@@ -18,13 +18,18 @@ namespace Baukasten
             Game();
             virtual ~Game();
 
-            virtual void start() = 0;
-            virtual void pause() = 0;
-            virtual void stop() = 0;
+            virtual void start();
+            virtual void pause();
+            virtual void stop();
 
         private:
+            void run();
+            void processUserInput();
+            void renderScene();
+
             std::shared_ptr<LogicalSpace> mLogicalSpace;
             std::shared_ptr<VirtualSpace> mVirtualSpace;
+            bool mKeepRunning;
         };
     }
 }
