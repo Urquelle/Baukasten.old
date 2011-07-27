@@ -1,3 +1,6 @@
+#ifndef GAME_H
+#define GAME_H
+
 namespace Eisenfaust
 {
     class Game
@@ -16,4 +19,6 @@ namespace Eisenfaust
         static Game* m_instance;
     };
 }
+
+#endif // GAME_H
 
