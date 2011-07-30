@@ -6,4 +6,8 @@ set (Eisenfaust_SRCS
 
 add_executable(eisenfaust ${Eisenfaust_SRCS})
 
+if(CMAKE_COMPILER_IS_GNUCXX)
+    set(CMAKE_CXX_FLAGS "-std=gnu++0x")
+endif()
+
 install(TARGETS eisenfaust DESTINATION bin)
