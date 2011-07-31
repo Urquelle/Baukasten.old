@@ -2,7 +2,10 @@ cmake_minimum_required(VERSION 2.8)
 
 set (Eisenfaust_SRCS
     main.cpp
-    game.cpp)
+    game.cpp
+    abstract_space.cpp
+    logical_space.cpp
+    virtual_space.cpp)
 
 add_executable(eisenfaust ${Eisenfaust_SRCS})
 
