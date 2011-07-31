@@ -6,17 +6,12 @@ namespace Eisenfaust
     class Game
     {
     public:
-        static Game& instance();
-
+        Game();
         virtual ~Game();
 
         void start();
         void pause();
         void stop();
-    private:
-        Game();
-
-        static Game* m_instance;
     };
 }
 

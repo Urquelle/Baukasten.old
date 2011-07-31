@@ -4,7 +4,7 @@ int main(int argc, const char *argv[])
 {
     using namespace Eisenfaust;
 
-    Game &game = Game::instance();
+    Game game;
 
     game.start();
     game.pause();

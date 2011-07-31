@@ -2,15 +2,6 @@
 
 using namespace Eisenfaust;
 
-Game* Game::m_instance = 0;
-
-Game& Game::instance()
-{
-    if ( m_instance == 0 )
-        m_instance = new Game();
-    return *m_instance;
-}
-
 Game::Game()
 {
     //
