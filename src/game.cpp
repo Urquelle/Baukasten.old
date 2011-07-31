@@ -4,10 +4,10 @@
 
 using namespace Eisenfaust;
 
-Game::Game()
+Game::Game() :
+    m_lSpace( std::shared_ptr<LogicalSpace>( new LogicalSpace ) ),
+    m_vSpace( std::shared_ptr<VirtualSpace>( new VirtualSpace ) )
 {
-    m_lSpace = std::shared_ptr<LogicalSpace>( new LogicalSpace );
-    m_vSpace = std::shared_ptr<VirtualSpace>( new VirtualSpace );
 }
 
 Game::~Game()
