@@ -1,5 +1,5 @@
 #include "virtual_space.h"
-#include "renderable_object.h"
+#include "renderable_entity.h"
 
 using namespace Eisenfaust;
 
@@ -11,7 +11,7 @@ VirtualSpace::~VirtualSpace()
 {
 }
 
-void VirtualSpace::append( const RenderableObject *ro )
+void VirtualSpace::append( const RenderableEntity *ro )
 {
     AbstractSpace::append( ro );
 }

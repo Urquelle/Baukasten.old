@@ -5,7 +5,7 @@
 
 namespace Eisenfaust
 {
-    class RenderableObject;
+    class RenderableEntity;
 
     class VirtualSpace : public AbstractSpace
     {
@@ -13,7 +13,7 @@ namespace Eisenfaust
         VirtualSpace();
         virtual ~VirtualSpace();
 
-        void append( const RenderableObject* );
+        void append( const RenderableEntity* );
     };
 }
 

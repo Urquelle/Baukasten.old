@@ -1,19 +1,23 @@
 #ifndef ABSTRACT_SPACE_H
 #define ABSTRACT_SPACE_H
 
-#include "object.h"
+#include "entity.h"
 
 #include <list>
 
 namespace Eisenfaust
 {
-    class AbstractSpace
+    class AbstractSpace : public Entity
     {
     public:
-        void append( const Object* );
+        AbstractSpace() {}
+        virtual ~AbstractSpace() {}
+
+        void append( const Entity* );
         void clear();
+
     private:
-        std::list<const Object*> m_entityList;
+        std::list<const Entity*> m_entityList;
     };
 }
 
