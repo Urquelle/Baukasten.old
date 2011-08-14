@@ -5,7 +5,10 @@
 
 namespace Eisenfaust
 {
-    typedef std::tuple<float, float, float> t_coord;
+    namespace Core
+    {
+        typedef std::tuple<float, float, float> t_pos;
+    }
 }
 
 #endif // GLOBAL_H

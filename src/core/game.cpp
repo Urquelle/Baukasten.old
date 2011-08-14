@@ -2,11 +2,11 @@
 #include "logical_space.h"
 #include "virtual_space.h"
 
-using namespace Eisenfaust;
+using namespace Eisenfaust::Core;
 
 Game::Game() :
-    m_lSpace( std::shared_ptr<LogicalSpace>( new LogicalSpace ) ),
-    m_vSpace( std::shared_ptr<VirtualSpace>( new VirtualSpace ) )
+    mLogicalSpace( std::shared_ptr<LogicalSpace>( new LogicalSpace ) ),
+    mVirtualSpace( std::shared_ptr<VirtualSpace>( new VirtualSpace ) )
 {
 }
 

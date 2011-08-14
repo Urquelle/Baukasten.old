@@ -1,6 +1,6 @@
 #include "logical_space.h"
 
-using namespace Eisenfaust;
+using namespace Eisenfaust::Core;
 
 LogicalSpace::LogicalSpace()
 {

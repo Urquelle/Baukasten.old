@@ -1,16 +1,23 @@
-cmake_minimum_required(VERSION 2.8)
+set (
+    core_SRCS
+    core/abstract_space.cpp
+    core/form.cpp
+    core/game.cpp
+    core/logical_space.cpp
+    core/virtual_space.cpp
+)
 
-set (Eisenfaust_SRCS
+set (
+    main_SRCS
     main.cpp
-    game.cpp
-    abstract_space.cpp
-    logical_space.cpp
-    virtual_space.cpp)
+)
 
-add_executable(eisenfaust ${Eisenfaust_SRCS})
-
-if(CMAKE_COMPILER_IS_GNUCXX)
+if (CMAKE_COMPILER_IS_GNUCXX)
     set(CMAKE_CXX_FLAGS "-std=gnu++0x")
 endif()
 
-install(TARGETS eisenfaust DESTINATION bin)
+add_executable(
+    eisenfaust
+    ${core_SRCS}
+    ${main_SRCS}
+)
