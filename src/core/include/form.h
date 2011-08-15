@@ -4,11 +4,11 @@
 #include "global.h"
 #include "renderable_entity.h"
 
-namespace Eisenfaust
+namespace Baukasten
 {
     namespace Core
     {
-        class EF_EXPORT Form : public RenderableEntity
+        class BAUKASTEN_EXPORT Form : public RenderableEntity
         {
         public:
             Form();

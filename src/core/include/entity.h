@@ -3,11 +3,11 @@
 
 #include "global.h"
 
-namespace Eisenfaust
+namespace Baukasten
 {
     namespace Core
     {
-        class EF_EXPORT Entity
+        class BAUKASTEN_EXPORT Entity
         {
             // base class
         };

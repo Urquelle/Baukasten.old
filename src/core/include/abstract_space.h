@@ -6,11 +6,11 @@
 
 #include <list>
 
-namespace Eisenfaust
+namespace Baukasten
 {
     namespace Core
     {
-        class EF_EXPORT AbstractSpace : public Entity
+        class BAUKASTEN_EXPORT AbstractSpace : public Entity
         {
         public:
             AbstractSpace() {}

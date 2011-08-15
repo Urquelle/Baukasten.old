@@ -1,6 +1,6 @@
 #include "abstract_space.h"
 
-using namespace Eisenfaust::Core;
+using namespace Baukasten::Core;
 
 void AbstractSpace::append( const Entity *e )
 {

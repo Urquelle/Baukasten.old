@@ -6,11 +6,11 @@
 
 #include <tuple>
 
-namespace Eisenfaust
+namespace Baukasten
 {
     namespace Core
     {
-        class EF_EXPORT RenderableEntity : public Entity
+        class BAUKASTEN_EXPORT RenderableEntity : public Entity
         {
         public:
             RenderableEntity();

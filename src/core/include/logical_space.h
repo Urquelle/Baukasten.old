@@ -4,11 +4,11 @@
 #include "global.h"
 #include "abstract_space.h"
 
-namespace Eisenfaust
+namespace Baukasten
 {
     namespace Core
     {
-        class EF_EXPORT LogicalSpace : public AbstractSpace
+        class BAUKASTEN_EXPORT LogicalSpace : public AbstractSpace
         {
         public:
             LogicalSpace();

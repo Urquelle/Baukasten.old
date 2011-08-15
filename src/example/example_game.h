@@ -3,7 +3,7 @@
 
 #include <game.h>
 
-class ExampleGame : public Eisenfaust::Core::Game
+class ExampleGame : public Baukasten::Core::Game
 {
 public:
     ExampleGame();

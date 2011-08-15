@@ -4,13 +4,13 @@
 #include "global.h"
 #include "abstract_space.h"
 
-namespace Eisenfaust
+namespace Baukasten
 {
     namespace Core
     {
         class RenderableEntity;
 
-        class EF_EXPORT VirtualSpace : public AbstractSpace
+        class BAUKASTEN_EXPORT VirtualSpace : public AbstractSpace
         {
         public:
             VirtualSpace();

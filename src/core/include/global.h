@@ -3,7 +3,7 @@
 
 #include <tuple>
 
-namespace Eisenfaust
+namespace Baukasten
 {
     namespace Core
     {
@@ -12,9 +12,9 @@ namespace Eisenfaust
 }
 
 #if defined(EXPORT_LIB)
-#   define EF_EXPORT __attribute__((visibility("default")))
+#   define BAUKASTEN_EXPORT __attribute__((visibility("default")))
 #else
-#   define EF_EXPORT
+#   define BAUKASTEN_EXPORT
 #endif
 
 #endif // GLOBAL_H

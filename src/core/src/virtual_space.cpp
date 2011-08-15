@@ -1,7 +1,7 @@
 #include "virtual_space.h"
 #include "renderable_entity.h"
 
-using namespace Eisenfaust::Core;
+using namespace Baukasten::Core;
 
 VirtualSpace::VirtualSpace()
 {

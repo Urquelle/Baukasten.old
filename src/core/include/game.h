@@ -5,14 +5,14 @@
 
 #include <memory>
 
-namespace Eisenfaust
+namespace Baukasten
 {
     namespace Core
     {
         class LogicalSpace;
         class VirtualSpace;
 
-        class EF_EXPORT Game
+        class BAUKASTEN_EXPORT Game
         {
         public:
             Game();

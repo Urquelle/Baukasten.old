@@ -22,15 +22,15 @@ include_directories( include )
 add_definitions( -DEXPORT_LIB=1 )
 
 add_library(
-    Eisenfaust
+    Baukasten
     SHARED
     ${core_SRCS}
 )
 
 set_target_properties(
-    Eisenfaust
+    Baukasten
     PROPERTIES SOVERSION 0.0.1
 )
 
-install(TARGETS Eisenfaust LIBRARY DESTINATION lib/)
+install(TARGETS Baukasten LIBRARY DESTINATION lib/)
 install(FILES ${core_HEADER} DESTINATION include/)
