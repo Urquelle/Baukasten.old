@@ -11,10 +11,7 @@ VirtualSpace::~VirtualSpace()
 {
 }
 
-void VirtualSpace::append( const RenderableEntity *ro )
+void VirtualSpace::append( const RenderableEntity &ro )
 {
-    if ( !ro )
-        return;
-
     AbstractSpace::append( ro );
 }

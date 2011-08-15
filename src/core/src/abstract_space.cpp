@@ -2,12 +2,9 @@
 
 using namespace Baukasten::Core;
 
-void AbstractSpace::append( const Entity *e )
+void AbstractSpace::append( const Entity &e )
 {
-    if ( !e )
-        return;
-
-    mEntityList.push_back( e );
+    mEntityList.push_back( &e );
 }
 
 void AbstractSpace::clear()

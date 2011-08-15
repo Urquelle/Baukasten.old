@@ -13,7 +13,7 @@ namespace Baukasten {
             VirtualSpace();
             virtual ~VirtualSpace();
 
-            void append( const RenderableEntity* );
+            void append( const RenderableEntity& );
         };
     }
 }
