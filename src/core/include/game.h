@@ -19,7 +19,7 @@ namespace Baukasten {
             virtual void pause();
             virtual void stop();
 
-        private:
+        protected:
             void run();
             void processUserInput();
             void renderScene();
