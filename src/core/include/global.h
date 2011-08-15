@@ -3,10 +3,8 @@
 
 #include <tuple>
 
-namespace Baukasten
-{
-    namespace Core
-    {
+namespace Baukasten {
+    namespace Core {
         typedef std::tuple<float, float, float> t_pos;
     }
 }

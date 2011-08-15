@@ -4,12 +4,9 @@
 #include "global.h"
 #include "entity.h"
 
-namespace Baukasten
-{
-    namespace Core
-    {
-        class BAUKASTEN_EXPORT State : public Entity
-        {
+namespace Baukasten {
+    namespace Core {
+        class BAUKASTEN_EXPORT State : public Entity {
         public:
             State();
             virtual ~State();

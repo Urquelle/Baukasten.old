@@ -5,15 +5,12 @@
 
 #include <memory>
 
-namespace Baukasten
-{
-    namespace Core
-    {
+namespace Baukasten {
+    namespace Core {
         class LogicalSpace;
         class VirtualSpace;
 
-        class BAUKASTEN_EXPORT Game
-        {
+        class BAUKASTEN_EXPORT Game {
         public:
             Game();
             virtual ~Game();

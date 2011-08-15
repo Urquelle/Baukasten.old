@@ -6,12 +6,9 @@
 
 #include <tuple>
 
-namespace Baukasten
-{
-    namespace Core
-    {
-        class BAUKASTEN_EXPORT RenderableEntity : public Entity
-        {
+namespace Baukasten {
+    namespace Core {
+        class BAUKASTEN_EXPORT RenderableEntity : public Entity {
         public:
             RenderableEntity();
             virtual ~RenderableEntity() = 0;

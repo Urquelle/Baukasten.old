@@ -3,12 +3,9 @@
 
 #include "global.h"
 
-namespace Baukasten
-{
-    namespace Core
-    {
-        class BAUKASTEN_EXPORT Entity
-        {
+namespace Baukasten {
+    namespace Core {
+        class BAUKASTEN_EXPORT Entity {
             // base class
         };
     }

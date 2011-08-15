@@ -6,12 +6,9 @@
 
 #include <list>
 
-namespace Baukasten
-{
-    namespace Core
-    {
-        class BAUKASTEN_EXPORT AbstractSpace : public Entity
-        {
+namespace Baukasten {
+    namespace Core {
+        class BAUKASTEN_EXPORT AbstractSpace : public Entity {
         public:
             AbstractSpace() {}
             virtual ~AbstractSpace() {}

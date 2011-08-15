@@ -4,10 +4,8 @@
 #include "global.h"
 #include "entity.h"
 
-namespace Baukasten
-{
-    namespace Core
-    {
+namespace Baukasten {
+    namespace Core {
         class BAUKASTEN_EXPORT Action : public Entity {
         public:
             Action();

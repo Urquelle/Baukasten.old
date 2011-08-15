@@ -4,12 +4,9 @@
 #include "global.h"
 #include "renderable_entity.h"
 
-namespace Baukasten
-{
-    namespace Core
-    {
-        class BAUKASTEN_EXPORT Form : public RenderableEntity
-        {
+namespace Baukasten {
+    namespace Core {
+        class BAUKASTEN_EXPORT Form : public RenderableEntity {
         public:
             Form();
             virtual ~Form() = 0;

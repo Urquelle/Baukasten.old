@@ -4,14 +4,11 @@
 #include "global.h"
 #include "abstract_space.h"
 
-namespace Baukasten
-{
-    namespace Core
-    {
+namespace Baukasten {
+    namespace Core {
         class RenderableEntity;
 
-        class BAUKASTEN_EXPORT VirtualSpace : public AbstractSpace
-        {
+        class BAUKASTEN_EXPORT VirtualSpace : public AbstractSpace {
         public:
             VirtualSpace();
             virtual ~VirtualSpace();

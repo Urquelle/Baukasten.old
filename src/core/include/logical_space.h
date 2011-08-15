@@ -4,12 +4,9 @@
 #include "global.h"
 #include "abstract_space.h"
 
-namespace Baukasten
-{
-    namespace Core
-    {
-        class BAUKASTEN_EXPORT LogicalSpace : public AbstractSpace
-        {
+namespace Baukasten {
+    namespace Core {
+        class BAUKASTEN_EXPORT LogicalSpace : public AbstractSpace {
         public:
             LogicalSpace();
             virtual ~LogicalSpace();
