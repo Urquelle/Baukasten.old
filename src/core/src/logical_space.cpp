@@ -2,7 +2,8 @@
 
 using namespace Baukasten::Core;
 
-LogicalSpace::LogicalSpace()
+LogicalSpace::LogicalSpace( const std::string &id ) :
+    AbstractSpace( id )
 {
 }
 
