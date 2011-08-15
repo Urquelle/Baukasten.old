@@ -11,5 +11,11 @@ namespace Eisenfaust
     }
 }
 
+#if defined(EXPORT_LIB)
+#   define EF_EXPORT __attribute__((visibility("default")))
+#else
+#   define EF_EXPORT
+#endif
+
 #endif // GLOBAL_H
 

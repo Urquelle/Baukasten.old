@@ -1,6 +1,8 @@
 #ifndef GAME_H
 #define GAME_H
 
+#include "global.h"
+
 #include <memory>
 
 namespace Eisenfaust
@@ -10,15 +12,15 @@ namespace Eisenfaust
         class LogicalSpace;
         class VirtualSpace;
 
-        class Game
+        class EF_EXPORT Game
         {
         public:
             Game();
             virtual ~Game();
 
-            virtual void start();
-            virtual void pause();
-            virtual void stop();
+            virtual void start() = 0;
+            virtual void pause() = 0;
+            virtual void stop() = 0;
 
         private:
             std::shared_ptr<LogicalSpace> mLogicalSpace;

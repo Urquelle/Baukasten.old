@@ -1,15 +1,15 @@
 #ifndef ENTITY_H
 #define ENTITY_H
 
+#include "global.h"
+
 namespace Eisenfaust
 {
     namespace Core
     {
-        class Entity
+        class EF_EXPORT Entity
         {
-        public:
-            Entity() {}
-            virtual ~Entity() {}
+            // base class
         };
     }
 }

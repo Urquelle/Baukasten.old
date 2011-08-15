@@ -1,6 +1,7 @@
 #ifndef ABSTRACT_SPACE_H
 #define ABSTRACT_SPACE_H
 
+#include "global.h"
 #include "entity.h"
 
 #include <list>
@@ -9,7 +10,7 @@ namespace Eisenfaust
 {
     namespace Core
     {
-        class AbstractSpace : public Entity
+        class EF_EXPORT AbstractSpace : public Entity
         {
         public:
             AbstractSpace() {}

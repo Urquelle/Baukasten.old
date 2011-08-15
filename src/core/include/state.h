@@ -1,11 +1,13 @@
 #ifndef STATE_H
 #define STATE_H
 
+#include "global.h"
+
 namespace Eisenfaust
 {
     namespace Core
     {
-        class State
+        class EF_EXPORT State
         {
         public:
             State();

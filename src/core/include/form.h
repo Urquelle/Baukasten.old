@@ -1,13 +1,14 @@
 #ifndef FORM_H
 #define FORM_H
 
+#include "global.h"
 #include "renderable_entity.h"
 
 namespace Eisenfaust
 {
     namespace Core
     {
-        class Form : public RenderableEntity
+        class EF_EXPORT Form : public RenderableEntity
         {
         public:
             Form();

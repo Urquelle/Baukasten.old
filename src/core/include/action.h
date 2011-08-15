@@ -1,11 +1,13 @@
 #ifndef ACTION_4GNSEOOP
 #define ACTION_4GNSEOOP
 
+#include "global.h"
+
 namespace Eisenfaust
 {
     namespace Core
     {
-        class Action {
+        class EF_EXPORT Action {
         public:
             Action();
             virtual ~Action();

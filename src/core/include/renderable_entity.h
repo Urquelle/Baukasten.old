@@ -1,8 +1,8 @@
 #ifndef RENDERABLE_ENTITY_H
 #define RENDERABLE_ENTITY_H
 
-#include "entity.h"
 #include "global.h"
+#include "entity.h"
 
 #include <tuple>
 
@@ -10,11 +10,11 @@ namespace Eisenfaust
 {
     namespace Core
     {
-        class RenderableEntity : public Entity
+        class EF_EXPORT RenderableEntity : public Entity
         {
         public:
-            RenderableEntity() {}
-            virtual ~RenderableEntity() {}
+            RenderableEntity();
+            virtual ~RenderableEntity() = 0;
 
             void setPosition( const t_pos );
             void setPitch( const float );

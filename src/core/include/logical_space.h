@@ -1,13 +1,14 @@
 #ifndef LOGICAL_SPACE_H
 #define LOGICAL_SPACE_H
 
+#include "global.h"
 #include "abstract_space.h"
 
 namespace Eisenfaust
 {
     namespace Core
     {
-        class LogicalSpace : public AbstractSpace
+        class EF_EXPORT LogicalSpace : public AbstractSpace
         {
         public:
             LogicalSpace();

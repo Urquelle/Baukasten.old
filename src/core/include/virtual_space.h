@@ -1,6 +1,7 @@
 #ifndef VIRTUAL_SPACE_H
 #define VIRTUAL_SPACE_H
 
+#include "global.h"
 #include "abstract_space.h"
 
 namespace Eisenfaust
@@ -9,7 +10,7 @@ namespace Eisenfaust
     {
         class RenderableEntity;
 
-        class VirtualSpace : public AbstractSpace
+        class EF_EXPORT VirtualSpace : public AbstractSpace
         {
         public:
             VirtualSpace();
