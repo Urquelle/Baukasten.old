@@ -2,12 +2,13 @@
 #define ACTION_4GNSEOOP
 
 #include "global.h"
+#include "entity.h"
 
 namespace Baukasten
 {
     namespace Core
     {
-        class BAUKASTEN_EXPORT Action {
+        class BAUKASTEN_EXPORT Action : public Entity {
         public:
             Action();
             virtual ~Action();
