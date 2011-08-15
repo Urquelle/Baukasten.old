@@ -4,20 +4,29 @@
 #include "global.h"
 #include "entity.h"
 
-#include <tuple>
-
 namespace Baukasten {
     namespace Core {
-        class BAUKASTEN_EXPORT RenderableEntity : public Entity {
+        class BAUKASTEN_EXPORT Drawable : public Entity {
         public:
-            RenderableEntity();
-            virtual ~RenderableEntity() = 0;
+            Drawable();
+            Drawable( const std::string& );
+
+            virtual ~Drawable() = 0;
 
             void setPosition( const t_pos );
+            const t_pos getPosition() const;
+
             void setPitch( const float );
+            const float getPitch() const;
+
             void setYaw( const float );
+            const float getYaw() const;
+
             void setRoll( const float );
+            const float getRoll() const;
+
             void setScale( const float );
+            const float getScale() const;
 
         protected:
             // position of the object

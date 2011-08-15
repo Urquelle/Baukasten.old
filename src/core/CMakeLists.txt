@@ -1,8 +1,12 @@
 set (
     core_SRCS
     src/abstract_space.cpp
-    src/game.cpp
+    src/action.cpp
+    src/drawable.cpp
+    src/entity.cpp
+    src/generic_state.cpp
     src/logical_space.cpp
+    src/state.cpp
     src/virtual_space.cpp
 )
 
@@ -10,11 +14,13 @@ set (
     core_HEADER
     include/abstract_space.h
     include/action.h
+    include/drawable.h
     include/entity.h
     include/form.h
-    include/game.h
+    include/generic_state.h
     include/global.h
     include/logical_space.h
+    include/state.h
     include/virtual_space.h
 )
 

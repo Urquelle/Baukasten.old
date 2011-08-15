@@ -1,11 +1,21 @@
 #ifndef GLOBAL_H
 #define GLOBAL_H
 
+#include <map>
+#include <memory>
+#include <string>
 #include <tuple>
 
 namespace Baukasten {
     namespace Core {
-        typedef std::tuple<float, float, float> t_pos;
+        class Action;
+        class State;
+
+        using namespace std;
+
+        typedef tuple<float, float, float> t_pos;
+        typedef map<string, Action*> ActionMap;
+        typedef map<string, State*> StateMap;
     }
 }
 

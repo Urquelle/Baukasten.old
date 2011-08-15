@@ -4,18 +4,24 @@
 #include "global.h"
 #include "entity.h"
 
+#include <string>
+
 namespace Baukasten {
     namespace Core {
         class BAUKASTEN_EXPORT State : public Entity {
         public:
-            State();
+            State( Entity& );
+            State( Entity&, const std::string& );
+
             virtual ~State();
 
+            const Entity* getParent() const;
+
         private:
-            /* data */
+            Entity*     mParent;
         };
     } /* Core */
-} /* Eisenfaust */
+} /* Baukasten */
 
 #endif // STATE_H
 
