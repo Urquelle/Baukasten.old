@@ -1,0 +1,15 @@
+Konzept
+
+Das Spielprinzip soll das des Final Fantasy Tactics abbilden.
+
+Das Spiel ist rund rundenbasiertes RPG. Der Hauptcharacter reist auf einer Weltkarte von Punkt (Stadt) zu Punkt. Sowohl zwischen als auch auf den Punkten können Aktionen (Kämpfe, etc.) erfolgen.
+
+Die Charaktere besitzen eigenschaften wie:
+
+    * Name
+    * HP (Hitpoints/Lebenspunkte)
+    * MP (Magicpoints/Magiepunkte)
+    * Job (Eine Klasse zu der der Charakter gehört: Ritter, Ninja, Schwarz-/Weißmagier, usw..
+    * Erlernte Fähigkeiten des jeweiligen Jobs
+
+Die Charaktere sammeln in Kämpfen Erfahrungspunkte und Joberfahrungspunkte. Durch diese steigert sich ihre Stufe (HP/MP) und sie können durch die gesammelten Jobpunkte Fähigkeiten des Jobs erlernen.
