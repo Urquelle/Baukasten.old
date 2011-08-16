@@ -1,9 +1,48 @@
 #include "example_game.h"
+#include "unit.h"
+#include "states.h"
+#include "actions.h"
 
 #include <iostream>
 
-ExampleGame::ExampleGame()
+#if defined(USE_OGRE)
+#include "frame_listener.h"
+#include <OGRE/Ogre.h>
+
+void initSceneOgre( Ogre::Node *root )
 {
+}
+#endif
+
+ExampleGame::ExampleGame() :
+    mKeepRunning( true )
+#if defined(USE_OGRE)
+    , mRoot( 0 )
+    , mSceneManager( 0 )
+    , mWindow( 0 )
+    , mCamera( 0 )
+    , mListener( 0 )
+#endif
+{
+    Unit *u = new Unit();
+
+    StateName *sName = new StateName( *u, "Nika" );
+    StateLevel *sLevel = new StateLevel( *u, 0 );
+    StateExperience *sExp = new StateExperience( *u, 0 );
+
+    ActionLevelUp *aLvlUp = new ActionLevelUp( *u );
+    ActionAddExperience *aAddExp = new ActionAddExperience( *u );
+
+    u->addState( *sName );
+    u->addState( *sLevel );
+    u->addState( *sExp );
+
+    u->addAction( *aLvlUp );
+    u->addAction( *aAddExp );
+
+    std::cout << sLevel->getLevel() << std::endl;
+    u->invokeAction( "addExperience" );
+    std::cout << sLevel->getLevel() << std::endl;
 }
 
 ExampleGame::~ExampleGame()
@@ -13,6 +52,9 @@ ExampleGame::~ExampleGame()
 void ExampleGame::start()
 {
     std::cout << "spiel starten." << std::endl;
+    initRenderingSystem();
+    initScene( "test" );
+    run();
 }
 
 void ExampleGame::pause()
@@ -24,4 +66,64 @@ void ExampleGame::stop()
 {
     std::cout << "spiel stoppen." << std::endl;
 }
+
+void ExampleGame::run()
+{
+    while ( mKeepRunning ) {
+#if defined(USE_OGRE)
+        renderOneFrame();
+#else
+        break;
+#endif
+    }
+}
+
+void ExampleGame::initRenderingSystem()
+{
+#if defined(USE_OGRE)
+    mRoot = new Ogre::Root();
+
+    if ( !mRoot->restoreConfig() )
+        if ( !mRoot->showConfigDialog() )
+            mKeepRunning = false;
+
+    mSceneManager = mRoot->createSceneManager(Ogre::ST_GENERIC);
+    mWindow = mRoot->initialise( "true", "Baukasten Beispielanwendung" );
+
+    mCamera = mSceneManager->createCamera("Camera");
+    mCamera->setPosition(Ogre::Vector3(0,0,50));
+    mCamera->lookAt(Ogre::Vector3(0,0,0));
+    mCamera->setNearClipDistance(5);
+
+    Ogre::Viewport *viewport = mWindow->addViewport(mCamera);
+    viewport->setBackgroundColour(Ogre::ColourValue(0.0,0.0,0.0));
+
+    mCamera->setAspectRatio(
+        Ogre::Real(viewport->getActualWidth()) / Ogre::Real(viewport->getActualHeight())
+    );
+
+    mListener = new OgreFrameListener(
+        mWindow,
+        mCamera,
+        viewport
+    );
+
+    mRoot->addFrameListener(mListener);
+#endif
+}
+
+void ExampleGame::initScene( const std::string &scene )
+{
+#if defined(USE_OGRE)
+    initSceneOgre( mSceneManager->getRootSceneNode() );
+#endif
+}
+
+#if defined(USE_OGRE)
+void ExampleGame::renderOneFrame()
+{
+    Ogre::WindowEventUtilities::messagePump();
+    mKeepRunning = mRoot->renderOneFrame();
+}
+#endif
 
