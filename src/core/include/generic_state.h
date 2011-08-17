@@ -11,13 +11,29 @@ namespace Baukasten {
 		template<class T>
 		class BAUKASTEN_EXPORT GenericState : public State {
 		public:
-			GenericState( Entity& );
-			GenericState( Entity&, const std::string& );
+			GenericState( Entity &parent ) :
+				State( parent )
+			{
+			}
 
-			~GenericState();
+			GenericState( Entity &parent, const std::string &id ) :
+				State( parent, id )
+			{
+			}
 
-			const T getValue() const;
-			void setValue( const T& );
+			~GenericState()
+			{
+			}
+
+			const T getValue() const
+			{
+				return mValue;
+			}
+
+			void setValue( const T &value )
+			{
+				mValue = value;
+			}
 
 		private:
 			T mValue;
