@@ -3,7 +3,6 @@ set(
     example_game.cpp
     frame_listener.cpp
     main.cpp
-    states.cpp
 )
 
 include_directories( ${CMAKE_INSTALL_PREFIX}/include )

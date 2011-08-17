@@ -1,7 +1,7 @@
 #include "example_game.h"
-#include "unit.h"
-#include "states.h"
 #include "actions.h"
+
+#include <generic_state.h>
 
 #include <iostream>
 
@@ -24,11 +24,17 @@ ExampleGame::ExampleGame() :
     , mListener( 0 )
 #endif
 {
-    Unit *u = new Unit();
+    using namespace Baukasten::Core;
+    using namespace std;
 
-    StateName *sName = new StateName( *u, "Nika" );
-    StateLevel *sLevel = new StateLevel( *u, 0 );
-    StateExperience *sExp = new StateExperience( *u, 0 );
+    Entity *u = new Entity( "hans" );
+
+    GenericState<string> *sName = new GenericState<string>( *u, "name" );
+
+    GenericState<int> *sLevel = new GenericState<int>( *u, "level" );
+    sLevel->setValue( 0 );
+
+    GenericState<int> *sExp = new GenericState<int>( *u, "experience" );
 
     ActionLevelUp *aLvlUp = new ActionLevelUp( *u );
     ActionAddExperience *aAddExp = new ActionAddExperience( *u );
@@ -40,9 +46,9 @@ ExampleGame::ExampleGame() :
     u->addAction( *aLvlUp );
     u->addAction( *aAddExp );
 
-    std::cout << sLevel->getLevel() << std::endl;
-    u->invokeAction( "addExperience" );
-    std::cout << sLevel->getLevel() << std::endl;
+    std::cout << "Level: " << sLevel->getValue() << std::endl;
+    u->invokeAction( aAddExp->getId() );
+    std::cout << "Level: " << sLevel->getValue() << std::endl;
 }
 
 ExampleGame::~ExampleGame()
@@ -51,10 +57,12 @@ ExampleGame::~ExampleGame()
 
 void ExampleGame::start()
 {
+    /*
     std::cout << "spiel starten." << std::endl;
     initRenderingSystem();
     initScene( "test" );
     run();
+    */
 }
 
 void ExampleGame::pause()
