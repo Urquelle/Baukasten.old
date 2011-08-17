@@ -14,9 +14,7 @@ namespace Baukasten {
 
         class BAUKASTEN_EXPORT Entity {
         public:
-            Entity();
             Entity( const std::string& );
-
             virtual ~Entity();
 
             const std::string getId() const;

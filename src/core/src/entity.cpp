@@ -4,14 +4,9 @@
 
 #include <cstdlib>
 #include <ctime>
+#include <iostream>
 
 using namespace Baukasten::Core;
-
-Entity::Entity()
-{
-    srand( time( NULL ) );
-    Entity( "Entity_" + rand() );
-}
 
 Entity::Entity( const std::string &id ) :
     mId( id )

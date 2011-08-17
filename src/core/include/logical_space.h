@@ -8,9 +8,7 @@ namespace Baukasten {
     namespace Core {
         class BAUKASTEN_EXPORT LogicalSpace : public AbstractSpace {
         public:
-            LogicalSpace();
             LogicalSpace( const std::string& );
-
             virtual ~LogicalSpace();
         };
     }

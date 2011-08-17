@@ -3,11 +3,6 @@
 
 using namespace Baukasten::Core;
 
-VirtualSpace::VirtualSpace() :
-    AbstractSpace()
-{
-}
-
 VirtualSpace::VirtualSpace( const std::string &id ) :
     AbstractSpace( id )
 {

@@ -10,9 +10,7 @@ namespace Baukasten {
     namespace Core {
         class BAUKASTEN_EXPORT State : public Entity {
         public:
-            State( Entity& );
             State( Entity&, const std::string& );
-
             virtual ~State();
 
             const Entity* getParent() const;

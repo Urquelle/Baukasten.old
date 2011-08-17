@@ -2,12 +2,6 @@
 
 using namespace Baukasten::Core;
 
-Action::Action( Entity &parent ) :
-    Entity(),
-    mParent( &parent )
-{
-}
-
 Action::Action( Entity &parent, const std::string &id ) :
     Entity( id ),
     mParent( &parent )

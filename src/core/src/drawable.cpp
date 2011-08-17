@@ -2,11 +2,6 @@
 
 using namespace Baukasten::Core;
 
-Drawable::Drawable() :
-    Entity()
-{
-}
-
 Drawable::Drawable( const std::string &id ) :
     Entity( id )
 {

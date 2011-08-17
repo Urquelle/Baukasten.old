@@ -8,9 +8,7 @@ namespace Baukasten {
     namespace Core {
         class BAUKASTEN_EXPORT Drawable : public Entity {
         public:
-            Drawable();
             Drawable( const std::string& );
-
             virtual ~Drawable() = 0;
 
             void setPosition( const t_pos );

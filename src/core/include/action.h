@@ -11,9 +11,7 @@ namespace Baukasten {
     namespace Core {
         class BAUKASTEN_EXPORT Action : public Entity {
         public:
-            Action( Entity& );
             Action( Entity&, const std::string& );
-
             virtual ~Action();
 
             const Entity* getParent() const;

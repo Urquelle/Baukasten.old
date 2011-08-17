@@ -10,7 +10,6 @@ namespace Baukasten {
     namespace Core {
         class BAUKASTEN_EXPORT AbstractSpace : public Entity {
         public:
-            AbstractSpace() : Entity() {}
             AbstractSpace( const std::string &id ) : Entity( id ) {}
             virtual ~AbstractSpace() {}
 
