@@ -107,6 +107,7 @@ void Entity::dropAction( const std::string &id )
                 mActionQueue.erase( it );
                 break;
             }
+			it++;
         }
     }
 }
