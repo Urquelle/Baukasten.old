@@ -17,7 +17,10 @@ namespace Baukasten {
             const Entity* getSource() const;
             void clear();
             bool isActive() const;
+
             void setTarget( Entity& );
+            Entity* getTarget();
+
             void setTarget( EntityList& );
 
             virtual void doAction() = 0;

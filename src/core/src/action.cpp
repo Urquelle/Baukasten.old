@@ -34,6 +34,11 @@ void Action::setTarget( Entity &target )
     mTarget = &target;
 }
 
+Entity* Action::getTarget()
+{
+    return mTarget;
+}
+
 void Action::setTarget( EntityList &targetList )
 {
     mTargetList = targetList;
