@@ -20,7 +20,7 @@ public:
     void doAction()
     {
         GenericState<int> *lvl = static_cast<GenericState<int>*>(
-            getParent()->hasState( "level" )
+            getParent()->getState( "level" )
         );
 
         if ( lvl ) {
@@ -47,7 +47,7 @@ public:
     void doAction()
     {
         GenericState<int> *exp = static_cast<GenericState<int>*>(
-            getParent()->hasState( "experience" )
+            getParent()->getState( "experience" )
         );
 
         if ( exp ) {
@@ -57,7 +57,7 @@ public:
             // check whether the entity has a level state and if
             // we have to increase the level.
             GenericState<int> *lvl = static_cast<GenericState<int>*>(
-                getParent()->hasState( "level" )
+                getParent()->getState( "level" )
             );
 
             if ( lvl && expPoints >= 10 && expPoints < 50 && lvl->getValue() < 1 )
