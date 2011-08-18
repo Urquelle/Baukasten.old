@@ -10,10 +10,12 @@ namespace Baukasten {
     namespace Core {
         class Action;
         class State;
+        class Entity;
 
         using namespace std;
 
         typedef tuple<float, float, float> t_pos;
+        typedef map<string, Entity*> EntityMap;
         typedef map<string, Action*> ActionMap;
         typedef map<string, State*> StateMap;
     }

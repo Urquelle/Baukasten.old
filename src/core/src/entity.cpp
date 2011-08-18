@@ -54,6 +54,32 @@ void Entity::invokeAction( const std::string &actionId ) const
         action->doAction();
 }
 
+void Entity::setForm( Form &form )
+{
+    mForm = &form;
+}
+
+Form* Entity::getForm() const
+{
+    return mForm;
+}
+
+void Entity::addEntity( Entity &entity )
+{
+    if ( !hasEntity( entity.getId() ) )
+        mEntityMap[ entity.getId() ] =  &entity;
+}
+
+bool Entity::hasEntity( const std::string &id ) const
+{
+    EntityMap::const_iterator it = mEntityMap.find( id );
+    return ( it == mEntityMap.end() );
+}
+
+void Entity::removeEntity( const Entity &entity )
+{
+}
+
 bool Entity::operator==( const Entity &other ) const
 {
     return ( mId == other.getId() );

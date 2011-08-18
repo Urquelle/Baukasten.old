@@ -26,13 +26,21 @@ namespace Baukasten {
             Action* hasAction(const std::string&) const;
             void invokeAction( const std::string& ) const;
 
+            void setForm( Form& );
+            Form* getForm() const;
+
+            void addEntity( Entity& );
+            bool hasEntity( const std::string& ) const;
+            void removeEntity( const Entity& );
+
             bool operator==( const Entity& ) const;
 
         protected:
-            std::string         mId;
-            StateMap            mStateMap;
-            ActionMap           mActionMap;
-            Form*               mForm;
+            std::string     mId;
+            StateMap        mStateMap;
+            ActionMap       mActionMap;
+            Form*           mForm;
+            EntityMap       mEntityMap;
         };
     }
 }
