@@ -45,9 +45,9 @@ void Entity::addState( State &state )
         mStates[ state.getId() ] = &state;
 }
 
-State* Entity::getState( const std::string &stateId ) const
+State* Entity::getState( const std::string &id ) const
 {
-    StateMap::const_iterator it = mStates.find( stateId );
+    StateMap::const_iterator it = mStates.find( id );
     return ( it == mStates.end() ) ? 0 : it->second;
 }
 
@@ -56,9 +56,9 @@ StateMap Entity::getStates() const
 	return mStates;
 }
 
-bool Entity::hasState( const std::string &stateId ) const
+bool Entity::hasState( const std::string &id ) const
 {
-    StateMap::const_iterator it = mStates.find( stateId );
+    StateMap::const_iterator it = mStates.find( id );
     return ( it != mStates.end() );
 }
 
@@ -68,9 +68,9 @@ void Entity::addAction( Action &action )
         mActions[ action.getId() ] =  &action;
 }
 
-Action* Entity::getAction( const std::string &actionId ) const
+Action* Entity::getAction( const std::string &id ) const
 {
-    ActionMap::const_iterator it = mActions.find( actionId );
+    ActionMap::const_iterator it = mActions.find( id );
     return ( it == mActions.end() ) ? 0 : it->second;
 }
 
@@ -79,15 +79,15 @@ ActionMap Entity::getActions() const
 	return mActions;
 }
 
-bool Entity::hasAction( const std::string &actionId ) const
+bool Entity::hasAction( const std::string &id ) const
 {
-    ActionMap::const_iterator it = mActions.find( actionId );
+    ActionMap::const_iterator it = mActions.find( id );
     return ( it != mActions.end() );
 }
 
-void Entity::invokeAction( const std::string &actionId )
+void Entity::invokeAction( const std::string &id )
 {
-    Action *action = getAction( actionId );
+    Action *action = getAction( id );
 
     if ( action && !action->isActive() ) {
         action->clear();
@@ -96,9 +96,9 @@ void Entity::invokeAction( const std::string &actionId )
     }
 }
 
-void Entity::invokeAction( const std::string &actionId, Entity &target )
+void Entity::invokeAction( const std::string &id, Entity &target )
 {
-    Action *action = getAction( actionId );
+    Action *action = getAction( id );
 
     if ( action && !action->isActive() ) {
         action->clear();
@@ -108,9 +108,9 @@ void Entity::invokeAction( const std::string &actionId, Entity &target )
     }
 }
 
-void Entity::invokeAction( const std::string &actionId, EntityList targetList )
+void Entity::invokeAction( const std::string &id, EntityList targetList )
 {
-    Action *action = getAction( actionId );
+    Action *action = getAction( id );
 
     if ( action && !action->isActive() ) {
         action->clear();
