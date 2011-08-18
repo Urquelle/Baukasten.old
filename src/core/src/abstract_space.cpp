@@ -9,6 +9,6 @@ void AbstractSpace::append( const Entity &e )
 
 void AbstractSpace::clear()
 {
-    mEntityList.clear();
+	mEntityList.erase( mEntityList.begin(), mEntityList.end() );
 }
 
