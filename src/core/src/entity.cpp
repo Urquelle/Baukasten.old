@@ -88,7 +88,7 @@ void Entity::invokeAction( const std::string &actionId, EntityList targetList )
     if ( action && !action->isActive() ) {
         action->clear();
         action->setActive( true );
-        action->setTarget( targetList );
+        action->setTargetList( targetList );
         mActionQueue.push_back( action );
     }
 }

@@ -44,8 +44,13 @@ Entity* Action::getTarget()
     return mTarget;
 }
 
-void Action::setTarget( EntityList &targetList )
+void Action::setTargetList( EntityList &targetList )
 {
     mTargetList = targetList;
+}
+
+EntityList Action::getTargetList()
+{
+	return mTargetList;
 }
 
