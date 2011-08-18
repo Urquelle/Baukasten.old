@@ -99,6 +99,7 @@ void Entity::dropAction( const std::string &id )
 
     if ( action && action->isActive() ) {
         action->clear();
+		action->setActive( false );
         ActionList::iterator it = mActionQueue.begin();
 
         while ( it != mActionQueue.end() ) {
