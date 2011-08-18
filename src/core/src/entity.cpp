@@ -90,6 +90,23 @@ void Entity::invokeAction( const std::string &actionId, EntityList targetList )
     }
 }
 
+void Entity::dropAction( const std::string &id )
+{
+    Action *action = getAction( id );
+
+    if ( action && action->isActive() ) {
+        action->clear();
+        ActionList::iterator it = mActionQueue.begin();
+
+        while ( it != mActionQueue.end() ) {
+            if ( *it == action ) {
+                mActionQueue.erase( it );
+                break;
+            }
+        }
+    }
+}
+
 void Entity::runActions()
 {
     ActionList::const_iterator it = mActionQueue.begin();

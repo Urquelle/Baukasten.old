@@ -31,6 +31,8 @@ namespace Baukasten {
             void invokeAction( const std::string&, Entity& );
             void invokeAction( const std::string&, EntityList );
 
+            void dropAction( const std::string& );
+
             void runActions();
 
             void setForm( Form& );
