@@ -69,4 +69,33 @@ private:
     /* data */
 };
 
+class Hit : public Baukasten::Core::Action {
+public:
+    Hit( Entity &source ) :
+        Action( source, "hit" )
+    {
+    }
+
+    virtual ~Hit()
+    {
+    }
+
+    void doAction()
+    {
+        Entity *target = getTarget();
+
+        if ( !target )
+            return;
+
+        GenericState<int> *state = static_cast<GenericState<int>*>(
+            target->getState( "hp" )
+        );
+
+        if ( !state )
+            return;
+
+        state->setValue( state->getValue() - 10 );
+    }
+};
+
 #endif /* end of include guard: ACTIONS_OG1WVP4A */

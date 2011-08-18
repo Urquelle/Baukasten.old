@@ -30,14 +30,13 @@ ExampleGame::ExampleGame() :
     Entity *u = new Entity( "hans" );
 
     GenericState<string> *sName = new GenericState<string>( *u, "name" );
-
     GenericState<int> *sLevel = new GenericState<int>( *u, "level" );
     sLevel->setValue( 0 );
-
     GenericState<int> *sExp = new GenericState<int>( *u, "experience" );
 
     ActionLevelUp *aLvlUp = new ActionLevelUp( *u );
     ActionAddExperience *aAddExp = new ActionAddExperience( *u );
+    Hit *aHit = new Hit( *u );
 
     u->addState( *sName );
     u->addState( *sLevel );
@@ -45,11 +44,22 @@ ExampleGame::ExampleGame() :
 
     u->addAction( *aLvlUp );
     u->addAction( *aAddExp );
+    u->addAction( *aHit );
 
-    std::cout << "Level: " << sLevel->getValue() << std::endl;
+    Entity *u2 = new Entity( "gomez" );
+
+    GenericState<int> *sHP = new GenericState<int>( *u2, "hp" );
+    sHP->setValue( 10 );
+
+    u2->addState( *sHP );
+
+    std::cout << u->getId() << " level: " << sLevel->getValue() << std::endl;
+    std::cout << u2->getId() << " hp: " << sHP->getValue() << std::endl;
     u->invokeAction( aAddExp->getId() );
+    u->invokeAction( aHit->getId(), *u2 );
     u->runActions();
-    std::cout << "Level: " << sLevel->getValue() << std::endl;
+    std::cout << u2->getId() << " hp: " << sHP->getValue() << std::endl;
+    std::cout << u->getId() << " level: " << sLevel->getValue() << std::endl;
 }
 
 ExampleGame::~ExampleGame()
