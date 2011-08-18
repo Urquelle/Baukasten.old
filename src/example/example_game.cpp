@@ -53,12 +53,28 @@ ExampleGame::ExampleGame() :
 
     u2->addState( *sHP );
 
+	Entity *u3 = new Entity( "ramirez" );
+
+	GenericState<int> *sHP2 = new GenericState<int>( *u3, "hp" );
+	sHP2->setValue( 15 );
+
+	u3->addState( *sHP2 );
+
     std::cout << u->getId() << " level: " << sLevel->getValue() << std::endl;
-    std::cout << u2->getId() << " hp: " << sHP->getValue() << std::endl;
+    std::cout << u2->getId() << " hp: " << ( static_cast<GenericState<int>*>( u2->getState( "hp" ) ) )->getValue() << std::endl;
+    std::cout << u3->getId() << " hp: " << sHP2->getValue() << std::endl;
+
+	EntityList targets;
+
+	targets.push_back( u2 );
+	targets.push_back( u3 );
+
     u->invokeAction( aAddExp->getId() );
-    u->invokeAction( aHit->getId(), *u2 );
+    u->invokeAction( aHit->getId(), targets );
     u->runActions();
+
     std::cout << u2->getId() << " hp: " << sHP->getValue() << std::endl;
+    std::cout << u3->getId() << " hp: " << sHP2->getValue() << std::endl;
     std::cout << u->getId() << " level: " << sLevel->getValue() << std::endl;
 }
 

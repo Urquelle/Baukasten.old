@@ -4,6 +4,8 @@
 #include <action.h>
 #include <generic_state.h>
 
+#include <iostream>
+
 using namespace Baukasten::Core;
 
 class ActionLevelUp : public Baukasten::Core::Action {
@@ -84,20 +86,33 @@ public:
     {
         Entity *target = getTarget();
 
-        if ( !target )
-            return;
+        if ( target ) {
+			hit( target );
+		}
 
-        GenericState<int> *state = static_cast<GenericState<int>*>(
-            target->getState( "hp" )
-        );
+		EntityList targetList = getTargetList();
+		EntityList::iterator it;
 
-        if ( !state )
-            return;
+		for ( it = targetList.begin(); it != targetList.end();  ++it ) {
+			hit( *it );
+		}
 
-        state->setValue( state->getValue() - 10 );
-
-        target->dropAction( getId() );
+		getSource()->dropAction( getId() );
     }
+
+	void hit( Entity *entity )
+	{
+		GenericState<int> *state = static_cast<GenericState<int>*>(
+			entity->getState( "hp" )
+		);
+
+		if ( !state ) {
+			std::cout << "kein state gefunden" << std::endl;
+			return;
+		}
+
+		state->setValue( state->getValue() - 10 );
+	}
 };
 
 #endif /* end of include guard: ACTIONS_OG1WVP4A */
