@@ -14,7 +14,7 @@ namespace Baukasten {
             Action( Entity&, const std::string& );
             virtual ~Action();
 
-            const Entity* getSource() const;
+            Entity* getSource() const;
             void clear();
             bool isActive() const;
             void setActive( bool );

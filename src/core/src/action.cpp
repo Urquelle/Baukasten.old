@@ -13,7 +13,7 @@ Action::~Action()
 {
 }
 
-const Entity* Action::getSource() const
+Entity* Action::getSource() const
 {
     return mSource;
 }
