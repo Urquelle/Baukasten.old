@@ -1,8 +1,8 @@
 cmake_minimum_required(VERSION 2.8)
 
-project (Eisenfaust)
+project (Baukasten)
 
-set (Eisenfaust_VERSION_MAJOR 0)
-set (Eisenfaust_VERSION_MINOR 1)
+set (Baukasten_VERSION_MAJOR 0)
+set (Baukasten_VERSION_MINOR 1)
 
 add_subdirectory(src)
