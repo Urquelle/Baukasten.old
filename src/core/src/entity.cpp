@@ -9,7 +9,8 @@
 using namespace Baukasten::Core;
 
 Entity::Entity( const std::string &id ) :
-    mId( id )
+    mId( id ),
+	mForm( 0 )
 {
 }
 
