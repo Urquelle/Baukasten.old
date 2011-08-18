@@ -2,9 +2,10 @@
 
 using namespace Baukasten::Core;
 
-Action::Action( Entity &parent, const std::string &id ) :
+Action::Action( Entity &source, const std::string &id ) :
     Entity( id ),
-    mParent( &parent )
+    mSource( &source ),
+    mActive( false )
 {
 }
 
@@ -12,24 +13,29 @@ Action::~Action()
 {
 }
 
-const Entity* Action::getParent() const
+const Entity* Action::getSource() const
 {
-    return mParent;
+    return mSource;
 }
 
-void Action::doAction( Entity &target )
+void Action::clear()
 {
-    Entity *tParent = mParent;
-    mParent = &target;
-    doAction();
-    mParent = tParent;
+    mTarget = 0;
+    mTargetList.erase( mTargetList.begin(), mTargetList.end() );
 }
 
-void Action::doAction( std::list<Entity*> targetList )
+bool Action::isActive() const
 {
-    std::list<Entity*>::const_iterator it = targetList.begin();
-    while ( it != targetList.end() ) {
-        doAction( *(static_cast<Entity*>(*it)) );
-    }
+    return mActive;
+}
+
+void Action::setTarget( Entity &target )
+{
+    mTarget = &target;
+}
+
+void Action::setTarget( EntityList &targetList )
+{
+    mTargetList = targetList;
 }
 

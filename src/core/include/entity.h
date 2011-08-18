@@ -26,7 +26,12 @@ namespace Baukasten {
             void addAction( Action& );
             Action* getAction( const std::string& ) const;
             bool hasAction( const std::string& ) const;
-            void invokeAction( const std::string& ) const;
+
+            void invokeAction( const std::string& );
+            void invokeAction( const std::string&, Entity& );
+            void invokeAction( const std::string&, EntityList );
+
+            void runActions();
 
             void setForm( Form& );
             Form* getForm() const;
@@ -41,6 +46,7 @@ namespace Baukasten {
             std::string     mId;
             StateMap        mStateMap;
             ActionMap       mActionMap;
+            ActionList      mActionQueue;
             Form*           mForm;
             EntityMap       mEntityMap;
         };

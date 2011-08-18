@@ -48,6 +48,7 @@ ExampleGame::ExampleGame() :
 
     std::cout << "Level: " << sLevel->getValue() << std::endl;
     u->invokeAction( aAddExp->getId() );
+    u->runActions();
     std::cout << "Level: " << sLevel->getValue() << std::endl;
 }
 

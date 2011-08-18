@@ -8,8 +8,8 @@ using namespace Baukasten::Core;
 
 class ActionLevelUp : public Baukasten::Core::Action {
 public:
-    ActionLevelUp( Entity &parent ) :
-        Action( parent, "levelUp" )
+    ActionLevelUp( Entity &source ) :
+        Action( source, "levelUp" )
     {
     }
 
@@ -20,7 +20,7 @@ public:
     void doAction()
     {
         GenericState<int> *lvl = static_cast<GenericState<int>*>(
-            getParent()->getState( "level" )
+            getSource()->getState( "level" )
         );
 
         if ( lvl ) {
@@ -35,8 +35,8 @@ private:
 
 class ActionAddExperience : public Baukasten::Core::Action {
 public:
-    ActionAddExperience( Entity &parent ) :
-        Action( parent, "addExperience" )
+    ActionAddExperience( Entity &source ) :
+        Action( source, "addExperience" )
     {
     }
 
@@ -47,7 +47,7 @@ public:
     void doAction()
     {
         GenericState<int> *exp = static_cast<GenericState<int>*>(
-            getParent()->getState( "experience" )
+            getSource()->getState( "experience" )
         );
 
         if ( exp ) {
@@ -57,7 +57,7 @@ public:
             // check whether the entity has a level state and if
             // we have to increase the level.
             GenericState<int> *lvl = static_cast<GenericState<int>*>(
-                getParent()->getState( "level" )
+                getSource()->getState( "level" )
             );
 
             if ( lvl && expPoints >= 10 && expPoints < 50 && lvl->getValue() < 1 )

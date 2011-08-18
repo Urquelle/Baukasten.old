@@ -14,14 +14,19 @@ namespace Baukasten {
             Action( Entity&, const std::string& );
             virtual ~Action();
 
-            const Entity* getParent() const;
+            const Entity* getSource() const;
+            void clear();
+            bool isActive() const;
+            void setTarget( Entity& );
+            void setTarget( EntityList& );
 
             virtual void doAction() = 0;
-            virtual void doAction( Entity& );
-            virtual void doAction( std::list<Entity*> );
 
         private:
-            Entity*     mParent;
+            Entity*     mSource;
+            Entity*     mTarget;
+            EntityList  mTargetList;
+            bool        mActive;
         };
     } /* Core */
 } /* Baukasten */

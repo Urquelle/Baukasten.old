@@ -2,6 +2,7 @@
 #define GLOBAL_H
 
 #include <map>
+#include <list>
 #include <memory>
 #include <string>
 #include <tuple>
@@ -15,9 +16,14 @@ namespace Baukasten {
         using namespace std;
 
         typedef tuple<float, float, float> t_pos;
-        typedef map<string, Entity*> EntityMap;
-        typedef map<string, Action*> ActionMap;
-        typedef map<string, State*> StateMap;
+
+        typedef map<string, Entity*>    EntityMap;
+        typedef list<Entity*>           EntityList;
+
+        typedef map<string, Action*>    ActionMap;
+        typedef list<Action*>           ActionList;
+
+        typedef map<string, State*>     StateMap;
     }
 }
 

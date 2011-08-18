@@ -58,15 +58,43 @@ bool Entity::hasAction( const std::string &actionId ) const
     return ( it != mActionMap.end() );
 }
 
-void Entity::invokeAction( const std::string &actionId ) const
+void Entity::invokeAction( const std::string &actionId )
 {
-    if ( !hasAction( actionId ) )
-        return;
-
     Action *action = getAction( actionId );
 
-    if ( action )
-        action->doAction();
+    if ( action && !action->isActive() ) {
+        action->clear();
+        mActionQueue.push_back( action );
+    }
+}
+
+void Entity::invokeAction( const std::string &actionId, Entity &target )
+{
+    Action *action = getAction( actionId );
+
+    if ( action && !action->isActive() ) {
+        action->clear();
+        action->setTarget( target );
+        mActionQueue.push_back( action );
+    }
+}
+
+void Entity::invokeAction( const std::string &actionId, EntityList targetList )
+{
+    Action *action = getAction( actionId );
+
+    if ( action && !action->isActive() ) {
+        action->clear();
+        action->setTarget( targetList );
+        mActionQueue.push_back( action );
+    }
+}
+
+void Entity::runActions()
+{
+    ActionList::const_iterator it = mActionQueue.begin();
+    while ( it != mActionQueue.end() )
+        (*it++)->doAction();
 }
 
 void Entity::setForm( Form &form )
