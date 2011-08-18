@@ -1,7 +1,5 @@
 #include "example_game.h"
-#include "actions.h"
-
-#include <generic_state.h>
+#include "entities.h"
 
 #include <iostream>
 
@@ -27,55 +25,25 @@ ExampleGame::ExampleGame() :
     using namespace Baukasten::Core;
     using namespace std;
 
-    Entity *u = new Entity( "hans" );
+    Unit *sanchez = new Unit( "sanchez" );
+    Unit *gomez = new Unit( "gomez" );
+	Unit *ramirez = new Unit( "ramirez" );
 
-    GenericState<string> *sName = new GenericState<string>( *u, "name" );
-    GenericState<int> *sLevel = new GenericState<int>( *u, "level" );
-    sLevel->setValue( 0 );
-    GenericState<int> *sExp = new GenericState<int>( *u, "experience" );
-
-    ActionLevelUp *aLvlUp = new ActionLevelUp( *u );
-    ActionAddExperience *aAddExp = new ActionAddExperience( *u );
-    Hit *aHit = new Hit( *u );
-
-    u->addState( *sName );
-    u->addState( *sLevel );
-    u->addState( *sExp );
-
-    u->addAction( *aLvlUp );
-    u->addAction( *aAddExp );
-    u->addAction( *aHit );
-
-    Entity *u2 = new Entity( "gomez" );
-
-    GenericState<int> *sHP = new GenericState<int>( *u2, "hp" );
-    sHP->setValue( 10 );
-
-    u2->addState( *sHP );
-
-	Entity *u3 = new Entity( "ramirez" );
-
-	GenericState<int> *sHP2 = new GenericState<int>( *u3, "hp" );
-	sHP2->setValue( 15 );
-
-	u3->addState( *sHP2 );
-
-    std::cout << u->getId() << " level: " << sLevel->getValue() << std::endl;
-    std::cout << u2->getId() << " hp: " << ( static_cast<GenericState<int>*>( u2->getState( "hp" ) ) )->getValue() << std::endl;
-    std::cout << u3->getId() << " hp: " << sHP2->getValue() << std::endl;
+    std::cout << sanchez->getName() << " level: " << sanchez->getLevel() << std::endl;
+    std::cout << gomez->getName() << " hp: " << gomez->getHP() << std::endl;
+    std::cout << ramirez->getName() << " hp: " << ramirez->getHP() << std::endl;
 
 	EntityList targets;
 
-	targets.push_back( u2 );
-	targets.push_back( u3 );
+	targets.push_back( gomez );
+	targets.push_back( ramirez );
 
-    u->invokeAction( aAddExp->getId() );
-    u->invokeAction( aHit->getId(), targets );
-    u->runActions();
+    sanchez->invokeAction( "hit", targets );
+    sanchez->runActions();
 
-    std::cout << u2->getId() << " hp: " << sHP->getValue() << std::endl;
-    std::cout << u3->getId() << " hp: " << sHP2->getValue() << std::endl;
-    std::cout << u->getId() << " level: " << sLevel->getValue() << std::endl;
+    std::cout << gomez->getName() << " hp: " << gomez->getHP() << std::endl;
+    std::cout << ramirez->getName() << " hp: " << ramirez->getHP() << std::endl;
+    std::cout << sanchez->getName() << " level: " << sanchez->getLevel() << std::endl;
 }
 
 ExampleGame::~ExampleGame()
