@@ -19,25 +19,10 @@ public:
     {
     }
 
-    void doAction()
-    {
-		// remove the action from the execution queue
-		getSource()->dropAction( getId() );
-
-		Unit *target = static_cast<Unit*>(getTarget());
-
-		if ( target ) {
-			levelUp( target );
-		}
-
-		EntityList targetList = getTargetList();
-
-		if ( !target && targetList.empty() )
-			levelUp( static_cast<Unit*>(getSource() ) );
-    }
-
-	void levelUp( Unit *unit )
+	void run( Entity *entity )
 	{
+		Unit *unit = static_cast<Unit*>( entity );
+
 		GenericState<int> *state = static_cast<GenericState<int>*>(unit->getState( "level" ));
 		state->setValue( state->getValue() + 1 );
 		std::cout << unit->getName() << " reached  Level " << state->getValue() << "! Ooohh ... shiny!" << std::endl;
@@ -58,20 +43,10 @@ public:
     {
     }
 
-    void doAction()
-    {
-		// remove the action from the execution queue
-		getSource()->dropAction( getId() );
-
-		Unit *target = static_cast<Unit*>(getSource());
-
-        if ( target ) {
-			addExperience( target );
-        }
-    }
-
-	void addExperience( Unit *unit )
+	void run( Entity *entity )
 	{
+		Unit *unit = static_cast<Unit*>( entity );
+
         GenericState<int> *exp = static_cast<GenericState<int>*>(
             getSource()->getState( "experience" )
         );
@@ -116,31 +91,10 @@ public:
 	{
 	}
 
-	void doAction()
+	void run( Entity *entity )
 	{
-		// remove the action from the execution queue
-		getSource()->dropAction( getId() );
+		Unit *unit = static_cast<Unit*>(entity);
 
-		Unit *target = static_cast<Unit*>( getTarget() );
-
-		if ( target ) {
-			die( target );
-		}
-
-		EntityList targetList = getTargetList();
-		EntityList::iterator it;
-
-		for ( it = targetList.begin(); it != targetList.end(); ++it ) {
-			die( static_cast<Unit*>(*it) );
-		}
-
-		if ( targetList.empty() ) {
-			die( static_cast<Unit*>(getSource()) );
-		}
-	}
-
-	void die( Unit *unit )
-	{
 		std::cout << unit->getName() << ": it's ... over ... at last ... Hnnnnnnng" << std::endl;
 	}
 };
@@ -156,30 +110,10 @@ public:
     {
     }
 
-    void doAction()
-    {
-		// remove the action from the execution queue
-		getSource()->dropAction( getId() );
-
-        Unit *target = static_cast<Unit*>(getTarget());
-
-        if ( target ) {
-			hit( target );
-		}
-
-		EntityList targetList = getTargetList();
-		EntityList::iterator it = targetList.begin();
-
-		if ( !targetList.empty() ) {
-			while ( it != targetList.end() ) {
-				hit( static_cast<Unit*>(*it) );
-				it++;
-			}
-		}
-    }
-
-	void hit( Unit *unit )
+	void run( Entity *entity )
 	{
+		Unit *unit = static_cast<Unit*>(entity);
+
 		GenericState<int> *state = static_cast<GenericState<int>*>(
 			unit->getState( "hp" )
 		);

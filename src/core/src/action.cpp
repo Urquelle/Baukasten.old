@@ -54,3 +54,28 @@ EntityList Action::getTargetList()
 	return mTargetList;
 }
 
+void Action::doAction()
+{
+	// remove the action from the execution queue
+	getSource()->dropAction( getId() );
+
+	Entity *target = getTarget();
+
+	if ( target ) {
+		run( target );
+		return;
+	}
+
+	EntityList targetList = getTargetList();
+	if ( !targetList.empty() ) {
+		EntityList::iterator it = targetList.begin();
+		while( it != targetList.end() ) {
+			run( *it );
+			++it;
+		}
+	}
+
+	if ( !target && targetList.empty() )
+		run( getSource() );
+}
+

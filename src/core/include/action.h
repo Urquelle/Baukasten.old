@@ -25,7 +25,8 @@ namespace Baukasten {
             void setTargetList( EntityList& );
 			EntityList getTargetList();
 
-            virtual void doAction() = 0;
+            virtual void doAction();
+			virtual void run( Entity* ) = 0;
 
         private:
             Entity*     mSource;
