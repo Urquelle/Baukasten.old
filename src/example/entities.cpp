@@ -9,12 +9,13 @@ Unit::Unit( const std::string &id ) :
 	mLevel( new GenericState<int>( *this, "level" ) ),
 	mExperience( new GenericState<int>( *this, "experience" ) ),
 
-	mAddExpAction( new ActionAddExperience( *this ) ),
-	mLevelUpAction( new ActionLevelUp( *this ) ),
-	mHitAction( new HitAction( *this ) )
+	mAddExpAction( new AddExperienceAction( *this ) ),
+	mLevelUpAction( new LevelUpAction( *this ) ),
+	mHitAction( new HitAction( *this ) ),
+	mDieAction( new DieAction( *this ) )
 {
 	mName->setValue( id );
-	mHP->setValue( 10 );
+	mHP->setValue( 40 );
 	mMP->setValue( 10 );
 	mLevel->setValue( 1 );
 	mExperience->setValue( 0 );
@@ -28,6 +29,7 @@ Unit::Unit( const std::string &id ) :
 	addAction( *mAddExpAction );
 	addAction( *mLevelUpAction );
 	addAction( *mHitAction );
+	addAction( *mDieAction );
 }
 
 Unit::~Unit()

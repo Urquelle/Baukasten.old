@@ -29,10 +29,6 @@ ExampleGame::ExampleGame() :
     Unit *gomez = new Unit( "gomez" );
 	Unit *ramirez = new Unit( "ramirez" );
 
-    std::cout << sanchez->getName() << " level: " << sanchez->getLevel() << std::endl;
-    std::cout << gomez->getName() << " hp: " << gomez->getHP() << std::endl;
-    std::cout << ramirez->getName() << " hp: " << ramirez->getHP() << std::endl;
-
 	EntityList targets;
 
 	targets.push_back( gomez );
@@ -40,10 +36,12 @@ ExampleGame::ExampleGame() :
 
     sanchez->invokeAction( "hit", targets );
     sanchez->runActions();
-
-    std::cout << gomez->getName() << " hp: " << gomez->getHP() << std::endl;
-    std::cout << ramirez->getName() << " hp: " << ramirez->getHP() << std::endl;
-    std::cout << sanchez->getName() << " level: " << sanchez->getLevel() << std::endl;
+    sanchez->invokeAction( "hit", targets );
+    sanchez->runActions();
+    sanchez->invokeAction( "hit", targets );
+    sanchez->runActions();
+    sanchez->invokeAction( "hit", targets );
+    sanchez->runActions();
 }
 
 ExampleGame::~ExampleGame()
