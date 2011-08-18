@@ -71,14 +71,14 @@ private:
     /* data */
 };
 
-class Hit : public Baukasten::Core::Action {
+class HitAction : public Baukasten::Core::Action {
 public:
-    Hit( Entity &source ) :
+    HitAction( Entity &source ) :
         Action( source, "hit" )
     {
     }
 
-    virtual ~Hit()
+    virtual ~HitAction()
     {
     }
 
@@ -106,10 +106,8 @@ public:
 			entity->getState( "hp" )
 		);
 
-		if ( !state ) {
-			std::cout << "kein state gefunden" << std::endl;
+		if ( !state )
 			return;
-		}
 
 		state->setValue( state->getValue() - 10 );
 	}

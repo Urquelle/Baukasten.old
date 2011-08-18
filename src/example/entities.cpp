@@ -11,7 +11,7 @@ Unit::Unit( const std::string &id ) :
 
 	mAddExpAction( new ActionAddExperience( *this ) ),
 	mLevelUpAction( new ActionLevelUp( *this ) ),
-	mHitAction( new Hit( *this ) )
+	mHitAction( new HitAction( *this ) )
 {
 	mName->setValue( id );
 	mHP->setValue( 10 );
