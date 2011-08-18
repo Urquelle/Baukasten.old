@@ -7,6 +7,10 @@ Drawable::Drawable( const std::string &id ) :
 {
 }
 
+Drawable::~Drawable()
+{
+}
+
 void Drawable::setPosition( const t_pos position )
 {
     mPosition = position;

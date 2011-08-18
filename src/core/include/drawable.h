@@ -9,7 +9,7 @@ namespace Baukasten {
         class BAUKASTEN_EXPORT Drawable : public Entity {
         public:
             Drawable( const std::string& );
-            virtual ~Drawable() = 0;
+            virtual ~Drawable();
 
             void setPosition( const t_pos );
             const t_pos getPosition() const;
