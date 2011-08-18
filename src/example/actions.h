@@ -95,6 +95,8 @@ public:
             return;
 
         state->setValue( state->getValue() - 10 );
+
+        target->dropAction( getId() );
     }
 };
 
