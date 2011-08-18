@@ -1,8 +1,9 @@
 #ifndef FORM_H
 #define FORM_H
 
-#include "global.h"
+#include "abstract_space.h"
 #include "drawable.h"
+#include "global.h"
 
 #include <string>
 
@@ -10,13 +11,14 @@ namespace Baukasten {
     namespace Core {
         class BAUKASTEN_EXPORT Form : public Drawable {
         public:
-            Form();
-            virtual ~Form() = 0;
+            Form( const std::string& );
+            virtual ~Form();
+
+            void addSpace( const std::string&, AbstractSpace& );
 
         protected:
             std::string mMeshName;
-
-            // can contain space objects
+            EntityMap   mSpaceMap;
         };
     }
 }

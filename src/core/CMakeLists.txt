@@ -4,6 +4,7 @@ set (
     src/action.cpp
     src/drawable.cpp
     src/entity.cpp
+    src/form.cpp
     src/logical_space.cpp
     src/state.cpp
     src/virtual_space.cpp
