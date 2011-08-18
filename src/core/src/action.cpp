@@ -29,6 +29,11 @@ bool Action::isActive() const
     return mActive;
 }
 
+void Action::setActive( bool active )
+{
+    mActive = active;
+}
+
 void Action::setTarget( Entity &target )
 {
     mTarget = &target;
