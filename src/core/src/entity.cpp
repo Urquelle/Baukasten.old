@@ -37,7 +37,7 @@ State* Entity::getState( const std::string &stateId ) const
 bool Entity::hasState( const std::string &stateId ) const
 {
     StateMap::const_iterator it = mStateMap.find( stateId );
-    return ( it == mStateMap.end() );
+    return ( it != mStateMap.end() );
 }
 
 void Entity::addAction( Action &action )
@@ -55,7 +55,7 @@ Action* Entity::getAction( const std::string &actionId ) const
 bool Entity::hasAction( const std::string &actionId ) const
 {
     ActionMap::const_iterator it = mActionMap.find( actionId );
-    return ( it == mActionMap.end() );
+    return ( it != mActionMap.end() );
 }
 
 void Entity::invokeAction( const std::string &actionId ) const
