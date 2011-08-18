@@ -20,10 +20,12 @@ namespace Baukasten {
             const std::string getId() const;
 
             void addState( State& );
-            State* hasState(const std::string&) const;
+            State* getState( const std::string& ) const;
+            bool hasState( const std::string& ) const;
 
             void addAction( Action& );
-            Action* hasAction(const std::string&) const;
+            Action* getAction( const std::string& ) const;
+            bool hasAction( const std::string& ) const;
             void invokeAction( const std::string& ) const;
 
             void setForm( Form& );

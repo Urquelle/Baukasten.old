@@ -28,10 +28,16 @@ void Entity::addState( State &state )
         mStateMap[ state.getId() ] = &state;
 }
 
-State* Entity::hasState( const std::string &stateId ) const
+State* Entity::getState( const std::string &stateId ) const
 {
     StateMap::const_iterator it = mStateMap.find( stateId );
     return ( it == mStateMap.end() ) ? 0 : it->second;
+}
+
+bool Entity::hasState( const std::string &stateId ) const
+{
+    StateMap::const_iterator it = mStateMap.find( stateId );
+    return ( it == mStateMap.end() );
 }
 
 void Entity::addAction( Action &action )
@@ -40,15 +46,24 @@ void Entity::addAction( Action &action )
         mActionMap[ action.getId() ] =  &action;
 }
 
-Action* Entity::hasAction( const std::string &actionId ) const
+Action* Entity::getAction( const std::string &actionId ) const
 {
     ActionMap::const_iterator it = mActionMap.find( actionId );
     return ( it == mActionMap.end() ) ? 0 : it->second;
 }
 
+bool Entity::hasAction( const std::string &actionId ) const
+{
+    ActionMap::const_iterator it = mActionMap.find( actionId );
+    return ( it == mActionMap.end() );
+}
+
 void Entity::invokeAction( const std::string &actionId ) const
 {
-    Action *action = hasAction( actionId );
+    if ( !hasAction( actionId ) )
+        return;
+
+    Action *action = getAction( actionId );
 
     if ( action )
         action->doAction();
