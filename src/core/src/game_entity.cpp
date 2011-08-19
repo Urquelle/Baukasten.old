@@ -13,6 +13,16 @@ GameEntity::~GameEntity()
 {
 }
 
+void GameEntity::setType( EntityType &type )
+{
+	mType = &type;
+}
+
+EntityType* GameEntity::getType() const
+{
+	return mType;
+}
+
 void GameEntity::addAction( Action &action )
 {
     if ( !hasAction( action.getId() ) )
