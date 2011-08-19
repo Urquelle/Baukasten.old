@@ -4,7 +4,7 @@
 using namespace Baukasten::Core;
 
 Entity::Entity( const std::string &id ) :
-    mId( id )
+	Object( id )
 {
 }
 
@@ -13,24 +13,13 @@ Entity& Entity::operator=( const Entity &other )
 	if ( this == &other )
 		return *this;
 
-	mId = other.getId();
 	mStates = other.getStates();
 
 	return *this;
 }
 
-bool Entity::operator==( const Entity &other ) const
-{
-    return ( mId == other.getId() );
-}
-
 Entity::~Entity()
 {
-}
-
-const std::string Entity::getId() const
-{
-    return mId;
 }
 
 void Entity::addState( State &state )

@@ -3,7 +3,7 @@
 using namespace Baukasten::Core;
 
 State::State( Entity &parent, const std::string &id ) :
-    Entity( id ),
+    Object( id ),
     mParent( &parent )
 {
 }
