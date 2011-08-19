@@ -14,6 +14,11 @@ Entity::Entity( const std::string &id ) :
 {
 }
 
+bool Entity::operator==( const Entity &other ) const
+{
+    return ( mId == other.getId() );
+}
+
 Entity::~Entity()
 {
 }
@@ -156,8 +161,7 @@ EntityMap Entity::getEntities() const
 	return mEntities;
 }
 
-bool Entity::operator==( const Entity &other ) const
+void Entity::removeEntity( const Entity &entity )
 {
-    return ( mId == other.getId() );
 }
 
