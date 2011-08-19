@@ -1,6 +1,7 @@
 set(
     example_SRCS
 	entities.cpp
+	entity_types.cpp
     example_game.cpp
     frame_listener.cpp
     main.cpp
