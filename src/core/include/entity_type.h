@@ -21,8 +21,6 @@ namespace Baukasten {
 			State* getEntityState( const std::string& );
 
 		private:
-			std::string		mId;
-			StateMap		mStates;
 			EntityType*		mParent;
 			EntityTypeList	mChildren;
 		};
