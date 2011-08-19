@@ -11,6 +11,11 @@ Object::~Object()
 {
 }
 
+void Object::operator=( const Object &other )
+{
+	mId = other.getId();
+}
+
 bool Object::operator==( const Object &other ) const
 {
     return ( mId == other.getId() );

@@ -10,6 +10,7 @@ namespace Baukasten {
 			Object( const std::string& );
 			virtual ~Object();
 
+			void operator=( const Object& );
 			bool operator==( const Object& ) const;
 
 			const std::string getId() const;
