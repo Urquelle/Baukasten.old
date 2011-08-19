@@ -142,7 +142,7 @@ void Entity::runActions()
 {
     ActionList::const_iterator it = mActionQueue.begin();
     while ( it != mActionQueue.end() )
-        (*it++)->doAction();
+        (*it++)->run();
 }
 
 void Entity::setForm( Form &form )

@@ -54,7 +54,7 @@ EntityList Action::getTargets()
 	return mTargets;
 }
 
-void Action::doAction()
+void Action::run()
 {
 	// remove the action from the execution queue
 	getSource()->dropAction( getId() );
@@ -62,7 +62,7 @@ void Action::doAction()
 	Entity *target = getTarget();
 
 	if ( target ) {
-		run( target );
+		doAction( target );
 		return;
 	}
 
@@ -70,12 +70,12 @@ void Action::doAction()
 	if ( !targets.empty() ) {
 		EntityList::iterator it = targets.begin();
 		while( it != targets.end() ) {
-			run( *it );
+			doAction( *it );
 			++it;
 		}
 	}
 
 	if ( !target && targets.empty() )
-		run( getSource() );
+		doAction( getSource() );
 }
 

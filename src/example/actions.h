@@ -19,7 +19,7 @@ public:
     {
     }
 
-	void run( Entity *entity )
+	void doAction( Entity *entity )
 	{
 		Unit *unit = static_cast<Unit*>( entity );
 
@@ -43,7 +43,7 @@ public:
     {
     }
 
-	void run( Entity *entity )
+	void doAction( Entity *entity )
 	{
 		Unit *unit = static_cast<Unit*>( entity );
 
@@ -91,7 +91,7 @@ public:
 	{
 	}
 
-	void run( Entity *entity )
+	void doAction( Entity *entity )
 	{
 		Unit *unit = static_cast<Unit*>(entity);
 
@@ -110,7 +110,7 @@ public:
     {
     }
 
-	void run( Entity *entity )
+	void doAction( Entity *entity )
 	{
 		Unit *unit = static_cast<Unit*>(entity);
 
