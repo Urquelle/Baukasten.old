@@ -38,6 +38,11 @@ namespace Baukasten {
 		private:
 			T mValue;
 		};
+
+		// typedef some often used genericstates
+		typedef GenericState<int>			StateInt;
+		typedef GenericState<float>			StateFloat;
+		typedef GenericState<std::string>	StateString;
 	} /* Core */
 } /* Baukasten */
 

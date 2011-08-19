@@ -18,16 +18,16 @@ public:
 	int getExperience() const;
 
 private:
-	GenericState<std::string>*	mName;
-	GenericState<int>*			mHP;
-	GenericState<int>*			mMP;
-	GenericState<int>*			mLevel;
-	GenericState<int>*			mExperience;
+	StateString*	mName;
+	StateInt*		mHP;
+	StateInt*		mMP;
+	StateInt*		mLevel;
+	StateInt*		mExperience;
 
-	Action*						mAddExpAction;
-	Action*						mLevelUpAction;
-	Action*						mHitAction;
-	Action*						mDieAction;
+	Action*			mAddExpAction;
+	Action*			mLevelUpAction;
+	Action*			mHitAction;
+	Action*			mDieAction;
 };
 
 #endif /* end of include guard: ENTITIES_SI8O8CQ0 */

@@ -3,11 +3,11 @@
 
 Unit::Unit( const std::string &id ) :
 	Entity( id ),
-	mName( new GenericState<std::string>( *this, "name" ) ),
-	mHP( new GenericState<int>( *this, "hp" ) ),
-	mMP( new GenericState<int>( *this, "mp" ) ),
-	mLevel( new GenericState<int>( *this, "level" ) ),
-	mExperience( new GenericState<int>( *this, "experience" ) ),
+	mName( new StateString( *this, "name" ) ),
+	mHP( new StateInt( *this, "hp" ) ),
+	mMP( new StateInt( *this, "mp" ) ),
+	mLevel( new StateInt( *this, "level" ) ),
+	mExperience( new StateInt( *this, "experience" ) ),
 
 	mAddExpAction( new AddExperienceAction( *this ) ),
 	mLevelUpAction( new LevelUpAction( *this ) ),
