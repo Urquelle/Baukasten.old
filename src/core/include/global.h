@@ -28,6 +28,7 @@ namespace Baukasten {
         typedef list<Action*>				ActionList;
 
         typedef map<string, State*>			StateMap;
+        typedef list<State*>				StateList;
     }
 }
 
