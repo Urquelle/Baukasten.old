@@ -1,6 +1,7 @@
 #include "game_entity.h"
 
 #include "action.h"
+#include "entity_type.h"
 
 using namespace Baukasten::Core;
 
@@ -135,5 +136,24 @@ GameEntityMap GameEntity::getEntities() const
 
 void GameEntity::removeEntity( const GameEntity &entity )
 {
+}
+
+bool GameEntity::hasState( const std::string &id ) const
+{
+	bool answer = Entity::hasState( id );
+	if ( !answer )
+		answer = getType()->hasState( id );
+
+	return answer;
+}
+
+State* GameEntity::getState( const std::string &id ) const
+{
+	State *state = Entity::getState( id );
+
+	if ( !state )
+		state = getType()->getState( id );
+
+	return state;
 }
 

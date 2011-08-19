@@ -38,6 +38,9 @@ namespace Baukasten {
 			GameEntityMap getEntities() const;
             void removeEntity( const GameEntity& );
 
+			bool hasState( const std::string& ) const;
+			State* getState( const std::string& ) const;
+
 		private:
 			EntityType*		mType;
             ActionMap       mActions;
@@ -49,3 +52,4 @@ namespace Baukasten {
 } /* Baukasten */
 
 #endif /* end of include guard: GAME_ENTITY_W1MJLLNE */
+
