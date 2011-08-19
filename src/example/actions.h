@@ -131,7 +131,7 @@ public:
 		}
 
 		state->setValue( state->getValue() - 10 );
-		std::cout << source->getName() << " just hit " << unit->getName() << " ... Oouch!" << std::endl;
+		std::cout << source->getName() << "(" << source->getSex() << ") just hit " << unit->getName() << " ... Oouch!" << std::endl;
 
 		if ( state->getValue() <= 0 ) {
 			state->setValue( 0 );

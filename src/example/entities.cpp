@@ -1,4 +1,5 @@
 #include "entities.h"
+#include "entity_types.h"
 #include "actions.h"
 
 Unit::Unit( const std::string &id ) :
@@ -30,6 +31,8 @@ Unit::Unit( const std::string &id ) :
 	addAction( *mLevelUpAction );
 	addAction( *mHitAction );
 	addAction( *mDieAction );
+
+	setType( *(new BasicClass( "basic" )) );
 }
 
 Unit::~Unit()
@@ -68,5 +71,15 @@ int Unit::getLevel() const
 int Unit::getExperience() const
 {
 	return mExperience->getValue();
+}
+
+int Unit::getSex() const
+{
+	StateInt *state = static_cast<StateInt*>(getState( "sex" ));
+
+	if ( !state )
+		return -1;
+
+	return state->getValue();
 }
 

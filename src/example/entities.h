@@ -16,6 +16,7 @@ public:
 	int getMP() const;
 	int getLevel() const;
 	int getExperience() const;
+	int getSex() const;
 
 private:
 	StateString*	mName;

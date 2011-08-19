@@ -6,10 +6,10 @@
 
 using namespace Baukasten::Core;
 
-class SquireClass : public EntityType {
+class BasicClass : public EntityType {
 public:
-	SquireClass( const std::string& );
-	virtual ~SquireClass();
+	BasicClass( const std::string& );
+	virtual ~BasicClass();
 
 private:
 	StateInt*	mSex;
