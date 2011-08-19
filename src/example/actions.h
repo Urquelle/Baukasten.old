@@ -143,5 +143,22 @@ public:
 	}
 };
 
+class MoveAction : public Baukasten::Core::Action {
+public:
+    MoveAction( GameEntity &source ) :
+        Action( source, "move" )
+    {
+    }
+
+    virtual ~MoveAction()
+    {
+    }
+
+	void doAction( GameEntity *entity )
+	{
+		Unit *unit = static_cast<Unit*>(entity);
+		std::cout << unit->getName() << " just moved to somewhere else." << std::endl;
+	}
+};
 
 #endif /* end of include guard: ACTIONS_OG1WVP4A */
