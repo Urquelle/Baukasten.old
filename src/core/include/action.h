@@ -22,8 +22,8 @@ namespace Baukasten {
             void setTarget( Entity& );
             Entity* getTarget();
 
-            void setTargetList( EntityList& );
-			EntityList getTargetList();
+            void setTargets( EntityList& );
+			EntityList getTargets();
 
             virtual void doAction();
 			virtual void run( Entity* ) = 0;
@@ -31,7 +31,7 @@ namespace Baukasten {
         private:
             Entity*     mSource;
             Entity*     mTarget;
-            EntityList  mTargetList;
+            EntityList  mTargets;
             bool        mActive;
         };
     } /* Core */

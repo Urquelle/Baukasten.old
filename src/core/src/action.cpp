@@ -21,7 +21,7 @@ Entity* Action::getSource() const
 void Action::clear()
 {
     mTarget = 0;
-    mTargetList.erase( mTargetList.begin(), mTargetList.end() );
+    mTargets.erase( mTargets.begin(), mTargets.end() );
 }
 
 bool Action::isActive() const
@@ -44,14 +44,14 @@ Entity* Action::getTarget()
     return mTarget;
 }
 
-void Action::setTargetList( EntityList &targetList )
+void Action::setTargets( EntityList &targets )
 {
-    mTargetList = targetList;
+    mTargets = targets;
 }
 
-EntityList Action::getTargetList()
+EntityList Action::getTargets()
 {
-	return mTargetList;
+	return mTargets;
 }
 
 void Action::doAction()
@@ -66,16 +66,16 @@ void Action::doAction()
 		return;
 	}
 
-	EntityList targetList = getTargetList();
-	if ( !targetList.empty() ) {
-		EntityList::iterator it = targetList.begin();
-		while( it != targetList.end() ) {
+	EntityList targets = getTargets();
+	if ( !targets.empty() ) {
+		EntityList::iterator it = targets.begin();
+		while( it != targets.end() ) {
 			run( *it );
 			++it;
 		}
 	}
 
-	if ( !target && targetList.empty() )
+	if ( !target && targets.empty() )
 		run( getSource() );
 }
 

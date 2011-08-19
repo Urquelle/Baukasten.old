@@ -108,14 +108,14 @@ void Entity::invokeAction( const std::string &id, Entity &target )
     }
 }
 
-void Entity::invokeAction( const std::string &id, EntityList targetList )
+void Entity::invokeAction( const std::string &id, EntityList targets )
 {
     Action *action = getAction( id );
 
     if ( action && !action->isActive() ) {
         action->clear();
         action->setActive( true );
-        action->setTargetList( targetList );
+        action->setTargets( targets );
         mActionQueue.push_back( action );
     }
 }
