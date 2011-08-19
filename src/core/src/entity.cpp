@@ -17,18 +17,10 @@ Entity& Entity::operator=( const Entity &other )
 		return *this;
 
 	mId = other.getId();
-
-	mStates.clear();
 	mStates = other.getStates();
-
-	mActions.clear();
 	mActions = other.getActions();
-
-	delete mForm;
-	mForm = other.getForm();
-
-	mEntities.clear();
 	mEntities = other.getEntities();
+	mForm = other.getForm();
 
 	return *this;
 }
