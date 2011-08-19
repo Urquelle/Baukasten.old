@@ -11,6 +11,7 @@ namespace Baukasten {
     namespace Core {
         class Action;
         class Entity;
+        class EntityType;
 		class GameEntity;
         class State;
 
@@ -20,6 +21,9 @@ namespace Baukasten {
 
         typedef map<string, Entity*>		EntityMap;
         typedef list<Entity*>				EntityList;
+
+		typedef map<string, EntityType*>	EntityTypeMap;
+		typedef list<EntityType*>			EntityTypeList;
 
         typedef map<string, GameEntity*>	GameEntityMap;
         typedef list<GameEntity*>			GameEntityList;
