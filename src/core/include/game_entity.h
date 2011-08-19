@@ -9,7 +9,7 @@ namespace Baukasten {
 		class EntityType;
 		class Form;
 
-		class GameEntity : public Entity {
+		class BAUKASTEN_EXPORT GameEntity : public Entity {
 		public:
 			GameEntity( const std::string& );
 			virtual ~GameEntity();
