@@ -73,6 +73,7 @@ void Action::run()
 			doAction( *it );
 			++it;
 		}
+		return;
 	}
 
 	if ( !target && targets.empty() )
