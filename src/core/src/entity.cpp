@@ -26,37 +26,47 @@ const std::string Entity::getId() const
 void Entity::addState( State &state )
 {
     if ( !hasState( state.getId() ) )
-        mStateMap[ state.getId() ] = &state;
+        mStates[ state.getId() ] = &state;
 }
 
 State* Entity::getState( const std::string &stateId ) const
 {
-    StateMap::const_iterator it = mStateMap.find( stateId );
-    return ( it == mStateMap.end() ) ? 0 : it->second;
+    StateMap::const_iterator it = mStates.find( stateId );
+    return ( it == mStates.end() ) ? 0 : it->second;
+}
+
+StateMap Entity::getStates() const
+{
+	return mStates;
 }
 
 bool Entity::hasState( const std::string &stateId ) const
 {
-    StateMap::const_iterator it = mStateMap.find( stateId );
-    return ( it != mStateMap.end() );
+    StateMap::const_iterator it = mStates.find( stateId );
+    return ( it != mStates.end() );
 }
 
 void Entity::addAction( Action &action )
 {
     if ( !hasAction( action.getId() ) )
-        mActionMap[ action.getId() ] =  &action;
+        mActions[ action.getId() ] =  &action;
 }
 
 Action* Entity::getAction( const std::string &actionId ) const
 {
-    ActionMap::const_iterator it = mActionMap.find( actionId );
-    return ( it == mActionMap.end() ) ? 0 : it->second;
+    ActionMap::const_iterator it = mActions.find( actionId );
+    return ( it == mActions.end() ) ? 0 : it->second;
+}
+
+ActionMap Entity::getActions() const
+{
+	return mActions;
 }
 
 bool Entity::hasAction( const std::string &actionId ) const
 {
-    ActionMap::const_iterator it = mActionMap.find( actionId );
-    return ( it != mActionMap.end() );
+    ActionMap::const_iterator it = mActions.find( actionId );
+    return ( it != mActions.end() );
 }
 
 void Entity::invokeAction( const std::string &actionId )
@@ -132,17 +142,18 @@ Form* Entity::getForm() const
 void Entity::addEntity( Entity &entity )
 {
     if ( !hasEntity( entity.getId() ) )
-        mEntityMap[ entity.getId() ] =  &entity;
+        mEntities[ entity.getId() ] =  &entity;
 }
 
 bool Entity::hasEntity( const std::string &id ) const
 {
-    EntityMap::const_iterator it = mEntityMap.find( id );
-    return ( it == mEntityMap.end() );
+    EntityMap::const_iterator it = mEntities.find( id );
+    return ( it == mEntities.end() );
 }
 
-void Entity::removeEntity( const Entity &entity )
+EntityMap Entity::getEntities() const
 {
+	return mEntities;
 }
 
 bool Entity::operator==( const Entity &other ) const

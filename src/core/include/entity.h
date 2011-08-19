@@ -21,10 +21,12 @@ namespace Baukasten {
 
             void addState( State& );
             State* getState( const std::string& ) const;
+			StateMap getStates() const;
             bool hasState( const std::string& ) const;
 
             void addAction( Action& );
             Action* getAction( const std::string& ) const;
+			ActionMap getActions() const;
             bool hasAction( const std::string& ) const;
 
             void invokeAction( const std::string& );
@@ -40,17 +42,16 @@ namespace Baukasten {
 
             void addEntity( Entity& );
             bool hasEntity( const std::string& ) const;
+			EntityMap getEntities() const;
             void removeEntity( const Entity& );
-
-            bool operator==( const Entity& ) const;
 
         protected:
             std::string     mId;
-            StateMap        mStateMap;
-            ActionMap       mActionMap;
+            StateMap        mStates;
+            ActionMap       mActions;
             ActionList      mActionQueue;
             Form*           mForm;
-            EntityMap       mEntityMap;
+            EntityMap       mEntities;
         };
     }
 }
