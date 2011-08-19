@@ -1,10 +1,7 @@
 #include "entity.h"
 #include "state.h"
 #include "action.h"
-
-#include <cstdlib>
-#include <ctime>
-#include <iostream>
+#include "form.h"
 
 using namespace Baukasten::Core;
 
@@ -12,6 +9,28 @@ Entity::Entity( const std::string &id ) :
     mId( id ),
 	mForm( 0 )
 {
+}
+
+Entity& Entity::operator=( const Entity &other )
+{
+	if ( this == &other )
+		return *this;
+
+	mId = other.getId();
+
+	mStates.clear();
+	mStates = other.getStates();
+
+	mActions.clear();
+	mActions = other.getActions();
+
+	delete mForm;
+	mForm = other.getForm();
+
+	mEntities.clear();
+	mEntities = other.getEntities();
+
+	return *this;
 }
 
 bool Entity::operator==( const Entity &other ) const

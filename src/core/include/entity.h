@@ -15,6 +15,7 @@ namespace Baukasten {
         class BAUKASTEN_EXPORT Entity {
         public:
             Entity( const std::string& );
+			Entity& operator=( const Entity& );
             bool operator==( const Entity& ) const;
 
             virtual ~Entity();
