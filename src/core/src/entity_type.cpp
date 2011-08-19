@@ -51,7 +51,7 @@ State* EntityType::getState( const std::string &id ) const
 {
 	State *state = Entity::getState( id );
 
-	if ( !state )
+	if ( !state && mParent )
 		state = mParent->getState( id );
 
 	return state;
