@@ -29,17 +29,20 @@ ExampleGame::ExampleGame() :
     Unit *gomez = new Unit( "gomez" );
 	Unit *ramirez = new Unit( "ramirez" );
 
-	EntityList targets;
+	GameEntityList targets;
 
 	targets.push_back( gomez );
 	targets.push_back( ramirez );
 
     sanchez->invokeAction( "hit", targets );
     sanchez->runActions();
+
     sanchez->invokeAction( "hit", targets );
     sanchez->runActions();
+
     sanchez->invokeAction( "hit", targets );
     sanchez->runActions();
+
     sanchez->invokeAction( "hit", targets );
     sanchez->runActions();
 }

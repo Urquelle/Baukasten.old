@@ -1,12 +1,12 @@
 #ifndef ENTITIES_SI8O8CQ0
 #define ENTITIES_SI8O8CQ0
 
-#include <entity.h>
+#include <game_entity.h>
 #include <generic_state.h>
 
 using namespace Baukasten::Core;
 
-class Unit : public Entity {
+class Unit : public GameEntity {
 public:
 	Unit( const std::string& );
 	virtual ~Unit();

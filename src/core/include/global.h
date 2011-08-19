@@ -10,20 +10,24 @@
 namespace Baukasten {
     namespace Core {
         class Action;
-        class State;
         class Entity;
+		class GameEntity;
+        class State;
 
         using namespace std;
 
         typedef tuple<float, float, float> t_pos;
 
-        typedef map<string, Entity*>    EntityMap;
-        typedef list<Entity*>           EntityList;
+        typedef map<string, Entity*>		EntityMap;
+        typedef list<Entity*>				EntityList;
 
-        typedef map<string, Action*>    ActionMap;
-        typedef list<Action*>           ActionList;
+        typedef map<string, GameEntity*>	GameEntityMap;
+        typedef list<GameEntity*>			GameEntityList;
 
-        typedef map<string, State*>     StateMap;
+        typedef map<string, Action*>		ActionMap;
+        typedef list<Action*>				ActionList;
+
+        typedef map<string, State*>			StateMap;
     }
 }
 

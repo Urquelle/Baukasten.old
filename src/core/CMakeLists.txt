@@ -5,6 +5,7 @@ set (
     src/drawable.cpp
     src/entity.cpp
     src/form.cpp
+	src/game_entity.cpp
     src/logical_space.cpp
     src/state.cpp
     src/virtual_space.cpp
@@ -17,6 +18,7 @@ set (
     include/drawable.h
     include/entity.h
     include/form.h
+	include/game_entity.h
     include/generic_state.h
     include/global.h
     include/logical_space.h

@@ -19,7 +19,7 @@ public:
     {
     }
 
-	void doAction( Entity *entity )
+	void doAction( GameEntity *entity )
 	{
 		Unit *unit = static_cast<Unit*>( entity );
 
@@ -43,7 +43,7 @@ public:
     {
     }
 
-	void doAction( Entity *entity )
+	void doAction( GameEntity *entity )
 	{
 		Unit *unit = static_cast<Unit*>( entity );
 
@@ -91,7 +91,7 @@ public:
 	{
 	}
 
-	void doAction( Entity *entity )
+	void doAction( GameEntity *entity )
 	{
 		Unit *unit = static_cast<Unit*>(entity);
 
@@ -101,7 +101,7 @@ public:
 
 class HitAction : public Baukasten::Core::Action {
 public:
-    HitAction( Entity &source ) :
+    HitAction( GameEntity &source ) :
         Action( source, "hit" )
     {
     }
@@ -110,7 +110,7 @@ public:
     {
     }
 
-	void doAction( Entity *entity )
+	void doAction( GameEntity *entity )
 	{
 		Unit *unit = static_cast<Unit*>(entity);
 

@@ -2,7 +2,7 @@
 
 using namespace Baukasten::Core;
 
-Action::Action( Entity &source, const std::string &id ) :
+Action::Action( GameEntity &source, const std::string &id ) :
     Entity( id ),
     mSource( &source ),
     mActive( false )
@@ -13,7 +13,7 @@ Action::~Action()
 {
 }
 
-Entity* Action::getSource() const
+GameEntity* Action::getSource() const
 {
     return mSource;
 }
@@ -34,22 +34,22 @@ void Action::setActive( bool active )
     mActive = active;
 }
 
-void Action::setTarget( Entity &target )
+void Action::setTarget( GameEntity &target )
 {
     mTarget = &target;
 }
 
-Entity* Action::getTarget()
+GameEntity* Action::getTarget()
 {
     return mTarget;
 }
 
-void Action::setTargets( EntityList &targets )
+void Action::setTargets( GameEntityList &targets )
 {
     mTargets = targets;
 }
 
-EntityList Action::getTargets()
+GameEntityList Action::getTargets()
 {
 	return mTargets;
 }
@@ -59,16 +59,16 @@ void Action::run()
 	// remove the action from the execution queue
 	getSource()->dropAction( getId() );
 
-	Entity *target = getTarget();
+	GameEntity *target = getTarget();
 
 	if ( target ) {
 		doAction( target );
 		return;
 	}
 
-	EntityList targets = getTargets();
+	GameEntityList targets = getTargets();
 	if ( !targets.empty() ) {
-		EntityList::iterator it = targets.begin();
+		GameEntityList::iterator it = targets.begin();
 		while( it != targets.end() ) {
 			doAction( *it );
 			++it;

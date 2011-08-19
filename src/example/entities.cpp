@@ -2,7 +2,7 @@
 #include "actions.h"
 
 Unit::Unit( const std::string &id ) :
-	Entity( id ),
+	GameEntity( id ),
 	mName( new StateString( *this, "name" ) ),
 	mHP( new StateInt( *this, "hp" ) ),
 	mMP( new StateInt( *this, "mp" ) ),

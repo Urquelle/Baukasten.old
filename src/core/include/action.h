@@ -2,7 +2,7 @@
 #define ACTION_4GNSEOOP
 
 #include "global.h"
-#include "entity.h"
+#include "game_entity.h"
 
 #include <string>
 #include <list>
@@ -11,28 +11,28 @@ namespace Baukasten {
     namespace Core {
         class BAUKASTEN_EXPORT Action : public Entity {
         public:
-            Action( Entity&, const std::string& );
+            Action( GameEntity&, const std::string& );
             virtual ~Action();
 
-            Entity* getSource() const;
+            GameEntity* getSource() const;
             void clear();
             bool isActive() const;
             void setActive( bool );
 
-            void setTarget( Entity& );
-            Entity* getTarget();
+            void setTarget( GameEntity& );
+            GameEntity* getTarget();
 
-            void setTargets( EntityList& );
-			EntityList getTargets();
+            void setTargets( GameEntityList& );
+			GameEntityList getTargets();
 
 			virtual void run();
-            virtual void doAction( Entity* ) = 0;
+            virtual void doAction( GameEntity* ) = 0;
 
         private:
-            Entity*     mSource;
-            Entity*     mTarget;
-            EntityList  mTargets;
-            bool        mActive;
+            GameEntity*		mSource;
+            GameEntity*		mTarget;
+            GameEntityList	mTargets;
+            bool			mActive;
         };
     } /* Core */
 } /* Baukasten */
