@@ -2,18 +2,12 @@
 
 using namespace Baukasten::Core;
 
-State::State( Entity &parent, const std::string &id ) :
-    Object( id ),
-    mParent( &parent )
+State::State( const std::string &id ) :
+    Object( id )
 {
 }
 
 State::~State()
 {
-}
-
-const Entity* State::getParent() const
-{
-    return mParent;
 }
 

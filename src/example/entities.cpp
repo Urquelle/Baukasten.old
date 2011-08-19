@@ -3,11 +3,11 @@
 
 Unit::Unit( const std::string &id ) :
 	GameEntity( id ),
-	mName( new StateString( *this, "name" ) ),
-	mHP( new StateInt( *this, "hp" ) ),
-	mMP( new StateInt( *this, "mp" ) ),
-	mLevel( new StateInt( *this, "level" ) ),
-	mExperience( new StateInt( *this, "experience" ) ),
+	mName( new StateString( "name" ) ),
+	mHP( new StateInt( "hp" ) ),
+	mMP( new StateInt( "mp" ) ),
+	mLevel( new StateInt( "level" ) ),
+	mExperience( new StateInt( "experience" ) ),
 
 	mAddExpAction( new AddExperienceAction( *this ) ),
 	mLevelUpAction( new LevelUpAction( *this ) ),
