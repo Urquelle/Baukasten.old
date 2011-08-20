@@ -151,7 +151,7 @@ State* GameEntity::getState( const std::string &id ) const
 {
 	State *state = Entity::getState( id );
 
-	if ( !state )
+	if ( !state && getType() )
 		state = getType()->getState( id );
 
 	return state;
