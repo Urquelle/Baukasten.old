@@ -141,7 +141,7 @@ void GameEntity::removeEntity( const GameEntity &entity )
 bool GameEntity::hasState( const std::string &id ) const
 {
 	bool answer = Entity::hasState( id );
-	if ( !answer )
+	if ( !answer && getType() )
 		answer = getType()->hasState( id );
 
 	return answer;
