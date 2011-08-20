@@ -29,6 +29,7 @@ private:
 	Action*			mLevelUpAction;
 	Action*			mHitAction;
 	Action*			mDieAction;
+	Action*			mLuaAction;
 };
 
 #endif /* end of include guard: ENTITIES_SI8O8CQ0 */

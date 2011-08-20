@@ -1,19 +1,7 @@
 #include "action_lua.h"
-#include <iostream>
-
-#include <lua.hpp>
+#include "global_lua.h"
 
 using namespace Baukasten::Core;
-
-// register GameEntity Functions here.
-static const luaL_Reg bkGEFunctions[] = {
-	{}
-};
-
-int luaCallback( lua_State *L )
-{
-	std::cout << "aus lua aufgerufen!" << std::endl;
-}
 
 ActionLua::ActionLua(
 		GameEntity &source,
@@ -22,18 +10,17 @@ ActionLua::ActionLua(
 	Action( source, id ),
 	mFilePath( filePath )
 {
-	mLuaState = lua_open();
-	luaopen_base( mLuaState );
-	lua_register( mLuaState, "doAction", luaCallback );
+	wrapClasses();
 }
 
 ActionLua::~ActionLua()
 {
-	lua_close( mLuaState );
 }
 
 void ActionLua::doAction( GameEntity *entity )
 {
-	luaL_dofile( mLuaState, mFilePath.c_str() );
+	SLB::Script s;
+	s.doString("SLB.using(SLB)");
+	s.doFile( mFilePath );
 }
 

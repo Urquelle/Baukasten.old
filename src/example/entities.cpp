@@ -2,6 +2,10 @@
 #include "entity_types.h"
 #include "actions.h"
 
+#include <action_lua.h>
+
+using namespace Baukasten::Core;
+
 Unit::Unit( const std::string &id ) :
 	GameEntity( id ),
 	mName( new StateString( "name" ) ),
@@ -13,7 +17,8 @@ Unit::Unit( const std::string &id ) :
 	mAddExpAction( new AddExperienceAction( *this ) ),
 	mLevelUpAction( new LevelUpAction( *this ) ),
 	mHitAction( new HitAction( *this ) ),
-	mDieAction( new DieAction( *this ) )
+	mDieAction( new DieAction( *this ) ),
+	mLuaAction( new ActionLua( *this, "hello", "hello.lua" ) )
 {
 	mName->setValue( id );
 	mHP->setValue( 40 );
@@ -31,6 +36,7 @@ Unit::Unit( const std::string &id ) :
 	addAction( *mLevelUpAction );
 	addAction( *mHitAction );
 	addAction( *mDieAction );
+	addAction( *mLuaAction );
 
 	setType( *(new BasicClass( "basic" )) );
 }
@@ -46,6 +52,7 @@ Unit::~Unit()
 	delete mAddExpAction;
 	delete mLevelUpAction;
 	delete mHitAction;
+	delete mLuaAction;
 }
 
 std::string Unit::getName() const

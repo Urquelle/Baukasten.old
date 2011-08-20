@@ -19,7 +19,7 @@ namespace Baukasten {
 
 		private:
 			const std::string	mFilePath;
-			lua_State*			mLuaState;
+			lua_State*			mL;
 		};
 	} /* Core */
 } /* Baukasten */

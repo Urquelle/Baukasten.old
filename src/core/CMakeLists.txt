@@ -35,59 +35,25 @@ set (
 set( targetLibs "" )
 
 # compile lua action class
-if( DEFINED USE_LUA )
-	message(STATUS "lua dependencies on")
-
+if( DEFINED WITH_LUA )
 	find_library( luaLibPath lua )
-	message(STATUS ${luaLib})
-
-	# use the source only if the lib's found
-	if (NOT ${luaLibPath} EQUAL "")
-		set(
-			targetLibs
-			${targetLibs}
-			lua
-		)
-
-		set (
-			core_SRCS
-			${core_SRCS}
-			src/action_lua.cpp
-		)
-
-		set (
-			core_HEADER
-			${core_HEADER}
-			include/action_lua.h
-		)
-	else()
-		message(ERROR "liblua not found!")
-	endif()
-else()
-	message(STATUS "lua dependencies off")
+	set( targetLibs ${targetLibs} lua )
+	set( core_SRCS ${core_SRCS} src/action_lua.cpp )
+	set( core_HEADER ${core_HEADER} include/action_lua.h include/global_lua.h )
+	set( slb_LINKDIR ${CMAKE_CURRENT_SOURCE_DIR}/lib/ )
+	install(FILES ${CMAKE_CURRENT_SOURCE_DIR}/lib/libSLB.so DESTINATION lib/)
 endif()
 
 include_directories( include )
+link_directories( ${slb_LINKDIR} )
+
 add_definitions( -DEXPORT_LIB=1 )
+add_library( Baukasten SHARED ${core_SRCS} )
 
-add_library(
-    Baukasten
-    SHARED
-    ${core_SRCS}
-)
-
-set_target_properties(
-    Baukasten
-    PROPERTIES SOVERSION 0.0.1
-)
+set_target_properties( Baukasten PROPERTIES SOVERSION 0.0.1 )
 
 if (NOT ${targetLibs} EQUAL "" )
-	message(STATUS "linking project " ${targetLibs})
-
-	target_link_libraries(
-		Baukasten
-		${targetLibs}
-	)
+	target_link_libraries( Baukasten ${targetLibs} )
 endif()
 
 install(TARGETS Baukasten LIBRARY DESTINATION lib/)
