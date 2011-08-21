@@ -28,6 +28,14 @@ void wrapClasses()
 			.param("State object.")
 		.set("getState", &IncStates::getState);
 
+	// register the ActionLua Class
+	SLB::Class<ActionLua>("Action")
+		.comment("Action Wrapper")
+		.constructor<GameEntity&, const std::string&, const std::string&>()
+		.inherits<Action>()
+		.set("doAction", &ActionLua::doAction)
+			.param("GameEntity as the target Object.");
+
 	// register EntityType Class
 	SLB::Class<EntityType>("EntityType")
 		.comment("Wrapper for the EntityTypeClass.")

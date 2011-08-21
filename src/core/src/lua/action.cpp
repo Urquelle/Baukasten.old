@@ -23,6 +23,7 @@ void ActionLua::doAction( GameEntity *entity )
 	SLB::Script s;
 	s.doString("SLB.using(SLB)");
 	s.set("entity", entity);
+	s.set("action", this);
 	s.doFile( mFilePath );
 }
 
