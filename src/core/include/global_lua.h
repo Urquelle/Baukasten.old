@@ -15,8 +15,7 @@ void wrapClasses()
 	SLB::Class<Object>("Object")
 		.constructor<const std::string&>()
 		.const_set("getId", &Object::getId);
-
-
+/*
 	SLB::Class<Entity>("Entity")
 		.comment("Wrapper for the Entity Class.")
 		.constructor<const std::string&>()
@@ -31,9 +30,7 @@ void wrapClasses()
 		.constructor<const std::string&>()
 		.inherits<Entity>()
 		.set("hasState", &GameEntity::hasState)
-			.param("id of the state")
-		.set("getId", &GameEntity::getId)
-			.comment("Returns the id");
+			.param("id of the state");
 
 	SLB::Class<State>("State")
 		.comment("Wrapper for the State Class.")
@@ -46,6 +43,7 @@ void wrapClasses()
 		.set("setValue",&StateInt::setValue)
 			.param("expects an integer.")
 		.set("getValue",&StateInt::getValue);
+		*/
 }
 
 #endif /* end of include guard: GLOBAL_LUA_S7HRAEG3 */
