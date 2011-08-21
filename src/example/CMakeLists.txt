@@ -14,6 +14,6 @@ add_executable(
     ${example_SRCS}
 )
 
-target_link_libraries( exampleGame Baukasten )
+target_link_libraries( exampleGame Baukasten SLB)
 
 install(TARGETS exampleGame RUNTIME DESTINATION bin/)
