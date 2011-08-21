@@ -36,8 +36,6 @@ set( targetLibs "" )
 
 # compile lua action class
 if( DEFINED WITH_LUA )
-	find_library( luaLibPath lua )
-	set( targetLibs ${targetLibs} lua )
 	set( core_SRCS ${core_SRCS} src/lua/action.cpp )
 	set( core_HEADER ${core_HEADER} include/lua/action.h include/lua/global.h )
 	set( slb_LINKDIR ${CMAKE_CURRENT_SOURCE_DIR}/lib/ )
