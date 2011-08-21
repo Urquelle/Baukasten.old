@@ -1,4 +1,5 @@
 #include "action.h"
+#include "game_entity.h"
 
 using namespace Baukasten::Core;
 

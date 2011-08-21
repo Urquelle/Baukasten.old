@@ -2,13 +2,15 @@
 #define ACTION_4GNSEOOP
 
 #include "global.h"
-#include "game_entity.h"
+#include "entity.h"
 
 #include <string>
 #include <list>
 
 namespace Baukasten {
     namespace Core {
+		class GameEntity;
+
         class BAUKASTEN_EXPORT Action : public Entity {
         public:
             Action( GameEntity&, const std::string& );
