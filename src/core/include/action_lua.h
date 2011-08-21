@@ -4,6 +4,8 @@
 #include "global.h"
 #include "action.h"
 
+#include <string>
+
 class lua_State;
 
 namespace Baukasten {

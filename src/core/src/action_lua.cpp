@@ -1,4 +1,5 @@
 #include "action_lua.h"
+#include "game_entity.h"
 #include "global_lua.h"
 
 using namespace Baukasten::Core;
