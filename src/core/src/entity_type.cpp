@@ -49,7 +49,7 @@ void EntityType::removeChild( const EntityType &child )
 
 State* EntityType::getState( const std::string &id ) const
 {
-	State *state = Entity::getState( id );
+	State *state = IncStates::getState( id );
 
 	if ( !state && mParent )
 		state = mParent->getState( id );

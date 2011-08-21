@@ -3,32 +3,22 @@
 
 #include "entity.h"
 #include "global.h"
+#include "inc_actions.h"
+#include "inc_states.h"
 
 namespace Baukasten {
 	namespace Core {
 		class EntityType;
 		class Form;
 
-		class BAUKASTEN_EXPORT GameEntity : public Entity {
+		class BAUKASTEN_EXPORT GameEntity :
+			public Entity, public IncActions, public IncStates {
 		public:
 			GameEntity( const std::string& );
 			virtual ~GameEntity();
 
 			void setType( EntityType& );
 			EntityType* getType() const;
-
-            void addAction( Action& );
-            Action* getAction( const std::string& ) const;
-			ActionMap getActions() const;
-            bool hasAction( const std::string& ) const;
-
-            void invokeAction( const std::string& );
-            void invokeAction( const std::string&, GameEntity& );
-            void invokeAction( const std::string&, GameEntityList );
-
-            void dropAction( const std::string& );
-
-            void runActions();
 
             void setForm( Form& );
             Form* getForm() const;
@@ -43,8 +33,6 @@ namespace Baukasten {
 
 		private:
 			EntityType*		mType;
-            ActionMap       mActions;
-            ActionList      mActionQueue;
             Form*           mForm;
             GameEntityMap	mEntities;
 		};

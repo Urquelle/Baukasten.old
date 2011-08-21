@@ -2,13 +2,13 @@
 #define STATE_H
 
 #include "global.h"
-#include "object.h"
+#include "entity.h"
 
 #include <string>
 
 namespace Baukasten {
 	namespace Core {
-		class BAUKASTEN_EXPORT State : public Object {
+		class BAUKASTEN_EXPORT State : public Entity {
 		public:
 			State( const std::string& );
 			virtual ~State();

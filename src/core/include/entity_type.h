@@ -3,10 +3,12 @@
 
 #include "entity.h"
 #include "global.h"
+#include "inc_states.h"
 
 namespace Baukasten {
 	namespace Core {
-		class BAUKASTEN_EXPORT EntityType : public Entity {
+		class BAUKASTEN_EXPORT EntityType :
+			public Entity, public IncStates {
 		public:
 			EntityType( const std::string& );
 			virtual ~EntityType();
