@@ -26,7 +26,7 @@ namespace Baukasten {
 			{
 			}
 
-			const T getValue() const
+			const T& getValue() const
 			{
 				return mValue;
 			}
