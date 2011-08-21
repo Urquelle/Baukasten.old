@@ -54,5 +54,6 @@ if (NOT ${targetLibs} EQUAL "" )
 	target_link_libraries( Baukasten ${targetLibs} )
 endif()
 
+install(DIRECTORY include/ DESTINATION ${CMAKE_INSTALL_PREFIX}/include)
 install(TARGETS Baukasten LIBRARY DESTINATION lib/)
 install(FILES ${core_HEADER} DESTINATION include/)
