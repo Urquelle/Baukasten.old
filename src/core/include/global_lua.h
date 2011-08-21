@@ -2,6 +2,7 @@
 #define GLOBAL_LUA_S7HRAEG3
 
 #include "global.h"
+#include "entity.h"
 #include "game_entity.h"
 #include "generic_state.h"
 #include "state.h"
@@ -12,9 +13,9 @@ void wrapClasses()
 {
 	using namespace Baukasten::Core;
 
-	SLB::Class<Object>("Object")
+	SLB::Class<Entity>("Entity")
 		.constructor<const std::string&>()
-		.const_set("getId", &Object::getId);
+		.const_set("getId", &Entity::getId);
 /*
 	SLB::Class<Entity>("Entity")
 		.comment("Wrapper for the Entity Class.")
