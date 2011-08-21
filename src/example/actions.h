@@ -101,48 +101,6 @@ public:
 	}
 };
 
-class HitAction : public Baukasten::Core::Action {
-public:
-    HitAction( GameEntity &source ) :
-        Action( source, "hit" )
-    {
-    }
-
-    virtual ~HitAction()
-    {
-    }
-
-	void doAction( GameEntity *entity )
-	{
-		Unit *unit = static_cast<Unit*>(entity);
-
-		GenericState<int> *state = static_cast<GenericState<int>*>(
-			unit->getState( "hp" )
-		);
-
-		if ( !state )
-			return;
-
-		Unit *source = static_cast<Unit*>( getSource() );
-
-		if ( source != unit ) {
-			source->invokeAction( "addExperience" );
-			source->runActions();
-		}
-
-		state->setValue( state->getValue() - 10 );
-		std::cout << source->getName() << "(" << source->getSex() << ") just hit " << unit->getName() << " ... Oouch!" << std::endl;
-
-		if ( state->getValue() <= 0 ) {
-			state->setValue( 0 );
-
-			// call the die action ... MUAHAHAHAHA
-			unit->invokeAction( "die" );
-			unit->runActions();
-		}
-	}
-};
-
 class MoveAction : public Baukasten::Core::Action {
 public:
     MoveAction( GameEntity &source ) :
