@@ -52,5 +52,8 @@ void ExampleGame::run()
 
     sanchez->invokeAction( "hit", targets );
     sanchez->runActions();
+
+	sanchez->invokeAction( "hello" );
+	sanchez->runActions();
 }
 
