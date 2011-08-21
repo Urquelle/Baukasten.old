@@ -2,7 +2,7 @@
 #include "entity_types.h"
 #include "actions.h"
 
-#include <action_lua.h>
+#include <lua/action.h>
 
 using namespace Baukasten::Core;
 
@@ -18,7 +18,7 @@ Unit::Unit( const std::string &id ) :
 	mLevelUpAction( new LevelUpAction( *this ) ),
 	mHitAction( new HitAction( *this ) ),
 	mDieAction( new DieAction( *this ) ),
-	mLuaAction( new ActionLua( *this, "hello", "hello.lua" ) )
+	mLuaAction( new ActionLua( *this, "hello", "scripts/hit_action.lua" ) )
 {
 	mName->setValue( id );
 	mHP->setValue( 40 );
