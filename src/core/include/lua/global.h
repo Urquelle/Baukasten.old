@@ -110,7 +110,7 @@ void wrapClasses()
 		.inherits<Entity>();
 
 	// register GenericState with int as the template argument
-	SLB::Class<GenericState<int> >("StateInt")
+	SLB::Class<StateInt>("StateInt")
 		.comment("Wrapper for the StateInt Class.")
 		.constructor<const std::string&>()
 		.inherits<State>()
@@ -118,6 +118,16 @@ void wrapClasses()
 		.set("setValue",&StateInt::setValue)
 			.param("expects an integer.")
 		.set("getValue",&StateInt::getValue);
+
+	// register GenericState with string as the template argument
+	SLB::Class<StateString>("StateString")
+		.comment("Wrapper for the StateString Class.")
+		.constructor<const std::string&>()
+		.inherits<State>()
+		.inherits<Entity>()
+		.set("setValue",&StateString::setValue)
+			.param("expects a string.")
+		.set("getValue",&StateString::getValue);
 }
 
 #endif /* end of include guard: GLOBAL_LUA_S7HRAEG3 */
