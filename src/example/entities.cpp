@@ -16,9 +16,8 @@ Unit::Unit( const std::string &id ) :
 
 	mAddExpAction( new AddExperienceAction( *this ) ),
 	mLevelUpAction( new LevelUpAction( *this ) ),
-	mHitAction( new HitAction( *this ) ),
 	mDieAction( new DieAction( *this ) ),
-	mLuaAction( new ActionLua( *this, "hello", "scripts/hit_action.lua" ) )
+	mHitAction( new ActionLua( *this, "hit", "scripts/hit_action.lua" ) )
 {
 	mName->setValue( id );
 	mHP->setValue( 40 );
@@ -34,9 +33,8 @@ Unit::Unit( const std::string &id ) :
 
 	addAction( *mAddExpAction );
 	addAction( *mLevelUpAction );
-	addAction( *mHitAction );
 	addAction( *mDieAction );
-	addAction( *mLuaAction );
+	addAction( *mHitAction );
 
 	setType( *(new BasicClass( "basic" )) );
 }
@@ -52,7 +50,6 @@ Unit::~Unit()
 	delete mAddExpAction;
 	delete mLevelUpAction;
 	delete mHitAction;
-	delete mLuaAction;
 }
 
 std::string Unit::getName() const

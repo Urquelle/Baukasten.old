@@ -41,19 +41,16 @@ void ExampleGame::run()
 	targets.push_back( gomez );
 	targets.push_back( ramirez );
 
-    sanchez->invokeAction( "hit", targets );
-    sanchez->runActions();
+	sanchez->invokeAction( "hit", targets );
+	sanchez->runActions();
 
-    sanchez->invokeAction( "hit", targets );
-    sanchez->runActions();
+	sanchez->invokeAction( "hit", targets );
+	sanchez->runActions();
 
-    sanchez->invokeAction( "hit", targets );
-    sanchez->runActions();
+	sanchez->invokeAction( "hit", targets );
+	sanchez->runActions();
 
-    sanchez->invokeAction( "hit", targets );
-    sanchez->runActions();
-
-	sanchez->invokeAction( "hello" );
+	sanchez->invokeAction( "hit", targets );
 	sanchez->runActions();
 }
 
