@@ -27,7 +27,7 @@ bool Entity::operator==( const Entity &other ) const
 	return ( getId() == other.getId() );
 }
 
-const std::string Entity::getId() const
+const std::string& Entity::getId() const
 {
 	return mId;
 }

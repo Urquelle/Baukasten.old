@@ -17,7 +17,7 @@ namespace Baukasten {
 			Entity& operator=( const Entity& );
             bool operator==( const Entity& ) const;
 
-			const std::string getId() const;
+			const std::string& getId() const;
 
 		private:
 			std::string mId;
