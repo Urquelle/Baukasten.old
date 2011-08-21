@@ -28,11 +28,24 @@ void wrapClasses()
 			.param("State object.")
 		.set("getState", &IncStates::getState);
 
-	// register the ActionLua Class
-	SLB::Class<ActionLua>("Action")
+	SLB::Class<Action,SLB::Instance::NoCopy>("Action")
 		.comment("Action Wrapper")
+		.inherits<Entity>()
+		.set("getSource", &Action::getSource)
+		.set("clear", &Action::clear)
+		.set("isActive", &Action::isActive)
+		.set("setActive", &Action::setActive)
+			.param("bool to indicate whether the action should stay in the queue")
+		.set("setTarget", &Action::setTarget)
+			.param("GameEntity as the target")
+		.set("getTarget", &Action::getTarget);
+
+	// register the ActionLua Class
+	SLB::Class<ActionLua>("ActionLua")
+		.comment("ActionLua Wrapper")
 		.constructor<GameEntity&, const std::string&, const std::string&>()
 		.inherits<Action>()
+		.inherits<Entity>()
 		.set("doAction", &ActionLua::doAction)
 			.param("GameEntity as the target Object.");
 
