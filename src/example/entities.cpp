@@ -50,6 +50,9 @@ Unit::~Unit()
 	delete mAddExpAction;
 	delete mLevelUpAction;
 	delete mHitAction;
+
+	if ( EntityType *type = getType() )
+		delete type;
 }
 
 std::string Unit::getName() const
