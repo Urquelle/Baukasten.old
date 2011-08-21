@@ -22,7 +22,6 @@ protected:
     void initScene( const std::string& );
 
     bool mKeepRunning;
-
 };
 
 #endif /* end of include guard: GAME_QESA072Y */
