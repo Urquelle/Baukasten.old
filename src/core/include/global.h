@@ -5,7 +5,6 @@
 #include <list>
 #include <memory>
 #include <string>
-#include <tuple>
 
 namespace Baukasten {
     namespace Core {
@@ -17,7 +16,11 @@ namespace Baukasten {
 
         using namespace std;
 
-        typedef tuple<float, float, float> t_pos;
+		typedef struct {
+			float x;
+			float y;
+			float z;
+		} t_pos;
 
         typedef map<string, Entity*>		EntityMap;
         typedef list<Entity*>				EntityList;
