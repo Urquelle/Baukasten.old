@@ -3,6 +3,7 @@
 
 #include <global.h>
 #include <entity.h>
+#include <entity_type.h>
 #include <game_entity.h>
 #include <generic_state.h>
 #include <state.h>
@@ -13,38 +14,63 @@ void wrapClasses()
 {
 	using namespace Baukasten::Core;
 
-	SLB::Class<Entity>("Entity")
-		.constructor<const std::string&>()
-		.const_set("getId", &Entity::getId);
-/*
+	// register Entity Class
 	SLB::Class<Entity>("Entity")
 		.comment("Wrapper for the Entity Class.")
 		.constructor<const std::string&>()
-		.inherits<Object>()
-		.set("addState", &Entity::addState)
-			.param("receives a State Object.")
-		.set("getState", &Entity::getState)
-			.param("String as the id of the State");
+		.const_set("getId", &Entity::getId);
 
+	// register IncStates Class
+	SLB::Class<IncStates>("IncStates")
+		.comment("IncStates Wrapper.")
+		.constructor()
+		.set("addState", &IncStates::addState)
+			.param("State object.")
+		.set("getState", &IncStates::getState);
+
+	// register EntityType Class
+	SLB::Class<EntityType>("EntityType")
+		.comment("Wrapper for the EntityTypeClass.")
+		.constructor<const std::string&>()
+		.inherits<Entity>()
+		.inherits<IncStates>()
+		.set("setParent", &EntityType::setParent)
+			.param("EntityType as objects parent")
+		.const_set("getParent", &EntityType::getParent)
+		.set("addChild", &EntityType::addChild)
+			.param("EntityType as objects child.")
+		.set("removeChild", &EntityType::removeChild)
+		.const_set("getState", &EntityType::getState)
+			.param("State ID")
+		.set("getEntityState", &EntityType::getEntityState);
+
+	// register GameEntity Class
 	SLB::Class<GameEntity>("GameEntity")
 		.comment("Wrapper for the GameEntity Class.")
 		.constructor<const std::string&>()
 		.inherits<Entity>()
+		.set("setType", &GameEntity::setType)
+			.param("the EntityType.")
+		.set("getType", &GameEntity::getType)
 		.set("hasState", &GameEntity::hasState)
-			.param("id of the state");
+			.param("state id")
+		.set("getState", &GameEntity::getState)
+			.param("state id");
 
+	// register State Class
 	SLB::Class<State>("State")
 		.comment("Wrapper for the State Class.")
-		.constructor<const std::string&>();
+		.constructor<const std::string&>()
+		.inherits<Entity>();
 
-	SLB::Class<GenericState<int>>("StateInt")
+	// register GenericState with int as the template argument
+	SLB::Class<GenericState<int> >("StateInt")
 		.comment("Wrapper for the StateInt Class.")
 		.constructor<const std::string&>()
 		.inherits<State>()
 		.set("setValue",&StateInt::setValue)
 			.param("expects an integer.")
 		.set("getValue",&StateInt::getValue);
-		*/
 }
 
 #endif /* end of include guard: GLOBAL_LUA_S7HRAEG3 */
