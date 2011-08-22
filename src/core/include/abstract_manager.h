@@ -20,8 +20,14 @@ namespace Baukasten {
 
 		virtual void add( T *t )
 		{
-			if ( t && !has( t->getId() ) )
-				mMap[ t->getId() ] = t;
+			if ( t )
+				add( t->getId(), t );
+		}
+
+		virtual void add( const std::string &id, T *t )
+		{
+			if ( t && !has( id ) )
+				mMap[ id ] = t;
 		}
 
 		virtual T* get( const std::string &id ) const
