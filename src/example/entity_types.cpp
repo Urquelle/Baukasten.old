@@ -8,10 +8,10 @@ BasicClass::BasicClass( const std::string &id ) :
 	mJumpHeight( new StateInt( "jumpHeight", 3 ) ),
 	mSpeed( new StateInt( "speed", 8 ) )
 {
-	addState( *mSex );
-	addState( *mMovement );
-	addState( *mJumpHeight );
-	addState( *mSpeed );
+	addState( mSex );
+	addState( mMovement );
+	addState( mJumpHeight );
+	addState( mSpeed );
 }
 
 BasicClass::~BasicClass()

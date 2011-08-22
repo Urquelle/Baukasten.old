@@ -35,9 +35,10 @@ void Action::setActive( bool active )
     mActive = active;
 }
 
-void Action::setTarget( GameEntity &target )
+void Action::setTarget( GameEntity *target )
 {
-    mTarget = &target;
+	if ( target )
+		mTarget = target;
 }
 
 GameEntity* Action::getTarget()

@@ -13,7 +13,7 @@ namespace Baukasten {
             AbstractSpace( const std::string &id ) : Entity( id ) {}
             virtual ~AbstractSpace() {}
 
-            void append( const Entity& );
+            void append( const Entity* );
             void clear();
 
         private:

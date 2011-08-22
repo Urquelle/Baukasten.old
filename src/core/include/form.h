@@ -14,7 +14,7 @@ namespace Baukasten {
             Form( const std::string& );
             virtual ~Form();
 
-            void addSpace( const std::string&, AbstractSpace& );
+            void addSpace( const std::string&, AbstractSpace* );
 
         protected:
             std::string mMeshName;

@@ -13,11 +13,11 @@ namespace Baukasten {
 			EntityType( const std::string& );
 			virtual ~EntityType();
 
-			void setParent( EntityType& );
+			void setParent( EntityType* );
 			EntityType* getParent() const;
 
-			void addChild( EntityType& );
-			void removeChild( const EntityType& );
+			void addChild( EntityType* );
+			void removeChild( const EntityType* );
 
 			State* getState( const std::string& ) const;
 			State* getEntityState( const std::string& );

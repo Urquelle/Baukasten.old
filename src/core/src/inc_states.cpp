@@ -12,10 +12,10 @@ IncStates::~IncStates()
 {
 }
 
-void IncStates::addState( State &state )
+void IncStates::addState( State *state )
 {
-    if ( !hasState( state.getId() ) )
-        mStates[ state.getId() ] = &state;
+    if ( state && !hasState( state->getId() ) )
+        mStates[ state->getId() ] = state;
 }
 
 State* IncStates::getState( const std::string &id ) const

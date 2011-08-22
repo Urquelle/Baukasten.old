@@ -13,7 +13,7 @@ namespace Baukasten {
             VirtualSpace( const std::string& );
             virtual ~VirtualSpace();
 
-            void append( const Drawable& );
+            void append( const Drawable* );
         };
     }
 }

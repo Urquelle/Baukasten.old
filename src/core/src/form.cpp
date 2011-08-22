@@ -11,7 +11,8 @@ Form::~Form()
 {
 }
 
-void Form::addSpace( const std::string &spaceName, AbstractSpace &space )
+void Form::addSpace( const std::string &spaceName, AbstractSpace *space )
 {
-	mSpaceMap[ spaceName ] = &space;
+	if ( space )
+		mSpaceMap[ spaceName ] = space;
 }

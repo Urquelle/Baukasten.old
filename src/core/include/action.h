@@ -21,7 +21,7 @@ namespace Baukasten {
             bool isActive() const;
             void setActive( bool );
 
-            void setTarget( GameEntity& );
+            void setTarget( GameEntity* );
             GameEntity* getTarget();
 
             void setTargets( GameEntityList& );

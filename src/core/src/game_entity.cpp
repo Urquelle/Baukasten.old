@@ -14,9 +14,10 @@ GameEntity::~GameEntity()
 {
 }
 
-void GameEntity::setType( EntityType &type )
+void GameEntity::setType( EntityType *type )
 {
-	mType = &type;
+	if ( type )
+		mType = type;
 }
 
 EntityType* GameEntity::getType() const
@@ -24,9 +25,10 @@ EntityType* GameEntity::getType() const
 	return mType;
 }
 
-void GameEntity::setForm( Form &form )
+void GameEntity::setForm( Form *form )
 {
-    mForm = &form;
+	if ( form )
+		mForm = form;
 }
 
 Form* GameEntity::getForm() const
@@ -34,10 +36,10 @@ Form* GameEntity::getForm() const
     return mForm;
 }
 
-void GameEntity::addEntity( GameEntity &entity )
+void GameEntity::addEntity( const std::string &id, GameEntity *entity )
 {
-    if ( !hasEntity( entity.getId() ) )
-        mEntities[ entity.getId() ] =  &entity;
+    if ( entity && !hasEntity( id ) )
+        mEntities[ id ] =  entity;
 }
 
 bool GameEntity::hasEntity( const std::string &id ) const
@@ -51,8 +53,9 @@ GameEntityMap GameEntity::getEntities() const
 	return mEntities;
 }
 
-void GameEntity::removeEntity( const GameEntity &entity )
+void GameEntity::removeEntity( const GameEntity *entity )
 {
+	// TODO
 }
 
 bool GameEntity::hasState( const std::string &id ) const

@@ -25,18 +25,18 @@ Unit::Unit( const std::string &id ) :
 	mLevel->setValue( 1 );
 	mExperience->setValue( 0 );
 
-	addState( *mName );
-	addState( *mHP );
-	addState( *mMP );
-	addState( *mLevel );
-	addState( *mExperience );
+	addState( mName );
+	addState( mHP );
+	addState( mMP );
+	addState( mLevel );
+	addState( mExperience );
 
-	addAction( *mAddExpAction );
-	addAction( *mLevelUpAction );
-	addAction( *mDieAction );
-	addAction( *mHitAction );
+	addAction( mAddExpAction );
+	addAction( mLevelUpAction );
+	addAction( mDieAction );
+	addAction( mHitAction );
 
-	setType( *(new BasicClass( "basic" )) );
+	setType( new BasicClass( "basic" ) );
 }
 
 Unit::~Unit()

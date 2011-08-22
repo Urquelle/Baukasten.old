@@ -14,12 +14,15 @@ EntityType::~EntityType()
 {
 }
 
-void EntityType::setParent( EntityType &parent )
+void EntityType::setParent( EntityType *parent )
 {
-	if ( mParent && &parent == mParent )
+	if ( !parent )
 		return;
 
-	mParent = &parent;
+	if ( mParent && parent == mParent )
+		return;
+
+	mParent = parent;
 }
 
 EntityType* EntityType::getParent() const
@@ -27,23 +30,29 @@ EntityType* EntityType::getParent() const
 	return mParent;
 }
 
-void EntityType::addChild( EntityType &child )
+void EntityType::addChild( EntityType *child )
 {
+	if ( !child )
+		return;
+
 	EntityTypeList::iterator it =
-		std::find( mChildren.begin(), mChildren.end(), &child );
+		std::find( mChildren.begin(), mChildren.end(), child );
 
 	// the child is already in the list, if the iterator's
 	// not equal end().
 	if ( it != mChildren.end() )
 		return;
 
-	mChildren.push_back( &child );
+	mChildren.push_back( child );
 }
 
-void EntityType::removeChild( const EntityType &child )
+void EntityType::removeChild( const EntityType *child )
 {
+	if ( !child )
+		return;
+
 	mChildren.erase(
-		std::find( mChildren.begin(), mChildren.end(), &child )
+		std::find( mChildren.begin(), mChildren.end(), child )
 	);
 }
 

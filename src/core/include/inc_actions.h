@@ -12,13 +12,13 @@ namespace Baukasten {
 			IncActions();
 			virtual ~IncActions();
 
-            void addAction( Action& );
+            void addAction( Action* );
             Action* getAction( const std::string& ) const;
 			ActionMap getActions() const;
             bool hasAction( const std::string& ) const;
 
             void invokeAction( const std::string& );
-            void invokeAction( const std::string&, GameEntity& );
+            void invokeAction( const std::string&, GameEntity* );
             void invokeAction( const std::string&, GameEntityList );
 
             void dropAction( const std::string& );

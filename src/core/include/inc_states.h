@@ -12,7 +12,7 @@ namespace Baukasten {
 			IncStates();
 			virtual ~IncStates();
 
-            void addState( State& );
+            void addState( State* );
             State* getState( const std::string& ) const;
 			StateMap getStates() const;
             bool hasState( const std::string& ) const;

@@ -12,10 +12,10 @@ IncActions::~IncActions()
 {
 }
 
-void IncActions::addAction( Action &action )
+void IncActions::addAction( Action *action )
 {
-    if ( !hasAction( action.getId() ) )
-        mActions[ action.getId() ] =  &action;
+    if ( action && !hasAction( action->getId() ) )
+        mActions[ action->getId() ] =  action;
 }
 
 Action* IncActions::getAction( const std::string &id ) const
@@ -46,8 +46,11 @@ void IncActions::invokeAction( const std::string &id )
     }
 }
 
-void IncActions::invokeAction( const std::string &id, GameEntity &target )
+void IncActions::invokeAction( const std::string &id, GameEntity *target )
 {
+	if ( !target )
+		return;
+
     Action *action = getAction( id );
 
     if ( action && !action->isActive() ) {

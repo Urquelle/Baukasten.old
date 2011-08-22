@@ -12,7 +12,7 @@ VirtualSpace::~VirtualSpace()
 {
 }
 
-void VirtualSpace::append( const Drawable &o )
+void VirtualSpace::append( const Drawable *o )
 {
     AbstractSpace::append( o );
 }
