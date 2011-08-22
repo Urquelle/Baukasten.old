@@ -5,6 +5,7 @@ set (
 	src/actions_manager.cpp
     src/drawable.cpp
     src/entity.cpp
+	src/entity_manager.cpp
     src/entity_type.cpp
     src/form.cpp
 	src/game_entity.cpp
@@ -23,6 +24,7 @@ set (
 	include/actions_manager.h
     include/drawable.h
     include/entity.h
+	include/entity_manager.h
     include/entity_type.h
     include/form.h
 	include/game_entity.h
