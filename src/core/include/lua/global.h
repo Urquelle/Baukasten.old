@@ -24,8 +24,11 @@ void wrapClasses()
 	SLB::Class<StatesManager>("StatesManager")
 		.comment("StatesManager Wrapper.")
 		.constructor()
-		.set("addState", &StatesManager::addState)
-			.param("State object.")
+		.set("addState", ( void (StatesManager::*)(State*) ) &StatesManager::addState)
+			.param("State Object")
+		.set("addState", ( void (StatesManager::*)(const std::string&, State*) ) &StatesManager::addState)
+			.param("ID of the State")
+			.param("State Object")
 		.set("getState", &StatesManager::getState);
 
 	SLB::Class<ActionsManager>("ActionsManager")

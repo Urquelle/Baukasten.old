@@ -14,6 +14,7 @@ namespace Baukasten {
 		virtual ~StatesManager();
 
 		void addState( State* );
+		void addState( const std::string&, State* );
 		State* getState( const std::string& ) const;
 		StateMap getStates() const;
 		bool hasState( const std::string& ) const;
