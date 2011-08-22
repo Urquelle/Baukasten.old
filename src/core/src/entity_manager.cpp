@@ -12,9 +12,14 @@ EntityManager::~EntityManager()
 {
 }
 
-void EntityManager::addEntity( const std::string &id, Entity *entity )
+void EntityManager::addEntity( Entity *entity )
 {
 	add( entity );
+}
+
+void EntityManager::addEntity( const std::string &id, Entity *entity )
+{
+	add( id, entity );
 }
 
 Entity* EntityManager::getEntity( const std::string &id ) const
