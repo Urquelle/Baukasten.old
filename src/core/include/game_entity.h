@@ -4,6 +4,7 @@
 #include "entity.h"
 #include "global.h"
 #include "inc_actions.h"
+#include "inc_objects.h"
 #include "inc_states.h"
 
 namespace Baukasten {
@@ -12,7 +13,8 @@ namespace Baukasten {
 		class Form;
 
 		class BAUKASTEN_EXPORT GameEntity :
-			public Entity, public IncActions, public IncStates {
+			public Entity, public IncActions,
+			public IncStates, public IncObjects {
 		public:
 			GameEntity( const std::string& );
 			virtual ~GameEntity();
