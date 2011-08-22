@@ -1,7 +1,7 @@
 #include "entity.h"
 #include "state.h"
 
-using namespace Baukasten::Core;
+using namespace Baukasten;
 
 Entity::Entity( const std::string &id ) :
 	mId( id )

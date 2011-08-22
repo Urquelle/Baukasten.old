@@ -4,7 +4,7 @@
 #include <entity_type.h>
 #include <generic_state.h>
 
-using namespace Baukasten::Core;
+using namespace Baukasten;
 
 class BasicClass : public EntityType {
 public:

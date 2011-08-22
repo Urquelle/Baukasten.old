@@ -7,13 +7,11 @@
 #include <string>
 
 namespace Baukasten {
-	namespace Core {
-		class BAUKASTEN_EXPORT State : public Entity {
-		public:
-			State( const std::string& );
-			virtual ~State();
-		};
-	} /* Core */
+	class BAUKASTEN_EXPORT State : public Entity {
+	public:
+		State( const std::string& );
+		virtual ~State();
+	};
 } /* Baukasten */
 
 #endif // STATE_H

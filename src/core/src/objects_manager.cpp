@@ -1,6 +1,6 @@
 #include "objects_manager.h"
 
-using namespace Baukasten::Core;
+using namespace Baukasten;
 
 ObjectsManager::ObjectsManager()
 {

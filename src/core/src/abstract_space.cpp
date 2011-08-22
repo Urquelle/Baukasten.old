@@ -1,6 +1,6 @@
 #include "abstract_space.h"
 
-using namespace Baukasten::Core;
+using namespace Baukasten;
 
 void AbstractSpace::append( const Entity *e )
 {

@@ -12,7 +12,7 @@
 
 void wrapClasses()
 {
-	using namespace Baukasten::Core;
+	using namespace Baukasten;
 
 	// register Entity Class
 	SLB::Class<Entity>("Entity")

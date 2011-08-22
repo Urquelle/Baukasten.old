@@ -2,7 +2,7 @@
 
 #include "state.h"
 
-using namespace Baukasten::Core;
+using namespace Baukasten;
 
 StatesManager::StatesManager()
 {

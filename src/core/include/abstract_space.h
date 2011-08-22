@@ -7,19 +7,17 @@
 #include <list>
 
 namespace Baukasten {
-    namespace Core {
-        class BAUKASTEN_EXPORT AbstractSpace : public Entity {
-        public:
-            AbstractSpace( const std::string &id ) : Entity( id ) {}
-            virtual ~AbstractSpace() {}
+	class BAUKASTEN_EXPORT AbstractSpace : public Entity {
+	public:
+		AbstractSpace( const std::string &id ) : Entity( id ) {}
+		virtual ~AbstractSpace() {}
 
-            void append( const Entity* );
-            void clear();
+		void append( const Entity* );
+		void clear();
 
-        private:
-            std::list<const Entity*> mEntityList;
-        };
-    }
+	private:
+		std::list<const Entity*> mEntityList;
+	};
 }
 
 #endif // ABSTRACT_SPACE_H

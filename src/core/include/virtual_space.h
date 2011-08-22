@@ -5,17 +5,15 @@
 #include "abstract_space.h"
 
 namespace Baukasten {
-    namespace Core {
-        class Drawable;
+	class Drawable;
 
-        class BAUKASTEN_EXPORT VirtualSpace : public AbstractSpace {
-        public:
-            VirtualSpace( const std::string& );
-            virtual ~VirtualSpace();
+	class BAUKASTEN_EXPORT VirtualSpace : public AbstractSpace {
+	public:
+		VirtualSpace( const std::string& );
+		virtual ~VirtualSpace();
 
-            void append( const Drawable* );
-        };
-    }
+		void append( const Drawable* );
+	};
 }
 
 #endif // VIRTUAL_SPACE_H

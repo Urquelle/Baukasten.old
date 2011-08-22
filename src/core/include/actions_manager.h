@@ -5,31 +5,29 @@
 #include "abstract_manager.h"
 
 namespace Baukasten {
-	namespace Core {
-		class Action;
+	class Action;
 
-		class BAUKASTEN_EXPORT ActionsManager : public AbstractManager<Action> {
-		public:
-			ActionsManager();
-			virtual ~ActionsManager();
+	class BAUKASTEN_EXPORT ActionsManager : public AbstractManager<Action> {
+	public:
+		ActionsManager();
+		virtual ~ActionsManager();
 
-            void addAction( Action* );
-            Action* getAction( const std::string& ) const;
-			ActionMap getActions() const;
-            bool hasAction( const std::string& ) const;
+		void addAction( Action* );
+		Action* getAction( const std::string& ) const;
+		ActionMap getActions() const;
+		bool hasAction( const std::string& ) const;
 
-            void invokeAction( const std::string& );
-            void invokeAction( const std::string&, GameEntity* );
-            void invokeAction( const std::string&, GameEntityList );
+		void invokeAction( const std::string& );
+		void invokeAction( const std::string&, GameEntity* );
+		void invokeAction( const std::string&, GameEntityList );
 
-            void dropAction( const std::string& );
+		void dropAction( const std::string& );
 
-            void runActions();
+		void runActions();
 
-		private:
-			ActionList	mActionQueue;
-		};
-	} /* Core */
+	private:
+		ActionList	mActionQueue;
+	};
 } /* Baukasten */
 
 #endif /* end of include guard: INC_ACTIONS_GW487EFJ */

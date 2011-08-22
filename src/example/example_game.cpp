@@ -29,7 +29,7 @@ void ExampleGame::stop()
 
 void ExampleGame::run()
 {
-    using namespace Baukasten::Core;
+    using namespace Baukasten;
     using namespace std;
 
     Unit *sanchez = new Unit( "sanchez" );

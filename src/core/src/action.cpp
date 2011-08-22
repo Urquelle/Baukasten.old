@@ -1,7 +1,7 @@
 #include "action.h"
 #include "game_entity.h"
 
-using namespace Baukasten::Core;
+using namespace Baukasten;
 
 Action::Action( GameEntity &source, const std::string &id ) :
     Entity( id ),

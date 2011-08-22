@@ -2,7 +2,7 @@
 
 #include "action.h"
 
-using namespace Baukasten::Core;
+using namespace Baukasten;
 
 ActionsManager::ActionsManager()
 {

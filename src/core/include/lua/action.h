@@ -9,21 +9,19 @@
 class lua_State;
 
 namespace Baukasten {
-	namespace Core {
-		class GameEntity;
+	class GameEntity;
 
-		class BAUKASTEN_EXPORT ActionLua : public Action {
-		public:
-			ActionLua( GameEntity&, const std::string&, const std::string& );
-			virtual ~ActionLua();
+	class BAUKASTEN_EXPORT ActionLua : public Action {
+	public:
+		ActionLua( GameEntity&, const std::string&, const std::string& );
+		virtual ~ActionLua();
 
-			virtual void doAction( GameEntity* );
+		virtual void doAction( GameEntity* );
 
-		private:
-			const std::string	mFilePath;
-			lua_State*			mL;
-		};
-	} /* Core */
+	private:
+		const std::string	mFilePath;
+		lua_State*			mL;
+	};
 } /* Baukasten */
 
 #endif /* end of include guard: ACTION_LUA_6DRO5ZC8 */

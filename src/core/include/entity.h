@@ -6,23 +6,21 @@
 #include <string>
 
 namespace Baukasten {
-    namespace Core {
-        class State;
+	class State;
 
-        class BAUKASTEN_EXPORT Entity {
-        public:
-            Entity( const std::string& );
-            virtual ~Entity();
+	class BAUKASTEN_EXPORT Entity {
+	public:
+		Entity( const std::string& );
+		virtual ~Entity();
 
-			Entity& operator=( const Entity& );
-            bool operator==( const Entity& ) const;
+		Entity& operator=( const Entity& );
+		bool operator==( const Entity& ) const;
 
-			const std::string& getId() const;
+		const std::string& getId() const;
 
-		private:
-			std::string mId;
-        };
-    }
+	private:
+		std::string mId;
+	};
 }
 
 #endif // ENTITY_H

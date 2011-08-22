@@ -3,7 +3,7 @@
 #include "action.h"
 #include "entity_type.h"
 
-using namespace Baukasten::Core;
+using namespace Baukasten;
 
 GameEntity::GameEntity( const std::string &id ) :
 	Entity( id )

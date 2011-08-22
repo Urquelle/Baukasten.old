@@ -8,35 +8,33 @@
 #include <list>
 
 namespace Baukasten {
-    namespace Core {
-		class GameEntity;
+	class GameEntity;
 
-        class BAUKASTEN_EXPORT Action : public Entity {
-        public:
-            Action( GameEntity&, const std::string& );
-            virtual ~Action();
+	class BAUKASTEN_EXPORT Action : public Entity {
+	public:
+		Action( GameEntity&, const std::string& );
+		virtual ~Action();
 
-            GameEntity* getSource() const;
-            void clear();
-            bool isActive() const;
-            void setActive( bool );
+		GameEntity* getSource() const;
+		void clear();
+		bool isActive() const;
+		void setActive( bool );
 
-            void setTarget( GameEntity* );
-            GameEntity* getTarget();
+		void setTarget( GameEntity* );
+		GameEntity* getTarget();
 
-            void setTargets( GameEntityList& );
-			GameEntityList getTargets();
+		void setTargets( GameEntityList& );
+		GameEntityList getTargets();
 
-			virtual void run();
-            virtual void doAction( GameEntity* ) = 0;
+		virtual void run();
+		virtual void doAction( GameEntity* ) = 0;
 
-        private:
-            GameEntity*		mSource;
-            GameEntity*		mTarget;
-            GameEntityList	mTargets;
-            bool			mActive;
-        };
-    } /* Core */
+	private:
+		GameEntity*		mSource;
+		GameEntity*		mTarget;
+		GameEntityList	mTargets;
+		bool			mActive;
+	};
 } /* Baukasten */
 
 #endif /* end of include guard: ACTION_4GNSEOOP */

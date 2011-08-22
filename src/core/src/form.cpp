@@ -1,6 +1,6 @@
 #include "form.h"
 
-using namespace Baukasten::Core;
+using namespace Baukasten;
 
 Form::Form( const std::string &id ) :
 	Drawable( id )

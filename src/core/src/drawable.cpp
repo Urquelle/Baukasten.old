@@ -1,6 +1,6 @@
 #include "drawable.h"
 
-using namespace Baukasten::Core;
+using namespace Baukasten;
 
 Drawable::Drawable( const std::string &id ) :
     Entity( id )

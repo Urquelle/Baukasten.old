@@ -4,7 +4,7 @@
 
 #include <lua/action.h>
 
-using namespace Baukasten::Core;
+using namespace Baukasten;
 
 Unit::Unit( const std::string &id ) :
 	GameEntity( id ),

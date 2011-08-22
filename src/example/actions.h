@@ -8,9 +8,9 @@
 
 #include <iostream>
 
-using namespace Baukasten::Core;
+using namespace Baukasten;
 
-class LevelUpAction : public Baukasten::Core::Action {
+class LevelUpAction : public Action {
 public:
     LevelUpAction( Unit &source ) :
         Action( source, "levelUp" )
@@ -34,7 +34,7 @@ private:
     /* data */
 };
 
-class AddExperienceAction : public Baukasten::Core::Action {
+class AddExperienceAction : public Action {
 public:
     AddExperienceAction( Unit &source ) :
         Action( source, "addExperience" )
@@ -82,7 +82,7 @@ private:
     /* data */
 };
 
-class DieAction : public Baukasten::Core::Action {
+class DieAction : public Action {
 public:
 	DieAction( Unit &source ) :
 		Action( source, "die" )
@@ -101,7 +101,7 @@ public:
 	}
 };
 
-class MoveAction : public Baukasten::Core::Action {
+class MoveAction : public Action {
 public:
     MoveAction( GameEntity &source ) :
         Action( source, "move" )

@@ -1,7 +1,7 @@
 #include "virtual_space.h"
 #include "drawable.h"
 
-using namespace Baukasten::Core;
+using namespace Baukasten;
 
 VirtualSpace::VirtualSpace( const std::string &id ) :
     AbstractSpace( id )

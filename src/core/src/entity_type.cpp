@@ -2,7 +2,7 @@
 
 #include <algorithm>
 
-using namespace Baukasten::Core;
+using namespace Baukasten;
 
 EntityType::EntityType( const std::string &id ) :
 	Entity( id ),

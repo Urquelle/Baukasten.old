@@ -8,19 +8,17 @@
 #include <string>
 
 namespace Baukasten {
-    namespace Core {
-        class BAUKASTEN_EXPORT Form : public Drawable {
-        public:
-            Form( const std::string& );
-            virtual ~Form();
+	class BAUKASTEN_EXPORT Form : public Drawable {
+	public:
+		Form( const std::string& );
+		virtual ~Form();
 
-            void addSpace( const std::string&, AbstractSpace* );
+		void addSpace( const std::string&, AbstractSpace* );
 
-        protected:
-            std::string mMeshName;
-            EntityMap   mSpaceMap;
-        };
-    }
+	protected:
+		std::string mMeshName;
+		EntityMap   mSpaceMap;
+	};
 }
 
 #endif // FORM_H

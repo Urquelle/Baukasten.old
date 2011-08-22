@@ -6,20 +6,18 @@
 #include "abstract_manager.h"
 
 namespace Baukasten {
-	namespace Core {
-		class State;
+	class State;
 
-		class BAUKASTEN_EXPORT StatesManager : public AbstractManager<State> {
-		public:
-			StatesManager();
-			virtual ~StatesManager();
+	class BAUKASTEN_EXPORT StatesManager : public AbstractManager<State> {
+	public:
+		StatesManager();
+		virtual ~StatesManager();
 
-            void addState( State* );
-            State* getState( const std::string& ) const;
-			StateMap getStates() const;
-            bool hasState( const std::string& ) const;
-		};
-	} /* Core */
+		void addState( State* );
+		State* getState( const std::string& ) const;
+		StateMap getStates() const;
+		bool hasState( const std::string& ) const;
+	};
 } /* Baukasten */
 
 #endif /* end of include guard: INC_STATES_18NEVRSZ */

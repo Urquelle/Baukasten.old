@@ -2,7 +2,7 @@
 #include <game_entity.h>
 #include <lua/global.h>
 
-using namespace Baukasten::Core;
+using namespace Baukasten;
 
 ActionLua::ActionLua(
 		GameEntity &source,

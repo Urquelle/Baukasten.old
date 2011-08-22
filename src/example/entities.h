@@ -4,7 +4,7 @@
 #include <game_entity.h>
 #include <generic_state.h>
 
-using namespace Baukasten::Core;
+using namespace Baukasten;
 
 class Unit : public GameEntity {
 public:
