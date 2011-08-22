@@ -17,6 +17,11 @@ void ActionsManager::addAction( Action *action )
 	add( action );
 }
 
+void ActionsManager::addAction( const std::string &id, Action *action )
+{
+	add( id, action );
+}
+
 Action* ActionsManager::getAction( const std::string &id ) const
 {
 	return get( id );

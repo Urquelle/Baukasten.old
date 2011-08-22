@@ -13,6 +13,7 @@ namespace Baukasten {
 		virtual ~ActionsManager();
 
 		void addAction( Action* );
+		void addAction( const std::string&, Action* );
 		Action* getAction( const std::string& ) const;
 		ActionMap getActions() const;
 		bool hasAction( const std::string& ) const;
