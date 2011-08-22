@@ -2,15 +2,16 @@
 #define INC_ACTIONS_GW487EFJ
 
 #include "global.h"
+#include "abstract_manager.h"
 
 namespace Baukasten {
 	namespace Core {
 		class Action;
 
-		class BAUKASTEN_EXPORT IncActions {
+		class BAUKASTEN_EXPORT ActionsManager : public AbstractManager<Action> {
 		public:
-			IncActions();
-			virtual ~IncActions();
+			ActionsManager();
+			virtual ~ActionsManager();
 
             void addAction( Action* );
             Action* getAction( const std::string& ) const;
@@ -26,7 +27,6 @@ namespace Baukasten {
             void runActions();
 
 		private:
-			ActionMap	mActions;
 			ActionList	mActionQueue;
 		};
 	} /* Core */

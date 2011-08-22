@@ -2,23 +2,25 @@ set (
     core_SRCS
     src/abstract_space.cpp
     src/action.cpp
+	src/actions_manager.cpp
     src/drawable.cpp
     src/entity.cpp
     src/entity_type.cpp
     src/form.cpp
 	src/game_entity.cpp
-	src/inc_actions.cpp
-	src/inc_objects.cpp
-	src/inc_states.cpp
     src/logical_space.cpp
+	src/objects_manager.cpp
     src/state.cpp
+	src/states_manager.cpp
     src/virtual_space.cpp
 )
 
 set (
     core_HEADER
+	include/abstract_manager.h
     include/abstract_space.h
     include/action.h
+	include/actions_manager.h
     include/drawable.h
     include/entity.h
     include/entity_type.h
@@ -26,11 +28,10 @@ set (
 	include/game_entity.h
     include/generic_state.h
     include/global.h
-	include/inc_actions.h
-	include/inc_objects.h
-	include/inc_states.h
     include/logical_space.h
+	include/objects_manager.h
     include/state.h
+	include/states_manager.h
     include/virtual_space.h
 )
 

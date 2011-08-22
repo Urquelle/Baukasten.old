@@ -2,13 +2,14 @@
 #define INC_OBJECTS_W8NDAGHK
 
 #include "global.h"
+#include "abstract_manager.h"
 
 namespace Baukasten {
 	namespace Core {
-		class BAUKASTEN_EXPORT IncObjects {
+		class BAUKASTEN_EXPORT ObjectsManager {
 		public:
-			IncObjects();
-			virtual ~IncObjects();
+			ObjectsManager();
+			virtual ~ObjectsManager();
 
 			void addObject( void*, const std::string& );
 			void* getObject( const std::string& ) const;

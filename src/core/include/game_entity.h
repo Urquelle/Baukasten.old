@@ -1,11 +1,12 @@
 #ifndef GAME_ENTITY_W1MJLLNE
 #define GAME_ENTITY_W1MJLLNE
 
-#include "entity.h"
 #include "global.h"
-#include "inc_actions.h"
-#include "inc_objects.h"
-#include "inc_states.h"
+
+#include "actions_manager.h"
+#include "entity.h"
+#include "objects_manager.h"
+#include "states_manager.h"
 
 namespace Baukasten {
 	namespace Core {
@@ -13,8 +14,8 @@ namespace Baukasten {
 		class Form;
 
 		class BAUKASTEN_EXPORT GameEntity :
-			public Entity, public IncActions,
-			public IncStates, public IncObjects {
+			public Entity, public ActionsManager,
+			public StatesManager, public ObjectsManager {
 		public:
 			GameEntity( const std::string& );
 			virtual ~GameEntity();

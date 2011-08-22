@@ -60,7 +60,7 @@ void GameEntity::removeEntity( const GameEntity *entity )
 
 bool GameEntity::hasState( const std::string &id ) const
 {
-	bool answer = IncStates::hasState( id );
+	bool answer = StatesManager::hasState( id );
 	if ( !answer && getType() )
 		answer = getType()->hasState( id );
 
@@ -69,7 +69,7 @@ bool GameEntity::hasState( const std::string &id ) const
 
 State* GameEntity::getState( const std::string &id ) const
 {
-	State *state = IncStates::getState( id );
+	State *state = StatesManager::getState( id );
 
 	if ( !state && getType() )
 		state = getType()->getState( id );
