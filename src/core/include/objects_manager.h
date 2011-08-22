@@ -2,7 +2,6 @@
 #define INC_OBJECTS_W8NDAGHK
 
 #include "global.h"
-#include "abstract_manager.h"
 
 namespace Baukasten {
 	class BAUKASTEN_EXPORT ObjectsManager {
