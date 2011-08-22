@@ -8,6 +8,7 @@ set (
     src/form.cpp
 	src/game_entity.cpp
 	src/inc_actions.cpp
+	src/inc_objects.cpp
 	src/inc_states.cpp
     src/logical_space.cpp
     src/state.cpp
@@ -26,6 +27,7 @@ set (
     include/generic_state.h
     include/global.h
 	include/inc_actions.h
+	include/inc_objects.h
 	include/inc_states.h
     include/logical_space.h
     include/state.h
