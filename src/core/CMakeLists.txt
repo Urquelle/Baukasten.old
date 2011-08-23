@@ -37,7 +37,6 @@ set (
     include/virtual_space.h
 )
 
-set( targetLibs "" )
 
 # compile lua action class
 if( DEFINED WITH_LUA )
@@ -54,10 +53,6 @@ add_definitions( -DEXPORT_LIB=1 )
 add_library( Baukasten SHARED ${core_SRCS} )
 
 set_target_properties( Baukasten PROPERTIES SOVERSION 0.0.1 )
-
-if (NOT ${targetLibs} EQUAL "" )
-	target_link_libraries( Baukasten ${targetLibs} )
-endif()
 
 install(DIRECTORY include/ DESTINATION ${CMAKE_INSTALL_PREFIX}/include)
 install(TARGETS Baukasten LIBRARY DESTINATION lib/)
