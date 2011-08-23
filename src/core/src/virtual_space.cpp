@@ -4,7 +4,7 @@
 using namespace Baukasten;
 
 VirtualSpace::VirtualSpace( const std::string &id ) :
-    AbstractSpace( id )
+    LogicalSpace( id )
 {
 }
 
@@ -14,5 +14,5 @@ VirtualSpace::~VirtualSpace()
 
 void VirtualSpace::append( const Drawable *o )
 {
-    AbstractSpace::append( o );
+    LogicalSpace::append( o );
 }

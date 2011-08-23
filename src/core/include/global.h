@@ -11,7 +11,9 @@ namespace Baukasten {
 	class Entity;
 	class EntityType;
 	class GameEntity;
+	class LogicalSpace;
 	class State;
+	class VirtualSpace;
 
 	using namespace std;
 
@@ -34,6 +36,9 @@ namespace Baukasten {
 	typedef list<Action*>				ActionList;
 
 	typedef map<string, void*>			ObjectMap;
+
+	typedef map<string, LogicalSpace*>	LSpaces;
+	typedef map<string, VirtualSpace*>	VSpaces;
 
 	typedef map<string, State*>			StateMap;
 	typedef list<State*>				StateList;

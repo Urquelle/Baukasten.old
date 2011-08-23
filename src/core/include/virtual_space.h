@@ -2,12 +2,12 @@
 #define VIRTUAL_SPACE_H
 
 #include "global.h"
-#include "abstract_space.h"
+#include "logical_space.h"
 
 namespace Baukasten {
 	class Drawable;
 
-	class BAUKASTEN_EXPORT VirtualSpace : public AbstractSpace {
+	class BAUKASTEN_EXPORT VirtualSpace : public LogicalSpace {
 	public:
 		VirtualSpace( const std::string& );
 		virtual ~VirtualSpace();
