@@ -5,7 +5,9 @@
 using namespace Baukasten;
 
 GameEntity::GameEntity( const std::string &id ) :
-	Entity( id )
+	Entity( id ),
+	mType( 0 ),
+	mForm( 0 )
 {
 }
 
