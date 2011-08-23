@@ -56,10 +56,16 @@ GameEntityList Action::getTargets()
 	return mTargets;
 }
 
+bool Action::done() const
+{
+	return true;
+}
+
 void Action::run()
 {
 	// remove the action from the execution queue
-	getSource()->dropAction( getId() );
+	if ( done() )
+		getSource()->dropAction( getId() );
 
 	GameEntity *target = getTarget();
 

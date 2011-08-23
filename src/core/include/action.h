@@ -26,6 +26,7 @@ namespace Baukasten {
 		void setTargets( GameEntityList& );
 		GameEntityList getTargets();
 
+		virtual bool done() const;
 		virtual void run();
 		virtual void doAction( GameEntity* ) = 0;
 
