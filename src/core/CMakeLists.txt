@@ -37,6 +37,8 @@ set (
     include/virtual_space.h
 )
 
+option( WITH_LUA  "compile with Lua support." TRUE )
+option( WITH_OGRE  "compile with OGRE support." TRUE )
 
 # compile lua action class
 if( DEFINED WITH_LUA )
