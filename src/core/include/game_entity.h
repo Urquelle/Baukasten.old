@@ -6,7 +6,7 @@
 #include "actions_manager.h"
 #include "entity.h"
 #include "entity_manager.h"
-#include <entity_type.h>
+#include "entity_type.h"
 #include "objects_manager.h"
 #include "states_manager.h"
 
