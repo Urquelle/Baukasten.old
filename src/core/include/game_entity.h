@@ -6,6 +6,7 @@
 #include "actions_manager.h"
 #include "entity.h"
 #include "entity_manager.h"
+#include <entity_type.h>
 #include "objects_manager.h"
 #include "states_manager.h"
 
@@ -27,7 +28,17 @@ namespace Baukasten {
 		Form* getForm() const;
 
 		bool hasState( const std::string& ) const;
-		State* getState( const std::string& ) const;
+
+		template<class T>
+		T getState( const std::string &id ) const
+		{
+			T state = StatesManager::getState<T>( id );
+
+			if ( !state && getType() )
+				state = getType()->getState<T>( id );
+
+			return state;
+		}
 
 	private:
 		EntityType*		mType;

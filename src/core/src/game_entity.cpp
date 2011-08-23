@@ -1,7 +1,6 @@
 #include "game_entity.h"
 
 #include "action.h"
-#include "entity_type.h"
 
 using namespace Baukasten;
 
@@ -43,15 +42,5 @@ bool GameEntity::hasState( const std::string &id ) const
 		answer = getType()->hasState( id );
 
 	return answer;
-}
-
-State* GameEntity::getState( const std::string &id ) const
-{
-	State *state = StatesManager::getState( id );
-
-	if ( !state && getType() )
-		state = getType()->getState( id );
-
-	return state;
 }
 

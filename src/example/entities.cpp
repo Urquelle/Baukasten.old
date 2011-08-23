@@ -82,7 +82,7 @@ int Unit::getExperience() const
 
 int Unit::getSex() const
 {
-	StateInt *state = static_cast<StateInt*>(getState( "sex" ));
+	StateInt *state = getState<StateInt*>( "sex" );
 
 	if ( !state )
 		return -1;

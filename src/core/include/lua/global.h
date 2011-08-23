@@ -29,7 +29,7 @@ void wrapClasses()
 		.set("addState", ( void (StatesManager::*)(const std::string&, State*) ) &StatesManager::addState)
 			.param("ID of the State")
 			.param("State Object")
-		.set("getState", &StatesManager::getState);
+		.set("getState", &StatesManager::getState<State*>);
 
 	SLB::Class<ActionsManager>("ActionsManager")
 		.comment("ActionsManager Wrapper")
@@ -90,7 +90,7 @@ void wrapClasses()
 		.set("addChild", &EntityType::addChild)
 			.param("EntityType as objects child.")
 		.set("removeChild", &EntityType::removeChild)
-		.const_set("getState", &EntityType::getState)
+		.const_set("getState", &EntityType::getState<State*>)
 			.param("State ID")
 		.set("getEntityState", &EntityType::getEntityState);
 
@@ -106,7 +106,7 @@ void wrapClasses()
 		.set("getType", &GameEntity::getType)
 		.set("hasState", &GameEntity::hasState)
 			.param("state id")
-		.set("getState", &GameEntity::getState)
+		.set("getState", &GameEntity::getState<State*>)
 			.param("state id");
 
 	// register State Class

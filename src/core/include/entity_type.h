@@ -18,7 +18,17 @@ namespace Baukasten {
 		void addChild( EntityType* );
 		void removeChild( const EntityType* );
 
-		State* getState( const std::string& ) const;
+		template<class T>
+		T getState( const std::string &id ) const
+		{
+			T state = StatesManager::getState<T>( id );
+
+			if ( !state && mParent )
+				state = mParent->getState<T>( id );
+
+			return state;
+		}
+
 		State* getEntityState( const std::string& );
 
 	private:

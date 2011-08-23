@@ -22,11 +22,6 @@ void StatesManager::addState( const std::string &id, State *state )
 	add( id, state );
 }
 
-State* StatesManager::getState( const std::string &id ) const
-{
-    return get( id );
-}
-
 StateMap StatesManager::getStates() const
 {
 	return getAll();

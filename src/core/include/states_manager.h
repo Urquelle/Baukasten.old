@@ -15,7 +15,13 @@ namespace Baukasten {
 
 		void addState( State* );
 		void addState( const std::string&, State* );
-		State* getState( const std::string& ) const;
+
+		template<class T>
+		T getState( const std::string &id ) const
+		{
+			return static_cast<T>( get( id ) );
+		}
+
 		StateMap getStates() const;
 		bool hasState( const std::string& ) const;
 	};

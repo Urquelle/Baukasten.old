@@ -56,16 +56,6 @@ void EntityType::removeChild( const EntityType *child )
 	);
 }
 
-State* EntityType::getState( const std::string &id ) const
-{
-	State *state = StatesManager::getState( id );
-
-	if ( !state && mParent )
-		state = mParent->getState( id );
-
-	return state;
-}
-
 State* EntityType::getEntityState( const std::string &id )
 {
 	return 0;

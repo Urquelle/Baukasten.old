@@ -25,7 +25,7 @@ public:
 	{
 		Unit *unit = static_cast<Unit*>( entity );
 
-		GenericState<int> *state = static_cast<GenericState<int>*>(unit->getState( "level" ));
+		StateInt *state = unit->getState<StateInt*>( "level" );
 		state->setValue( state->getValue() + 1 );
 		std::cout << unit->getName() << " reached  Level " << state->getValue() << "! Ooohh ... shiny!" << std::endl;
 	}
@@ -49,9 +49,7 @@ public:
 	{
 		Unit *unit = static_cast<Unit*>( entity );
 
-        GenericState<int> *exp = static_cast<GenericState<int>*>(
-            getSource()->getState( "experience" )
-        );
+        StateInt *exp = getSource()->getState<StateInt*>( "experience" );
 
 		int pOld = exp->getValue();
 		int pNew = pOld + 10;
