@@ -15,8 +15,7 @@ namespace Baukasten {
 	class Form;
 
 	class BAUKASTEN_EXPORT GameEntity : public Entity,
-		public ActionsManager, public EntityManager,
-		public StatesManager, public ObjectsManager {
+		public ActionsManager, public StatesManager {
 	public:
 		GameEntity( const std::string& );
 		virtual ~GameEntity();
