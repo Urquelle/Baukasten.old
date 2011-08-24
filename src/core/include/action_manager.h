@@ -7,10 +7,10 @@
 namespace Baukasten {
 	class Action;
 
-	class BAUKASTEN_EXPORT ActionsManager : public AbstractManager<Action> {
+	class BAUKASTEN_EXPORT ActionManager : public AbstractManager<Action> {
 	public:
-		ActionsManager();
-		virtual ~ActionsManager();
+		ActionManager();
+		virtual ~ActionManager();
 
 		void addAction( Action* );
 		void addAction( const std::string&, Action* );

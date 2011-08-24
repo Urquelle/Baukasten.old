@@ -2,7 +2,7 @@ set (
     core_SRCS
     src/abstract_space.cpp
     src/action.cpp
-	src/actions_manager.cpp
+	src/action_manager.cpp
     src/drawable.cpp
     src/entity.cpp
 	src/entity_manager.cpp
@@ -21,7 +21,7 @@ set (
 	include/abstract_manager.h
     include/abstract_space.h
     include/action.h
-	include/actions_manager.h
+	include/action_manager.h
     include/drawable.h
     include/entity.h
 	include/entity_manager.h

@@ -1,43 +1,43 @@
-#include "actions_manager.h"
+#include "action_manager.h"
 
 #include "action.h"
 
 using namespace Baukasten;
 
-ActionsManager::ActionsManager()
+ActionManager::ActionManager()
 {
 }
 
-ActionsManager::~ActionsManager()
+ActionManager::~ActionManager()
 {
 }
 
-void ActionsManager::addAction( Action *action )
+void ActionManager::addAction( Action *action )
 {
 	add( action );
 }
 
-void ActionsManager::addAction( const std::string &id, Action *action )
+void ActionManager::addAction( const std::string &id, Action *action )
 {
 	add( id, action );
 }
 
-Action* ActionsManager::getAction( const std::string &id ) const
+Action* ActionManager::getAction( const std::string &id ) const
 {
 	return get( id );
 }
 
-ActionMap ActionsManager::getActions() const
+ActionMap ActionManager::getActions() const
 {
 	return getAll();
 }
 
-bool ActionsManager::hasAction( const std::string &id ) const
+bool ActionManager::hasAction( const std::string &id ) const
 {
     return has( id );
 }
 
-void ActionsManager::invokeAction( const std::string &id )
+void ActionManager::invokeAction( const std::string &id )
 {
     Action *action = getAction( id );
 
@@ -48,7 +48,7 @@ void ActionsManager::invokeAction( const std::string &id )
     }
 }
 
-void ActionsManager::invokeAction( const std::string &id, GameEntity *target )
+void ActionManager::invokeAction( const std::string &id, GameEntity *target )
 {
 	if ( !target )
 		return;
@@ -63,7 +63,7 @@ void ActionsManager::invokeAction( const std::string &id, GameEntity *target )
     }
 }
 
-void ActionsManager::invokeAction( const std::string &id, GameEntityList targets )
+void ActionManager::invokeAction( const std::string &id, GameEntityList targets )
 {
     Action *action = getAction( id );
 
@@ -75,7 +75,7 @@ void ActionsManager::invokeAction( const std::string &id, GameEntityList targets
     }
 }
 
-void ActionsManager::dropAction( const std::string &id )
+void ActionManager::dropAction( const std::string &id )
 {
     Action *action = getAction( id );
 
@@ -93,7 +93,7 @@ void ActionsManager::dropAction( const std::string &id )
     }
 }
 
-void ActionsManager::runActions()
+void ActionManager::runActions()
 {
     ActionList::const_iterator it = mActionQueue.begin();
     while ( it != mActionQueue.end() )

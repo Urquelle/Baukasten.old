@@ -3,7 +3,7 @@
 
 #include "global.h"
 
-#include "actions_manager.h"
+#include "action_manager.h"
 #include "entity.h"
 #include "entity_type.h"
 #include "states_manager.h"
@@ -13,7 +13,7 @@ namespace Baukasten {
 	class Form;
 
 	class BAUKASTEN_EXPORT GameEntity : public Entity,
-		public ActionsManager, public StatesManager {
+		public ActionManager, public StatesManager {
 	public:
 		GameEntity( const std::string& );
 		virtual ~GameEntity();
