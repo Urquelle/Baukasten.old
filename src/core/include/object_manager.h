@@ -4,10 +4,10 @@
 #include "global.h"
 
 namespace Baukasten {
-	class BAUKASTEN_EXPORT ObjectsManager {
+	class BAUKASTEN_EXPORT ObjectManager {
 	public:
-		ObjectsManager();
-		virtual ~ObjectsManager();
+		ObjectManager();
+		virtual ~ObjectManager();
 
 		void addObject( const std::string&, void* );
 

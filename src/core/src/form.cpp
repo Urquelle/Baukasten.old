@@ -7,7 +7,7 @@ using namespace Baukasten;
 
 Form::Form( const std::string &id ) :
 	Drawable( id ),
-	ObjectsManager()
+	ObjectManager()
 {
 }
 

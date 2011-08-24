@@ -5,7 +5,7 @@
 
 #include "drawable.h"
 #include "entity_manager.h"
-#include "objects_manager.h"
+#include "object_manager.h"
 #include "states_manager.h"
 
 #include <string>
@@ -15,7 +15,7 @@ namespace Baukasten {
 	class VirtualSpace;
 
 	class BAUKASTEN_EXPORT Form : public Drawable,
-	public EntityManager, public ObjectsManager, public StatesManager {
+	public EntityManager, public ObjectManager, public StatesManager {
 	public:
 		Form( const std::string& );
 		virtual ~Form();

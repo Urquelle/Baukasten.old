@@ -10,7 +10,7 @@ set (
     src/form.cpp
 	src/game_entity.cpp
     src/logical_space.cpp
-	src/objects_manager.cpp
+	src/object_manager.cpp
     src/state.cpp
 	src/states_manager.cpp
     src/virtual_space.cpp
@@ -31,7 +31,7 @@ set (
     include/generic_state.h
     include/global.h
     include/logical_space.h
-	include/objects_manager.h
+	include/object_manager.h
     include/state.h
 	include/states_manager.h
     include/virtual_space.h
