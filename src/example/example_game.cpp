@@ -1,11 +1,20 @@
 #include "example_game.h"
 #include "entities.h"
+#include "actions.h"
+
+#include <action.h>
+#include <lua/action.h>
+#include <generic_state.h>
 
 #include <iostream>
 
-ExampleGame::ExampleGame() :
-    mKeepRunning( true )
+using namespace Baukasten;
+
+ExampleGame::ExampleGame( const std::string &id ) :
+	GameEntity( id )
 {
+	addState( "keepRunning", new StateBool( "keepRunning", true ) );
+	addAction( "updateState", new UpdateState( *this ) );
 }
 
 ExampleGame::~ExampleGame()
@@ -14,12 +23,13 @@ ExampleGame::~ExampleGame()
 
 void ExampleGame::start()
 {
+	init();
     run();
 }
 
-void ExampleGame::pause()
+bool ExampleGame::keepRunning() const
 {
-    std::cout << "spiel pausieren." << std::endl;
+	return getState<StateBool*>( "keepRunning" )->getValue();
 }
 
 void ExampleGame::stop()
@@ -41,16 +51,16 @@ void ExampleGame::run()
 	targets.push_back( gomez );
 	targets.push_back( ramirez );
 
-	sanchez->invokeAction( "hit", targets );
-	sanchez->runActions();
+	while ( keepRunning() ) {
+		sanchez->invokeAction( "hit", targets );
+		sanchez->runActions();
 
-	sanchez->invokeAction( "hit", targets );
-	sanchez->runActions();
+		invokeAction( "updateState", targets );
+		runActions();
+	}
+}
 
-	sanchez->invokeAction( "hit", targets );
-	sanchez->runActions();
-
-	sanchez->invokeAction( "hit", targets );
-	sanchez->runActions();
+void ExampleGame::init()
+{
 }
 
