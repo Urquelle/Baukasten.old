@@ -9,10 +9,8 @@ namespace Baukasten {
 
 	class BAUKASTEN_EXPORT VirtualSpace : public LogicalSpace {
 	public:
-		VirtualSpace( const std::string& );
+		VirtualSpace();
 		virtual ~VirtualSpace();
-
-		void append( const Drawable* );
 	};
 }
 

@@ -3,14 +3,12 @@
 
 #include "global.h"
 
-#include "abstract_space.h"
 #include "entity_manager.h"
 
 namespace Baukasten {
-	class BAUKASTEN_EXPORT LogicalSpace : public AbstractSpace,
-	public EntityManager {
+	class BAUKASTEN_EXPORT LogicalSpace : public EntityManager {
 	public:
-		LogicalSpace( const std::string& );
+		LogicalSpace();
 		virtual ~LogicalSpace();
 	};
 }

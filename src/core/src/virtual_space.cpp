@@ -3,8 +3,8 @@
 
 using namespace Baukasten;
 
-VirtualSpace::VirtualSpace( const std::string &id ) :
-    LogicalSpace( id )
+VirtualSpace::VirtualSpace() :
+    LogicalSpace()
 {
 }
 
@@ -12,7 +12,3 @@ VirtualSpace::~VirtualSpace()
 {
 }
 
-void VirtualSpace::append( const Drawable *o )
-{
-    LogicalSpace::append( o );
-}

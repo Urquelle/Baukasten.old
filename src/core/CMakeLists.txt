@@ -1,6 +1,5 @@
 set (
     core_SRCS
-    src/abstract_space.cpp
     src/action.cpp
 	src/action_manager.cpp
     src/drawable.cpp
@@ -19,7 +18,6 @@ set (
 set (
     core_HEADER
 	include/abstract_manager.h
-    include/abstract_space.h
     include/action.h
 	include/action_manager.h
     include/drawable.h
