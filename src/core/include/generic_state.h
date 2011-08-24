@@ -43,6 +43,7 @@ namespace Baukasten {
 	typedef GenericState<int>			StateInt;
 	typedef GenericState<float>			StateFloat;
 	typedef GenericState<std::string>	StateString;
+	typedef GenericState<bool>			StateBool;
 } /* Baukasten */
 
 #endif /* end of include guard: GENERIC_STATE_7VBP3DTZ */
