@@ -21,7 +21,7 @@ if (DOXYGEN_FOUND)
 		DEPENDS ${DOXYGEN_INPUT}
 	)
 
-	add_custom_target(doc ALL DEPENDS ${DOXYGEN_OUTPUT})
+	add_custom_target(doc DEPENDS ${DOXYGEN_OUTPUT})
 
 	install(DIRECTORY doc/ DESTINATION ${DOXYGEN_OUTPUT})
 endif(DOXYGEN_FOUND)
