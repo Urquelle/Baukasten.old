@@ -3,11 +3,11 @@
 
 #include "entity.h"
 #include "global.h"
-#include "states_manager.h"
+#include "state_manager.h"
 
 namespace Baukasten {
 	class BAUKASTEN_EXPORT EntityType :
-		public Entity, public StatesManager {
+		public Entity, public StateManager {
 	public:
 		EntityType( const std::string& );
 		virtual ~EntityType();
@@ -21,7 +21,7 @@ namespace Baukasten {
 		template<class T>
 		T getState( const std::string &id ) const
 		{
-			T state = StatesManager::getState<T>( id );
+			T state = StateManager::getState<T>( id );
 
 			if ( !state && mParent )
 				state = mParent->getState<T>( id );

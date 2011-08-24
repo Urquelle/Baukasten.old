@@ -8,10 +8,10 @@
 namespace Baukasten {
 	class State;
 
-	class BAUKASTEN_EXPORT StatesManager : public AbstractManager<State> {
+	class BAUKASTEN_EXPORT StateManager : public AbstractManager<State> {
 	public:
-		StatesManager();
-		virtual ~StatesManager();
+		StateManager();
+		virtual ~StateManager();
 
 		void addState( State* );
 		void addState( const std::string&, State* );

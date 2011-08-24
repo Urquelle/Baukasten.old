@@ -39,7 +39,7 @@ Form* GameEntity::getForm() const
 
 bool GameEntity::hasState( const std::string &id ) const
 {
-	bool answer = StatesManager::hasState( id );
+	bool answer = StateManager::hasState( id );
 	if ( !answer && getType() )
 		answer = getType()->hasState( id );
 

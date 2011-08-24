@@ -6,14 +6,14 @@
 #include "action_manager.h"
 #include "entity.h"
 #include "entity_type.h"
-#include "states_manager.h"
+#include "state_manager.h"
 
 namespace Baukasten {
 	class EntityType;
 	class Form;
 
 	class BAUKASTEN_EXPORT GameEntity : public Entity,
-		public ActionManager, public StatesManager {
+		public ActionManager, public StateManager {
 	public:
 		GameEntity( const std::string& );
 		virtual ~GameEntity();
@@ -29,7 +29,7 @@ namespace Baukasten {
 		template<class T>
 		T getState( const std::string &id ) const
 		{
-			T state = StatesManager::getState<T>( id );
+			T state = StateManager::getState<T>( id );
 
 			if ( !state && getType() )
 				state = getType()->getState<T>( id );

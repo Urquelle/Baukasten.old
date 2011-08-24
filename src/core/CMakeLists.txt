@@ -12,7 +12,7 @@ set (
     src/logical_space.cpp
 	src/object_manager.cpp
     src/state.cpp
-	src/states_manager.cpp
+	src/state_manager.cpp
     src/virtual_space.cpp
 )
 
@@ -33,7 +33,7 @@ set (
     include/logical_space.h
 	include/object_manager.h
     include/state.h
-	include/states_manager.h
+	include/state_manager.h
     include/virtual_space.h
 )
 
