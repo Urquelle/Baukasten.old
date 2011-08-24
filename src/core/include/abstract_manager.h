@@ -15,6 +15,8 @@ namespace Baukasten {
 	 *
 	 * implements a container with arbitrary object type.
 	 * adds methods to act upon the collection.
+	 *
+	 * \tparam T class to use as second parameter of the map.
 	 */
 	template<class T>
 	class AbstractManager {
