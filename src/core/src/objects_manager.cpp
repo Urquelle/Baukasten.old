@@ -10,7 +10,7 @@ ObjectsManager::~ObjectsManager()
 {
 }
 
-void ObjectsManager::addObject( void *object, const std::string &id )
+void ObjectsManager::addObject( const std::string &id, void *object )
 {
 	if ( !hasObject( id ) )
 		mObjects[ id ] = object;

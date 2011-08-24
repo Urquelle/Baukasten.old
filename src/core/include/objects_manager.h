@@ -9,7 +9,7 @@ namespace Baukasten {
 		ObjectsManager();
 		virtual ~ObjectsManager();
 
-		void addObject( void*, const std::string& );
+		void addObject( const std::string&, void* );
 
 		template<class T>
 		T getObject( const std::string &id ) const
