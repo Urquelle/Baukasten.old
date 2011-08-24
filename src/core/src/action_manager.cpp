@@ -68,7 +68,7 @@ void ActionManager::invokeAction( const std::string &id, GameEntityList targets 
     Action *action = getAction( id );
 
     if ( action && !action->isActive() ) {
-        action->clear();
+		action->clear();
         action->setActive( true );
         action->setTargets( targets );
         mActionQueue.push_back( action );
@@ -84,10 +84,10 @@ void ActionManager::dropAction( const std::string &id )
         ActionList::iterator it = mActionQueue.begin();
 
         while ( it != mActionQueue.end() ) {
-            if ( *it == action ) {
-                mActionQueue.erase( it );
+			if ( *it == action ) {
+				mActionQueue.erase( it );
                 break;
-            }
+			}
 			it++;
         }
     }
