@@ -142,7 +142,7 @@ void wrapClasses()
 		.inherits<State>()
 		.inherits<Entity>()
 		.set("setValue",&StateBool::setValue)
-			.param("expects a string.")
+			.param("expects a boolean.")
 		.set("getValue",&StateBool::getValue);
 }
 
