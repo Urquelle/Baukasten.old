@@ -134,6 +134,16 @@ void wrapClasses()
 		.set("setValue",&StateString::setValue)
 			.param("expects a string.")
 		.set("getValue",&StateString::getValue);
+
+	// register GenericState with boolean as the template argument
+	SLB::Class<StateBool>("StateBool")
+		.comment("Wrapper for the StateBool Class.")
+		.constructor<const std::string&>()
+		.inherits<State>()
+		.inherits<Entity>()
+		.set("setValue",&StateBool::setValue)
+			.param("expects a string.")
+		.set("getValue",&StateBool::getValue);
 }
 
 #endif /* end of include guard: GLOBAL_LUA_S7HRAEG3 */
