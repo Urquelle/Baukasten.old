@@ -2,8 +2,8 @@
 
 #include <OGRE/Ogre.h>
 
-WorldMapForm::WorldMapForm( const std::string &id, Ogre::SceneManager *sceneManager ) :
-	OgreForm( id, sceneManager )
+WorldMapForm::WorldMapForm( const std::string &id, Ogre::Root *root ) :
+	OgreForm( id, root )
 {
     Ogre::Plane plane(Ogre::Vector3::UNIT_Y, -5);
     Ogre::MeshManager::getSingleton().createPlane(

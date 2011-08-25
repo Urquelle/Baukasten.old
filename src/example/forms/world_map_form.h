@@ -9,7 +9,7 @@ namespace Ogre {
 
 class WorldMapForm : public OgreForm {
 public:
-	WorldMapForm( const std::string&, Ogre::SceneManager* );
+	WorldMapForm( const std::string&, Ogre::Root* );
 	virtual ~WorldMapForm();
 
 	void renderScene();

@@ -114,32 +114,16 @@ int ExampleGame::init()
         return -1;
     }
 
-    Ogre::RenderWindow *window = mRoot->initialise(true, "Ogre3D Beginners Guide");
-    mSceneManager = mRoot->createSceneManager(Ogre::ST_GENERIC);
-
-	Ogre::Camera *mCamera = mSceneManager->createCamera("Camera");
-    mCamera->setPosition(Ogre::Vector3(0,0,50));
-    mCamera->lookAt(Ogre::Vector3(0,0,0));
-    mCamera->setNearClipDistance(5);
-
-    Ogre::Viewport *viewport = window->addViewport(mCamera);
-    viewport->setBackgroundColour(Ogre::ColourValue(0.0,0.0,0.0));
-
-    mCamera->setAspectRatio(
-        Ogre::Real(viewport->getActualWidth()) / Ogre::Real(viewport->getActualHeight())
-    );
-
-	getForm()->addObject( "root", mRoot );
-	getForm()->addObject( "window", window );
-	getForm()->addObject( "sceneManager", mSceneManager );
+    mRoot->initialise( true, getId() );
+    mSceneManager = mRoot->createSceneManager(Ogre::ST_GENERIC, "sceneManager");
 
 	loadResources();
 
 	// init Entities
 	mWorldMap = new WorldMap( "worldmap" );
-	mWorldMap->setForm( new WorldMapForm( "form", mSceneManager ) );
+	mWorldMap->setForm( new WorldMapForm( "form", mRoot ) );
 
-	getForm()->addToLSpace( "objects", mWorldMap );
-	getForm()->addToVSpace( "objects", mWorldMap->getForm() );
+	getForm()->addToLSpace( mWorldMap );
+	getForm()->addToVSpace( mWorldMap->getForm() );
 }
 

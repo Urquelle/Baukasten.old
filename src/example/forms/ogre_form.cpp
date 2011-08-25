@@ -3,9 +3,9 @@
 #include <OGRE/Ogre.h>
 
 
-OgreForm::OgreForm( const std::string &id, Ogre::SceneManager *sm ) :
+OgreForm::OgreForm( const std::string &id, Ogre::Root *root ) :
 	Form( id ),
-	mSceneManager( sm )
+	mRoot( root )
 {
 }
 
@@ -13,8 +13,8 @@ OgreForm::~OgreForm()
 {
 }
 
-Ogre::SceneManager* OgreForm::getSceneManager() const
+Ogre::Root* OgreForm::getRoot() const
 {
-	return mSceneManager;
+	return mRoot;
 }
 

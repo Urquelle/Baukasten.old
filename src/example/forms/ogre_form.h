@@ -1,18 +1,16 @@
 #include <form.h>
 
 namespace Ogre{
-	class SceneManager;
+	class Root;
 }
 
 class OgreForm : public Baukasten::Form {
 public:
-	OgreForm( const std::string&, Ogre::SceneManager* );
+	OgreForm( const std::string&, Ogre::Root* );
 	virtual ~OgreForm();
 
-	Ogre::SceneManager* getSceneManager() const;
-
-	virtual void renderScene() = 0;
+	Ogre::Root* getRoot() const;
 
 private:
-	Ogre::SceneManager*	mSceneManager;
+	Ogre::Root* mRoot;
 };
