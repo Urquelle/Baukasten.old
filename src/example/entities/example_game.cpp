@@ -94,7 +94,6 @@ void loadResources()
         for (i = settings->begin(); i != settings->end(); ++i) {
             typeName = i->first;
             dataName = i->second;
-			cout << sectionName << " -> " << typeName << ": " << dataName << endl;
 
             Ogre::ResourceGroupManager::getSingleton().addResourceLocation(
 				dataName,

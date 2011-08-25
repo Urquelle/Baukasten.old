@@ -15,16 +15,16 @@ namespace Ogre {
 class ExampleGame : public Baukasten::GameEntity
 {
 public:
-    ExampleGame( const std::string &id );
-    virtual ~ExampleGame();
+	ExampleGame( const std::string &id );
+	virtual ~ExampleGame();
 
-    void start();
-    void stop();
+	void start();
+	void stop();
 
 	bool keepRunning() const;
 
 protected:
-    void run();
+	void run();
 	int init();
 
 private:
