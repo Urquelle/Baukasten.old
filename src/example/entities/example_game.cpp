@@ -1,12 +1,12 @@
 #include "example_game.h"
 #include "entities.h"
-#include "actions/actions.h"
 #include "actions/render_scene.h"
 #include "forms/world_map_form.h"
 #include "world_map.h"
 
 #include <action.h>
 #include <generic_state.h>
+#include <lua/action.h>
 
 #include <OGRE/Ogre.h>
 
@@ -18,9 +18,9 @@ using namespace Baukasten;
 ExampleGame::ExampleGame( const std::string &id ) :
 	GameEntity( id )
 {
-	addState( "keepRunning", new StateBool( "keepRunning", true ) );
+	addState( "keepRunning", new StateInt( "keepRunning", 1 ) );
 
-	addAction( "updateState", new UpdateState( *this ) );
+	addAction( new ActionLua( *this, "updateState", "scripts/update_state.lua" ) );
 	addAction( "renderScene", new RenderScene( *this ) );
 
 	setForm( new Form( "form" ) );

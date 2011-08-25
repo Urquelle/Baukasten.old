@@ -1,6 +1,5 @@
 #include "entities.h"
 #include "entity_types.h"
-#include "actions/actions.h"
 
 #include <lua/action.h>
 
@@ -11,10 +10,10 @@ using namespace Baukasten;
 Unit::Unit( const std::string &id ) :
 	GameEntity( id )
 {
-	addAction( new AddExperienceAction( *this ) );
+	addAction( new ActionLua( *this, "addExperience", "scripts/add_exp.lua" ) );
 	addAction( new ActionLua( *this, "levelUp", "scripts/level_up.lua" ) );
-	addAction( new DieAction( *this ) );
-	addAction( new ActionLua( *this, "hit", "scripts/hit_action.lua" ) );
+	addAction( new ActionLua( *this, "die", "scripts/die.lua" ) );
+	addAction( new ActionLua( *this, "hit", "scripts/hit.lua" ) );
 
 	setType( new BasicClass( "basic" ) );
 
