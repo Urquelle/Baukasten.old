@@ -41,11 +41,6 @@ bool ExampleGame::keepRunning() const
 	return getState<StateBool*>( "keepRunning" )->getValue();
 }
 
-void ExampleGame::stop()
-{
-    std::cout << "spiel stoppen." << std::endl;
-}
-
 void ExampleGame::run()
 {
     using namespace Baukasten;

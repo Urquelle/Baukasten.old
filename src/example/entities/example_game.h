@@ -19,8 +19,6 @@ public:
 	virtual ~ExampleGame();
 
 	void start();
-	void stop();
-
 	bool keepRunning() const;
 
 protected:
