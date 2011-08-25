@@ -57,7 +57,7 @@ WorldMapForm::~WorldMapForm()
 {
 }
 
-void WorldMapForm::renderScene()
+void WorldMapForm::render()
 {
 }
 

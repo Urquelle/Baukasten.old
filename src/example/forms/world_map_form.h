@@ -12,7 +12,7 @@ public:
 	WorldMapForm( const std::string&, Ogre::Root* );
 	virtual ~WorldMapForm();
 
-	void renderScene();
+	void render();
 
 private:
 	Ogre::Entity*	mGround;
