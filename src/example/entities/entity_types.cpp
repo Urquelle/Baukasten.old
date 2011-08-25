@@ -1,5 +1,4 @@
 #include "entity_types.h"
-#include "actions/actions.h"
 
 BasicClass::BasicClass( const std::string &id ) :
 	EntityType( id )
