@@ -11,7 +11,7 @@ using namespace Baukasten;
 
 void RenderScene::doAction( GameEntity *entity )
 {
-	Form *form = static_cast<Form*>( getSource()->getForm() );
+	Form *form = getSource()->getForm();
 
 	if ( !form )
 		return;
