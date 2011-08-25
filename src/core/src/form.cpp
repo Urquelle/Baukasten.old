@@ -29,8 +29,11 @@ void Form::removeLSpace( const std::string &id )
 
 void Form::addToLSpace( const std::string &id, Entity *entity )
 {
-	if ( !entity || !hasLSpace( id ) )
+	if ( !entity )
 		return;
+
+	if ( !hasLSpace( id ) )
+		addLSpace( id, new LogicalSpace() );
 
 	LogicalSpace *space = getLSpace( id );
 
@@ -74,8 +77,11 @@ void Form::removeVSpace( const std::string &id )
 
 void Form::addToVSpace( const std::string &id, Drawable *entity )
 {
-	if ( !entity || !hasVSpace( id ) )
+	if ( !entity )
 		return;
+
+	if ( !hasVSpace( id ) )
+		addVSpace( id, new VirtualSpace() );
 
 	VirtualSpace *space = getVSpace( id );
 
