@@ -5,8 +5,6 @@
 #include <game_entity.h>
 #include <virtual_space.h>
 
-#include <iostream>
-
 using namespace Baukasten;
 
 void RenderScene::doAction( GameEntity *entity )
