@@ -1,6 +1,8 @@
-#include "entity_types.h"
+#include "basic_type.h"
 
-BasicClass::BasicClass( const std::string &id ) :
+#include <generic_state.h>
+
+BasicType::BasicType( const std::string &id ) :
 	EntityType( id )
 {
 	addState( new StateString( "name", "unknown" ) );
@@ -11,7 +13,7 @@ BasicClass::BasicClass( const std::string &id ) :
 	addState( new StateInt( "level", 1 ) );
 }
 
-BasicClass::~BasicClass()
+BasicType::~BasicType()
 {
 }
 

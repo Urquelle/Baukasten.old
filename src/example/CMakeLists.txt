@@ -1,7 +1,7 @@
 set(
     example_SRCS
 	actions/render_scene.cpp
-	entities/entity_types.cpp
+	entities/basic_type.cpp
     entities/example_game.cpp
 	entities/unit.cpp
 	entities/world_map.cpp

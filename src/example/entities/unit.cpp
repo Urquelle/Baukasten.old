@@ -1,5 +1,5 @@
 #include "unit.h"
-#include "entity_types.h"
+#include "basic_type.h"
 
 #include <lua/action.h>
 
@@ -15,7 +15,7 @@ Unit::Unit( const std::string &id ) :
 	addAction( new ActionLua( *this, "die", "scripts/die.lua" ) );
 	addAction( new ActionLua( *this, "hit", "scripts/hit.lua" ) );
 
-	setType( new BasicClass( "basic" ) );
+	setType( new BasicType( "basic" ) );
 
 	setName( id );
 }

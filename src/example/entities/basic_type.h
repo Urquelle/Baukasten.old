@@ -2,14 +2,13 @@
 #define ENTITY_TYPES_QYICYEIC
 
 #include <entity_type.h>
-#include <generic_state.h>
 
 using namespace Baukasten;
 
-class BasicClass : public EntityType {
+class BasicType : public EntityType {
 public:
-	BasicClass( const std::string& );
-	virtual ~BasicClass();
+	BasicType( const std::string& );
+	virtual ~BasicType();
 };
 
 #endif /* end of include guard: ENTITY_TYPES_QYICYEIC */
