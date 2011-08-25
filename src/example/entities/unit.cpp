@@ -1,4 +1,4 @@
-#include "entities.h"
+#include "unit.h"
 #include "entity_types.h"
 
 #include <lua/action.h>

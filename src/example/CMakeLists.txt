@@ -1,9 +1,9 @@
 set(
     example_SRCS
 	actions/render_scene.cpp
-	entities/entities.cpp
 	entities/entity_types.cpp
     entities/example_game.cpp
+	entities/unit.cpp
 	entities/world_map.cpp
 	forms/ogre_form.cpp
 	forms/world_map_form.cpp
