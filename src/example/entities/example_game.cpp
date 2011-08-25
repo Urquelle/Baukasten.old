@@ -1,11 +1,17 @@
 #include "example_game.h"
 #include "entities.h"
 #include "actions/actions.h"
+#include "actions/render_scene.h"
+#include "forms/world_map_form.h"
+#include "world_map.h"
 
 #include <action.h>
 #include <generic_state.h>
 
+#include <OGRE/Ogre.h>
+
 #include <iostream>
+#include <cstdlib>
 
 using namespace Baukasten;
 
@@ -13,7 +19,11 @@ ExampleGame::ExampleGame( const std::string &id ) :
 	GameEntity( id )
 {
 	addState( "keepRunning", new StateBool( "keepRunning", true ) );
+
 	addAction( "updateState", new UpdateState( *this ) );
+	addAction( "renderScene", new RenderScene( *this ) );
+
+	setForm( new Form( "form" ) );
 }
 
 ExampleGame::~ExampleGame()
@@ -51,16 +61,101 @@ void ExampleGame::run()
 	targets.push_back( ramirez );
 
 	while ( keepRunning() ) {
+
+		invokeAction( "updateState", targets );
+		invokeAction( "processInput" );
+		invokeAction( "renderScene" );
+
 		sanchez->invokeAction( "hit", targets );
 		sanchez->runActions();
 
-		invokeAction( "updateState", targets );
 		runActions();
+
+		mRoot->renderOneFrame();
 	}
 }
 
-void ExampleGame::init()
+void loadResources()
 {
-	// init ogre here
+	std::string userHome = getenv( "HOME" );
+
+    Ogre::ConfigFile cf;
+    cf.load(userHome + "/.config/baukasten/resources.cfg");
+
+    Ogre::ConfigFile::SectionIterator sectionIter = cf.getSectionIterator();
+    Ogre::String sectionName, typeName, dataName;
+
+    while (sectionIter.hasMoreElements()) {
+        sectionName = sectionIter.peekNextKey();
+        Ogre::ConfigFile::SettingsMultiMap *settings = sectionIter.getNext();
+        Ogre::ConfigFile::SettingsMultiMap::iterator i;
+
+        for (i = settings->begin(); i != settings->end(); ++i) {
+            typeName = i->first;
+            dataName = i->second;
+			cout << sectionName << " -> " << typeName << ": " << dataName << endl;
+
+            Ogre::ResourceGroupManager::getSingleton().addResourceLocation(
+				dataName,
+				typeName,
+				sectionName
+			);
+        }
+    }
+
+    Ogre::ResourceGroupManager::getSingleton().initialiseAllResourceGroups();
+}
+
+int ExampleGame::init()
+{
+    mRoot = new Ogre::Root("plugins.cfg");
+
+    if (!mRoot->showConfigDialog()) {
+        return -1;
+    }
+
+    Ogre::RenderWindow *window = mRoot->initialise(true, "Ogre3D Beginners Guide");
+    mSceneManager = mRoot->createSceneManager(Ogre::ST_GENERIC);
+
+	Ogre::Camera *mCamera = mSceneManager->createCamera("Camera");
+    mCamera->setPosition(Ogre::Vector3(0,0,50));
+    mCamera->lookAt(Ogre::Vector3(0,0,0));
+    mCamera->setNearClipDistance(5);
+
+    Ogre::Viewport *viewport = window->addViewport(mCamera);
+    viewport->setBackgroundColour(Ogre::ColourValue(0.0,0.0,0.0));
+
+    mCamera->setAspectRatio(
+        Ogre::Real(viewport->getActualWidth()) / Ogre::Real(viewport->getActualHeight())
+    );
+
+	loadResources();
+
+    //Ogre::Plane plane(Ogre::Vector3::UNIT_Y, -5);
+    //Ogre::MeshManager::getSingleton().createPlane(
+		//"plane",
+		//Ogre::ResourceGroupManager::DEFAULT_RESOURCE_GROUP_NAME,
+		//plane,
+		//1500,1500,200,200,true,1,5,5,Ogre::Vector3::UNIT_Z
+	//);
+
+    //Ogre::Entity *ground = mSceneManager->createEntity(
+        //"LightPlaneEntity", "plane"
+    //);
+    //mSceneManager->getRootSceneNode()->createChildSceneNode()
+        //->attachObject(ground);
+    //ground->setMaterialName("Examples/BeachStones");
+
+    //Ogre::Light *light = mSceneManager->createLight("light1");
+    //light->setType(Ogre::Light::LT_DIRECTIONAL);
+    //light->setDirection(Ogre::Vector3(1,-1,0));
+
+    //mSceneManager->setShadowTechnique(
+        //Ogre::SHADOWTYPE_STENCIL_ADDITIVE
+    //);
+	//
+	// init Entities
+	mWorldMap = new WorldMap( "worldmap" );
+	mWorldMap->setForm( new WorldMapForm( "form", mSceneManager ) );
 }
 

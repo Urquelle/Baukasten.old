@@ -17,10 +17,9 @@ end
 state:setValue( state:getValue() - 10 )
 
 name = source:getState("name")
-sex = source:getState("sex")
 targetName = entity:getState("name")
 
-print(name:getValue() .. "(" .. sex:getValue() .. ") just hit " .. targetName:getValue() .. "." )
+print(name:getValue() .. " just hit " .. targetName:getValue() .. "." )
 
 if state:getValue() <= 0 then
 	state:setValue(0)

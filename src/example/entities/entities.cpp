@@ -9,109 +9,67 @@
 using namespace Baukasten;
 
 Unit::Unit( const std::string &id ) :
-	GameEntity( id ),
-	mName( new StateString( "name" ) ),
-	mHP( new StateInt( "hp" ) ),
-	mMP( new StateInt( "mp" ) ),
-	mLevel( new StateInt( "level" ) ),
-	mExperience( new StateInt( "experience" ) ),
-
-	mAddExpAction( new AddExperienceAction( *this ) ),
-	mLevelUpAction( new LevelUpAction( *this ) ),
-	mDieAction( new DieAction( *this ) ),
-	mHitAction( new ActionLua( *this, "hit", "scripts/hit_action.lua" ) )
+	GameEntity( id )
 {
-	mName->setValue( id );
-	mHP->setValue( 40 );
-	mMP->setValue( 10 );
-	mLevel->setValue( 1 );
-	mExperience->setValue( 0 );
-
-	addState( mName );
-	addState( mHP );
-	addState( mMP );
-	addState( mLevel );
-	addState( mExperience );
-
-	addAction( mAddExpAction );
-	addAction( mLevelUpAction );
-	addAction( mDieAction );
-	addAction( mHitAction );
+	addAction( new AddExperienceAction( *this ) );
+	addAction( new LevelUpAction( *this ) );
+	addAction( new DieAction( *this ) );
+	addAction( new ActionLua( *this, "hit", "scripts/hit_action.lua" ) );
 
 	setType( new BasicClass( "basic" ) );
+
+	setName( id );
 }
 
 Unit::~Unit()
 {
-	delete mName;
-	delete mHP;
-	delete mMP;
-	delete mLevel;
-	delete mExperience;
-
-	delete mAddExpAction;
-	delete mLevelUpAction;
-	delete mHitAction;
-
 	if ( EntityType *type = getType() )
 		delete type;
 }
 
 std::string Unit::getName() const
 {
-	return mName->getValue();
+	if ( hasState( "name" ) )
+		return getState<StateString*>( "name" )->getValue();
+	return "";
+}
+
+void Unit::setName( const std::string &name )
+{
+	if ( hasState( "name" ) )
+		getState<StateString*>( "name" )->setValue( getId() );
 }
 
 int Unit::getHP() const
 {
-	return mHP->getValue();
+	if ( hasState( "hp" ) )
+		return getState<StateInt*>( "hp" )->getValue();
+	return 0;
 }
 
 int Unit::getMP() const
 {
-	return mMP->getValue();
+	if ( hasState( "mp" ) )
+		return getState<StateInt*>( "mp" )->getValue();
+	return 0;
 }
 
 int Unit::getLevel() const
 {
-	return mLevel->getValue();
+	if ( hasState( "level" ) )
+		return getState<StateInt*>( "level" )->getValue();
+	return 0;
 }
 
 int Unit::getExperience() const
 {
-	return mExperience->getValue();
+	if ( hasState( "exp" ) )
+		return getState<StateInt*>( "exp" )->getValue();
+	return 0;
 }
 
 int Unit::getSex() const
 {
-	StateInt *state = getState<StateInt*>( "sex" );
-
-	if ( !state )
-		return -1;
-
-	return state->getValue();
-}
-
-UnitForm::UnitForm( const std::string &id ) :
-	Form( id ),
-	mEntity( 0 )
-{
-}
-
-UnitForm::~UnitForm()
-{
-	if ( mEntity )
-		delete mEntity;
-}
-
-Ogre::Entity* UnitForm::getEntity() const
-{
-	return mEntity;
-}
-
-void UnitForm::setEntity( Ogre::Entity *entity )
-{
-	if ( entity )
-		mEntity = entity;
+	return 0;
 }
 

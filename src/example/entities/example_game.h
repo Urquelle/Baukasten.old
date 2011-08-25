@@ -5,6 +5,13 @@
 
 #include <string>
 
+class WorldMap;
+
+namespace Ogre {
+	class Root;
+	class SceneManager;
+} /* Ogre */
+
 class ExampleGame : public Baukasten::GameEntity
 {
 public:
@@ -18,7 +25,13 @@ public:
 
 protected:
     void run();
-	void init();
+	int init();
+
+private:
+	WorldMap*			mWorldMap;
+
+	Ogre::Root*			mRoot;
+	Ogre::SceneManager*	mSceneManager;
 };
 
 #endif /* end of include guard: GAME_QESA072Y */

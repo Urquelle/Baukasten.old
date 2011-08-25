@@ -49,7 +49,7 @@ public:
 	{
 		Unit *unit = static_cast<Unit*>( entity );
 
-        StateInt *exp = getSource()->getState<StateInt*>( "experience" );
+        StateInt *exp = getSource()->getState<StateInt*>( "exp" );
 
 		int pOld = exp->getValue();
 		int pNew = pOld + 10;

@@ -2,16 +2,14 @@
 #include "actions/actions.h"
 
 BasicClass::BasicClass( const std::string &id ) :
-	EntityType( id ),
-	mSex( new StateInt( "sex", 0 ) ),
-	mMovement( new StateInt( "movement", 4 ) ),
-	mJumpHeight( new StateInt( "jumpHeight", 3 ) ),
-	mSpeed( new StateInt( "speed", 8 ) )
+	EntityType( id )
 {
-	addState( mSex );
-	addState( mMovement );
-	addState( mJumpHeight );
-	addState( mSpeed );
+	addState( new StateString( "name", "unknown" ) );
+
+	addState( new StateInt( "hp", 10 ) );
+	addState( new StateInt( "mp", 10 ) );
+	addState( new StateInt( "exp", 0 ) );
+	addState( new StateInt( "level", 1 ) );
 }
 
 BasicClass::~BasicClass()
