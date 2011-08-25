@@ -55,12 +55,13 @@ void ExampleGame::run()
 	targets.push_back( gomez );
 	targets.push_back( ramirez );
 
+	invokeAction( "renderScene" );
+
 	// mainloop
 	while ( keepRunning() ) {
 
 		invokeAction( "updateState", targets );
 		invokeAction( "processInput" );
-		invokeAction( "renderScene" );
 
 		sanchez->invokeAction( "hit", targets );
 		sanchez->runActions();

@@ -14,6 +14,8 @@ public:
 	{
 	}
 
+	bool done() const;
+
 	void doAction( Baukasten::GameEntity* );
 };
 

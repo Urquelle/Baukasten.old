@@ -7,6 +7,11 @@
 
 using namespace Baukasten;
 
+bool RenderScene::done() const
+{
+	return false;
+}
+
 void RenderScene::doAction( GameEntity *entity )
 {
 	Form *form = getSource()->getForm();
