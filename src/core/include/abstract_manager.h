@@ -32,6 +32,12 @@ namespace Baukasten {
 		/*! destructor */
 		virtual ~AbstractManager()
 		{
+			typename map<string, T*>::iterator it = mMap.begin();
+			while ( it != mMap.end() ) {
+				if ( (*it).second )
+					delete (*it).second;
+				++it;
+			}
 		}
 
 		/*! \brief add object t to the collection.
