@@ -10,30 +10,6 @@
 
 using namespace Baukasten;
 
-class LevelUpAction : public Action {
-public:
-    LevelUpAction( Unit &source ) :
-        Action( source, "levelUp" )
-    {
-    }
-
-    virtual ~LevelUpAction()
-    {
-    }
-
-	void doAction( GameEntity *entity )
-	{
-		Unit *unit = static_cast<Unit*>( entity );
-
-		StateInt *state = unit->getState<StateInt*>( "level" );
-		state->setValue( state->getValue() + 1 );
-		std::cout << unit->getName() << " reached  Level " << state->getValue() << "! Ooohh ... shiny!" << std::endl;
-	}
-
-private:
-    /* data */
-};
-
 class AddExperienceAction : public Action {
 public:
     AddExperienceAction( Unit &source ) :

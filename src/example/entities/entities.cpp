@@ -12,7 +12,7 @@ Unit::Unit( const std::string &id ) :
 	GameEntity( id )
 {
 	addAction( new AddExperienceAction( *this ) );
-	addAction( new LevelUpAction( *this ) );
+	addAction( new ActionLua( *this, "levelUp", "scripts/level_up.lua" ) );
 	addAction( new DieAction( *this ) );
 	addAction( new ActionLua( *this, "hit", "scripts/hit_action.lua" ) );
 
