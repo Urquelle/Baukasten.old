@@ -67,7 +67,7 @@ void ExampleGame::run()
 		invokeAction( "renderScene" );
 
 		sanchez->invokeAction( "hit", targets );
-		//sanchez->runActions();
+		sanchez->runActions();
 
 		runActions();
 
