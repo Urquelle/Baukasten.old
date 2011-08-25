@@ -2,6 +2,7 @@
 #define ABSTRACT_MANAGER_4A46G9D2
 
 #include "global.h"
+#include "action.h"
 #include "state.h"
 
 namespace Baukasten {
