@@ -8,7 +8,7 @@
 namespace Baukasten {
 	class State;
 
-	class BAUKASTEN_EXPORT StateManager : public AbstractManager<State> {
+	class BAUKASTEN_EXPORT StateManager : protected AbstractManager<State> {
 	public:
 		StateManager();
 		virtual ~StateManager();
