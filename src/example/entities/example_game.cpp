@@ -67,7 +67,7 @@ void ExampleGame::run()
 		invokeAction( "renderScene" );
 
 		sanchez->invokeAction( "hit", targets );
-		sanchez->runActions();
+		//sanchez->runActions();
 
 		runActions();
 
@@ -129,33 +129,17 @@ int ExampleGame::init()
         Ogre::Real(viewport->getActualWidth()) / Ogre::Real(viewport->getActualHeight())
     );
 
+	getForm()->addObject( "root", mRoot );
+	getForm()->addObject( "window", window );
+	getForm()->addObject( "sceneManager", mSceneManager );
+
 	loadResources();
 
-    //Ogre::Plane plane(Ogre::Vector3::UNIT_Y, -5);
-    //Ogre::MeshManager::getSingleton().createPlane(
-		//"plane",
-		//Ogre::ResourceGroupManager::DEFAULT_RESOURCE_GROUP_NAME,
-		//plane,
-		//1500,1500,200,200,true,1,5,5,Ogre::Vector3::UNIT_Z
-	//);
-
-    //Ogre::Entity *ground = mSceneManager->createEntity(
-        //"LightPlaneEntity", "plane"
-    //);
-    //mSceneManager->getRootSceneNode()->createChildSceneNode()
-        //->attachObject(ground);
-    //ground->setMaterialName("Examples/BeachStones");
-
-    //Ogre::Light *light = mSceneManager->createLight("light1");
-    //light->setType(Ogre::Light::LT_DIRECTIONAL);
-    //light->setDirection(Ogre::Vector3(1,-1,0));
-
-    //mSceneManager->setShadowTechnique(
-        //Ogre::SHADOWTYPE_STENCIL_ADDITIVE
-    //);
-	//
 	// init Entities
 	mWorldMap = new WorldMap( "worldmap" );
 	mWorldMap->setForm( new WorldMapForm( "form", mSceneManager ) );
+
+	getForm()->addToLSpace( "objects", mWorldMap );
+	getForm()->addToVSpace( "objects", mWorldMap->getForm() );
 }
 

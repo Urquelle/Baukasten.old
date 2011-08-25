@@ -14,16 +14,6 @@ WorldMapForm::WorldMapForm( const std::string &id, Ogre::SceneManager *sceneMana
     );
 
     mGround = sceneManager->createEntity( "LightPlaneEntity", "plane" );
-}
-
-WorldMapForm::~WorldMapForm()
-{
-}
-
-void WorldMapForm::renderScene()
-{
-	std::cout << "in renderScene" << std::endl;
-	Ogre::SceneManager *sceneManager = getSceneManager();
 
     sceneManager->getRootSceneNode()->createChildSceneNode()->attachObject(mGround);
     mGround->setMaterialName("Examples/BeachStones");
@@ -35,5 +25,13 @@ void WorldMapForm::renderScene()
     sceneManager->setShadowTechnique(
         Ogre::SHADOWTYPE_STENCIL_ADDITIVE
     );
+}
+
+WorldMapForm::~WorldMapForm()
+{
+}
+
+void WorldMapForm::renderScene()
+{
 }
 
