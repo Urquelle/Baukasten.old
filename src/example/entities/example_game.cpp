@@ -1,9 +1,8 @@
 #include "example_game.h"
 #include "entities.h"
-#include "actions.h"
+#include "actions/actions.h"
 
 #include <action.h>
-#include <lua/action.h>
 #include <generic_state.h>
 
 #include <iostream>
@@ -62,5 +61,6 @@ void ExampleGame::run()
 
 void ExampleGame::init()
 {
+	// init ogre here
 }
 

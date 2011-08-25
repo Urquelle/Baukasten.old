@@ -1,8 +1,10 @@
 #include "entities.h"
 #include "entity_types.h"
-#include "actions.h"
+#include "actions/actions.h"
 
 #include <lua/action.h>
+
+#include <OGRE/Ogre.h>
 
 using namespace Baukasten;
 
@@ -88,5 +90,28 @@ int Unit::getSex() const
 		return -1;
 
 	return state->getValue();
+}
+
+UnitForm::UnitForm( const std::string &id ) :
+	Form( id ),
+	mEntity( 0 )
+{
+}
+
+UnitForm::~UnitForm()
+{
+	if ( mEntity )
+		delete mEntity;
+}
+
+Ogre::Entity* UnitForm::getEntity() const
+{
+	return mEntity;
+}
+
+void UnitForm::setEntity( Ogre::Entity *entity )
+{
+	if ( entity )
+		mEntity = entity;
 }
 

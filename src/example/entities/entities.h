@@ -1,10 +1,13 @@
 #ifndef ENTITIES_SI8O8CQ0
 #define ENTITIES_SI8O8CQ0
 
+#include <form.h>
 #include <game_entity.h>
 #include <generic_state.h>
 
 using namespace Baukasten;
+
+namespace Ogre{ class Entity; }
 
 class Unit : public GameEntity {
 public:
@@ -29,6 +32,18 @@ private:
 	Action*			mLevelUpAction;
 	Action*			mDieAction;
 	Action*			mHitAction;
+};
+
+class UnitForm : public Form {
+public:
+	UnitForm( const std::string& );
+	virtual ~UnitForm();
+
+	Ogre::Entity* getEntity() const;
+	void setEntity( Ogre::Entity* );
+
+private:
+	Ogre::Entity*	mEntity;
 };
 
 #endif /* end of include guard: ENTITIES_SI8O8CQ0 */

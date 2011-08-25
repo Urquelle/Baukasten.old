@@ -1,7 +1,7 @@
 #ifndef ACTIONS_OG1WVP4A
 #define ACTIONS_OG1WVP4A
 
-#include "entities.h"
+#include "entities/entities.h"
 
 #include <action.h>
 #include <generic_state.h>

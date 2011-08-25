@@ -1,12 +1,12 @@
 set(
     example_SRCS
-	entities.cpp
-	entity_types.cpp
-    example_game.cpp
+	entities/entities.cpp
+	entities/entity_types.cpp
+    entities/example_game.cpp
     main.cpp
 )
 
-include_directories( ${core_include_dir} )
+include_directories( ${core_include_dir} ${CMAKE_CURRENT_SOURCE_DIR} )
 link_directories( ${core_lib_dir} ${CMAKE_INSTALL_PREFIX}/lib )
 
 add_executable( exampleGame ${example_SRCS})

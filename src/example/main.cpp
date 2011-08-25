@@ -1,4 +1,4 @@
-#include "example_game.h"
+#include "entities/example_game.h"
 
 int main(int argc, const char *argv[])
 {
