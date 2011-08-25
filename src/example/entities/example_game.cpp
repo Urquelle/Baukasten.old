@@ -60,6 +60,7 @@ void ExampleGame::run()
 	targets.push_back( gomez );
 	targets.push_back( ramirez );
 
+	// mainloop
 	while ( keepRunning() ) {
 
 		invokeAction( "updateState", targets );
@@ -114,8 +115,8 @@ int ExampleGame::init()
         return -1;
     }
 
-    mRoot->initialise( true, getId() );
-    mSceneManager = mRoot->createSceneManager(Ogre::ST_GENERIC, "sceneManager");
+	mRoot->initialise( true, getId() );
+	mSceneManager = mRoot->createSceneManager(Ogre::ST_GENERIC, "sceneManager");
 
 	loadResources();
 
