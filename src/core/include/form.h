@@ -20,27 +20,17 @@ namespace Baukasten {
 		Form( const std::string& );
 		virtual ~Form();
 
-		void addLSpace( const std::string&, LogicalSpace* );
-		void removeLSpace( const std::string& );
-		void addToLSpace( const std::string&, Entity* );
-		void removeFromLSpace( const std::string&, const std::string& );
-		bool hasLSpace( const std::string& ) const;
-		LogicalSpace* getLSpace( const std::string& ) const;
+		void addToLSpace( Entity* );
+		void removeFromLSpace( const std::string& );
+		LogicalSpace* getLSpace() const;
 
-		void addVSpace( const std::string&, VirtualSpace* );
-		void removeVSpace( const std::string& );
-		void addToVSpace( const std::string&, Drawable* );
-		void removeFromVSpace( const std::string&, const std::string& );
-		bool hasVSpace( const std::string& ) const;
-		VirtualSpace* getVSpace( const std::string& ) const;
+		void addToVSpace( Drawable* );
+		void removeFromVSpace( const std::string& );
+		VirtualSpace* getVSpace() const;
 
 	protected:
-		std::string mMeshName;
-
-		std::map<const std::string, LogicalSpace*> mLSpaces;
-		std::map<const std::string, VirtualSpace*> mVSpaces;
-
-		EntityMap   mSpaceMap;
+		LogicalSpace*	mLSpace;
+		VirtualSpace*	mVSpace;
 	};
 }
 

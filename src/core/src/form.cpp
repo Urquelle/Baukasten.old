@@ -7,107 +7,53 @@ using namespace Baukasten;
 
 Form::Form( const std::string &id ) :
 	Drawable( id ),
-	ObjectManager()
+	ObjectManager(),
+	mLSpace( new LogicalSpace() ),
+	mVSpace( new VirtualSpace() )
 {
 }
 
 Form::~Form()
 {
+	delete mLSpace;
+	delete mVSpace;
 }
 
-void Form::addLSpace( const std::string &id, LogicalSpace *space )
-{
-	if ( space && !hasLSpace( id ) )
-		mLSpaces[ id ] = space;
-}
-
-void Form::removeLSpace( const std::string &id )
-{
-	if ( hasLSpace( id ) )
-		mLSpaces.erase( mLSpaces.find( id ) );
-}
-
-void Form::addToLSpace( const std::string &id, Entity *entity )
+void Form::addToLSpace( Entity *entity )
 {
 	if ( !entity )
 		return;
 
-	if ( !hasLSpace( id ) )
-		addLSpace( id, new LogicalSpace() );
-
-	LogicalSpace *space = getLSpace( id );
-
-	if ( space )
-		space->addEntity( entity );
+	mLSpace->addEntity( entity );
 }
 
-void Form::removeFromLSpace( const std::string &spaceId, const std::string &entityId )
+void Form::removeFromLSpace( const std::string &id )
 {
-	LogicalSpace *space = getLSpace( spaceId );
-
-	if ( !space )
-		return;
-
-	if ( space->hasEntity( entityId ) )
-		space->removeEntity( entityId );
+	if ( mLSpace->hasEntity( id ) )
+		mLSpace->removeEntity( id );
 }
 
-bool Form::hasLSpace( const std::string &id ) const
+LogicalSpace* Form::getLSpace() const
 {
-	return ( mLSpaces.find( id ) != mLSpaces.end() );
+	return mLSpace;
 }
 
-LogicalSpace* Form::getLSpace( const std::string &id ) const
-{
-	LSpaces::const_iterator it = mLSpaces.find( id );
-	return ( it == mLSpaces.end() ) ? 0 : it->second;
-}
-
-void Form::addVSpace( const std::string &id, VirtualSpace *space )
-{
-	if ( space && !hasVSpace( id ) )
-		mVSpaces[ id ] = space;
-}
-
-void Form::removeVSpace( const std::string &id )
-{
-	if ( hasVSpace( id ) )
-		mVSpaces.erase( mVSpaces.find( id ) );
-}
-
-void Form::addToVSpace( const std::string &id, Drawable *entity )
+void Form::addToVSpace( Drawable *entity )
 {
 	if ( !entity )
 		return;
 
-	if ( !hasVSpace( id ) )
-		addVSpace( id, new VirtualSpace() );
-
-	VirtualSpace *space = getVSpace( id );
-
-	if ( space )
-		space->addEntity( entity );
+	mVSpace->addEntity( entity );
 }
 
-void Form::removeFromVSpace( const std::string &spaceId, const std::string &entityId )
+void Form::removeFromVSpace( const std::string &id )
 {
-	VirtualSpace *space = getVSpace( spaceId );
-
-	if ( !space )
-		return;
-
-	if ( space->hasEntity( entityId ) )
-		space->removeEntity( entityId );
+	if ( mVSpace->hasEntity( id ) )
+		mVSpace->removeEntity( id );
 }
 
-bool Form::hasVSpace( const std::string &id ) const
+VirtualSpace* Form::getVSpace() const
 {
-	return ( mVSpaces.find( id ) != mVSpaces.end() );
-}
-
-VirtualSpace* Form::getVSpace( const std::string &id ) const
-{
-	VSpaces::const_iterator it = mVSpaces.find( id );
-	return ( it == mVSpaces.end() ) ? 0 : it->second;
+	return mVSpace;
 }
 
