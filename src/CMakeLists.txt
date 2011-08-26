@@ -21,6 +21,7 @@ set (
 set (
 	graphics_SRCS
 	graphics/src/graphics_interface.cpp
+	graphics/src/ogre/ogre_interface.cpp
 )
 
 option( WITH_LUA  "compile with Lua support." TRUE )
