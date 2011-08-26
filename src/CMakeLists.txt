@@ -1,3 +1,5 @@
+set( CORE_INC ${CMAKE_CURRENT_SOURCE_DIR}/core/include )
+
 set (
     core_SRCS
     core/src/action.cpp
@@ -25,7 +27,7 @@ if( DEFINED WITH_LUA )
 	install(FILES ${CMAKE_CURRENT_SOURCE_DIR}/core/lib/libSLB.so DESTINATION lib/)
 endif()
 
-include_directories( core/include )
+include_directories( ${CORE_INC} )
 link_directories( ${slb_LINKDIR} )
 
 add_definitions( -DEXPORT_LIB=1 )
