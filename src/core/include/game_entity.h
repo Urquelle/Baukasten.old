@@ -5,6 +5,7 @@
 
 #include "action_manager.h"
 #include "entity.h"
+#include "entity_manager.h"
 #include "entity_type.h"
 #include "state_manager.h"
 
@@ -13,7 +14,8 @@ namespace Baukasten {
 	class Form;
 
 	class BAUKASTEN_EXPORT GameEntity : public Entity,
-		public ActionManager, public StateManager {
+		public ActionManager, public StateManager,
+		public EntityManager {
 	public:
 		GameEntity( const std::string& );
 		virtual ~GameEntity();
