@@ -1,7 +1,8 @@
-#include "example_game.h"
-#include "unit.h"
 #include "actions/render_scene.h"
+#include "basic_type.h"
+#include "example_game.h"
 #include "forms/world_map_form.h"
+#include "unit.h"
 #include "world_map.h"
 
 #include <action.h>
@@ -38,7 +39,7 @@ void ExampleGame::start()
 
 bool ExampleGame::keepRunning() const
 {
-	return getState<StateBool*>( "keepRunning" )->getValue();
+	return getState<StateInt*>( "keepRunning" )->getValue();
 }
 
 void ExampleGame::run()
@@ -46,9 +47,19 @@ void ExampleGame::run()
     using namespace Baukasten;
     using namespace std;
 
+	BasicType *type = new BasicType( "basic" );
+
     Unit *sanchez = new Unit( "sanchez" );
     Unit *gomez = new Unit( "gomez" );
 	Unit *ramirez = new Unit( "ramirez" );
+
+	sanchez->setType( type );
+	gomez->setType( type );
+	ramirez->setType( type );
+
+	sanchez->setName( sanchez->getId() );
+	gomez->setName( gomez->getId() );
+	ramirez->setName( ramirez->getId() );
 
 	GameEntityList targets;
 

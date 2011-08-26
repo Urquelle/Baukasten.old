@@ -90,7 +90,7 @@ void wrapClasses()
 		.set("addChild", &EntityType::addChild)
 			.param("EntityType as objects child.")
 		.set("removeChild", &EntityType::removeChild)
-		.const_set("getState", &EntityType::getState<State*>)
+		.set("getState", &EntityType::getState<State*>)
 			.param("State ID")
 		.set("getEntityState", &EntityType::getEntityState);
 

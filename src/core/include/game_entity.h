@@ -31,8 +31,10 @@ namespace Baukasten {
 		{
 			T state = StateManager::getState<T>( id );
 
-			if ( !state && getType() )
+			if ( !state && getType() ) {
 				state = getType()->getState<T>( id );
+				state->addTo( this );
+			}
 
 			return state;
 		}

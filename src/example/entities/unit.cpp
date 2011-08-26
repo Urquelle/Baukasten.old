@@ -14,10 +14,6 @@ Unit::Unit( const std::string &id ) :
 	addAction( new ActionLua( *this, "levelUp", "scripts/level_up.lua" ) );
 	addAction( new ActionLua( *this, "die", "scripts/die.lua" ) );
 	addAction( new ActionLua( *this, "hit", "scripts/hit.lua" ) );
-
-	setType( new BasicType( "basic" ) );
-
-	setName( id );
 }
 
 Unit::~Unit()
