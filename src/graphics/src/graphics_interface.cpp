@@ -7,41 +7,16 @@
 
 using namespace Baukasten;
 
-GraphicsInterface* GraphicsInterface::mInstance = 0;
+IGraphics* GraphicsInterface::mInstance = 0;
 
-GraphicsInterface* GraphicsInterface::instance()
+IGraphics* GraphicsInterface::instance()
 {
-	if ( !mInstance )
-		mInstance = new GraphicsInterface();
-	return mInstance;
-}
-
-GraphicsInterface::GraphicsInterface() :
-	mInitialised( false ),
-	mImpl( 0 )
-{
-}
-
-GraphicsInterface::~GraphicsInterface()
-{
-	delete mInstance;
-}
-
-void GraphicsInterface::init()
-{
+	if ( !mInstance ) {
 #if defined(WITH_OGRE)
-	mImpl = new OgreInterface();
+		mInstance = new OgreInterface();
 #endif
-
-	if ( mImpl ) {
-		mImpl->init();
-		mInitialised = true;
 	}
-}
 
-void GraphicsInterface::renderForm( Form *form )
-{
-	if ( !mInitialised )
-		init();
+	return mInstance;
 }
 

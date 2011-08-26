@@ -7,19 +7,13 @@ namespace Baukasten {
 
 	class GraphicsInterface {
 	public:
-		static GraphicsInterface* instance();
-		virtual ~GraphicsInterface();
-
-		void addCamera();
-		void init();
-		void renderForm( Form* );
+		static IGraphics* instance();
+		virtual ~GraphicsInterface() {}
 
 	private:
-		GraphicsInterface();
+		GraphicsInterface() {}
 
-		static GraphicsInterface*	mInstance;
-		bool						mInitialised;
-		IGraphics*					mImpl;
+		static IGraphics* mInstance;
 	};
 } /* Baukasten */
 
