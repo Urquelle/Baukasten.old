@@ -10,7 +10,12 @@ set(
     main.cpp
 )
 
-include_directories( ${Core_INCLUDE_DIR} ${CMAKE_CURRENT_SOURCE_DIR} )
+include_directories(
+	${Core_INCLUDE_DIR}
+	${Graphics_INCLUDE_DIR}
+	${CMAKE_CURRENT_SOURCE_DIR}
+)
+
 link_directories( ${Core_LIB_DIR} ${CMAKE_INSTALL_PREFIX}/lib )
 
 add_executable( exampleGame ${example_SRCS})
