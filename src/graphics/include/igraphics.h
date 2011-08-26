@@ -6,8 +6,12 @@ namespace Baukasten {
 
 	class IGraphics {
 	public:
-		virtual void init() = 0;
+		IGraphics() : mInitialised( false ) {}
+		virtual int init() = 0;
 		virtual void renderForm( Form* ) = 0;
+
+	protected:
+		bool mInitialised;
 	};
 }
 
