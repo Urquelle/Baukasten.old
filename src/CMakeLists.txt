@@ -20,6 +20,10 @@ set (
 option( WITH_LUA  "compile with Lua support." TRUE )
 option( WITH_OGRE  "compile with OGRE support." TRUE )
 
+if( WITH_OGRE )
+	add_definitions( -DWITH_OGRE )
+endif()
+
 # compile lua action class
 if( DEFINED WITH_LUA )
 	set( core_SRCS ${core_SRCS} core/src/lua/action.cpp )
