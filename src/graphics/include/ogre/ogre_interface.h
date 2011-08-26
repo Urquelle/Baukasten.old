@@ -3,14 +3,32 @@
 
 #include "igraphics.h"
 
+#include <map>
+#include <string>
+
+namespace Ogre {
+	class Node;
+	class Root;
+	class SceneManager;
+}
+
 namespace Baukasten {
+	using namespace std;
+
+	typedef map<const string, Ogre::Node*> NodeMap;
+
 	class OgreInterface : public IGraphics {
 	public:
 		OgreInterface();
 		virtual ~OgreInterface();
 
-		void init();
+		int init();
 		void renderForm( Form* );
+
+	private:
+		Ogre::Root*			mRoot;
+		Ogre::SceneManager*	mSceneManager;
+		NodeMap				mForms;
 	};
 } /* Baukasten */
 
