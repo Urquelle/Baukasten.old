@@ -10,8 +10,8 @@ set(
     main.cpp
 )
 
-include_directories( ${core_include_dir} ${CMAKE_CURRENT_SOURCE_DIR} )
-link_directories( ${core_lib_dir} ${CMAKE_INSTALL_PREFIX}/lib )
+include_directories( ${Core_INCLUDE_DIR} ${CMAKE_CURRENT_SOURCE_DIR} )
+link_directories( ${Core_LIB_DIR} ${CMAKE_INSTALL_PREFIX}/lib )
 
 add_executable( exampleGame ${example_SRCS})
 target_link_libraries( exampleGame Baukasten SLB OgreMain )

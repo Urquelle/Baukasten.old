@@ -5,7 +5,11 @@ project (Baukasten)
 set (Baukasten_VERSION_MAJOR 0)
 set (Baukasten_VERSION_MINOR 1)
 
+set( Core_INCLUDE_DIR ${CMAKE_CURRENT_SOURCE_DIR}/src/core/include )
+set( Core_LIB_DIR ${CMAKE_CURRENT_SOURCE_DIR}/src/core/lib )
+
 add_subdirectory(src)
+add_subdirectory(example)
 
 find_package( Doxygen )
 if (DOXYGEN_FOUND)
