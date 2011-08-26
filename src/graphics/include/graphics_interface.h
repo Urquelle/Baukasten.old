@@ -3,6 +3,7 @@
 
 namespace Baukasten {
 	class Form;
+	class IGraphics;
 
 	class GraphicsInterface {
 	public:
@@ -18,6 +19,7 @@ namespace Baukasten {
 
 		static GraphicsInterface*	mInstance;
 		bool						mInitialised;
+		IGraphics*					mImpl;
 	};
 } /* Baukasten */
 

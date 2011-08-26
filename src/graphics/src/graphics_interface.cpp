@@ -1,4 +1,5 @@
 #include "graphics_interface.h"
+#include "igraphics.h"
 
 using namespace Baukasten;
 
@@ -12,7 +13,8 @@ GraphicsInterface* GraphicsInterface::instance()
 }
 
 GraphicsInterface::GraphicsInterface() :
-	mInitialised( false )
+	mInitialised( false ),
+	mImpl( 0 )
 {
 }
 
@@ -23,6 +25,10 @@ GraphicsInterface::~GraphicsInterface()
 
 void GraphicsInterface::init()
 {
+	if ( mImpl ) {
+		mImpl->init();
+		mInitialised = true;
+	}
 }
 
 void GraphicsInterface::renderForm( Form *form )
