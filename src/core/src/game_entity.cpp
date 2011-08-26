@@ -46,3 +46,24 @@ bool GameEntity::hasState( const std::string &id ) const
 	return answer;
 }
 
+void GameEntity::addChild( GameEntity *child )
+{
+	if ( mChildren.find( child->getId() ) == mChildren.end() )
+		mChildren[ child->getId() ] = child;
+}
+
+void GameEntity::removeChild( const std::string &id )
+{
+	mChildren.erase( mChildren.find( id ) );
+}
+
+void GameEntity::setParent( GameEntity *parent )
+{
+	mParent = parent;
+}
+
+GameEntity* GameEntity::getParent() const
+{
+	return mParent;
+}
+

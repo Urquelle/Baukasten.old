@@ -39,10 +39,17 @@ namespace Baukasten {
 			return state;
 		}
 
+		void addChild( GameEntity* );
+		void removeChild( const std::string& );
+
+		void setParent( GameEntity* );
+		GameEntity* getParent() const;
+
 	private:
 		EntityType*		mType;
 		Form*           mForm;
-		GameEntityMap	mEntities;
+		GameEntityMap	mChildren;
+		GameEntity*		mParent;
 	};
 } /* Baukasten */
 
