@@ -9,13 +9,15 @@ namespace Baukasten {
 		static GraphicsInterface* instance();
 		virtual ~GraphicsInterface();
 
-		void renderForm( Form* );
 		void addCamera();
+		void init();
+		void renderForm( Form* );
 
 	private:
 		GraphicsInterface();
 
-		static GraphicsInterface* mInstance;
+		static GraphicsInterface*	mInstance;
+		bool						mInitialised;
 	};
 } /* Baukasten */
 

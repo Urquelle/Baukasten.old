@@ -11,11 +11,23 @@ GraphicsInterface* GraphicsInterface::instance()
 	return mInstance;
 }
 
-GraphicsInterface::GraphicsInterface()
+GraphicsInterface::GraphicsInterface() :
+	mInitialised( false )
 {
 }
 
 GraphicsInterface::~GraphicsInterface()
 {
+	delete mInstance;
+}
+
+void GraphicsInterface::init()
+{
+}
+
+void GraphicsInterface::renderForm( Form *form )
+{
+	if ( !mInitialised )
+		init();
 }
 
