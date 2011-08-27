@@ -48,6 +48,10 @@ bool GameEntity::hasState( const std::string &id ) const
 
 void GameEntity::addChild( GameEntity *child )
 {
+	// prevent infinite loop
+	if ( this == child )
+		return;
+
 	if ( mChildren.find( child->getId() ) == mChildren.end() )
 		mChildren[ child->getId() ] = child;
 }
