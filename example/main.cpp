@@ -1,8 +1,8 @@
-#include "entities/example_game.h"
+#include "entities/game.h"
 
 int main(int argc, const char *argv[])
 {
-    ExampleGame game( "eisenfaust" );
+    Game game( "eisenfaust" );
     game.start();
     return 0;
 }

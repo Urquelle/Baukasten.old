@@ -1,4 +1,4 @@
-#include "example_game.h"
+#include "game.h"
 #include "forms/ogre_form.h"
 #include "lua/bindings.h"
 #include "world_map.h"
@@ -10,7 +10,7 @@
 
 using namespace Baukasten;
 
-ExampleGame::ExampleGame( const std::string &id ) :
+Game::Game( const std::string &id ) :
 	GameEntity( id ),
 	mGraphics( GraphicsInterface::instance() )
 {
@@ -19,22 +19,22 @@ ExampleGame::ExampleGame( const std::string &id ) :
 	setForm( new Form( "form" ) );
 }
 
-ExampleGame::~ExampleGame()
+Game::~Game()
 {
 }
 
-void ExampleGame::start()
+void Game::start()
 {
 	init();
     run();
 }
 
-bool ExampleGame::keepRunning() const
+bool Game::keepRunning() const
 {
 	return getState<StateInt*>( "keepRunning" )->getValue();
 }
 
-void ExampleGame::run()
+void Game::run()
 {
 	// mainloop
 	while ( keepRunning() ) {
@@ -48,7 +48,7 @@ void ExampleGame::run()
 	std::cout << "... GAME OVER!!! ..." << endl;
 }
 
-int ExampleGame::init()
+int Game::init()
 {
 	initBindings();
 	mGraphics->init();

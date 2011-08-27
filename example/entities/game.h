@@ -11,11 +11,11 @@ namespace Baukasten {
 	class IGraphics;
 }
 
-class ExampleGame : public Baukasten::GameEntity
+class Game : public Baukasten::GameEntity
 {
 public:
-	ExampleGame( const std::string& );
-	virtual ~ExampleGame();
+	Game( const std::string& );
+	virtual ~Game();
 
 	void start();
 	bool keepRunning() const;

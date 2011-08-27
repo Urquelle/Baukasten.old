@@ -2,7 +2,7 @@ set(
     example_SRCS
 	actions/render_scene.cpp
 	entities/basic_type.cpp
-    entities/example_game.cpp
+    entities/game.cpp
 	entities/unit.cpp
 	entities/world_map.cpp
 	forms/ogre_form.cpp
