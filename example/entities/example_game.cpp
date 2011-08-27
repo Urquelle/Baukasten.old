@@ -3,6 +3,7 @@
 #include "example_game.h"
 #include "forms/world_map_form.h"
 #include "unit.h"
+#include "lua/bindings.h"
 #include "world_map.h"
 
 #include <action.h>
@@ -68,6 +69,8 @@ void ExampleGame::run()
 
 int ExampleGame::init()
 {
+	initBindings();
+
 	// init Entities
 	mWorldMap = new WorldMap( "worldmap" );
 	mWorldMap->setForm( new WorldMapForm( "form", mRoot ) );
