@@ -42,7 +42,6 @@ bool ExampleGame::keepRunning() const
 void ExampleGame::run()
 {
     using namespace Baukasten;
-    using namespace std;
 
 	IGraphics *graphics = GraphicsInterface::instance();
 	graphics->init();
@@ -56,9 +55,10 @@ void ExampleGame::run()
 		invokeAction( "processInput" );
 
 		runActions();
-
-		//mRoot->renderOneFrame();
+		graphics->render();
 	}
+
+	std::cout << "... GAME OVER!!! ..." << endl;
 }
 
 int ExampleGame::init()
