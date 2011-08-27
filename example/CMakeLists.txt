@@ -6,7 +6,6 @@ set(
 	entities/unit.cpp
 	entities/world_map.cpp
 	forms/ogre_form.cpp
-	forms/world_map_form.cpp
     main.cpp
 )
 
