@@ -47,35 +47,13 @@ void ExampleGame::run()
     using namespace Baukasten;
     using namespace std;
 
-	BasicType *type = new BasicType( "basic" );
-
-    Unit *sanchez = new Unit( "sanchez" );
-    Unit *gomez = new Unit( "gomez" );
-	Unit *ramirez = new Unit( "ramirez" );
-
-	sanchez->setType( type );
-	gomez->setType( type );
-	ramirez->setType( type );
-
-	sanchez->setName( sanchez->getId() );
-	gomez->setName( gomez->getId() );
-	ramirez->setName( ramirez->getId() );
-
-	GameEntityList targets;
-
-	targets.push_back( gomez );
-	targets.push_back( ramirez );
-
 	invokeAction( "renderScene" );
 
 	// mainloop
 	while ( keepRunning() ) {
 
-		invokeAction( "updateState", targets );
+		invokeAction( "updateState" );
 		invokeAction( "processInput" );
-
-		sanchez->invokeAction( "hit", targets );
-		sanchez->runActions();
 
 		runActions();
 
@@ -130,7 +108,31 @@ int ExampleGame::init()
 	mWorldMap = new WorldMap( "worldmap" );
 	mWorldMap->setForm( new WorldMapForm( "form", mRoot ) );
 
-	getForm()->addToLSpace( mWorldMap );
-	getForm()->addToVSpace( mWorldMap->getForm() );
+	addChild( mWorldMap );
+
+	BasicType *type = new BasicType( "basic" );
+
+    Unit *sanchez = new Unit( "sanchez" );
+    Unit *gomez = new Unit( "gomez" );
+	Unit *ramirez = new Unit( "ramirez" );
+
+	sanchez->setType( type );
+	gomez->setType( type );
+	ramirez->setType( type );
+
+	sanchez->setName( sanchez->getId() );
+	gomez->setName( gomez->getId() );
+	ramirez->setName( ramirez->getId() );
+
+	addChild( sanchez );
+	addChild( gomez );
+	addChild( ramirez );
+
+	GameEntityList targets;
+
+	targets.push_back( gomez );
+	targets.push_back( ramirez );
+
+	sanchez->invokeAction( "hit", targets );
 }
 
