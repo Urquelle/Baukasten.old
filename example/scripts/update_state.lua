@@ -1,15 +1,14 @@
 source = action:getSource()
-gomez = source:getChild( "gomez" )
+worldMap = source:getChild( "worldmap" )
 keepRunning = source:getState( "keepRunning" )
 
-if gomez == nil then
+if worldMap == nil then
 	return
 end
 
+gomez = worldMap:getChild( "gomez" )
 hp = gomez:getState( "hp" )
 
 if hp:getValue() == 0 then
-	print( "gomez, our great leader ... is ... dead!!" )
-	print( "... GAME OVER! ..." )
 	keepRunning:setValue( false )
 end

@@ -15,6 +15,7 @@ if not (source == entity) then
 end
 
 state:setValue( state:getValue() - 10 )
+state = entity:getState("hp")
 
 name = source:getState("name")
 targetName = entity:getState("name")
@@ -24,5 +25,4 @@ print(name:getValue() .. " just hit " .. targetName:getValue() .. "." )
 if state:getValue() <= 0 then
 	state:setValue(0)
 	entity:invokeAction("die")
-	entity:runActions()
 end
