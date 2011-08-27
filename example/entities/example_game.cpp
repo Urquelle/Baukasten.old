@@ -1,21 +1,15 @@
 #include "actions/render_scene.h"
-#include "basic_type.h"
 #include "example_game.h"
-#include "forms/world_map_form.h"
-#include "unit.h"
+#include "forms/ogre_form.h"
 #include "lua/bindings.h"
 #include "world_map.h"
 
 #include <action.h>
+#include <form.h>
 #include <generic_state.h>
 #include <graphics_interface.h>
 #include <igraphics.h>
 #include <lua/action.h>
-
-#include <OGRE/Ogre.h>
-
-#include <iostream>
-#include <cstdlib>
 
 using namespace Baukasten;
 
@@ -36,7 +30,7 @@ ExampleGame::~ExampleGame()
 
 void ExampleGame::start()
 {
-	//init();
+	init();
     run();
 }
 
@@ -73,33 +67,8 @@ int ExampleGame::init()
 
 	// init Entities
 	mWorldMap = new WorldMap( "worldmap" );
-	mWorldMap->setForm( new WorldMapForm( "form", mRoot ) );
+	mWorldMap->setForm( new OgreForm( "form" ) );
 
 	addChild( mWorldMap );
-
-	BasicType *type = new BasicType( "basic" );
-
-    Unit *sanchez = new Unit( "sanchez" );
-    Unit *gomez = new Unit( "gomez" );
-	Unit *ramirez = new Unit( "ramirez" );
-
-	sanchez->setType( type );
-	gomez->setType( type );
-	ramirez->setType( type );
-
-	sanchez->setName( sanchez->getId() );
-	gomez->setName( gomez->getId() );
-	ramirez->setName( ramirez->getId() );
-
-	addChild( sanchez );
-	addChild( gomez );
-	addChild( ramirez );
-
-	GameEntityList targets;
-
-	targets.push_back( gomez );
-	targets.push_back( ramirez );
-
-	sanchez->invokeAction( "hit", targets );
 }
 
