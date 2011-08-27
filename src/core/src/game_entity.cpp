@@ -52,6 +52,12 @@ void GameEntity::addChild( GameEntity *child )
 		mChildren[ child->getId() ] = child;
 }
 
+GameEntity* GameEntity::getChild( const std::string &id ) const
+{
+	GameEntityMap::const_iterator it = mChildren.find( id );
+	return ( it == mChildren.end() ) ? 0 : it->second;
+}
+
 void GameEntity::removeChild( const std::string &id )
 {
 	mChildren.erase( mChildren.find( id ) );

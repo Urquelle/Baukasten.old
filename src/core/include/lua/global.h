@@ -107,6 +107,8 @@ void wrapClasses()
 			.param("state id")
 		.set("getState", &GameEntity::getState<State*>)
 			.param("state id")
+		.set("getChild", &GameEntity::getChild)
+			.param("child id")
 		.set("runActions", &GameEntity::runActions);
 
 	// register State Class
