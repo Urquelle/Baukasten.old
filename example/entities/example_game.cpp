@@ -7,6 +7,8 @@
 
 #include <action.h>
 #include <generic_state.h>
+#include <graphics_interface.h>
+#include <igraphics.h>
 #include <lua/action.h>
 
 #include <OGRE/Ogre.h>
@@ -33,7 +35,7 @@ ExampleGame::~ExampleGame()
 
 void ExampleGame::start()
 {
-	init();
+	//init();
     run();
 }
 
@@ -47,6 +49,9 @@ void ExampleGame::run()
     using namespace Baukasten;
     using namespace std;
 
+	IGraphics *graphics = GraphicsInterface::instance();
+	graphics->init();
+
 	invokeAction( "renderScene" );
 
 	// mainloop
@@ -57,53 +62,12 @@ void ExampleGame::run()
 
 		runActions();
 
-		mRoot->renderOneFrame();
+		//mRoot->renderOneFrame();
 	}
-}
-
-void loadResources()
-{
-	std::string userHome = getenv( "HOME" );
-
-    Ogre::ConfigFile cf;
-    cf.load(userHome + "/.config/baukasten/resources.cfg");
-
-    Ogre::ConfigFile::SectionIterator sectionIter = cf.getSectionIterator();
-    Ogre::String sectionName, typeName, dataName;
-
-    while (sectionIter.hasMoreElements()) {
-        sectionName = sectionIter.peekNextKey();
-        Ogre::ConfigFile::SettingsMultiMap *settings = sectionIter.getNext();
-        Ogre::ConfigFile::SettingsMultiMap::iterator i;
-
-        for (i = settings->begin(); i != settings->end(); ++i) {
-            typeName = i->first;
-            dataName = i->second;
-
-            Ogre::ResourceGroupManager::getSingleton().addResourceLocation(
-				dataName,
-				typeName,
-				sectionName
-			);
-        }
-    }
-
-    Ogre::ResourceGroupManager::getSingleton().initialiseAllResourceGroups();
 }
 
 int ExampleGame::init()
 {
-    mRoot = new Ogre::Root("plugins.cfg");
-
-    if (!mRoot->showConfigDialog()) {
-        return -1;
-    }
-
-	mRoot->initialise( true, getId() );
-	mSceneManager = mRoot->createSceneManager(Ogre::ST_GENERIC, "sceneManager");
-
-	loadResources();
-
 	// init Entities
 	mWorldMap = new WorldMap( "worldmap" );
 	mWorldMap->setForm( new WorldMapForm( "form", mRoot ) );
