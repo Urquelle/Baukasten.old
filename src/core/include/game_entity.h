@@ -45,6 +45,8 @@ namespace Baukasten {
 		void setParent( GameEntity* );
 		GameEntity* getParent() const;
 
+		virtual void runActions();
+
 	private:
 		EntityType*		mType;
 		Form*           mForm;

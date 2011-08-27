@@ -32,6 +32,11 @@ ActionMap ActionManager::getActions() const
 	return getAll();
 }
 
+ActionList ActionManager::getInvokedActions() const
+{
+	return mActionQueue;
+}
+
 bool ActionManager::hasAction( const std::string &id ) const
 {
     return has( id );
@@ -91,12 +96,5 @@ void ActionManager::dropAction( const std::string &id )
 			it++;
         }
     }
-}
-
-void ActionManager::runActions()
-{
-    ActionList::const_iterator it = mActionQueue.begin();
-    while ( it != mActionQueue.end() )
-        (*it++)->run();
 }
 

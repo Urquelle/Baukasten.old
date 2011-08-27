@@ -54,8 +54,7 @@ void wrapClasses()
 			.param("ID of the Action")
 			.param("Target List")
 		.set("dropAction", &ActionManager::dropAction)
-			.param("ID of the Action to drop from the execution queue")
-		.set("runActions", &ActionManager::runActions);
+			.param("ID of the Action to drop from the execution queue");
 
 	SLB::Class<Action,SLB::Instance::NoCopy>("Action")
 		.comment("Action Wrapper")
@@ -107,7 +106,8 @@ void wrapClasses()
 		.set("hasState", &GameEntity::hasState)
 			.param("state id")
 		.set("getState", &GameEntity::getState<State*>)
-			.param("state id");
+			.param("state id")
+		.set("runActions", &GameEntity::runActions);
 
 	// register State Class
 	SLB::Class<State>("State")

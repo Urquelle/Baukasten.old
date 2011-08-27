@@ -56,6 +56,15 @@ namespace Baukasten {
 		/*! \brief returns the map of objects. */
 		ActionMap getActions() const;
 
+		/*! \brief returns a list of currently active actions.
+		 *
+		 * actions that were invoked and still are in the
+		 * execution queue are returned.
+		 *
+		 * \return ActionList actions in the execution queue.
+		 */
+		ActionList getInvokedActions() const;
+
 		/*! \brief returns wheter the the key's present in the map.
 		 *
 		 * \return true if key found, false otherwise.
@@ -99,13 +108,6 @@ namespace Baukasten {
 		 * \param id id of action.
 		 */
 		void dropAction( const std::string& );
-
-		/*! \brief execute actions in the execution queue.
-		 *
-		 * calls the run() method of every action in the execution
-		 * queue.
-		 */
-		void runActions();
 
 	private:
 		ActionList	mActionQueue;

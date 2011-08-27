@@ -67,3 +67,29 @@ GameEntity* GameEntity::getParent() const
 	return mParent;
 }
 
+void GameEntity::runActions()
+{
+	// run own actions first
+	ActionList al = getInvokedActions();
+	ActionList::const_iterator it = al.begin();
+	while ( it != al.end() ) {
+		(*it)->run();
+		it++;
+	}
+
+	// run children's actions
+	GameEntity *e = 0;
+	GameEntityMap::const_iterator cit = mChildren.begin();
+	while ( cit != mChildren.end() ) {
+		al = cit->second->getInvokedActions();
+		it = al.begin();
+
+		while ( it != al.end() ) {
+			(*it)->run();
+			it++;
+		}
+
+		cit++;
+	}
+}
+
