@@ -6,6 +6,36 @@
 
 using namespace Baukasten;
 
+void loadResources()
+{
+	std::string userHome = getenv( "HOME" );
+
+    Ogre::ConfigFile cf;
+    cf.load(userHome + "/.config/baukasten/resources.cfg");
+
+    Ogre::ConfigFile::SectionIterator sectionIter = cf.getSectionIterator();
+    Ogre::String sectionName, typeName, dataName;
+
+    while (sectionIter.hasMoreElements()) {
+        sectionName = sectionIter.peekNextKey();
+        Ogre::ConfigFile::SettingsMultiMap *settings = sectionIter.getNext();
+        Ogre::ConfigFile::SettingsMultiMap::iterator i;
+
+        for (i = settings->begin(); i != settings->end(); ++i) {
+            typeName = i->first;
+            dataName = i->second;
+
+            Ogre::ResourceGroupManager::getSingleton().addResourceLocation(
+				dataName,
+				typeName,
+				sectionName
+			);
+        }
+    }
+
+    Ogre::ResourceGroupManager::getSingleton().initialiseAllResourceGroups();
+}
+
 OgreInterface::OgreInterface() :
 	IGraphics()
 {
@@ -25,6 +55,8 @@ int OgreInterface::init()
 
 	mRoot->initialise( true, "" );
 	mSceneManager = mRoot->createSceneManager(Ogre::ST_GENERIC, "sceneManager");
+
+	loadResources();
 
 	mInitialised = true;
 
