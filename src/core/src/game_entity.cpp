@@ -87,14 +87,7 @@ void GameEntity::runActions()
 	GameEntity *e = 0;
 	GameEntityMap::const_iterator cit = mChildren.begin();
 	while ( cit != mChildren.end() ) {
-		al = cit->second->getInvokedActions();
-		it = al.begin();
-
-		while ( it != al.end() ) {
-			(*it)->run();
-			it++;
-		}
-
+		cit->second->runActions();
 		cit++;
 	}
 }
