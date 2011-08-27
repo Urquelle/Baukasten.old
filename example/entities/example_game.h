@@ -7,15 +7,14 @@
 
 class WorldMap;
 
-namespace Ogre {
-	class Root;
-	class SceneManager;
-} /* Ogre */
+namespace Baukasten {
+	class IGraphics;
+}
 
 class ExampleGame : public Baukasten::GameEntity
 {
 public:
-	ExampleGame( const std::string &id );
+	ExampleGame( const std::string& );
 	virtual ~ExampleGame();
 
 	void start();
@@ -26,10 +25,8 @@ protected:
 	int init();
 
 private:
-	WorldMap*			mWorldMap;
-
-	Ogre::Root*			mRoot;
-	Ogre::SceneManager*	mSceneManager;
+	WorldMap*				mWorldMap;
+	Baukasten::IGraphics*	mGraphics;
 };
 
 #endif /* end of include guard: GAME_QESA072Y */

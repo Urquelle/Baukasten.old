@@ -1,11 +1,8 @@
-#include "actions/render_scene.h"
 #include "example_game.h"
 #include "forms/ogre_form.h"
 #include "lua/bindings.h"
 #include "world_map.h"
 
-#include <action.h>
-#include <form.h>
 #include <generic_state.h>
 #include <graphics_interface.h>
 #include <igraphics.h>
@@ -14,13 +11,11 @@
 using namespace Baukasten;
 
 ExampleGame::ExampleGame( const std::string &id ) :
-	GameEntity( id )
+	GameEntity( id ),
+	mGraphics( GraphicsInterface::instance() )
 {
 	addState( "keepRunning", new StateInt( "keepRunning", 1 ) );
-
 	addAction( new ActionLua( *this, "updateState", "scripts/update_state.lua" ) );
-	addAction( "renderScene", new RenderScene( *this ) );
-
 	setForm( new Form( "form" ) );
 }
 
@@ -41,21 +36,13 @@ bool ExampleGame::keepRunning() const
 
 void ExampleGame::run()
 {
-    using namespace Baukasten;
-
-	IGraphics *graphics = GraphicsInterface::instance();
-	graphics->init();
-
-	invokeAction( "renderScene" );
-
 	// mainloop
 	while ( keepRunning() ) {
-
 		invokeAction( "updateState" );
 		invokeAction( "processInput" );
 
 		runActions();
-		graphics->render();
+		mGraphics->renderForm( mWorldMap->getForm() );
 	}
 
 	std::cout << "... GAME OVER!!! ..." << endl;
@@ -64,6 +51,7 @@ void ExampleGame::run()
 int ExampleGame::init()
 {
 	initBindings();
+	mGraphics->init();
 
 	// init Entities
 	mWorldMap = new WorldMap( "worldmap" );
