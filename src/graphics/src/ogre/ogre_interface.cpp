@@ -31,6 +31,12 @@ int OgreInterface::init()
 	return 1;
 }
 
+void OgreInterface::render()
+{
+	if ( mRoot )
+		mRoot->renderOneFrame();
+}
+
 void OgreInterface::renderForm( Form *form )
 {
 	if ( !mInitialised && !init() )

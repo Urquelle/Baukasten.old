@@ -23,6 +23,7 @@ namespace Baukasten {
 		virtual ~OgreInterface();
 
 		int init();
+		void render();
 		void renderForm( Form* );
 
 	private:
