@@ -2,12 +2,28 @@
 
 #include "action.h"
 
+#include <iostream>
+
 using namespace Baukasten;
+using namespace std;
+
+bool isAncestor( GameEntity *entity, GameEntity *child )
+{
+	while ( GameEntity *parent = entity->getParent() ) {
+		if ( parent == child )
+			return true;
+		parent = parent->getParent();
+	}
+	return false;
+}
+
+// --------- GameEntity ---------------- //
 
 GameEntity::GameEntity( const std::string &id ) :
 	Entity( id ),
 	mType( 0 ),
-	mForm( 0 )
+	mForm( 0 ),
+	mParent( 0 )
 {
 }
 
@@ -49,7 +65,7 @@ bool GameEntity::hasState( const std::string &id ) const
 void GameEntity::addChild( GameEntity *child )
 {
 	// prevent infinite loop
-	if ( this == child )
+	if ( this == child || isAncestor( this, child ) )
 		return;
 
 	if ( mChildren.find( child->getId() ) == mChildren.end() )
