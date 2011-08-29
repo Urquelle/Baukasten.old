@@ -42,7 +42,7 @@ void Game::run()
 		invokeAction( "processInput" );
 
 		runActions();
-		mGraphics->renderForm( mWorldMap->getForm() );
+		mGraphics->render();
 	}
 
 	std::cout << "... GAME OVER!!! ..." << endl;
@@ -58,5 +58,7 @@ int Game::init()
 	mWorldMap->setForm( new OgreForm( "form" ) );
 
 	addChild( mWorldMap );
+
+	mGraphics->addForm( mWorldMap->getForm() );
 }
 

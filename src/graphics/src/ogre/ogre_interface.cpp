@@ -69,11 +69,8 @@ void OgreInterface::render()
 		mRoot->renderOneFrame();
 }
 
-void OgreInterface::renderForm( Form *form )
+void OgreInterface::addForm( Form *form )
 {
-	if ( !mInitialised && !init() )
-		return;
-
 	std::cout << "in OgreInterface::renderForm" << std::endl;
 }
 

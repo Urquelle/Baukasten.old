@@ -9,7 +9,7 @@ namespace Baukasten {
 		IGraphics() : mInitialised( false ) {}
 		virtual int init() = 0;
 		virtual void render() = 0;
-		virtual void renderForm( Form* ) = 0;
+		virtual void addForm( Form* ) = 0;
 
 	protected:
 		bool mInitialised;
