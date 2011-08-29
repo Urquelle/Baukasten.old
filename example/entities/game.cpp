@@ -29,7 +29,7 @@ void Game::start()
     run();
 }
 
-bool Game::keepRunning() const
+bool Game::keepRunning()
 {
 	return getState<StateInt*>( "keepRunning" )->getValue();
 }

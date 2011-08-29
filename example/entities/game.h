@@ -18,7 +18,7 @@ public:
 	virtual ~Game();
 
 	void start();
-	bool keepRunning() const;
+	bool keepRunning();
 
 protected:
 	void run();

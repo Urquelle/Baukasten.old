@@ -16,15 +16,13 @@ namespace Baukasten {
 	public:
 
 		GenericState( const std::string &id ) :
-			State( id ),
-			mIntState( 0 )
+			State( id )
 		{
 		}
 
 		GenericState( const std::string &id, T value ) :
 			State( id ),
-			mValue( value ),
-			mIntState( 0 )
+			mValue( value )
 		{
 		}
 
@@ -35,7 +33,7 @@ namespace Baukasten {
 		const T& getValue() const
 		{
 			if ( mIntState )
-				return mIntState->getValue();
+				return ( static_cast<GenericState<T>*>( mIntState ) )->getValue();
 
 			return mValue;
 		}
@@ -56,8 +54,7 @@ namespace Baukasten {
 		}
 
 	private:
-		T					mValue;
-		GenericState<T>*	mIntState;
+		T mValue;
 	};
 
 	// typedef some often used genericstates

@@ -15,7 +15,6 @@ if not (source == entity) then
 end
 
 state:setValue( state:getValue() - 10 )
-state = entity:getState("hp")
 
 name = source:getState("name")
 targetName = entity:getState("name")

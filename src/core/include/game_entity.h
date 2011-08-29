@@ -27,15 +27,17 @@ namespace Baukasten {
 		bool hasState( const std::string& ) const;
 
 		template<class T>
-		T getState( const std::string &id ) const
+		T getState( const std::string &id )
 		{
 			T state = StateManager::getState<T>( id );
 
 			if ( !state && getType() ) {
 				state = getType()->getState<T>( id );
 
-				if ( state )
-					state->addTo( this );
+				if ( state ) {
+					state = state->pack();
+					addState( state );
+				}
 			}
 
 			return state;

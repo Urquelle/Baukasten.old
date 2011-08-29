@@ -12,14 +12,14 @@ public:
 	Unit( const std::string& );
 	virtual ~Unit();
 
-	std::string getName() const;
+	std::string getName();
 	void setName( const std::string& );
 
-	int getHP() const;
-	int getMP() const;
-	int getLevel() const;
-	int getExperience() const;
-	int getSex() const;
+	int getHP();
+	int getMP();
+	int getLevel();
+	int getExperience();
+	int getSex();
 };
 
 #endif /* end of include guard: ENTITIES_SI8O8CQ0 */

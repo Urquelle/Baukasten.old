@@ -4,7 +4,7 @@ using namespace Baukasten;
 
 State::State( const std::string &id ) :
     Entity( id ),
-	mIsLocked( false )
+	mIntState( 0 )
 {
 }
 
@@ -12,9 +12,10 @@ State::~State()
 {
 }
 
-void State::addTo( const GameEntity *entity )
+State* State::pack()
 {
-	mEntities.push_back( entity );
-	mIsLocked = true;
+	State *state = new State( getId() );
+	state->mIntState = this;
+	return state;
 }
 

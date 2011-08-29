@@ -22,7 +22,7 @@ Unit::~Unit()
 		delete type;
 }
 
-std::string Unit::getName() const
+std::string Unit::getName()
 {
 	if ( hasState( "name" ) )
 		return getState<StateString*>( "name" )->getValue();
@@ -35,35 +35,35 @@ void Unit::setName( const std::string &name )
 		getState<StateString*>( "name" )->setValue( getId() );
 }
 
-int Unit::getHP() const
+int Unit::getHP()
 {
 	if ( hasState( "hp" ) )
 		return getState<StateInt*>( "hp" )->getValue();
 	return 0;
 }
 
-int Unit::getMP() const
+int Unit::getMP()
 {
 	if ( hasState( "mp" ) )
 		return getState<StateInt*>( "mp" )->getValue();
 	return 0;
 }
 
-int Unit::getLevel() const
+int Unit::getLevel()
 {
 	if ( hasState( "level" ) )
 		return getState<StateInt*>( "level" )->getValue();
 	return 0;
 }
 
-int Unit::getExperience() const
+int Unit::getExperience()
 {
 	if ( hasState( "exp" ) )
 		return getState<StateInt*>( "exp" )->getValue();
 	return 0;
 }
 
-int Unit::getSex() const
+int Unit::getSex()
 {
 	return 0;
 }
