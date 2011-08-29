@@ -14,14 +14,17 @@ namespace Baukasten {
 	template<class T>
 	class BAUKASTEN_EXPORT GenericState : public State {
 	public:
+
 		GenericState( const std::string &id ) :
-			State( id )
+			State( id ),
+			mIntState( 0 )
 		{
 		}
 
 		GenericState( const std::string &id, T value ) :
 			State( id ),
-			mValue( value )
+			mValue( value ),
+			mIntState( 0 )
 		{
 		}
 
@@ -31,44 +34,30 @@ namespace Baukasten {
 
 		const T& getValue() const
 		{
+			if ( mIntState )
+				return mIntState->getValue();
+
 			return mValue;
 		}
 
 		void setValue( const T &value )
 		{
-			if ( mIsLocked ) {
-				GameEntity *entity = 0;
+			if ( mIntState )
+				mIntState = 0;
 
-				/* go through all entities in the list which registered themself
-				 * to have returned the state from their type object, so in case
-				 * the value of this state's is changed a new state has to be
-				 * instantiated and assigned directly to the entity, so that the
-				 * value of the type object isn't overwritten.
-				 */
-				while ( mEntities.size() ) {
+			mValue = value;
+		}
 
-					/* have to cast the const away, since the getState() method is
-					 * const, and that's where the addTo() method is used to provide
-					 * the state with the object the state is to add to. addTo() method
-					 * is supplied with this pointer as parameter, the getState() method
-					 * is const, hence this pointer is const.
-					 */
-					entity = const_cast<GameEntity*>( mEntities.front() );
-					entity->addState( new GenericState<T>( getId(), value ) );
-
-					// remove entity from the registered list again.
-					mEntities.pop_front();
-				}
-
-				// unlock the state, as all requests have been dealed with.
-				mIsLocked = false;
-			} else {
-				mValue = value;
-			}
+		GenericState<T>* pack()
+		{
+			GenericState<T> *newState = new GenericState<T>( getId() );
+			newState->mIntState = this;
+			return newState;
 		}
 
 	private:
-		T						mValue;
+		T					mValue;
+		GenericState<T>*	mIntState;
 	};
 
 	// typedef some often used genericstates
