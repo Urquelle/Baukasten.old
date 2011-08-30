@@ -1,3 +1,6 @@
+#ifndef BINDINGS_LL46QKQ4
+#define BINDINGS_LL46QKQ4
+
 #include "entities/world_map.h"
 
 #include <slb/SLB.hpp>
@@ -14,4 +17,6 @@ void initBindings()
 		.inherits<Entity>()
 		.inherits<GameEntity>();
 }
+
+#endif /* end of include guard: BINDINGS_LL46QKQ4 */
 
