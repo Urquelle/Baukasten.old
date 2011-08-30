@@ -12,9 +12,15 @@ set (
 	core/src/game_entity.cpp
     core/src/logical_space.cpp
 	core/src/object_manager.cpp
+	core/src/observer.cpp
     core/src/state.cpp
 	core/src/state_manager.cpp
     core/src/virtual_space.cpp
+)
+
+include_directories(
+	"/usr/include/sigc++-2.0"
+	"/usr/lib64/sigc++-2.0/include"
 )
 
 # compile lua action class
