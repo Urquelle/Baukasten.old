@@ -63,13 +63,16 @@ bool Action::done() const
 
 void Action::run()
 {
+	GameEntity *source = getSource();
+
 	// remove the action from the execution queue
 	if ( done() )
-		getSource()->dropAction( getId() );
+		source->dropAction( getId() );
 
 	GameEntity *target = getTarget();
 
 	if ( target ) {
+		source->onActionRun().emit( source, this );
 		doAction( target );
 		return;
 	}
@@ -78,13 +81,16 @@ void Action::run()
 	if ( !targets.empty() ) {
 		GameEntityList::iterator it = targets.begin();
 		while( it != targets.end() ) {
+			source->onActionRun().emit( source, this );
 			doAction( *it );
 			++it;
 		}
 		return;
 	}
 
-	if ( !target && targets.empty() )
+	if ( !target && targets.empty() ) {
+		source->onActionRun().emit( source, this );
 		doAction( getSource() );
+	}
 }
 

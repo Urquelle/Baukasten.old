@@ -139,6 +139,11 @@ sigc::signal<void, GameEntity*, Action*> GameEntity::onActionInvoked()
 	return mActionInvoked;
 }
 
+sigc::signal<void, GameEntity*, Action*> GameEntity::onActionRun()
+{
+	return mActionRun;
+}
+
 void GameEntity::stateChanged( State *state )
 {
 	mStateChanged.emit( this, state );
