@@ -1,6 +1,7 @@
 #include "action_manager.h"
 
 #include "action.h"
+#include "game_entity.h"
 
 using namespace Baukasten;
 
@@ -50,6 +51,11 @@ void ActionManager::invokeAction( const std::string &id )
         action->clear();
         action->setActive( true );
         mActionQueue.push_back( action );
+
+		action->getSource()->onActionInvoked().emit(
+			action->getSource(),
+			action
+		);
     }
 }
 
@@ -65,6 +71,11 @@ void ActionManager::invokeAction( const std::string &id, GameEntity *target )
         action->setActive( true );
         action->setTarget( target );
         mActionQueue.push_back( action );
+
+		action->getSource()->onActionInvoked().emit(
+			action->getSource(),
+			action
+		);
     }
 }
 
@@ -77,6 +88,11 @@ void ActionManager::invokeAction( const std::string &id, GameEntityList targets 
         action->setActive( true );
         action->setTargets( targets );
         mActionQueue.push_back( action );
+
+		action->getSource()->onActionInvoked().emit(
+			action->getSource(),
+			action
+		);
     }
 }
 

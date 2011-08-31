@@ -59,6 +59,7 @@ namespace Baukasten {
 		virtual void runActions();
 
 		sigc::signal<void, GameEntity*, State*> onStateChanged();
+		sigc::signal<void, GameEntity*, Action*> onActionInvoked();
 
 	private:
 		void stateChanged( State* );
@@ -70,6 +71,7 @@ namespace Baukasten {
 
 		// signals
 		sigc::signal<void, GameEntity*, State*>		mStateChanged;
+		sigc::signal<void, GameEntity*, Action*>	mActionInvoked;
 	};
 } /* Baukasten */
 
