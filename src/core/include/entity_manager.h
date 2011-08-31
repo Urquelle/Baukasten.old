@@ -6,7 +6,8 @@
 #include "abstract_manager.h"
 
 namespace Baukasten {
-	class BAUKASTEN_EXPORT EntityManager : protected AbstractManager<Entity> {
+	class BAUKASTEN_EXPORT EntityManager :
+		protected virtual AbstractManager<Entity> {
 	public:
 		EntityManager();
 		virtual ~EntityManager();

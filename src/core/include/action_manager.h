@@ -14,7 +14,8 @@ namespace Baukasten {
 	 * wrapps methods implemented in AbstractManager to limit the usage
 	 * of this class to Action classes only.
 	 */
-	class BAUKASTEN_EXPORT ActionManager : protected AbstractManager<Action> {
+	class BAUKASTEN_EXPORT ActionManager :
+		protected virtual AbstractManager<Action> {
 	public:
 
 		/*! \brief constructor */
