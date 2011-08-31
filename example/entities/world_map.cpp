@@ -2,7 +2,6 @@
 
 #include "basic_type.h"
 #include "entities/unit.h"
-#include "forms/ogre_form.h"
 
 #include <form.h>
 #include <generic_state.h>

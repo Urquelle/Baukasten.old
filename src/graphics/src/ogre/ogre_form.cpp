@@ -1,4 +1,4 @@
-#include "ogre_form.h"
+#include "ogre/ogre_form.h"
 
 #include <OGRE/Ogre.h>
 

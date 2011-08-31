@@ -1,5 +1,7 @@
 #include "ogre/ogre_interface.h"
 
+#include "ogre/ogre_form.h"
+
 #include <OGRE/Ogre.h>
 
 #include <iostream>

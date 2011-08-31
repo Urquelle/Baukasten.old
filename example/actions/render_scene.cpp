@@ -1,9 +1,9 @@
 #include "render_scene.h"
 
-#include "forms/ogre_form.h"
 
 #include <game_entity.h>
 #include <virtual_space.h>
+#include <ogre/ogre_form.h>
 
 using namespace Baukasten;
 

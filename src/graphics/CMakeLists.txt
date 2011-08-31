@@ -4,5 +4,6 @@ set (
 	graphics_SRCS
 	graphics/src/graphics_interface.cpp
 	graphics/src/ogre/ogre_interface.cpp
+	graphics/src/ogre/ogre_form.cpp
 )
 

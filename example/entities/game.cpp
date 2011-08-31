@@ -1,5 +1,4 @@
 #include "game.h"
-#include "forms/ogre_form.h"
 #include "lua/bindings.h"
 #include "world_map.h"
 
@@ -8,6 +7,7 @@
 #include <igraphics.h>
 #include <iinput.h>
 #include <lua/action.h>
+#include <ogre/ogre_form.h>
 
 using namespace Baukasten;
 
