@@ -8,6 +8,8 @@
 #include "entity_type.h"
 #include "state_manager.h"
 
+#include <sigc++/sigc++.h>
+
 namespace Baukasten {
 	class EntityType;
 	class Form;
@@ -15,6 +17,8 @@ namespace Baukasten {
 	class BAUKASTEN_EXPORT GameEntity : public Entity,
 		public ActionManager, public StateManager {
 	public:
+		friend class State;
+
 		GameEntity( const std::string& );
 		virtual ~GameEntity();
 
@@ -24,6 +28,8 @@ namespace Baukasten {
 		void setForm( Form* );
 		Form* getForm() const;
 
+		void addState( State* );
+		void addState( const std::string&, State* );
 		bool hasState( const std::string& ) const;
 
 		template<class T>
@@ -52,11 +58,18 @@ namespace Baukasten {
 
 		virtual void runActions();
 
+		sigc::signal<void, GameEntity*, State*> onStateChanged();
+
 	private:
+		void stateChanged( State* );
+
 		EntityType*		mType;
 		Form*           mForm;
 		GameEntityMap	mChildren;
 		GameEntity*		mParent;
+
+		// signals
+		sigc::signal<void, GameEntity*, State*>		mStateChanged;
 	};
 } /* Baukasten */
 

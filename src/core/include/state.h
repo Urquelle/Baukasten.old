@@ -4,6 +4,8 @@
 #include "global.h"
 #include "entity.h"
 
+#include <sigc++/sigc++.h>
+
 #include <string>
 
 namespace Baukasten {
@@ -14,8 +16,13 @@ namespace Baukasten {
 
 		virtual State* pack();
 
+		sigc::signal<void, State*> onChange();
+
 	protected:
 		State*	mIntState;
+
+	private:
+		sigc::signal<void, State*>	mChanged;
 	};
 } /* Baukasten */
 

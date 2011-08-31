@@ -53,6 +53,24 @@ Form* GameEntity::getForm() const
     return mForm;
 }
 
+void GameEntity::addState( const std::string &id, State *state )
+{
+	if ( !state )
+		return;
+
+	state->onChange().connect(
+		sigc::mem_fun( this, &GameEntity::stateChanged )
+	);
+
+	StateManager::addState( id, state );
+}
+
+void GameEntity::addState( State *state )
+{
+	if ( state )
+		addState( state->getId(), state );
+}
+
 bool GameEntity::hasState( const std::string &id ) const
 {
 	bool answer = StateManager::hasState( id );
@@ -110,5 +128,15 @@ void GameEntity::runActions()
 		cit->second->runActions();
 		cit++;
 	}
+}
+
+sigc::signal<void, GameEntity*, State*> GameEntity::onStateChanged()
+{
+	return mStateChanged;
+}
+
+void GameEntity::stateChanged( State *state )
+{
+	mStateChanged.emit( this, state );
 }
 

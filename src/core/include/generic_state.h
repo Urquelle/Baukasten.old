@@ -44,6 +44,7 @@ namespace Baukasten {
 				mIntState = 0;
 
 			mValue = value;
+			onChange().emit( this );
 		}
 
 		GenericState<T>* pack()

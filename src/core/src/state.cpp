@@ -19,3 +19,8 @@ State* State::pack()
 	return state;
 }
 
+sigc::signal<void, State*> State::onChange()
+{
+	return mChanged;
+}
+
