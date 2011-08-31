@@ -25,7 +25,7 @@ include_directories(
 # compile lua action class
 if( WITH_LUA )
 	set( core_SRCS ${core_SRCS} core/src/lua/action.cpp )
-	set( slb_LINKDIR ${CMAKE_CURRENT_SOURCE_DIR}/core/lib/ )
-	install(FILES ${CMAKE_CURRENT_SOURCE_DIR}/core/lib/libSLB.so DESTINATION lib/)
+	set( slb_LINKDIR ${CMAKE_HOME_DIRECTORY}/lib/ )
+	install(FILES ${CMAKE_HOME_DIRECTORY}/lib/libSLB.so DESTINATION lib/)
 endif()
 
