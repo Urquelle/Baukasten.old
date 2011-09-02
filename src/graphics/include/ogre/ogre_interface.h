@@ -10,6 +10,8 @@ namespace Ogre {
 	class Node;
 	class Root;
 	class SceneManager;
+	class RenderWindow;
+	class Camera;
 }
 
 namespace Baukasten {
@@ -24,12 +26,16 @@ namespace Baukasten {
 
 		int init();
 		void render();
-		void addForm( Form* );
 		void shutDown();
+
+		Ogre::Root* getRoot() const;
+		Ogre::SceneManager* getSceneManager() const;
 
 	private:
 		Ogre::Root*			mRoot;
+		Ogre::RenderWindow*	mWindow;
 		Ogre::SceneManager*	mSceneManager;
+		Ogre::Camera*		mCamera;
 		NodeMap				mForms;
 	};
 } /* Baukasten */

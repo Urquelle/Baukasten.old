@@ -64,6 +64,18 @@ int OgreInterface::init()
 
 	mSceneManager = mRoot->createSceneManager(Ogre::ST_GENERIC, "sceneManager");
 
+    mCamera = mSceneManager->createCamera("Camera");
+    mCamera->setPosition(Ogre::Vector3(0,0,50));
+    mCamera->lookAt(Ogre::Vector3(0,0,0));
+    mCamera->setNearClipDistance(5);
+
+    Ogre::Viewport *viewport = renderWindow->addViewport(mCamera);
+    viewport->setBackgroundColour(Ogre::ColourValue(0.0,0.0,0.0));
+
+    mCamera->setAspectRatio(
+        Ogre::Real(viewport->getActualWidth()) / Ogre::Real(viewport->getActualHeight())
+    );
+
 	loadResources();
 
 	mInitialised = true;
@@ -77,9 +89,14 @@ void OgreInterface::render()
 		mRoot->renderOneFrame();
 }
 
-void OgreInterface::addForm( Form *form )
+Ogre::Root* OgreInterface::getRoot() const
 {
-	std::cout << "in OgreInterface::renderForm" << std::endl;
+	return mRoot;
+}
+
+Ogre::SceneManager* OgreInterface::getSceneManager() const
+{
+	return mSceneManager;
 }
 
 void OgreInterface::shutDown()
