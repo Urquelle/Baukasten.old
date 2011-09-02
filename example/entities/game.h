@@ -9,7 +9,7 @@
 class WorldMap;
 
 namespace Baukasten {
-	class IGraphics;
+	class OgreInterface;
 	class IInput;
 }
 
@@ -29,7 +29,7 @@ protected:
 
 private:
 	WorldMap*				mWorldMap;
-	Baukasten::IGraphics*	mGraphics;
+	Baukasten::OgreInterface*	mGraphics;
 	Baukasten::IInput*		mInput;
 };
 

@@ -8,12 +8,13 @@
 #include <iinput.h>
 #include <lua/action.h>
 #include <ogre/ogre_form.h>
+#include <ogre/ogre_interface.h>
 
 using namespace Baukasten;
 
 Game::Game( const std::string &id ) :
 	GameEntity( id ),
-	mGraphics( GraphicsInterface::instance() ),
+	mGraphics( dynamic_cast<OgreInterface*>(GraphicsInterface::instance()) ),
 	mInput( InputInterface::instance() )
 {
 	addState( "keepRunning", new StateInt( "keepRunning", 1 ) );
@@ -73,10 +74,11 @@ int Game::init()
 
 	// init Entities
 	mWorldMap = new WorldMap( "worldmap" );
-	mWorldMap->setForm( new OgreForm( "form" ) );
+
+	OgreForm *form = new OgreForm( "form:worldmap", mGraphics );
+
+	mWorldMap->setForm( form );
 
 	addChild( mWorldMap );
-
-	mGraphics->addForm( mWorldMap->getForm() );
 }
 
