@@ -6,6 +6,7 @@
 #include <generic_state.h>
 #include <graphics_interface.h>
 #include <igraphics.h>
+#include <iinput.h>
 #include <lua/action.h>
 
 using namespace Baukasten;
@@ -13,7 +14,7 @@ using namespace Baukasten;
 Game::Game( const std::string &id ) :
 	GameEntity( id ),
 	mGraphics( GraphicsInterface::instance() ),
-	mInput( new InputInterface() )
+	mInput( InputInterface::instance() )
 {
 	addState( "keepRunning", new StateInt( "keepRunning", 1 ) );
 	addAction( new ActionLua( *this, "updateState", "scripts/update_state.lua" ) );

@@ -26,19 +26,18 @@ namespace Baukasten {
 
 	typedef sigc::signal<void, Key, Modifier> KeyDownEvent;
 
+	class IInput;
+
 	class BAUKASTEN_EXPORT InputInterface {
 	public:
-		InputInterface();
+		static IInput* instance();
+
 		virtual ~InputInterface();
 
-		bool init();
-		void process() const;
-		void shutDown();
-
-		KeyDownEvent onKeyDown() const;
-
 	private:
-		KeyDownEvent	mOnKeyDown;
+		InputInterface();
+
+		static IInput* mInstance;
 	};
 } /* Baukasten */
 
