@@ -6,7 +6,6 @@
 #include <generic_state.h>
 #include <graphics_interface.h>
 #include <igraphics.h>
-#include <input_interface.h>
 #include <lua/action.h>
 
 using namespace Baukasten;
@@ -38,9 +37,9 @@ bool Game::keepRunning()
 	return getState<StateInt*>( "keepRunning" )->getValue();
 }
 
-void Game::onKeyDown( SDLKey key, SDLMod mod )
+void Game::onKeyDown( Baukasten::Key key, Baukasten::Modifier mod )
 {
-	if ( key == SDLK_q ) {
+	if ( key == Baukasten::KEY_Q ) {
 		getState<StateInt*>( "keepRunning" )->setValue( 0 );
 	}
 }

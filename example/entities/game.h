@@ -2,8 +2,7 @@
 #define GAME_QESA072Y
 
 #include <game_entity.h>
-
-#include <SDL/SDL.h>
+#include <input_interface.h>
 
 #include <string>
 
@@ -22,7 +21,7 @@ public:
 
 	void start();
 	bool keepRunning();
-	void onKeyDown( SDLKey, SDLMod );
+	void onKeyDown( Baukasten::Key, Baukasten::Modifier );
 
 protected:
 	void run();
