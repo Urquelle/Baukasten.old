@@ -8,6 +8,7 @@
 
 namespace Baukasten {
 	typedef sigc::signal<void, SDL_Event*> InputEvent;
+	typedef sigc::signal<void, SDLKey, SDLMod> KeyDownEvent;
 
 	class BAUKASTEN_EXPORT InputInterface {
 	public:
@@ -19,11 +20,12 @@ namespace Baukasten {
 		void shutDown();
 
 		InputEvent onEvent() const;
-
+		KeyDownEvent onKeyDown() const;
 
 	private:
-		SDL_Event*	mEvent;
-		InputEvent	mOnEvent;
+		SDL_Event*		mEvent;
+		InputEvent		mOnEvent;
+		KeyDownEvent	mOnKeyDown;
 	};
 } /* Baukasten */
 
