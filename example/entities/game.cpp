@@ -37,7 +37,7 @@ bool Game::keepRunning()
 	return getState<StateInt*>( "keepRunning" )->getValue();
 }
 
-void Game::onKeyDown( Baukasten::Key key, Baukasten::Modifier mod )
+void Game::onKeyDown( Key key, Modifier mod )
 {
 	if ( key == Baukasten::KEY_Q ) {
 		getState<StateInt*>( "keepRunning" )->setValue( 0 );
