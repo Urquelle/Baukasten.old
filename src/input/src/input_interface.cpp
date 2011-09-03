@@ -120,19 +120,23 @@ bool InputInterface::init()
 		return false;
 	}
 
-	SDL_Surface *screen = SDL_SetVideoMode( 640, 480, 0, SDL_OPENGL );
+	SDL_Surface *screen = SDL_SetVideoMode( 1024, 768, 0, SDL_OPENGL );
 }
 
 void InputInterface::process() const
 {
-	SDL_PollEvent( mEvent );
-	mOnEvent.emit( mEvent );
-
-	if ( mEvent->type == SDL_KEYDOWN ) {
-		mOnKeyDown.emit(
-			getKey( mEvent->key.keysym.sym ),
-			getModifier( mEvent->key.keysym.mod )
-		);
+	while ( SDL_PollEvent( mEvent ) ) {
+		switch( mEvent->type ) {
+		case SDL_KEYDOWN:
+			mOnKeyDown.emit(
+				getKey( mEvent->key.keysym.sym ),
+				getModifier( mEvent->key.keysym.mod )
+			);
+			break;
+		default:
+			mOnEvent.emit( mEvent );
+			break;
+		}
 	}
 
 	SDL_GL_SwapBuffers();
