@@ -1,5 +1,7 @@
 #include "input_interface.h"
 
+#include <SDL/SDL.h>
+
 using namespace Baukasten;
 
 Key getKey( SDLKey key )
@@ -95,18 +97,12 @@ Modifier getModifier( SDLMod mod )
 	return KEYMOD_NONE;
 }
 
-InputInterface::InputInterface() :
-	mEvent( new SDL_Event() )
+InputInterface::InputInterface()
 {
 }
 
 InputInterface::~InputInterface()
 {
-}
-
-InputEvent InputInterface::onEvent() const
-{
-	return mOnEvent;
 }
 
 KeyDownEvent InputInterface::onKeyDown() const
@@ -125,16 +121,17 @@ bool InputInterface::init()
 
 void InputInterface::process() const
 {
-	while ( SDL_PollEvent( mEvent ) ) {
-		switch( mEvent->type ) {
+	SDL_Event event;
+
+	while ( SDL_PollEvent( &event ) ) {
+		switch( event.type ) {
 		case SDL_KEYDOWN:
 			mOnKeyDown.emit(
-				getKey( mEvent->key.keysym.sym ),
-				getModifier( mEvent->key.keysym.mod )
+				getKey( event.key.keysym.sym ),
+				getModifier( event.key.keysym.mod )
 			);
 			break;
 		default:
-			mOnEvent.emit( mEvent );
 			break;
 		}
 	}
