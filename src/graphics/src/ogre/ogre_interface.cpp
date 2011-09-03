@@ -80,3 +80,8 @@ void OgreInterface::addForm( Form *form )
 	std::cout << "in OgreInterface::renderForm" << std::endl;
 }
 
+void OgreInterface::shutDown()
+{
+	// do some cleanup
+}
+

@@ -25,6 +25,7 @@ namespace Baukasten {
 		int init();
 		void render();
 		void addForm( Form* );
+		void shutDown();
 
 	private:
 		Ogre::Root*			mRoot;

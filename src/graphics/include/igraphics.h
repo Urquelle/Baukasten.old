@@ -12,6 +12,7 @@ namespace Baukasten {
 		virtual int init() = 0;
 		virtual void render() = 0;
 		virtual void addForm( Form* ) = 0;
+		virtual void shutDown() = 0;
 
 	protected:
 		bool mInitialised;
