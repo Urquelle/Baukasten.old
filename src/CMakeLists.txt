@@ -1,8 +1,13 @@
 option( WITH_LUA  "compile with Lua support." TRUE )
 option( WITH_OGRE  "compile with OGRE support." TRUE )
+option( WITH_SDL "compile with SDL support." TRUE )
 
 if( WITH_OGRE )
 	add_definitions( -DWITH_OGRE )
+endif()
+
+if( WITH_SDL )
+	add_definitions( -DWITH_SDL )
 endif()
 
 include( core/CMakeLists.txt )
