@@ -7,6 +7,7 @@ set (Baukasten_VERSION_MINOR 1)
 
 set( Core_INCLUDE_DIR ${CMAKE_CURRENT_SOURCE_DIR}/src/core/include )
 set( Graphics_INCLUDE_DIR ${CMAKE_CURRENT_SOURCE_DIR}/src/graphics/include )
+set( Input_INCLUDE_DIR ${CMAKE_CURRENT_SOURCE_DIR}/src/input/include )
 set( Core_LIB_DIR ${CMAKE_CURRENT_SOURCE_DIR}/src/core/lib )
 
 add_subdirectory(src)

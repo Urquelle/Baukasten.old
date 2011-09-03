@@ -53,7 +53,13 @@ int OgreInterface::init()
 		return 0;
 	}
 
-	mRoot->initialise( true, "" );
+	mRoot->initialise( false );
+	Ogre::NameValuePairList misc;
+	misc["currentGLContext"] = "True";
+	Ogre::RenderWindow *renderWindow =
+		mRoot->createRenderWindow("MainRenderWindow", 640, 480, false, &misc);
+	renderWindow->setVisible(true);
+
 	mSceneManager = mRoot->createSceneManager(Ogre::ST_GENERIC, "sceneManager");
 
 	loadResources();
