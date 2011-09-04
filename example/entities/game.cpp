@@ -1,6 +1,7 @@
 #include "game.h"
 #include "lua/bindings.h"
 #include "world_map.h"
+#include "forms/worldmap_form.h"
 
 #include <generic_state.h>
 #include <graphics_interface.h>
@@ -76,7 +77,10 @@ int Game::init()
 	// init Entities
 	mWorldMap = new WorldMap( "worldmap" );
 
-	OgreForm *form = new OgreForm( "form:worldmap", mGraphics );
+	WorldMapForm *form = new WorldMapForm(
+		"form:worldmap",
+		mInput->getScreen()
+	);
 
 	mWorldMap->setForm( form );
 

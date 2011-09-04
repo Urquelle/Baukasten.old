@@ -28,7 +28,7 @@ protected:
 	int init();
 
 private:
-	WorldMap*				mWorldMap;
+	WorldMap*					mWorldMap;
 	Baukasten::OgreInterface*	mGraphics;
 	Baukasten::SDLInterface*	mInput;
 };
