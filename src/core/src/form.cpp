@@ -63,11 +63,9 @@ void Form::render()
 	EntityMap entities = mVSpace->getEntities();
 	EntityMap::const_iterator it = entities.begin();
 	Form *form = 0;
-	GameEntity *entity = 0;
 
 	while ( it != entities.end() ) {
-		entity = dynamic_cast<GameEntity*>( it->second );
-		form = entity->getForm();
+		form = static_cast<Form*>( it->second );
 		if ( form )
 			form->render();
 		it++;
