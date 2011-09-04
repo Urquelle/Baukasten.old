@@ -3,10 +3,8 @@
 #include "world_map.h"
 #include "forms/worldmap_form.h"
 
+#include <core_services.h>
 #include <generic_state.h>
-#include <graphics_interface.h>
-#include <igraphics.h>
-#include <iinput.h>
 #include <sdl/sdl_interface.h>
 #include <lua/action.h>
 #include <ogre/ogre_form.h>
@@ -17,9 +15,7 @@ using namespace Baukasten;
 enum Mode { MODE_WORLDMAP, MODE_MENU, MODE_BATTLE };
 
 Game::Game( const std::string &id ) :
-	GameEntity( id ),
-	mGraphics( dynamic_cast<OgreInterface*>(GraphicsInterface::instance()) ),
-	mInput( dynamic_cast<SDLInterface*>(InputInterface::instance()) )
+	GameEntity( id )
 {
 	addState( "keepRunning", new StateInt( "keepRunning", 1 ) );
 	addState( "currentMode", new StateInt( "currentMode", MODE_WORLDMAP ) );
@@ -70,11 +66,12 @@ int Game::init()
 {
 	initBindings();
 
-	// input has to be initialised before graphics, since we use sdl
-	// and the window is created there. ogre simply connects to the
-	// existing window.
-	mInput->init();
-	mGraphics->init();
+	CoreServices *services = new CoreServices();
+
+	services->init( ALL );
+
+	mInput = dynamic_cast<SDLInterface*>( services->getInputService() );
+	mGraphics = dynamic_cast<OgreInterface*>( services->getVideoService() );
 
 	mInput->onKeyDown().connect( sigc::mem_fun( this, &Game::onKeyDown ) );
 

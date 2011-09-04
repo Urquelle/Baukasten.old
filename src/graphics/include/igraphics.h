@@ -3,6 +3,8 @@
 
 #include "global.h"
 
+#include "graphics_interface.h"
+
 namespace Baukasten {
 	class Form;
 
