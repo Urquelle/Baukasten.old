@@ -25,6 +25,13 @@ namespace Baukasten {
 		/*! \brief destructor */
 		virtual ~Drawable();
 
+		/*! \brief renders the object
+		 *
+		 * render method is called once every iteration of
+		 * the mainloop.
+		 */
+		virtual void render() = 0;
+
 		/*! \brief set position of the object.
 		 *
 		 * \param position a three point vector which represents
