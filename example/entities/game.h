@@ -10,7 +10,7 @@ class WorldMap;
 
 namespace Baukasten {
 	class OgreInterface;
-	class IInput;
+	class SDLInterface;
 }
 
 class Game : public Baukasten::GameEntity
@@ -30,7 +30,7 @@ protected:
 private:
 	WorldMap*				mWorldMap;
 	Baukasten::OgreInterface*	mGraphics;
-	Baukasten::IInput*		mInput;
+	Baukasten::SDLInterface*	mInput;
 };
 
 #endif /* end of include guard: GAME_QESA072Y */

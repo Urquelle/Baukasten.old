@@ -6,6 +6,7 @@
 #include <graphics_interface.h>
 #include <igraphics.h>
 #include <iinput.h>
+#include <sdl/sdl_interface.h>
 #include <lua/action.h>
 #include <ogre/ogre_form.h>
 #include <ogre/ogre_interface.h>
@@ -15,7 +16,7 @@ using namespace Baukasten;
 Game::Game( const std::string &id ) :
 	GameEntity( id ),
 	mGraphics( dynamic_cast<OgreInterface*>(GraphicsInterface::instance()) ),
-	mInput( InputInterface::instance() )
+	mInput( dynamic_cast<SDLInterface*>(InputInterface::instance()) )
 {
 	addState( "keepRunning", new StateInt( "keepRunning", 1 ) );
 	addAction( new ActionLua( *this, "updateState", "scripts/update_state.lua" ) );
