@@ -5,6 +5,8 @@
 
 #include "iinput.h"
 
+class SDL_Surface;
+
 namespace Baukasten {
 	class BAUKASTEN_EXPORT SDLInterface : public IInput {
 	public:
@@ -14,6 +16,11 @@ namespace Baukasten {
 		bool init();
 		void process() const;
 		void shutDown();
+
+		SDL_Surface* getScreen() const;
+
+	private:
+		SDL_Surface* mSurface;
 	};
 } /* Baukasten */
 

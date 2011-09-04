@@ -111,7 +111,7 @@ bool SDLInterface::init()
 		return false;
 	}
 
-	SDL_Surface *screen = SDL_SetVideoMode( 1024, 768, 0, SDL_OPENGL );
+	mSurface = SDL_SetVideoMode( 1024, 768, 0, SDL_OPENGL | SDL_OPENGLBLIT | SDL_DOUBLEBUF );
 }
 
 void SDLInterface::process() const
@@ -137,5 +137,10 @@ void SDLInterface::process() const
 void SDLInterface::shutDown()
 {
 	SDL_Quit();
+}
+
+SDL_Surface* SDLInterface::getScreen() const
+{
+	return mSurface;
 }
 
