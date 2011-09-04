@@ -13,6 +13,11 @@ namespace Baukasten {
 		OgreForm( const std::string&, OgreInterface* );
 		virtual ~OgreForm();
 
+		OgreInterface* getInterface() const
+		{
+			return mInterface;
+		}
+
 	private:
 		void initScene();
 
