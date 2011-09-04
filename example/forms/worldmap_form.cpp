@@ -30,8 +30,11 @@ WorldMapForm::WorldMapForm( const std::string &id, OgreInterface *interface ) :
 	SceneNode* node = manager->getRootSceneNode()->createChildSceneNode("Background");
 	node->attachObject(rect);
 
-	// Example of background scrolling
-	//material->getTechnique(0)->getPass(0)->getTextureUnitState(0)->setScrollAnimation(-0.25, 0.0);
+	Ogre::Entity* groupSphere = manager->createEntity("GroupPosition","sphere.mesh");
+	SceneNode* nodeGroup = node->createChildSceneNode("node");
+	nodeGroup->setScale(0.005f,0.005f,0.005f);
+	nodeGroup->setPosition(0,0,0);
+	nodeGroup->attachObject(groupSphere);
 }
 
 WorldMapForm::~WorldMapForm()
