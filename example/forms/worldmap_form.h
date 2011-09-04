@@ -1,17 +1,16 @@
 #ifndef WORLDMAP_FORM_OPYB550X
 #define WORLDMAP_FORM_OPYB550X
 
-#include <form.h>
+#include <ogre/ogre_form.h>
 
-class SDL_Surface;
+namespace Baukasten {
+	class OgreInterface;
+} /* Baukasten */
 
-class WorldMapForm : public Baukasten::Form {
+class WorldMapForm : public Baukasten::OgreForm {
 public:
-	WorldMapForm( const std::string&, SDL_Surface* );
+	WorldMapForm( const std::string&, Baukasten::OgreInterface* );
 	virtual ~WorldMapForm();
-
-private:
-	SDL_Surface* mScreen;
 };
 
 #endif /* end of include guard: WORLDMAP_FORM_OPYB550X */

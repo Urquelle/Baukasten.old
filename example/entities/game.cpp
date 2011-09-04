@@ -79,7 +79,7 @@ int Game::init()
 
 	WorldMapForm *form = new WorldMapForm(
 		"form:worldmap",
-		mInput->getScreen()
+		mGraphics
 	);
 
 	mWorldMap->setForm( form );
