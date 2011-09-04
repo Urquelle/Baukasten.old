@@ -14,12 +14,16 @@
 
 using namespace Baukasten;
 
+enum Mode { MODE_WORLDMAP, MODE_MENU, MODE_BATTLE };
+
 Game::Game( const std::string &id ) :
 	GameEntity( id ),
 	mGraphics( dynamic_cast<OgreInterface*>(GraphicsInterface::instance()) ),
 	mInput( dynamic_cast<SDLInterface*>(InputInterface::instance()) )
 {
 	addState( "keepRunning", new StateInt( "keepRunning", 1 ) );
+	addState( "currentMode", new StateInt( "currentMode", MODE_WORLDMAP ) );
+
 	addAction( new ActionLua( *this, "updateState", "scripts/update_state.lua" ) );
 	setForm( new Form( "form" ) );
 }
