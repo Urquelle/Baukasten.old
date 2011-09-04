@@ -28,7 +28,7 @@ namespace Baukasten {
 		void removeFromVSpace( const std::string& );
 		VirtualSpace* getVSpace() const;
 
-		virtual void render() {}
+		virtual void render();
 
 	protected:
 		LogicalSpace*	mLSpace;

@@ -1,5 +1,6 @@
 #include "form.h"
 
+#include "game_entity.h"
 #include "logical_space.h"
 #include "virtual_space.h"
 
@@ -55,5 +56,21 @@ void Form::removeFromVSpace( const std::string &id )
 VirtualSpace* Form::getVSpace() const
 {
 	return mVSpace;
+}
+
+void Form::render()
+{
+	EntityMap entities = mVSpace->getEntities();
+	EntityMap::const_iterator it = entities.begin();
+	Form *form = 0;
+	GameEntity *entity = 0;
+
+	while ( it != entities.end() ) {
+		entity = dynamic_cast<GameEntity*>( it->second );
+		form = entity->getForm();
+		if ( form )
+			form->render();
+		it++;
+	}
 }
 
