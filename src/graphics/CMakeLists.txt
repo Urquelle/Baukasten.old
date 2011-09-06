@@ -11,7 +11,7 @@ if( WITH_OGRE )
 	set(
 		${graphics_SRCS}
 		${graphics_SRCS}
-		graphics/src/ogre/ogre_interface.cpp
+		graphics/src/ogre/ogre_graphics.cpp
 		graphics/src/ogre/ogre_form.cpp
 	)
 endif()

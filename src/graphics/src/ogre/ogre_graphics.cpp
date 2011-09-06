@@ -1,4 +1,4 @@
-#include "ogre/ogre_interface.h"
+#include "ogre/ogre_graphics.h"
 
 #include "ogre/ogre_form.h"
 
@@ -38,16 +38,16 @@ void loadResources()
     Ogre::ResourceGroupManager::getSingleton().initialiseAllResourceGroups();
 }
 
-OgreInterface::OgreInterface() :
+OgreGraphics::OgreGraphics() :
 	IGraphics()
 {
 }
 
-OgreInterface::~OgreInterface()
+OgreGraphics::~OgreGraphics()
 {
 }
 
-int OgreInterface::init()
+int OgreGraphics::init()
 {
 	mRoot = new Ogre::Root("plugins.cfg");
 
@@ -83,23 +83,23 @@ int OgreInterface::init()
 	return 1;
 }
 
-void OgreInterface::render()
+void OgreGraphics::render()
 {
 	if ( mRoot )
 		mRoot->renderOneFrame();
 }
 
-Ogre::Root* OgreInterface::getRoot() const
+Ogre::Root* OgreGraphics::getRoot() const
 {
 	return mRoot;
 }
 
-Ogre::SceneManager* OgreInterface::getSceneManager() const
+Ogre::SceneManager* OgreGraphics::getSceneManager() const
 {
 	return mSceneManager;
 }
 
-void OgreInterface::shutDown()
+void OgreGraphics::shutDown()
 {
 	// do some cleanup
 }

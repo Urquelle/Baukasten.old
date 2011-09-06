@@ -1,5 +1,5 @@
-#ifndef OGRE_INTERFACE_DK716OON
-#define OGRE_INTERFACE_DK716OON
+#ifndef OGRE_GRAPHICS_DK716OON
+#define OGRE_GRAPHICS_DK716OON
 
 #include "igraphics.h"
 
@@ -19,10 +19,10 @@ namespace Baukasten {
 
 	typedef map<const string, Ogre::Node*> NodeMap;
 
-	class OgreInterface : public IGraphics {
+	class OgreGraphics : public IGraphics {
 	public:
-		OgreInterface();
-		virtual ~OgreInterface();
+		OgreGraphics();
+		virtual ~OgreGraphics();
 
 		int init();
 		void render();
@@ -40,4 +40,4 @@ namespace Baukasten {
 	};
 } /* Baukasten */
 
-#endif /* end of include guard: OGRE_INTERFACE_DK716OON */
+#endif /* end of include guard: OGRE_GRAPHICS_DK716OON */
