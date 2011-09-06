@@ -3,6 +3,8 @@
 
 #if defined(WITH_OGRE)
 #	include "ogre/ogre_interface.h"
+#else
+#	include "irrlicht/irrlicht_graphics.h"
 #endif
 
 using namespace Baukasten;
@@ -14,6 +16,8 @@ IGraphics* GraphicsInterface::instance()
 	if ( !mInstance ) {
 #if defined(WITH_OGRE)
 		mInstance = new OgreInterface();
+#else
+		mInstance = new IrrlichtGraphics();
 #endif
 	}
 
