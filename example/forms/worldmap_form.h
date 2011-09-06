@@ -1,15 +1,15 @@
 #ifndef WORLDMAP_FORM_OPYB550X
 #define WORLDMAP_FORM_OPYB550X
 
-#include <ogre/ogre_form.h>
+#include <irrlicht/irrlicht_form.h>
 
 namespace Baukasten {
-	class OgreInterface;
+	class IGraphics;
 } /* Baukasten */
 
-class WorldMapForm : public Baukasten::OgreForm {
+class WorldMapForm : public Baukasten::IrrlichtForm {
 public:
-	WorldMapForm( const std::string&, Baukasten::OgreInterface* );
+	WorldMapForm( const std::string&, Baukasten::IGraphics* );
 	virtual ~WorldMapForm();
 };
 

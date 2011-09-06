@@ -9,7 +9,7 @@
 class WorldMap;
 
 namespace Baukasten {
-	class OgreInterface;
+	class IrrlichtGraphics;
 	class SDLInterface;
 }
 
@@ -28,9 +28,9 @@ protected:
 	int init();
 
 private:
-	WorldMap*					mWorldMap;
-	Baukasten::OgreInterface*	mGraphics;
-	Baukasten::SDLInterface*	mInput;
+	WorldMap*						mWorldMap;
+	Baukasten::IrrlichtGraphics*	mGraphics;
+	Baukasten::SDLInterface*		mInput;
 };
 
 #endif /* end of include guard: GAME_QESA072Y */

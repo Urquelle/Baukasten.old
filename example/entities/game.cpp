@@ -8,7 +8,7 @@
 #include <sdl/sdl_interface.h>
 #include <lua/action.h>
 #include <ogre/ogre_form.h>
-#include <ogre/ogre_interface.h>
+#include <irrlicht/irrlicht_graphics.h>
 
 using namespace Baukasten;
 
@@ -71,7 +71,7 @@ int Game::init()
 	services->init( ALL );
 
 	mInput = dynamic_cast<SDLInterface*>( services->getInputService() );
-	mGraphics = dynamic_cast<OgreInterface*>( services->getVideoService() );
+	mGraphics = dynamic_cast<IrrlichtGraphics*>( services->getVideoService() );
 
 	mInput->onKeyDown().connect( sigc::mem_fun( this, &Game::onKeyDown ) );
 

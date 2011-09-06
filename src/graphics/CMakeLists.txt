@@ -4,6 +4,7 @@ set (
 	graphics_SRCS
 	graphics/src/graphics_interface.cpp
 	graphics/src/irrlicht/irrlicht_graphics.cpp
+	graphics/src/irrlicht/irrlicht_form.cpp
 )
 
 if( WITH_OGRE )
