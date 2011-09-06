@@ -53,3 +53,8 @@ ISceneManager* IrrlichtGraphics::getSceneManager() const
 	return mSceneManager;
 }
 
+IGUIEnvironment* IrrlichtGraphics::getGui() const
+{
+	return mGui;
+}
+
