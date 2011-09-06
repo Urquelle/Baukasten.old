@@ -7,10 +7,14 @@
 #include <generic_state.h>
 #include <sdl/sdl_interface.h>
 #include <lua/action.h>
-#include <ogre/ogre_form.h>
 #include <irrlicht/irrlicht_graphics.h>
 
+#include <irrlicht/irrlicht.h>
+
 using namespace Baukasten;
+
+using namespace irr;
+using namespace core;
 
 enum Mode { MODE_WORLDMAP, MODE_MENU, MODE_BATTLE };
 
@@ -72,6 +76,8 @@ int Game::init()
 
 	mInput = dynamic_cast<SDLInterface*>( services->getInputService() );
 	mGraphics = dynamic_cast<IrrlichtGraphics*>( services->getVideoService() );
+
+	mGraphics->getDevice()->setWindowCaption( L"Eisenfaust" );
 
 	mInput->onKeyDown().connect( sigc::mem_fun( this, &Game::onKeyDown ) );
 
