@@ -48,6 +48,11 @@ void IrrlichtGraphics::shutDown()
 	mDevice->drop();
 }
 
+IrrlichtDevice* IrrlichtGraphics::getDevice() const
+{
+	return mDevice;
+}
+
 ISceneManager* IrrlichtGraphics::getSceneManager() const
 {
 	return mSceneManager;
