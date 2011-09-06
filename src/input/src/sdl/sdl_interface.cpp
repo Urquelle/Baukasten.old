@@ -107,11 +107,11 @@ SDLInterface::~SDLInterface()
 
 bool SDLInterface::init()
 {
-	if ( SDL_Init(SDL_INIT_EVERYTHING) < 0 ) {
+	if ( SDL_Init(SDL_INIT_TIMER) < 0 ) {
 		return false;
 	}
 
-	mSurface = SDL_SetVideoMode( 1024, 768, 0, SDL_OPENGL | SDL_OPENGLBLIT | SDL_DOUBLEBUF );
+	//mSurface = SDL_SetVideoMode( 1024, 768, 0, SDL_OPENGL | SDL_OPENGLBLIT | SDL_DOUBLEBUF );
 }
 
 void SDLInterface::process() const
@@ -131,7 +131,7 @@ void SDLInterface::process() const
 		}
 	}
 
-	SDL_GL_SwapBuffers();
+	//SDL_GL_SwapBuffers();
 }
 
 void SDLInterface::shutDown()
