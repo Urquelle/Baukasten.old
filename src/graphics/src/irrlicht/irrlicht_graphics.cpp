@@ -59,6 +59,11 @@ IrrlichtDevice* IrrlichtGraphics::getDevice() const
 	return mDevice;
 }
 
+IVideoDriver* IrrlichtGraphics::getDriver() const
+{
+	return mDriver;
+}
+
 ISceneManager* IrrlichtGraphics::getSceneManager() const
 {
 	return mSceneManager;

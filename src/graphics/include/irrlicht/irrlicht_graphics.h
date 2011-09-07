@@ -36,6 +36,7 @@ namespace Baukasten {
 		void shutDown();
 
 		IrrlichtDevice* getDevice() const;
+		video::IVideoDriver* getDriver() const;
 		scene::ISceneManager* getSceneManager() const;
 		gui::IGUIEnvironment* getGui() const;
 
