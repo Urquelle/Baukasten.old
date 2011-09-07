@@ -17,3 +17,8 @@ IrrlichtForm::~IrrlichtForm()
 {
 }
 
+IrrlichtGraphics* IrrlichtForm::getGraphics() const
+{
+	return mGraphics;
+}
+

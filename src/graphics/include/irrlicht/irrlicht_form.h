@@ -13,6 +13,8 @@ namespace Baukasten {
 		IrrlichtForm( const std::string&, IrrlichtGraphics* );
 		virtual ~IrrlichtForm();
 
+		IrrlichtGraphics* getGraphics() const;
+
 	private:
 		IrrlichtGraphics* mGraphics;
 	};
