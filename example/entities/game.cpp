@@ -59,7 +59,10 @@ void Game::run()
 		invokeAction( "updateState" );
 
 		runActions();
+		mGraphics->getDriver()->beginScene(true, true, video::SColor(0, 0, 0, 0));
+		getForm()->render();
 		mGraphics->render();
+		mGraphics->getDriver()->endScene();
 		mInput->process();
 	}
 
@@ -90,6 +93,7 @@ int Game::init()
 	);
 
 	mWorldMap->setForm( form );
+	getForm()->addToVSpace( form );
 
 	addChild( mWorldMap );
 }
