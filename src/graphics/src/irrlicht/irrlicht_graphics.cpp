@@ -41,12 +41,6 @@ int IrrlichtGraphics::init()
 void IrrlichtGraphics::render()
 {
 	mDevice->run();
-	mDriver->beginScene( true, true, SColor(0, 0, 0, 0) );
-
-	mSceneManager->drawAll();
-	mGui->drawAll();
-
-	mDriver->endScene();
 }
 
 void IrrlichtGraphics::shutDown()
