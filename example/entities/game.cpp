@@ -5,7 +5,7 @@
 
 #include <core_services.h>
 #include <generic_state.h>
-#include <lua/action.h>
+#include <lua/action_lua.h>
 #include <irrlicht/irrlicht_graphics.h>
 #include <irrlicht/irrlicht_input.h>
 

@@ -1,7 +1,7 @@
 #include "unit.h"
 #include "basic_type.h"
 
-#include <lua/action.h>
+#include <lua/action_lua.h>
 
 #include <OGRE/Ogre.h>
 

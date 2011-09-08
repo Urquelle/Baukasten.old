@@ -1,4 +1,4 @@
-#include <lua/action.h>
+#include <lua/action_lua.h>
 #include <game_entity.h>
 #include <lua/global.h>
 
