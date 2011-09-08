@@ -59,10 +59,8 @@ void Game::run()
 		invokeAction( "updateState" );
 
 		runActions();
-		mGraphics->getDriver()->beginScene(true, true, video::SColor(0, 0, 0, 0));
-		mGraphics->render( getForm() );
-		mGraphics->getDriver()->endScene();
 		mInput->process();
+		mGraphics->render( getForm() );
 	}
 
 	std::cout << "... GAME OVER!!! ..." << endl;
