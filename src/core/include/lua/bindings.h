@@ -1,12 +1,15 @@
 #ifndef GLOBAL_LUA_S7HRAEG3
 #define GLOBAL_LUA_S7HRAEG3
 
-#include <global.h>
-#include <entity.h>
-#include <entity_type.h>
-#include <game_entity.h>
-#include <generic_state.h>
-#include <state.h>
+#include "global.h"
+
+#include "action.h"
+
+#include "entity.h"
+#include "entity_type.h"
+#include "game_entity.h"
+#include "generic_state.h"
+#include "state.h"
 
 #include "slb/SLB.hpp"
 
