@@ -1,6 +1,6 @@
-#include <lua/action_lua.h>
-#include <game_entity.h>
-#include <lua/bindings.h>
+#include "game_entity.h"
+#include "lua/action_lua.h"
+#include "lua/bindings.h"
 
 using namespace Baukasten;
 
