@@ -26,6 +26,7 @@ namespace Baukasten {
 	using namespace irr;
 
 	class CoreServices;
+	class Form;
 
 	class BAUKASTEN_EXPORT IrrlichtGraphics :
 		public IGraphics {
@@ -34,7 +35,7 @@ namespace Baukasten {
 		virtual ~IrrlichtGraphics();
 
 		int init( CoreServices* );
-		void render();
+		void render( Form* );
 		void shutDown();
 
 		IrrlichtDevice* getDevice() const;

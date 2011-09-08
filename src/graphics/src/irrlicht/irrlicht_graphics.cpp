@@ -1,5 +1,7 @@
 #include "irrlicht/irrlicht_graphics.h"
 
+#include <form.h>
+
 #include <irrlicht/irrlicht.h>
 
 using namespace Baukasten;
@@ -38,9 +40,12 @@ int IrrlichtGraphics::init( CoreServices *coreServices )
 	return 1;
 }
 
-void IrrlichtGraphics::render()
+void IrrlichtGraphics::render( Form *form )
 {
 	mDevice->run();
+	mDriver->beginScene(true, true, video::SColor(0, 0, 0, 0));
+	form->render();
+	mDriver->endScene();
 }
 
 void IrrlichtGraphics::shutDown()

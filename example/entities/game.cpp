@@ -60,8 +60,7 @@ void Game::run()
 
 		runActions();
 		mGraphics->getDriver()->beginScene(true, true, video::SColor(0, 0, 0, 0));
-		getForm()->render();
-		mGraphics->render();
+		mGraphics->render( getForm() );
 		mGraphics->getDriver()->endScene();
 		mInput->process();
 	}
