@@ -6,7 +6,6 @@
 #include "game_entity.h"
 #include "state.h"
 
-#include <iostream>
 #include <list>
 #include <string>
 
