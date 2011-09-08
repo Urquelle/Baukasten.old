@@ -1,5 +1,5 @@
 #include "game.h"
-#include "lua/bindings.h"
+#include "../lua/bindings.h"
 #include "world_map.h"
 #include "forms/worldmap_form.h"
 
