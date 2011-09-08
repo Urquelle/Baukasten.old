@@ -15,20 +15,10 @@ CoreServices::~CoreServices()
 {
 }
 
-void CoreServices::init( const Services &services )
+void CoreServices::init()
 {
-	switch ( services ) {
-	case INPUT:
-		mInput->init();
-		break;
-	case VIDEO:
-		mGraphics->init();
-		break;
-	case ALL:
-		mInput->init();
-		mGraphics->init();
-		break;
-	}
+	mGraphics->init( this );
+	mInput->init( this );
 }
 
 IGraphics* CoreServices::getVideoService() const

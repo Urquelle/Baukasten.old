@@ -4,6 +4,8 @@
 
 #if defined( WITH_SDL )
 #	include "sdl/sdl_interface.h"
+#else
+#	include "irrlicht/irrlicht_input.h"
 #endif
 
 using namespace Baukasten;
@@ -15,6 +17,8 @@ IInput* InputInterface::instance()
 	if ( !mInstance ) {
 #if defined( WITH_SDL )
 		mInstance = new SDLInterface();
+#else
+		mInstance = new IrrlichtInput();
 #endif
 	}
 

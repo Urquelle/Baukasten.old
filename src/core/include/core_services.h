@@ -4,8 +4,6 @@
 #include "global.h"
 
 namespace Baukasten {
-	typedef enum Services { INPUT, VIDEO, ALL } Services;
-
 	class IGraphics;
 	class IInput;
 
@@ -14,7 +12,7 @@ namespace Baukasten {
 		CoreServices();
 		virtual ~CoreServices();
 
-		void init( const Services& );
+		void init();
 		IGraphics* getVideoService() const;
 		IInput* getInputService() const;
 

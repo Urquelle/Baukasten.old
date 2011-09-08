@@ -5,9 +5,9 @@
 
 #include <core_services.h>
 #include <generic_state.h>
-#include <sdl/sdl_interface.h>
 #include <lua/action.h>
 #include <irrlicht/irrlicht_graphics.h>
+#include <irrlicht/irrlicht_input.h>
 
 #include <irrlicht/irrlicht.h>
 
@@ -75,9 +75,9 @@ int Game::init()
 
 	CoreServices *services = new CoreServices();
 
-	services->init( ALL );
+	services->init();
 
-	mInput = dynamic_cast<SDLInterface*>( services->getInputService() );
+	mInput = dynamic_cast<IrrlichtInput*>( services->getInputService() );
 	mGraphics = dynamic_cast<IrrlichtGraphics*>( services->getVideoService() );
 
 	mGraphics->getDevice()->setWindowCaption( L"Eisenfaust" );

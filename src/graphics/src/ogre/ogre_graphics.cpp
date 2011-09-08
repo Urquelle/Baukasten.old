@@ -47,7 +47,7 @@ OgreGraphics::~OgreGraphics()
 {
 }
 
-int OgreGraphics::init()
+int OgreGraphics::init( CoreServices *coreServices )
 {
 	mRoot = new Ogre::Root("plugins.cfg");
 

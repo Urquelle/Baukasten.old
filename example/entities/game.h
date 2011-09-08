@@ -10,7 +10,7 @@ class WorldMap;
 
 namespace Baukasten {
 	class IrrlichtGraphics;
-	class SDLInterface;
+	class IrrlichtInput;
 }
 
 class Game : public Baukasten::GameEntity
@@ -30,7 +30,7 @@ protected:
 private:
 	WorldMap*						mWorldMap;
 	Baukasten::IrrlichtGraphics*	mGraphics;
-	Baukasten::SDLInterface*		mInput;
+	Baukasten::IrrlichtInput*		mInput;
 };
 
 #endif /* end of include guard: GAME_QESA072Y */

@@ -23,7 +23,7 @@ IrrlichtGraphics::~IrrlichtGraphics()
 {
 }
 
-int IrrlichtGraphics::init()
+int IrrlichtGraphics::init( CoreServices *coreServices )
 {
 	mDevice = createDevice(
 		EDT_OPENGL,

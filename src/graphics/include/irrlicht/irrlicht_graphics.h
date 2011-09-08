@@ -25,13 +25,15 @@ namespace Baukasten {
 
 	using namespace irr;
 
+	class CoreServices;
+
 	class BAUKASTEN_EXPORT IrrlichtGraphics :
 		public IGraphics {
 	public:
 		IrrlichtGraphics();
 		virtual ~IrrlichtGraphics();
 
-		int init();
+		int init( CoreServices* );
 		void render();
 		void shutDown();
 

@@ -7,11 +7,12 @@
 
 namespace Baukasten {
 	class Form;
+	class CoreServices;
 
 	class BAUKASTEN_EXPORT IGraphics {
 	public:
 		IGraphics() : mInitialised( false ) {}
-		virtual int init() = 0;
+		virtual int init( CoreServices* ) = 0;
 		virtual void render() = 0;
 		virtual void shutDown() = 0;
 
