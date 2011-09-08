@@ -18,7 +18,7 @@ WorldMapForm::WorldMapForm( const std::string &id, IGraphics *graphics ) :
 	mSceneManager( getGraphics()->getSceneManager() ),
 	mDriver( getGraphics()->getDriver() )
 {
-	mBackground = mDriver->getTexture("media/worldmap.jpg");
+	mBackground = mDriver->getTexture("media/1024x768/worldmap.jpg");
 }
 
 WorldMapForm::~WorldMapForm()
