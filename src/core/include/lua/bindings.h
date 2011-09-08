@@ -4,6 +4,7 @@
 #include "global.h"
 
 #include "action.h"
+#include "action_lua.h"
 
 #include "entity.h"
 #include "entity_type.h"
