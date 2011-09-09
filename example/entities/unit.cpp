@@ -18,8 +18,6 @@ Unit::Unit( const std::string &id ) :
 
 Unit::~Unit()
 {
-	if ( EntityType *type = getType() )
-		delete type;
 }
 
 std::string Unit::getName()
