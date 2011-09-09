@@ -1,5 +1,7 @@
-#include "game_entity.h"
 #include "lua/action_lua.h"
+
+#include "debug.h"
+#include "game_entity.h"
 #include "lua/bindings.h"
 
 using namespace Baukasten;
@@ -20,6 +22,8 @@ ActionLua::~ActionLua()
 
 void ActionLua::doAction( GameEntity *entity )
 {
+	BK_ASSERT( entity != 0, "entity must not be 0." );
+
 	SLB::Script s;
 	s.doString("SLB.using(SLB)");
 	s.set("entity", entity);

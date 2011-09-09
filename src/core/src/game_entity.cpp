@@ -1,6 +1,7 @@
 #include "game_entity.h"
 
 #include "action.h"
+#include "debug.h"
 
 #include <iostream>
 
@@ -55,8 +56,7 @@ Form* GameEntity::getForm() const
 
 void GameEntity::addState( const std::string &id, State *state )
 {
-	if ( !state )
-		return;
+	BK_ASSERT( state != 0, "state must not be 0." );
 
 	state->onChange().connect(
 		sigc::mem_fun( this, &GameEntity::stateChanged )
@@ -82,9 +82,11 @@ bool GameEntity::hasState( const std::string &id ) const
 
 void GameEntity::addChild( GameEntity *child )
 {
-	// prevent infinite loop
-	if ( this == child || isAncestor( this, child ) )
-		return;
+	BK_ASSERT( this != child, "you can't have a GameEntity be its own child." );
+	BK_ASSERT(
+		!isAncestor( this, child ),
+		"you can't assign a parent GameEntity to be its own grandchild."
+	);
 
 	if ( mChildren.find( child->getId() ) == mChildren.end() )
 		mChildren[ child->getId() ] = child;
@@ -103,6 +105,9 @@ void GameEntity::removeChild( const std::string &id )
 
 void GameEntity::setParent( GameEntity *parent )
 {
+	BK_ASSERT( parent != 0, "parent must not be 0." );
+	BK_ASSERT( parent != this, "GameEntity object can't be its own parent." );
+
 	mParent = parent;
 }
 

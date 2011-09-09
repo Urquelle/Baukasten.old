@@ -3,6 +3,8 @@
 #include "action.h"
 #include "game_entity.h"
 
+#include "debug.h"
+
 using namespace Baukasten;
 
 ActionManager::ActionManager()
@@ -15,11 +17,13 @@ ActionManager::~ActionManager()
 
 void ActionManager::addAction( Action *action )
 {
+	BK_ASSERT( action != 0, "action must not be 0" );
 	add( action );
 }
 
 void ActionManager::addAction( const std::string &id, Action *action )
 {
+	BK_ASSERT( action != 0, "action must not be 0" );
 	add( id, action );
 }
 
@@ -61,9 +65,7 @@ void ActionManager::invokeAction( const std::string &id )
 
 void ActionManager::invokeAction( const std::string &id, GameEntity *target )
 {
-	if ( !target )
-		return;
-
+	BK_ASSERT( target != 0, "target must not be 0" );
     Action *action = getAction( id );
 
     if ( action && !action->isActive() ) {

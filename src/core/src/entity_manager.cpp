@@ -1,6 +1,7 @@
 #include "entity_manager.h"
 
 #include "entity.h"
+#include "debug.h"
 
 using namespace Baukasten;
 
@@ -14,11 +15,13 @@ EntityManager::~EntityManager()
 
 void EntityManager::addEntity( Entity *entity )
 {
+	BK_ASSERT( entity != 0, "entity must not be 0." );
 	add( entity );
 }
 
 void EntityManager::addEntity( const std::string &id, Entity *entity )
 {
+	BK_ASSERT( entity != 0, "entity must not be 0." );
 	add( id, entity );
 }
 

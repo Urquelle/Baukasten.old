@@ -1,5 +1,6 @@
 #include "form.h"
 
+#include "debug.h"
 #include "game_entity.h"
 #include "logical_space.h"
 #include "virtual_space.h"
@@ -22,8 +23,7 @@ Form::~Form()
 
 void Form::addToLSpace( Entity *entity )
 {
-	if ( !entity )
-		return;
+	BK_ASSERT( entity != 0, "entity must not be 0." );
 
 	mLSpace->addEntity( entity );
 }
@@ -41,8 +41,7 @@ LogicalSpace* Form::getLSpace() const
 
 void Form::addToVSpace( Drawable *entity )
 {
-	if ( !entity )
-		return;
+	BK_ASSERT( entity != 0, "entity must not be 0." );
 
 	mVSpace->addEntity( entity );
 }

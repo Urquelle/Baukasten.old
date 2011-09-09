@@ -1,6 +1,7 @@
 #include "irrlicht/irrlicht_input.h"
 
 #include "core_services.h"
+#include "debug.h"
 #include "irrlicht/irrlicht_graphics.h"
 
 #include <irrlicht/irrlicht.h>
@@ -129,6 +130,8 @@ bool IrrlichtInput::OnEvent( const SEvent &event )
 
 bool IrrlichtInput::init( CoreServices *coreServices )
 {
+	BK_ASSERT( coreServices != 0, "coreServices must not be 0." );
+
 	IrrlichtGraphics *graphics =
 		dynamic_cast<IrrlichtGraphics*>( coreServices->getVideoService() );
 
@@ -145,6 +148,8 @@ void IrrlichtInput::shutDown()
 
 void IrrlichtInput::setDevice( IrrlichtDevice *device )
 {
+	BK_ASSERT( device != 0, "device must not be 0." );
+
 	mDevice = device;
 }
 
