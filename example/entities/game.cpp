@@ -82,7 +82,7 @@ int Game::init()
 	mInput->onKeyDown().connect( sigc::mem_fun( this, &Game::onKeyDown ) );
 
 	// init Entities
-	mWorldMap = new WorldMap( "worldmap" );
+	mWorldMap = new WorldMap( "entity:worldmap" );
 	getForm()->addToVSpace( mWorldMap->getForm() );
 
 	addChild( mWorldMap );
