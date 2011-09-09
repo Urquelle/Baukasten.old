@@ -4,7 +4,7 @@
 using namespace Baukasten;
 
 VirtualSpace::VirtualSpace() :
-    LogicalSpace()
+	LogicalSpace()
 {
 }
 

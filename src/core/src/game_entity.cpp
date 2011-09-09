@@ -51,7 +51,7 @@ void GameEntity::setForm( Form *form )
 
 Form* GameEntity::getForm() const
 {
-    return mForm;
+	return mForm;
 }
 
 void GameEntity::addState( const std::string &id, State *state )

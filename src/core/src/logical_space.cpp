@@ -3,7 +3,7 @@
 using namespace Baukasten;
 
 LogicalSpace::LogicalSpace() :
-    EntityManager()
+	EntityManager()
 {
 }
 

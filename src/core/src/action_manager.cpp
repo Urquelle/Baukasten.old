@@ -44,41 +44,41 @@ ActionList ActionManager::getInvokedActions() const
 
 bool ActionManager::hasAction( const std::string &id ) const
 {
-    return has( id );
+	return has( id );
 }
 
 void ActionManager::invokeAction( const std::string &id )
 {
-    Action *action = getAction( id );
+	Action *action = getAction( id );
 
-    if ( action && !action->isActive() ) {
-        action->clear();
-        action->setActive( true );
-        mActionQueue.push_back( action );
+	if ( action && !action->isActive() ) {
+		action->clear();
+		action->setActive( true );
+		mActionQueue.push_back( action );
 
 		action->getSource()->onActionInvoked().emit(
 			action->getSource(),
 			action
 		);
-    }
+	}
 }
 
 void ActionManager::invokeAction( const std::string &id, GameEntity *target )
 {
 	BK_ASSERT( target != 0, "target must not be 0" );
-    Action *action = getAction( id );
+	Action *action = getAction( id );
 
-    if ( action && !action->isActive() ) {
-        action->clear();
-        action->setActive( true );
-        action->setTarget( target );
-        mActionQueue.push_back( action );
+	if ( action && !action->isActive() ) {
+		action->clear();
+		action->setActive( true );
+		action->setTarget( target );
+		mActionQueue.push_back( action );
 
 		action->getSource()->onActionInvoked().emit(
 			action->getSource(),
 			action
 		);
-    }
+	}
 }
 
 void ActionManager::invokeAction( const std::string &id, GameEntityList targets )
@@ -87,9 +87,9 @@ void ActionManager::invokeAction( const std::string &id, GameEntityList targets 
 
     if ( action && !action->isActive() ) {
 		action->clear();
-        action->setActive( true );
-        action->setTargets( targets );
-        mActionQueue.push_back( action );
+		action->setActive( true );
+		action->setTargets( targets );
+		mActionQueue.push_back( action );
 
 		action->getSource()->onActionInvoked().emit(
 			action->getSource(),

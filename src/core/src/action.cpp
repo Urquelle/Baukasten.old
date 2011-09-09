@@ -4,10 +4,10 @@
 using namespace Baukasten;
 
 Action::Action( GameEntity &source, const std::string &id ) :
-    Entity( id ),
-    mSource( &source ),
+	Entity( id ),
+	mSource( &source ),
 	mTarget( 0 ),
-    mActive( false )
+	mActive( false )
 {
 }
 
@@ -17,23 +17,23 @@ Action::~Action()
 
 GameEntity* Action::getSource() const
 {
-    return mSource;
+	return mSource;
 }
 
 void Action::clear()
 {
-    mTarget = 0;
-    mTargets.erase( mTargets.begin(), mTargets.end() );
+	mTarget = 0;
+	mTargets.erase( mTargets.begin(), mTargets.end() );
 }
 
 bool Action::isActive() const
 {
-    return mActive;
+	return mActive;
 }
 
 void Action::setActive( bool active )
 {
-    mActive = active;
+	mActive = active;
 }
 
 void Action::setTarget( GameEntity *target )
@@ -44,12 +44,12 @@ void Action::setTarget( GameEntity *target )
 
 GameEntity* Action::getTarget()
 {
-    return mTarget;
+	return mTarget;
 }
 
 void Action::setTargets( GameEntityList &targets )
 {
-    mTargets = targets;
+	mTargets = targets;
 }
 
 GameEntityList Action::getTargets()

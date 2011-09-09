@@ -3,7 +3,7 @@
 using namespace Baukasten;
 
 State::State( const std::string &id ) :
-    Entity( id ),
+	Entity( id ),
 	mIntState( 0 )
 {
 }
