@@ -93,6 +93,18 @@ Key getKey( EKEY_CODE key )
 	case KEY_KEY_Z:
 		t_key = KEY_Z;
 		break;
+	case KEY_LEFT:
+		t_key = KEY_ARROW_LEFT;
+		break;
+	case KEY_UP:
+		t_key = KEY_ARROW_UP;
+		break;
+	case KEY_RIGHT:
+		t_key = KEY_ARROW_RIGHT;
+		break;
+	case KEY_DOWN:
+		t_key = KEY_ARROW_DOWN;
+		break;
 	}
 
 	return t_key;
