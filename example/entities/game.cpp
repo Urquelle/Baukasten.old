@@ -70,7 +70,7 @@ int Game::init()
 {
 	initBindings();
 
-	CoreServices *services = new CoreServices();
+	CoreServices *services = CoreServices::instance();
 
 	services->init();
 
