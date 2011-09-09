@@ -1,9 +1,9 @@
 #include "game.h"
 #include "../lua/bindings.h"
 #include "world_map.h"
-#include "forms/worldmap_form.h"
 
 #include <core_services.h>
+#include <form.h>
 #include <generic_state.h>
 #include <lua/action_lua.h>
 #include <irrlicht/irrlicht_graphics.h>
@@ -83,14 +83,7 @@ int Game::init()
 
 	// init Entities
 	mWorldMap = new WorldMap( "worldmap" );
-
-	WorldMapForm *form = new WorldMapForm(
-		"form:worldmap",
-		mGraphics
-	);
-
-	mWorldMap->setForm( form );
-	getForm()->addToVSpace( form );
+	getForm()->addToVSpace( mWorldMap->getForm() );
 
 	addChild( mWorldMap );
 }
