@@ -24,8 +24,8 @@ WorldMap::WorldMap( const std::string &id ) :
 
 	BasicType *type = new BasicType( "basic" );
 
-    Unit *sanchez = new Unit( "sanchez" );
-    Unit *gomez = new Unit( "gomez" );
+	Unit *sanchez = new Unit( "sanchez" );
+	Unit *gomez = new Unit( "gomez" );
 	Unit *ramirez = new Unit( "ramirez" );
 
 	sanchez->setType( type );

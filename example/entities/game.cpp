@@ -37,7 +37,7 @@ Game::~Game()
 void Game::start()
 {
 	init();
-    run();
+	run();
 }
 
 bool Game::keepRunning()
