@@ -4,15 +4,17 @@
 #ifndef NDEBUG
 
 #include <iostream>
-#include <assert.h>
+#include <cassert>
+#include <cstdlib>
 
-#define BK_DEBUG( X ) std::cout << __FILE__ << " " << __LINE__ << ": " << X << std::endl;
+using namespace std;
+
+#define BK_DEBUG( X ) cout << __FILE__ << " " << __LINE__ << ": " << X << endl;
 #define BK_ASSERT( TST, MSG )							\
 		( (TST) ? (void)0								\
-			: (std::cerr << __FILE__ "(" << __LINE__	\
+			: (cerr << __FILE__ "(" << __LINE__			\
 				<< "): Assertion failed " #TST			\
-				<< " " << MSG << std::endl,abort()))
-
+				<< " " << MSG << endl,abort()))
 #else
 
 #define BK_DEBUG( X )
