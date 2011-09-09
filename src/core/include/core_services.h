@@ -9,7 +9,7 @@ namespace Baukasten {
 
 	class BAUKASTEN_EXPORT CoreServices {
 	public:
-		CoreServices();
+		static CoreServices* instance();
 		virtual ~CoreServices();
 
 		void init();
@@ -17,6 +17,10 @@ namespace Baukasten {
 		IInput* getInputService() const;
 
 	private:
+		CoreServices();
+
+		static CoreServices* mInstance;
+
 		IGraphics*	mGraphics;
 		IInput*		mInput;
 	};

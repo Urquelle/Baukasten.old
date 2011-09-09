@@ -5,6 +5,15 @@
 
 using namespace Baukasten;
 
+CoreServices* CoreServices::mInstance = 0;
+
+CoreServices* CoreServices::instance()
+{
+	if ( !mInstance )
+		mInstance = new CoreServices();
+	return mInstance;
+}
+
 CoreServices::CoreServices() :
 	mGraphics( GraphicsInterface::instance() ),
 	mInput( InputInterface::instance() )
