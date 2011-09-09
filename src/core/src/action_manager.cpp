@@ -83,9 +83,9 @@ void ActionManager::invokeAction( const std::string &id, GameEntity *target )
 
 void ActionManager::invokeAction( const std::string &id, GameEntityList targets )
 {
-    Action *action = getAction( id );
+	Action *action = getAction( id );
 
-    if ( action && !action->isActive() ) {
+	if ( action && !action->isActive() ) {
 		action->clear();
 		action->setActive( true );
 		action->setTargets( targets );
@@ -95,24 +95,24 @@ void ActionManager::invokeAction( const std::string &id, GameEntityList targets 
 			action->getSource(),
 			action
 		);
-    }
+	}
 }
 
 void ActionManager::dropAction( const std::string &id )
 {
-    Action *action = getAction( id );
+	Action *action = getAction( id );
 
-    if ( action && action->isActive() ) {
+	if ( action && action->isActive() ) {
 		action->setActive( false );
-        ActionList::iterator it = mActionQueue.begin();
+		ActionList::iterator it = mActionQueue.begin();
 
-        while ( it != mActionQueue.end() ) {
+		while ( it != mActionQueue.end() ) {
 			if ( *it == action ) {
 				mActionQueue.erase( it );
-                break;
+				break;
 			}
 			it++;
-        }
-    }
+		}
+	}
 }
 
