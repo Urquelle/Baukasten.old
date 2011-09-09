@@ -6,6 +6,7 @@
 #include "world_map.h"
 
 #include <core_services.h>
+#include <debug.h>
 #include <form.h>
 #include <generic_state.h>
 #include <lua/action_lua.h>
@@ -50,8 +51,22 @@ bool Game::keepRunning()
 
 void Game::onKeyDown( Key key, Modifier mod )
 {
-	if ( key == Baukasten::KEY_Q ) {
+	switch ( key ) {
+	case KEY_Q:
 		getState<StateInt*>( "keepRunning" )->setValue( 0 );
+		break;
+	case KEY_ARROW_LEFT:
+		BK_DEBUG( "move left" );
+		break;
+	case KEY_ARROW_UP:
+		BK_DEBUG( "move up" );
+		break;
+	case KEY_ARROW_RIGHT:
+		BK_DEBUG( "move right" );
+		break;
+	case KEY_ARROW_DOWN:
+		BK_DEBUG( "move down" );
+		break;
 	}
 }
 
