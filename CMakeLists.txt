@@ -10,6 +10,12 @@ set( Graphics_INCLUDE_DIR ${CMAKE_CURRENT_SOURCE_DIR}/src/graphics/include )
 set( Input_INCLUDE_DIR ${CMAKE_CURRENT_SOURCE_DIR}/src/input/include )
 set( Core_LIB_DIR ${CMAKE_CURRENT_SOURCE_DIR}/lib )
 
+set( CMAKE_BUILD_TYPE Debug )
+
+if( NOT ( CMAKE_BUILD_TYPE STREQUAL Debug ) )
+	add_definitions( -DNDEBUG )
+endif()
+
 add_subdirectory(src)
 add_subdirectory(example)
 
