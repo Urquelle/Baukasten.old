@@ -6,6 +6,7 @@ using namespace Baukasten;
 Action::Action( GameEntity &source, const std::string &id ) :
     Entity( id ),
     mSource( &source ),
+	mTarget( 0 ),
     mActive( false )
 {
 }
