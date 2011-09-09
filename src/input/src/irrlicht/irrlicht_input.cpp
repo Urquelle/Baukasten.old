@@ -128,14 +128,10 @@ bool IrrlichtInput::OnEvent( const SEvent &event )
 {
 	switch ( event.EventType ) {
 	case EET_KEY_INPUT_EVENT:
-		switch ( event.KeyInput.Key ) {
-		case KEY_KEY_Q:
-			mOnKeyDown.emit(
-				getKey( event.KeyInput.Key ),
-				getModifier( event.KeyInput )
-			);
-			break;
-		}
+		mOnKeyDown.emit(
+			getKey( event.KeyInput.Key ),
+			getModifier( event.KeyInput )
+		);
 		break;
 	}
 }
