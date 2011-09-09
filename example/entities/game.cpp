@@ -1,4 +1,7 @@
 #include "game.h"
+
+#include "basic_type.h"
+#include "entities/unit.h"
 #include "../lua/bindings.h"
 #include "world_map.h"
 
@@ -75,16 +78,35 @@ int Game::init()
 	services->init();
 
 	mInput = dynamic_cast<IrrlichtInput*>( services->getInputService() );
+	mInput->onKeyDown().connect( sigc::mem_fun( this, &Game::onKeyDown ) );
 	mGraphics = dynamic_cast<IrrlichtGraphics*>( services->getVideoService() );
-
 	mGraphics->getDevice()->setWindowCaption( L"Eisenfaust" );
 
-	mInput->onKeyDown().connect( sigc::mem_fun( this, &Game::onKeyDown ) );
-
-	// init Entities
+	// init worldmap
 	mWorldMap = new WorldMap( "entity:worldmap" );
 	getForm()->addToVSpace( mWorldMap->getForm() );
 
+	// init hero's group and some units
+	BasicType *type = new BasicType( "basic" );
+	GameEntity *group = new GameEntity( "entity:heroGroup" );
+
+	Unit *sanchez = new Unit( "sanchez" );
+	Unit *gomez = new Unit( "gomez" );
+	Unit *ramirez = new Unit( "ramirez" );
+
+	sanchez->setType( type );
+	gomez->setType( type );
+	ramirez->setType( type );
+
+	sanchez->setName( sanchez->getId() );
+	gomez->setName( gomez->getId() );
+	ramirez->setName( ramirez->getId() );
+
+	group->addChild( sanchez );
+	group->addChild( gomez );
+	group->addChild( ramirez );
+
 	addChild( mWorldMap );
+	addChild( group );
 }
 
