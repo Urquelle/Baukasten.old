@@ -105,9 +105,9 @@ int Game::init()
 	BasicType *type = new BasicType( "basic" );
 	GameEntity *group = new GameEntity( "entity:heroGroup" );
 
-	Unit *sanchez = new Unit( "sanchez" );
-	Unit *gomez = new Unit( "gomez" );
-	Unit *ramirez = new Unit( "ramirez" );
+	Unit *sanchez = new Unit( "unit:sanchez" );
+	Unit *gomez = new Unit( "unit:gomez" );
+	Unit *ramirez = new Unit( "unit:ramirez" );
 
 	sanchez->setType( type );
 	gomez->setType( type );
