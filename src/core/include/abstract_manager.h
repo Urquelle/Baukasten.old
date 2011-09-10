@@ -24,6 +24,8 @@ namespace Baukasten {
 	template<class T>
 	class AbstractManager {
 	public:
+		typedef map<string, shared_ptr<T>> TMap;
+
 		/*! constructor
 		 *
 		 * nothing fancy here.
@@ -35,11 +37,10 @@ namespace Baukasten {
 		/*! destructor */
 		virtual ~AbstractManager()
 		{
-			typename map<string, T*>::iterator it = mMap.begin();
+			auto it = mMap.begin();
 			while ( it != mMap.end() ) {
-				if ( (*it).second )
-					delete (*it).second;
-				++it;
+				it->second.reset();
+				it++;
 			}
 		}
 
@@ -64,10 +65,10 @@ namespace Baukasten {
 		 */
 		virtual void add( const std::string &id, T *t )
 		{
-			if ( t && !has( id ) )
-				mMap[ id ] = t;
 			BK_ASSERT( t != 0, "t must not be 0." );
 			BK_ASSERT( !has( id ), "id " << id << " must be unique in the collection." );
+
+			mMap[ id ] = shared_ptr<T>( t );
 		}
 
 		/*! \brief fetch an object from the map.
@@ -80,8 +81,12 @@ namespace Baukasten {
 		 */
 		virtual T* get( const std::string &id ) const
 		{
-			typename map<string,T*>::const_iterator it = mMap.find( id );
-			return ( it == mMap.end() ) ? 0 : it->second;
+			typename TMap::const_iterator it = mMap.find( id );
+
+			if ( it == mMap.end() )
+				return 0;
+
+			return it->second.get();
 		}
 
 		/*! \brief fetch all objects from the map.
@@ -90,7 +95,7 @@ namespace Baukasten {
 		 *
 		 * \return map of object pointers of type T.
 		 */
-		virtual map<string, T*> getAll() const
+		virtual TMap getAll() const
 		{
 			return mMap;
 		}
@@ -121,7 +126,7 @@ namespace Baukasten {
 		}
 
 	protected:
-		map<string, T*> mMap;
+		TMap mMap;
 	};
 } /* Baukasten */
 

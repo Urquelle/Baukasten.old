@@ -59,12 +59,13 @@ VirtualSpace* Form::getVSpace() const
 
 void Form::render()
 {
-	EntityMap entities = mVSpace->getEntities();
-	EntityMap::const_iterator it = entities.begin();
+	typedef AbstractManager<Entity> EMap;
+	EMap::TMap entities = mVSpace->getEntities();
+	EMap::TMap::const_iterator it = entities.begin();
 	Form *form = 0;
 
 	while ( it != entities.end() ) {
-		form = static_cast<Form*>( it->second );
+		form = static_cast<Form*>( it->second.get() );
 		if ( form )
 			form->render();
 		it++;

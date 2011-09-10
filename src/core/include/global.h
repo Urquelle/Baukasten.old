@@ -32,7 +32,7 @@ namespace Baukasten {
 	typedef map<string, GameEntity*>	GameEntityMap;
 	typedef list<GameEntity*>			GameEntityList;
 
-	typedef map<string, Action*>		ActionMap;
+	typedef map<string, shared_ptr<Action>>	ActionMap;
 	typedef list<Action*>				ActionList;
 
 	typedef map<string, void*>			ObjectMap;
@@ -40,7 +40,7 @@ namespace Baukasten {
 	typedef map<string, LogicalSpace*>	LSpaces;
 	typedef map<string, VirtualSpace*>	VSpaces;
 
-	typedef map<string, State*>			StateMap;
+	typedef map<string, shared_ptr<State>>	StateMap;
 	typedef list<State*>				StateList;
 }
 

@@ -32,7 +32,7 @@ Action* ActionManager::getAction( const std::string &id ) const
 	return get( id );
 }
 
-ActionMap ActionManager::getActions() const
+AbstractManager<Action>::TMap ActionManager::getActions() const
 {
 	return getAll();
 }

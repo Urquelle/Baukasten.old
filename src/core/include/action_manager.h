@@ -55,7 +55,7 @@ namespace Baukasten {
 		Action* getAction( const std::string& ) const;
 
 		/*! \brief returns the map of objects. */
-		ActionMap getActions() const;
+		AbstractManager<Action>::TMap getActions() const;
 
 		/*! \brief returns a list of currently active actions.
 		 *
