@@ -63,7 +63,7 @@ namespace Baukasten {
 		 * \param id id for the object in the map
 		 * \param t object to be added to the map
 		 */
-		virtual void add( const std::string &id, T *t )
+		virtual void add( const string &id, T *t )
 		{
 			BK_ASSERT( t != 0, "t must not be 0." );
 			BK_ASSERT( !has( id ), "id " << id << " must be unique in the collection." );
@@ -79,7 +79,7 @@ namespace Baukasten {
 		 * \return object of type T* if object is found, 0 if the object
 		 * is not in the map.
 		 */
-		virtual T* get( const std::string &id ) const
+		virtual T* get( const string &id ) const
 		{
 			typename TMap::const_iterator it = mMap.find( id );
 
@@ -108,7 +108,7 @@ namespace Baukasten {
 		 * \param id id under which the object is stored in the map.
 		 * \return returns true if the key id is in the map, false otherwise.
 		 */
-		virtual bool has( const std::string &id ) const
+		virtual bool has( const string &id ) const
 		{
 			return ( mMap.find( id ) != mMap.end() );
 		}
@@ -120,7 +120,7 @@ namespace Baukasten {
 		 *
 		 * \param id id string for the key in the map.
 		 */
-		virtual void remove( const std::string &id )
+		virtual void remove( const string &id )
 		{
 			mMap.erase( mMap.find( id ) );
 		}
