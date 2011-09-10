@@ -145,6 +145,7 @@ bool IrrlichtInput::init( CoreServices *coreServices )
 	IrrlichtGraphics *graphics =
 		dynamic_cast<IrrlichtGraphics*>( coreServices->getVideoService() );
 
+	BK_ASSERT( graphics != 0, "graphics must not be 0." );
 	graphics->getDevice()->setEventReceiver( this );
 }
 
