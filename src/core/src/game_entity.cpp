@@ -28,7 +28,7 @@ GameEntity::GameEntity( const std::string &id ) :
 
 GameEntity::~GameEntity()
 {
-	BK_DEBUG( getId() << ": selfdestrict in 1 ... 2 ... 3!" );
+	BK_DEBUG( getId() << ": selfdestruction in 1 ... 2 ... 3!" );
 
 	// destroy children
 	GameEntityMap::iterator it = mChildren.begin();
