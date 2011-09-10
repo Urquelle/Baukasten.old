@@ -38,8 +38,8 @@ void Action::setActive( bool active )
 
 void Action::setTarget( GameEntity *target )
 {
-	if ( target )
-		mTarget = target;
+	BK_ASSERT( target != 0, "target must not be 0." );
+	mTarget = target;
 }
 
 GameEntity* Action::getTarget()
