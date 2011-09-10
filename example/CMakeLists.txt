@@ -1,6 +1,5 @@
 set(
     example_SRCS
-	actions/render_scene.cpp
 	entities/basic_type.cpp
     entities/game.cpp
 	entities/unit.cpp
