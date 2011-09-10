@@ -1,5 +1,4 @@
 #include "unit.h"
-#include "basic_type.h"
 
 #include <lua/action_lua.h>
 
