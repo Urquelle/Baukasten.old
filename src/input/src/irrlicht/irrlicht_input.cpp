@@ -134,6 +134,8 @@ bool IrrlichtInput::OnEvent( const SEvent &event )
 		);
 		break;
 	}
+
+	return false;
 }
 
 bool IrrlichtInput::init( CoreServices *coreServices )
