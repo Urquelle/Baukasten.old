@@ -31,7 +31,7 @@ GameEntity::~GameEntity()
 	BK_DEBUG( getId() << ": selfdestruction in 1 ... 2 ... 3!" );
 
 	// destroy children
-	GameEntityMap::iterator it = mChildren.begin();
+	auto it = mChildren.begin();
 	while ( it != mChildren.end() ) {
 		delete it->second;
 		it++;
@@ -100,7 +100,7 @@ void GameEntity::addChild( GameEntity *child )
 
 GameEntity* GameEntity::getChild( const std::string &id ) const
 {
-	GameEntityMap::const_iterator it = mChildren.find( id );
+	auto it = mChildren.find( id );
 	return ( it == mChildren.end() ) ? 0 : it->second;
 }
 
@@ -126,14 +126,14 @@ void GameEntity::runActions()
 {
 	// run own actions first
 	ActionList al = getInvokedActions();
-	ActionList::const_iterator it = al.begin();
+	auto it = al.begin();
 	while ( it != al.end() ) {
 		(*it)->run();
 		it++;
 	}
 
 	// run children's actions
-	GameEntityMap::const_iterator cit = mChildren.begin();
+	auto cit = mChildren.begin();
 	while ( cit != mChildren.end() ) {
 		cit->second->runActions();
 		cit++;

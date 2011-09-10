@@ -33,8 +33,7 @@ void EntityType::addChild( EntityType *child )
 {
 	BK_ASSERT( child != 0, "child must not be 0." );
 
-	EntityTypeList::iterator it =
-		std::find( mChildren.begin(), mChildren.end(), child );
+	auto it = find( mChildren.begin(), mChildren.end(), child );
 
 	if ( it == mChildren.end() )
 		mChildren.push_back( child );

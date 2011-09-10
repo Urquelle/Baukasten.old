@@ -104,7 +104,7 @@ void ActionManager::dropAction( const std::string &id )
 
 	if ( action && action->isActive() ) {
 		action->setActive( false );
-		ActionList::iterator it = mActionQueue.begin();
+		auto it = mActionQueue.begin();
 
 		while ( it != mActionQueue.end() ) {
 			if ( *it == action ) {
