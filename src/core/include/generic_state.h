@@ -27,6 +27,7 @@ namespace Baukasten {
 
 		~GenericState()
 		{
+			BK_DEBUG( getId() << ": i'm freeeeee" );
 		}
 
 		const T& getValue() const

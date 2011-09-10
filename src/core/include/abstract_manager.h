@@ -39,6 +39,7 @@ namespace Baukasten {
 		{
 			auto it = mMap.begin();
 			while ( it != mMap.end() ) {
+				BK_DEBUG( "in ~AbstractManager ... deleting your " << it->second->getId() );
 				it->second.reset();
 				it++;
 			}
