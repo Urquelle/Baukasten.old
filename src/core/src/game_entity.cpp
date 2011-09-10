@@ -3,8 +3,6 @@
 #include "action.h"
 #include "debug.h"
 
-#include <iostream>
-
 using namespace Baukasten;
 using namespace std;
 
