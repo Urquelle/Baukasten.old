@@ -23,7 +23,7 @@ namespace Baukasten {
 		float z;
 	} t_pos;
 
-	typedef map<string, Entity*>		EntityMap;
+	typedef map<string, shared_ptr<Entity>>	EntityMap;
 	typedef list<Entity*>				EntityList;
 
 	typedef map<string, EntityType*>	EntityTypeMap;

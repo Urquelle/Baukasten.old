@@ -30,7 +30,7 @@ Entity* EntityManager::getEntity( const std::string &id ) const
 	return get( id );
 }
 
-AbstractManager<Entity>::TMap EntityManager::getEntities() const
+EntityMap EntityManager::getEntities() const
 {
 	return getAll();
 }
