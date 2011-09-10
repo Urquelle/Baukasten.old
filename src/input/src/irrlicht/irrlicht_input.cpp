@@ -157,7 +157,6 @@ void IrrlichtInput::shutDown()
 void IrrlichtInput::setDevice( IrrlichtDevice *device )
 {
 	BK_ASSERT( device != 0, "device must not be 0." );
-
 	mDevice = device;
 }
 

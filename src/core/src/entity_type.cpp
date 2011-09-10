@@ -42,10 +42,7 @@ void EntityType::addChild( EntityType *child )
 void EntityType::removeChild( const EntityType *child )
 {
 	BK_ASSERT( child != 0, "child must not be 0." );
-
-	mChildren.erase(
-		std::find( mChildren.begin(), mChildren.end(), child )
-	);
+	mChildren.erase( find( mChildren.begin(), mChildren.end(), child ) );
 }
 
 State* EntityType::getEntityState( const std::string &id )

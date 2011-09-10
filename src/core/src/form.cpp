@@ -24,7 +24,6 @@ Form::~Form()
 void Form::addToLSpace( Entity *entity )
 {
 	BK_ASSERT( entity != 0, "entity must not be 0." );
-
 	mLSpace->addEntity( entity );
 }
 
@@ -42,7 +41,6 @@ LogicalSpace* Form::getLSpace() const
 void Form::addToVSpace( Drawable *entity )
 {
 	BK_ASSERT( entity != 0, "entity must not be 0." );
-
 	mVSpace->addEntity( entity );
 }
 
