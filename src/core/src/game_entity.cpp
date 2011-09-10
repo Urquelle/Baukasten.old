@@ -30,6 +30,14 @@ GameEntity::GameEntity( const std::string &id ) :
 
 GameEntity::~GameEntity()
 {
+	BK_DEBUG( getId() << ": selfdestrict in 1 ... 2 ... 3!" );
+
+	// destroy children
+	GameEntityMap::iterator it = mChildren.begin();
+	while ( it != mChildren.end() ) {
+		delete it->second;
+		it++;
+	}
 }
 
 void GameEntity::setType( EntityType *type )
