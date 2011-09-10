@@ -2,7 +2,9 @@
 #define ABSTRACT_MANAGER_4A46G9D2
 
 #include "global.h"
+
 #include "action.h"
+#include "debug.h"
 #include "state.h"
 
 namespace Baukasten {
@@ -48,8 +50,8 @@ namespace Baukasten {
 		 */
 		virtual void add( T *t )
 		{
-			if ( t )
-				add( t->getId(), t );
+			BK_ASSERT( t != 0, "t must not be 0." );
+			add( t->getId(), t );
 		}
 
 		/*! \brief add object t to the collection.
@@ -64,6 +66,8 @@ namespace Baukasten {
 		{
 			if ( t && !has( id ) )
 				mMap[ id ] = t;
+			BK_ASSERT( t != 0, "t must not be 0." );
+			BK_ASSERT( !has( id ), "id " << id << " must be unique in the collection." );
 		}
 
 		/*! \brief fetch an object from the map.
