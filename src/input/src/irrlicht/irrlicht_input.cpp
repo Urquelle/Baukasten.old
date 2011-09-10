@@ -112,7 +112,15 @@ Key getKey( EKEY_CODE key )
 
 Modifier getModifier( SEvent::SKeyInput key )
 {
-	return KEYMOD_NONE;
+	Modifier mod = KEYMOD_NONE;
+
+	if ( key.PressedDown ) {
+		mod = static_cast<Modifier>( mod | KEYMOD_PRESSED );
+	} else {
+		mod = static_cast<Modifier>( mod | KEYMOD_RELEASED );
+	}
+
+	return mod;
 }
 
 IrrlichtInput::IrrlichtInput() :
