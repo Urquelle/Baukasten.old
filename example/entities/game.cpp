@@ -23,7 +23,10 @@ using namespace core;
 enum Mode { MODE_WORLDMAP, MODE_MENU, MODE_BATTLE };
 
 Game::Game( const std::string &id ) :
-	GameEntity( id )
+	GameEntity( id ),
+	mWorldMap( 0 ), mGraphics( 0 ), mInput( 0 ),
+	mMoveRight( false ), mMoveLeft( false ),
+	mMoveUp( false ), mMoveDown( false )
 {
 	addState( "keepRunning", new StateInt( "keepRunning", 1 ) );
 	addState( "currentMode", new StateInt( "currentMode", MODE_WORLDMAP ) );
@@ -56,16 +59,36 @@ void Game::onKeyDown( Key key, Modifier mod )
 		getState<StateInt*>( "keepRunning" )->setValue( 0 );
 		break;
 	case KEY_ARROW_LEFT:
-		BK_DEBUG( "move left" );
+		if ( mod & KEYMOD_PRESSED && !mMoveLeft ) {
+			BK_DEBUG( "move left" );
+			mMoveLeft = true;
+		} else if ( mod & KEYMOD_RELEASED ) {
+			mMoveLeft = false;
+		}
 		break;
 	case KEY_ARROW_UP:
-		BK_DEBUG( "move up" );
+		if ( mod & KEYMOD_PRESSED && !mMoveUp ) {
+			BK_DEBUG( "move up" );
+			mMoveUp = true;
+		} else if ( mod & KEYMOD_RELEASED ) {
+			mMoveUp = false;
+		}
 		break;
 	case KEY_ARROW_RIGHT:
-		BK_DEBUG( "move right" );
+		if ( mod & KEYMOD_PRESSED && !mMoveRight ) {
+			BK_DEBUG( "move right" );
+			mMoveRight = true;
+		} else if ( mod & KEYMOD_RELEASED ) {
+			mMoveRight = false;
+		}
 		break;
 	case KEY_ARROW_DOWN:
-		BK_DEBUG( "move down" );
+		if ( mod & KEYMOD_PRESSED && !mMoveDown ) {
+			BK_DEBUG( "move down" );
+			mMoveDown = true;
+		} else if ( mod & KEYMOD_RELEASED ) {
+			mMoveDown = false;
+		}
 		break;
 	}
 }
