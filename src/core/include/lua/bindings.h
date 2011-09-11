@@ -5,12 +5,15 @@
 
 #include "action.h"
 #include "action_lua.h"
-
+#include "drawable.h"
 #include "entity.h"
 #include "entity_type.h"
+#include "form.h"
 #include "game_entity.h"
 #include "generic_state.h"
+#include "logical_space.h"
 #include "state.h"
+#include "virtual_space.h"
 
 #include "slb/SLB.hpp"
 
@@ -18,13 +21,49 @@ void wrapClasses()
 {
 	using namespace Baukasten;
 
-	// register Entity Class
+	// register Entity class
 	SLB::Class<Entity>("Entity")
 		.comment("Wrapper for the Entity Class.")
 		.constructor<const std::string&>()
 		.const_set("getId", &Entity::getId);
 
-	// register StateManager Class
+	// register Drawable class
+	SLB::Class<Drawable,SLB::Instance::NoCopy>("Drawable")
+		.comment("Drawable class")
+		.inherits<Entity>()
+		.set("setPosition", &Drawable::setPosition)
+			.param("position")
+		.set("getPosition", &Drawable::getPosition)
+		.set("setSize", &Drawable::setSize)
+			.param("size")
+		.set("getSize", &Drawable::getSize)
+		.set("setPitch", &Drawable::setPitch)
+			.param("float value")
+		.const_set("getPitch", &Drawable::getPitch)
+		.set("setYaw", &Drawable::setYaw)
+			.param("float value")
+		.const_set("getYaw", &Drawable::getYaw)
+		.set("setRoll", &Drawable::setRoll)
+			.param("float value")
+		.const_set("getRoll", &Drawable::getRoll)
+		.set("setScale", &Drawable::setScale)
+			.param("float value")
+		.const_set("getScale", &Drawable::getScale);
+
+	// register EntityManager class
+	SLB::Class<EntityManager>("EntityManager")
+		.comment("EntityManager class")
+		.constructor()
+		.set("addEntity", ( void (EntityManager::*)(Entity*) ) &EntityManager::addEntity)
+			.param("Entity object")
+		.set("getEntity", &EntityManager::getEntity)
+			.param("Entity id")
+		.const_set("getEntities", &EntityManager::getEntities)
+		.const_set("hasEntity", &EntityManager::hasEntity)
+		.set("removeEntity", &EntityManager::removeEntity)
+			.param("Entity id");
+
+	// register StateManager class
 	SLB::Class<StateManager>("StateManager")
 		.comment("StateManager Wrapper.")
 		.constructor()
@@ -33,8 +72,11 @@ void wrapClasses()
 		.set("addState", ( void (StateManager::*)(const std::string&, State*) ) &StateManager::addState)
 			.param("ID of the State")
 			.param("State Object")
-		.set("getState", &StateManager::getState<State*>);
+		.const_set("getState", &StateManager::getState<State*>)
+		.const_set("getStates", &StateManager::getStates)
+		.const_set("hasState", &StateManager::hasState);
 
+	// register ActionManager class
 	SLB::Class<ActionManager>("ActionManager")
 		.comment("ActionManager Wrapper")
 		.constructor()
@@ -60,6 +102,7 @@ void wrapClasses()
 		.set("dropAction", &ActionManager::dropAction)
 			.param("ID of the Action to drop from the execution queue");
 
+	// register Action class
 	SLB::Class<Action,SLB::Instance::NoCopy>("Action")
 		.comment("Action Wrapper")
 		.inherits<Entity>()
@@ -113,6 +156,7 @@ void wrapClasses()
 			.param("state id")
 		.set("getChild", &GameEntity::getChild)
 			.param("child id")
+		.set("getForm", &GameEntity::getForm)
 		.set("runActions", &GameEntity::runActions);
 
 	// register State Class
@@ -153,6 +197,38 @@ void wrapClasses()
 		.set("setValue",&StateBool::setValue)
 			.param("expects a boolean.")
 		.set("getValue",&StateBool::getValue);
+
+	// register Form class
+	SLB::Class<Form>("Form")
+		.comment("Form class")
+		.constructor<const std::string&>()
+		.inherits<Entity>()
+		.inherits<Drawable>()
+		.inherits<StateManager>()
+		.inherits<EntityManager>()
+		.set("addToLSpace", &Form::addToLSpace)
+			.param("Entity expected")
+		.set("removeFromLSpace", &Form::removeFromLSpace)
+			.param("Entity id expected")
+		.set("getLSpace", &Form::getLSpace)
+		.set("addToVSpace", &Form::addToVSpace)
+			.param("Entity expected")
+		.set("removeFromVSpace", &Form::removeFromVSpace)
+			.param("Entity id expected")
+		.set("getVSpace", &Form::getVSpace);
+
+	// register LogicalSpace class
+	SLB::Class<LogicalSpace>("LogicalSpace")
+		.comment("LogicalSpace class")
+		.constructor()
+		.inherits<EntityManager>();
+
+	// register VirtualSpace class
+	SLB::Class<VirtualSpace>("VirtualSpace")
+		.comment("VirtualSpace class")
+		.constructor()
+		.inherits<LogicalSpace>()
+		.inherits<EntityManager>();
 }
 
 #endif /* end of include guard: GLOBAL_LUA_S7HRAEG3 */
