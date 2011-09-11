@@ -33,5 +33,7 @@ void Form2d::render()
 		core::rect<s32>(0, 0, getSize().width, getSize().height),
 		0, video::SColor(255,255,255,255), true
 	);
+
+	IrrlichtForm::render();
 }
 
