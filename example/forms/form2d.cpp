@@ -29,7 +29,7 @@ void Form2d::render()
 {
 	mDriver->draw2DImage(
 		mBackground,
-		core::position2d<s32>( getPosition().x, getPosition().y ),
+		core::position2d<s32>( getPosition().getX(), getPosition().getY() ),
 		core::rect<s32>(0, 0, getSize().width, getSize().height),
 		0, video::SColor(255,255,255,255), true
 	);

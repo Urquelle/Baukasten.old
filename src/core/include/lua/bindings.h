@@ -229,6 +229,21 @@ void wrapClasses()
 		.constructor()
 		.inherits<LogicalSpace>()
 		.inherits<EntityManager>();
+
+	// register t_pos struct
+	SLB::Class<t_pos>("t_pos")
+		.comment("t_pos struct")
+		.constructor()
+		.constructor<float, float, float>()
+		.set("getX", &t_pos::getX)
+		.set("setX", &t_pos::setX)
+			.param("x value")
+		.set("getY", &t_pos::getY)
+		.set("setY", &t_pos::setY)
+			.param("y value")
+		.set("getZ", &t_pos::getZ)
+		.set("setZ", &t_pos::setZ)
+			.param("z value");
 }
 
 #endif /* end of include guard: GLOBAL_LUA_S7HRAEG3 */

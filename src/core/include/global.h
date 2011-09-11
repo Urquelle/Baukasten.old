@@ -17,7 +17,20 @@ namespace Baukasten {
 
 	using namespace std;
 
-	typedef struct {
+	typedef struct t_pos {
+		t_pos() : x(0), y(0), z(0) {}
+		t_pos( float _x, float _y, float _z ) :
+			x( _x ), y( _y ), z( _z ) {}
+
+		float getX() const { return x; }
+		float getY() const { return y; }
+		float getZ() const { return z; }
+
+		void setX( float _x ) { x = _x; }
+		void setY( float _y ) { y = _y; }
+		void setZ( float _z ) { z = _z; }
+
+	private:
 		float x;
 		float y;
 		float z;
