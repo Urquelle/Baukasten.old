@@ -228,7 +228,9 @@ void wrapClasses()
 		.comment("VirtualSpace class")
 		.constructor()
 		.inherits<LogicalSpace>()
-		.inherits<EntityManager>();
+		.inherits<EntityManager>()
+		.set("getDrawable", &VirtualSpace::getDrawable)
+			.param("Drawable id");
 
 	// register t_pos struct
 	SLB::Class<t_pos>("t_pos")

@@ -12,3 +12,8 @@ VirtualSpace::~VirtualSpace()
 {
 }
 
+Drawable* VirtualSpace::getDrawable( const std::string &id ) const
+{
+	return static_cast<Drawable*>( LogicalSpace::getEntity( id ) );
+}
+

@@ -11,6 +11,8 @@ namespace Baukasten {
 	public:
 		VirtualSpace();
 		virtual ~VirtualSpace();
+
+		Drawable* getDrawable( const std::string& ) const;
 	};
 }
 
