@@ -17,10 +17,10 @@ namespace irr {
 	} /* video */
 } /* irr */
 
-class WorldMapForm : public Baukasten::IrrlichtForm {
+class Form2d : public Baukasten::IrrlichtForm {
 public:
-	WorldMapForm( const std::string&, Baukasten::IGraphics* );
-	virtual ~WorldMapForm();
+	Form2d( const std::string&, const std::string&, Baukasten::IGraphics* );
+	virtual ~Form2d();
 
 	void render();
 

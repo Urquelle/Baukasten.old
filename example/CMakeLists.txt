@@ -4,7 +4,7 @@ set(
     entities/game.cpp
 	entities/unit.cpp
 	entities/world_map.cpp
-	forms/worldmap_form.cpp
+	forms/form2d.cpp
     main.cpp
 )
 

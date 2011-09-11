@@ -1,7 +1,7 @@
 #include "world_map.h"
 
 #include "core_services.h"
-#include "forms/worldmap_form.h"
+#include "forms/form2d.h"
 
 #include <form.h>
 #include <generic_state.h>
@@ -16,10 +16,13 @@ WorldMap::WorldMap( const std::string &id ) :
 
 	CoreServices *services = CoreServices::instance();
 
-	setForm( new WorldMapForm(
+	Form2d *wmForm = new Form2d(
 		"form:worldmap",
+		"media/1024x768/worldmap.jpg",
 		services->getVideoService()
-	));
+	);
+
+	setForm( wmForm );
 }
 
 WorldMap::~WorldMap()

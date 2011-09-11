@@ -1,4 +1,4 @@
-#include "worldmap_form.h"
+#include "form2d.h"
 
 #include <irrlicht/irrlicht_graphics.h>
 
@@ -13,19 +13,19 @@ using namespace io;
 using namespace gui;
 using namespace video;
 
-WorldMapForm::WorldMapForm( const std::string &id, IGraphics *graphics ) :
+Form2d::Form2d( const std::string &id, const std::string &fileName, IGraphics *graphics ) :
 	IrrlichtForm( id, dynamic_cast<IrrlichtGraphics*>( graphics ) ),
 	mSceneManager( getGraphics()->getSceneManager() ),
 	mDriver( getGraphics()->getDriver() )
 {
-	mBackground = mDriver->getTexture("media/1024x768/worldmap.jpg");
+	mBackground = mDriver->getTexture( fileName.c_str() );
 }
 
-WorldMapForm::~WorldMapForm()
+Form2d::~Form2d()
 {
 }
 
-void WorldMapForm::render()
+void Form2d::render()
 {
 	mDriver->draw2DImage(
 		mBackground, core::position2d<s32>(0,0),
