@@ -20,7 +20,7 @@ include_directories(
 link_directories( ${Core_LIB_DIR} ${CMAKE_INSTALL_PREFIX}/lib )
 
 add_executable( exampleGame ${example_SRCS})
-target_link_libraries( exampleGame Baukasten SLB OgreMain )
+target_link_libraries( exampleGame Baukasten SLB bz2 jpeg png )
 set_target_properties( exampleGame PROPERTIES INSTALL_RPATH_USE_LINK_PATH TRUE)
 install(TARGETS exampleGame RUNTIME DESTINATION bin/)
 install(DIRECTORY scripts DESTINATION bin/)
