@@ -11,7 +11,8 @@ using namespace Baukasten;
 WorldMap::WorldMap( const std::string &id ) :
 	GameEntity( id )
 {
-	addState( new StateString( "currentCity", "berlin" ) );
+	addState( new StateString( "state:currentCity", "berlin" ) );
+	addState( new StateStringVector( "state:cities", { "berlin", "mannheim", "münchen" } ) );
 
 	CoreServices *services = CoreServices::instance();
 
