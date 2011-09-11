@@ -23,6 +23,11 @@ namespace Baukasten {
 		float z;
 	} t_pos;
 
+	typedef struct {
+		float width;
+		float height;
+	} t_size;
+
 	typedef map<string, shared_ptr<Entity>>	EntityMap;
 	typedef list<Entity*>				EntityList;
 

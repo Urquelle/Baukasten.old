@@ -42,6 +42,10 @@ namespace Baukasten {
 		/*! \brief getter method for position. */
 		const t_pos getPosition() const;
 
+		void setSize( const t_size );
+
+		const t_size getSize() const;
+
 		/*! \brief set the rotation around the x-axis.
 		 *
 		 * \param pitch rotation value.
@@ -72,6 +76,9 @@ namespace Baukasten {
 	protected:
 		// position of the object
 		t_pos   mPosition;
+
+		// size of the object
+		t_size	mSize;
 
 		// rotation around the x-axis
 		float   mPitch;

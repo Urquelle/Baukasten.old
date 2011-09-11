@@ -22,6 +22,9 @@ WorldMap::WorldMap( const std::string &id ) :
 		services->getVideoService()
 	);
 
+	wmForm->setPosition( { 0, 0, 0 } );
+	wmForm->setSize( { 1024, 768 } );
+
 	setForm( wmForm );
 }
 

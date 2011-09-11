@@ -21,6 +21,16 @@ const t_pos Drawable::getPosition() const
 	return mPosition;
 }
 
+void Drawable::setSize( const t_size size )
+{
+	mSize = size;
+}
+
+const t_size Drawable::getSize() const
+{
+	return mSize;
+}
+
 void Drawable::setPitch( const float pitch )
 {
 	mPitch = pitch;
