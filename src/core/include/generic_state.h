@@ -6,7 +6,7 @@
 #include "game_entity.h"
 #include "state.h"
 
-#include <list>
+#include <vector>
 #include <string>
 
 namespace Baukasten {
@@ -58,11 +58,75 @@ namespace Baukasten {
 		T mValue;
 	};
 
+	template<class T>
+	class BAUKASTEN_EXPORT GenericState<vector<T>> : public State {
+	public:
+
+		GenericState( const string &id ) :
+			State( id )
+		{
+		}
+
+		GenericState( const string &id, vector<T> values ) :
+			State( id ),
+			mValues( values )
+		{
+			BK_DEBUG( "i'm a special vector state." );
+		}
+
+		~GenericState()
+		{
+			BK_DEBUG( getId() << ": i'm freeeeee" );
+		}
+
+		const T& getValue( const int i ) const
+		{
+			if ( mIntState )
+				return ( static_cast<GenericState<T>*>( mIntState ) )->getValue( i );
+
+			return mValues.at( i );
+		}
+
+		void addValue( const T &value )
+		{
+			if ( mIntState )
+				mIntState = 0;
+
+			mValues.push_back( value );
+			onChange().emit( this );
+		}
+
+		void setValue( const int i, const T &value )
+		{
+			if ( mIntState )
+				mIntState = 0;
+
+			BK_ASSERT(
+				i < mValues.size(),
+				"position to include the value must not be greater than collection's size"
+			);
+
+			mValues[i] = value;
+			onChange().emit( this );
+		}
+
+		GenericState<vector<T>>* pack()
+		{
+			GenericState<vector<T>> *newState = new GenericState<vector<T>>( getId() );
+			newState->mIntState = this;
+			return newState;
+		}
+
+	private:
+		std::vector<T> mValues;
+	};
+
 	// typedef some often used genericstates
-	typedef GenericState<int>			StateInt;
-	typedef GenericState<float>			StateFloat;
-	typedef GenericState<std::string>	StateString;
-	typedef GenericState<bool>			StateBool;
+	typedef GenericState<int>				StateInt;
+	typedef GenericState<float>				StateFloat;
+	typedef GenericState<string>			StateString;
+	typedef GenericState<bool>				StateBool;
+	typedef GenericState<vector<string>>	StateStringVector;
 } /* Baukasten */
 
 #endif /* end of include guard: GENERIC_STATE_7VBP3DTZ */
