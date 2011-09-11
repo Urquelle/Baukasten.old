@@ -1,8 +1,8 @@
 #ifndef GLOBAL_H
 #define GLOBAL_H
 
-#include <map>
 #include <list>
+#include <map>
 #include <memory>
 #include <string>
 
@@ -29,24 +29,24 @@ namespace Baukasten {
 	} t_size;
 
 	typedef map<string, shared_ptr<Entity>>	EntityMap;
-	typedef list<Entity*>				EntityList;
+	typedef list<Entity*>					EntityList;
 
-	typedef map<string, EntityType*>	EntityTypeMap;
-	typedef list<EntityType*>			EntityTypeList;
+	typedef map<string, EntityType*>		EntityTypeMap;
+	typedef list<EntityType*>				EntityTypeList;
 
-	typedef map<string, GameEntity*>	GameEntityMap;
-	typedef list<GameEntity*>			GameEntityList;
+	typedef map<string, GameEntity*>		GameEntityMap;
+	typedef list<GameEntity*>				GameEntityList;
 
 	typedef map<string, shared_ptr<Action>>	ActionMap;
-	typedef list<Action*>				ActionList;
+	typedef list<Action*>					ActionList;
 
-	typedef map<string, void*>			ObjectMap;
+	typedef map<string, void*>				ObjectMap;
 
-	typedef map<string, LogicalSpace*>	LSpaces;
-	typedef map<string, VirtualSpace*>	VSpaces;
+	typedef map<string, LogicalSpace*>		LSpaces;
+	typedef map<string, VirtualSpace*>		VSpaces;
 
 	typedef map<string, shared_ptr<State>>	StateMap;
-	typedef list<State*>				StateList;
+	typedef list<State*>					StateList;
 }
 
 #if defined(EXPORT_LIB)
