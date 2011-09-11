@@ -32,6 +32,7 @@ Game::Game( const std::string &id ) :
 	addState( "currentMode", new StateInt( "currentMode", MODE_WORLDMAP ) );
 
 	addAction( new ActionLua( *this, "updateState", "scripts/update_state.lua" ) );
+
 	setForm( new Form( "form" ) );
 }
 
