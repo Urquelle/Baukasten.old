@@ -1,3 +1,11 @@
+-- TODO v-0.1 --
+* document core/input/graphics classes
+* add and document audio interface to coreservices
+
+-- TODO --
+* implement example game
+
+-- DONE --
 * define IGraphics interface.
 * define IInput interface.
 * move lib/ directory to project root.
