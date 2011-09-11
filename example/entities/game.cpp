@@ -60,7 +60,7 @@ void Game::onKeyDown( Key key, Modifier mod )
 		break;
 	case KEY_ARROW_LEFT:
 		if ( mod & KEYMOD_PRESSED && !mMoveLeft ) {
-			BK_DEBUG( "move left" );
+			mWorldMap->invokeAction( "moveLeftOnMap" );
 			mMoveLeft = true;
 		} else if ( mod & KEYMOD_RELEASED ) {
 			mMoveLeft = false;
@@ -76,7 +76,7 @@ void Game::onKeyDown( Key key, Modifier mod )
 		break;
 	case KEY_ARROW_RIGHT:
 		if ( mod & KEYMOD_PRESSED && !mMoveRight ) {
-			BK_DEBUG( "move right" );
+			mWorldMap->invokeAction( "moveRightOnMap" );
 			mMoveRight = true;
 		} else if ( mod & KEYMOD_RELEASED ) {
 			mMoveRight = false;

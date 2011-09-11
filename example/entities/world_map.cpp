@@ -3,6 +3,7 @@
 #include "core_services.h"
 #include "forms/form2d.h"
 
+#include <lua/action_lua.h>
 #include <form.h>
 #include <generic_state.h>
 
@@ -12,7 +13,9 @@ WorldMap::WorldMap( const std::string &id ) :
 	GameEntity( id )
 {
 	addState( new StateString( "state:currentCity", "berlin" ) );
-	addState( new StateStringVector( "state:cities", { "berlin", "mannheim", "münchen" } ) );
+
+	addAction( new ActionLua( *this, "moveRightOnMap", "scripts/move_right_on_map.lua" ) );
+	addAction( new ActionLua( *this, "moveLeftOnMap", "scripts/move_left_on_map.lua" ) );
 
 	CoreServices *services = CoreServices::instance();
 
@@ -37,7 +40,7 @@ WorldMap::WorldMap( const std::string &id ) :
 	t_pos mannheim = { 420, 410, 100 };
 
 	pointer->setSize( { 45, 35 } );
-	pointer->setPosition( mannheim );
+	pointer->setPosition( berlin );
 
 	wmForm->addToVSpace( pointer );
 }
