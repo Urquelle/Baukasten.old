@@ -26,6 +26,20 @@ WorldMap::WorldMap( const std::string &id ) :
 	wmForm->setSize( { 1024, 768 } );
 
 	setForm( wmForm );
+
+	Form2d *pointer = new Form2d(
+		"form:pointer",
+		"media/1024x768/pointer.jpg",
+		services->getVideoService()
+	);
+
+	t_pos berlin = { 467, 338, 100 };
+	t_pos mannheim = { 420, 410, 100 };
+
+	pointer->setSize( { 45, 35 } );
+	pointer->setPosition( mannheim );
+
+	wmForm->addToVSpace( pointer );
 }
 
 WorldMap::~WorldMap()
