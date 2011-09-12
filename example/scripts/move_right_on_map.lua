@@ -1,8 +1,8 @@
-posLondon	= t_pos( 255, 330, 0 )
-posParis	= t_pos( 295, 420, 0 )
-posBerlin	= t_pos( 485, 355, 0 )
-posVienna	= t_pos( 565, 480, 0 )
-posConst	= t_pos( 845, 670, 0 )
+posLondon	= t_pos( 250, 310, 0 )
+posParis	= t_pos( 275, 405, 0 )
+posBerlin	= t_pos( 467, 338, 0 )
+posVienna	= t_pos( 560, 470, 0 )
+posConst	= t_pos( 840, 655, 0 )
 
 cityConst	= "konstantinopel"
 cityVienna	= "vienna"

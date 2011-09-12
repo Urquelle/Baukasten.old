@@ -21,11 +21,11 @@ GameEntity* createPointer()
 
 	Form2d *form = new Form2d(
 		"form:pointer",
-		"media/1024x768/pointer.jpg",
+		"media/1024x768/pointer.png",
 		services->getVideoService()
 	);
 
-	form->setSize( { 45, 35 } );
+	form->setSize( { 50, 39 } );
 	form->setPosition( berlin );
 
 	pointer->setForm( form );
