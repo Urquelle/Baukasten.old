@@ -4,6 +4,8 @@
 #include "game_entity.h"
 #include "lua/bindings.h"
 
+#include <exception>
+
 using namespace Baukasten;
 
 ActionLua::ActionLua(
@@ -28,6 +30,12 @@ void ActionLua::doAction( GameEntity *entity )
 	s.doString("SLB.using(SLB)");
 	s.set("entity", entity);
 	s.set("action", this);
-	s.doFile( mFilePath );
+
+	try {
+		s.doFile( mFilePath );
+	} catch ( std::exception &e ) {
+		BK_DEBUG( e.what() << ": make sure the file " << mFilePath << " is available." );
+		BK_ABORT();
+	}
 }
 
