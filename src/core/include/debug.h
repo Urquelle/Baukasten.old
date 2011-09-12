@@ -10,6 +10,7 @@
 using namespace std;
 
 #define BK_DEBUG( X ) cout << __FILE__ << " " << __LINE__ << ": " << X << endl;
+#define BK_ABORT() abort()
 #define BK_ASSERT( TST, MSG )							\
 		( (TST) ? (void)0								\
 			: (cerr << __FILE__ "(" << __LINE__			\
@@ -18,6 +19,7 @@ using namespace std;
 #else
 
 #define BK_DEBUG( X )
+#define BK_ABORT()
 #define BK_ASSERT( TST, MSG ) ( (void)0 )
 
 #endif
