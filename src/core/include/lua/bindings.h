@@ -156,6 +156,8 @@ void wrapClasses()
 			.param("state id")
 		.set("getChild", &GameEntity::getChild)
 			.param("child id")
+		.set("addChild", &GameEntity::addChild)
+			.param("gameentity object")
 		.set("getForm", &GameEntity::getForm)
 		.set("runActions", &GameEntity::runActions);
 
