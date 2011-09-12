@@ -91,6 +91,12 @@ void Game::onKeyDown( Key key, Modifier mod )
 			mMoveDown = false;
 		}
 		break;
+	case Baukasten::KEY_RETURN:
+		if ( mod & KEYMOD_PRESSED ) {
+			mWorldMap->invokeAction( "showMenu" );
+			BK_DEBUG( "show menu" );
+		}
+		break;
 	}
 }
 
