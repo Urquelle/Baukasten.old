@@ -105,6 +105,9 @@ Key getKey( EKEY_CODE key )
 	case KEY_DOWN:
 		t_key = KEY_ARROW_DOWN;
 		break;
+	case irr::KEY_RETURN:
+		t_key = Baukasten::KEY_RETURN;
+		break;
 	}
 
 	return t_key;
