@@ -27,9 +27,9 @@ void ActionLua::doAction( GameEntity *entity )
 	BK_ASSERT( entity != 0, "entity must not be 0." );
 
 	SLB::Script s;
-	s.doString("SLB.using(SLB)");
-	s.set("entity", entity);
-	s.set("action", this);
+	s.doString( "SLB.using(SLB)" );
+	s.set( "entity", entity );
+	s.set( "action", this );
 
 	try {
 		s.doFile( mFilePath );
