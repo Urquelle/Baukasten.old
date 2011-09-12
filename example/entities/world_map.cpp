@@ -9,6 +9,30 @@
 
 using namespace Baukasten;
 
+GameEntity* createPointer()
+{
+	t_pos berlin = { 467, 338, 100 };
+	t_pos mannheim = { 420, 410, 100 };
+
+	CoreServices *services = CoreServices::instance();
+
+	GameEntity *pointer = new GameEntity( "entity:pointer" );
+	pointer->addState( new StateString( "state:currentCity", "berlin" ) );
+
+	Form2d *form = new Form2d(
+		"form:pointer",
+		"media/1024x768/pointer.jpg",
+		services->getVideoService()
+	);
+
+	form->setSize( { 45, 35 } );
+	form->setPosition( berlin );
+
+	pointer->setForm( form );
+
+	return pointer;
+}
+
 WorldMap::WorldMap( const std::string &id ) :
 	GameEntity( id )
 {
@@ -30,19 +54,9 @@ WorldMap::WorldMap( const std::string &id ) :
 
 	setForm( wmForm );
 
-	Form2d *pointer = new Form2d(
-		"form:pointer",
-		"media/1024x768/pointer.jpg",
-		services->getVideoService()
-	);
-
-	t_pos berlin = { 467, 338, 100 };
-	t_pos mannheim = { 420, 410, 100 };
-
-	pointer->setSize( { 45, 35 } );
-	pointer->setPosition( berlin );
-
-	wmForm->addToVSpace( pointer );
+	GameEntity *pointer = createPointer();
+	wmForm->addToVSpace( pointer->getForm() );
+	addChild( pointer );
 }
 
 WorldMap::~WorldMap()

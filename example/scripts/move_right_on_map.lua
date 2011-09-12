@@ -10,19 +10,20 @@ cityBerlin	= "berlin"
 cityParis	= "paris"
 cityLondon	= "london"
 
-currentCity = entity:getState( "state:currentCity" )
-pointer = entity:getForm():getVSpace():getDrawable("form:pointer")
+pointer = entity:getChild( "entity:pointer" )
+currentCity = pointer:getState( "state:currentCity" )
+form = pointer:getForm()
 
 if currentCity:getValue() == cityLondon then
 	currentCity:setValue( cityParis )
-	pointer:setPosition( posParis )
+	form:setPosition( posParis )
 elseif currentCity:getValue() == cityParis then
 	currentCity:setValue( cityBerlin )
-	pointer:setPosition( posBerlin )
+	form:setPosition( posBerlin )
 elseif currentCity:getValue() == cityBerlin then
 	currentCity:setValue( cityVienna )
-	pointer:setPosition( posVienna )
+	form:setPosition( posVienna )
 elseif currentCity:getValue() == cityVienna then
 	currentCity:setValue( cityConst )
-	pointer:setPosition( posConst )
+	form:setPosition( posConst )
 end
