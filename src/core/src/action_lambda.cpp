@@ -28,7 +28,7 @@ bool ActionLambda::done() const
 
 void ActionLambda::doAction( GameEntity *entity )
 {
-	BK_ASSERT( mDone != 0, "function pointer must not be 0." );
+	BK_ASSERT( mDoAction != 0, "function pointer must not be 0." );
 	(*mDoAction)( this, entity );
 }
 
