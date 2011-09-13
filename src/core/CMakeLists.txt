@@ -3,6 +3,7 @@ set( CORE_INC ${CMAKE_CURRENT_SOURCE_DIR}/core/include )
 set (
     core_SRCS
     core/src/action.cpp
+	core/src/action_lambda.cpp
 	core/src/action_manager.cpp
 	core/src/core_services.cpp
     core/src/drawable.cpp
