@@ -8,8 +8,8 @@
 #include <algorithm>
 
 namespace Baukasten {
-	typedef std::function<bool ()> DoneFunction;
-	typedef std::function<void ( GameEntity* )> DoActionFunction;
+	typedef std::function<bool ( const Action* )> DoneFunction;
+	typedef std::function<void ( Action*, GameEntity* )> DoActionFunction;
 
 	class ActionLambda : public Action {
 	public:
