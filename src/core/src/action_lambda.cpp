@@ -20,6 +20,18 @@ ActionLambda::~ActionLambda()
 {
 }
 
+void ActionLambda::setDoActionFunction( DoActionFunction *func )
+{
+	BK_ASSERT( func != 0, "function pointer must not be 0." );
+	mDoAction = func;
+}
+
+void ActionLambda::setDoneFunction( DoneFunction *func )
+{
+	BK_ASSERT( func != 0, "function pointer must not be 0." );
+	mDone = func;
+}
+
 bool ActionLambda::done() const
 {
 	if ( !mDone )

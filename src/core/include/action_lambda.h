@@ -19,6 +19,9 @@ namespace Baukasten {
 		bool done() const;
 		void doAction( GameEntity* );
 
+		void setDoActionFunction( DoActionFunction* );
+		void setDoneFunction( DoneFunction* );
+
 	private:
 		DoneFunction*		mDone;
 		DoActionFunction*	mDoAction;
