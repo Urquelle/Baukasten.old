@@ -11,7 +11,7 @@ namespace Baukasten {
 	typedef std::function<bool ( const Action* )> DoneFunction;
 	typedef std::function<void ( Action*, GameEntity* )> DoActionFunction;
 
-	class ActionLambda : public Action {
+	class BAUKASTEN_EXPORT ActionLambda : public Action {
 	public:
 		ActionLambda( GameEntity&, const std::string&, DoneFunction*, DoActionFunction* );
 		virtual ~ActionLambda();
