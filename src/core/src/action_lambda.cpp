@@ -7,12 +7,12 @@ using namespace Baukasten;
 ActionLambda::ActionLambda(
 		GameEntity &source,
 		const std::string &id,
-		DoneFunction *doneFunc,
-		DoActionFunction *doActFunc
+		DoActionFunction *doActFunc,
+		DoneFunction *doneFunc
 		) :
 	Action( source, id ),
-	mDone( doneFunc ),
-	mDoAction( doActFunc )
+	mDoAction( doActFunc ),
+	mDone( doneFunc )
 {
 }
 
@@ -22,7 +22,8 @@ ActionLambda::~ActionLambda()
 
 bool ActionLambda::done() const
 {
-	BK_ASSERT( mDone != 0, "function pointer must not be 0." );
+	if ( !mDone )
+		return Action::done();
 	return (*mDone)( this );
 }
 

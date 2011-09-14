@@ -13,7 +13,7 @@ namespace Baukasten {
 
 	class BAUKASTEN_EXPORT ActionLambda : public Action {
 	public:
-		ActionLambda( GameEntity&, const std::string&, DoneFunction*, DoActionFunction* );
+		ActionLambda( GameEntity&, const std::string&, DoActionFunction*, DoneFunction *doneFunc = 0 );
 		virtual ~ActionLambda();
 
 		bool done() const;
