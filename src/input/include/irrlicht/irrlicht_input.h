@@ -5,17 +5,16 @@
 
 #include "iinput.h"
 
-#include <irrlicht/IEventReceiver.h>
-
 namespace irr {
 	class IrrlichtDevice;
 } /* irr */
 
 namespace Baukasten {
 	class CoreServices;
+	class IrrlichtInputPrivate;
 
 	class BAUKASTEN_EXPORT IrrlichtInput :
-		public IInput, public irr::IEventReceiver {
+		public IInput {
 	public:
 		IrrlichtInput();
 		virtual ~IrrlichtInput();
@@ -24,11 +23,11 @@ namespace Baukasten {
 		void process() const;
 		void shutDown();
 
-		bool OnEvent( const irr::SEvent& );
-
 		void setDevice( irr::IrrlichtDevice* );
 
 	private:
+		IrrlichtInputPrivate*	mImpl;
+		friend class IrrlichtInputPrivate;
 		irr::IrrlichtDevice* mDevice;
 	};
 } /* Baukasten */

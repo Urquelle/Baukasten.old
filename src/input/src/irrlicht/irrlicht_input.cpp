@@ -126,27 +126,47 @@ Modifier getModifier( SEvent::SKeyInput key )
 	return mod;
 }
 
+// ---------- IrrlichtInputPrivate ------------ //
+namespace Baukasten {
+	class IrrlichtInputPrivate : public irr::IEventReceiver {
+	public:
+		IrrlichtInputPrivate( IrrlichtInput *input ) :
+			mInput( input )
+		{
+		}
+
+		~IrrlichtInputPrivate()
+		{
+		}
+
+		bool OnEvent( const irr::SEvent &event )
+		{
+			switch ( event.EventType ) {
+			case EET_KEY_INPUT_EVENT:
+				mInput->mOnKeyDown.emit(
+					getKey( event.KeyInput.Key ),
+					getModifier( event.KeyInput )
+				);
+				break;
+			}
+
+			return false;
+		}
+
+	private:
+		IrrlichtInput*	mInput;
+	};
+}
+
+// ---------- IrrlichtInput ------------------ //
 IrrlichtInput::IrrlichtInput() :
-	IInput()
+	IInput(),
+	mImpl( new IrrlichtInputPrivate( this ) )
 {
 }
 
 IrrlichtInput::~IrrlichtInput()
 {
-}
-
-bool IrrlichtInput::OnEvent( const SEvent &event )
-{
-	switch ( event.EventType ) {
-	case EET_KEY_INPUT_EVENT:
-		mOnKeyDown.emit(
-			getKey( event.KeyInput.Key ),
-			getModifier( event.KeyInput )
-		);
-		break;
-	}
-
-	return false;
 }
 
 bool IrrlichtInput::init( CoreServices *coreServices )
@@ -157,7 +177,7 @@ bool IrrlichtInput::init( CoreServices *coreServices )
 		dynamic_cast<IrrlichtGraphics*>( coreServices->getVideoService() );
 
 	BK_ASSERT( graphics != 0, "graphics must not be 0." );
-	graphics->getDevice()->setEventReceiver( this );
+	graphics->getDevice()->setEventReceiver( mImpl );
 }
 
 void IrrlichtInput::process() const
