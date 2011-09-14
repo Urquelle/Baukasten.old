@@ -37,6 +37,7 @@ namespace Baukasten {
 		int init( CoreServices* );
 		void render( Form* );
 		void shutDown();
+		void setWindowCaption( const std::wstring& );
 
 		IrrlichtDevice* getDevice() const;
 		video::IVideoDriver* getDriver() const;

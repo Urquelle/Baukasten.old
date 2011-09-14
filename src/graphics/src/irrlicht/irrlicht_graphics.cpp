@@ -54,6 +54,11 @@ void IrrlichtGraphics::shutDown()
 	mDevice->drop();
 }
 
+void IrrlichtGraphics::setWindowCaption( const std::wstring &caption )
+{
+	mDevice->setWindowCaption( caption.c_str() );
+}
+
 IrrlichtDevice* IrrlichtGraphics::getDevice() const
 {
 	return mDevice;

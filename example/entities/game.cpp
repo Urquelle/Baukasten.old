@@ -125,7 +125,7 @@ int Game::init()
 	mInput = dynamic_cast<IrrlichtInput*>( services->getInputService() );
 	mInput->onKeyDown().connect( sigc::mem_fun( this, &Game::onKeyDown ) );
 	mGraphics = dynamic_cast<IrrlichtGraphics*>( services->getVideoService() );
-	mGraphics->getDevice()->setWindowCaption( L"Eisenfaust" );
+	mGraphics->setWindowCaption( L"Eisenfaust" );
 
 	// init worldmap
 	mWorldMap = new WorldMap( "entity:worldmap" );

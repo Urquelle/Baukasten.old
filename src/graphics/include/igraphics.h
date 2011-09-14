@@ -15,6 +15,7 @@ namespace Baukasten {
 		virtual int init( CoreServices* ) = 0;
 		virtual void render( Form* ) = 0;
 		virtual void shutDown() = 0;
+		virtual void setWindowCaption( const std::wstring& ) = 0;
 
 	protected:
 		bool mInitialised;
