@@ -13,12 +13,7 @@
 #include <irrlicht/irrlicht_graphics.h>
 #include <irrlicht/irrlicht_input.h>
 
-#include <irrlicht/irrlicht.h>
-
 using namespace Baukasten;
-
-using namespace irr;
-using namespace core;
 
 enum Mode { MODE_WORLDMAP, MODE_MENU, MODE_BATTLE };
 
@@ -91,7 +86,7 @@ void Game::onKeyDown( Key key, Modifier mod )
 			mMoveDown = false;
 		}
 		break;
-	case Baukasten::KEY_RETURN:
+	case KEY_RETURN:
 		if ( mod & KEYMOD_PRESSED ) {
 			mWorldMap->invokeAction( "showMenu" );
 			BK_DEBUG( "show menu" );
