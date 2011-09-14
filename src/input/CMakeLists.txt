@@ -4,6 +4,5 @@ set (
 	input_SRCS
 	input/src/input_interface.cpp
 	input/src/irrlicht/irrlicht_input.cpp
-	input/src/sdl/sdl_interface.cpp
 )
 

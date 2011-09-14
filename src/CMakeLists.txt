@@ -1,17 +1,4 @@
 option( WITH_LUA  "compile with Lua support." TRUE )
-option( WITH_OGRE  "compile with OGRE support." FALSE )
-option( WITH_SDL "compile with SDL support." FALSE )
-
-if( WITH_OGRE )
-	message(STATUS "using OGRE.")
-	add_definitions( -DWITH_OGRE )
-else()
-	message(STATUS "using Irrlicht GraphicsInterface")
-endif()
-
-if( WITH_SDL )
-	add_definitions( -DWITH_SDL )
-endif()
 
 include( core/CMakeLists.txt )
 include( graphics/CMakeLists.txt )
