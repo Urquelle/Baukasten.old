@@ -3,11 +3,20 @@
 #include "core_services.h"
 #include "forms/form2d.h"
 
+#include <action_lambda.h>
 #include <lua/action_lua.h>
 #include <form.h>
 #include <generic_state.h>
+#include <igraphics.h>
+#include <irrlicht/irrlicht_graphics.h>
+
+#include <irrlicht/irrlicht.h>
 
 using namespace Baukasten;
+
+using namespace irr;
+using namespace core;
+using namespace gui;
 
 GameEntity* createPointer()
 {
@@ -33,6 +42,38 @@ GameEntity* createPointer()
 	return pointer;
 }
 
+IGUIListBox *listBox = 0;
+DoActionFunction doActFunc( []( Action *action, GameEntity *entity ) {
+		GameEntity *pointer = action->getSource()->getChild( "entity:pointer" );
+
+		CoreServices *services = CoreServices::instance();
+		IrrlichtGraphics *graphics =
+			dynamic_cast<IrrlichtGraphics*>( services->getVideoService() );
+
+		t_pos pos = pointer->getForm()->getPosition();
+		t_size size = pointer->getForm()->getSize();
+
+		IGUIEnvironment *gui = graphics->getGui();
+
+		if ( !listBox ) {
+			listBox = gui->addListBox(
+				rect<s32>(
+					pos.getX() + size.width,
+					pos.getY() + 10,
+					pos.getX() + 250,
+					pos.getY() + 100
+				)
+			);
+
+			listBox->setDrawBackground( true );
+			listBox->setItemHeight( 30 );
+
+			listBox->addItem( L"Move" );
+			listBox->addItem( L"Exit" );
+		}
+	}
+);
+
 WorldMap::WorldMap( const std::string &id ) :
 	GameEntity( id )
 {
@@ -40,8 +81,20 @@ WorldMap::WorldMap( const std::string &id ) :
 
 	addAction( new ActionLua( *this, "moveRightOnMap", "scripts/move_right_on_map.lua" ) );
 	addAction( new ActionLua( *this, "moveLeftOnMap", "scripts/move_left_on_map.lua" ) );
+	addAction( new ActionLambda( *this, "showMenu", &doActFunc ) );
 
 	CoreServices *services = CoreServices::instance();
+	IrrlichtGraphics *graphics =
+		dynamic_cast<IrrlichtGraphics*>( services->getVideoService() );
+
+	IGUIEnvironment *gui = graphics->getGui();
+
+	IGUISkin* skin = gui->getSkin();
+	IGUIFont* font = gui->getFont( "media/fonts/FinalFantasyTactics.bmp" );
+	if (font)
+		skin->setFont(font);
+	else
+		BK_DEBUG( "couldn't load font!" );
 
 	Form2d *wmForm = new Form2d(
 		"form:worldmap",
