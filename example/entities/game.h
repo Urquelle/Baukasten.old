@@ -9,8 +9,8 @@
 class WorldMap;
 
 namespace Baukasten {
-	class IrrlichtGraphics;
-	class IrrlichtInput;
+	class IGraphics;
+	class IInput;
 }
 
 class Game : public Baukasten::GameEntity
@@ -29,8 +29,8 @@ protected:
 
 private:
 	WorldMap*						mWorldMap;
-	Baukasten::IrrlichtGraphics*	mGraphics;
-	Baukasten::IrrlichtInput*		mInput;
+	Baukasten::IGraphics*	mGraphics;
+	Baukasten::IInput*		mInput;
 
 	bool mMoveRight;
 	bool mMoveLeft;

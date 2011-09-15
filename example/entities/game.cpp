@@ -9,9 +9,9 @@
 #include <debug.h>
 #include <form.h>
 #include <generic_state.h>
+#include <igraphics.h>
+#include <iinput.h>
 #include <lua/action_lua.h>
-#include <irrlicht/irrlicht_graphics.h>
-#include <irrlicht/irrlicht_input.h>
 
 using namespace Baukasten;
 
@@ -117,9 +117,9 @@ int Game::init()
 
 	services->init();
 
-	mInput = dynamic_cast<IrrlichtInput*>( services->getInputService() );
+	mInput = services->getInputService();
 	mInput->onKeyDown().connect( sigc::mem_fun( this, &Game::onKeyDown ) );
-	mGraphics = dynamic_cast<IrrlichtGraphics*>( services->getVideoService() );
+	mGraphics = services->getVideoService();
 	mGraphics->setWindowCaption( L"Eisenfaust" );
 
 	// init worldmap
