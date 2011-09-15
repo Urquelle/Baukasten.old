@@ -21,7 +21,7 @@ GameEntity* createPointer()
 
 	Form2d *form = new Form2d(
 		"form:pointer",
-		"media/1024x768/pointer.png",
+		"media/images/1024x768/pointer.png",
 		services->getVideoService()
 	);
 
@@ -45,7 +45,7 @@ WorldMap::WorldMap( const std::string &id ) :
 
 	Form2d *wmForm = new Form2d(
 		"form:worldmap",
-		"media/1024x768/worldmap.jpg",
+		"media/images/1024x768/worldmap.jpg",
 		services->getVideoService()
 	);
 
