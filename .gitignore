@@ -1,6 +1,6 @@
 build/*
 doc/*
-media/*
+example/media/*
 *.ignore
 *.zip
 *.user
