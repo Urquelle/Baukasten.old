@@ -87,15 +87,6 @@ WorldMap::WorldMap( const std::string &id ) :
 	IrrlichtGraphics *graphics =
 		dynamic_cast<IrrlichtGraphics*>( services->getVideoService() );
 
-	IGUIEnvironment *gui = graphics->getGui();
-
-	IGUISkin* skin = gui->getSkin();
-	IGUIFont* font = gui->getFont( "media/fonts/FinalFantasyTactics.bmp" );
-	if (font)
-		skin->setFont(font);
-	else
-		BK_DEBUG( "couldn't load font!" );
-
 	Form2d *wmForm = new Form2d(
 		"form:worldmap",
 		"media/images/1024x768/worldmap.jpg",
