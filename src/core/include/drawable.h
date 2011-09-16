@@ -80,6 +80,9 @@ namespace Baukasten {
 		// size of the object
 		t_size	mSize;
 
+		// orientation the object is looking at
+		t_pos	mOrientation;
+
 		// rotation around the x-axis
 		float   mPitch;
 
