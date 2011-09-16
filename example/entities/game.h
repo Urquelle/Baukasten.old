@@ -20,7 +20,10 @@ public:
 	virtual ~Game();
 
 	void start();
+
 	bool keepRunning();
+	int currentMode();
+
 	void onKeyDown( Baukasten::Key, Baukasten::Modifier );
 
 protected:
@@ -28,7 +31,7 @@ protected:
 	int init();
 
 private:
-	WorldMap*						mWorldMap;
+	WorldMap*				mWorldMap;
 	Baukasten::IGraphics*	mGraphics;
 	Baukasten::IInput*		mInput;
 

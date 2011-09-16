@@ -48,48 +48,79 @@ bool Game::keepRunning()
 	return getState<StateInt*>( "keepRunning" )->getValue();
 }
 
+int Game::currentMode()
+{
+	return getState<StateInt*>( "currentMode" )->getValue();
+}
+
 void Game::onKeyDown( Key key, Modifier mod )
 {
 	switch ( key ) {
 	case KEY_Q:
-		getState<StateInt*>( "keepRunning" )->setValue( 0 );
+		if ( mod & KEYMOD_PRESSED ) {
+			switch ( currentMode() ) {
+			case MODE_WORLDMAP:
+				getState<StateInt*>( "keepRunning" )->setValue( 0 );
+				break;
+			case MODE_MENU:
+				mWorldMap->invokeAction( "hideMenu" );
+				getState<StateInt*>( "currentMode" )->setValue( MODE_WORLDMAP );
+				break;
+			}
+		}
 		break;
 	case KEY_ARROW_LEFT:
-		if ( mod & KEYMOD_PRESSED && !mMoveLeft ) {
-			mWorldMap->invokeAction( "moveLeftOnMap" );
-			mMoveLeft = true;
-		} else if ( mod & KEYMOD_RELEASED ) {
-			mMoveLeft = false;
+		switch ( currentMode() ) {
+		case MODE_WORLDMAP:
+			if ( mod & KEYMOD_PRESSED && !mMoveLeft ) {
+				mWorldMap->invokeAction( "moveLeftOnMap" );
+				mMoveLeft = true;
+			} else if ( mod & KEYMOD_RELEASED ) {
+				mMoveLeft = false;
+			}
+			break;
 		}
 		break;
 	case KEY_ARROW_UP:
-		if ( mod & KEYMOD_PRESSED && !mMoveUp ) {
-			BK_DEBUG( "move up" );
-			mMoveUp = true;
-		} else if ( mod & KEYMOD_RELEASED ) {
-			mMoveUp = false;
+		switch ( currentMode() ) {
+		case MODE_WORLDMAP:
+			if ( mod & KEYMOD_PRESSED && !mMoveUp ) {
+				BK_DEBUG( "move up" );
+				mMoveUp = true;
+			} else if ( mod & KEYMOD_RELEASED ) {
+				mMoveUp = false;
+			}
+			break;
 		}
 		break;
 	case KEY_ARROW_RIGHT:
-		if ( mod & KEYMOD_PRESSED && !mMoveRight ) {
-			mWorldMap->invokeAction( "moveRightOnMap" );
-			mMoveRight = true;
-		} else if ( mod & KEYMOD_RELEASED ) {
-			mMoveRight = false;
+		switch ( currentMode() ) {
+		case MODE_WORLDMAP:
+			if ( mod & KEYMOD_PRESSED && !mMoveRight ) {
+				mWorldMap->invokeAction( "moveRightOnMap" );
+				mMoveRight = true;
+			} else if ( mod & KEYMOD_RELEASED ) {
+				mMoveRight = false;
+			}
+			break;
 		}
 		break;
 	case KEY_ARROW_DOWN:
-		if ( mod & KEYMOD_PRESSED && !mMoveDown ) {
-			BK_DEBUG( "move down" );
-			mMoveDown = true;
-		} else if ( mod & KEYMOD_RELEASED ) {
-			mMoveDown = false;
+		switch ( currentMode() ) {
+		case MODE_WORLDMAP:
+			if ( mod & KEYMOD_PRESSED && !mMoveDown ) {
+				BK_DEBUG( "move down" );
+				mMoveDown = true;
+			} else if ( mod & KEYMOD_RELEASED ) {
+				mMoveDown = false;
+			}
+			break;
 		}
 		break;
 	case KEY_RETURN:
 		if ( mod & KEYMOD_PRESSED ) {
 			mWorldMap->invokeAction( "showMenu" );
-			BK_DEBUG( "show menu" );
+			getState<StateInt*>( "currentMode" )->setValue( MODE_MENU );
 		}
 		break;
 	}

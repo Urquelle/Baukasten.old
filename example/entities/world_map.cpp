@@ -43,7 +43,7 @@ GameEntity* createPointer()
 }
 
 IGUIListBox *listBox = 0;
-DoActionFunction doActFunc( []( Action *action, GameEntity *entity ) {
+DoActionFunction showMenuFunction( []( Action *action, GameEntity *entity ) {
 		GameEntity *pointer = action->getSource()->getChild( "entity:pointer" );
 
 		CoreServices *services = CoreServices::instance();
@@ -56,23 +56,29 @@ DoActionFunction doActFunc( []( Action *action, GameEntity *entity ) {
 		IGUIEnvironment *gui = graphics->getGui();
 
 		if ( !listBox ) {
-			listBox = gui->addListBox(
-				rect<s32>(
-					pos.getX() + size.width,
-					pos.getY() + 10,
-					pos.getX() + 250,
-					pos.getY() + 100
-				)
-			);
-
+			listBox = gui->addListBox( rect<s32>( 0, 0, 250, 100 ) );
 			listBox->setDrawBackground( true );
 			listBox->setItemHeight( 30 );
 
 			listBox->addItem( L"Move" );
 			listBox->addItem( L"Exit" );
 		}
+
+		position2d<s32> currPosition = listBox->getAbsolutePosition().UpperLeftCorner;
+		listBox->move( position2d<s32>(
+			pos.getX() + size.width - currPosition.X,
+			pos.getY() + 20 - currPosition.Y
+		));
+
+		listBox->setVisible( true );
+		listBox->setSelected( 0 );
+		gui->setFocus( listBox );
 	}
 );
+
+DoActionFunction hideFunction( []( Action *action, GameEntity *entity ) {
+	listBox->setVisible( false );
+});
 
 WorldMap::WorldMap( const std::string &id ) :
 	GameEntity( id )
@@ -81,7 +87,8 @@ WorldMap::WorldMap( const std::string &id ) :
 
 	addAction( new ActionLua( *this, "moveRightOnMap", "scripts/move_right_on_map.lua" ) );
 	addAction( new ActionLua( *this, "moveLeftOnMap", "scripts/move_left_on_map.lua" ) );
-	addAction( new ActionLambda( *this, "showMenu", &doActFunc ) );
+	addAction( new ActionLambda( *this, "showMenu", &showMenuFunction ) );
+	addAction( new ActionLambda( *this, "hideMenu", &hideFunction ) );
 
 	CoreServices *services = CoreServices::instance();
 	IrrlichtGraphics *graphics =
