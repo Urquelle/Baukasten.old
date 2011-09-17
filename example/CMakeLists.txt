@@ -5,6 +5,7 @@ set(
 	entities/unit.cpp
 	entities/world_map.cpp
 	forms/form2d.cpp
+	forms/menu_form.cpp
     main.cpp
 )
 

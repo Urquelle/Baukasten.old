@@ -2,21 +2,13 @@
 
 #include "core_services.h"
 #include "forms/form2d.h"
+#include "forms/menu_form.h"
 
 #include <action_lambda.h>
 #include <lua/action_lua.h>
-#include <form.h>
 #include <generic_state.h>
-#include <igraphics.h>
-#include <irrlicht/irrlicht_graphics.h>
-
-#include <irrlicht/irrlicht.h>
 
 using namespace Baukasten;
-
-using namespace irr;
-using namespace core;
-using namespace gui;
 
 GameEntity* createPointer()
 {
@@ -42,57 +34,50 @@ GameEntity* createPointer()
 	return pointer;
 }
 
-IGUIListBox *listBox = 0;
-DoActionFunction showMenuFunction( []( Action *action, GameEntity *entity ) {
-		GameEntity *pointer = action->getSource()->getChild( "entity:pointer" );
+GameEntity* createMenu()
+{
+	CoreServices *services = CoreServices::instance();
+	GameEntity *menu = new GameEntity( "entity:menu" );
 
-		CoreServices *services = CoreServices::instance();
-		IrrlichtGraphics *graphics =
-			dynamic_cast<IrrlichtGraphics*>( services->getVideoService() );
+	MenuForm *form = new MenuForm( "form:menu", services->getVideoService() );
+	form->setSize( { 100, 40 } );
+	form->setPosition( { 0, 0, 0 } );
 
-		t_pos pos = pointer->getForm()->getPosition();
-		t_size size = pointer->getForm()->getSize();
+	menu->setForm( form );
 
-		IGUIEnvironment *gui = graphics->getGui();
+	return menu;
+}
 
-		if ( !listBox ) {
-			listBox = gui->addListBox( rect<s32>( 0, 0, 250, 100 ) );
-			listBox->setDrawBackground( true );
-			listBox->setItemHeight( 30 );
+DoActionFunction showMenuFunction( []( Action *action, GameEntity *entity )
+{
+	GameEntity *pointer = action->getSource()->getChild( "entity:pointer" );
+	GameEntity *menu = action->getSource()->getChild( "entity:menu" );
 
-			listBox->addItem( L"Move" );
-			listBox->addItem( L"Exit" );
-		}
+	t_pos pos = pointer->getForm()->getPosition();
+	t_size size = pointer->getForm()->getSize();
 
-		position2d<s32> currPosition = listBox->getAbsolutePosition().UpperLeftCorner;
-		listBox->move( position2d<s32>(
-			pos.getX() + size.width - currPosition.X,
-			pos.getY() + 20 - currPosition.Y
-		));
+	menu->getForm()->setPosition(
+		{ pos.getX() + size.width, pos.getY(), 0 }
+	);
 
-		listBox->setVisible( true );
-		listBox->setSelected( 0 );
-		gui->setFocus( listBox );
-	}
-);
+	menu->getForm()->setVisible( true );
+});
 
-DoActionFunction hideFunction( []( Action *action, GameEntity *entity ) {
-	listBox->setVisible( false );
+DoActionFunction hideFunction( []( Action *action, GameEntity *entity )
+{
+	GameEntity *menu = action->getSource()->getChild( "entity:menu" );
+	menu->getForm()->setVisible( false );
 });
 
 WorldMap::WorldMap( const std::string &id ) :
 	GameEntity( id )
 {
-	addState( new StateString( "state:currentCity", "berlin" ) );
-
 	addAction( new ActionLua( *this, "moveRightOnMap", "scripts/move_right_on_map.lua" ) );
 	addAction( new ActionLua( *this, "moveLeftOnMap", "scripts/move_left_on_map.lua" ) );
 	addAction( new ActionLambda( *this, "showMenu", &showMenuFunction ) );
 	addAction( new ActionLambda( *this, "hideMenu", &hideFunction ) );
 
 	CoreServices *services = CoreServices::instance();
-	IrrlichtGraphics *graphics =
-		dynamic_cast<IrrlichtGraphics*>( services->getVideoService() );
 
 	Form2d *wmForm = new Form2d(
 		"form:worldmap",
@@ -108,6 +93,10 @@ WorldMap::WorldMap( const std::string &id ) :
 	GameEntity *pointer = createPointer();
 	wmForm->addToVSpace( pointer->getForm() );
 	addChild( pointer );
+
+	GameEntity *menu = createMenu();
+	wmForm->addToVSpace( menu->getForm() );
+	addChild( menu );
 }
 
 WorldMap::~WorldMap()
