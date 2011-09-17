@@ -30,9 +30,7 @@ namespace Baukasten {
 		KEYMOD_LSHIFT		= 1u << 4,
 		KEYMOD_RSHIFT		= 1u << 5,
 		KEYMOD_SHIFT		= 1u << 6,
-		KEYMOD_ALT			= 1u << 7,
-		KEYMOD_PRESSED		= 1u << 8,
-		KEYMOD_RELEASED		= 1u << 9
+		KEYMOD_ALT			= 1u << 7
 	} Modifier;
 
 	typedef sigc::signal<void, Key, Modifier> KeyEvent;
