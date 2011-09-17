@@ -57,26 +57,22 @@ void Game::onKeyDown( Key key, Modifier mod )
 {
 	switch ( key ) {
 	case KEY_Q:
-		if ( mod & KEYMOD_PRESSED ) {
-			switch ( currentMode() ) {
-			case MODE_WORLDMAP:
-				getState<StateInt*>( "keepRunning" )->setValue( 0 );
-				break;
-			case MODE_MENU:
-				mWorldMap->invokeAction( "hideMenu" );
-				getState<StateInt*>( "currentMode" )->setValue( MODE_WORLDMAP );
-				break;
-			}
+		switch ( currentMode() ) {
+		case MODE_WORLDMAP:
+			getState<StateInt*>( "keepRunning" )->setValue( 0 );
+			break;
+		case MODE_MENU:
+			mWorldMap->invokeAction( "hideMenu" );
+			getState<StateInt*>( "currentMode" )->setValue( MODE_WORLDMAP );
+			break;
 		}
 		break;
 	case KEY_ARROW_LEFT:
 		switch ( currentMode() ) {
 		case MODE_WORLDMAP:
-			if ( mod & KEYMOD_PRESSED && !mMoveLeft ) {
+			if ( !mMoveLeft ) {
 				mWorldMap->invokeAction( "moveLeftOnMap" );
 				mMoveLeft = true;
-			} else if ( mod & KEYMOD_RELEASED ) {
-				mMoveLeft = false;
 			}
 			break;
 		}
@@ -84,23 +80,17 @@ void Game::onKeyDown( Key key, Modifier mod )
 	case KEY_ARROW_UP:
 		switch ( currentMode() ) {
 		case MODE_WORLDMAP:
-			if ( mod & KEYMOD_PRESSED && !mMoveUp ) {
-				BK_DEBUG( "move up" );
-				mMoveUp = true;
-			} else if ( mod & KEYMOD_RELEASED ) {
-				mMoveUp = false;
-			}
+			BK_DEBUG( "move up" );
+			mMoveUp = true;
 			break;
 		}
 		break;
 	case KEY_ARROW_RIGHT:
 		switch ( currentMode() ) {
 		case MODE_WORLDMAP:
-			if ( mod & KEYMOD_PRESSED && !mMoveRight ) {
+			if ( !mMoveRight ) {
 				mWorldMap->invokeAction( "moveRightOnMap" );
 				mMoveRight = true;
-			} else if ( mod & KEYMOD_RELEASED ) {
-				mMoveRight = false;
 			}
 			break;
 		}
@@ -108,19 +98,49 @@ void Game::onKeyDown( Key key, Modifier mod )
 	case KEY_ARROW_DOWN:
 		switch ( currentMode() ) {
 		case MODE_WORLDMAP:
-			if ( mod & KEYMOD_PRESSED && !mMoveDown ) {
-				BK_DEBUG( "move down" );
-				mMoveDown = true;
-			} else if ( mod & KEYMOD_RELEASED ) {
-				mMoveDown = false;
-			}
+			BK_DEBUG( "move down" );
+			mMoveDown = true;
 			break;
 		}
 		break;
 	case KEY_RETURN:
-		if ( mod & KEYMOD_PRESSED ) {
-			mWorldMap->invokeAction( "showMenu" );
-			getState<StateInt*>( "currentMode" )->setValue( MODE_MENU );
+		mWorldMap->invokeAction( "showMenu" );
+		getState<StateInt*>( "currentMode" )->setValue( MODE_MENU );
+		break;
+	}
+}
+
+void Game::onKeyUp( Key key, Modifier mod )
+{
+	switch ( key ) {
+	case KEY_Q:
+		break;
+	case KEY_ARROW_LEFT:
+		switch ( currentMode() ) {
+		case MODE_WORLDMAP:
+			mMoveLeft = false;
+			break;
+		}
+		break;
+	case KEY_ARROW_UP:
+		switch ( currentMode() ) {
+		case MODE_WORLDMAP:
+			mMoveUp = false;
+			break;
+		}
+		break;
+	case KEY_ARROW_RIGHT:
+		switch ( currentMode() ) {
+		case MODE_WORLDMAP:
+			mMoveRight = false;
+			break;
+		}
+		break;
+	case KEY_ARROW_DOWN:
+		switch ( currentMode() ) {
+		case MODE_WORLDMAP:
+			mMoveDown = false;
+			break;
 		}
 		break;
 	}
@@ -150,6 +170,7 @@ int Game::init()
 
 	mInput = services->getInputService();
 	mInput->onKeyDown().connect( sigc::mem_fun( this, &Game::onKeyDown ) );
+	mInput->onKeyUp().connect( sigc::mem_fun( this, &Game::onKeyUp ) );
 	mGraphics = services->getVideoService();
 	mGraphics->setWindowCaption( L"Eisenfaust" );
 

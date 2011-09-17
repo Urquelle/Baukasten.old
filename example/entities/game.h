@@ -25,6 +25,7 @@ public:
 	int currentMode();
 
 	void onKeyDown( Baukasten::Key, Baukasten::Modifier );
+	void onKeyUp( Baukasten::Key, Baukasten::Modifier );
 
 protected:
 	void run();
