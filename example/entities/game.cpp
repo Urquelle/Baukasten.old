@@ -2,6 +2,7 @@
 
 #include "basic_type.h"
 #include "entities/unit.h"
+#include "forms/form2d.h"
 #include "../lua/bindings.h"
 #include "world_map.h"
 
@@ -197,6 +198,19 @@ int Game::init()
 	group->addChild( sanchez );
 	group->addChild( gomez );
 	group->addChild( ramirez );
+
+	Form2d *form = new Form2d(
+		"form:group",
+		"media/images/1024x768/group.jpg",
+		services->getVideoService()
+	);
+
+	form->setPosition( { 515, 338, 0 } );
+	form->setSize( { 30, 30 } );
+	form->setVisible( true );
+
+	group->setForm( form );
+	getForm()->addToVSpace( form );
 
 	addChild( mWorldMap );
 	addChild( group );
