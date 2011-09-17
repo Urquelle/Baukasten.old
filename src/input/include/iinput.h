@@ -14,10 +14,12 @@ namespace Baukasten {
 		virtual void process() const = 0;
 		virtual void shutDown() = 0;
 
-		KeyDownEvent onKeyDown() const { return mOnKeyDown; }
+		KeyEvent onKeyDown() const { return mOnKeyDown; }
+		KeyEvent onKeyUp() const { return mOnKeyUp; }
 
 	protected:
-		KeyDownEvent mOnKeyDown;
+		KeyEvent mOnKeyDown;
+		KeyEvent mOnKeyUp;
 	};
 } /* Baukasten */
 

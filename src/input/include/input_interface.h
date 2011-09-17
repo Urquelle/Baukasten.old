@@ -35,7 +35,7 @@ namespace Baukasten {
 		KEYMOD_RELEASED		= 1u << 9
 	} Modifier;
 
-	typedef sigc::signal<void, Key, Modifier> KeyDownEvent;
+	typedef sigc::signal<void, Key, Modifier> KeyEvent;
 
 	class IInput;
 

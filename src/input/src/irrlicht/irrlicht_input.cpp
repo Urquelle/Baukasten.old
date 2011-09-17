@@ -143,10 +143,17 @@ namespace Baukasten {
 		{
 			switch ( event.EventType ) {
 			case EET_KEY_INPUT_EVENT:
-				mInput->mOnKeyDown.emit(
-					getKey( event.KeyInput.Key ),
-					getModifier( event.KeyInput )
-				);
+				if ( event.KeyInput.PressedDown ) {
+					mInput->mOnKeyDown.emit(
+						getKey( event.KeyInput.Key ),
+						getModifier( event.KeyInput )
+					);
+				} else if ( !event.KeyInput.PressedDown ) {
+					mInput->mOnKeyUp.emit(
+						getKey( event.KeyInput.Key ),
+						getModifier( event.KeyInput )
+					);
+				}
 				break;
 			}
 
