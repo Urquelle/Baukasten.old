@@ -13,6 +13,12 @@ namespace Baukasten {
 		virtual ~VirtualSpace();
 
 		Drawable* getDrawable( const std::string& ) const;
+
+		void addEntity( Drawable* );
+		DrawableList getEntities() const;
+
+	private:
+		DrawableList mDrawables;
 	};
 }
 

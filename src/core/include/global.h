@@ -8,6 +8,7 @@
 
 namespace Baukasten {
 	class Action;
+	class Drawable;
 	class Entity;
 	class EntityType;
 	class GameEntity;
@@ -60,6 +61,8 @@ namespace Baukasten {
 
 	typedef map<string, shared_ptr<State>>	StateMap;
 	typedef list<State*>					StateList;
+
+	typedef list<shared_ptr<Drawable>>		DrawableList;
 }
 
 #if defined(EXPORT_LIB)

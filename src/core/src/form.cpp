@@ -62,7 +62,7 @@ void Form::render()
 	Form *form = 0;
 
 	while ( it != entities.end() ) {
-		form = static_cast<Form*>( it->second.get() );
+		form = static_cast<Form*>( it->get() );
 		if ( form )
 			form->render();
 		it++;
