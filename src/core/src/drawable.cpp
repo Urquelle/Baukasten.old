@@ -71,3 +71,7 @@ const float Drawable::getScale() const
 	return mScale;
 }
 
+void Drawable::setVisible( bool visible )
+{
+}
+

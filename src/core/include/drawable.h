@@ -73,6 +73,9 @@ namespace Baukasten {
 		/*! getter method for object's scale ratio. */
 		const float getScale() const;
 
+		/*! sets the visibility of the object. */
+		virtual void setVisible( bool );
+
 	protected:
 		// position of the object
 		t_pos   mPosition;
