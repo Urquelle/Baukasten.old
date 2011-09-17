@@ -191,9 +191,9 @@ int Game::init()
 	gomez->setType( type );
 	ramirez->setType( type );
 
-	sanchez->setName( sanchez->getId() );
-	gomez->setName( gomez->getId() );
-	ramirez->setName( ramirez->getId() );
+	sanchez->setName( "sanchez" );
+	gomez->setName( "gomez" );
+	ramirez->setName( "ramirez" );
 
 	group->addChild( sanchez );
 	group->addChild( gomez );
