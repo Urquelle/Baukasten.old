@@ -26,7 +26,7 @@ namespace Baukasten {
 		void setDevice( irr::IrrlichtDevice* );
 
 	private:
-		IrrlichtInputPrivate*	mImpl;
+		shared_ptr<IrrlichtInputPrivate> mImpl;
 		friend class IrrlichtInputPrivate;
 		irr::IrrlichtDevice* mDevice;
 	};

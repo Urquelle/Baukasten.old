@@ -181,7 +181,7 @@ IrrlichtInput::init( CoreServices *coreServices )
 		dynamic_cast<IrrlichtGraphics*>( coreServices->getVideoService() );
 
 	BK_ASSERT( graphics != 0, "graphics must not be 0." );
-	graphics->getDevice()->setEventReceiver( mImpl );
+	graphics->getDevice()->setEventReceiver( mImpl.get() );
 }
 
 void
