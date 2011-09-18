@@ -61,9 +61,9 @@ namespace Baukasten {
 
 		virtual void runActions();
 
-		StateSignal onStateChanged();
-		ActionSignal onActionInvoked();
-		ActionSignal onActionRun();
+		StateSignal& onStateChanged();
+		ActionSignal& onActionInvoked();
+		ActionSignal& onActionRun();
 
 	private:
 		void stateChanged( State* );

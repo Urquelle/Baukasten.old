@@ -138,17 +138,17 @@ void GameEntity::runActions()
 	getForm()->getLSpace()->runActions();
 }
 
-StateSignal GameEntity::onStateChanged()
+StateSignal& GameEntity::onStateChanged()
 {
 	return mStateChanged;
 }
 
-ActionSignal GameEntity::onActionInvoked()
+ActionSignal& GameEntity::onActionInvoked()
 {
 	return mActionInvoked;
 }
 
-ActionSignal GameEntity::onActionRun()
+ActionSignal& GameEntity::onActionRun()
 {
 	return mActionRun;
 }
