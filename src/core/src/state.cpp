@@ -12,14 +12,16 @@ State::~State()
 {
 }
 
-State* State::pack()
+State*
+State::pack()
 {
 	State *state = new State( getId() );
 	state->mIntState = this;
 	return state;
 }
 
-sigc::signal<void, State*> State::onChange()
+sigc::signal<void, State*>
+State::onChange()
 {
 	return mChanged;
 }

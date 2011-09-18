@@ -7,7 +7,8 @@ using namespace Baukasten;
 
 CoreServices* CoreServices::mInstance = 0;
 
-CoreServices* CoreServices::instance()
+CoreServices*
+CoreServices::instance()
 {
 	if ( !mInstance )
 		mInstance = new CoreServices();
@@ -24,18 +25,21 @@ CoreServices::~CoreServices()
 {
 }
 
-void CoreServices::init()
+void
+CoreServices::init()
 {
 	mGraphics->init( this );
 	mInput->init( this );
 }
 
-IGraphics* CoreServices::getVideoService() const
+IGraphics*
+CoreServices::getVideoService() const
 {
 	return mGraphics;
 }
 
-IInput* CoreServices::getInputService() const
+IInput*
+CoreServices::getInputService() const
 {
 	return mInput;
 }

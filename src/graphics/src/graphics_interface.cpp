@@ -7,7 +7,8 @@ using namespace Baukasten;
 
 IGraphics* GraphicsInterface::mInstance = 0;
 
-IGraphics* GraphicsInterface::instance()
+IGraphics*
+GraphicsInterface::instance()
 {
 	if ( !mInstance ) {
 		mInstance = new IrrlichtGraphics();

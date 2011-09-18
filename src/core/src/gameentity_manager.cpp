@@ -13,20 +13,23 @@ GameEntityManager::~GameEntityManager()
 {
 }
 
-void GameEntityManager::addGameEntity( GameEntity *entity )
+void
+GameEntityManager::addGameEntity( GameEntity *entity )
 {
 	BK_ASSERT( entity != 0, "entity must not be 0." );
 	add( entity );
 }
 
-void GameEntityManager::addGameEntity(
+void
+GameEntityManager::addGameEntity(
 	const std::string &id, GameEntity *entity )
 {
 	BK_ASSERT( entity != 0, "entity must not be 0." );
 	add( id, entity );
 }
 
-GameEntity* GameEntityManager::getGameEntity(
+GameEntity*
+GameEntityManager::getGameEntity(
 	const std::string &id ) const
 {
 	return get( id );
@@ -38,12 +41,14 @@ GameEntityManager::getGameEntities() const
 	return getAll();
 }
 
-bool GameEntityManager::hasGameEntity( const std::string &id ) const
+bool
+GameEntityManager::hasGameEntity( const std::string &id ) const
 {
 	return has( id );
 }
 
-void GameEntityManager::removeGameEntity( const std::string &id )
+void
+GameEntityManager::removeGameEntity( const std::string &id )
 {
 	remove( id );
 }

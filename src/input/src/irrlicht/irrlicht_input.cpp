@@ -10,7 +10,8 @@ using namespace Baukasten;
 
 using namespace irr;
 
-Key getKey( EKEY_CODE key )
+Key
+getKey( EKEY_CODE key )
 {
 	Key t_key = KEY_NONE;
 
@@ -113,7 +114,8 @@ Key getKey( EKEY_CODE key )
 	return t_key;
 }
 
-Modifier getModifier( SEvent::SKeyInput key )
+Modifier
+getModifier( SEvent::SKeyInput key )
 {
 	Modifier mod = KEYMOD_NONE;
 	return mod;
@@ -132,7 +134,8 @@ namespace Baukasten {
 		{
 		}
 
-		bool OnEvent( const irr::SEvent &event )
+		bool
+		OnEvent( const irr::SEvent &event )
 		{
 			switch ( event.EventType ) {
 			case EET_KEY_INPUT_EVENT:
@@ -169,7 +172,8 @@ IrrlichtInput::~IrrlichtInput()
 {
 }
 
-bool IrrlichtInput::init( CoreServices *coreServices )
+bool
+IrrlichtInput::init( CoreServices *coreServices )
 {
 	BK_ASSERT( coreServices != 0, "coreServices must not be 0." );
 
@@ -180,15 +184,18 @@ bool IrrlichtInput::init( CoreServices *coreServices )
 	graphics->getDevice()->setEventReceiver( mImpl );
 }
 
-void IrrlichtInput::process() const
+void
+IrrlichtInput::process() const
 {
 }
 
-void IrrlichtInput::shutDown()
+void
+IrrlichtInput::shutDown()
 {
 }
 
-void IrrlichtInput::setDevice( IrrlichtDevice *device )
+void
+IrrlichtInput::setDevice( IrrlichtDevice *device )
 {
 	BK_ASSERT( device != 0, "device must not be 0." );
 	mDevice = device;

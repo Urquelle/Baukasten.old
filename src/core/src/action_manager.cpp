@@ -18,39 +18,46 @@ ActionManager::~ActionManager()
 {
 }
 
-void ActionManager::addAction( Action *action )
+void
+ActionManager::addAction( Action *action )
 {
 	BK_ASSERT( action != 0, "action must not be 0" );
 	add( action );
 }
 
-void ActionManager::addAction( const std::string &id, Action *action )
+void
+ActionManager::addAction( const std::string &id, Action *action )
 {
 	BK_ASSERT( action != 0, "action must not be 0" );
 	add( id, action );
 }
 
-Action* ActionManager::getAction( const std::string &id ) const
+Action*
+ActionManager::getAction( const std::string &id ) const
 {
 	return get( id );
 }
 
-ActionMap ActionManager::getActions() const
+ActionMap
+ActionManager::getActions() const
 {
 	return getAll();
 }
 
-ActionList ActionManager::getInvokedActions() const
+ActionList
+ActionManager::getInvokedActions() const
 {
 	return mActionQueue;
 }
 
-bool ActionManager::hasAction( const std::string &id ) const
+bool
+ActionManager::hasAction( const std::string &id ) const
 {
 	return has( id );
 }
 
-void ActionManager::invokeAction( const std::string &id )
+void
+ActionManager::invokeAction( const std::string &id )
 {
 	Action *action = getAction( id );
 
@@ -66,7 +73,8 @@ void ActionManager::invokeAction( const std::string &id )
 	}
 }
 
-void ActionManager::invokeAction( const std::string &id, GameEntity *target )
+void
+ActionManager::invokeAction( const std::string &id, GameEntity *target )
 {
 	BK_ASSERT( target != 0, "target must not be 0" );
 	Action *action = getAction( id );
@@ -84,7 +92,8 @@ void ActionManager::invokeAction( const std::string &id, GameEntity *target )
 	}
 }
 
-void ActionManager::invokeAction( const std::string &id, GameEntityList targets )
+void
+ActionManager::invokeAction( const std::string &id, GameEntityList targets )
 {
 	Action *action = getAction( id );
 
@@ -101,7 +110,8 @@ void ActionManager::invokeAction( const std::string &id, GameEntityList targets 
 	}
 }
 
-void ActionManager::dropAction( const std::string &id )
+void
+ActionManager::dropAction( const std::string &id )
 {
 	Action *action = getAction( id );
 

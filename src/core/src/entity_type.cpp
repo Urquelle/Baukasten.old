@@ -16,7 +16,8 @@ EntityType::~EntityType()
 {
 }
 
-void EntityType::setParent( EntityType *parent )
+void
+EntityType::setParent( EntityType *parent )
 {
 	BK_ASSERT( parent != 0, "parent must not be 0." );
 
@@ -24,12 +25,14 @@ void EntityType::setParent( EntityType *parent )
 		mParent = parent;
 }
 
-EntityType* EntityType::getParent() const
+EntityType*
+EntityType::getParent() const
 {
 	return mParent;
 }
 
-void EntityType::addChild( EntityType *child )
+void
+EntityType::addChild( EntityType *child )
 {
 	BK_ASSERT( child != 0, "child must not be 0." );
 
@@ -39,13 +42,15 @@ void EntityType::addChild( EntityType *child )
 		mChildren.push_back( child );
 }
 
-void EntityType::removeChild( const EntityType *child )
+void
+EntityType::removeChild( const EntityType *child )
 {
 	BK_ASSERT( child != 0, "child must not be 0." );
 	mChildren.erase( find( mChildren.begin(), mChildren.end(), child ) );
 }
 
-State* EntityType::getEntityState( const std::string &id )
+State*
+EntityType::getEntityState( const std::string &id )
 {
 	return 0;
 }

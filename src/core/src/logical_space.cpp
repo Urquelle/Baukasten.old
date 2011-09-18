@@ -15,7 +15,8 @@ LogicalSpace::~LogicalSpace()
 {
 }
 
-void LogicalSpace::runActions()
+void
+LogicalSpace::runActions()
 {
 	auto map = getGameEntities();
 	for_each( map.begin(), map.end(), []( pair<string,shared_ptr<GameEntity>> entry ) {

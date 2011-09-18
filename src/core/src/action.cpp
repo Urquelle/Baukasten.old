@@ -19,54 +19,64 @@ Action::~Action()
 {
 }
 
-GameEntity* Action::getSource() const
+GameEntity*
+Action::getSource() const
 {
 	return mSource;
 }
 
-void Action::clear()
+void
+Action::clear()
 {
 	mTarget = 0;
 	mTargets.erase( mTargets.begin(), mTargets.end() );
 }
 
-bool Action::isActive() const
+bool
+Action::isActive() const
 {
 	return mActive;
 }
 
-void Action::setActive( bool active )
+void
+Action::setActive( bool active )
 {
 	mActive = active;
 }
 
-void Action::setTarget( GameEntity *target )
+void
+Action::setTarget( GameEntity *target )
 {
 	BK_ASSERT( target != 0, "target must not be 0." );
 	mTarget = target;
 }
 
-GameEntity* Action::getTarget()
+GameEntity*
+Action::getTarget()
 {
 	return mTarget;
 }
 
-void Action::setTargets( GameEntityList &targets )
+void
+Action::setTargets( GameEntityList &targets )
 {
 	mTargets = targets;
 }
 
-GameEntityList Action::getTargets()
+GameEntityList
+Action::getTargets()
 {
 	return mTargets;
 }
 
-bool Action::done() const
+bool
+Action::done() const
 {
 	return true;
 }
 
-void Action::run()
+void
+Action::run()
 {
 	auto source = getSource();
 

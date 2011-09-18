@@ -13,12 +13,14 @@ VirtualSpace::~VirtualSpace()
 	// TODO empty mDrawables list and reset the shared_ptr.
 }
 
-Drawable* VirtualSpace::getDrawable( const std::string &id ) const
+Drawable*
+VirtualSpace::getDrawable( const std::string &id ) const
 {
 	return static_cast<Drawable*>( EntityManager::getEntity( id ) );
 }
 
-void VirtualSpace::addEntity( Drawable *entity )
+void
+VirtualSpace::addEntity( Drawable *entity )
 {
 	add( entity );
 
@@ -28,7 +30,8 @@ void VirtualSpace::addEntity( Drawable *entity )
 	mDrawables.push_back( shared_ptr<Drawable>( entity ) );
 }
 
-DrawableList VirtualSpace::getEntities() const
+DrawableList
+VirtualSpace::getEntities() const
 {
 	return mDrawables;
 }

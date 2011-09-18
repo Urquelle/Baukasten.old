@@ -12,7 +12,8 @@ Entity::~Entity()
 {
 }
 
-Entity& Entity::operator=( const Entity &other )
+Entity&
+Entity::operator=( const Entity &other )
 {
 	if ( this == &other )
 		return *this;
@@ -22,12 +23,14 @@ Entity& Entity::operator=( const Entity &other )
 	return *this;
 }
 
-bool Entity::operator==( const Entity &other ) const
+bool
+Entity::operator==( const Entity &other ) const
 {
 	return ( getId() == other.getId() );
 }
 
-const std::string& Entity::getId() const
+const std::string&
+Entity::getId() const
 {
 	return mId;
 }

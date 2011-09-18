@@ -23,41 +23,48 @@ Form::~Form()
 	delete mVSpace;
 }
 
-void Form::addToLSpace( GameEntity *entity )
+void
+Form::addToLSpace( GameEntity *entity )
 {
 	BK_ASSERT( entity != 0, "entity must not be 0." );
 	mLSpace->addGameEntity( entity );
 }
 
-void Form::removeFromLSpace( const std::string &id )
+void
+Form::removeFromLSpace( const std::string &id )
 {
 	if ( mLSpace->hasGameEntity( id ) )
 		mLSpace->removeGameEntity( id );
 }
 
-LogicalSpace* Form::getLSpace() const
+LogicalSpace*
+Form::getLSpace() const
 {
 	return mLSpace;
 }
 
-void Form::addToVSpace( Drawable *entity )
+void
+Form::addToVSpace( Drawable *entity )
 {
 	BK_ASSERT( entity != 0, "entity must not be 0." );
 	mVSpace->addEntity( entity );
 }
 
-void Form::removeFromVSpace( const std::string &id )
+void
+Form::removeFromVSpace( const std::string &id )
 {
 	if ( mVSpace->hasEntity( id ) )
 		mVSpace->removeEntity( id );
 }
 
-VirtualSpace* Form::getVSpace() const
+VirtualSpace*
+Form::getVSpace() const
 {
 	return mVSpace;
 }
 
-void Form::render()
+void
+Form::render()
 {
 	auto entities = mVSpace->getEntities();
 	for_each( entities.begin(), entities.end(), []( shared_ptr<Drawable> d ) {

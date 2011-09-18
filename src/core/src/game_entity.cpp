@@ -10,7 +10,8 @@
 using namespace Baukasten;
 using namespace std;
 
-bool isAncestor( GameEntity *entity, GameEntity *child )
+bool
+isAncestor( GameEntity *entity, GameEntity *child )
 {
 	while ( GameEntity *parent = entity->getParent() ) {
 		if ( parent == child )
@@ -42,29 +43,34 @@ GameEntity::~GameEntity()
 	}
 }
 
-void GameEntity::setType( EntityType *type )
+void
+GameEntity::setType( EntityType *type )
 {
 	if ( type )
 		mType = type;
 }
 
-EntityType* GameEntity::getType() const
+EntityType*
+GameEntity::getType() const
 {
 	return mType;
 }
 
-void GameEntity::setForm( Form *form )
+void
+GameEntity::setForm( Form *form )
 {
 	if ( form )
 		mForm = form;
 }
 
-Form* GameEntity::getForm() const
+Form*
+GameEntity::getForm() const
 {
 	return mForm;
 }
 
-void GameEntity::addState( const std::string &id, State *state )
+void
+GameEntity::addState( const std::string &id, State *state )
 {
 	BK_ASSERT( state != 0, "state must not be 0." );
 
@@ -75,13 +81,15 @@ void GameEntity::addState( const std::string &id, State *state )
 	StateManager::addState( id, state );
 }
 
-void GameEntity::addState( State *state )
+void
+GameEntity::addState( State *state )
 {
 	if ( state )
 		addState( state->getId(), state );
 }
 
-bool GameEntity::hasState( const std::string &id ) const
+bool
+GameEntity::hasState( const std::string &id ) const
 {
 	bool answer = StateManager::hasState( id );
 	if ( !answer && getType() )
@@ -90,7 +98,8 @@ bool GameEntity::hasState( const std::string &id ) const
 	return answer;
 }
 
-void GameEntity::addChild( GameEntity *child )
+void
+GameEntity::addChild( GameEntity *child )
 {
 	BK_ASSERT( this != child, "you can't have a GameEntity be its own child." );
 	BK_ASSERT(
@@ -102,18 +111,21 @@ void GameEntity::addChild( GameEntity *child )
 		mChildren[ child->getId() ] = child;
 }
 
-GameEntity* GameEntity::getChild( const std::string &id ) const
+GameEntity*
+GameEntity::getChild( const std::string &id ) const
 {
 	auto it = mChildren.find( id );
 	return ( it == mChildren.end() ) ? 0 : it->second;
 }
 
-void GameEntity::removeChild( const std::string &id )
+void
+GameEntity::removeChild( const std::string &id )
 {
 	mChildren.erase( mChildren.find( id ) );
 }
 
-void GameEntity::setParent( GameEntity *parent )
+void
+GameEntity::setParent( GameEntity *parent )
 {
 	BK_ASSERT( parent != 0, "parent must not be 0." );
 	BK_ASSERT( parent != this, "GameEntity object can't be its own parent." );
@@ -121,12 +133,14 @@ void GameEntity::setParent( GameEntity *parent )
 	mParent = parent;
 }
 
-GameEntity* GameEntity::getParent() const
+GameEntity*
+GameEntity::getParent() const
 {
 	return mParent;
 }
 
-void GameEntity::runActions()
+void
+GameEntity::runActions()
 {
 	// run own actions first
 	ActionList al = getInvokedActions();
@@ -138,22 +152,26 @@ void GameEntity::runActions()
 	getForm()->getLSpace()->runActions();
 }
 
-StateSignal& GameEntity::onStateChanged()
+StateSignal&
+GameEntity::onStateChanged()
 {
 	return mStateChanged;
 }
 
-ActionSignal& GameEntity::onActionInvoked()
+ActionSignal&
+GameEntity::onActionInvoked()
 {
 	return mActionInvoked;
 }
 
-ActionSignal& GameEntity::onActionRun()
+ActionSignal&
+GameEntity::onActionRun()
 {
 	return mActionRun;
 }
 
-void GameEntity::stateChanged( State *state )
+void
+GameEntity::stateChanged( State *state )
 {
 	mStateChanged.emit( this, state );
 }

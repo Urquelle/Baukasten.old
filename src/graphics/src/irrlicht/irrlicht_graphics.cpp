@@ -25,7 +25,8 @@ IrrlichtGraphics::~IrrlichtGraphics()
 {
 }
 
-int IrrlichtGraphics::init( CoreServices *coreServices )
+int
+IrrlichtGraphics::init( CoreServices *coreServices )
 {
 	mDevice = createDevice(
 		EDT_OPENGL,
@@ -40,7 +41,8 @@ int IrrlichtGraphics::init( CoreServices *coreServices )
 	return 1;
 }
 
-void IrrlichtGraphics::render( Form *form )
+void
+IrrlichtGraphics::render( Form *form )
 {
 	mDevice->run();
 	mDriver->beginScene(true, true, video::SColor(0, 0, 0, 0));
@@ -49,32 +51,38 @@ void IrrlichtGraphics::render( Form *form )
 	mDriver->endScene();
 }
 
-void IrrlichtGraphics::shutDown()
+void
+IrrlichtGraphics::shutDown()
 {
 	mDevice->drop();
 }
 
-void IrrlichtGraphics::setWindowCaption( const std::wstring &caption )
+void
+IrrlichtGraphics::setWindowCaption( const std::wstring &caption )
 {
 	mDevice->setWindowCaption( caption.c_str() );
 }
 
-IrrlichtDevice* IrrlichtGraphics::getDevice() const
+IrrlichtDevice*
+IrrlichtGraphics::getDevice() const
 {
 	return mDevice;
 }
 
-IVideoDriver* IrrlichtGraphics::getDriver() const
+IVideoDriver*
+IrrlichtGraphics::getDriver() const
 {
 	return mDriver;
 }
 
-ISceneManager* IrrlichtGraphics::getSceneManager() const
+ISceneManager*
+IrrlichtGraphics::getSceneManager() const
 {
 	return mSceneManager;
 }
 
-IGUIEnvironment* IrrlichtGraphics::getGui() const
+IGUIEnvironment*
+IrrlichtGraphics::getGui() const
 {
 	return mGui;
 }

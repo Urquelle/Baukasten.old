@@ -20,26 +20,30 @@ ActionLambda::~ActionLambda()
 {
 }
 
-void ActionLambda::setDoActionFunction( DoActionFunction *func )
+void
+ActionLambda::setDoActionFunction( DoActionFunction *func )
 {
 	BK_ASSERT( func != 0, "function pointer must not be 0." );
 	mDoAction = func;
 }
 
-void ActionLambda::setDoneFunction( DoneFunction *func )
+void
+ActionLambda::setDoneFunction( DoneFunction *func )
 {
 	BK_ASSERT( func != 0, "function pointer must not be 0." );
 	mDone = func;
 }
 
-bool ActionLambda::done() const
+bool
+ActionLambda::done() const
 {
 	if ( !mDone )
 		return Action::done();
 	return (*mDone)( this );
 }
 
-void ActionLambda::doAction( GameEntity *entity )
+void
+ActionLambda::doAction( GameEntity *entity )
 {
 	BK_ASSERT( mDoAction != 0, "function pointer must not be 0." );
 	(*mDoAction)( this, entity );

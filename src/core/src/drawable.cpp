@@ -11,67 +11,80 @@ Drawable::~Drawable()
 {
 }
 
-void Drawable::setPosition( const t_pos position )
+void
+Drawable::setPosition( const t_pos position )
 {
 	mPosition = position;
 }
 
-const t_pos Drawable::getPosition() const
+const t_pos
+Drawable::getPosition() const
 {
 	return mPosition;
 }
 
-void Drawable::setSize( const t_size size )
+void
+Drawable::setSize( const t_size size )
 {
 	mSize = size;
 }
 
-const t_size Drawable::getSize() const
+const t_size
+Drawable::getSize() const
 {
 	return mSize;
 }
 
-void Drawable::setPitch( const float pitch )
+void
+Drawable::setPitch( const float pitch )
 {
 	mPitch = pitch;
 }
 
-const float Drawable::getPitch() const
+const
+float Drawable::getPitch() const
 {
 	return mPitch;
 }
 
-void Drawable::setYaw( const float yaw )
+void
+Drawable::setYaw( const float yaw )
 {
 	mYaw = yaw;
 }
 
-const float Drawable::getYaw() const
+const float
+Drawable::getYaw() const
 {
 	return mYaw;
 }
 
-void Drawable::setRoll( const float roll )
+void
+Drawable::setRoll( const float roll )
 {
 	mRoll = roll;
 }
 
-const float Drawable::getRoll() const
+const float
+Drawable::getRoll() const
 {
 	return mRoll;
 }
 
-void Drawable::setScale( const float scale )
+void
+Drawable::setScale( const float scale )
 {
 	mScale = scale;
 }
 
-const float Drawable::getScale() const
+const float
+Drawable::getScale() const
 {
 	return mScale;
 }
 
-void Drawable::setVisible( bool visible )
+void
+Drawable::setVisible( bool visible )
 {
 }
 
