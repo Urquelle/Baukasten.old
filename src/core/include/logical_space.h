@@ -10,6 +10,8 @@ namespace Baukasten {
 	public:
 		LogicalSpace();
 		virtual ~LogicalSpace();
+
+		void runActions();
 	};
 }
 

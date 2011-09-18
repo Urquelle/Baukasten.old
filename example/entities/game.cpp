@@ -13,6 +13,7 @@
 #include <igraphics.h>
 #include <iinput.h>
 #include <lua/action_lua.h>
+#include <logical_space.h>
 
 using namespace Baukasten;
 
@@ -160,8 +161,7 @@ void Game::run()
 	// mainloop
 	while ( keepRunning() ) {
 		invokeAction( "updateState" );
-
-		runActions();
+		getForm()->getLSpace()->runActions();
 		mInput->process();
 		mGraphics->render( getForm() );
 	}
@@ -186,6 +186,7 @@ int Game::init()
 	// init worldmap
 	mWorldMap = new WorldMap( "entity:worldmap" );
 	getForm()->addToVSpace( mWorldMap->getForm() );
+	getForm()->addToLSpace( mWorldMap );
 
 	// init hero's group and some units
 	BasicType *type = new BasicType( "basic" );
