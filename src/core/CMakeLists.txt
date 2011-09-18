@@ -14,7 +14,6 @@ set (
 	core/src/game_entity.cpp
 	core/src/gameentity_manager.cpp
     core/src/logical_space.cpp
-	core/src/object_manager.cpp
     core/src/state.cpp
 	core/src/state_manager.cpp
     core/src/virtual_space.cpp

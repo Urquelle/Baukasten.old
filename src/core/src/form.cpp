@@ -9,7 +9,6 @@ using namespace Baukasten;
 
 Form::Form( const std::string &id ) :
 	Drawable( id ),
-	ObjectManager(),
 	mLSpace( new LogicalSpace() ),
 	mVSpace( new VirtualSpace() )
 {
