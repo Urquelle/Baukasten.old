@@ -7,6 +7,7 @@
 #include <action_lambda.h>
 #include <lua/action_lua.h>
 #include <generic_state.h>
+#include <virtual_space.h>
 
 using namespace Baukasten;
 
@@ -69,6 +70,37 @@ DoActionFunction hideFunction( []( Action *action, GameEntity *entity )
 	menu->getForm()->setVisible( false );
 });
 
+DoActionFunction handleMenuItemFunction( []( Action *action, GameEntity *entity )
+{
+	enum MenuAction { MOVE, ABORT, QUIT };
+
+	GameEntity *pointer = action->getSource()->getChild( "entity:pointer" );
+	GameEntity *menu = action->getSource()->getChild( "entity:menu" );
+	MenuForm *form = static_cast<MenuForm*>( menu->getForm() );
+	Form2d  *group = static_cast<Form2d*>(
+		action->getSource()->getForm()->getVSpace()->getDrawable( "form:group" )
+	);
+
+	t_pos pos = pointer->getForm()->getPosition();
+	t_size size = pointer->getForm()->getSize();
+
+	switch ( form->getCurrentIndex() ) {
+	case MOVE:
+		group->setPosition(
+			{ pos.getX() + size.width, pos.getY(), 0 }
+		);
+		break;
+	case ABORT:
+		action->getSource()->invokeAction( "hideMenu" );
+		break;
+	case QUIT:
+		BK_DEBUG( "quit game" );
+		break;
+	}
+
+	form->setVisible( false );
+});
+
 WorldMap::WorldMap( const std::string &id ) :
 	GameEntity( id )
 {
@@ -76,6 +108,7 @@ WorldMap::WorldMap( const std::string &id ) :
 	addAction( new ActionLua( *this, "moveLeftOnMap", "scripts/move_left_on_map.lua" ) );
 	addAction( new ActionLambda( *this, "showMenu", &showMenuFunction ) );
 	addAction( new ActionLambda( *this, "hideMenu", &hideFunction ) );
+	addAction( new ActionLambda( *this, "handleMenuItem", &handleMenuItemFunction ) );
 
 	CoreServices *services = CoreServices::instance();
 

@@ -105,8 +105,16 @@ void Game::onKeyDown( Key key, Modifier mod )
 		}
 		break;
 	case KEY_RETURN:
-		mWorldMap->invokeAction( "showMenu" );
-		getState<StateInt*>( "currentMode" )->setValue( MODE_MENU );
+		switch ( currentMode() ) {
+		case MODE_WORLDMAP:
+			mWorldMap->invokeAction( "showMenu" );
+			getState<StateInt*>( "currentMode" )->setValue( MODE_MENU );
+			break;
+		case MODE_MENU:
+			mWorldMap->invokeAction( "handleMenuItem" );
+			getState<StateInt*>( "currentMode" )->setValue( MODE_WORLDMAP );
+			break;
+		}
 		break;
 	}
 }
