@@ -135,13 +135,7 @@ void GameEntity::runActions()
 	}
 
 	// run children's actions
-	EntityMap map = getForm()->getLSpace()->getEntities();
-	auto cit = map.begin();
-	while ( cit != map.end() ) {
-		GameEntity *entity = dynamic_cast<GameEntity*>( cit->second.get() );
-		entity->runActions();
-		cit++;
-	}
+	getForm()->getLSpace()->runActions();
 }
 
 sigc::signal<void, GameEntity*, State*> GameEntity::onStateChanged()
