@@ -14,6 +14,9 @@ namespace Baukasten {
 	class EntityType;
 	class Form;
 
+	typedef sigc::signal<void, GameEntity*, State*> StateSignal;
+	typedef sigc::signal<void, GameEntity*, Action*> ActionSignal;
+
 	class BAUKASTEN_EXPORT GameEntity : public Entity,
 		public ActionManager, public StateManager {
 	public:
@@ -58,9 +61,9 @@ namespace Baukasten {
 
 		virtual void runActions();
 
-		sigc::signal<void, GameEntity*, State*> onStateChanged();
-		sigc::signal<void, GameEntity*, Action*> onActionInvoked();
-		sigc::signal<void, GameEntity*, Action*> onActionRun();
+		StateSignal onStateChanged();
+		ActionSignal onActionInvoked();
+		ActionSignal onActionRun();
 
 	private:
 		void stateChanged( State* );
@@ -71,9 +74,9 @@ namespace Baukasten {
 		GameEntity*		mParent;
 
 		// signals
-		sigc::signal<void, GameEntity*, State*>		mStateChanged;
-		sigc::signal<void, GameEntity*, Action*>	mActionInvoked;
-		sigc::signal<void, GameEntity*, Action*>	mActionRun;
+		StateSignal		mStateChanged;
+		ActionSignal	mActionInvoked;
+		ActionSignal	mActionRun;
 	};
 } /* Baukasten */
 

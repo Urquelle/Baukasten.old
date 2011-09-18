@@ -138,17 +138,17 @@ void GameEntity::runActions()
 	getForm()->getLSpace()->runActions();
 }
 
-sigc::signal<void, GameEntity*, State*> GameEntity::onStateChanged()
+StateSignal GameEntity::onStateChanged()
 {
 	return mStateChanged;
 }
 
-sigc::signal<void, GameEntity*, Action*> GameEntity::onActionInvoked()
+ActionSignal GameEntity::onActionInvoked()
 {
 	return mActionInvoked;
 }
 
-sigc::signal<void, GameEntity*, Action*> GameEntity::onActionRun()
+ActionSignal GameEntity::onActionRun()
 {
 	return mActionRun;
 }
