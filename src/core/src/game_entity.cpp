@@ -2,6 +2,8 @@
 
 #include "action.h"
 #include "debug.h"
+#include "form.h"
+#include "logical_space.h"
 
 using namespace Baukasten;
 using namespace std;
@@ -133,9 +135,11 @@ void GameEntity::runActions()
 	}
 
 	// run children's actions
-	auto cit = mChildren.begin();
-	while ( cit != mChildren.end() ) {
-		cit->second->runActions();
+	EntityMap map = getForm()->getLSpace()->getEntities();
+	auto cit = map.begin();
+	while ( cit != map.end() ) {
+		GameEntity *entity = dynamic_cast<GameEntity*>( cit->second.get() );
+		entity->runActions();
 		cit++;
 	}
 }
