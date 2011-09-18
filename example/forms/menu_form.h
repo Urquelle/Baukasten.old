@@ -22,9 +22,10 @@ public:
 
 	void setVisible( bool );
 
+	int getCurrentIndex() const;
+
 private:
 	irr::gui::IGUIListBox* mMenu;
-	/* data */
 };
 
 #endif /* end of include guard: MENU_NR2276VJ */

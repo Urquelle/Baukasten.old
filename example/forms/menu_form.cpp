@@ -55,3 +55,8 @@ void MenuForm::setVisible( bool visible )
 	mMenu->setVisible( visible );
 }
 
+int MenuForm::getCurrentIndex() const
+{
+	return mMenu->getSelected();
+}
+
