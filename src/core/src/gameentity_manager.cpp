@@ -32,7 +32,7 @@ GameEntity* GameEntityManager::getGameEntity(
 	return get( id );
 }
 
-AbstractManager<GameEntity>::TMap
+GameEntityManager::TMap
 GameEntityManager::getGameEntities() const
 {
 	return getAll();

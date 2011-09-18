@@ -15,7 +15,7 @@ namespace Baukasten {
 		void addGameEntity( GameEntity* );
 		void addGameEntity( const std::string&, GameEntity* );
 		GameEntity* getGameEntity( const std::string& ) const;
-		AbstractManager<GameEntity>::TMap getGameEntities() const;
+		TMap getGameEntities() const;
 		bool hasGameEntity( const std::string& ) const;
 		void removeGameEntity( const std::string& );
 	};
