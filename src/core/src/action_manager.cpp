@@ -5,7 +5,10 @@
 
 #include "debug.h"
 
+#include <algorithm>
+
 using namespace Baukasten;
+using namespace std;
 
 ActionManager::ActionManager()
 {
@@ -104,15 +107,11 @@ void ActionManager::dropAction( const std::string &id )
 
 	if ( action && action->isActive() ) {
 		action->setActive( false );
-		auto it = mActionQueue.begin();
-
-		while ( it != mActionQueue.end() ) {
-			if ( *it == action ) {
-				mActionQueue.erase( it );
-				break;
-			}
-			it++;
-		}
+		mActionQueue.erase(
+			find_if( mActionQueue.begin(), mActionQueue.end(), [action](Action *a) {
+				return a == action;
+			})
+		);
 	}
 }
 

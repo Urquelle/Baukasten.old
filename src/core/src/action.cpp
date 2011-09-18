@@ -1,7 +1,11 @@
 #include "action.h"
+
 #include "game_entity.h"
 
+#include <algorithm>
+
 using namespace Baukasten;
+using namespace std;
 
 Action::Action( GameEntity &source, const std::string &id ) :
 	Entity( id ),
@@ -64,28 +68,25 @@ bool Action::done() const
 
 void Action::run()
 {
-	GameEntity *source = getSource();
+	auto source = getSource();
 
 	// remove the action from the execution queue
 	if ( done() )
 		source->dropAction( getId() );
 
-	GameEntity *target = getTarget();
-
+	auto target = getTarget();
 	if ( target ) {
 		source->onActionRun().emit( source, this );
 		doAction( target );
 		return;
 	}
 
-	GameEntityList targets = getTargets();
+	auto targets = getTargets();
 	if ( !targets.empty() ) {
-		GameEntityList::iterator it = targets.begin();
-		while( it != targets.end() ) {
+		for_each( targets.begin(), targets.end(), [source, this]( GameEntity *entity ) {
 			source->onActionRun().emit( source, this );
-			doAction( *it );
-			++it;
-		}
+			doAction( entity );
+		});
 		return;
 	}
 

@@ -2,6 +2,8 @@
 
 #include "game_entity.h"
 
+#include <algorithm>
+
 using namespace Baukasten;
 
 LogicalSpace::LogicalSpace() :
@@ -16,9 +18,7 @@ LogicalSpace::~LogicalSpace()
 void LogicalSpace::runActions()
 {
 	auto map = getGameEntities();
-	auto it = map.begin();
-	while ( it != map.end() ) {
-		( static_cast<GameEntity*>( it->second.get() ) )->runActions();
-		it++;
-	}
+	for_each( map.begin(), map.end(), []( pair<string,shared_ptr<GameEntity>> entry ) {
+		entry.second->runActions();
+	});
 }

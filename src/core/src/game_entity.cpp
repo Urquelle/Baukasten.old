@@ -5,6 +5,8 @@
 #include "form.h"
 #include "logical_space.h"
 
+#include <algorithm>
+
 using namespace Baukasten;
 using namespace std;
 
@@ -128,11 +130,9 @@ void GameEntity::runActions()
 {
 	// run own actions first
 	ActionList al = getInvokedActions();
-	auto it = al.begin();
-	while ( it != al.end() ) {
-		(*it)->run();
-		it++;
-	}
+	for_each( al.begin(), al.end(), []( Action *a ) {
+		a->run();
+	});
 
 	// run children's actions
 	getForm()->getLSpace()->runActions();

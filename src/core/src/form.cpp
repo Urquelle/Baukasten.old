@@ -5,7 +5,10 @@
 #include "logical_space.h"
 #include "virtual_space.h"
 
+#include <algorithm>
+
 using namespace Baukasten;
+using namespace std;
 
 Form::Form( const std::string &id ) :
 	Drawable( id ),
@@ -57,14 +60,8 @@ VirtualSpace* Form::getVSpace() const
 void Form::render()
 {
 	auto entities = mVSpace->getEntities();
-	auto it = entities.begin();
-	Form *form = 0;
-
-	while ( it != entities.end() ) {
-		form = static_cast<Form*>( it->get() );
-		if ( form )
-			form->render();
-		it++;
-	}
+	for_each( entities.begin(), entities.end(), []( shared_ptr<Drawable> d ) {
+		d->render();
+	});
 }
 
