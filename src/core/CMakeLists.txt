@@ -12,6 +12,7 @@ set (
     core/src/entity_type.cpp
     core/src/form.cpp
 	core/src/game_entity.cpp
+	core/src/gameentity_manager.cpp
     core/src/logical_space.cpp
 	core/src/object_manager.cpp
     core/src/state.cpp

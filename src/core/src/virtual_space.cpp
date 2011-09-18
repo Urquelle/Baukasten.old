@@ -4,7 +4,7 @@
 using namespace Baukasten;
 
 VirtualSpace::VirtualSpace() :
-	LogicalSpace()
+	EntityManager()
 {
 }
 
@@ -15,7 +15,7 @@ VirtualSpace::~VirtualSpace()
 
 Drawable* VirtualSpace::getDrawable( const std::string &id ) const
 {
-	return static_cast<Drawable*>( LogicalSpace::getEntity( id ) );
+	return static_cast<Drawable*>( EntityManager::getEntity( id ) );
 }
 
 void VirtualSpace::addEntity( Drawable *entity )

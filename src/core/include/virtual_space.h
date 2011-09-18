@@ -2,12 +2,13 @@
 #define VIRTUAL_SPACE_H
 
 #include "global.h"
-#include "logical_space.h"
+
+#include "entity_manager.h"
 
 namespace Baukasten {
 	class Drawable;
 
-	class BAUKASTEN_EXPORT VirtualSpace : public LogicalSpace {
+	class BAUKASTEN_EXPORT VirtualSpace : public EntityManager {
 	public:
 		VirtualSpace();
 		virtual ~VirtualSpace();

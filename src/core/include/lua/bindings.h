@@ -65,6 +65,19 @@ void wrapClasses()
 		.set("removeEntity", &EntityManager::removeEntity)
 			.param("Entity id");
 
+	// register GameEntityManager class
+	SLB::Class<GameEntityManager>("GameEntityManager")
+		.comment("GameEntityManager class")
+		.constructor()
+		.set("addGameEntity", ( void (GameEntityManager::*)(GameEntity*) ) &GameEntityManager::addGameEntity)
+			.param("GameEntity object")
+		.set("getGameEntity", &GameEntityManager::getGameEntity)
+			.param("GameEntity id")
+		.const_set("getGameEntities", &GameEntityManager::getGameEntities)
+		.const_set("hasGameEntity", &GameEntityManager::hasGameEntity)
+		.set("removeGameEntity", &GameEntityManager::removeGameEntity)
+			.param("GameEntity id");
+
 	// register StateManager class
 	SLB::Class<StateManager>("StateManager")
 		.comment("StateManager Wrapper.")
@@ -225,13 +238,12 @@ void wrapClasses()
 	SLB::Class<LogicalSpace>("LogicalSpace")
 		.comment("LogicalSpace class")
 		.constructor()
-		.inherits<EntityManager>();
+		.inherits<GameEntityManager>();
 
 	// register VirtualSpace class
 	SLB::Class<VirtualSpace>("VirtualSpace")
 		.comment("VirtualSpace class")
 		.constructor()
-		.inherits<LogicalSpace>()
 		.inherits<EntityManager>()
 		.set("getDrawable", &VirtualSpace::getDrawable)
 			.param("Drawable id");

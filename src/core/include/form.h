@@ -20,7 +20,7 @@ namespace Baukasten {
 		Form( const std::string& );
 		virtual ~Form();
 
-		void addToLSpace( Entity* );
+		void addToLSpace( GameEntity* );
 		void removeFromLSpace( const std::string& );
 		LogicalSpace* getLSpace() const;
 

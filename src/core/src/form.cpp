@@ -21,16 +21,16 @@ Form::~Form()
 	delete mVSpace;
 }
 
-void Form::addToLSpace( Entity *entity )
+void Form::addToLSpace( GameEntity *entity )
 {
 	BK_ASSERT( entity != 0, "entity must not be 0." );
-	mLSpace->addEntity( entity );
+	mLSpace->addGameEntity( entity );
 }
 
 void Form::removeFromLSpace( const std::string &id )
 {
-	if ( mLSpace->hasEntity( id ) )
-		mLSpace->removeEntity( id );
+	if ( mLSpace->hasGameEntity( id ) )
+		mLSpace->removeGameEntity( id );
 }
 
 LogicalSpace* Form::getLSpace() const
