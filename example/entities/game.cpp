@@ -218,7 +218,7 @@ int Game::init()
 	form->setVisible( true );
 
 	group->setForm( form );
-	getForm()->addToVSpace( form );
+	mWorldMap->getForm()->addToVSpace( form );
 
 	addChild( mWorldMap );
 	addChild( group );
