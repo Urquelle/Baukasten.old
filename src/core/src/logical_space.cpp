@@ -14,6 +14,16 @@ LogicalSpace::~LogicalSpace()
 {
 }
 
+GameEntity*
+LogicalSpace::getEntity( const string &id ) const
+{
+	auto it = mMap.find( id );
+	if ( it == mMap.end() )
+		return 0;
+
+	return it->second;
+}
+
 void
 LogicalSpace::runActions()
 {
@@ -33,6 +43,12 @@ LogicalSpace::addEntity( GameEntity *entity )
 
 	mMap[ entity->getId() ] = entity;
 	mList.push_back( entity );
+}
+
+list<GameEntity*>
+LogicalSpace::getEntities() const
+{
+	return mList;
 }
 
 bool
