@@ -6,7 +6,7 @@
 #include <sigc++/sigc++.h>
 
 namespace Baukasten {
-	typedef enum {
+	enum class Key {
 		KEY_NONE,
 		KEY_A, KEY_B, KEY_C, KEY_D, KEY_E, KEY_F, KEY_G,
 		KEY_H, KEY_I, KEY_J, KEY_K, KEY_L, KEY_M, KEY_N,
@@ -20,9 +20,9 @@ namespace Baukasten {
 		KEY_7, KEY_8, KEY_9,
 
 		KEY_RETURN
-	} Key;
+	};
 
-	typedef enum {
+	enum class Modifier {
 		KEYMOD_NONE			= 1u << 0,
 		KEYMOD_LCTRL		= 1u << 1,
 		KEYMOD_RCTRL		= 1u << 2,
@@ -31,7 +31,7 @@ namespace Baukasten {
 		KEYMOD_RSHIFT		= 1u << 5,
 		KEYMOD_SHIFT		= 1u << 6,
 		KEYMOD_ALT			= 1u << 7
-	} Modifier;
+	};
 
 	typedef sigc::signal<void, Key, Modifier> KeyEvent;
 

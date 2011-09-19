@@ -56,7 +56,7 @@ int Game::currentMode()
 void Game::onKeyDown( Key key, Modifier mod )
 {
 	switch ( key ) {
-	case KEY_Q:
+	case Key::KEY_Q:
 		switch ( currentMode() ) {
 		case MODE_WORLDMAP:
 			getState<StateInt*>( "keepRunning" )->setValue( 0 );
@@ -67,7 +67,7 @@ void Game::onKeyDown( Key key, Modifier mod )
 			break;
 		}
 		break;
-	case KEY_ARROW_LEFT:
+	case Key::KEY_ARROW_LEFT:
 		switch ( currentMode() ) {
 		case MODE_WORLDMAP:
 			if ( !mMoveLeft ) {
@@ -77,7 +77,7 @@ void Game::onKeyDown( Key key, Modifier mod )
 			break;
 		}
 		break;
-	case KEY_ARROW_UP:
+	case Key::KEY_ARROW_UP:
 		switch ( currentMode() ) {
 		case MODE_WORLDMAP:
 			BK_DEBUG( "move up" );
@@ -85,7 +85,7 @@ void Game::onKeyDown( Key key, Modifier mod )
 			break;
 		}
 		break;
-	case KEY_ARROW_RIGHT:
+	case Key::KEY_ARROW_RIGHT:
 		switch ( currentMode() ) {
 		case MODE_WORLDMAP:
 			if ( !mMoveRight ) {
@@ -95,7 +95,7 @@ void Game::onKeyDown( Key key, Modifier mod )
 			break;
 		}
 		break;
-	case KEY_ARROW_DOWN:
+	case Key::KEY_ARROW_DOWN:
 		switch ( currentMode() ) {
 		case MODE_WORLDMAP:
 			BK_DEBUG( "move down" );
@@ -103,7 +103,7 @@ void Game::onKeyDown( Key key, Modifier mod )
 			break;
 		}
 		break;
-	case KEY_RETURN:
+	case Key::KEY_RETURN:
 		switch ( currentMode() ) {
 		case MODE_WORLDMAP:
 			mWorldMap->invokeAction( "showMenu" );
@@ -121,30 +121,30 @@ void Game::onKeyDown( Key key, Modifier mod )
 void Game::onKeyUp( Key key, Modifier mod )
 {
 	switch ( key ) {
-	case KEY_Q:
+	case Key::KEY_Q:
 		break;
-	case KEY_ARROW_LEFT:
+	case Key::KEY_ARROW_LEFT:
 		switch ( currentMode() ) {
 		case MODE_WORLDMAP:
 			mMoveLeft = false;
 			break;
 		}
 		break;
-	case KEY_ARROW_UP:
+	case Key::KEY_ARROW_UP:
 		switch ( currentMode() ) {
 		case MODE_WORLDMAP:
 			mMoveUp = false;
 			break;
 		}
 		break;
-	case KEY_ARROW_RIGHT:
+	case Key::KEY_ARROW_RIGHT:
 		switch ( currentMode() ) {
 		case MODE_WORLDMAP:
 			mMoveRight = false;
 			break;
 		}
 		break;
-	case KEY_ARROW_DOWN:
+	case Key::KEY_ARROW_DOWN:
 		switch ( currentMode() ) {
 		case MODE_WORLDMAP:
 			mMoveDown = false;
