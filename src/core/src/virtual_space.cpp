@@ -49,7 +49,7 @@ VirtualSpace::getEntities() const
 bool
 VirtualSpace::hasEntity( const string &id ) const
 {
-	return ( mMap.find( id ) != mMap.end() );
+	return mMap.count( id );
 }
 
 void

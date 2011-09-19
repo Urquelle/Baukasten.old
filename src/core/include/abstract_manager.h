@@ -105,7 +105,7 @@ namespace Baukasten {
 		 */
 		virtual bool has( const string &id ) const
 		{
-			return ( mMap.find( id ) != mMap.end() );
+			return mMap.count( id );
 		}
 
 		/*! \brief remove the object to the given id.
