@@ -3,23 +3,23 @@
 
 #include "global.h"
 
-#include "entity_manager.h"
-
 namespace Baukasten {
 	class Drawable;
 
-	class BAUKASTEN_EXPORT VirtualSpace : public EntityManager {
+	class BAUKASTEN_EXPORT VirtualSpace {
 	public:
 		VirtualSpace();
 		virtual ~VirtualSpace();
 
-		Drawable* getDrawable( const std::string& ) const;
-
+		Drawable* getEntity( const std::string& ) const;
 		void addEntity( Drawable* );
-		DrawableList getEntities() const;
+		list<Drawable*> getEntities() const;
+		bool hasEntity( const string& ) const;
+		void removeEntity( const string& );
 
 	private:
-		DrawableList mDrawables;
+		list<Drawable*>			mList;
+		map<string, Drawable*>	mMap;
 	};
 }
 

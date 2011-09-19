@@ -44,7 +44,7 @@ ActionManager::getActions() const
 	return getAll();
 }
 
-ActionList
+list<Action*>
 ActionManager::getInvokedActions() const
 {
 	return mActionQueue;

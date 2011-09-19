@@ -19,28 +19,26 @@ Form::Form( const std::string &id ) :
 
 Form::~Form()
 {
-	delete mLSpace;
-	delete mVSpace;
 }
 
 void
 Form::addToLSpace( GameEntity *entity )
 {
 	BK_ASSERT( entity != 0, "entity must not be 0." );
-	mLSpace->addGameEntity( entity );
+	mLSpace->addEntity( entity );
 }
 
 void
 Form::removeFromLSpace( const std::string &id )
 {
-	if ( mLSpace->hasGameEntity( id ) )
-		mLSpace->removeGameEntity( id );
+	if ( mLSpace->hasEntity( id ) )
+		mLSpace->removeEntity( id );
 }
 
 LogicalSpace*
 Form::getLSpace() const
 {
-	return mLSpace;
+	return mLSpace.get();
 }
 
 void
@@ -60,14 +58,14 @@ Form::removeFromVSpace( const std::string &id )
 VirtualSpace*
 Form::getVSpace() const
 {
-	return mVSpace;
+	return mVSpace.get();
 }
 
 void
 Form::render()
 {
 	auto entities = mVSpace->getEntities();
-	for_each( entities.begin(), entities.end(), []( shared_ptr<Drawable> d ) {
+	for_each( entities.begin(), entities.end(), []( Drawable* d ) {
 		d->render();
 	});
 }

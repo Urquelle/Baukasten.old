@@ -93,9 +93,9 @@ Action::run()
 
 	auto targets = getTargets();
 	if ( !targets.empty() ) {
-		for_each( targets.begin(), targets.end(), [source, this]( GameEntity *entity ) {
+		for_each( targets.begin(), targets.end(), [source, this]( shared_ptr<GameEntity> entity ) {
 			source->onActionRun().emit( source, this );
-			doAction( entity );
+			doAction( entity.get() );
 		});
 		return;
 	}

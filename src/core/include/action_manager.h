@@ -64,7 +64,7 @@ namespace Baukasten {
 		 *
 		 * \return ActionList actions in the execution queue.
 		 */
-		ActionList getInvokedActions() const;
+		list<Action*> getInvokedActions() const;
 
 		/*! \brief returns wheter the the key's present in the map.
 		 *
@@ -111,7 +111,7 @@ namespace Baukasten {
 		void dropAction( const std::string& );
 
 	private:
-		ActionList	mActionQueue;
+		list<Action*> mActionQueue;
 	};
 } /* Baukasten */
 

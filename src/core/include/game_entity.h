@@ -23,6 +23,7 @@ namespace Baukasten {
 		friend class State;
 
 		GameEntity( const std::string& );
+		GameEntity( const GameEntity& );
 		virtual ~GameEntity();
 
 		void setType( EntityType* );
@@ -68,10 +69,10 @@ namespace Baukasten {
 	private:
 		void stateChanged( State* );
 
-		EntityType*		mType;
-		Form*           mForm;
-		GameEntityMap	mChildren;
-		GameEntity*		mParent;
+		EntityType*			mType;
+		shared_ptr<Form>	mForm;
+		GameEntityMap		mChildren;
+		GameEntity*			mParent;
 
 		// signals
 		StateSignal		mStateChanged;

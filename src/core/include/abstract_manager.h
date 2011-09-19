@@ -37,12 +37,6 @@ namespace Baukasten {
 		/*! destructor */
 		virtual ~AbstractManager()
 		{
-			auto it = mMap.begin();
-			while ( it != mMap.end() ) {
-				BK_DEBUG( "in ~AbstractManager ... deleting your " << it->second->getId() );
-				it->second.reset();
-				it++;
-			}
 		}
 
 		/*! \brief add object t to the collection.

@@ -31,8 +31,6 @@ MenuForm::MenuForm( const std::string &id, IGraphics *graphics ) :
 
 MenuForm::~MenuForm()
 {
-	if ( mMenu )
-		delete mMenu;
 }
 
 void MenuForm::render()

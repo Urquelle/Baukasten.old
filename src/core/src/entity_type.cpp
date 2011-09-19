@@ -5,6 +5,7 @@
 #include <algorithm>
 
 using namespace Baukasten;
+using namespace std;
 
 EntityType::EntityType( const std::string &id ) :
 	Entity( id ),
@@ -36,17 +37,24 @@ EntityType::addChild( EntityType *child )
 {
 	BK_ASSERT( child != 0, "child must not be 0." );
 
-	auto it = find( mChildren.begin(), mChildren.end(), child );
+	auto it = find_if( mChildren.begin(), mChildren.end(), [child]( shared_ptr<EntityType> t ) {
+		return t.get() == child;
+	});
 
 	if ( it == mChildren.end() )
-		mChildren.push_back( child );
+		mChildren.push_back( shared_ptr<EntityType>( child ) );
 }
 
 void
 EntityType::removeChild( const EntityType *child )
 {
 	BK_ASSERT( child != 0, "child must not be 0." );
-	mChildren.erase( find( mChildren.begin(), mChildren.end(), child ) );
+
+	auto it = find_if( mChildren.begin(), mChildren.end(), [child]( shared_ptr<EntityType> t ) {
+		return t.get() == child;
+	});
+
+	mChildren.erase( it );
 }
 
 State*

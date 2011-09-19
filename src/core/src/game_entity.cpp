@@ -26,21 +26,20 @@ isAncestor( GameEntity *entity, GameEntity *child )
 GameEntity::GameEntity( const std::string &id ) :
 	Entity( id ),
 	mType( 0 ),
-	mForm( 0 ),
 	mParent( 0 )
+{
+}
+
+GameEntity::GameEntity( const GameEntity &rhs ) :
+	Entity( rhs.getId() ),
+	mType( rhs.getType() ),
+	mParent( rhs.getParent() ),
+	mForm( rhs.getForm() )
 {
 }
 
 GameEntity::~GameEntity()
 {
-	BK_DEBUG( getId() << ": selfdestruction in 1 ... 2 ... 3!" );
-
-	// destroy children
-	auto it = mChildren.begin();
-	while ( it != mChildren.end() ) {
-		delete it->second;
-		it++;
-	}
 }
 
 void
@@ -59,14 +58,14 @@ GameEntity::getType() const
 void
 GameEntity::setForm( Form *form )
 {
-	if ( form )
-		mForm = form;
+	BK_ASSERT( form != 0, "form must not be 0." );
+	mForm = shared_ptr<Form>( form );
 }
 
 Form*
 GameEntity::getForm() const
 {
-	return mForm;
+	return mForm.get();
 }
 
 void
@@ -108,14 +107,14 @@ GameEntity::addChild( GameEntity *child )
 	);
 
 	if ( mChildren.find( child->getId() ) == mChildren.end() )
-		mChildren[ child->getId() ] = child;
+		mChildren[ child->getId() ] = shared_ptr<GameEntity>( child );
 }
 
 GameEntity*
 GameEntity::getChild( const std::string &id ) const
 {
 	auto it = mChildren.find( id );
-	return ( it == mChildren.end() ) ? 0 : it->second;
+	return ( it == mChildren.end() ) ? 0 : it->second.get();
 }
 
 void
@@ -143,7 +142,7 @@ void
 GameEntity::runActions()
 {
 	// run own actions first
-	ActionList al = getInvokedActions();
+	auto al = getInvokedActions();
 	for_each( al.begin(), al.end(), []( Action *a ) {
 		a->run();
 	});

@@ -78,7 +78,7 @@ DoActionFunction handleMenuItemFunction( []( Action *action, GameEntity *entity 
 	GameEntity *menu = action->getSource()->getChild( "entity:menu" );
 	MenuForm *form = static_cast<MenuForm*>( menu->getForm() );
 	Form2d  *group = static_cast<Form2d*>(
-		action->getSource()->getForm()->getVSpace()->getDrawable( "form:group" )
+		action->getSource()->getForm()->getVSpace()->getEntity( "form:group" )
 	);
 
 	t_pos pos = pointer->getForm()->getPosition();

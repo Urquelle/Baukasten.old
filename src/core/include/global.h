@@ -43,26 +43,22 @@ namespace Baukasten {
 	} t_size;
 
 	typedef map<string, shared_ptr<Entity>>	EntityMap;
-	typedef list<Entity*>					EntityList;
+	typedef list<shared_ptr<Entity>>		EntityList;
 
-	typedef map<string, EntityType*>		EntityTypeMap;
-	typedef list<EntityType*>				EntityTypeList;
+	typedef map<string, shared_ptr<EntityType>> EntityTypeMap;
+	typedef list<shared_ptr<EntityType>>	EntityTypeList;
 
-	typedef map<string, GameEntity*>		GameEntityMap;
-	typedef list<GameEntity*>				GameEntityList;
+	typedef map<string, shared_ptr<GameEntity>> GameEntityMap;
+	typedef list<shared_ptr<GameEntity>>	GameEntityList;
 
 	typedef map<string, shared_ptr<Action>>	ActionMap;
-	typedef list<Action*>					ActionList;
-
-	typedef map<string, void*>				ObjectMap;
+	typedef list<shared_ptr<Action>>		ActionList;
 
 	typedef map<string, LogicalSpace*>		LSpaces;
-	typedef map<string, VirtualSpace*>		VSpaces;
+	typedef map<string, shared_ptr<VirtualSpace>> VSpaces;
 
 	typedef map<string, shared_ptr<State>>	StateMap;
-	typedef list<State*>					StateList;
-
-	typedef list<shared_ptr<Drawable>>		DrawableList;
+	typedef list<shared_ptr<State>>			StateList;
 }
 
 #if defined(EXPORT_LIB)

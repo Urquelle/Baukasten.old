@@ -30,8 +30,8 @@ namespace Baukasten {
 		virtual void render();
 
 	protected:
-		LogicalSpace*	mLSpace;
-		VirtualSpace*	mVSpace;
+		shared_ptr<LogicalSpace> mLSpace;
+		shared_ptr<VirtualSpace> mVSpace;
 	};
 }
 

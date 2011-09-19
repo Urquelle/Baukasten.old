@@ -1,4 +1,6 @@
 #include "entity.h"
+
+#include "debug.h"
 #include "state.h"
 
 using namespace Baukasten;
@@ -10,6 +12,7 @@ Entity::Entity( const std::string &id ) :
 
 Entity::~Entity()
 {
+	BK_DEBUG( getId() + " destroyed." );
 }
 
 Entity&
