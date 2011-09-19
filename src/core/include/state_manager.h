@@ -23,7 +23,7 @@ namespace Baukasten {
 			return static_cast<T>( get( id ) );
 		}
 
-		StateMap getStates() const;
+		TMap getStates() const;
 		bool hasState( const std::string& ) const;
 	};
 } /* Baukasten */

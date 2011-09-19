@@ -28,7 +28,7 @@ StateManager::addState( const std::string &id, State *state )
 	add( id, state );
 }
 
-StateMap
+StateManager::TMap
 StateManager::getStates() const
 {
 	return getAll();

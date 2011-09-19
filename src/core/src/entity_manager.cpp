@@ -33,7 +33,7 @@ EntityManager::getEntity( const std::string &id ) const
 	return get( id );
 }
 
-EntityMap
+EntityManager::TMap
 EntityManager::getEntities() const
 {
 	return getAll();
