@@ -1,6 +1,7 @@
 set(
     example_SRCS
 	entities/basic_type.cpp
+	entities/city.cpp
     entities/game.cpp
 	entities/unit.cpp
 	entities/world_map.cpp
