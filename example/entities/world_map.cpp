@@ -1,5 +1,6 @@
 #include "world_map.h"
 
+#include "city.h"
 #include "forms/form2d.h"
 #include "forms/menu_form.h"
 
@@ -133,6 +134,39 @@ WorldMap::WorldMap( const std::string &id ) :
 	GameEntity *menu = createMenu();
 	wmForm->addToVSpace( menu->getForm() );
 	addChild( menu );
+
+	City *london = new City( "city:london" );
+	City *paris = new City( "city:paris" );
+	City *berlin = new City( "city:berlin" );
+	City *vienna = new City( "city:vienna" );
+	City *constantinopel = new City( "city:constantinopel" );
+
+	london->getState<StateString*>( "state:cityDown" )->setValue( paris->getId() );
+
+	paris->getState<StateString*>( "state:cityUp" )->setValue( london->getId() );
+	paris->getState<StateString*>( "state:cityRight" )->setValue( berlin->getId() );
+
+	berlin->getState<StateString*>( "state:cityLeft" )->setValue( paris->getId() );
+	berlin->getState<StateString*>( "state:cityDown" )->setValue( vienna->getId() );
+
+	vienna->getState<StateString*>( "state:cityUp" )->setValue( berlin->getId() );
+	vienna->getState<StateString*>( "state:cityDown" )->setValue( constantinopel->getId() );
+
+	constantinopel->getState<StateString*>( "state:cityUp" )->setValue( vienna->getId() );
+
+	london->getForm()->setPosition( posLondon );
+	paris->getForm()->setPosition( posParis );
+	berlin->getForm()->setPosition( posBerlin );
+	vienna->getForm()->setPosition( posVienna );
+	constantinopel->getForm()->setPosition( posConst );
+
+	addChild( london );
+	addChild( paris );
+	addChild( berlin );
+	addChild( vienna );
+	addChild( constantinopel );
+
+	getForm()->addToVSpace( berlin->getForm() );
 }
 
 WorldMap::~WorldMap()
