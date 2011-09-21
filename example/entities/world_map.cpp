@@ -169,7 +169,8 @@ WorldMap::WorldMap( const std::string &id ) :
 	addChild( vienna );
 	addChild( constantinopel );
 
-	getForm()->addToVSpace( berlin->getForm() );
+	getForm()->addToVSpace( "form:berlin", berlin->getForm() );
+	getForm()->addToVSpace( "form:vienna", vienna->getForm() );
 
 	pointer->getForm()->setPosition( berlin->getForm()->getPosition() );
 }
