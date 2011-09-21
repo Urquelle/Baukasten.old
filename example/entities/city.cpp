@@ -12,17 +12,14 @@ City::City( const string &id ) :
 {
 	CoreServices *services = CoreServices::instance();
 
-	addState( "state:visited", new StateInt( "state:visited", 0 ) );
-	addState( "state:name", new StateString( "state:name", "<unknown>" ) );
+	addState( new StateInt( "state:visited", 0 ) );
+	addState( new StateString( "state:name", "<unknown>" ) );
+	addState( new StateString( "state:cityUp" ) );
+	addState( new StateString( "state:cityRight" ) );
+	addState( new StateString( "state:cityDown" ) );
+	addState( new StateString( "state:cityLeft" ) );
 
-	CityForm *form = new CityForm(
-		"form:city",
-		services->getVideoService()
-	);
-
-	form->addState( "state:mode", new StateInt( "state:mode", 0 ) );
-
-	setForm( form );
+	setForm( new CityForm( "form:city", services->getVideoService()) );
 }
 
 City::~City()

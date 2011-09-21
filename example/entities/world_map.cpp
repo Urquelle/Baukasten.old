@@ -19,7 +19,7 @@ GameEntity* createPointer()
 	CoreServices *services = CoreServices::instance();
 
 	GameEntity *pointer = new GameEntity( "entity:pointer" );
-	pointer->addState( new StateString( "state:currentCity", "berlin" ) );
+	pointer->addState( new StateString( "state:currentCity", "city:berlin" ) );
 
 	Form2d *form = new Form2d(
 		"form:pointer",

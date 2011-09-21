@@ -4,11 +4,11 @@ posBerlin	= t_pos( 467, 338, 0 )
 posVienna	= t_pos( 560, 470, 0 )
 posConst	= t_pos( 840, 655, 0 )
 
-cityConst	= "konstantinopel"
-cityVienna	= "vienna"
-cityBerlin	= "berlin"
-cityParis	= "paris"
-cityLondon	= "london"
+cityConst	= "city:constantinopel"
+cityVienna	= "city:vienna"
+cityBerlin	= "city:berlin"
+cityParis	= "city:paris"
+cityLondon	= "city:london"
 
 pointer = entity:getChild( "entity:pointer" )
 currentCity = pointer:getState( "state:currentCity" )
