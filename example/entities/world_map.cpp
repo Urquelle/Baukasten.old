@@ -1,10 +1,10 @@
 #include "world_map.h"
 
-#include "core_services.h"
 #include "forms/form2d.h"
 #include "forms/menu_form.h"
 
 #include <action_lambda.h>
+#include <core_services.h>
 #include <lua/action_lua.h>
 #include <generic_state.h>
 #include <virtual_space.h>
