@@ -214,7 +214,7 @@ int Game::init()
 	form->setPosition( { 515, 338, 0 } );
 	form->setSize( { 30, 30 } );
 	form->setVisible( true );
-	form->addState( "state:currentCity", new StateString( "state:currentCity", "berlin" ) );
+	form->addState( new StateString( "state:currentCity", "city:berlin" ) );
 
 	group->setForm( form );
 	mWorldMap->getForm()->addToVSpace( form );
