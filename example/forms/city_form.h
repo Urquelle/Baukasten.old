@@ -1,13 +1,13 @@
 #ifndef CITY_FORM_VDYKOAZS
 #define CITY_FORM_VDYKOAZS
 
-#include <irrlicht/irrlicht_form.h>
+#include "form2d.h"
 
 namespace Baukasten {
 	class IGraphics;
 } /* Baukasten */
 
-class CityForm : public Baukasten::IrrlichtForm {
+class CityForm : public Form2d {
 public:
 	CityForm( const string&, Baukasten::IGraphics* );
 	virtual ~CityForm();
