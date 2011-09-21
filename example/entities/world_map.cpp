@@ -32,8 +32,6 @@ GameEntity* createPointer()
 	);
 
 	form->setSize( { 50, 39 } );
-	form->setPosition( berlin );
-
 	pointer->setForm( form );
 
 	return pointer;
@@ -167,6 +165,8 @@ WorldMap::WorldMap( const std::string &id ) :
 	addChild( constantinopel );
 
 	getForm()->addToVSpace( berlin->getForm() );
+
+	pointer->getForm()->setPosition( berlin->getForm()->getPosition() );
 }
 
 WorldMap::~WorldMap()
