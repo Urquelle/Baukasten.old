@@ -42,7 +42,7 @@ Form::getLSpace() const
 }
 
 void
-Form::addToVSpace( Drawable *entity )
+Form::addToVSpace( Form *entity )
 {
 	BK_ASSERT( entity != 0, "entity must not be 0." );
 	mVSpace->addEntity( entity );

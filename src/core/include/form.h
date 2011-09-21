@@ -23,7 +23,7 @@ namespace Baukasten {
 		void removeFromLSpace( const std::string& );
 		LogicalSpace* getLSpace() const;
 
-		void addToVSpace( Drawable* );
+		void addToVSpace( Form* );
 		void removeFromVSpace( const std::string& );
 		VirtualSpace* getVSpace() const;
 

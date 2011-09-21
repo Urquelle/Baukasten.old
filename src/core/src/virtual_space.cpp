@@ -1,7 +1,7 @@
 #include "virtual_space.h"
 
 #include "debug.h"
-#include "drawable.h"
+#include "form.h"
 
 using namespace Baukasten;
 
@@ -13,7 +13,7 @@ VirtualSpace::~VirtualSpace()
 {
 }
 
-Drawable*
+Form*
 VirtualSpace::getEntity( const std::string &id ) const
 {
 	auto it = mMap.find( id );
@@ -24,7 +24,7 @@ VirtualSpace::getEntity( const std::string &id ) const
 }
 
 void
-VirtualSpace::addEntity( Drawable *entity )
+VirtualSpace::addEntity( Form *entity )
 {
 	BK_ASSERT( entity != 0, "entity must not be 0." );
 	BK_ASSERT(
@@ -40,7 +40,7 @@ VirtualSpace::addEntity( Drawable *entity )
 	mList.push_back( entity );
 }
 
-list<Drawable*>
+list<Form*>
 VirtualSpace::getEntities() const
 {
 	return mList;
