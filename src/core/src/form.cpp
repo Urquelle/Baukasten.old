@@ -49,6 +49,13 @@ Form::addToVSpace( Form *entity )
 }
 
 void
+Form::addToVSpace( const string &id, Form *entity )
+{
+	BK_ASSERT( entity != 0, "entity must not be 0." );
+	mVSpace->addEntity( id, entity );
+}
+
+void
 Form::removeFromVSpace( const std::string &id )
 {
 	if ( mVSpace->hasEntity( id ) )

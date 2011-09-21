@@ -24,6 +24,7 @@ namespace Baukasten {
 		LogicalSpace* getLSpace() const;
 
 		void addToVSpace( Form* );
+		void addToVSpace( const string&, Form* );
 		void removeFromVSpace( const std::string& );
 		VirtualSpace* getVSpace() const;
 
