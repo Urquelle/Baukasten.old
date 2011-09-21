@@ -12,6 +12,7 @@ namespace Baukasten {
 		virtual ~VirtualSpace();
 
 		Form* getEntity( const std::string& ) const;
+		void addEntity( const string&, Form* );
 		void addEntity( Form* );
 		list<Form*> getEntities() const;
 		bool hasEntity( const string& ) const;

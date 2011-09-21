@@ -24,6 +24,19 @@ VirtualSpace::getEntity( const std::string &id ) const
 }
 
 void
+VirtualSpace::addEntity( const string &id, Form *entity )
+{
+	BK_ASSERT( entity != 0, "entity must not be 0." );
+	BK_ASSERT(
+		!hasEntity( id ),
+		"id " << id << " must be unique in the collection."
+	);
+
+	mMap[ id ] = entity;
+	mList.push_back( entity );
+}
+
+void
 VirtualSpace::addEntity( Form *entity )
 {
 	BK_ASSERT( entity != 0, "entity must not be 0." );
@@ -32,12 +45,7 @@ VirtualSpace::addEntity( Form *entity )
 		"id " << entity->getId() << " must be unique in the collection."
 	);
 
-	mMap[ entity->getId() ] = entity;
-
-	// in order to be able to draw the entities in the
-	// order they were added to the collection, it is
-	// neccessary to maintain a list of these entities.
-	mList.push_back( entity );
+	addEntity( entity->getId(), entity );
 }
 
 list<Form*>
