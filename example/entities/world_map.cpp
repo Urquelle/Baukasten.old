@@ -11,11 +11,14 @@
 
 using namespace Baukasten;
 
+const t_pos posLondon = { 250, 310, 0 };
+const t_pos posParis = { 275, 405, 0 };
+const t_pos posBerlin = { 515, 345, 0 };
+const t_pos posVienna = { 560, 470, 0 };
+const t_pos posConst = { 840, 655, 0 };
+
 GameEntity* createPointer()
 {
-	t_pos berlin = { 467, 338, 100 };
-	t_pos mannheim = { 420, 410, 100 };
-
 	CoreServices *services = CoreServices::instance();
 
 	GameEntity *pointer = new GameEntity( "entity:pointer" );
