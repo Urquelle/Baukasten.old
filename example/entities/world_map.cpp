@@ -139,17 +139,22 @@ WorldMap::WorldMap( const std::string &id ) :
 	City *vienna = new City( "city:vienna" );
 	City *constantinopel = new City( "city:constantinopel" );
 
+	london->getState<StateString*>( "state:name" )->setValue( "London" );
 	london->getState<StateString*>( "state:cityDown" )->setValue( paris->getId() );
 
+	paris->getState<StateString*>( "state:name" )->setValue( "Paris" );
 	paris->getState<StateString*>( "state:cityUp" )->setValue( london->getId() );
 	paris->getState<StateString*>( "state:cityRight" )->setValue( berlin->getId() );
 
+	berlin->getState<StateString*>( "state:name" )->setValue( "Berlin" );
 	berlin->getState<StateString*>( "state:cityLeft" )->setValue( paris->getId() );
 	berlin->getState<StateString*>( "state:cityDown" )->setValue( vienna->getId() );
 
+	vienna->getState<StateString*>( "state:name" )->setValue( "Vienna" );
 	vienna->getState<StateString*>( "state:cityUp" )->setValue( berlin->getId() );
 	vienna->getState<StateString*>( "state:cityDown" )->setValue( constantinopel->getId() );
 
+	constantinopel->getState<StateString*>( "state:name" )->setValue( "Constantinopel" );
 	constantinopel->getState<StateString*>( "state:cityUp" )->setValue( vienna->getId() );
 
 	london->getForm()->setPosition( posLondon );
