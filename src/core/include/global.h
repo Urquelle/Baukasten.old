@@ -6,6 +6,8 @@
 #include <memory>
 #include <string>
 
+using namespace std;
+
 namespace Baukasten {
 	class Action;
 	class Drawable;
