@@ -1,5 +1,7 @@
 #include "city_form.h"
 
+#include "../global.h"
+
 #include <debug.h>
 #include <generic_state.h>
 #include <irrlicht/irrlicht_graphics.h>
@@ -23,6 +25,14 @@ CityForm::~CityForm()
 
 void CityForm::render()
 {
-	Form2d::render();
+	int mode = getState<StateInt*>( "state:mode" )->getValue();
+	switch ( mode ) {
+	case Mode::MODE_WORLDMAP:
+		Form2d::render();
+		break;
+	case Mode::MODE_RUNSCENE:
+		BK_DEBUG( "render battle scene" );
+		break;
+	}
 }
 

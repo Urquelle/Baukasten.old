@@ -4,6 +4,7 @@
 enum Mode {
 	MODE_WORLDMAP,
 	MODE_MENU,
+	MODE_RUNSCENE,
 	MODE_BATTLE
 };
 
