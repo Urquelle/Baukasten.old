@@ -87,15 +87,24 @@ DoActionFunction handleMenuItemFunction( []( Action *action, GameEntity *entity 
 	GameEntity *city = action->getSource()->getChild(
 		pointer->getState<StateString*>( "state:currentCity" )->getValue()
 	);
+	StateString *cityName = city->getState<StateString*>( "state:name" );
+	StateInt *timesVisited = city->getState<StateInt*>( "state:visited" );
 
 	t_pos pos = pointer->getForm()->getPosition();
 	t_size size = pointer->getForm()->getSize();
 
 	switch ( form->getCurrentIndex() ) {
 	case MOVE:
-		group->setPosition(
-			{ pos.getX() + size.width, pos.getY(), 0 }
-		);
+		if ( timesVisited->getValue() == 0 ) {
+			BK_DEBUG( "first time in " + cityName->getValue() + "? LET'S FIGHT MOTHERFUCKER!!!" );
+			city->invokeAction( "runScene" );
+			group->setPosition(
+				{ pos.getX() + size.width, pos.getY(), 0 }
+			);
+		} else {
+			BK_DEBUG( "i've seen you here before in " << ". " << timesVisited->getValue() << " times." );
+		}
+		timesVisited->setValue( timesVisited->getValue() + 1 );
 		break;
 	case ABORT:
 		action->getSource()->invokeAction( "hideMenu" );
