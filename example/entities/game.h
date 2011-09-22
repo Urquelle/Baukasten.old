@@ -35,11 +35,6 @@ private:
 	WorldMap*				mWorldMap;
 	Baukasten::IGraphics*	mGraphics;
 	Baukasten::IInput*		mInput;
-
-	bool mMoveRight;
-	bool mMoveLeft;
-	bool mMoveUp;
-	bool mMoveDown;
 };
 
 #endif /* end of include guard: GAME_QESA072Y */

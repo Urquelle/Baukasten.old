@@ -3,9 +3,11 @@
 #include "city.h"
 #include "forms/form2d.h"
 #include "forms/menu_form.h"
+#include "../global.h"
 
 #include <action_lambda.h>
 #include <core_services.h>
+#include <iinput.h>
 #include <lua/action_lua.h>
 #include <generic_state.h>
 #include <virtual_space.h>
@@ -104,15 +106,27 @@ DoActionFunction handleMenuItemFunction( []( Action *action, GameEntity *entity 
 });
 
 WorldMap::WorldMap( const std::string &id ) :
-	GameEntity( id )
+	GameEntity( id ),
+	mMoveLeft( false ),
+	mMoveRight( false ),
+	mMoveUp( false ),
+	mMoveDown( false )
 {
 	addAction( new ActionLua( *this, "moveRightOnMap", "scripts/move_right_on_map.lua" ) );
 	addAction( new ActionLua( *this, "moveLeftOnMap", "scripts/move_left_on_map.lua" ) );
+
 	addAction( new ActionLambda( *this, "showMenu", &showMenuFunction ) );
 	addAction( new ActionLambda( *this, "hideMenu", &hideFunction ) );
 	addAction( new ActionLambda( *this, "handleMenuItem", &handleMenuItemFunction ) );
 
 	CoreServices *services = CoreServices::instance();
+
+	services->getInputService()->onKeyDown().connect(
+		sigc::mem_fun( this, &WorldMap::onKeyDown )
+	);
+	services->getInputService()->onKeyUp().connect(
+		sigc::mem_fun( this, &WorldMap::onKeyUp )
+	);
 
 	Form2d *wmForm = new Form2d(
 		"form:worldmap",
@@ -177,5 +191,79 @@ WorldMap::WorldMap( const std::string &id ) :
 
 WorldMap::~WorldMap()
 {
+}
+
+void WorldMap::onKeyDown( Key key, Modifier mod )
+{
+	StateInt *mode = getParent()->getState<StateInt*>( "currentMode" );
+
+	switch ( mode->getValue() ) {
+	case Mode::MODE_MENU:
+		switch ( key ) {
+		case Key::KEY_Q:
+			invokeAction( "hideMenu" );
+			mode->setValue( Mode::MODE_WORLDMAP );
+			break;
+		}
+		break;
+	case Mode::MODE_WORLDMAP:
+		switch ( key ) {
+		case Key::KEY_ARROW_LEFT:
+			if ( !mMoveLeft ) {
+				invokeAction( "moveLeftOnMap" );
+				mMoveLeft = true;
+			}
+			break;
+		case Key::KEY_ARROW_RIGHT:
+			if ( !mMoveRight ) {
+				invokeAction( "moveRightOnMap" );
+				mMoveRight = true;
+			}
+			break;
+		case Key::KEY_ARROW_UP:
+			if ( !mMoveUp ) {
+				invokeAction( "moveUpOnMap" );
+				mMoveUp = true;
+			}
+			break;
+		case Key::KEY_ARROW_DOWN:
+			if ( !mMoveDown ) {
+				invokeAction( "moveDownOnMap" );
+				mMoveDown = true;
+			}
+			break;
+		}
+		break;
+	}
+}
+
+void WorldMap::onKeyUp( Key key, Modifier mod )
+{
+	StateInt *mode = getParent()->getState<StateInt*>( "currentMode" );
+
+	switch ( mode->getValue() ) {
+	case Mode::MODE_MENU:
+		switch ( key ) {
+		case Key::KEY_Q:
+			break;
+		}
+		break;
+	case Mode::MODE_WORLDMAP:
+		switch ( key ) {
+		case Key::KEY_ARROW_LEFT:
+			mMoveLeft = false;
+			break;
+		case Key::KEY_ARROW_RIGHT:
+			mMoveRight = false;
+			break;
+		case Key::KEY_ARROW_UP:
+			mMoveUp = false;
+			break;
+		case Key::KEY_ARROW_DOWN:
+			mMoveDown = false;
+			break;
+		}
+		break;
+	}
 }
 
