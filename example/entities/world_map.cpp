@@ -81,8 +81,11 @@ DoActionFunction handleMenuItemFunction( []( Action *action, GameEntity *entity 
 	GameEntity *pointer = action->getSource()->getChild( "entity:pointer" );
 	GameEntity *menu = action->getSource()->getChild( "entity:menu" );
 	MenuForm *form = static_cast<MenuForm*>( menu->getForm() );
-	Form2d  *group = static_cast<Form2d*>(
-		action->getSource()->getForm()->getVSpace()->getEntity( "form:group" )
+
+	Form *group = action->getSource()->getForm()->getVSpace()->getEntity( "form:group" );
+
+	GameEntity *city = action->getSource()->getChild(
+		pointer->getState<StateString*>( "state:currentCity" )->getValue()
 	);
 
 	t_pos pos = pointer->getForm()->getPosition();
