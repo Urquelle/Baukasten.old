@@ -3,6 +3,7 @@
 #include "basic_type.h"
 #include "entities/unit.h"
 #include "forms/form2d.h"
+#include "../global.h"
 #include "../lua/bindings.h"
 #include "world_map.h"
 
@@ -17,8 +18,6 @@
 
 using namespace Baukasten;
 
-enum Mode { MODE_WORLDMAP, MODE_MENU, MODE_BATTLE };
-
 Game::Game( const std::string &id ) :
 	GameEntity( id ),
 	mWorldMap( 0 ), mGraphics( 0 ), mInput( 0 ),
@@ -26,7 +25,7 @@ Game::Game( const std::string &id ) :
 	mMoveUp( false ), mMoveDown( false )
 {
 	addState( "keepRunning", new StateInt( "keepRunning", 1 ) );
-	addState( "currentMode", new StateInt( "currentMode", MODE_WORLDMAP ) );
+	addState( "currentMode", new StateInt( "currentMode", Mode::MODE_WORLDMAP ) );
 
 	setForm( new Form( "form" ) );
 }
@@ -58,10 +57,10 @@ void Game::onKeyDown( Key key, Modifier mod )
 	switch ( key ) {
 	case Key::KEY_Q:
 		switch ( currentMode() ) {
-		case MODE_WORLDMAP:
+		case Mode::MODE_WORLDMAP:
 			getState<StateInt*>( "keepRunning" )->setValue( 0 );
 			break;
-		case MODE_MENU:
+		case Mode::MODE_MENU:
 			mWorldMap->invokeAction( "hideMenu" );
 			getState<StateInt*>( "currentMode" )->setValue( MODE_WORLDMAP );
 			break;
