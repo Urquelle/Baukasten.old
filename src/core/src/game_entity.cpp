@@ -106,8 +106,10 @@ GameEntity::addChild( GameEntity *child )
 		"you can't assign a parent GameEntity to be its own grandchild."
 	);
 
-	if ( mChildren.find( child->getId() ) == mChildren.end() )
+	if ( mChildren.find( child->getId() ) == mChildren.end() ) {
 		mChildren[ child->getId() ] = shared_ptr<GameEntity>( child );
+		child->setParent( this );
+	}
 }
 
 GameEntity*
