@@ -124,7 +124,9 @@ WorldMap::WorldMap( const std::string &id ) :
 	mMoveUp( false ),
 	mMoveDown( false )
 {
+	addAction( new ActionLua( *this, "moveUpOnMap", "scripts/move_up_on_map.lua" ) );
 	addAction( new ActionLua( *this, "moveRightOnMap", "scripts/move_right_on_map.lua" ) );
+	addAction( new ActionLua( *this, "moveDownOnMap", "scripts/move_down_on_map.lua" ) );
 	addAction( new ActionLua( *this, "moveLeftOnMap", "scripts/move_left_on_map.lua" ) );
 
 	addAction( new ActionLambda( *this, "showMenu", &showMenuFunction ) );
