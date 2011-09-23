@@ -18,6 +18,7 @@ endif()
 
 add_subdirectory(src)
 add_subdirectory(example)
+add_subdirectory(test)
 
 find_package( Doxygen )
 if (DOXYGEN_FOUND)
