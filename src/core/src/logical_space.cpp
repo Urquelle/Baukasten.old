@@ -61,5 +61,8 @@ void
 LogicalSpace::removeEntity( const string &id )
 {
 	mMap.erase( mMap.find( id ) );
+	mList.remove_if( [&id]( GameEntity *entity ) {
+		return entity->getId() == id;
+	});
 }
 

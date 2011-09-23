@@ -64,5 +64,8 @@ void
 VirtualSpace::removeEntity( const string &id )
 {
 	mMap.erase( mMap.find( id ) );
+	mList.remove_if( [&id]( Form *form ) {
+		return form->getId() == id;
+	});
 }
 
