@@ -80,6 +80,7 @@ DoActionFunction handleMenuItemFunction( []( Action *action, GameEntity *entity 
 
 	GameEntity *pointer = action->getSource()->getChild( "entity:pointer" );
 	GameEntity *menu = action->getSource()->getChild( "entity:menu" );
+	GameEntity *game = action->getSource()->getParent();
 	MenuForm *form = static_cast<MenuForm*>( menu->getForm() );
 
 	Form *group = action->getSource()->getForm()->getVSpace()->getEntity( "form:group" );
@@ -110,7 +111,7 @@ DoActionFunction handleMenuItemFunction( []( Action *action, GameEntity *entity 
 		action->getSource()->invokeAction( "hideMenu" );
 		break;
 	case QUIT:
-		BK_DEBUG( "quit game" );
+		game->getState<StateInt*>( "keepRunning" )->setValue( 0 );
 		break;
 	}
 
