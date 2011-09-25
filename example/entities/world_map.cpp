@@ -99,9 +99,7 @@ DoActionFunction handleMenuItemFunction( []( Action *action, GameEntity *entity 
 		if ( timesVisited->getValue() == 0 ) {
 			game->getState<StateInt*>( "currentMode" )->setValue( Mode::MODE_RUNSCENE );
 			city->invokeAction( "runScene" );
-			group->setPosition(
-				{ pos.getX() + size.width, pos.getY(), 0 }
-			);
+			group->setPosition( { pos.getX() + size.width, pos.getY(), 0 } );
 		} else {
 			BK_DEBUG( "i've seen you here before in " << ". " << timesVisited->getValue() << " times." );
 		}
