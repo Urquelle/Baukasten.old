@@ -6,6 +6,7 @@
 #include <action_lambda.h>
 #include <core_services.h>
 #include <generic_state.h>
+#include <virtual_space.h>
 
 using namespace Baukasten;
 
@@ -13,6 +14,23 @@ DoActionFunction runScene( []( Action *action, GameEntity *entity ) {
 	// set mode of the form to play
 	Form * form = action->getSource()->getForm();
 	form->getState<StateInt*>( "state:mode" )->setValue( Mode::MODE_RUNSCENE );
+
+	// remove worldmap and group from the vspace
+	GameEntity *worldMap = action->getSource()->getParent();
+	GameEntity *game = worldMap->getParent();
+
+	// remove worldmap from game's vspace
+	game->getForm()->removeFromVSpace( worldMap->getForm()->getId() );
+
+	// add current city to game's vspace
+	game->getForm()->addToVSpace( form );
+
+	// ... run cut scene
+
+	// start fight, after the cut scene
+	form->setSize( { 1024, 768 } );
+	form->setPosition( { 0, 0, 0 } );
+	action->getSource()->invokeAction( "action:battle" );
 });
 
 DoActionFunction battle( []( Action *action, GameEntity *entity ) {
