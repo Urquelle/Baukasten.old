@@ -97,7 +97,7 @@ DoActionFunction handleMenuItemFunction( []( Action *action, GameEntity *entity 
 	switch ( form->getCurrentIndex() ) {
 	case MOVE:
 		if ( timesVisited->getValue() == 0 ) {
-			BK_DEBUG( "first time in " + cityName->getValue() + "? LET'S FIGHT MOTHERFUCKER!!!" );
+			game->getState<StateInt*>( "currentMode" )->setValue( Mode::MODE_RUNSCENE );
 			city->invokeAction( "runScene" );
 			group->setPosition(
 				{ pos.getX() + size.width, pos.getY(), 0 }

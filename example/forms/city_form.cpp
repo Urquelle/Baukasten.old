@@ -33,7 +33,6 @@ void CityForm::render()
 		Form2d::render();
 		break;
 	case Mode::MODE_RUNSCENE:
-		BK_DEBUG( "render battle scene" );
 		break;
 	}
 }
