@@ -1,5 +1,5 @@
-#ifndef ABSTRACT_MANAGER_4A46G9D2
-#define ABSTRACT_MANAGER_4A46G9D2
+#ifndef GENERIC_MANAGER_4A46G9D2
+#define GENERIC_MANAGER_4A46G9D2
 
 #include "global.h"
 
@@ -22,7 +22,7 @@ namespace Baukasten {
 	 * \tparam T class to use as second parameter of the map.
 	 */
 	template<class T>
-	class AbstractManager {
+	class GenericManager {
 	public:
 		typedef map<string, shared_ptr<T>> TMap;
 
@@ -30,12 +30,12 @@ namespace Baukasten {
 		 *
 		 * nothing fancy here.
 		 */
-		AbstractManager()
+		GenericManager()
 		{
 		}
 
 		/*! destructor */
-		virtual ~AbstractManager()
+		virtual ~GenericManager()
 		{
 		}
 
@@ -125,4 +125,5 @@ namespace Baukasten {
 	};
 } /* Baukasten */
 
-#endif /* end of include guard: ABSTRACT_MANAGER_4A46G9D2 */
+#endif /* end of include guard: GENERIC_MANAGER_4A46G9D2 */
+

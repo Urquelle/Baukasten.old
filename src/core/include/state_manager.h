@@ -3,13 +3,13 @@
 
 #include "global.h"
 
-#include "abstract_manager.h"
+#include "generic_manager.h"
 
 namespace Baukasten {
 	class State;
 
 	class BAUKASTEN_EXPORT StateManager :
-		protected virtual AbstractManager<State> {
+		protected virtual GenericManager<State> {
 	public:
 		StateManager();
 		virtual ~StateManager();

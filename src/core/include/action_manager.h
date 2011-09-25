@@ -2,7 +2,7 @@
 #define INC_ACTIONS_GW487EFJ
 
 #include "global.h"
-#include "abstract_manager.h"
+#include "generic_manager.h"
 
 namespace Baukasten {
 	class Action;
@@ -11,11 +11,11 @@ namespace Baukasten {
 	 *
 	 * \ingroup action
 	 *
-	 * wrapps methods implemented in AbstractManager to limit the usage
+	 * wrapps methods implemented in GenericManager to limit the usage
 	 * of this class to Action classes only.
 	 */
 	class BAUKASTEN_EXPORT ActionManager :
-		protected virtual AbstractManager<Action> {
+		protected virtual GenericManager<Action> {
 	public:
 
 		/*! \brief constructor */

@@ -3,11 +3,11 @@
 
 #include "global.h"
 
-#include "abstract_manager.h"
+#include "generic_manager.h"
 
 namespace Baukasten {
 	class BAUKASTEN_EXPORT EntityManager :
-		protected virtual AbstractManager<Entity> {
+		protected virtual GenericManager<Entity> {
 	public:
 		EntityManager();
 		virtual ~EntityManager();
