@@ -16,7 +16,7 @@ add_library( Baukasten SHARED ${core_SRCS} ${graphics_SRCS} ${input_SRCS} )
 
 set_target_properties( Baukasten PROPERTIES SOVERSION 0.0.1 )
 
-target_link_libraries( Baukasten sigc-2.0 SDL Irrlicht GL X11 )
+target_link_libraries( Baukasten sigc-2.0 Irrlicht GL X11 )
 
 install(DIRECTORY core/include/ DESTINATION ${CMAKE_INSTALL_PREFIX}/include)
 install(TARGETS Baukasten LIBRARY DESTINATION lib/)
