@@ -19,6 +19,19 @@ CityForm::CityForm( const string &id, const string &filePath, IGraphics *graphic
 {
 	addState( "state:mode", new StateInt( "state:mode", 0 ) );
 	setSize( { 20, 20 } );
+
+	string fileName = filePath + "_1.png";
+
+	irr::video::ITexture* tex;
+	tex = getGraphics()->getDriver()->getTexture( fileName.c_str() );
+
+	getGraphics()->getDriver()->makeColorKeyTexture( tex, core::position2d<s32>(0,0) );
+
+	mBattleField = getGraphics()->getGui()->addImage(core::rect<s32>( 0, 0, 1024, 768 ));
+	mBattleField->setImage(tex);
+	mBattleField->setScaleImage(true);
+	mBattleField->setVisible( false );
+	getGraphics()->getDriver()->removeTexture(tex);
 }
 
 CityForm::~CityForm()

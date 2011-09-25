@@ -19,6 +19,9 @@ public:
 	virtual ~CityForm();
 
 	void render();
+
+private:
+	irr::gui::IGUIImage*	mBattleField;
 };
 
 #endif /* end of include guard: CITY_FORM_VDYKOAZS */
