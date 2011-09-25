@@ -5,7 +5,7 @@
 
 class City : public Baukasten::GameEntity {
 public:
-	City( const string& );
+	City( const string&, const string& );
 	virtual ~City();
 };
 

@@ -162,11 +162,11 @@ WorldMap::WorldMap( const std::string &id ) :
 	wmForm->addToVSpace( menu->getForm() );
 	addChild( menu );
 
-	City *london = new City( "city:london" );
-	City *paris = new City( "city:paris" );
-	City *berlin = new City( "city:berlin" );
-	City *vienna = new City( "city:vienna" );
-	City *constantinopel = new City( "city:constantinopel" );
+	City *london = new City( "city:london", "media/maps/0" );
+	City *paris = new City( "city:paris", "media/maps/1" );
+	City *berlin = new City( "city:berlin", "media/maps/2" );
+	City *vienna = new City( "city:vienna", "media/maps/3" );
+	City *constantinopel = new City( "city:constantinopel", "media/maps/4" );
 
 	london->getState<StateString*>( "state:name" )->setValue( "London" );
 	london->getState<StateString*>( "state:cityDown" )->setValue( paris->getId() );

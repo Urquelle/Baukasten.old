@@ -15,7 +15,7 @@ DoActionFunction runScene( []( Action *action, GameEntity *entity ) {
 	form->getState<StateInt*>( "state:mode" )->setValue( Mode::MODE_RUNSCENE );
 });
 
-City::City( const string &id ) :
+City::City( const string &id, const string &filePath ) :
 	GameEntity( id )
 {
 	CoreServices *services = CoreServices::instance();
@@ -29,7 +29,7 @@ City::City( const string &id ) :
 	addState( new StateString( "state:cityDown" ) );
 	addState( new StateString( "state:cityLeft" ) );
 
-	setForm( new CityForm( "form:city", services->getVideoService()) );
+	setForm( new CityForm( "form:city", filePath, services->getVideoService()) );
 }
 
 City::~City()
