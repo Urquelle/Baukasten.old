@@ -101,7 +101,7 @@ DoActionFunction handleMenuItemFunction( []( Action *action, GameEntity *entity 
 			city->invokeAction( "runScene" );
 			group->setPosition( { pos.getX() + size.width, pos.getY(), 0 } );
 		} else {
-			BK_DEBUG( "i've seen you here before in " << ". " << timesVisited->getValue() << " times." );
+			BK_DEBUG( "i've seen you here before in " << cityName->getValue() << ". " << timesVisited->getValue() << " times." );
 		}
 		timesVisited->setValue( timesVisited->getValue() + 1 );
 		break;
