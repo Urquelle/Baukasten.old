@@ -47,6 +47,11 @@ void CityForm::render()
 		break;
 	case Mode::MODE_RUNSCENE:
 		break;
+	case Mode::MODE_BATTLE:
+		if ( !mBattleField->isVisible() )
+			mBattleField->setVisible( true );
+		IrrlichtForm::render();
+		break;
 	}
 }
 
