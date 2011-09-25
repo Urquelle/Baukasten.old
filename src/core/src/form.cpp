@@ -72,8 +72,8 @@ void
 Form::render()
 {
 	auto entities = mVSpace->getEntities();
-	for_each( entities.begin(), entities.end(), []( Drawable* d ) {
-		d->render();
+	for_each( entities.begin(), entities.end(), []( Form* f ) {
+		f->render();
 	});
 }
 
