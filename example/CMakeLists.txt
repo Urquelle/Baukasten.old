@@ -18,3 +18,4 @@ if("${isSystemDir}" STREQUAL "-1")
 endif("${isSystemDir}" STREQUAL "-1")
 
 add_subdirectory( eisenfaust )
+add_subdirectory( tetris )
