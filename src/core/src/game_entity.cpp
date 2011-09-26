@@ -150,7 +150,9 @@ GameEntity::runActions()
 	});
 
 	// run children's actions
-	getForm()->getLSpace()->runActions();
+	Form *form = getForm();
+	if ( form )
+		getForm()->getLSpace()->runActions();
 }
 
 StateSignal&
