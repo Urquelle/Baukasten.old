@@ -33,7 +33,7 @@ void BlockForm::render()
 	int j = 0;
 	auto matrix = getState<StateIntVector*>( s.str() )->getValues();
 	for_each( matrix.begin(), matrix.end(), [&i, &j, &pos, driver, this]( int k ) {
-		int x = pos.getX() + BLOCK_WIDTH * ( i % 5 );
+		int x = pos.getX() + BLOCK_WIDTH * ( i % 4 );
 		int y = pos.getY() + BLOCK_HEIGHT * j;
 
 		if ( k ) {
@@ -44,7 +44,7 @@ void BlockForm::render()
 		}
 
 		++i;
-		j += ( ( i > 4 ) && ( i % 5 ) == 0 ) ? 1 : 0;
+		j += ( ( i > 4 ) && ( i % 4 ) == 0 ) ? 1 : 0;
 	});
 	Form::render();
 }

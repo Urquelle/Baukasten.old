@@ -1,4 +1,4 @@
-initial_position = t_pos( 400, -20, 0 )
+initial_position = t_pos( 400, 20, 0 )
 
 block_list = { "block:i", "block:j", "block:z", "block:s", "block:l", "block:t", "block:o" }
 math.randomseed( os.time() )
