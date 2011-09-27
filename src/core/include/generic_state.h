@@ -70,12 +70,10 @@ namespace Baukasten {
 			State( id ),
 			mValues( values )
 		{
-			BK_DEBUG( "i'm a special vector state." );
 		}
 
 		~GenericState()
 		{
-			BK_DEBUG( getId() << ": i'm freeeeee" );
 		}
 
 		const T& getValue( const int i ) const
