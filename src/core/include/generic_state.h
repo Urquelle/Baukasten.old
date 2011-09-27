@@ -84,6 +84,11 @@ namespace Baukasten {
 			return mValues.at( i );
 		}
 
+		vector<T> getValues() const
+		{
+			return mValues;
+		}
+
 		void addValue( const T &value )
 		{
 			if ( mIntState )
