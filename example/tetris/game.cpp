@@ -3,6 +3,7 @@
 #include "block_form.h"
 #include "form2d.h"
 
+#include <lua/action_lua.h>
 #include <core_services.h>
 #include <generic_state.h>
 #include <iinput.h>
@@ -275,6 +276,7 @@ void Game::init()
 	}));
 
 	GameEntity *blockGroup = new GameEntity( "entity:group" );
+	blockGroup->addAction( new ActionLua( *blockGroup, "action:nextBlock", "scripts/next_block.lua" ) );
 	blockGroup->addChild( blockO );
 	blockGroup->addChild( blockZ );
 	blockGroup->addChild( blockS );
@@ -284,6 +286,8 @@ void Game::init()
 	blockGroup->addChild( blockI );
 
 	addChild( blockGroup );
+	blockGroup->invokeAction( "action:nextBlock" );
+	getForm()->addToLSpace( blockGroup );
 }
 
 void Game::run()
