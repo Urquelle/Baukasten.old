@@ -55,6 +55,7 @@ namespace Baukasten {
 
 		void addChild( GameEntity* );
 		GameEntity* getChild( const std::string& ) const;
+		GameEntityMap getChildren() const;
 		void removeChild( const std::string& );
 
 		void setParent( GameEntity* );

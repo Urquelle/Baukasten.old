@@ -119,6 +119,12 @@ GameEntity::getChild( const std::string &id ) const
 	return ( it == mChildren.end() ) ? 0 : it->second.get();
 }
 
+GameEntityMap
+GameEntity::getChildren() const
+{
+	return mChildren;
+}
+
 void
 GameEntity::removeChild( const std::string &id )
 {
