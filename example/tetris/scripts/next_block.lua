@@ -11,5 +11,5 @@ block = source:getChild( next_block )
 
 -- add block and its form to L/VSpace
 source:getParent():getForm():addToLSpace( block )
-source:getParent():getForm():addToVSpace( block:getForm():getId(), block:getForm() )
+source:getParent():getForm():addToVSpace( "block:current", block:getForm() )
 block:getForm():setPosition( initial_position )
