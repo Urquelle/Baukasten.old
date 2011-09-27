@@ -18,6 +18,8 @@ Game::Game( const string &id ) :
 {
 	addAction( new ActionLua( *this, "action:rotateLeft", "scripts/rotate_left.lua" ) );
 	addAction( new ActionLua( *this, "action:rotateRight", "scripts/rotate_right.lua" ) );
+	addAction( new ActionLua( *this, "action:moveLeft", "scripts/move_left.lua" ) );
+	addAction( new ActionLua( *this, "action:moveRight", "scripts/move_right.lua" ) );
 
 	addState( new StateBool( "state:keepRunning", true ) );
 
@@ -317,6 +319,12 @@ void Game::onKeyDown( Key key, Modifier mod )
 		break;
 	case Key::KEY_ARROW_DOWN:
 		invokeAction( "action:rotateLeft" );
+		break;
+	case Key::KEY_ARROW_RIGHT:
+		invokeAction( "action:moveRight" );
+		break;
+	case Key::KEY_ARROW_LEFT:
+		invokeAction( "action:moveLeft" );
 		break;
 	}
 }
