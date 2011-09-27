@@ -16,6 +16,9 @@ using namespace Baukasten;
 Game::Game( const string &id ) :
 	GameEntity( id )
 {
+	addAction( new ActionLua( *this, "action:rotateLeft", "scripts/rotate_left.lua" ) );
+	addAction( new ActionLua( *this, "action:rotateRight", "scripts/rotate_right.lua" ) );
+
 	addState( new StateBool( "state:keepRunning", true ) );
 
 	setForm( new Form( "form:main" ) );
@@ -308,6 +311,12 @@ void Game::onKeyDown( Key key, Modifier mod )
 	switch ( key ) {
 	case Key::KEY_Q:
 		getState<StateBool*>( "state:keepRunning" )->setValue( false );
+		break;
+	case Key::KEY_ARROW_UP:
+		invokeAction( "action:rotateRight" );
+		break;
+	case Key::KEY_ARROW_DOWN:
+		invokeAction( "action:rotateLeft" );
 		break;
 	}
 }
