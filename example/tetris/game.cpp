@@ -37,7 +37,7 @@ void Game::init()
 	mInput = service->getInputService();
 	mGraphics = service->getVideoService();
 
-	// init entities
+	// init main display
 	GameEntity *display = new GameEntity( "entity:display ");
 	display->setForm(
 		new Form2d( "form:display", "media/display.png", mGraphics )
