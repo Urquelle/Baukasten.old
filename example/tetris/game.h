@@ -2,6 +2,7 @@
 #define GAME_QC1L8Y4Z
 
 #include <game_entity.h>
+#include <input_interface.h>
 
 namespace Baukasten {
 	class IInput;
@@ -14,6 +15,8 @@ public:
 	virtual ~Game();
 
 	void start();
+
+	void onKeyDown( Baukasten::Key, Baukasten::Modifier );
 
 protected:
 	void init();

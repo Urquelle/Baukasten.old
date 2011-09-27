@@ -16,6 +16,8 @@ using namespace Baukasten;
 Game::Game( const string &id ) :
 	GameEntity( id )
 {
+	addState( new StateBool( "state:keepRunning", true ) );
+
 	setForm( new Form( "form:main" ) );
 }
 
@@ -36,6 +38,8 @@ void Game::init()
 	service->init();
 	mInput = service->getInputService();
 	mGraphics = service->getVideoService();
+
+	mInput->onKeyDown().connect( sigc::mem_fun( this, &Game::onKeyDown ) );
 
 	// init main display
 	GameEntity *display = new GameEntity( "entity:display ");
@@ -292,10 +296,19 @@ void Game::init()
 
 void Game::run()
 {
-	while ( true ) {
-		getForm()->getLSpace()->runActions();
+	while ( getState<StateBool*>( "state:keepRunning" )->getValue() ) {
+		runActions();
 		mInput->process();
 		mGraphics->render( getForm() );
+	}
+}
+
+void Game::onKeyDown( Key key, Modifier mod )
+{
+	switch ( key ) {
+	case Key::KEY_Q:
+		getState<StateBool*>( "state:keepRunning" )->setValue( false );
+		break;
 	}
 }
 
