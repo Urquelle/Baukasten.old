@@ -1,5 +1,6 @@
 #include "game.h"
 
+#include "actions.h"
 #include "block_form.h"
 #include "form2d.h"
 
@@ -18,8 +19,8 @@ Game::Game( const string &id ) :
 {
 	addAction( new ActionLua( *this, "action:rotateLeft", "scripts/rotate_left.lua" ) );
 	addAction( new ActionLua( *this, "action:rotateRight", "scripts/rotate_right.lua" ) );
-	addAction( new ActionLua( *this, "action:moveLeft", "scripts/move_left.lua" ) );
-	addAction( new ActionLua( *this, "action:moveRight", "scripts/move_right.lua" ) );
+	addAction( new ActionLambda( *this, "action:moveLeft", &moveLeft ) );
+	addAction( new ActionLambda( *this, "action:moveRight", &moveRight ) );
 
 	addState( new StateBool( "state:keepRunning", true ) );
 
