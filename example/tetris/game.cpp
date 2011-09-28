@@ -1,6 +1,7 @@
 #include "game.h"
 
 #include "actions.h"
+#include "field_form.h"
 #include "block_form.h"
 #include "form2d.h"
 
@@ -59,6 +60,36 @@ void Game::init()
 	addChild( display );
 	getForm()->addToVSpace( display->getForm() );
 	getForm()->addToLSpace( display );
+
+	// init playfield
+	GameEntity *field = new GameEntity( "entity:field" );
+	field->setForm( new FieldForm( "form:field", mGraphics ) );
+	field->getForm()->setPosition( { 280, 20, 0 } );
+	field->getForm()->setSize( { 480, 720 } );
+	field->getForm()->addState( new StateIntVector( "state:field", {
+		0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+		0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+		0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+		0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+		0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+		0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+		0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+		0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+		0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+		0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+		0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+		0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+		0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+		0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+		0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+		0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+		0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+		0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0
+	}));
+
+	addChild( field );
+	getForm()->addToVSpace( field->getForm() );
+	getForm()->addToLSpace( field );
 
 	// init blocks
 	GameEntity *blockO = new GameEntity( "block:o" );

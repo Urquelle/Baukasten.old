@@ -3,6 +3,7 @@ project( Tetris )
 set(
 	tetris_SRCS
 	block_form.cpp
+	field_form.cpp
 	form2d.cpp
 	game.cpp
 	main.cpp
