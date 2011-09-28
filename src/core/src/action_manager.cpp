@@ -93,7 +93,7 @@ ActionManager::invokeAction( const std::string &id, GameEntity *target )
 }
 
 void
-ActionManager::invokeAction( const std::string &id, GameEntityList targets )
+ActionManager::invokeAction( const std::string &id, list<GameEntity*> targets )
 {
 	Action *action = getAction( id );
 

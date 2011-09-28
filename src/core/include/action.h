@@ -91,13 +91,13 @@ namespace Baukasten {
 		 *
 		 * \param targets GameEntityList as a list of targets.
 		 */
-		void setTargets( GameEntityList& );
+		void setTargets( list<GameEntity*>& );
 
 		/*! \brief get the list of target objects.
 		 *
 		 * \return GameEntityList as a list of targets.
 		 */
-		GameEntityList getTargets();
+		list<GameEntity*> getTargets();
 
 		/*! \brief returns bool whether or not the action should be dropped.
 		 *
@@ -135,10 +135,10 @@ namespace Baukasten {
 		virtual void doAction( GameEntity* ) = 0;
 
 	private:
-		GameEntity*		mSource;
-		GameEntity*		mTarget;
-		GameEntityList	mTargets;
-		bool			mActive;
+		GameEntity*			mSource;
+		GameEntity*			mTarget;
+		list<GameEntity*>	mTargets;
+		bool				mActive;
 	};
 } /* Baukasten */
 

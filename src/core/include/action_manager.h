@@ -99,7 +99,7 @@ namespace Baukasten {
 		 * \param id id of the action.
 		 * \param targets target objects.
 		 */
-		void invokeAction( const std::string&, GameEntityList );
+		void invokeAction( const std::string&, list<GameEntity*> );
 
 		/*! \brief drop action from the execution queue.
 		 *
