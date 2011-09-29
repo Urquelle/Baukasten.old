@@ -17,5 +17,4 @@ if("${isSystemDir}" STREQUAL "-1")
    set(CMAKE_INSTALL_RPATH "${CMAKE_INSTALL_PREFIX}/lib")
 endif("${isSystemDir}" STREQUAL "-1")
 
-add_subdirectory( eisenfaust )
 add_subdirectory( tetris )
