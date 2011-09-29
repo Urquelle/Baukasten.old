@@ -289,7 +289,7 @@ void Game::init()
 	}));
 
 	GameEntity *blockGroup = new GameEntity( "entity:group" );
-	blockGroup->addAction( new ActionLua( *blockGroup, "action:nextBlock", "scripts/next_block.lua" ) );
+	blockGroup->addAction( new ActionLambda( *blockGroup, "action:nextBlock", &nextBlock ) );
 	blockGroup->addChild( blockO );
 	blockGroup->addChild( blockZ );
 	blockGroup->addChild( blockS );

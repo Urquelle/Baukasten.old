@@ -3,9 +3,26 @@
 
 #include <action_lambda.h>
 #include <form.h>
+#include <generic_state.h>
 #include <virtual_space.h>
 
+#include <cstdlib>
+#include <ctime>
+
 using namespace Baukasten;
+
+DoActionFunction nextBlock([]( Action *action, GameEntity *entity ) {
+	string blocks[] = { "block:i", "block:j", "block:z", "block:s", "block:l", "block:t", "block:o" };
+
+	srand( time( 0 ) );
+
+	GameEntity *block = entity->getChild( blocks[ rand() % 7 ] );
+	GameEntity *field = entity->getParent()->getChild( "entity:field" );
+
+	entity->getParent()->getForm()->addToLSpace( block );
+	entity->getParent()->getForm()->addToVSpace( "block:current", block->getForm() );
+	block->getForm()->setPosition( { 400, 20, 0 } );
+});
 
 DoActionFunction moveRight([]( Action *action, GameEntity *entity ) {
 	Form *form = action->getSource()->getForm()->getVSpace()->getEntity( "block:current" );
