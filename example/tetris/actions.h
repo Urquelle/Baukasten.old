@@ -11,6 +11,8 @@
 
 using namespace Baukasten;
 
+const int BLOCK_WIDTH = 40, BLOCK_HEIGHT = 40;
+
 DoActionFunction nextBlock([]( Action *action, GameEntity *entity ) {
 	string blocks[] = { "block:i", "block:j", "block:z", "block:s", "block:l", "block:t", "block:o" };
 
@@ -27,7 +29,7 @@ DoActionFunction nextBlock([]( Action *action, GameEntity *entity ) {
 DoActionFunction moveRight([]( Action *action, GameEntity *entity ) {
 	Form *form = action->getSource()->getForm()->getVSpace()->getEntity( "block:current" );
 	t_pos currPos = form->getPosition();
-	t_pos nextPos( { currPos.getX() + 40, currPos.getY(), currPos.getZ() } );
+	t_pos nextPos( { currPos.getX() + BLOCK_WIDTH, currPos.getY(), currPos.getZ() } );
 
 	if ( nextPos.getX() < 640 ) {
 		form->setPosition( nextPos );
@@ -37,7 +39,7 @@ DoActionFunction moveRight([]( Action *action, GameEntity *entity ) {
 DoActionFunction moveLeft([]( Action *action, GameEntity *entity ) {
 	Form *form = action->getSource()->getForm()->getVSpace()->getEntity( "block:current" );
 	t_pos currPos = form->getPosition();
-	t_pos nextPos( { currPos.getX() - 40, currPos.getY(), currPos.getZ() } );
+	t_pos nextPos( { currPos.getX() - BLOCK_WIDTH, currPos.getY(), currPos.getZ() } );
 
 	if ( nextPos.getX() > 200 ) {
 		form->setPosition( nextPos );
