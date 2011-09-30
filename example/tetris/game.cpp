@@ -18,8 +18,7 @@ using namespace Baukasten;
 Game::Game( const string &id ) :
 	GameEntity( id )
 {
-	addAction( new ActionLua( *this, "action:rotateLeft", "scripts/rotate_left.lua" ) );
-	addAction( new ActionLua( *this, "action:rotateRight", "scripts/rotate_right.lua" ) );
+	addAction( new ActionLua( *this, "action:rotate", "scripts/rotate.lua" ) );
 	addAction( new ActionLambda( *this, "action:moveLeft", &moveLeft ) );
 	addAction( new ActionLambda( *this, "action:moveRight", &moveRight ) );
 
@@ -351,10 +350,8 @@ void Game::onKeyDown( Key key, Modifier mod )
 		getState<StateBool*>( "state:keepRunning" )->setValue( false );
 		break;
 	case Key::KEY_ARROW_UP:
-		invokeAction( "action:rotateRight" );
-		break;
+		invokeAction( "action:rotate" );
 	case Key::KEY_ARROW_DOWN:
-		invokeAction( "action:rotateLeft" );
 		break;
 	case Key::KEY_ARROW_RIGHT:
 		invokeAction( "action:moveRight" );
