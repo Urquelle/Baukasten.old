@@ -63,38 +63,47 @@ void Game::init()
 
 	// init playfield
 	GameEntity *field = new GameEntity( "entity:field" );
+	field->addAction( new ActionLambda( *field, "action:recalculate", &recalc, &recalcDone ) );
+	field->addState( new StateInt( "state:left", 0 ) );
+	field->addState( new StateInt( "state:right", 0 ) );
 	field->setForm( new FieldForm( "form:field", mGraphics ) );
-	field->getForm()->setPosition( { 280, 20, 0 } );
+	field->getForm()->addState( new StateInt( "state:currentLine", 0 ) );
+	field->getForm()->setPosition( { 240, 20, 0 } );
 	field->getForm()->setSize( { 480, 720 } );
 	field->getForm()->addState( new StateIntVector( "state:field", {
-		0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-		0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-		0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-		0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-		0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-		0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-		0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-		0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-		0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-		0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-		0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-		0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-		0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-		0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-		0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-		0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-		0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-		0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0
+		0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+		0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+		0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+		0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+		0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+		0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+		0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+		0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+		0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+		0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+		0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+		0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+		0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+		0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+		0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+		0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+		0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+		0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0
 	}));
 
 	addChild( field );
 	getForm()->addToVSpace( field->getForm() );
 	getForm()->addToLSpace( field );
+	field->invokeAction( "action:recalculate" );
 
 	// init blocks
 	GameEntity *blockO = new GameEntity( "block:o" );
 	blockO->setForm( new BlockForm( "form:o", mGraphics ) );
 	blockO->getForm()->addState( new StateInt( "state:currentMatrix", 1 ) );
+	blockO->getForm()->addState( new StateIntVector( "state:limit1", { 1, 1, 1, 1 } ) );
+	blockO->getForm()->addState( new StateIntVector( "state:limit2", { 1, 1, 1, 1 } ) );
+	blockO->getForm()->addState( new StateIntVector( "state:limit3", { 1, 1, 1, 1 } ) );
+	blockO->getForm()->addState( new StateIntVector( "state:limit4", { 1, 1, 1, 1 } ) );
 	blockO->getForm()->addState( new StateIntVector( "state:matrix1", {
 		0, 0, 0, 0,
 		0, 1, 1, 0,
@@ -123,6 +132,10 @@ void Game::init()
 	GameEntity *blockZ = new GameEntity( "block:z" );
 	blockZ->setForm( new BlockForm( "form:z", mGraphics ) );
 	blockZ->getForm()->addState( new StateInt( "state:currentMatrix", 1 ) );
+	blockZ->getForm()->addState( new StateIntVector( "state:limit1", { 1, 1, 1, 2 } ) );
+	blockZ->getForm()->addState( new StateIntVector( "state:limit2", { 1, 1, 2, 1 } ) );
+	blockZ->getForm()->addState( new StateIntVector( "state:limit3", { 1, 1, 1, 2 } ) );
+	blockZ->getForm()->addState( new StateIntVector( "state:limit4", { 1, 1, 2, 1 } ) );
 	blockZ->getForm()->addState( new StateIntVector( "state:matrix1", {
 		0, 0, 0, 0,
 		1, 1, 0, 0,
@@ -151,6 +164,10 @@ void Game::init()
 	GameEntity *blockS = new GameEntity( "block:s" );
 	blockS->setForm( new BlockForm( "form:s", mGraphics ) );
 	blockS->getForm()->addState( new StateInt( "state:currentMatrix", 1 ) );
+	blockS->getForm()->addState( new StateIntVector( "state:limit1", { 1, 1, 1, 2 } ) );
+	blockS->getForm()->addState( new StateIntVector( "state:limit2", { 1, 1, 2, 1 } ) );
+	blockS->getForm()->addState( new StateIntVector( "state:limit3", { 1, 1, 1, 2 } ) );
+	blockS->getForm()->addState( new StateIntVector( "state:limit4", { 1, 1, 2, 1 } ) );
 	blockS->getForm()->addState( new StateIntVector( "state:matrix1", {
 		0, 0, 0, 0,
 		0, 1, 1, 0,
@@ -179,6 +196,10 @@ void Game::init()
 	GameEntity *blockT = new GameEntity( "block:t" );
 	blockT->setForm( new BlockForm( "form:t", mGraphics ) );
 	blockT->getForm()->addState( new StateInt( "state:currentMatrix", 1 ) );
+	blockT->getForm()->addState( new StateIntVector( "state:limit1", { 1, 1, 1, 2 } ) );
+	blockT->getForm()->addState( new StateIntVector( "state:limit2", { 1, 1, 2, 1 } ) );
+	blockT->getForm()->addState( new StateIntVector( "state:limit3", { 1, 1, 1, 2 } ) );
+	blockT->getForm()->addState( new StateIntVector( "state:limit4", { 1, 1, 2, 1 } ) );
 	blockT->getForm()->addState( new StateIntVector( "state:matrix1", {
 		0, 0, 0, 0,
 		1, 1, 1, 0,
@@ -207,6 +228,10 @@ void Game::init()
 	GameEntity *blockL = new GameEntity( "block:l" );
 	blockL->setForm( new BlockForm( "form:l", mGraphics ) );
 	blockL->getForm()->addState( new StateInt( "state:currentMatrix", 1 ) );
+	blockL->getForm()->addState( new StateIntVector( "state:limit1", { 1, 1, 2, 1 } ) );
+	blockL->getForm()->addState( new StateIntVector( "state:limit2", { 1, 1, 1, 2 } ) );
+	blockL->getForm()->addState( new StateIntVector( "state:limit3", { 1, 1, 2, 1 } ) );
+	blockL->getForm()->addState( new StateIntVector( "state:limit4", { 1, 1, 1, 2 } ) );
 	blockL->getForm()->addState( new StateIntVector( "state:matrix1", {
 		0, 0, 0, 0,
 		0, 1, 0, 0,
@@ -235,6 +260,10 @@ void Game::init()
 	GameEntity *blockJ = new GameEntity( "block:j" );
 	blockJ->setForm( new BlockForm( "form:j", mGraphics ) );
 	blockJ->getForm()->addState( new StateInt( "state:currentMatrix", 1 ) );
+	blockJ->getForm()->addState( new StateIntVector( "state:limit1", { 1, 1, 2, 1 } ) );
+	blockJ->getForm()->addState( new StateIntVector( "state:limit2", { 1, 1, 1, 2 } ) );
+	blockJ->getForm()->addState( new StateIntVector( "state:limit3", { 1, 1, 2, 1 } ) );
+	blockJ->getForm()->addState( new StateIntVector( "state:limit4", { 1, 1, 1, 2 } ) );
 	blockJ->getForm()->addState( new StateIntVector( "state:matrix1", {
 		0, 0, 0, 0,
 		0, 0, 1, 0,
@@ -263,6 +292,10 @@ void Game::init()
 	GameEntity *blockI = new GameEntity( "block:i" );
 	blockI->setForm( new BlockForm( "form:i", mGraphics ) );
 	blockI->getForm()->addState( new StateInt( "state:currentMatrix", 1 ) );
+	blockI->getForm()->addState( new StateIntVector( "state:limit1", { 2, 0, 2, 1 } ) );
+	blockI->getForm()->addState( new StateIntVector( "state:limit2", { -1, 2, 1, 2 } ) );
+	blockI->getForm()->addState( new StateIntVector( "state:limit3", { 2, 0, 2, 1 } ) );
+	blockI->getForm()->addState( new StateIntVector( "state:limit4", { -1, 2, 1, 2 } ) );
 	blockI->getForm()->addState( new StateIntVector( "state:matrix1", {
 		0, 1, 0, 0,
 		0, 1, 0, 0,

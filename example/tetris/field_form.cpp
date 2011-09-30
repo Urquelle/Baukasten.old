@@ -32,7 +32,7 @@ void FieldForm::render()
 	irr::video::SColor cSet( 255, 0, 0, 0 );
 
 	for_each( matrix.begin(), matrix.end(), [&i, &j, &pos, &size, driver, this, &cEmpty, &cSet]( int k ) {
-		int x = pos.getX() + 40 * ( i % 12 );
+		int x = pos.getX() + 40 * ( i % 13 );
 		int y = pos.getY() + 40 * j;
 
 		if ( k )
@@ -45,7 +45,7 @@ void FieldForm::render()
 			);
 
 		++i;
-		j += ( ( i > 11 ) && ( i % 12 ) == 0 ) ? 1 : 0;
+		j += ( ( i > 12 ) && ( i % 13 ) == 0 ) ? 1 : 0;
 	});
 }
 

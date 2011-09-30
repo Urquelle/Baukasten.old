@@ -8,10 +8,12 @@
 
 #include <cstdlib>
 #include <ctime>
+#include <sstream>
 
 using namespace Baukasten;
 
 const int BLOCK_WIDTH = 40, BLOCK_HEIGHT = 40;
+const int LIMIT_TOP = 0, LIMIT_RIGHT = 1, LIMIT_BOTTOM = 2, LIMIT_LEFT = 3;
 
 DoActionFunction nextBlock([]( Action *action, GameEntity *entity ) {
 	string blocks[] = { "block:i", "block:j", "block:z", "block:s", "block:l", "block:t", "block:o" };
@@ -24,26 +26,72 @@ DoActionFunction nextBlock([]( Action *action, GameEntity *entity ) {
 	entity->getParent()->getForm()->addToLSpace( block );
 	entity->getParent()->getForm()->addToVSpace( "block:current", block->getForm() );
 	block->getForm()->setPosition( { 400, 20, 0 } );
+
+	field->getState<StateInt*>( "state:left" )->setValue(6);
+	field->getState<StateInt*>( "state:right" )->setValue(6);
 });
 
 DoActionFunction moveRight([]( Action *action, GameEntity *entity ) {
 	Form *form = action->getSource()->getForm()->getVSpace()->getEntity( "block:current" );
-	t_pos currPos = form->getPosition();
-	t_pos nextPos( { currPos.getX() + BLOCK_WIDTH, currPos.getY(), currPos.getZ() } );
+	GameEntity *field = entity->getChild( "entity:field" );
 
-	if ( nextPos.getX() < 640 ) {
+	Form *block = entity->getForm()->getVSpace()->getEntity( "block:current" );
+
+	stringstream sLimit;
+	sLimit << "state:limit" << block->getState<StateInt*>("state:currentMatrix")->getValue();
+	auto limit = block->getState<StateIntVector*>( sLimit.str() );
+
+	StateInt *left = field->getState<StateInt*>( "state:left" );
+	StateInt *right = field->getState<StateInt*>( "state:right" );
+
+	if ( right->getValue() + limit->getValue( LIMIT_RIGHT ) < 13 ) {
+		t_pos currPos = form->getPosition();
+		t_pos nextPos( { currPos.getX() + BLOCK_WIDTH, currPos.getY(), currPos.getZ() } );
+
+		left->setValue( left->getValue() + 1 );
+		right->setValue( right->getValue() + 1 );
 		form->setPosition( nextPos );
 	}
 });
 
 DoActionFunction moveLeft([]( Action *action, GameEntity *entity ) {
 	Form *form = action->getSource()->getForm()->getVSpace()->getEntity( "block:current" );
-	t_pos currPos = form->getPosition();
-	t_pos nextPos( { currPos.getX() - BLOCK_WIDTH, currPos.getY(), currPos.getZ() } );
+	GameEntity *field = entity->getChild( "entity:field" );
 
-	if ( nextPos.getX() > 200 ) {
+	Form *block = entity->getForm()->getVSpace()->getEntity( "block:current" );
+
+	stringstream sLimit;
+	sLimit << "state:limit" << block->getState<StateInt*>("state:currentMatrix")->getValue();
+	auto limit = block->getState<StateIntVector*>( sLimit.str() );
+
+	StateInt *left = field->getState<StateInt*>( "state:left" );
+	StateInt *right = field->getState<StateInt*>( "state:right" );
+
+	if ( left->getValue() - limit->getValue( LIMIT_LEFT ) > 0 ) {
+		t_pos currPos = form->getPosition();
+		t_pos nextPos( { currPos.getX() - BLOCK_WIDTH, currPos.getY(), currPos.getZ() } );
+
+		left->setValue( left->getValue() - 1 );
+		right->setValue( right->getValue() - 1 );
 		form->setPosition( nextPos );
 	}
+});
+
+DoActionFunction recalc([]( Action *action, GameEntity *entity ) {
+	StateInt *currLine = entity->getForm()->getState<StateInt*>( "state:currentLine" );
+	Form *block = entity->getParent()->getForm()->getVSpace()->getEntity( "block:current" );
+
+	if ( block ) {
+		t_pos pos = block->getPosition();
+		int currBlockLine = pos.getY() / BLOCK_HEIGHT;
+
+		if ( currBlockLine < 18 )
+			block->setPosition( { pos.getX(), pos.getY() + 1, 0 } );
+	}
+});
+
+DoneFunction recalcDone([]( const Action *action ) {
+	return false;
 });
 
 #endif /* end of include guard: ACTIONS_J8BEDW58 */

@@ -31,12 +31,14 @@ void BlockForm::render()
 
 	int i = 0;
 	int j = 0;
+	bool lineEmpty = true;
 	auto matrix = getState<StateIntVector*>( s.str() )->getValues();
-	for_each( matrix.begin(), matrix.end(), [&i, &j, &pos, driver, this]( int k ) {
+	for_each( matrix.begin(), matrix.end(), [&i, &j, &pos, &lineEmpty, driver, this]( int k ) {
 		int x = pos.getX() + BLOCK_WIDTH * ( i % 4 );
 		int y = pos.getY() + BLOCK_HEIGHT * j;
 
 		if ( k ) {
+			lineEmpty = false;
 			driver->draw2DRectangle(
 				irr::video::SColor(),
 				irr::core::rect<s32>( x, y, x + BLOCK_WIDTH, y + BLOCK_HEIGHT )
@@ -44,7 +46,11 @@ void BlockForm::render()
 		}
 
 		++i;
-		j += ( ( i > 4 ) && ( i % 4 ) == 0 ) ? 1 : 0;
+
+		if ( ( i > 4 ) && ( i % 4 ) == 0 && !lineEmpty ) {
+			j++;
+			lineEmpty = true;
+		}
 	});
 	Form::render();
 }
