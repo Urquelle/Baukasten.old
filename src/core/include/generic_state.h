@@ -79,7 +79,7 @@ namespace Baukasten {
 		const T& getValue( const int i ) const
 		{
 			if ( mIntState )
-				return ( static_cast<GenericState<T>*>( mIntState ) )->getValue( i );
+				return ( static_cast<GenericState<vector<T>>*>( mIntState ) )->getValue( i );
 
 			return mValues.at( i );
 		}
