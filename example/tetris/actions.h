@@ -23,7 +23,7 @@ DoActionFunction nextBlock([]( Action *action, GameEntity *entity ) {
 	GameEntity *block = entity->getChild( blocks[ rand() % 7 ] );
 	GameEntity *field = entity->getParent()->getChild( "entity:field" );
 
-	entity->getParent()->getForm()->addToLSpace( block );
+	entity->getParent()->getForm()->addToLSpace( "block:current", block );
 	entity->getParent()->getForm()->addToVSpace( "block:current", block->getForm() );
 	block->getForm()->setPosition( { 400, 20, 0 } );
 
