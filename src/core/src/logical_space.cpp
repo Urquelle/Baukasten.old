@@ -33,16 +33,23 @@ LogicalSpace::runActions()
 }
 
 void
-LogicalSpace::addEntity( GameEntity *entity )
+LogicalSpace::addEntity( const string &id, GameEntity *entity )
 {
 	BK_ASSERT( entity != 0, "entity must not be 0." );
 	BK_ASSERT(
-		!hasEntity( entity->getId() ),
-		"id " << entity->getId() << " must be unique in the collection."
+		!hasEntity( id ),
+		"id " << id << " must be unique in the collection."
 	);
 
-	mMap[ entity->getId() ] = entity;
+	mMap[ id ] = entity;
 	mList.push_back( entity );
+}
+
+void
+LogicalSpace::addEntity( GameEntity *entity )
+{
+	BK_ASSERT( entity != 0, "entity must not be 0." );
+	addEntity( entity->getId(), entity );
 }
 
 list<GameEntity*>

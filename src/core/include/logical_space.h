@@ -12,6 +12,7 @@ namespace Baukasten {
 		void runActions();
 
 		GameEntity* getEntity( const string& ) const;
+		void addEntity( const string&, GameEntity* );
 		void addEntity( GameEntity* );
 		list<GameEntity*> getEntities() const;
 		bool hasEntity( const string& ) const;

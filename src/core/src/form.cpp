@@ -25,7 +25,14 @@ void
 Form::addToLSpace( GameEntity *entity )
 {
 	BK_ASSERT( entity != 0, "entity must not be 0." );
-	mLSpace->addEntity( entity );
+	addToLSpace( entity->getId(), entity );
+}
+
+void
+Form::addToLSpace( const string &id, GameEntity *entity )
+{
+	BK_ASSERT( entity != 0, "entity must not be 0." );
+	mLSpace->addEntity( id, entity );
 }
 
 void
