@@ -64,6 +64,8 @@ void Game::init()
 	GameEntity *field = new GameEntity( "entity:field" );
 	field->addAction( new ActionLambda( *field, "action:recalculate", &recalc, &recalcDone ) );
 	field->addState( new StateInt( "state:column", 0 ) );
+	field->addState( new StateInt( "state:row", 0 ) );
+	field->addState( new StateInt( "state:rows", 18 ) );
 	field->setForm( new FieldForm( "form:field", mGraphics ) );
 	field->getForm()->addState( new StateInt( "state:currentLine", 0 ) );
 	field->getForm()->setPosition( { 240, 20, 0 } );

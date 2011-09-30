@@ -78,10 +78,22 @@ DoActionFunction recalc([]( Action *action, GameEntity *entity ) {
 
 	if ( block ) {
 		t_pos pos = block->getPosition();
-		int currBlockLine = pos.getY() / BLOCK_HEIGHT;
 
-		if ( currBlockLine < 18 )
+		int currRow = ( pos.getY() + 20 ) / BLOCK_HEIGHT;
+		int rows = entity->getState<StateInt*>( "state:rows" )->getValue();
+
+		stringstream sLimit;
+		sLimit << "state:limit" << block->getState<StateInt*>( "state:currentMatrix" )->getValue();
+		int bottomLimit = block->getState<StateIntVector*>( sLimit.str() )->getValue( LIMIT_BOTTOM );
+
+		if ( ( currRow + bottomLimit ) < ( rows - 1 )) {
+			entity->getState<StateInt*>( "state:row" )->setValue( currRow );
 			block->setPosition( { pos.getX(), pos.getY() + 1, 0 } );
+		} else {
+			entity->getParent()->getForm()->removeFromVSpace( "block:current" );
+			entity->getParent()->getForm()->removeFromLSpace( "block:current" );
+			entity->getParent()->getChild( "entity:group" )->invokeAction( "action:nextBlock" );
+		}
 	}
 });
 
