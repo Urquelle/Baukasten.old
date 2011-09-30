@@ -351,6 +351,7 @@ void Game::onKeyDown( Key key, Modifier mod )
 		break;
 	case Key::KEY_ARROW_UP:
 		invokeAction( "action:rotate" );
+		break;
 	case Key::KEY_ARROW_DOWN:
 		break;
 	case Key::KEY_ARROW_RIGHT:
