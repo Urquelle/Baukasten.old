@@ -204,6 +204,18 @@ void wrapClasses()
 			.param("expects a boolean.")
 		.set("getValue",&StateBool::getValue);
 
+	SLB::Class<StateIntVector>("StateIntVector")
+		.comment("Wrapper for the StateIntVector Class.")
+		.constructor<const std::string&>()
+		.constructor<const std::string&, vector<int>>()
+		.inherits<State>()
+		.inherits<Entity>()
+		.set("setValue",&StateIntVector::setValue)
+			.param("index int value")
+			.param("int value")
+		.set("getValue",&StateIntVector::getValue)
+			.param("index int value");
+
 	// register Form class
 	SLB::Class<Form>("Form")
 		.comment("Form class")
