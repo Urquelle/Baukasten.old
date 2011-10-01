@@ -28,20 +28,15 @@ void FieldForm::render()
 	auto pos = getPosition();
 	t_size size = getSize();
 
-	irr::video::SColor cEmpty( 255, 255, 255, 255 );
 	irr::video::SColor cSet( 255, 0, 0, 0 );
 
-	for_each( matrix.begin(), matrix.end(), [&i, &j, &pos, &size, driver, this, &cEmpty, &cSet]( int k ) {
+	for_each( matrix.begin(), matrix.end(), [&i, &j, &pos, &size, driver, this, &cSet]( int k ) {
 		int x = pos.getX() + 40 * ( i % 13 );
 		int y = pos.getY() + 40 * j;
 
 		if ( k )
 			driver->draw2DRectangle(
 				cSet, irr::core::rect<s32>( x, y, x + 40, y + 40 )
-			);
-		else
-			driver->draw2DRectangle(
-				cEmpty, irr::core::rect<s32>( x, y, x + 40, y + 40 )
 			);
 
 		++i;
