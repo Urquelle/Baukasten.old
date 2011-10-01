@@ -4,6 +4,7 @@
 #include <action_lambda.h>
 #include <form.h>
 #include <generic_state.h>
+#include <logical_space.h>
 #include <virtual_space.h>
 
 #include <cstdlib>
@@ -20,12 +21,28 @@ DoActionFunction nextBlock([]( Action *action, GameEntity *entity ) {
 
 	srand( time( 0 ) );
 
-	GameEntity *block = entity->getChild( blocks[ rand() % 7 ] );
+	GameEntity *block = 0;
+	GameEntity *nextBlock = entity->getParent()->getForm()->getLSpace()->getEntity( "block:next" );
+
+	entity->getParent()->getForm()->removeFromVSpace( "block:next" );
+	entity->getParent()->getForm()->removeFromLSpace( "block:next" );
+
+	if ( !nextBlock ) {
+		block = entity->getChild( blocks[ rand() % 7 ] );
+	} else {
+		block = nextBlock;
+	}
+	nextBlock = entity->getChild( blocks[ rand() % 7 ] );
+
 	GameEntity *field = entity->getParent()->getChild( "entity:field" );
 
+	entity->getParent()->getForm()->addToLSpace( "block:next", nextBlock );
+	entity->getParent()->getForm()->addToVSpace( "block:next", nextBlock->getForm() );
 	entity->getParent()->getForm()->addToLSpace( "block:current", block );
 	entity->getParent()->getForm()->addToVSpace( "block:current", block->getForm() );
+
 	block->getForm()->setPosition( { 400, 20, 0 } );
+	nextBlock->getForm()->setPosition( { 820, 40, 0 } );
 
 	field->getState<StateInt*>( "state:column" )->setValue(6);
 });
