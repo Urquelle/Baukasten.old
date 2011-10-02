@@ -70,6 +70,8 @@ void Game::init()
 	field->getForm()->addState( new StateInt( "state:currentLine", 0 ) );
 	field->getForm()->setPosition( { 240, 20, 0 } );
 	field->getForm()->setSize( { 480, 720 } );
+
+	// 13x18
 	field->getForm()->addState( new StateIntVector( "state:field", {
 		0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
 		0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
