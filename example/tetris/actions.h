@@ -96,17 +96,38 @@ DoActionFunction recalc([]( Action *action, GameEntity *entity ) {
 	if ( block ) {
 		t_pos pos = block->getPosition();
 
+		int currMatrix = block->getState<StateInt*>( "state:currentMatrix" )->getValue();
 		int currRow = ( pos.getY() + 20 ) / BLOCK_HEIGHT;
+		int currCol = entity->getState<StateInt*>( "state:column" )->getValue();
 		int rows = entity->getState<StateInt*>( "state:rows" )->getValue();
 
 		stringstream sLimit;
-		sLimit << "state:limit" << block->getState<StateInt*>( "state:currentMatrix" )->getValue();
-		int bottomLimit = block->getState<StateIntVector*>( sLimit.str() )->getValue( LIMIT_BOTTOM );
+		sLimit << "state:limit" << currMatrix;
+		auto limit = block->getState<StateIntVector*>( sLimit.str() );
 
-		if ( ( currRow + bottomLimit ) < ( rows - 1 )) {
+		if ( ( currRow + limit->getValue( LIMIT_BOTTOM ) ) < ( rows - 1 )) {
 			entity->getState<StateInt*>( "state:row" )->setValue( currRow );
 			block->setPosition( { pos.getX(), pos.getY() + 1, 0 } );
 		} else {
+			stringstream sMatrix;
+			sMatrix << "state:matrix" << currMatrix;
+			auto matrix = block->getState<StateIntVector*>( sMatrix.str() )->getValues();
+			auto state = entity->getForm()->getState<StateIntVector*>( "state:field" );
+
+			int i = 0;
+			int j = 0;
+			for_each( matrix.begin(), matrix.end(), [&currRow, &currCol, &i, &j, entity, state, limit]( int k ) {
+				if ( k ) {
+					state->setValue(
+						( currRow + j - limit->getValue( LIMIT_TOP ) ) * 13 +	// offset top
+						currCol - limit->getValue( LIMIT_LEFT ) + ( i % 4 ),	// offset left
+						1
+					);
+				}
+				++i;
+				j += ( i > 0 && ( i % 4 == 0 ) ) ? 1 : 0;
+			});
+
 			entity->getParent()->getForm()->removeFromVSpace( "block:current" );
 			entity->getParent()->getForm()->removeFromLSpace( "block:current" );
 			entity->getParent()->getChild( "entity:group" )->invokeAction( "action:nextBlock" );
