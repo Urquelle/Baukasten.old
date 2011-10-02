@@ -38,6 +38,11 @@ BlockForm::render()
 		int y = pos.getY() + BLOCK_HEIGHT * j;
 
 		if ( k ) {
+			driver->draw2DRectangleOutline(
+				irr::core::rect<s32>( x, y, x + BLOCK_WIDTH, y + BLOCK_HEIGHT ),
+				irr::video::SColor( 255, 0, 0, 0 )
+			);
+
 			driver->draw2DRectangle(
 				irr::video::SColor(),
 				irr::core::rect<s32>( x, y, x + BLOCK_WIDTH, y + BLOCK_HEIGHT )
