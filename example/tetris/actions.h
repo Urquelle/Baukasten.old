@@ -41,8 +41,8 @@ DoActionFunction nextBlock([]( Action *action, GameEntity *entity ) {
 	entity->getParent()->getForm()->addToLSpace( "block:current", block );
 	entity->getParent()->getForm()->addToVSpace( "block:current", block->getForm() );
 
-	block->getForm()->setPosition( { 400, 20, 0 } );
 	nextBlock->getForm()->setPosition( { 820, 40, 0 } );
+	block->getForm()->setPosition( { 400, 20, 0 } );
 
 	field->getState<StateInt*>( "state:column" )->setValue(6);
 });
