@@ -21,7 +21,8 @@ BlockForm::~BlockForm()
 {
 }
 
-void BlockForm::render()
+void
+BlockForm::render()
 {
 	irr::video::IVideoDriver *driver = getGraphics()->getDriver();
 	auto pos = getPosition();
