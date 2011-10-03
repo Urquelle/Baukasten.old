@@ -112,6 +112,19 @@ namespace Baukasten {
 			onChange().emit( this );
 		}
 
+		void setValues( vector<T> values )
+		{
+			if ( mIntState )
+				mIntState = 0;
+			mValues = values;
+			onChange().emit( this );
+		}
+
+		void setValues( GenericState<vector<T>> *state )
+		{
+			mValues = state->getValues();
+		}
+
 		GenericState<vector<T>>* pack()
 		{
 			GenericState<vector<T>> *newState = new GenericState<vector<T>>( getId() );

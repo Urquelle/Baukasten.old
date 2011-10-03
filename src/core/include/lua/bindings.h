@@ -213,6 +213,8 @@ void wrapClasses()
 		.set("setValue",&StateIntVector::setValue)
 			.param("index int value")
 			.param("int value")
+		.set("setValues", ( void (StateIntVector::*)(StateIntVector*) ) &StateIntVector::setValues)
+			.param("values")
 		.set("getValue",&StateIntVector::getValue)
 			.param("index int value");
 
