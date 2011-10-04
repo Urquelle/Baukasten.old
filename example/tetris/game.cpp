@@ -133,6 +133,9 @@ void Game::init()
 		0, 1, 1, 0,
 		0, 0, 0, 0
 	}));
+	blockO->getForm()->addState( new StateIntVector( "state:matrix",
+		blockO->getForm()->getState<StateIntVector*>( "state:matrix1" )->getValues()
+	));
 
 	GameEntity *blockZ = new GameEntity( "block:z" );
 	blockZ->setForm( new BlockForm( "form:z", mGraphics ) );
@@ -165,6 +168,9 @@ void Game::init()
 		0, 1, 1, 0,
 		0, 1, 0, 0
 	}));
+	blockZ->getForm()->addState( new StateIntVector( "state:matrix",
+		blockZ->getForm()->getState<StateIntVector*>( "state:matrix1" )->getValues()
+	));
 
 	GameEntity *blockS = new GameEntity( "block:s" );
 	blockS->setForm( new BlockForm( "form:s", mGraphics ) );
@@ -197,6 +203,9 @@ void Game::init()
 		0, 1, 1, 0,
 		0, 0, 1, 0
 	}));
+	blockS->getForm()->addState( new StateIntVector( "state:matrix",
+		blockS->getForm()->getState<StateIntVector*>( "state:matrix1" )->getValues()
+	));
 
 	GameEntity *blockT = new GameEntity( "block:t" );
 	blockT->setForm( new BlockForm( "form:t", mGraphics ) );
@@ -229,6 +238,9 @@ void Game::init()
 		0, 1, 1, 0,
 		0, 0, 1, 0
 	}));
+	blockT->getForm()->addState( new StateIntVector( "state:matrix",
+		blockT->getForm()->getState<StateIntVector*>( "state:matrix1" )->getValues()
+	));
 
 	GameEntity *blockL = new GameEntity( "block:l" );
 	blockL->setForm( new BlockForm( "form:l", mGraphics ) );
@@ -261,6 +273,9 @@ void Game::init()
 		1, 0, 0, 0,
 		0, 0, 0, 0
 	}));
+	blockL->getForm()->addState( new StateIntVector( "state:matrix",
+		blockL->getForm()->getState<StateIntVector*>( "state:matrix1" )->getValues()
+	));
 
 	GameEntity *blockJ = new GameEntity( "block:j" );
 	blockJ->setForm( new BlockForm( "form:j", mGraphics ) );
@@ -293,6 +308,9 @@ void Game::init()
 		1, 1, 1, 0,
 		0, 0, 0, 0
 	}));
+	blockJ->getForm()->addState( new StateIntVector( "state:matrix",
+		blockJ->getForm()->getState<StateIntVector*>( "state:matrix1" )->getValues()
+	));
 
 	GameEntity *blockI = new GameEntity( "block:i" );
 	blockI->setForm( new BlockForm( "form:i", mGraphics ) );
@@ -325,6 +343,9 @@ void Game::init()
 		1, 1, 1, 1,
 		0, 0, 0, 0
 	}));
+	blockI->getForm()->addState( new StateIntVector( "state:matrix",
+		blockI->getForm()->getState<StateIntVector*>( "state:matrix1" )->getValues()
+	));
 
 	GameEntity *blockGroup = new GameEntity( "entity:group" );
 	blockGroup->addAction( new ActionLambda( *blockGroup, "action:nextBlock", &nextBlock ) );
