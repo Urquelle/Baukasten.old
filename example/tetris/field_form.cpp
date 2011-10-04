@@ -37,10 +37,12 @@ void FieldForm::render()
 		int x = pos.getX() + 40 * ( i % 13 );
 		int y = pos.getY() + 40 * j;
 
-		if ( k )
+		// draw already occupied blocks
+		if ( k ) {
 			driver->draw2DRectangle(
 				cSet, irr::core::rect<s32>( x, y, x + 40, y + 40 )
 			);
+		}
 
 		++i;
 		j += ( ( i > 0 ) && ( i % 13 ) == 0 ) ? 1 : 0;
