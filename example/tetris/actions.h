@@ -35,6 +35,9 @@ DoActionFunction nextBlock([]( Action *action, GameEntity *entity ) {
 	nextBlock = entity->getChild( blocks[ rand() % 7 ] );
 
 	GameEntity *field = entity->getParent()->getChild( "entity:field" );
+	field->getForm()->getState<StateIntVector*>( "block:current" )->setValues(
+		block->getForm()->getState<StateIntVector*>( "state:matrix" )->getValues()
+	);
 
 	entity->getParent()->getForm()->addToLSpace( "block:next", nextBlock );
 	entity->getParent()->getForm()->addToVSpace( "block:next", nextBlock->getForm() );

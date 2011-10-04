@@ -22,6 +22,7 @@ void FieldForm::render()
 {
 	irr::video::IVideoDriver *driver = getGraphics()->getDriver();
 	auto matrix = getState<StateIntVector*>( "state:field" )->getValues();
+	auto block = getState<StateIntVector*>( "block:current" )->getValues();
 
 	int i = 0;
 	int j = 0;

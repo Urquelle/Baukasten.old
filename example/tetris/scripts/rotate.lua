@@ -5,6 +5,7 @@ column = field:getState("state:column"):getValue()
 
 curr_matrix = block:getState( "state:currentMatrix" )
 next_matrix_num = ( curr_matrix:getValue() % 4 ) + 1
+matrix = block:getState( "state:matrix" )
 
 curr_limits = block:getState( "state:limit" .. next_matrix_num )
 
@@ -16,4 +17,6 @@ block_max = column + limit_right
 
 if block_min >= 0 and block_max <= 13 then
 	curr_matrix:setValue( next_matrix_num )
+	matrix:setValues(block:getState( "state:matrix" .. next_matrix_num ))
+	field:getForm():getState("block:current"):setValues(matrix)
 end
