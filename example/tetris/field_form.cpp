@@ -28,6 +28,7 @@ void FieldForm::render()
 	auto block = getState<StateIntVector*>( "block:current" )->getValues();
 	auto column = getState<StateInt*>( "block:column" )->getValue();
 	auto row = getState<StateInt*>( "block:row" )->getValue();
+	auto step = getState<StateInt*>( "state:step" )->getValue();
 
 	int i = 0;
 	int j = 0;
@@ -37,7 +38,7 @@ void FieldForm::render()
 	irr::video::SColor cSet( 255, 0, 0, 0 );
 	irr::video::SColor cBlock( 255, 125, 125, 0 );
 
-	for_each( matrix.begin(), matrix.end(), [&i, &j, &pos, &row, &column, &block, driver, this, &cSet, &cBlock]( int k ) {
+	for_each( matrix.begin(), matrix.end(), [&i, &j, &pos, &row, &column, &block, driver, this, &cSet, &cBlock, &step]( int k ) {
 		int x = pos.getX() + 40 * ( i % 13 );
 		int y = pos.getY() + 40 * j;
 
@@ -56,7 +57,7 @@ void FieldForm::render()
 			int index = ( i - column + 1 ) - ( FIELD_WIDTH - BLOCK_WIDTH ) * ( j - row );
 			if ( block[ index ] ) {
 				driver->draw2DRectangle(
-					cBlock, irr::core::rect<s32>( x, y, x + 40, y + 40 )
+					cBlock, irr::core::rect<s32>( x, y + step, x + 40, y + 40 + step )
 				);
 			}
 		}

@@ -92,6 +92,9 @@ DoActionFunction recalc([]( Action *action, GameEntity *entity ) {
 	StateInt *currLine = entity->getForm()->getState<StateInt*>( "state:currentLine" );
 	Form *block = entity->getParent()->getForm()->getVSpace()->getEntity( "block:current" );
 
+	StateInt *step = entity->getForm()->getState<StateInt*>( "state:step" );
+	step->setValue( step->getValue() + 1 );
+
 	if ( block ) {
 		t_pos pos = block->getPosition();
 

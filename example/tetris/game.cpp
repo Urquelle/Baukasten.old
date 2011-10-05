@@ -68,6 +68,7 @@ void Game::init()
 	field->addState( new StateInt( "state:rows", 18 ) );
 	field->setForm( new FieldForm( "form:field", mGraphics ) );
 	field->getForm()->addState( new StateIntVector( "block:current" ) );
+	field->getForm()->addState( new StateInt( "state:step", 0 ) );
 	field->getForm()->addState( new StateInt( "block:column", 6 ) );
 	field->getForm()->addState( new StateInt( "block:row", 0 ) );
 	field->getForm()->addState( new StateInt( "state:currentLine", 0 ) );
