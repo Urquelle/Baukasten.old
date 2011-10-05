@@ -27,11 +27,7 @@ DoActionFunction nextBlock([]( Action *action, GameEntity *entity ) {
 	entity->getParent()->getForm()->removeFromVSpace( "block:next" );
 	entity->getParent()->getForm()->removeFromLSpace( "block:next" );
 
-	if ( !nextBlock ) {
-		block = entity->getChild( blocks[ rand() % 7 ] );
-	} else {
-		block = nextBlock;
-	}
+	block = ( nextBlock ) ? nextBlock : entity->getChild( blocks[ rand() % 7 ] );
 	nextBlock = entity->getChild( blocks[ rand() % 7 ] );
 
 	GameEntity *field = entity->getParent()->getChild( "entity:field" );
