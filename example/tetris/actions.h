@@ -47,44 +47,30 @@ DoActionFunction nextBlock([]( Action *action, GameEntity *entity ) {
 });
 
 DoActionFunction moveRight([]( Action *action, GameEntity *entity ) {
-	Form *form = action->getSource()->getForm()->getVSpace()->getEntity( "block:current" );
 	GameEntity *field = entity->getChild( "entity:field" );
-
 	Form *block = entity->getForm()->getVSpace()->getEntity( "block:current" );
 
 	stringstream sLimit;
 	sLimit << "state:limit" << block->getState<StateInt*>("state:currentMatrix")->getValue();
 	auto limit = block->getState<StateIntVector*>( sLimit.str() );
 
-	StateInt *column = field->getState<StateInt*>( "state:column" );
-
-	if ( column->getValue() + limit->getValue( LIMIT_RIGHT ) < 13 ) {
-		t_pos currPos = form->getPosition();
-		t_pos nextPos( { currPos.getX() + BLOCK_WIDTH, currPos.getY(), currPos.getZ() } );
-
+	StateInt *column = field->getForm()->getState<StateInt*>( "block:column" );
+	if ( column->getValue() + limit->getValue( LIMIT_RIGHT ) + 1 < 13 ) {
 		column->setValue( column->getValue() + 1 );
-		form->setPosition( nextPos );
 	}
 });
 
 DoActionFunction moveLeft([]( Action *action, GameEntity *entity ) {
-	Form *form = action->getSource()->getForm()->getVSpace()->getEntity( "block:current" );
 	GameEntity *field = entity->getChild( "entity:field" );
-
 	Form *block = entity->getForm()->getVSpace()->getEntity( "block:current" );
 
 	stringstream sLimit;
 	sLimit << "state:limit" << block->getState<StateInt*>("state:currentMatrix")->getValue();
 	auto limit = block->getState<StateIntVector*>( sLimit.str() );
 
-	StateInt *column = field->getState<StateInt*>( "state:column" );
-
-	if ( column->getValue() - limit->getValue( LIMIT_LEFT ) > 0 ) {
-		t_pos currPos = form->getPosition();
-		t_pos nextPos( { currPos.getX() - BLOCK_WIDTH, currPos.getY(), currPos.getZ() } );
-
+	StateInt *column = field->getForm()->getState<StateInt*>( "block:column" );
+	if ( column->getValue() - limit->getValue( LIMIT_LEFT ) + 1 > 0 ) {
 		column->setValue( column->getValue() - 1 );
-		form->setPosition( nextPos );
 	}
 });
 
