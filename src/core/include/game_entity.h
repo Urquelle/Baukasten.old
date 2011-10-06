@@ -20,7 +20,6 @@ namespace Baukasten {
 	class BAUKASTEN_EXPORT GameEntity : public Entity,
 		public ActionManager, public StateManager {
 	public:
-		friend class State;
 
 		GameEntity( const std::string& );
 		GameEntity( const GameEntity& );
