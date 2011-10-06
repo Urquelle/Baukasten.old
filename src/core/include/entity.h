@@ -10,8 +10,6 @@
  * All Classes of the Project are inside this namespace.
  */
 namespace Baukasten {
-	class State;
-
 	/*! \defgroup entity Entity Classes */
 
 	/*! \brief baseclass.
