@@ -13,7 +13,7 @@
 
 using namespace Baukasten;
 
-const int BLOCK_WIDTH = 40, BLOCK_HEIGHT = 40;
+const int BLOCK_WIDTH = 40, BLOCK_HEIGHT = 40, FIELD_SIZE = 12;
 const int LIMIT_TOP = 0, LIMIT_RIGHT = 1, LIMIT_BOTTOM = 2, LIMIT_LEFT = 3;
 
 DoActionFunction nextBlock([]( Action *action, GameEntity *entity ) {
@@ -43,7 +43,7 @@ DoActionFunction nextBlock([]( Action *action, GameEntity *entity ) {
 	nextBlock->getForm()->setPosition( { 820, 40, 0 } );
 	block->getForm()->setPosition( { 400, 20, 0 } );
 
-	field->getState<StateInt*>( "state:column" )->setValue(6);
+	field->getState<StateInt*>( "state:column" )->setValue(5);
 });
 
 DoActionFunction moveRight([]( Action *action, GameEntity *entity ) {
@@ -55,7 +55,7 @@ DoActionFunction moveRight([]( Action *action, GameEntity *entity ) {
 	auto limit = block->getState<StateIntVector*>( sLimit.str() );
 
 	StateInt *column = field->getForm()->getState<StateInt*>( "block:column" );
-	if ( column->getValue() + limit->getValue( LIMIT_RIGHT ) + 1 < 13 ) {
+	if ( column->getValue() + limit->getValue( LIMIT_RIGHT ) + 1 < FIELD_SIZE ) {
 		column->setValue( column->getValue() + 1 );
 	}
 });

@@ -9,7 +9,7 @@
 
 using namespace Baukasten;
 
-const int FIELD_WIDTH = 13;
+const int FIELD_WIDTH = 12;
 const int BLOCK_WIDTH = 4;
 
 FieldForm::FieldForm( const string &id, IGraphics *graphics ) :
@@ -39,7 +39,7 @@ void FieldForm::render()
 	irr::video::SColor cBlock( 255, 125, 125, 0 );
 
 	for_each( matrix.begin(), matrix.end(), [&i, &j, &pos, &row, &column, &block, driver, this, &cSet, &cBlock, &step]( int k ) {
-		int x = pos.getX() + 40 * ( i % 13 );
+		int x = pos.getX() + 40 * ( i % FIELD_WIDTH );
 		int y = pos.getY() + 40 * j;
 
 		// draw already occupied blocks
@@ -63,7 +63,7 @@ void FieldForm::render()
 		}
 
 		++i;
-		j += ( ( i > 0 ) && ( i % 13 ) == 0 ) ? 1 : 0;
+		j += ( ( i > 0 ) && ( i % FIELD_WIDTH ) == 0 ) ? 1 : 0;
 	});
 }
 
