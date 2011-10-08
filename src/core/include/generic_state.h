@@ -98,7 +98,7 @@ namespace Baukasten {
 			onChange().emit( this );
 		}
 
-		void setValue( const int i, const T &value )
+		void setValue( const unsigned int i, const T &value )
 		{
 			if ( mIntState )
 				mIntState = 0;

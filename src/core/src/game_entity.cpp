@@ -33,8 +33,8 @@ GameEntity::GameEntity( const std::string &id ) :
 GameEntity::GameEntity( const GameEntity &rhs ) :
 	Entity( rhs.getId() ),
 	mType( rhs.getType() ),
-	mParent( rhs.getParent() ),
-	mForm( rhs.getForm() )
+	mForm( rhs.getForm() ),
+	mParent( rhs.getParent() )
 {
 }
 

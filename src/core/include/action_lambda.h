@@ -23,8 +23,8 @@ namespace Baukasten {
 		void setDoneFunction( DoneFunction* );
 
 	private:
-		DoneFunction*		mDone;
 		DoActionFunction*	mDoAction;
+		DoneFunction*		mDone;
 	};
 } /* Baukasten */
 
