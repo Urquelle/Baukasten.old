@@ -81,6 +81,10 @@ DoActionFunction recalc([]( Action *action, GameEntity *entity ) {
 	StateInt *step = entity->getForm()->getState<StateInt*>( "state:step" );
 	step->setValue( step->getValue() + 1 );
 
+	float row = step->getValue() / BLOCK_HEIGHT;
+	row += ( step->getValue() % BLOCK_HEIGHT == 0 ) ? 0 : 1;
+	entity->getForm()->getState<StateInt*>( "block:row" )->setValue( row );
+
 	if ( block ) {
 		t_pos pos = block->getPosition();
 
