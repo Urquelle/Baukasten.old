@@ -39,8 +39,9 @@ void FieldForm::render()
 	irr::video::SColor cBlock( 255, 125, 125, 0 );
 	irr::video::SColor cControl( 255, 125, 125, 125 );
 
+	// draw current column
 	driver->draw2DRectangle(
-		irr::video::SColor( 255, 100, 30, 50 ), irr::core::rect<s32>( 240 + column * 40, 10, 240 + column * 40 + 40, 15 )
+		cControl, irr::core::rect<s32>( 240 + column * 40, 10, 240 + column * 40 + 40, 15 )
 	);
 
 	// draw current row
