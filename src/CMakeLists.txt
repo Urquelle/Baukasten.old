@@ -11,7 +11,7 @@ link_directories(
 	"/usr/lib64/sigc++-2.0/include"
 )
 
-add_definitions( -DEXPORT_LIB=1 )
+add_definitions( -DEXPORT_LIB=1 -Wall )
 add_library( Baukasten SHARED ${core_SRCS} ${graphics_SRCS} ${input_SRCS} )
 
 set_target_properties( Baukasten PROPERTIES SOVERSION 0.0.1 )
