@@ -100,7 +100,7 @@ void Game::init()
 	addChild( field );
 	getForm()->addToVSpace( field->getForm() );
 	getForm()->addToLSpace( field );
-	//field->invokeAction( "action:recalculate" );
+	field->invokeAction( "action:recalculate" );
 
 	// init blocks
 	GameEntity *blockO = new GameEntity( "block:o" );
