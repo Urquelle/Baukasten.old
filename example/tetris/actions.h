@@ -69,7 +69,7 @@ DoActionFunction moveLeft([]( Action *action, GameEntity *entity ) {
 	auto limit = block->getState<StateIntVector*>( sLimit.str() );
 
 	StateInt *column = field->getForm()->getState<StateInt*>( "block:column" );
-	if ( column->getValue() - limit->getValue( LIMIT_LEFT ) + 1 > 0 ) {
+	if ( column->getValue() - limit->getValue( LIMIT_LEFT ) > 0 ) {
 		column->setValue( column->getValue() - 1 );
 	}
 });
