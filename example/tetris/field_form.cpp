@@ -55,7 +55,7 @@ void FieldForm::render()
 		int range = ( i - column + 1 ) % FIELD_WIDTH;
 		if ( block.size() && i >= startBlock && i <= endBlock && range >= 0 && range < BLOCK_WIDTH ) {
 			int index = ( i - column + 1 ) - ( FIELD_WIDTH - BLOCK_WIDTH ) * ( j - row );
-			if ( block[ index ] ) {
+			if ( index > 0 && index < 15 && block[ index ] ) {
 				driver->draw2DRectangle(
 					cBlock, irr::core::rect<s32>( x, y + step, x + 40, y + 40 + step )
 				);
