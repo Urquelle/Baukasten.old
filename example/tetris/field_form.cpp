@@ -37,10 +37,17 @@ void FieldForm::render()
 
 	irr::video::SColor cSet( 255, 0, 0, 0 );
 	irr::video::SColor cBlock( 255, 125, 125, 0 );
+	irr::video::SColor cControl( 255, 125, 125, 125 );
 
 	driver->draw2DRectangle(
 		irr::video::SColor( 255, 100, 30, 50 ), irr::core::rect<s32>( 240 + column * 40, 10, 240 + column * 40 + 40, 15 )
 	);
+
+	// draw current row
+	driver->draw2DRectangle(
+		cControl, irr::core::rect<s32>( 230, 20 + row * 40, 235, 20 + 40 + row * 40 )
+	);
+
 	for_each( matrix.begin(), matrix.end(), [&i, &j, &pos, &row, &column, &block, driver, this, &cSet, &cBlock, &step]( int k ) {
 		int x = pos.getX() + 40 * ( i % FIELD_WIDTH );
 		int y = pos.getY() + 40 * j;
