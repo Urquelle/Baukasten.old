@@ -13,37 +13,50 @@
 
 using namespace Baukasten;
 
-const int BLOCK_WIDTH = 40, BLOCK_HEIGHT = 40, FIELD_SIZE = 12;
+const int BLOCK_WIDTH = 4, BLOCK_HEIGHT = 40, FIELD_SIZE = 12;
 const int LIMIT_TOP = 0, LIMIT_RIGHT = 1, LIMIT_BOTTOM = 2, LIMIT_LEFT = 3;
+const int CLEAN = 0, SET = 1;
+
+void setBlockFields( GameEntity *field, int value = 1 )
+{
+	Form *fieldForm = field->getForm();
+
+	auto row = fieldForm->getState<StateInt*>( "block:row" )->getValue();
+	auto block = fieldForm->getState<StateIntVector*>( "block:current" )->getValues();
+	auto column = fieldForm->getState<StateInt*>( "block:column" )->getValue();
+	auto matrixState = fieldForm->getState<StateIntVector*>( "state:field" );
+	auto matrix = matrixState->getValues();
+
+	for( int i = 0, j = 0; i < matrix.size(); ++i ) {
+		int startBlock = ( row * FIELD_SIZE ) + ( column - 1 );
+		int endBlock = ( ( row + 3 ) * FIELD_SIZE ) + ( column + 2 );
+		int range = ( i - column + 1 ) % FIELD_SIZE;
+		BK_DEBUG( "size: " << block.size() << " startBlock: " << startBlock << " endBlock: " << endBlock << " i: " << i << " range: " << range );
+		if ( block.size() && i >= startBlock && i <= endBlock && range >= 0 && range < BLOCK_WIDTH ) {
+			int index = ( i - row * FIELD_SIZE - column + 1 ) - ( FIELD_SIZE - BLOCK_WIDTH ) * ( j - row );
+			if ( index > 0 && index < 15 && block[ index ] ) {
+				matrixState->setValue( i, value );
+			}
+		}
+		j += ( ( i > 0 ) && ( i % FIELD_SIZE ) == 0 ) ? 1 : 0;
+	}
+}
 
 DoActionFunction nextBlock([]( Action *action, GameEntity *entity ) {
 	string blocks[] = { "block:i", "block:j", "block:z", "block:s", "block:l", "block:t", "block:o" };
 
 	srand( time( 0 ) );
 
-	GameEntity *block = 0;
-	GameEntity *nextBlock = entity->getParent()->getForm()->getLSpace()->getEntity( "block:next" );
-
-	entity->getParent()->getForm()->removeFromVSpace( "block:next" );
-	entity->getParent()->getForm()->removeFromLSpace( "block:next" );
-
-	block = ( nextBlock ) ? nextBlock : entity->getChild( blocks[ rand() % 7 ] );
-	nextBlock = entity->getChild( blocks[ rand() % 7 ] );
-
+	GameEntity *block = entity->getChild( blocks[ rand() % 7 ] );
 	GameEntity *field = entity->getParent()->getChild( "entity:field" );
 	field->getForm()->getState<StateIntVector*>( "block:current" )->setValues(
 		block->getForm()->getState<StateIntVector*>( "state:matrix" )->getValues()
 	);
 
-	entity->getParent()->getForm()->addToLSpace( "block:next", nextBlock );
-	entity->getParent()->getForm()->addToVSpace( "block:next", nextBlock->getForm() );
-	entity->getParent()->getForm()->addToLSpace( "block:current", block );
 	entity->getParent()->getForm()->addToVSpace( "block:current", block->getForm() );
-
-	nextBlock->getForm()->setPosition( { 820, 40, 0 } );
-	block->getForm()->setPosition( { 400, 20, 0 } );
-
 	field->getState<StateInt*>( "state:column" )->setValue(5);
+
+	setBlockFields( field );
 });
 
 DoActionFunction moveRight([]( Action *action, GameEntity *entity ) {
@@ -56,7 +69,9 @@ DoActionFunction moveRight([]( Action *action, GameEntity *entity ) {
 
 	StateInt *column = field->getForm()->getState<StateInt*>( "block:column" );
 	if ( column->getValue() + limit->getValue( LIMIT_RIGHT ) + 1 < FIELD_SIZE ) {
+		setBlockFields( field, CLEAN );
 		column->setValue( column->getValue() + 1 );
+		setBlockFields( field );
 	}
 });
 
@@ -70,7 +85,9 @@ DoActionFunction moveLeft([]( Action *action, GameEntity *entity ) {
 
 	StateInt *column = field->getForm()->getState<StateInt*>( "block:column" );
 	if ( column->getValue() - limit->getValue( LIMIT_LEFT ) > 0 ) {
+		setBlockFields( field, CLEAN );
 		column->setValue( column->getValue() - 1 );
+		setBlockFields( field );
 	}
 });
 
@@ -81,9 +98,11 @@ DoActionFunction recalc([]( Action *action, GameEntity *entity ) {
 	StateInt *step = entity->getForm()->getState<StateInt*>( "state:step" );
 	step->setValue( step->getValue() + 1 );
 
+	setBlockFields( entity, 0 );
 	float row = step->getValue() / BLOCK_HEIGHT;
 	row += ( step->getValue() % BLOCK_HEIGHT == 0 ) ? 0 : 1;
 	entity->getForm()->getState<StateInt*>( "block:row" )->setValue( row );
+	setBlockFields( entity, 1 );
 
 	if ( block ) {
 		t_pos pos = block->getPosition();
@@ -97,29 +116,9 @@ DoActionFunction recalc([]( Action *action, GameEntity *entity ) {
 		sLimit << "state:limit" << currMatrix;
 		auto limit = block->getState<StateIntVector*>( sLimit.str() );
 
-		if ( ( currRow + limit->getValue( LIMIT_BOTTOM ) ) < ( rows - 1 )) {
-			entity->getState<StateInt*>( "state:row" )->setValue( currRow );
-			block->setPosition( { pos.getX(), pos.getY() + 1, 0 } );
+		if ( ( row + 1 + limit->getValue( LIMIT_BOTTOM ) ) < ( rows - 1 )) {
+			setBlockFields( entity );
 		} else {
-			stringstream sMatrix;
-			sMatrix << "state:matrix" << currMatrix;
-			auto matrix = block->getState<StateIntVector*>( sMatrix.str() )->getValues();
-			auto state = entity->getForm()->getState<StateIntVector*>( "state:field" );
-
-			int i = 0;
-			int j = 0;
-			for_each( matrix.begin(), matrix.end(), [&currRow, &currCol, &i, &j, entity, state, limit]( int k ) {
-				if ( k ) {
-					state->setValue(
-						( currRow + j - limit->getValue( LIMIT_TOP ) ) * 13 +	// offset top
-						currCol - limit->getValue( LIMIT_LEFT ) + ( i % 4 ),	// offset left
-						1
-					);
-				}
-				++i;
-				j += ( i > 0 && ( i % 4 == 0 ) ) ? 1 : 0;
-			});
-
 			entity->getParent()->getForm()->removeFromVSpace( "block:current" );
 			entity->getParent()->getForm()->removeFromLSpace( "block:current" );
 			entity->getParent()->getChild( "entity:group" )->invokeAction( "action:nextBlock" );
