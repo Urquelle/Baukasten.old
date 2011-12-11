@@ -32,11 +32,14 @@ void setBlockFields( GameEntity *field, int value = SET )
 		int startBlock = ( row * FIELD_SIZE ) + ( column - 1 );
 		int endBlock = ( ( row + 3 ) * FIELD_SIZE ) + ( column + 2 );
 		int range = ( i - column + 1 ) % FIELD_SIZE;
+
 		BK_DEBUG( "size: " << block.size() << " startBlock: " << startBlock << " endBlock: " << endBlock << " i: " << i << " range: " << range );
+
 		if ( block.size() && i >= startBlock && i <= endBlock && range >= 0 && range < BLOCK_WIDTH ) {
 			int index = ( i - row * FIELD_SIZE - column + 1 ) - ( FIELD_SIZE - BLOCK_WIDTH ) * ( j - row );
-			if ( index > 0 && index < 15 && block[ index ] ) {
-				matrixState->setValue( i, value );
+			if ( index > 0 && index < 15 ) {
+				if ( SET == value && block[ index ] || CLEAN == value )
+					matrixState->setValue( i, value );
 			}
 		}
 		j += ( ( i > 0 ) && ( i % FIELD_SIZE ) == 0 ) ? 1 : 0;
