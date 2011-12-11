@@ -1,5 +1,7 @@
 #include "field_form.h"
 
+#include "constants.h"
+
 #include <generic_state.h>
 #include <irrlicht/irrlicht_graphics.h>
 
@@ -52,14 +54,14 @@ void FieldForm::render()
 		int y = pos.getY() + 40 * j;
 
 		// draw already occupied blocks
-		if ( k ) {
+		if ( SET == k || IN_MOTION == k ) {
 			driver->draw2DRectangle(
 				cSet, irr::core::rect<s32>( x, y, x + 40, y + 40 )
 			);
 		}
 
 		++i;
-		j += ( ( i > 0 ) && ( i % FIELD_WIDTH ) == 0 ) ? 1 : 0;
+		j += ( ( i > 0 ) && ( i % FIELD_WIDTH ) == 0 ) ? SET : CLEAN;
 	});
 }
 

@@ -1,6 +1,8 @@
 #ifndef ACTIONS_J8BEDW58
 #define ACTIONS_J8BEDW58
 
+#include "constants.h"
+
 #include <action_lambda.h>
 #include <form.h>
 #include <generic_state.h>
@@ -15,9 +17,8 @@ using namespace Baukasten;
 
 const int BLOCK_WIDTH = 4, BLOCK_HEIGHT = 40, FIELD_SIZE = 12;
 const int LIMIT_TOP = 0, LIMIT_RIGHT = 1, LIMIT_BOTTOM = 2, LIMIT_LEFT = 3;
-const int CLEAN = 0, SET = 1;
 
-void setBlockFields( GameEntity *field, int value = 1 )
+void setBlockFields( GameEntity *field, int value = SET )
 {
 	Form *fieldForm = field->getForm();
 
@@ -71,7 +72,7 @@ DoActionFunction moveRight([]( Action *action, GameEntity *entity ) {
 	if ( column->getValue() + limit->getValue( LIMIT_RIGHT ) + 1 < FIELD_SIZE ) {
 		setBlockFields( field, CLEAN );
 		column->setValue( column->getValue() + 1 );
-		setBlockFields( field );
+		setBlockFields( field, IN_MOTION );
 	}
 });
 
@@ -87,7 +88,7 @@ DoActionFunction moveLeft([]( Action *action, GameEntity *entity ) {
 	if ( column->getValue() - limit->getValue( LIMIT_LEFT ) > 0 ) {
 		setBlockFields( field, CLEAN );
 		column->setValue( column->getValue() - 1 );
-		setBlockFields( field );
+		setBlockFields( field, IN_MOTION );
 	}
 });
 
@@ -98,11 +99,11 @@ DoActionFunction recalc([]( Action *action, GameEntity *entity ) {
 	StateInt *step = entity->getForm()->getState<StateInt*>( "state:step" );
 	step->setValue( step->getValue() + 1 );
 
-	setBlockFields( entity, 0 );
+	setBlockFields( entity, CLEAN );
 	float row = step->getValue() / BLOCK_HEIGHT;
 	row += ( step->getValue() % BLOCK_HEIGHT == 0 ) ? 0 : 1;
 	entity->getForm()->getState<StateInt*>( "block:row" )->setValue( row );
-	setBlockFields( entity, 1 );
+	setBlockFields( entity, IN_MOTION );
 
 	if ( block ) {
 		t_pos pos = block->getPosition();
