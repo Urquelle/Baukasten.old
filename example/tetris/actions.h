@@ -38,7 +38,7 @@ void setBlockFields( GameEntity *field, int value = SET )
 		if ( block.size() && i >= startBlock && i <= endBlock && range >= 0 && range < BLOCK_WIDTH ) {
 			int index = ( i - row * FIELD_SIZE - column + 1 ) - ( FIELD_SIZE - BLOCK_WIDTH ) * ( j - row );
 			if ( index > 0 && index < 15 ) {
-				if ( SET == value && block[ index ] || CLEAN == value )
+				if ( ( IN_MOTION == value || SET == value ) && block[ index ] || CLEAN == value )
 					matrixState->setValue( i, value );
 			}
 		}
@@ -121,7 +121,7 @@ DoActionFunction recalc([]( Action *action, GameEntity *entity ) {
 		auto limit = block->getState<StateIntVector*>( sLimit.str() );
 
 		if ( ( row + 1 + limit->getValue( LIMIT_BOTTOM ) ) < ( rows - 1 )) {
-			setBlockFields( entity );
+			setBlockFields( entity, IN_MOTION );
 		} else {
 			entity->getParent()->getForm()->removeFromVSpace( "block:current" );
 			entity->getParent()->getForm()->removeFromLSpace( "block:current" );
