@@ -35,12 +35,21 @@ void setBlockFields( GameEntity *field, int value = SET )
 		j = (int)( i / FIELD_SIZE );
 
 		BK_DEBUG( "size: " << block.size() << " startBlock: " << startBlock << " endBlock: " << endBlock << " i: " << i << " range: " << range );
+
 		if ( block.size() && i >= startBlock && i <= endBlock && range >= 0 && range < BLOCK_WIDTH ) {
 			int index = ( i - row * FIELD_SIZE - column + 1 ) - ( FIELD_SIZE - BLOCK_WIDTH ) * ( j - row );
-			if ( index >= 0 && index <= 15 ) {
-				if ( ( IN_MOTION == value || SET == value ) && block[ index ] || CLEAN == value )
-					matrixState->setValue( i, value );
-			}
+
+			// skip iteration if index outside valid range
+			if ( index < 0 || index > 15 )
+				continue;
+
+			// skip iteration if block is about to be cleaned or set to IN_MOTION, where
+			// it is already set to SET
+			if ( matrix[ i ] == SET && ( CLEAN == value || IN_MOTION == value ) )
+				continue;
+
+			if ( ( IN_MOTION == value || SET == value ) && block[ index ] || CLEAN == value )
+				matrixState->setValue( i, value );
 		}
 	}
 }
@@ -65,7 +74,7 @@ DoActionFunction nextBlock([]( Action *action, GameEntity *entity ) {
 	entity->getParent()->getForm()->addToVSpace( "block:current", block->getForm() );
 	field->getState<StateInt*>( "state:column" )->setValue(5);
 
-	setBlockFields( field );
+	setBlockFields( field, IN_MOTION );
 });
 
 DoActionFunction moveRight([]( Action *action, GameEntity *entity ) {
