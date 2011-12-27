@@ -26,6 +26,8 @@ FieldForm::~FieldForm()
 void FieldForm::render()
 {
 	irr::video::IVideoDriver *driver = getGraphics()->getDriver();
+	gui::IGUIFont* font = getGraphics()->getDevice()->getGUIEnvironment()->getBuiltInFont();
+
 	auto matrix = getState<StateIntVector*>( "state:field" )->getValues();
 	auto column = getState<StateInt*>( "block:column" )->getValue();
 	auto row = getState<StateInt*>( "block:row" )->getValue();
@@ -65,6 +67,12 @@ void FieldForm::render()
 				cInMotion, irr::core::rect<s32>( x, y, x + 40, y + 40 )
 			);
 		}
+
+		// draw debug information
+		font->draw( ( k == SET ) ? L"1" : ( ( k == IN_MOTION ) ? L"2" : L"0" ),
+			core::rect<s32>( x , y, x + 40, y + 40 ),
+			video::SColor( 127, 127, 127, 255 )
+		);
 
 		++i;
 		j += ( ( i > 0 ) && ( i % FIELD_WIDTH ) == 0 ) ? 1 : 0;
