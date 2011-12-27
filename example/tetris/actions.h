@@ -67,12 +67,14 @@ DoActionFunction nextBlock([]( Action *action, GameEntity *entity ) {
 
 	GameEntity *block = entity->getChild( blocks[ rand() % 7 ] );
 	GameEntity *field = entity->getParent()->getChild( "entity:field" );
+
 	field->getForm()->getState<StateIntVector*>( "block:current" )->setValues(
 		block->getForm()->getState<StateIntVector*>( "state:matrix" )->getValues()
 	);
 
 	entity->getParent()->getForm()->addToVSpace( "block:current", block->getForm() );
 	field->getState<StateInt*>( "state:column" )->setValue(5);
+	field->getForm()->getState<StateInt*>( "block:column" )->setValue( 5 );
 
 	setBlockFields( field, IN_MOTION );
 });
@@ -149,6 +151,9 @@ DoActionFunction recalc([]( Action *action, GameEntity *entity ) {
 		if ( ( row + 1 + limit->getValue( LIMIT_BOTTOM ) ) < ( rows - 1 )) {
 			setBlockFields( entity, IN_MOTION );
 		} else {
+			setBlockFields( entity, SET );
+			step->setValue( 0 );
+
 			entity->getParent()->getForm()->removeFromVSpace( "block:current" );
 			entity->getParent()->getForm()->removeFromLSpace( "block:current" );
 			entity->getParent()->getChild( "entity:group" )->invokeAction( "action:nextBlock" );
