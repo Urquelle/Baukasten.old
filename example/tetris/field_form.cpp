@@ -35,8 +35,8 @@ void FieldForm::render()
 	auto pos = getPosition();
 	t_size size = getSize();
 
-	irr::video::SColor cSet( 255, 0, 0, 0 );
-	irr::video::SColor cBlock( 255, 125, 125, 0 );
+	irr::video::SColor cSet( 255, 0, 0, 255 );
+	irr::video::SColor cInMotion( 255, 125, 125, 255 );
 	irr::video::SColor cControl( 255, 125, 125, 125 );
 
 	// draw current column
@@ -49,14 +49,20 @@ void FieldForm::render()
 		cControl, irr::core::rect<s32>( 230, 20 + row * 40, 235, 20 + 40 + row * 40 )
 	);
 
-	for_each( matrix.begin(), matrix.end(), [&i, &j, &pos, driver, this, &cSet]( int k ) {
+	for_each( matrix.begin(), matrix.end(), [&i, &j, &pos, driver, this, &cSet, &cInMotion, font]( int k ) {
 		int x = pos.getX() + 40 * ( i % FIELD_WIDTH );
 		int y = pos.getY() + 40 * j;
 
 		// draw already occupied blocks
-		if ( SET == k || IN_MOTION == k ) {
+		if ( SET == k ) {
 			driver->draw2DRectangle(
 				cSet, irr::core::rect<s32>( x, y, x + 40, y + 40 )
+			);
+		}
+
+		if ( IN_MOTION == k ) {
+			driver->draw2DRectangle(
+				cInMotion, irr::core::rect<s32>( x, y, x + 40, y + 40 )
 			);
 		}
 
