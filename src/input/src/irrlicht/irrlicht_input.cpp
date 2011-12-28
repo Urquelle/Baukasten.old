@@ -70,7 +70,7 @@ getKey( EKEY_CODE key )
 	case KEY_NONCONVERT:	t_key = Key::KEY_NONE; break;
 	case KEY_ACCEPT:		t_key = Key::KEY_NONE; break;
 	case KEY_MODECHANGE:	t_key = Key::KEY_NONE; break;
-	case KEY_SPACE:			t_key = Key::KEY_NONE; break;
+	case KEY_SPACE:			t_key = Key::KEY_SPACE; break;
 	case KEY_PRIOR:			t_key = Key::KEY_NONE; break;
 	case KEY_NEXT:			t_key = Key::KEY_NONE; break;
 	case KEY_END:			t_key = Key::KEY_NONE; break;
