@@ -45,6 +45,12 @@ void setBlockFields( GameEntity *field, int value = SET )
 	}
 }
 
+DoActionFunction pauseGame([]( Action *action, GameEntity *entity ) {
+	entity->getState<StateBool*>( "state:pause" )->setValue(
+		!entity->getState<StateBool*>( "state:pause" )->getValue()
+	);
+});
+
 DoActionFunction nextBlock([]( Action *action, GameEntity *entity ) {
 	string blocks[] = { "block:i", "block:j", "block:z", "block:s", "block:l", "block:t", "block:o" };
 
@@ -63,6 +69,10 @@ DoActionFunction nextBlock([]( Action *action, GameEntity *entity ) {
 });
 
 DoActionFunction moveRight([]( Action *action, GameEntity *entity ) {
+
+	auto gamePaused = entity->getState<StateBool*>( "state:pause" );
+	if ( gamePaused && gamePaused->getValue() ) return; // do nothing on pause
+
 	GameEntity *field = entity->getChild( "entity:field" );
 	Form *block = entity->getForm()->getVSpace()->getEntity( "block:current" );
 
@@ -79,6 +89,10 @@ DoActionFunction moveRight([]( Action *action, GameEntity *entity ) {
 });
 
 DoActionFunction moveLeft([]( Action *action, GameEntity *entity ) {
+
+	auto gamePaused = entity->getState<StateBool*>( "state:pause" );
+	if ( gamePaused && gamePaused->getValue() ) return; // do nothing on pause
+
 	GameEntity *field = entity->getChild( "entity:field" );
 	Form *block = entity->getForm()->getVSpace()->getEntity( "block:current" );
 
@@ -95,6 +109,10 @@ DoActionFunction moveLeft([]( Action *action, GameEntity *entity ) {
 });
 
 DoActionFunction recalc([]( Action *action, GameEntity *entity ) {
+
+	auto gamePaused = entity->getParent()->getState<StateBool*>( "state:pause" );
+	if ( gamePaused && gamePaused->getValue() ) return; // do nothing on pause
+
 	StateInt *currLine = entity->getForm()->getState<StateInt*>( "state:currentLine" );
 	Form *block = entity->getParent()->getForm()->getVSpace()->getEntity( "block:current" );
 

@@ -21,8 +21,10 @@ Game::Game( const string &id ) :
 	addAction( new ActionLua( *this, "action:rotate", "scripts/rotate.lua" ) );
 	addAction( new ActionLambda( *this, "action:moveLeft", &moveLeft ) );
 	addAction( new ActionLambda( *this, "action:moveRight", &moveRight ) );
+	addAction( new ActionLambda( *this, "action:pause", &pauseGame ) );
 
 	addState( new StateBool( "state:keepRunning", true ) );
+	addState( new StateBool( "state:pause", false ) );
 
 	setForm( new Form( "form:main" ) );
 }
@@ -375,6 +377,10 @@ void Game::run()
 void Game::onKeyDown( Key key, Modifier mod )
 {
 	switch ( key ) {
+	case Key::KEY_P:
+	case Key::KEY_SPACE:
+		invokeAction( "action:pause" );
+		break;
 	case Key::KEY_Q:
 		getState<StateBool*>( "state:keepRunning" )->setValue( false );
 		break;
