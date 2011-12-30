@@ -72,7 +72,7 @@ DoActionFunction nextBlock([]( Action *action, GameEntity *entity ) {
 		block->getForm()->getState<StateIntVector*>( "state:matrix" )->getValues()
 	);
 
-	entity->getParent()->getForm()->addToVSpace( "block:current", block->getForm() );
+	entity->getParent()->getForm()->addToLSpace( "block:current", block );
 	field->getState<StateInt*>( "state:column" )->setValue(5);
 	field->getForm()->getState<StateInt*>( "block:column" )->setValue( 5 );
 
@@ -85,7 +85,7 @@ DoActionFunction moveRight([]( Action *action, GameEntity *entity ) {
 	if ( gamePaused && gamePaused->getValue() ) return; // do nothing on pause
 
 	GameEntity *field = entity->getChild( "entity:field" );
-	Form *block = entity->getForm()->getVSpace()->getEntity( "block:current" );
+	Form *block = entity->getForm()->getLSpace()->getEntity( "block:current" )->getForm();
 
 	stringstream sLimit;
 	sLimit << "state:limit" << block->getState<StateInt*>("state:currentMatrix")->getValue();
@@ -105,7 +105,7 @@ DoActionFunction moveLeft([]( Action *action, GameEntity *entity ) {
 	if ( gamePaused && gamePaused->getValue() ) return; // do nothing on pause
 
 	GameEntity *field = entity->getChild( "entity:field" );
-	Form *block = entity->getForm()->getVSpace()->getEntity( "block:current" );
+	Form *block = entity->getForm()->getLSpace()->getEntity( "block:current" )->getForm();
 
 	stringstream sLimit;
 	sLimit << "state:limit" << block->getState<StateInt*>("state:currentMatrix")->getValue();
@@ -125,7 +125,7 @@ DoActionFunction recalc([]( Action *action, GameEntity *entity ) {
 	if ( gamePaused && gamePaused->getValue() ) return; // do nothing on pause
 
 	StateInt *currLine = entity->getForm()->getState<StateInt*>( "state:currentLine" );
-	Form *block = entity->getParent()->getForm()->getVSpace()->getEntity( "block:current" );
+	GameEntity *block = entity->getParent()->getForm()->getLSpace()->getEntity( "block:current" );
 
 	StateInt *step = entity->getForm()->getState<StateInt*>( "state:step" );
 	step->setValue( step->getValue() + 1 );
@@ -137,16 +137,16 @@ DoActionFunction recalc([]( Action *action, GameEntity *entity ) {
 	setBlockFields( entity, IN_MOTION );
 
 	if ( block ) {
-		t_pos pos = block->getPosition();
+		t_pos pos = block->getForm()->getPosition();
 
-		int currMatrix = block->getState<StateInt*>( "state:currentMatrix" )->getValue();
+		int currMatrix = block->getForm()->getState<StateInt*>( "state:currentMatrix" )->getValue();
 		int currRow = ( pos.getY() + 20 ) / BLOCK_HEIGHT;
 		int currCol = entity->getState<StateInt*>( "state:column" )->getValue();
 		int rows = entity->getState<StateInt*>( "state:rows" )->getValue();
 
 		stringstream sLimit;
 		sLimit << "state:limit" << currMatrix;
-		auto limit = block->getState<StateIntVector*>( sLimit.str() );
+		auto limit = block->getForm()->getState<StateIntVector*>( sLimit.str() );
 
 		if ( ( row + 1 + limit->getValue( LIMIT_BOTTOM ) ) < ( rows - 1 )) {
 			setBlockFields( entity, IN_MOTION );

@@ -1,4 +1,4 @@
-block = source:getForm():getVSpace():getEntity( "block:current" )
+block = source:getForm():getLSpace():getEntity( "block:current" ):getForm()
 field = source:getChild("entity:field")
 
 column = field:getForm():getState("block:column"):getValue()

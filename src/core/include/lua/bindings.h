@@ -246,7 +246,9 @@ void wrapClasses()
 	// register LogicalSpace class
 	SLB::Class<LogicalSpace>("LogicalSpace")
 		.comment("LogicalSpace class")
-		.constructor();
+		.constructor()
+		.set("getEntity", &LogicalSpace::getEntity)
+			.param("Entity id");
 
 	// register VirtualSpace class
 	SLB::Class<VirtualSpace>("VirtualSpace")
