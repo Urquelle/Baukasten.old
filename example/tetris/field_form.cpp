@@ -77,5 +77,7 @@ void FieldForm::render()
 		++i;
 		j += ( ( i > 0 ) && ( i % FIELD_WIDTH ) == 0 ) ? 1 : 0;
 	});
+
+	IrrlichtForm::render();
 }
 

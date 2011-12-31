@@ -65,8 +65,15 @@ DoActionFunction nextBlock([]( Action *action, GameEntity *entity ) {
 
 	srand( time( 0 ) );
 
-	GameEntity *block = entity->getChild( blocks[ rand() % 7 ] );
+	GameEntity *block = 0;
 	GameEntity *field = entity->getParent()->getChild( "entity:field" );
+	GameEntity *nextBlock = entity->getChild( blocks[ rand() % 7 ] );
+
+	if ( field->getForm()->getLSpace()->hasEntity( "block:next" ) ) {
+		block = field->getForm()->getLSpace()->getEntity( "block:next" );
+	} else {
+		block = entity->getChild( blocks[ rand() % 7 ] );
+	}
 
 	field->getForm()->getState<StateIntVector*>( "block:current" )->setValues(
 		block->getForm()->getState<StateIntVector*>( "state:matrix" )->getValues()
@@ -75,6 +82,12 @@ DoActionFunction nextBlock([]( Action *action, GameEntity *entity ) {
 	entity->getParent()->getForm()->addToLSpace( "block:current", block );
 	field->getState<StateInt*>( "state:column" )->setValue(5);
 	field->getForm()->getState<StateInt*>( "block:column" )->setValue( 5 );
+
+	field->getForm()->removeFromLSpace( "block:next" );
+	field->getForm()->removeFromVSpace( "block:next" );
+	field->getForm()->addToLSpace( "block:next", nextBlock );
+	field->getForm()->addToVSpace( "block:next", nextBlock->getForm() );
+	nextBlock->getForm()->setPosition( { 800, 40, 0 } );
 
 	setBlockFields( field, IN_MOTION );
 });
