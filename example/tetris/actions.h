@@ -151,8 +151,6 @@ DoActionFunction recalc([]( Action *action, GameEntity *entity ) {
 		t_pos pos = block->getForm()->getPosition();
 
 		int currMatrix = block->getForm()->getState<StateInt*>( "state:currentMatrix" )->getValue();
-		int currRow = ( pos.getY() + 20 ) / BLOCK_HEIGHT;
-		int currCol = entity->getState<StateInt*>( "state:column" )->getValue();
 		int rows = entity->getState<StateInt*>( "state:rows" )->getValue();
 
 		stringstream sLimit;
@@ -165,7 +163,6 @@ DoActionFunction recalc([]( Action *action, GameEntity *entity ) {
 			setBlockFields( entity, SET );
 			step->setValue( 0 );
 
-			entity->getParent()->getForm()->removeFromVSpace( "block:current" );
 			entity->getParent()->getForm()->removeFromLSpace( "block:current" );
 			entity->getParent()->getChild( "entity:group" )->invokeAction( "action:nextBlock" );
 		}
