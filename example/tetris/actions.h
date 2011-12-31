@@ -34,8 +34,6 @@ void setBlockFields( GameEntity *field, int value = SET )
 		int range = ( i - column + 1 ) % FIELD_SIZE;
 		j = (int)( i / FIELD_SIZE );
 
-		BK_DEBUG( "size: " << block.size() << " startBlock: " << startBlock << " endBlock: " << endBlock << " i: " << i << " range: " << range );
-
 		if ( block.size() && i >= startBlock && i <= endBlock && range >= 0 && range < BLOCK_WIDTH ) {
 			int index = ( i - row * FIELD_SIZE - column + 1 ) - ( FIELD_SIZE - BLOCK_WIDTH ) * ( j - row );
 
