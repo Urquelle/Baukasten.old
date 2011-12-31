@@ -18,6 +18,26 @@ using namespace Baukasten;
 const int BLOCK_WIDTH = 4, BLOCK_HEIGHT = 40, FIELD_SIZE = 12;
 const int LIMIT_TOP = 0, LIMIT_RIGHT = 1, LIMIT_BOTTOM = 2, LIMIT_LEFT = 3;
 
+bool
+collisionDetected( GameEntity *block, GameEntity *field, int row, StateIntVector *limit )
+{
+	bool retValue = false;
+	int rows = field->getState<StateInt*>( "state:rows" )->getValue();
+	int fields = FIELD_SIZE * rows;
+
+	if ( ( row + 1 + limit->getValue( LIMIT_BOTTOM ) ) >= ( rows - 1 ) )
+		retValue = true;
+
+	auto fieldMatrix = field->getForm()->getState<StateIntVector*>( "state:field" )->getValues();
+	for ( int i = 0; i < fields; ++i ) {
+		if ( fieldMatrix[ i ] == IN_MOTION && ( ( i + FIELD_SIZE ) < fields ) && ( fieldMatrix[ i + FIELD_SIZE ] == SET ) ) {
+			retValue = true;
+		}
+	}
+
+	return retValue;
+}
+
 void setBlockFields( GameEntity *field, int value = SET )
 {
 	Form *fieldForm = field->getForm();
@@ -157,9 +177,7 @@ DoActionFunction recalc([]( Action *action, GameEntity *entity ) {
 		sLimit << "state:limit" << currMatrix;
 		auto limit = block->getForm()->getState<StateIntVector*>( sLimit.str() );
 
-		if ( ( row + 1 + limit->getValue( LIMIT_BOTTOM ) ) < ( rows - 1 )) {
-			setBlockFields( entity, IN_MOTION );
-		} else {
+		if ( collisionDetected( block, entity, row, limit ) ) {
 			setBlockFields( entity, SET );
 			step->setValue( 0 );
 
