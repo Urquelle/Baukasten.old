@@ -182,7 +182,6 @@ DoActionFunction recalc([]( Action *action, GameEntity *entity ) {
 	auto gamePaused = entity->getParent()->getState<StateBool*>( "state:pause" );
 	if ( gamePaused && gamePaused->getValue() ) return; // do nothing on pause
 
-	StateInt *currLine = entity->getForm()->getState<StateInt*>( "state:currentLine" );
 	GameEntity *block = entity->getParent()->getForm()->getLSpace()->getEntity( "block:current" );
 
 	StateInt *step = entity->getForm()->getState<StateInt*>( "state:step" );
