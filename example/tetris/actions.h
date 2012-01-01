@@ -203,6 +203,7 @@ DoActionFunction recalc([]( Action *action, GameEntity *entity ) {
 			setBlockFields( entity, SET );
 			step->setValue( 0 );
 
+			entity->getForm()->getState<StateInt*>( "block:row" )->setValue( 0 );
 			entity->getParent()->getForm()->removeFromLSpace( "block:current" );
 			entity->getParent()->getChild( "entity:group" )->invokeAction( "action:nextBlock" );
 		}
