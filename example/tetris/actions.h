@@ -19,18 +19,19 @@ const int BLOCK_WIDTH = 4, BLOCK_HEIGHT = 40, FIELD_SIZE = 12;
 const int LIMIT_TOP = 0, LIMIT_RIGHT = 1, LIMIT_BOTTOM = 2, LIMIT_LEFT = 3;
 
 bool
-collisionDetected( GameEntity *block, GameEntity *field, int row, StateIntVector *limit )
+collisionDetected( GameEntity *block, GameEntity *field )
 {
 	bool retValue = false;
 	int rows = field->getState<StateInt*>( "state:rows" )->getValue();
 	int fields = FIELD_SIZE * rows;
 
-	if ( ( row + 1 + limit->getValue( LIMIT_BOTTOM ) ) >= ( rows - 1 ) )
-		retValue = true;
-
 	auto fieldMatrix = field->getForm()->getState<StateIntVector*>( "state:field" )->getValues();
 	for ( int i = 0; i < fields; ++i ) {
 		if ( fieldMatrix[ i ] == IN_MOTION && ( ( i + FIELD_SIZE ) < fields ) && ( fieldMatrix[ i + FIELD_SIZE ] == SET ) ) {
+			retValue = true;
+		}
+
+		if ( fieldMatrix[ i ] == IN_MOTION && ( i + FIELD_SIZE ) > fields ) {
 			retValue = true;
 		}
 	}
@@ -116,14 +117,19 @@ DoActionFunction moveRight([]( Action *action, GameEntity *entity ) {
 	if ( gamePaused && gamePaused->getValue() ) return; // do nothing on pause
 
 	GameEntity *field = entity->getChild( "entity:field" );
-	Form *block = entity->getForm()->getLSpace()->getEntity( "block:current" )->getForm();
+	auto fieldMatrix = field->getForm()->getState<StateIntVector*>( "state:field" )->getValues();
 
-	stringstream sLimit;
-	sLimit << "state:limit" << block->getState<StateInt*>("state:currentMatrix")->getValue();
-	auto limit = block->getState<StateIntVector*>( sLimit.str() );
+	bool v = false;
+	for ( int i = 0; i < ( FIELD_SIZE * 18 ); ++i ) {
+		if ( v ) break;
+		if ( fieldMatrix[ i ] == IN_MOTION ) {
+			if ( ( i % FIELD_SIZE ) == ( FIELD_SIZE - 1 ) )
+				v = true;
+		}
+	}
 
 	StateInt *column = field->getForm()->getState<StateInt*>( "block:column" );
-	if ( column->getValue() + limit->getValue( LIMIT_RIGHT ) + 1 < FIELD_SIZE ) {
+	if ( !v ) {
 		setBlockFields( field, CLEAN );
 		column->setValue( column->getValue() + 1 );
 		setBlockFields( field, IN_MOTION );
@@ -136,14 +142,19 @@ DoActionFunction moveLeft([]( Action *action, GameEntity *entity ) {
 	if ( gamePaused && gamePaused->getValue() ) return; // do nothing on pause
 
 	GameEntity *field = entity->getChild( "entity:field" );
-	Form *block = entity->getForm()->getLSpace()->getEntity( "block:current" )->getForm();
+	auto fieldMatrix = field->getForm()->getState<StateIntVector*>( "state:field" )->getValues();
 
-	stringstream sLimit;
-	sLimit << "state:limit" << block->getState<StateInt*>("state:currentMatrix")->getValue();
-	auto limit = block->getState<StateIntVector*>( sLimit.str() );
+	bool v = false;
+	for ( int i = 0; i < ( FIELD_SIZE * 18 ); ++i ) {
+		if ( v ) break;
+		if ( fieldMatrix[ i ] == IN_MOTION ) {
+			if ( ( i % FIELD_SIZE ) == 0 )
+				v = true;
+		}
+	}
 
 	StateInt *column = field->getForm()->getState<StateInt*>( "block:column" );
-	if ( column->getValue() - limit->getValue( LIMIT_LEFT ) > 0 ) {
+	if ( !v ) {
 		setBlockFields( field, CLEAN );
 		column->setValue( column->getValue() - 1 );
 		setBlockFields( field, IN_MOTION );
@@ -173,11 +184,7 @@ DoActionFunction recalc([]( Action *action, GameEntity *entity ) {
 		int currMatrix = block->getForm()->getState<StateInt*>( "state:currentMatrix" )->getValue();
 		int rows = entity->getState<StateInt*>( "state:rows" )->getValue();
 
-		stringstream sLimit;
-		sLimit << "state:limit" << currMatrix;
-		auto limit = block->getForm()->getState<StateIntVector*>( sLimit.str() );
-
-		if ( collisionDetected( block, entity, row, limit ) ) {
+		if ( collisionDetected( block, entity ) ) {
 			setBlockFields( entity, SET );
 			step->setValue( 0 );
 
