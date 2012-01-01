@@ -73,7 +73,6 @@ void Game::init()
 	field->getForm()->addState( new StateInt( "state:step", 0 ) );
 	field->getForm()->addState( new StateInt( "block:column", 5 ) );
 	field->getForm()->addState( new StateInt( "block:row", 0 ) );
-	field->getForm()->addState( new StateInt( "state:currentLine", 0 ) );
 	field->getForm()->setPosition( { 240, 20, 0 } );
 	field->getForm()->setSize( { 480, 720 } );
 
