@@ -22,6 +22,7 @@ Game::Game( const string &id ) :
 	addAction( new ActionLambda( *this, "action:moveLeft", &moveLeft ) );
 	addAction( new ActionLambda( *this, "action:moveRight", &moveRight ) );
 	addAction( new ActionLambda( *this, "action:pause", &pauseGame ) );
+	addAction( new ActionLambda( *this, "action:gameOver", &gameOver ) );
 
 	addState( new StateBool( "state:keepRunning", true ) );
 	addState( new StateBool( "state:pause", false ) );

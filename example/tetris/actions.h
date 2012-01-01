@@ -79,6 +79,10 @@ DoActionFunction pauseGame([]( Action *action, GameEntity *entity ) {
 	);
 });
 
+DoActionFunction gameOver([]( Action *action, GameEntity *field ) {
+	field->dropAction( "action:recalculate" );
+});
+
 DoActionFunction nextBlock([]( Action *action, GameEntity *entity ) {
 	string blocks[] = { "block:i", "block:j", "block:z", "block:s", "block:l", "block:t", "block:o" };
 
@@ -109,6 +113,10 @@ DoActionFunction nextBlock([]( Action *action, GameEntity *entity ) {
 	nextBlock->getForm()->setPosition( { 800, 40, 0 } );
 
 	setBlockFields( field, IN_MOTION );
+
+	if ( collisionDetected( block, field ) ) {
+		entity->getParent()->invokeAction( "action:gameOver", field );
+	}
 });
 
 DoActionFunction moveRight([]( Action *action, GameEntity *entity ) {
