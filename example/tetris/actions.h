@@ -123,7 +123,11 @@ DoActionFunction moveRight([]( Action *action, GameEntity *entity ) {
 	for ( int i = 0; i < ( FIELD_SIZE * 18 ); ++i ) {
 		if ( v ) break;
 		if ( fieldMatrix[ i ] == IN_MOTION ) {
+			// either the right field border is reached ...
 			if ( ( i % FIELD_SIZE ) == ( FIELD_SIZE - 1 ) )
+				v = true;
+			// ... or there are some set blocks in the way
+			if ( ( i + 1 ) % FIELD_SIZE > 0 && ( ( i + 1 ) <= ( FIELD_SIZE * 18 ) ) && fieldMatrix[ i + 1 ] == SET )
 				v = true;
 		}
 	}
@@ -148,7 +152,11 @@ DoActionFunction moveLeft([]( Action *action, GameEntity *entity ) {
 	for ( int i = 0; i < ( FIELD_SIZE * 18 ); ++i ) {
 		if ( v ) break;
 		if ( fieldMatrix[ i ] == IN_MOTION ) {
+			// either the left field border is reached ...
 			if ( ( i % FIELD_SIZE ) == 0 )
+				v = true;
+			// ... or there are some set blocks in the way
+			if ( ( ( i - 1 ) % FIELD_SIZE ) < ( FIELD_SIZE - 1 ) && ( ( i - 1 ) >= 0 ) && fieldMatrix[ i - 1 ] == SET )
 				v = true;
 		}
 	}
