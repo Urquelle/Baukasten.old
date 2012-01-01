@@ -145,10 +145,10 @@ void Game::init()
 		0, 0, 0, 0
 	}));
 	blockZ->getForm()->addState( new StateIntVector( "state:matrix2", {
-		0, 0, 0, 0,
 		0, 0, 1, 0,
 		0, 1, 1, 0,
-		0, 1, 0, 0
+		0, 1, 0, 0,
+		0, 0, 0, 0
 	}));
 	blockZ->getForm()->addState( new StateIntVector( "state:matrix3", {
 		0, 0, 0, 0,
@@ -157,10 +157,10 @@ void Game::init()
 		0, 0, 0, 0
 	}));
 	blockZ->getForm()->addState( new StateIntVector( "state:matrix4", {
-		0, 0, 0, 0,
 		0, 0, 1, 0,
 		0, 1, 1, 0,
-		0, 1, 0, 0
+		0, 1, 0, 0,
+		0, 0, 0, 0
 	}));
 	blockZ->getForm()->addState( new StateIntVector( "state:matrix",
 		blockZ->getForm()->getState<StateIntVector*>( "state:matrix1" )->getValues()
@@ -176,10 +176,10 @@ void Game::init()
 		0, 0, 0, 0
 	}));
 	blockS->getForm()->addState( new StateIntVector( "state:matrix2", {
-		0, 0, 0, 0,
 		0, 1, 0, 0,
 		0, 1, 1, 0,
-		0, 0, 1, 0
+		0, 0, 1, 0,
+		0, 0, 0, 0
 	}));
 	blockS->getForm()->addState( new StateIntVector( "state:matrix3", {
 		0, 0, 0, 0,
@@ -188,10 +188,10 @@ void Game::init()
 		0, 0, 0, 0
 	}));
 	blockS->getForm()->addState( new StateIntVector( "state:matrix4", {
-		0, 0, 0, 0,
 		0, 1, 0, 0,
 		0, 1, 1, 0,
-		0, 0, 1, 0
+		0, 0, 1, 0,
+		0, 0, 0, 0
 	}));
 	blockS->getForm()->addState( new StateIntVector( "state:matrix",
 		blockS->getForm()->getState<StateIntVector*>( "state:matrix1" )->getValues()
@@ -207,10 +207,10 @@ void Game::init()
 		0, 0, 0, 0
 	}));
 	blockT->getForm()->addState( new StateIntVector( "state:matrix2", {
-		0, 0, 0, 0,
 		0, 1, 0, 0,
 		0, 1, 1, 0,
-		0, 1, 0, 0
+		0, 1, 0, 0,
+		0, 0, 0, 0
 	}));
 	blockT->getForm()->addState( new StateIntVector( "state:matrix3", {
 		0, 0, 0, 0,
@@ -219,10 +219,10 @@ void Game::init()
 		0, 0, 0, 0
 	}));
 	blockT->getForm()->addState( new StateIntVector( "state:matrix4", {
-		0, 0, 0, 0,
 		0, 0, 1, 0,
 		0, 1, 1, 0,
-		0, 0, 1, 0
+		0, 0, 1, 0,
+		0, 0, 0, 0
 	}));
 	blockT->getForm()->addState( new StateIntVector( "state:matrix",
 		blockT->getForm()->getState<StateIntVector*>( "state:matrix1" )->getValues()
@@ -232,10 +232,10 @@ void Game::init()
 	blockL->setForm( new BlockForm( "form:l", mGraphics ) );
 	blockL->getForm()->addState( new StateInt( "state:currentMatrix", 1 ) );
 	blockL->getForm()->addState( new StateIntVector( "state:matrix1", {
-		0, 0, 0, 0,
 		0, 1, 0, 0,
 		0, 1, 0, 0,
-		0, 1, 1, 0
+		0, 1, 1, 0,
+		0, 0, 0, 0
 	}));
 	blockL->getForm()->addState( new StateIntVector( "state:matrix2", {
 		0, 0, 0, 0,
@@ -244,10 +244,10 @@ void Game::init()
 		0, 0, 0, 0
 	}));
 	blockL->getForm()->addState( new StateIntVector( "state:matrix3", {
-		0, 0, 0, 0,
 		0, 1, 1, 0,
 		0, 0, 1, 0,
-		0, 0, 1, 0
+		0, 0, 1, 0,
+		0, 0, 0, 0
 	}));
 	blockL->getForm()->addState( new StateIntVector( "state:matrix4", {
 		0, 0, 0, 0,
@@ -263,10 +263,10 @@ void Game::init()
 	blockJ->setForm( new BlockForm( "form:j", mGraphics ) );
 	blockJ->getForm()->addState( new StateInt( "state:currentMatrix", 1 ) );
 	blockJ->getForm()->addState( new StateIntVector( "state:matrix1", {
-		0, 0, 0, 0,
 		0, 0, 1, 0,
 		0, 0, 1, 0,
-		0, 1, 1, 0
+		0, 1, 1, 0,
+		0, 0, 0, 0
 	}));
 	blockJ->getForm()->addState( new StateIntVector( "state:matrix2", {
 		0, 0, 0, 0,
@@ -275,10 +275,10 @@ void Game::init()
 		0, 0, 0, 0
 	}));
 	blockJ->getForm()->addState( new StateIntVector( "state:matrix3", {
-		0, 0, 0, 0,
 		0, 1, 1, 0,
 		0, 1, 0, 0,
-		0, 1, 0, 0
+		0, 1, 0, 0,
+		0, 0, 0, 0
 	}));
 	blockJ->getForm()->addState( new StateIntVector( "state:matrix4", {
 		0, 0, 0, 0,
@@ -302,8 +302,8 @@ void Game::init()
 	blockI->getForm()->addState( new StateIntVector( "state:matrix2", {
 		0, 0, 0, 0,
 		0, 0, 0, 0,
-		1, 1, 1, 1,
-		0, 0, 0, 0
+		0, 0, 0, 0,
+		1, 1, 1, 1
 	}));
 	blockI->getForm()->addState( new StateIntVector( "state:matrix3", {
 		0, 1, 0, 0,
@@ -314,8 +314,8 @@ void Game::init()
 	blockI->getForm()->addState( new StateIntVector( "state:matrix4", {
 		0, 0, 0, 0,
 		0, 0, 0, 0,
-		1, 1, 1, 1,
-		0, 0, 0, 0
+		0, 0, 0, 0,
+		1, 1, 1, 1
 	}));
 	blockI->getForm()->addState( new StateIntVector( "state:matrix",
 		blockI->getForm()->getState<StateIntVector*>( "state:matrix1" )->getValues()
