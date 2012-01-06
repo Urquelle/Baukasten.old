@@ -31,7 +31,7 @@ collisionDetected( GameEntity *block, GameEntity *field )
 			retValue = true;
 		}
 
-		if ( fieldMatrix[ i ] == IN_MOTION && ( i + FIELD_SIZE ) > fields ) {
+		if ( fieldMatrix[ i ] == IN_MOTION && ( i + FIELD_SIZE ) > ( fields - 1 ) ) {
 			retValue = true;
 		}
 	}
