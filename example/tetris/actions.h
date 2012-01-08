@@ -177,35 +177,34 @@ DoActionFunction moveLeft([]( Action *action, GameEntity *entity ) {
 	}
 });
 
-DoActionFunction recalc([]( Action *action, GameEntity *entity ) {
+DoActionFunction recalc([]( Action *action, GameEntity *field ) {
 
-	auto gamePaused = entity->getParent()->getState<StateBool*>( "state:pause" );
+	auto gamePaused = field->getParent()->getState<StateBool*>( "state:pause" );
 	if ( gamePaused && gamePaused->getValue() ) return; // do nothing on pause
 
-	GameEntity *block = entity->getParent()->getForm()->getLSpace()->getEntity( "block:current" );
+	GameEntity *block = field->getParent()->getForm()->getLSpace()->getEntity( "block:current" );
 
-	StateInt *step = entity->getForm()->getState<StateInt*>( "state:step" );
+	StateInt *step = field->getForm()->getState<StateInt*>( "state:step" );
 	step->setValue( step->getValue() + 1 );
 
-	setBlockFields( entity, CLEAN );
+	setBlockFields( field, CLEAN );
 	float row = step->getValue() / BLOCK_HEIGHT;
 	row += ( step->getValue() % BLOCK_HEIGHT == 0 ) ? 0 : 1;
-	entity->getForm()->getState<StateInt*>( "block:row" )->setValue( row );
-	setBlockFields( entity, IN_MOTION );
+	field->getForm()->getState<StateInt*>( "block:row" )->setValue( row );
+	setBlockFields( field, IN_MOTION );
 
 	if ( block ) {
 		t_pos pos = block->getForm()->getPosition();
 
 		int currMatrix = block->getForm()->getState<StateInt*>( "state:currentMatrix" )->getValue();
-		int rows = entity->getState<StateInt*>( "state:rows" )->getValue();
+		int rows = field->getState<StateInt*>( "state:rows" )->getValue();
 
-		if ( collisionDetected( block, entity ) ) {
-			setBlockFields( entity, SET );
+			setBlockFields( field, SET );
 			step->setValue( 0 );
 
-			entity->getForm()->getState<StateInt*>( "block:row" )->setValue( 0 );
-			entity->getParent()->getForm()->removeFromLSpace( "block:current" );
-			entity->getParent()->getChild( "entity:group" )->invokeAction( "action:nextBlock" );
+			field->getForm()->getState<StateInt*>( "block:row" )->setValue( 0 );
+			field->getParent()->getForm()->removeFromLSpace( "block:current" );
+			field->getParent()->getChild( "entity:group" )->invokeAction( "action:nextBlock" );
 		}
 	}
 });
