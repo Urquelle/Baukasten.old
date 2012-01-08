@@ -15,7 +15,7 @@
 
 using namespace Baukasten;
 
-const int BLOCK_WIDTH = 4, BLOCK_HEIGHT = 40, FIELD_SIZE = 12;
+const int BLOCK_WIDTH = 4, BLOCK_HEIGHT = 40, FIELD_SIZE = 12, ROW_COUNT = 18;
 const int LIMIT_TOP = 0, LIMIT_RIGHT = 1, LIMIT_BOTTOM = 2, LIMIT_LEFT = 3;
 
 bool
@@ -128,14 +128,14 @@ DoActionFunction moveRight([]( Action *action, GameEntity *entity ) {
 	auto fieldMatrix = field->getForm()->getState<StateIntVector*>( "state:field" )->getValues();
 
 	bool v = false;
-	for ( int i = 0; i < ( FIELD_SIZE * 18 ); ++i ) {
+	for ( int i = 0; i < ( FIELD_SIZE * ROW_COUNT ); ++i ) {
 		if ( v ) break;
 		if ( fieldMatrix[ i ] == IN_MOTION ) {
 			// either the right field border is reached ...
 			if ( ( i % FIELD_SIZE ) == ( FIELD_SIZE - 1 ) )
 				v = true;
 			// ... or there are some set blocks in the way
-			if ( ( i + 1 ) % FIELD_SIZE > 0 && ( ( i + 1 ) <= ( FIELD_SIZE * 18 ) ) && fieldMatrix[ i + 1 ] == SET )
+			if ( ( i + 1 ) % FIELD_SIZE > 0 && ( ( i + 1 ) <= ( FIELD_SIZE * ROW_COUNT ) ) && fieldMatrix[ i + 1 ] == SET )
 				v = true;
 		}
 	}
@@ -157,7 +157,7 @@ DoActionFunction moveLeft([]( Action *action, GameEntity *entity ) {
 	auto fieldMatrix = field->getForm()->getState<StateIntVector*>( "state:field" )->getValues();
 
 	bool v = false;
-	for ( int i = 0; i < ( FIELD_SIZE * 18 ); ++i ) {
+	for ( int i = 0; i < ( FIELD_SIZE * ROW_COUNT ); ++i ) {
 		if ( v ) break;
 		if ( fieldMatrix[ i ] == IN_MOTION ) {
 			// either the left field border is reached ...
