@@ -26,6 +26,7 @@ Game::Game( const string &id ) :
 
 	addState( new StateBool( "state:keepRunning", true ) );
 	addState( new StateBool( "state:pause", false ) );
+	addState( new StateInt( "state:points", 0 ) );
 
 	setForm( new Form( "form:main" ) );
 }
