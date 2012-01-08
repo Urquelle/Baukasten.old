@@ -199,6 +199,9 @@ DoActionFunction recalc([]( Action *action, GameEntity *field ) {
 		int currMatrix = block->getForm()->getState<StateInt*>( "state:currentMatrix" )->getValue();
 		int rows = field->getState<StateInt*>( "state:rows" )->getValue();
 
+		if ( collisionDetected( block, field ) ) {
+			field->invokeAction( "action:clearCompleteRows" );
+
 			setBlockFields( field, SET );
 			step->setValue( 0 );
 
@@ -206,6 +209,67 @@ DoActionFunction recalc([]( Action *action, GameEntity *field ) {
 			field->getParent()->getForm()->removeFromLSpace( "block:current" );
 			field->getParent()->getChild( "entity:group" )->invokeAction( "action:nextBlock" );
 		}
+	}
+});
+
+DoActionFunction clearCompleteRows([]( Action *action, GameEntity *entity ) {
+	GameEntity *field = action->getSource();
+	auto fieldMatrix = field->getForm()->getState<StateIntVector*>( "state:field" )->getValues();
+
+	int setBlocksCount = 0;
+	int points = 0;
+	int currRow = ROW_COUNT - 1, prevRow = ROW_COUNT - 1;
+	vector<int> completeRows;
+	for ( int i = ( FIELD_SIZE * ROW_COUNT ) - 1; i >= 0; --i ) {
+		currRow = (int)( i / FIELD_SIZE );
+
+		// if still in the same row and this block is set
+		if ( currRow == prevRow && fieldMatrix[ i ] == SET ) {
+			setBlocksCount++;
+
+		// if the next row's reached -- remember we go up the field, from 17 down to 0 ...
+		} else if( currRow < prevRow ) {
+			// ... and the row was complete
+			if ( setBlocksCount == FIELD_SIZE ) {
+				completeRows.push_back( prevRow );
+
+			// ... else collect the points
+			} else if ( completeRows.size() > 0 ) {
+				if ( completeRows.size() == 4 )
+					points = 1000;
+				else
+					points = completeRows.size() * 50;
+
+				// add new points
+				field->getParent()->getState<StateInt*>( "state:points" )->setValue(
+					field->getParent()->getState<StateInt*>( "state:points" )->getValue() + points
+				);
+
+				// clear the rows
+				int shiftBy = FIELD_SIZE * ( completeRows[0] - completeRows[completeRows.size() - 1] + 1 );
+				int shiftTo = completeRows[0] * FIELD_SIZE + FIELD_SIZE - 1;
+				int shiftFrom = ( completeRows[ completeRows.size() - 1 ] - 1 ) * FIELD_SIZE + FIELD_SIZE - 1;
+
+				BK_DEBUG( "start shifting from: " << shiftFrom << " to: " << shiftTo << " shiftBy: " << shiftBy );
+				for( ; shiftFrom >= 0; --shiftTo, --shiftFrom ) {
+					if( fieldMatrix[ shiftTo ] != IN_MOTION && fieldMatrix[ shiftFrom ] != IN_MOTION ) {
+						BK_DEBUG( "shift " << fieldMatrix[ shiftFrom ] << " from " << shiftFrom << " to " << shiftTo );
+						fieldMatrix[ shiftTo ] = fieldMatrix[ shiftFrom ];
+					}
+				}
+
+				// set matrix
+				field->getForm()->getState<StateIntVector*>( "state:field" )->setValues( fieldMatrix );
+
+				completeRows.clear();
+			}
+
+			setBlocksCount = 0;
+
+			if ( fieldMatrix[ i ] == SET )
+				setBlocksCount++;
+		}
+		prevRow = currRow;
 	}
 });
 
