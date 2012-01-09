@@ -250,10 +250,8 @@ DoActionFunction clearCompleteRows([]( Action *action, GameEntity *entity ) {
 				int shiftTo = completeRows[0] * FIELD_SIZE + FIELD_SIZE - 1;
 				int shiftFrom = ( completeRows[ completeRows.size() - 1 ] - 1 ) * FIELD_SIZE + FIELD_SIZE - 1;
 
-				BK_DEBUG( "start shifting from: " << shiftFrom << " to: " << shiftTo << " shiftBy: " << shiftBy );
 				for( ; shiftFrom >= 0; --shiftTo, --shiftFrom ) {
 					if( fieldMatrix[ shiftTo ] != IN_MOTION && fieldMatrix[ shiftFrom ] != IN_MOTION ) {
-						BK_DEBUG( "shift " << fieldMatrix[ shiftFrom ] << " from " << shiftFrom << " to " << shiftTo );
 						fieldMatrix[ shiftTo ] = fieldMatrix[ shiftFrom ];
 					}
 				}
