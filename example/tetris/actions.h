@@ -11,7 +11,6 @@
 
 #include <cstdlib>
 #include <ctime>
-#include <sstream>
 
 using namespace Baukasten;
 
