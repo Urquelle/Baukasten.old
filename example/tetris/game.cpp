@@ -4,6 +4,7 @@
 #include "field_form.h"
 #include "block_form.h"
 #include "form2d.h"
+#include "score_form.h"
 
 #include <lua/action_lua.h>
 #include <core_services.h>
@@ -26,7 +27,6 @@ Game::Game( const string &id ) :
 
 	addState( new StateBool( "state:keepRunning", true ) );
 	addState( new StateBool( "state:pause", false ) );
-	addState( new StateInt( "state:points", 0 ) );
 
 	setForm( new Form( "form:main" ) );
 }
@@ -337,6 +337,19 @@ void Game::init()
 	addChild( blockGroup );
 	blockGroup->invokeAction( "action:nextBlock" );
 	getForm()->addToLSpace( blockGroup );
+
+	// create and add the score window object
+	GameEntity *score = new GameEntity( "entity:score" );
+	score->addState( new StateInt( "state:score", 0 ) );
+	score->addState( new StateInt( "state:linesCleared", 0 ) );
+	score->addAction( new ActionLambda( *score, "action:collectPoints", &collectPoints ) );
+	score->setForm( new ScoreForm( "form:score", mGraphics ) );
+	score->getForm()->addState( new StateInt( "state:score", 0 ) );
+	score->getForm()->setPosition( { 800, 300, 0 } );
+
+	addChild( score );
+	getForm()->addToLSpace( score );
+	getForm()->addToVSpace( score->getForm() );
 }
 
 void Game::run()

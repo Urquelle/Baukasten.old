@@ -215,6 +215,7 @@ DoActionFunction recalc([]( Action *action, GameEntity *field ) {
 DoActionFunction clearCompleteRows([]( Action *action, GameEntity *entity ) {
 	GameEntity *field = action->getSource();
 	auto fieldMatrix = field->getForm()->getState<StateIntVector*>( "state:field" )->getValues();
+	auto score = field->getParent()->getChild( "entity:score" );
 
 	int setBlocksCount = 0;
 	int points = 0;
@@ -235,15 +236,9 @@ DoActionFunction clearCompleteRows([]( Action *action, GameEntity *entity ) {
 
 			// ... else collect the points
 			} else if ( completeRows.size() > 0 ) {
-				if ( completeRows.size() == 4 )
-					points = 1000;
-				else
-					points = completeRows.size() * 50;
-
 				// add new points
-				field->getParent()->getState<StateInt*>( "state:points" )->setValue(
-					field->getParent()->getState<StateInt*>( "state:points" )->getValue() + points
-				);
+				score->getState<StateInt*>( "state:linesCleared" )->setValue( completeRows.size() );
+				score->invokeAction( "action:collectPoints" );
 
 				// clear the rows
 				int shiftBy = FIELD_SIZE * ( completeRows[0] - completeRows[completeRows.size() - 1] + 1 );
@@ -273,6 +268,21 @@ DoActionFunction clearCompleteRows([]( Action *action, GameEntity *entity ) {
 
 DoneFunction recalcDone([]( const Action *action ) {
 	return false;
+});
+
+DoActionFunction collectPoints([]( Action *action, GameEntity *entity ) {
+	auto score = action->getSource()->getState<StateInt*>( "state:score" );
+	auto lines = action->getSource()->getState<StateInt*>( "state:linesCleared" );
+	int points = 0;
+
+	if ( lines->getValue() == 4 )
+		points = 1000;
+	else
+		points = lines->getValue() * 50;
+
+	lines->setValue( 0 );
+	score->setValue( score->getValue() + points );
+	action->getSource()->getForm()->getState<StateInt*>( "state:score" )->setValue( score->getValue() );
 });
 
 #endif /* end of include guard: ACTIONS_J8BEDW58 */
