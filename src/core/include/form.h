@@ -12,11 +12,12 @@
 namespace Baukasten {
 	class LogicalSpace;
 	class VirtualSpace;
+	class IGraphics;
 
 	class BAUKASTEN_EXPORT Form : public Drawable,
 	public EntityManager, public StateManager {
 	public:
-		Form( const std::string& );
+		Form( const std::string&, IGraphics *graphics = 0 );
 		virtual ~Form();
 
 		void addToLSpace( GameEntity* );
@@ -32,8 +33,11 @@ namespace Baukasten {
 		virtual void render();
 
 	protected:
+		IGraphics *getGraphics() const;
+
 		shared_ptr<LogicalSpace> mLSpace;
 		shared_ptr<VirtualSpace> mVSpace;
+		IGraphics *mGraphics;
 	};
 }
 

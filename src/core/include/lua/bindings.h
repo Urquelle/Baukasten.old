@@ -11,6 +11,7 @@
 #include "form.h"
 #include "game_entity.h"
 #include "generic_state.h"
+#include "igraphics.h"
 #include "logical_space.h"
 #include "state.h"
 #include "virtual_space.h"
@@ -221,7 +222,7 @@ void wrapClasses()
 	// register Form class
 	SLB::Class<Form>("Form")
 		.comment("Form class")
-		.constructor<const std::string&>()
+		.constructor<const std::string&, IGraphics*>()
 		.inherits<Entity>()
 		.inherits<Drawable>()
 		.inherits<StateManager>()

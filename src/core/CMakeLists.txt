@@ -5,6 +5,7 @@ set (
     core/src/action.cpp
 	core/src/action_lambda.cpp
 	core/src/action_manager.cpp
+	core/src/colour.cpp
 	core/src/core_services.cpp
     core/src/drawable.cpp
     core/src/entity.cpp

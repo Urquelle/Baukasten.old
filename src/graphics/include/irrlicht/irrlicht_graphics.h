@@ -5,6 +5,8 @@
 
 #include "igraphics.h"
 
+#include "colour.h"
+
 namespace irr {
 	class IrrlichtDevice;
 
@@ -37,6 +39,12 @@ namespace Baukasten {
 		int init( CoreServices* );
 		void render( Form* );
 		void shutDown();
+
+		void drawImage( const string&, const t_size&, const t_pos& );
+		void drawLine( const t_pos&, const t_pos&, const Colour& );
+		void drawRect( const t_size&, const t_pos&, const Colour& );
+		void drawText( const wchar_t*, const t_pos&, const Colour& );
+
 		void setWindowCaption( const std::wstring& );
 
 		IrrlichtDevice* getDevice() const;

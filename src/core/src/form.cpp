@@ -10,10 +10,11 @@
 using namespace Baukasten;
 using namespace std;
 
-Form::Form( const std::string &id ) :
+Form::Form( const std::string &id, IGraphics *graphics ) :
 	Drawable( id ),
 	mLSpace( new LogicalSpace() ),
-	mVSpace( new VirtualSpace() )
+	mVSpace( new VirtualSpace() ),
+	mGraphics( graphics )
 {
 }
 
@@ -82,5 +83,11 @@ Form::render()
 	for_each( entities.begin(), entities.end(), []( Form* f ) {
 		f->render();
 	});
+}
+
+IGraphics*
+Form::getGraphics() const
+{
+	return mGraphics;
 }
 
