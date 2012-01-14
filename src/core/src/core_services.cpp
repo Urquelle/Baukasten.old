@@ -1,7 +1,8 @@
 #include "core_services.h"
 
-#include "iinput.h"
+#include "iaudio.h"
 #include "igraphics.h"
+#include "iinput.h"
 
 using namespace Baukasten;
 
@@ -16,6 +17,7 @@ CoreServices::instance()
 }
 
 CoreServices::CoreServices() :
+	mAudio( AudioInterface::instance() ),
 	mGraphics( GraphicsInterface::instance() ),
 	mInput( InputInterface::instance() )
 {
@@ -26,10 +28,26 @@ CoreServices::~CoreServices()
 }
 
 void
-CoreServices::init()
+CoreServices::init( int argc, char* argv[] )
 {
+	mArgc = argc;
+	mArgv = argv;
+
+	mAudio->init( this );
 	mGraphics->init( this );
 	mInput->init( this );
+}
+
+IAudio*
+CoreServices::getAudioService() const
+{
+	return mAudio;
+}
+
+IInput*
+CoreServices::getInputService() const
+{
+	return mInput;
 }
 
 IGraphics*
@@ -38,9 +56,15 @@ CoreServices::getVideoService() const
 	return mGraphics;
 }
 
-IInput*
-CoreServices::getInputService() const
+int
+CoreServices::getArgumentsCount()
 {
-	return mInput;
+	return mArgc;
+}
+
+char**
+CoreServices::getArguments() const
+{
+	return mArgv;
 }
 

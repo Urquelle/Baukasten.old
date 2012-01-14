@@ -4,6 +4,7 @@
 #include "global.h"
 
 namespace Baukasten {
+	class IAudio;
 	class IGraphics;
 	class IInput;
 
@@ -12,17 +13,26 @@ namespace Baukasten {
 		static CoreServices* instance();
 		virtual ~CoreServices();
 
-		void init();
-		IGraphics* getVideoService() const;
-		IInput* getInputService() const;
+		void init( int, char** );
+
+		IAudio*		getAudioService() const;
+		IInput*		getInputService() const;
+		IGraphics*	getVideoService() const;
+
+		int			getArgumentsCount();
+		char**		getArguments() const;
 
 	private:
 		CoreServices();
 
 		static CoreServices* mInstance;
 
+		IAudio*		mAudio;
 		IGraphics*	mGraphics;
 		IInput*		mInput;
+
+		int			mArgc;
+		char**		mArgv;
 	};
 } /* Baukasten */
 
