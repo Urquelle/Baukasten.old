@@ -1,13 +1,9 @@
 #ifndef BLOCK_FORM_21IENA7S
 #define BLOCK_FORM_21IENA7S
 
-#include <irrlicht/irrlicht_form.h>
+#include <form.h>
 
-namespace Baukasten {
-	class IGraphics;
-} /* Baukasten */
-
-class BlockForm : public Baukasten::IrrlichtForm {
+class BlockForm : public Baukasten::Form {
 public:
 	const int BLOCK_WIDTH;
 	const int BLOCK_HEIGHT;

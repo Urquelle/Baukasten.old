@@ -1,17 +1,13 @@
 #include "block_form.h"
 
+#include <colour.h>
 #include <generic_state.h>
-#include <irrlicht/irrlicht_graphics.h>
-
-#include <irrlicht/irrlicht.h>
-
-#include <algorithm>
-#include <sstream>
+#include <igraphics.h>
 
 using namespace Baukasten;
 
 BlockForm::BlockForm( const string &id, IGraphics *graphics ) :
-	IrrlichtForm( id, dynamic_cast<IrrlichtGraphics*>( graphics ) ),
+	Form( id, graphics ),
 	BLOCK_WIDTH( 40 ),
 	BLOCK_HEIGHT( 40 )
 {
@@ -24,28 +20,30 @@ BlockForm::~BlockForm()
 void
 BlockForm::render()
 {
-	irr::video::IVideoDriver *driver = getGraphics()->getDriver();
 	auto matrix = getState<StateIntVector*>( "state:matrix1" )->getValues();
-	irr::video::SColor cSet( 255, 0, 0, 255 );
-	irr::video::SColor cClean( 255, 255, 255, 255 );
+	Colour cSet( 255, 0, 0, 255 );
+	Colour cClean( 255, 255, 255, 255 );
 
 	int x = getPosition().getX();
 	int x_offset = 0;
 	int y = getPosition().getY();
 	int y_offset = 0;
+	t_pos pos;
+	t_size size({ (float)(BLOCK_WIDTH), (float)(BLOCK_HEIGHT) });
 
 	for ( int i = 0; i < 16; ++i ) {
 		x_offset = ( i % 4 ) * BLOCK_WIDTH;
 		y_offset = (int)( i / 4 ) * BLOCK_HEIGHT;
 
+		pos.setX((float)(x + x_offset));
+		pos.setY((float)(y + y_offset));
+
 		if ( matrix[ i ] == 1 ) {
-			driver->draw2DRectangle( cSet, irr::core::rect<s32>(
-				x + x_offset, y + y_offset, x + x_offset + BLOCK_WIDTH, y + y_offset + BLOCK_HEIGHT
-			) );
+			getGraphics()->drawRect( size, pos, cSet );
 		} else {
-			driver->draw2DRectangle( cClean, irr::core::rect<s32>(
-				x + x_offset, y + y_offset, x + x_offset + BLOCK_WIDTH, y + y_offset + BLOCK_HEIGHT
-			) );
+			getGraphics()->drawRect( size, pos, cClean );
 		}
 	}
+
+	Form::render();
 }

@@ -1,13 +1,11 @@
 #ifndef FIELD_FORM_D01BMD3U
 #define FIELD_FORM_D01BMD3U
 
-#include <irrlicht/irrlicht_form.h>
+#include <global.h>
 
-namespace Baukasten {
-	class IGraphics;
-} /* Baukasten */
+#include <form.h>
 
-class FieldForm : public Baukasten::IrrlichtForm {
+class FieldForm : public Baukasten::Form {
 public:
 	FieldForm( const string&, Baukasten::IGraphics* );
 	virtual ~FieldForm();

@@ -1,13 +1,11 @@
 #ifndef SCORE_FORM_H_MPIAXVNA
 #define SCORE_FORM_H_MPIAXVNA
 
-#include <irrlicht/irrlicht_form.h>
+#include <global.h>
 
-namespace Baukasten {
-	class IGraphics;
-} /* Baukasten */
+#include <form.h>
 
-class ScoreForm : public Baukasten::IrrlichtForm {
+class ScoreForm : public Baukasten::Form {
 public:
 	ScoreForm( const string&, Baukasten::IGraphics* );
 	virtual ~ScoreForm();

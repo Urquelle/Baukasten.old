@@ -1,23 +1,11 @@
 #ifndef WORLDMAP_FORM_OPYB550X
 #define WORLDMAP_FORM_OPYB550X
 
-#include <irrlicht/irrlicht_form.h>
+#include <global.h>
 
-namespace Baukasten {
-	class IGraphics;
-} /* Baukasten */
+#include <form.h>
 
-namespace irr {
-	namespace scene {
-		class ISceneManager;
-	} /* scene */
-	namespace video {
-		class IVideoDriver;
-		class ITexture;
-	} /* video */
-} /* irr */
-
-class Form2d : public Baukasten::IrrlichtForm {
+class Form2d : public Baukasten::Form {
 public:
 	Form2d( const std::string&, const std::string&, Baukasten::IGraphics* );
 	virtual ~Form2d();
@@ -25,9 +13,7 @@ public:
 	void render();
 
 private:
-	irr::video::ITexture* 		mBackground;
-	irr::video::IVideoDriver*	mDriver;
-	irr::scene::ISceneManager*	mSceneManager;
+	string mFileName;
 };
 
 #endif /* end of include guard: WORLDMAP_FORM_OPYB550X */

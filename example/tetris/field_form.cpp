@@ -3,9 +3,8 @@
 #include "constants.h"
 
 #include <generic_state.h>
-#include <irrlicht/irrlicht_graphics.h>
-
-#include <irrlicht/irrlicht.h>
+#include <igraphics.h>
+#include <colour.h>
 
 #include <algorithm>
 
@@ -15,7 +14,7 @@ const int FIELD_WIDTH = 12;
 const int BLOCK_WIDTH = 4;
 
 FieldForm::FieldForm( const string &id, IGraphics *graphics ) :
-	IrrlichtForm( id, dynamic_cast<IrrlichtGraphics*>( graphics ) )
+	Form( id, graphics )
 {
 }
 
@@ -25,9 +24,6 @@ FieldForm::~FieldForm()
 
 void FieldForm::render()
 {
-	irr::video::IVideoDriver *driver = getGraphics()->getDriver();
-	gui::IGUIFont* font = getGraphics()->getDevice()->getGUIEnvironment()->getBuiltInFont();
-
 	auto matrix = getState<StateIntVector*>( "state:field" )->getValues();
 	auto column = getState<StateInt*>( "block:column" )->getValue();
 	auto row = getState<StateInt*>( "block:row" )->getValue();
@@ -35,49 +31,37 @@ void FieldForm::render()
 	int i = 0;
 	int j = 0;
 	auto pos = getPosition();
-	t_size size = getSize();
+	t_size size({ 40.0, 40.0 });
 
-	irr::video::SColor cSet( 255, 0, 0, 255 );
-	irr::video::SColor cInMotion( 255, 125, 125, 255 );
-	irr::video::SColor cControl( 255, 125, 125, 125 );
+	Colour cSet( 255, 0, 0, 255 );
+	Colour cInMotion( 255, 125, 125, 255 );
+	Colour cControl( 255, 125, 125, 125 );
 
 	// draw current column
-	driver->draw2DRectangle(
-		cControl, irr::core::rect<s32>( 240 + column * 40, 10, 240 + column * 40 + 40, 15 )
-	);
+	getGraphics()->drawRect( { 40.0, 5.0 }, {(float)(240 + column * 40), 10.0, 0.0}, cControl );
 
 	// draw current row
-	driver->draw2DRectangle(
-		cControl, irr::core::rect<s32>( 230, 20 + row * 40, 235, 20 + 40 + row * 40 )
-	);
+	getGraphics()->drawRect( { 5.0, 40.0 }, {230.0, (float)(20 + row * 40), 0.0}, cControl );
 
-	for_each( matrix.begin(), matrix.end(), [&i, &j, &pos, driver, this, &cSet, &cInMotion, font]( int k ) {
-		int x = pos.getX() + 40 * ( i % FIELD_WIDTH );
-		int y = pos.getY() + 40 * j;
+	for_each( matrix.begin(), matrix.end(), [&i, &j, &pos, size, this, &cSet, &cInMotion]( int k ) {
+		float x = pos.getX() + 40 * ( i % FIELD_WIDTH );
+		float y = pos.getY() + 40 * j;
 
 		// draw already occupied blocks
 		if ( SET == k ) {
-			driver->draw2DRectangle(
-				cSet, irr::core::rect<s32>( x, y, x + 40, y + 40 )
-			);
+			this->getGraphics()->drawRect( size, {x, y, 0.0}, cSet );
 		}
 
+		// draw falling blocks
 		if ( IN_MOTION == k ) {
-			driver->draw2DRectangle(
-				cInMotion, irr::core::rect<s32>( x, y, x + 40, y + 40 )
-			);
+			this->getGraphics()->drawRect( size, {x, y, 0.0}, cInMotion );
 		}
 
-		// draw debug information
-		font->draw( ( k == SET ) ? L"1" : ( ( k == IN_MOTION ) ? L"2" : L"0" ),
-			core::rect<s32>( x , y, x + 40, y + 40 ),
-			video::SColor( 127, 127, 127, 255 )
-		);
 
 		++i;
 		j += ( ( i > 0 ) && ( i % FIELD_WIDTH ) == 0 ) ? 1 : 0;
 	});
 
-	IrrlichtForm::render();
+	Form::render();
 }
 

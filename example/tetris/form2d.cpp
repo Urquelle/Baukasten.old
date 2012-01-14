@@ -1,24 +1,13 @@
 #include "form2d.h"
 
-#include <irrlicht/irrlicht_graphics.h>
-
-#include <irrlicht/irrlicht.h>
+#include <igraphics.h>
 
 using namespace Baukasten;
 
-using namespace irr;
-using namespace core;
-using namespace scene;
-using namespace io;
-using namespace gui;
-using namespace video;
-
 Form2d::Form2d( const std::string &id, const std::string &fileName, IGraphics *graphics ) :
-	IrrlichtForm( id, dynamic_cast<IrrlichtGraphics*>( graphics ) ),
-	mSceneManager( getGraphics()->getSceneManager() ),
-	mDriver( getGraphics()->getDriver() )
+	Form( id, graphics ),
+	mFileName( fileName )
 {
-	mBackground = mDriver->getTexture( fileName.c_str() );
 }
 
 Form2d::~Form2d()
@@ -27,13 +16,7 @@ Form2d::~Form2d()
 
 void Form2d::render()
 {
-	mDriver->draw2DImage(
-		mBackground,
-		core::position2d<s32>( getPosition().getX(), getPosition().getY() ),
-		core::rect<s32>(0, 0, getSize().width, getSize().height),
-		0, video::SColor(255,255,255,255), true
-	);
-
-	IrrlichtForm::render();
+	getGraphics()->drawImage( mFileName, getSize(), getPosition() );
+	Form::render();
 }
 
