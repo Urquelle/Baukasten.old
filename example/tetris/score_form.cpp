@@ -19,8 +19,6 @@ ScoreForm::~ScoreForm()
 void
 ScoreForm::render()
 {
-	float x = getPosition().getX();
-	float y = getPosition().getY();
 	int score = getState<StateInt*>( "state:score" )->getValue();
 
 	std::wstringstream sScore;
@@ -29,6 +27,6 @@ ScoreForm::render()
 	Colour colour( 128, 0, 0, 255 );
 
 	// draw score
-	getGraphics()->drawText( sScore.str().c_str(), { x, y, 0.0 }, colour );
+	getGraphics()->drawText( sScore.str().c_str(), getPosition(), colour );
 }
 
