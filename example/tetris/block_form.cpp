@@ -44,6 +44,4 @@ BlockForm::render()
 			getGraphics()->drawRect( size, pos, cClean );
 		}
 	}
-
-	Form::render();
 }

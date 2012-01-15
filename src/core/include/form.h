@@ -30,6 +30,7 @@ namespace Baukasten {
 		void removeFromVSpace( const std::string& );
 		VirtualSpace* getVSpace() const;
 
+		virtual void draw();
 		virtual void render();
 
 	protected:

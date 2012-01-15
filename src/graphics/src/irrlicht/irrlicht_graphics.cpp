@@ -46,7 +46,7 @@ IrrlichtGraphics::render( Form *form )
 {
 	mDevice->run();
 	mDriver->beginScene(true, true, video::SColor(0, 0, 0, 0));
-	form->render();
+	form->draw();
 	mSceneManager->drawAll();
 	mGui->drawAll();
 	mDriver->endScene();

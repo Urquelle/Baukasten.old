@@ -17,6 +17,5 @@ Form2d::~Form2d()
 void Form2d::render()
 {
 	getGraphics()->drawImage( mFileName, getSize(), getPosition() );
-	Form::render();
 }
 

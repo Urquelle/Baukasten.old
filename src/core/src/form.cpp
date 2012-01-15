@@ -77,12 +77,18 @@ Form::getVSpace() const
 }
 
 void
-Form::render()
+Form::draw()
 {
 	auto entities = mVSpace->getEntities();
 	for_each( entities.begin(), entities.end(), []( Form* f ) {
 		f->render();
+		f->draw();
 	});
+}
+
+void
+Form::render()
+{
 }
 
 IGraphics*
