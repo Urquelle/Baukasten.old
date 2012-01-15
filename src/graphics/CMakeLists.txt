@@ -6,13 +6,3 @@ set (
 	graphics/src/irrlicht/irrlicht_graphics.cpp
 	graphics/src/irrlicht/irrlicht_form.cpp
 )
-
-if( WITH_OGRE )
-	set(
-		${graphics_SRCS}
-		${graphics_SRCS}
-		graphics/src/ogre/ogre_graphics.cpp
-		graphics/src/ogre/ogre_form.cpp
-	)
-endif()
-
