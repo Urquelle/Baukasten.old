@@ -19,6 +19,9 @@ using namespace Baukasten;
 
 Game::Game( const string &id, int argc, char **argv ) :
 	GameEntity( id ),
+	mAudio( 0 ),
+	mGraphics( 0 ),
+	mInput( 0 ),
 	mArgc( argc ),
 	mArgv( argv )
 {
