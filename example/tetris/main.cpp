@@ -1,8 +1,8 @@
 #include "game.h"
 
-int main(int argc, const char *argv[])
+int main(int argc, char *argv[])
 {
-	Game game( "Tetris" );
+	Game game( "Tetris", argc, argv );
 	game.start();
 	return 0;
 }

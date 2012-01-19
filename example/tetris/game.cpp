@@ -9,15 +9,18 @@
 #include <lua/action_lua.h>
 #include <core_services.h>
 #include <generic_state.h>
-#include <iinput.h>
+#include <iaudio.h>
 #include <igraphics.h>
+#include <iinput.h>
 #include <logical_space.h>
 #include <virtual_space.h>
 
 using namespace Baukasten;
 
-Game::Game( const string &id ) :
-	GameEntity( id )
+Game::Game( const string &id, int argc, char **argv ) :
+	GameEntity( id ),
+	mArgc( argc ),
+	mArgv( argv )
 {
 	addAction( new ActionLua( *this, "action:rotate", "scripts/rotate.lua" ) );
 	addAction( new ActionLambda( *this, "action:moveLeft", &moveLeft ) );
@@ -45,9 +48,14 @@ void Game::init()
 {
 	CoreServices* service = CoreServices::instance();
 
-	service->init();
+	service->init( mArgc, mArgv );
+
 	mInput = service->getInputService();
 	mGraphics = service->getVideoService();
+	mAudio = service->getAudioService();
+
+	mAudio->loadFile( "media/tetris_theme.wav", "audio:main" );
+	mAudio->play( "audio:main" );
 
 	mInput->onKeyDown().connect( sigc::mem_fun( this, &Game::onKeyDown ) );
 

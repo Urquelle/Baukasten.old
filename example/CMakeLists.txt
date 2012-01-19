@@ -1,5 +1,6 @@
 include_directories(
 	${Core_INCLUDE_DIR}
+	${Audio_INCLUDE_DIR}
 	${Graphics_INCLUDE_DIR}
 	${Input_INCLUDE_DIR}
 	"/usr/include/sigc++-2.0"

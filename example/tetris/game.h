@@ -7,11 +7,12 @@
 namespace Baukasten {
 	class IInput;
 	class IGraphics;
+	class IAudio;
 } /* Baukasten */
 
 class Game : public Baukasten::GameEntity {
 public:
-	Game ( const string& );
+	Game ( const string&, int, char** );
 	virtual ~Game();
 
 	void start();
@@ -23,8 +24,11 @@ protected:
 	void run();
 
 private:
-	Baukasten::IInput*		mInput;
+	Baukasten::IAudio*		mAudio;
 	Baukasten::IGraphics*	mGraphics;
+	Baukasten::IInput*		mInput;
+	int mArgc;
+	char** mArgv;
 };
 
 #endif /* end of include guard: GAME_QC1L8Y4Z */
