@@ -60,7 +60,7 @@ void Game::init()
 	mAudio = service->getAudioService();
 
 	mAudio->loadFile( "media/tetris_theme.wav", "audio:main" );
-	mAudio->play( "audio:main" );
+	mAudio->play( "audio:main", 0, 0, true );
 
 	mInput->onKeyDown().connect( sigc::mem_fun( this, &Game::onKeyDown ) );
 
