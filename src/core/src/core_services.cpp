@@ -38,6 +38,14 @@ CoreServices::init( int argc, char* argv[] )
 	mInput->init( this );
 }
 
+void
+CoreServices::shutdown()
+{
+	mAudio->shutdown();
+	mGraphics->shutdown();
+	mInput->shutdown();
+}
+
 IAudio*
 CoreServices::getAudioService() const
 {

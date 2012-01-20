@@ -12,6 +12,8 @@ namespace Baukasten {
 	public:
 		IAudio() : mInitialised( false ) {}
 		virtual int init( CoreServices* ) = 0;
+		virtual void shutdown() = 0;
+
 		virtual void loadFile( const std::string&, const std::string& ) = 0;
 
 		virtual void play( const std::string& ) = 0;
@@ -21,7 +23,7 @@ namespace Baukasten {
 		virtual void pause( const std::string& ) = 0;
 		virtual void stop( const std::string& ) = 0;
 
-	private:
+	protected:
 		bool mInitialised;
 	};
 } /* Baukasten */

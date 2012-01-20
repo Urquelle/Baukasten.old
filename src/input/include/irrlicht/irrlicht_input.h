@@ -21,7 +21,7 @@ namespace Baukasten {
 
 		bool init( CoreServices* );
 		void process() const;
-		void shutDown();
+		void shutdown();
 
 		void setDevice( irr::IrrlichtDevice* );
 

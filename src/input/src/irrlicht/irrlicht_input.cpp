@@ -243,7 +243,7 @@ IrrlichtInput::process() const
 }
 
 void
-IrrlichtInput::shutDown()
+IrrlichtInput::shutdown()
 {
 }
 

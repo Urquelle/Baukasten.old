@@ -14,6 +14,7 @@ namespace Baukasten {
 		virtual ~CoreServices();
 
 		void init( int, char** );
+		void shutdown();
 
 		IAudio*		getAudioService() const;
 		IInput*		getInputService() const;

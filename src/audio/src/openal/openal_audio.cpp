@@ -24,9 +24,6 @@ OpenALAudio::OpenALAudio()
 
 OpenALAudio::~OpenALAudio()
 {
-	alcMakeContextCurrent( NULL );
-	alcDestroyContext( mContext );
-	alcCloseDevice( mDevice );
 }
 
 int
@@ -47,13 +44,42 @@ OpenALAudio::init( CoreServices *services )
 
 	alcMakeContextCurrent( mContext );
 
+	mInitialised = true;
+
 	return 1;
+}
+
+void
+OpenALAudio::shutdown()
+{
+	alcMakeContextCurrent( NULL );
+	alcDestroyContext( mContext );
+	alcCloseDevice( mDevice );
+
+	alutExit();
+
+	OpenALData *data;
+	for( auto i = mBuffers.begin(); i != mBuffers.end(); ++i ) {
+		BK_DEBUG( "releasing OpenAL Data: " << i->first );
+		data = i->second;
+
+		alSourcei( data->mSource, AL_BUFFER, 0 );
+		alDeleteBuffers( 1, &(data->mBuffer) );
+		alDeleteSources( 1, &(data->mSource) );
+	}
+
+	mInitialised = false;
 }
 
 void
 OpenALAudio::loadFile( const string &filePath, const string &id )
 {
 	BK_ASSERT( mBuffers.count( id ) == 0, "id " << id << " must be unique in the collection!" );
+
+	if ( !mInitialised ) {
+		BK_DEBUG( "loadFile called with uninitialised OpenAL environment!" );
+		return;
+	}
 
 	ALuint buffer = alutCreateBufferFromFile( filePath.c_str() );
 	ALuint source;

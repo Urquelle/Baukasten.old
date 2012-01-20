@@ -14,6 +14,8 @@ namespace Baukasten {
 	public:
 		IGraphics() : mInitialised( false ) {}
 		virtual int init( CoreServices* ) = 0;
+		virtual void shutdown() {}
+
 		virtual void render( Form* ) = 0;
 		virtual void shutDown() = 0;
 

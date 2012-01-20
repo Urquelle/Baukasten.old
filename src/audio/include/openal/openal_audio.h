@@ -19,6 +19,8 @@ namespace Baukasten {
 		virtual ~OpenALAudio();
 
 		int init( CoreServices* );
+		void shutdown();
+
 		void loadFile( const string&, const string& );
 
 		void play( const string& );
