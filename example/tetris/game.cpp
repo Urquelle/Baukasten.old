@@ -39,6 +39,8 @@ Game::Game( const string &id, int argc, char **argv ) :
 
 Game::~Game()
 {
+	CoreServices* service = CoreServices::instance();
+	service->shutdown();
 }
 
 void Game::start()
