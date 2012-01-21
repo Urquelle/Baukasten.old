@@ -97,6 +97,21 @@ OpenALAudio::loadFile( const string &filePath, const string &id )
 }
 
 void
+OpenALAudio::freeResource( const string &id )
+{
+	OpenALData *data = mBuffers[ id ];
+
+	if ( !data )
+		return;
+
+	alSourcei( data->mSource, AL_BUFFER, 0 );
+	alDeleteBuffers( 1, &(data->mBuffer) );
+	alDeleteSources( 1, &(data->mSource) );
+
+	mBuffers.erase( id );
+}
+
+void
 OpenALAudio::play( const string &id )
 {
 	play( id, false );

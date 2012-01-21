@@ -15,6 +15,7 @@ namespace Baukasten {
 		virtual void shutdown() = 0;
 
 		virtual void loadFile( const std::string&, const std::string& ) = 0;
+		virtual void freeResource( const std::string& ) = 0;
 
 		virtual void play( const std::string& ) = 0;
 		virtual void play( const std::string&, bool ) = 0;

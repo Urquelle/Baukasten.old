@@ -22,6 +22,7 @@ namespace Baukasten {
 		void shutdown();
 
 		void loadFile( const string&, const string& );
+		void freeResource( const string& );
 
 		void play( const string& );
 		void play( const string&, bool );
