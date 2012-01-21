@@ -26,8 +26,6 @@ namespace Baukasten {
 	private:
 		CoreServices();
 
-		static CoreServices* mInstance;
-
 		IAudio*		mAudio;
 		IGraphics*	mGraphics;
 		IInput*		mInput;

@@ -1,19 +1,17 @@
 #include "core_services.h"
 
+#include "debug.h"
 #include "iaudio.h"
 #include "igraphics.h"
 #include "iinput.h"
 
 using namespace Baukasten;
 
-CoreServices* CoreServices::mInstance = 0;
-
 CoreServices*
 CoreServices::instance()
 {
-	if ( !mInstance )
-		mInstance = new CoreServices();
-	return mInstance;
+	static CoreServices instance;
+	return &instance;
 }
 
 CoreServices::CoreServices() :
@@ -25,6 +23,10 @@ CoreServices::CoreServices() :
 
 CoreServices::~CoreServices()
 {
+	BK_DEBUG( "destroy CoreServices" );
+	mAudio->shutdown();
+	mGraphics->shutdown();
+	mInput->shutdown();
 }
 
 void
