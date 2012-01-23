@@ -28,8 +28,8 @@ BlockForm::render()
 	int x_offset = 0;
 	int y = getPosition().getY();
 	int y_offset = 0;
-	t_pos pos;
-	t_size size({ (float)(BLOCK_WIDTH), (float)(BLOCK_HEIGHT) });
+	v3<float> pos;
+	v2<float> size({ (float)(BLOCK_WIDTH), (float)(BLOCK_HEIGHT) });
 
 	for ( int i = 0; i < 16; ++i ) {
 		x_offset = ( i % 4 ) * BLOCK_WIDTH;
