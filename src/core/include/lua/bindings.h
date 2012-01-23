@@ -258,19 +258,19 @@ void wrapClasses()
 		.set("getEntity", &VirtualSpace::getEntity)
 			.param("Entity id");
 
-	// register t_pos struct
-	SLB::Class<t_pos>("t_pos")
-		.comment("t_pos struct")
+	// register v3<float> struct
+	SLB::Class<v3<float>>("v3<float>")
+		.comment("v3<float> struct")
 		.constructor()
 		.constructor<float, float, float>()
-		.set("getX", &t_pos::getX)
-		.set("setX", &t_pos::setX)
+		.set("getX", &v3<float>::getX)
+		.set("setX", &v3<float>::setX)
 			.param("x value")
-		.set("getY", &t_pos::getY)
-		.set("setY", &t_pos::setY)
+		.set("getY", &v3<float>::getY)
+		.set("setY", &v3<float>::setY)
 			.param("y value")
-		.set("getZ", &t_pos::getZ)
-		.set("setZ", &t_pos::setZ)
+		.set("getZ", &v3<float>::getZ)
+		.set("setZ", &v3<float>::setZ)
 			.param("z value");
 }
 

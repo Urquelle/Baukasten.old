@@ -40,10 +40,10 @@ namespace Baukasten {
 		void render( Form* );
 		void shutDown();
 
-		void drawImage( const string&, const t_size&, const t_pos& );
-		void drawLine( const t_pos&, const t_pos&, const Colour& );
-		void drawRect( const t_size&, const t_pos&, const Colour& );
-		void drawText( const wchar_t*, const t_pos&, const Colour& );
+		void drawImage( const string&, const v2<float>&, const v3<float>& );
+		void drawLine( const v3<float>&, const v3<float>&, const Colour& );
+		void drawRect( const v2<float>&, const v3<float>&, const Colour& );
+		void drawText( const wchar_t*, const v3<float>&, const Colour& );
 
 		void setWindowCaption( const std::wstring& );
 

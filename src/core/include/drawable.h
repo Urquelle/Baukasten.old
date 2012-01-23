@@ -37,14 +37,14 @@ namespace Baukasten {
 		 * \param position a three point vector which represents
 		 * the position of the object in a 3d space.
 		 */
-		void setPosition( const t_pos );
+		void setPosition( const v3<float> );
 
 		/*! \brief getter method for position. */
-		const t_pos getPosition() const;
+		const v3<float> getPosition() const;
 
-		void setSize( const t_size );
+		void setSize( const v2<float> );
 
-		const t_size getSize() const;
+		const v2<float> getSize() const;
 
 		/*! \brief set the rotation around the x-axis.
 		 *
@@ -78,13 +78,13 @@ namespace Baukasten {
 
 	protected:
 		// position of the object
-		t_pos   mPosition;
+		v3<float>   mPosition;
 
 		// size of the object
-		t_size	mSize;
+		v2<float>	mSize;
 
 		// orientation the object is looking at
-		t_pos	mOrientation;
+		v3<float>	mOrientation;
 
 		// rotation around the x-axis
 		float   mPitch;

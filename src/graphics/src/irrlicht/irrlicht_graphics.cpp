@@ -59,19 +59,19 @@ IrrlichtGraphics::shutDown()
 }
 
 void
-IrrlichtGraphics::drawImage( const std::string &filePath, const t_size &size, const t_pos &pos )
+IrrlichtGraphics::drawImage( const std::string &filePath, const v2<float> &size, const v3<float> &pos )
 {
 	irr::video::ITexture* mBackground = mDriver->getTexture( filePath.c_str() );
 	mDriver->draw2DImage(
 		mBackground,
 		core::position2d<s32>( pos.getX(), pos.getY() ),
-		core::rect<s32>(0, 0, size.width, size.height),
+		core::rect<s32>( 0, 0, size.getX(), size.getY() ),
 		0, video::SColor(255,255,255,255), true
 	);
 }
 
 void
-IrrlichtGraphics::drawLine( const t_pos &from, const t_pos &to, const Colour &colour )
+IrrlichtGraphics::drawLine( const v3<float> &from, const v3<float> &to, const Colour &colour )
 {
 	irr::video::SColor iColour( colour.getR(), colour.getG(), colour.getB(), colour.getAlpha() );
 
@@ -83,17 +83,17 @@ IrrlichtGraphics::drawLine( const t_pos &from, const t_pos &to, const Colour &co
 }
 
 void
-IrrlichtGraphics::drawRect( const t_size &size, const t_pos &pos, const Colour &colour )
+IrrlichtGraphics::drawRect( const v2<float> &size, const v3<float> &pos, const Colour &colour )
 {
 	irr::video::SColor iColour( colour.getR(), colour.getG(), colour.getB(), colour.getAlpha() );
 
 	mDriver->draw2DRectangle( iColour, irr::core::rect<s32>(
-		pos.getX(), pos.getY(), pos.getX() + size.width, pos.getY() + size.height
+		pos.getX(), pos.getY(), pos.getX() + size.getX(), pos.getY() + size.getY()
 	) );
 }
 
 void
-IrrlichtGraphics::drawText( const wchar_t *text, const t_pos &pos, const Colour &colour )
+IrrlichtGraphics::drawText( const wchar_t *text, const v3<float> &pos, const Colour &colour )
 {
 	gui::IGUIFont* font = mGui->getBuiltInFont();
 

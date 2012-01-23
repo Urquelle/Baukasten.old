@@ -20,29 +20,36 @@ namespace Baukasten {
 
 	using namespace std;
 
-	typedef struct t_pos {
-		t_pos() : x(0), y(0), z(0) {}
-		t_pos( float _x, float _y, float _z ) :
-			x( _x ), y( _y ), z( _z ) {}
+	template<class T> class v2 {
+	public:
+		v2() {}
+		v2( T x, T y ) :
+			mX( x ), mY( y ) {}
 
-		float getX() const { return x; }
-		float getY() const { return y; }
-		float getZ() const { return z; }
-
-		void setX( float _x ) { x = _x; }
-		void setY( float _y ) { y = _y; }
-		void setZ( float _z ) { z = _z; }
+		T getX() const { return mX; }
+		T getY() const { return mY; }
 
 	private:
-		float x;
-		float y;
-		float z;
-	} t_pos;
+		T mX, mY;
+	};
 
-	typedef struct {
-		float width;
-		float height;
-	} t_size;
+	template<class T> class v3 {
+	public:
+		v3() {}
+		v3( T x, T y, T z ) :
+			mX( x ), mY( y ), mZ( z ) {}
+
+		T getX() const { return mX; }
+		T getY() const { return mY; }
+		T getZ() const { return mZ; }
+
+		void setX( T x ) { mX = x; }
+		void setY( T y ) { mY = y; }
+		void setZ( T z ) { mZ = z; }
+
+	private:
+		T mX, mY, mZ;
+	};
 
 	typedef map<string, shared_ptr<Entity>>	EntityMap;
 	typedef list<shared_ptr<Entity>>		EntityList;

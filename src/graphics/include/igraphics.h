@@ -19,10 +19,10 @@ namespace Baukasten {
 		virtual void render( Form* ) = 0;
 		virtual void shutDown() = 0;
 
-		virtual void drawImage( const string&, const t_size&, const t_pos& ) = 0;
-		virtual void drawLine( const t_pos&, const t_pos&, const Colour& ) = 0;
-		virtual void drawRect( const t_size&, const t_pos&, const Colour& ) = 0;
-		virtual void drawText( const wchar_t*, const t_pos&, const Colour& ) = 0;
+		virtual void drawImage( const string&, const v2<float>&, const v3<float>& ) = 0;
+		virtual void drawLine( const v3<float>&, const v3<float>&, const Colour& ) = 0;
+		virtual void drawRect( const v2<float>&, const v3<float>&, const Colour& ) = 0;
+		virtual void drawText( const wchar_t*, const v3<float>&, const Colour& ) = 0;
 
 		virtual void setWindowCaption( const std::wstring& ) = 0;
 
