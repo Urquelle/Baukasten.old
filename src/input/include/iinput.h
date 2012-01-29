@@ -10,6 +10,7 @@ namespace Baukasten {
 
 	class BAUKASTEN_EXPORT IInput {
 	public:
+		IInput() : mInitialised( false ) {}
 		virtual bool init( CoreServices* ) = 0;
 		virtual void process() const = 0;
 		virtual void shutdown() {}
