@@ -1,6 +1,6 @@
 #include "input_interface.h"
 
-#include "irrlicht/irrlicht_input.h"
+#include "glfw/glfw_input.h"
 
 using namespace Baukasten;
 
@@ -10,7 +10,7 @@ IInput*
 InputInterface::instance()
 {
 	if ( !mInstance ) {
-		mInstance = new IrrlichtInput();
+		mInstance = new GlfwInput();
 	}
 
 	return mInstance;

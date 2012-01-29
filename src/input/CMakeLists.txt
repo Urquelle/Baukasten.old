@@ -4,5 +4,6 @@ set (
 	input_SRCS
 	input/src/input_interface.cpp
 	input/src/irrlicht/irrlicht_input.cpp
+	input/src/glfw/glfw_input.cpp
 )
 
