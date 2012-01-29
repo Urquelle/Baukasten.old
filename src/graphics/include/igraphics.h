@@ -14,10 +14,9 @@ namespace Baukasten {
 	public:
 		IGraphics() : mInitialised( false ) {}
 		virtual int init( CoreServices* ) = 0;
-		virtual void shutdown() {}
+		virtual void shutdown() = 0;
 
 		virtual void render( Form* ) = 0;
-		virtual void shutDown() = 0;
 
 		virtual void drawImage( const string&, const v2<float>&, const v3<float>& ) = 0;
 		virtual void drawLine( const v3<float>&, const v3<float>&, const Colour& ) = 0;

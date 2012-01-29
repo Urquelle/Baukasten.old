@@ -38,7 +38,7 @@ namespace Baukasten {
 
 		int init( CoreServices* );
 		void render( Form* );
-		void shutDown();
+		void shutdown();
 
 		void drawImage( const string&, const v2<float>&, const v3<float>& );
 		void drawLine( const v3<float>&, const v3<float>&, const Colour& );

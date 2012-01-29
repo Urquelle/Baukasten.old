@@ -53,7 +53,7 @@ IrrlichtGraphics::render( Form *form )
 }
 
 void
-IrrlichtGraphics::shutDown()
+IrrlichtGraphics::shutdown()
 {
 	mDevice->drop();
 }
