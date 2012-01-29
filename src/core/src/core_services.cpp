@@ -43,9 +43,9 @@ CoreServices::init( int argc, char* argv[] )
 void
 CoreServices::shutdown()
 {
-	mAudio->shutdown();
-	mGraphics->shutdown();
 	mInput->shutdown();
+	mGraphics->shutdown();
+	mAudio->shutdown();
 }
 
 IAudio*
