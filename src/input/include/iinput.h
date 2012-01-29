@@ -18,9 +18,13 @@ namespace Baukasten {
 		KeyEvent onKeyDown() const { return mOnKeyDown; }
 		KeyEvent onKeyUp() const { return mOnKeyUp; }
 
+		bool isInitialised() const { return mInitialised; }
+
 	protected:
 		KeyEvent mOnKeyDown;
 		KeyEvent mOnKeyUp;
+
+		bool mInitialised;
 	};
 } /* Baukasten */
 
