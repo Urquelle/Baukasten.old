@@ -13,6 +13,7 @@ namespace Baukasten {
 		virtual bool init( CoreServices* ) = 0;
 		virtual void process() const = 0;
 		virtual void shutdown() {}
+		virtual string getServiceName() const = 0;
 
 		KeyEvent onKeyDown() const { return mOnKeyDown; }
 		KeyEvent onKeyUp() const { return mOnKeyUp; }
