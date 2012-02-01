@@ -16,10 +16,14 @@ namespace Baukasten
 		inline int getBlue() const { return mB; }
 		inline int getAlpha() const { return mA; }
 
+		void getRgb( int*, int*, int*, int *a = 0 ) const;
+
 		inline float getRedF() const { return getRed() / 256.0; }
 		inline float getGreenF() const { return getGreen() / 256.0; }
 		inline float getBlueF() const { return getBlue() / 256.0; }
 		inline float getAlphaF() const { return getAlpha() / 256.0; }
+
+		void getRgbF( float*, float*, float*, float *a = 0 ) const;
 
 	private:
 		int mR;

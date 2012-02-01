@@ -16,3 +16,31 @@ Colour::~Colour()
 {
 }
 
+void
+Colour::getRgb( int *r, int *g, int *b, int *a ) const
+{
+	if ( !r || !g || !b )
+		return;
+
+	*r = mR;
+	*g = mG;
+	*b = mB;
+
+	if ( a )
+		*a = mA;
+}
+
+void
+Colour::getRgbF( float *r, float *g, float *b, float *a ) const
+{
+	if ( !r || !g || !b )
+		return;
+
+	*r = getRedF();
+	*g = getGreenF();
+	*b = getBlueF();
+
+	if ( a )
+		*a = getAlphaF();
+}
+
