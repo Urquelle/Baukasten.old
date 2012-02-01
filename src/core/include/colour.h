@@ -11,16 +11,21 @@ namespace Baukasten
 
 		virtual ~Colour();
 
-		inline int getR() const { return mR; }
-		inline int getG() const { return mG; }
-		inline int getB() const { return mB; }
-		inline int getAlpha() const { return mAlpha; }
+		inline int getRed() const { return mR; }
+		inline int getGreen() const { return mG; }
+		inline int getBlue() const { return mB; }
+		inline int getAlpha() const { return mA; }
+
+		inline float getRedF() const { return getRed() / 256.0; }
+		inline float getGreenF() const { return getGreen() / 256.0; }
+		inline float getBlueF() const { return getBlue() / 256.0; }
+		inline float getAlphaF() const { return getAlpha() / 256.0; }
 
 	private:
 		int mR;
 		int mG;
 		int mB;
-		int mAlpha;
+		int mA;
 	};
 } /* Baukasten */
 
