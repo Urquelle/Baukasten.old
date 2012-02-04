@@ -18,6 +18,7 @@ namespace Baukasten {
 
 		virtual void render( Form* ) = 0;
 
+		virtual void drawCircle( const v3<float>&, const uint, const Colour& ) = 0;
 		virtual void drawImage( const string&, const v2<float>&, const v3<float>& ) = 0;
 		virtual void drawLine( const v3<float>&, const v3<float>&, const Colour& ) = 0;
 		virtual void drawPoint( const v3<float>&, const uint, const Colour& ) = 0;
