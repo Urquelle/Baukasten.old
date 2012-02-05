@@ -1,7 +1,7 @@
 #include "graphics_interface.h"
 #include "igraphics.h"
 
-#include "irrlicht/irrlicht_graphics.h"
+#include "glfw/glfw_graphics.h"
 
 using namespace Baukasten;
 
@@ -11,7 +11,7 @@ IGraphics*
 GraphicsInterface::instance()
 {
 	if ( !mInstance ) {
-		mInstance = new IrrlichtGraphics();
+		mInstance = new GlfwGraphics();
 	}
 
 	return mInstance;
