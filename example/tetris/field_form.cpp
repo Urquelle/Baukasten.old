@@ -47,26 +47,27 @@ void FieldForm::render()
 		float x = pos.getX() + 40 * ( i % FIELD_WIDTH );
 		float y = pos.getY() + 40 * j;
 
+		auto graphics = this->getGraphics();
+
 		// draw already occupied blocks
 		if ( SET == k ) {
-			this->getGraphics()->drawRect( size, {x, y, 0.0}, cSet );
-			this->getGraphics()->drawText( L"1", {x + 20, y + 20, 0.0}, cControl );
+			graphics->drawRect( size, {x, y, 0.0}, cSet );
+			graphics->drawText( L"1", {x + 20, y + 20, 0.0}, cControl );
 		}
 
 		// draw falling blocks
 		if ( IN_MOTION == k ) {
-			this->getGraphics()->drawRect( size, {x, y, 0.0}, cInMotion );
-			this->getGraphics()->drawText( L"2", {x + 20, y + 20, 0.0}, cControl );
+			graphics->drawRect( size, {x, y, 0.0}, cInMotion );
+			graphics->drawText( L"2", {x + 20, y + 20, 0.0}, cControl );
 		}
 
 		if ( CLEAN == k ) {
-			this->getGraphics()->drawText( L"0", {x + 20, y + 20, 0.0}, cControl );
+			graphics->drawText( L"0", {x + 20, y + 20, 0.0}, cControl );
 		}
 
 		// draw + on the field
 		if ( ( i % FIELD_WIDTH ) < FIELD_WIDTH - 1 && ( i / FIELD_WIDTH ) < 17 ) {
-			this->getGraphics()->drawLine( { x + 38, y + 40, 0.0 }, {x + 43, y + 40, 0.0}, cSet );
-			this->getGraphics()->drawLine( { x + 40, y + 38, 0.0 }, {x + 40, y + 43, 0.0}, cSet );
+			graphics->drawPoint( { x + 40, y + 40, 0.0 }, 2, cSet );
 		}
 
 		++i;
