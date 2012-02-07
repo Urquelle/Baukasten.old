@@ -57,6 +57,7 @@ void Game::init()
 
 	mInput = service->getInputService();
 	mGraphics = service->getVideoService();
+	mGraphics->createWindow( { 1024, 768 }, L"Tetris" );
 	mAudio = service->getAudioService();
 
 	mAudio->loadFile( "media/tetris_theme.wav", "audio:main" );
