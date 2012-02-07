@@ -126,6 +126,7 @@ public:
 		c.getRgbF( &r, &g, &b );
 
 		glColor3f( r, g, b );
+		glPointSize( size );
 		glBegin( GL_POINTS );
 			glVertex3f( pos.getX(), pos.getY(), pos.getZ() );
 		glEnd();
