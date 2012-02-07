@@ -63,7 +63,8 @@ public:
 		setWindowCaption( title );
 	}
 
-	void render( Form *form )
+	void
+	render( Form *form )
 	{
 		glClear( GL_COLOR_BUFFER_BIT );
 
@@ -73,17 +74,20 @@ public:
 		glfwSwapBuffers();
 	}
 
-	void setWindowCaption( const std::wstring &title )
+	void
+	setWindowCaption( const std::wstring &title )
 	{
 		glfwSetWindowTitle( toString( title ).c_str() );
 	}
 
-	void shutdown()
+	void
+	shutdown()
 	{
 		glfwTerminate();
 	}
 
-	void drawCircle( const v3<float> &pos, const uint radius, const Colour &c )
+	void
+	drawCircle( const v3<float> &pos, const uint radius, const Colour &c )
 	{
 		glBegin(GL_TRIANGLE_FAN);
 			glVertex2f( pos.getX(), pos.getY() );
@@ -96,12 +100,14 @@ public:
 		glEnd();
 	}
 
-	void drawImage( const string &filePath, const v2<float> &size, const v3<float> &pos )
+	void
+	drawImage( const string &filePath, const v2<float> &size, const v3<float> &pos )
 	{
 		BK_DEBUG( "drawImage: implement me!!" );
 	}
 
-	void drawLine( const v3<float> &from, const v3<float> &to, const Colour &c )
+	void
+	drawLine( const v3<float> &from, const v3<float> &to, const Colour &c )
 	{
 		float r, g, b;
 		c.getRgbF( &r, &g, &b );
@@ -113,7 +119,8 @@ public:
 		glEnd();
 	}
 
-	void drawPoint( const v3<float> &pos, const uint size, const Colour &c )
+	void
+	drawPoint( const v3<float> &pos, const uint size, const Colour &c )
 	{
 		float r, g, b;
 		c.getRgbF( &r, &g, &b );
@@ -124,7 +131,8 @@ public:
 		glEnd();
 	}
 
-	void drawRect( const v2<float> &size, const v3<float> &pos, const Colour &c )
+	void
+	drawRect( const v2<float> &size, const v3<float> &pos, const Colour &c )
 	{
 		float r, g, b;
 		c.getRgbF( &r, &g, &b );
@@ -136,7 +144,8 @@ public:
 		);
 	}
 
-	void drawText( const wchar_t *text, const v3<float> &pos, const Colour &c )
+	void
+	drawText( const wchar_t *text, const v3<float> &pos, const Colour &c )
 	{
 		mFont->render(
 			pos,
