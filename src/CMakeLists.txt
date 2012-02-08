@@ -17,7 +17,7 @@ add_library( Baukasten SHARED ${core_SRCS} ${audio_SRCS} ${graphics_SRCS} ${inpu
 
 set_target_properties( Baukasten PROPERTIES SOVERSION 0.0.1 )
 
-target_link_libraries( Baukasten sigc-2.0 SLB openal alut GL GLU glfw freetype )
+target_link_libraries( Baukasten sigc-2.0 SLB openal alut GL GLEW GLU glfw freetype )
 
 install(DIRECTORY core/include/ DESTINATION ${CMAKE_INSTALL_PREFIX}/include)
 install(TARGETS Baukasten LIBRARY DESTINATION lib/)
