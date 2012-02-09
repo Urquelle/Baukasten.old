@@ -77,12 +77,12 @@ Form::getVSpace() const
 }
 
 void
-Form::draw()
+Form::constructScene()
 {
 	auto entities = mVSpace->getEntities();
 	for_each( entities.begin(), entities.end(), []( Form* f ) {
+		f->constructScene();
 		f->render();
-		f->draw();
 	});
 }
 

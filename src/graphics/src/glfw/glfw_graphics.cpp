@@ -69,7 +69,7 @@ public:
 	{
 		glClear( GL_COLOR_BUFFER_BIT );
 
-		form->draw();
+		form->constructScene();
 		form->render();
 
 		glfwSwapBuffers();
