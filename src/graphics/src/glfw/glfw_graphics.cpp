@@ -23,6 +23,14 @@ string toString( const wstring &s )
 	return str;
 }
 
+void checkForError()
+{
+	GLuint errCode = glGetError();
+	if ( errCode != GL_NO_ERROR ) {
+		BK_DEBUG( gluErrorString( errCode ) );
+	}
+}
+
 using namespace Baukasten;
 
 // GlfGraphicsP {{{
