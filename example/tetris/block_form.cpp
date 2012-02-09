@@ -40,8 +40,6 @@ BlockForm::render()
 
 		if ( matrix[ i ] == 1 ) {
 			getGraphics()->drawRect( size, pos, cSet );
-		} else {
-			getGraphics()->drawRect( size, pos, cClean );
 		}
 	}
 }
