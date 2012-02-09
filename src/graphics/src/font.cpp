@@ -39,7 +39,9 @@ namespace Baukasten {
 
 		void render( const v3<float> &pos, const char *text, const Colour &c )
 		{
+			BK_ASSERT( mFace != 0, "couldn't load font!" );
 			BK_DEBUG( "render text:" << text );
+
 			uint numChars = strlen( text );
 			FT_GlyphSlot slot = mFace->glyph;
 			FT_Vector pen;
