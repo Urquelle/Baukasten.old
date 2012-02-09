@@ -48,6 +48,7 @@ public:
 		glMatrixMode( GL_PROJECTION );
 		glLoadIdentity();
 		gluOrtho2D( 0.0, 640.0, 480.0, 0.0 );
+		glewInit();
 
 		mMaster->mInitialised = true;
 
