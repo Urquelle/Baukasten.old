@@ -14,6 +14,8 @@
 #include <cstring>
 #include <vector>
 
+#define BUFFER_OFFSET(offset) ((GLvoid *) NULL + offset)
+
 string toString( const wstring &s )
 {
 	string str( s.begin(), s.end() );
@@ -24,6 +26,13 @@ string toString( const wstring &s )
 using namespace Baukasten;
 
 // GlfGraphicsP {{{
+
+struct GraphicsNode {
+	GLuint vbo;
+	GLenum type;
+	int vertexCount;
+	int indexCount;
+};
 
 class Baukasten::GlfwGraphicsP {
 public:
@@ -73,6 +82,28 @@ public:
 		form->constructScene();
 		form->render();
 
+		glEnableClientState( GL_VERTEX_ARRAY );
+		GraphicsNode *node = 0;
+		for ( uint i = 0; i < mNodes.size(); ++i ) {
+			node = mNodes[i];
+
+			glBindBuffer( GL_ARRAY_BUFFER, node->vbo );
+
+			// read first three bytes off of the buffer to get the colour
+			GLuint colourSize = sizeof( float ) * 3;
+			GLfloat *colour = static_cast<GLfloat*>( glMapBufferRange( GL_ARRAY_BUFFER, 0, colourSize, GL_MAP_READ_BIT ) );
+			if ( colour )
+				glColor3fv( colour );
+
+			glVertexPointer( node->vertexCount, GL_FLOAT, 0, BUFFER_OFFSET(colourSize) );
+			glDrawArrays( node->type, 0, node->indexCount );
+
+			glBindBuffer( GL_ARRAY_BUFFER, 0 );
+			glDeleteBuffers( 1, &node->vbo );
+		}
+
+		mNodes.clear();
+		glDisableClientState( GL_VERTEX_ARRAY );
 		glfwSwapBuffers();
 	}
 
@@ -114,11 +145,24 @@ public:
 		float r, g, b;
 		c.getRgbF( &r, &g, &b );
 
-		glColor3f( r, g, b );
-		glBegin( GL_LINES );
-			glVertex3f( from.getX(), from.getY(), from.getZ() );
-			glVertex3f( to.getX(), to.getY(), to.getZ() );
-		glEnd();
+		GLfloat vertices[] = {
+			r, g, b,
+			from.getX(), from.getY(),
+			to.getX(), to.getY()
+		};
+
+		GraphicsNode *node = new GraphicsNode();
+
+		node->type = GL_POINTS;
+		node->vertexCount = 2;
+		node->indexCount = 2;
+
+		glGenBuffers( 1, &node->vbo );
+		glBindBuffer( GL_ARRAY_BUFFER, node->vbo );
+		glBufferData( GL_ARRAY_BUFFER, sizeof( vertices ), vertices, GL_DYNAMIC_DRAW );
+		glBindBuffer( GL_ARRAY_BUFFER, 0 );
+
+		mNodes.push_back( node );
 	}
 
 	void
@@ -127,11 +171,23 @@ public:
 		float r, g, b;
 		c.getRgbF( &r, &g, &b );
 
-		glColor3f( r, g, b );
-		glPointSize( size );
-		glBegin( GL_POINTS );
-			glVertex3f( pos.getX(), pos.getY(), pos.getZ() );
-		glEnd();
+		GLfloat vertices[] = {
+			r, g, b,
+			pos.getX(), pos.getY()
+		};
+
+		GraphicsNode *node = new GraphicsNode();
+
+		node->type = GL_POINTS;
+		node->vertexCount = 2;
+		node->indexCount = 1;
+
+		glGenBuffers( 1, &node->vbo );
+		glBindBuffer( GL_ARRAY_BUFFER, node->vbo );
+		glBufferData( GL_ARRAY_BUFFER, sizeof( vertices ), vertices, GL_DYNAMIC_DRAW );
+		glBindBuffer( GL_ARRAY_BUFFER, 0 );
+
+		mNodes.push_back( node );
 	}
 
 	void
@@ -140,11 +196,26 @@ public:
 		float r, g, b;
 		c.getRgbF( &r, &g, &b );
 
-		glColor3f( r, g, b );
-		glRectf(
-			pos.getX(), pos.getY(),
-			pos.getX() + size.getX(), pos.getY() + size.getY()
-		);
+		GLfloat vertices[] = {
+			r, g, b,
+			pos.getX(),					pos.getY(),
+			pos.getX() + size.getX(),	pos.getY(),
+			pos.getX() + size.getX(),	pos.getY() + size.getY(),
+			pos.getX(),					pos.getY() + size.getY()
+		};
+
+		GraphicsNode *node = new GraphicsNode();
+
+		node->type = GL_QUADS;
+		node->vertexCount = 2;
+		node->indexCount = 4;
+
+		glGenBuffers( 1, &node->vbo );
+		glBindBuffer( GL_ARRAY_BUFFER, node->vbo );
+		glBufferData( GL_ARRAY_BUFFER, sizeof( vertices ), vertices, GL_DYNAMIC_DRAW );
+		glBindBuffer( GL_ARRAY_BUFFER, 0 );
+
+		mNodes.push_back( node );
 	}
 
 	void
@@ -158,8 +229,9 @@ public:
 	}
 
 private:
-	GlfwGraphics* 	mMaster;
-	Font*			mFont;
+	GlfwGraphics* 			mMaster;
+	vector<GraphicsNode*>	mNodes;
+	Font*					mFont;
 };
 
 // }}}
