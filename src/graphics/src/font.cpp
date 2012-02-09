@@ -18,7 +18,7 @@ namespace Baukasten {
 		{
 			FT_Init_FreeType( &mLib );
 			FT_New_Face(
-				mLib, "/usr/share/fonts/corefont/arial.ttf",
+				mLib, "/usr/share/fonts/corefonts/arial.ttf",
 				0, &mFace
 			);
 			FT_Set_Char_Size( mFace, 12 * 64, 0, 100, 0 );
