@@ -6,7 +6,8 @@ include( audio/CMakeLists.txt )
 include( input/CMakeLists.txt )
 include( util/CMakeLists.txt )
 
-include_directories( ${CORE_INC} ${AUDIO_INC} ${GRAPHICS_INC} ${INPUT_INC} )
+include_directories( ${CMAKE_CURRENT_SOURCE_DIR} )
+
 link_directories(
 	${slb_LINKDIR}
 	"/usr/include/sigc++-2.0"

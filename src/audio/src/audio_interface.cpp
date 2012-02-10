@@ -1,7 +1,7 @@
-#include "audio_interface.h"
-#include "iaudio.h"
+#include "audio/AudioInterface"
 
-#include "openal/openal_audio.h"
+#include "audio/AudioImpl"
+#include "audio/IAudio"
 
 using namespace Baukasten;
 

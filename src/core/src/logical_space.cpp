@@ -1,6 +1,6 @@
-#include "logical_space.h"
+#include "core/LogicalSpace"
 
-#include "game_entity.h"
+#include "core/GameEntity"
 
 #include <algorithm>
 

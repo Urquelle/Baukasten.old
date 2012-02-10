@@ -1,7 +1,7 @@
-#include "entity.h"
+#include "core/Entity"
 
-#include "debug.h"
-#include "state.h"
+#include "core/Debug"
+#include "core/State"
 
 using namespace Baukasten;
 

@@ -1,10 +1,10 @@
 #ifndef GLFW_GRAPHICS_H_CMJ6TAUE
 #define GLFW_GRAPHICS_H_CMJ6TAUE
 
-#include "global.h"
-#include "../../util/Util"
+#include "core/Global"
 
-#include "igraphics.h"
+#include "graphics/IGraphics"
+#include "util/Util"
 
 namespace Baukasten {
 

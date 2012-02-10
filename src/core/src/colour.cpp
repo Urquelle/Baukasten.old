@@ -1,4 +1,4 @@
-#include "colour.h"
+#include "core/Colour"
 
 using namespace Baukasten;
 

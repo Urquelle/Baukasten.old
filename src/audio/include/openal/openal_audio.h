@@ -1,9 +1,9 @@
 #ifndef OPENAL_AUDIO_H_EBPNAPHY
 #define OPENAL_AUDIO_H_EBPNAPHY
 
-#include "global.h"
+#include "core/Global"
 
-#include "iaudio.h"
+#include "audio/IAudio"
 
 struct ALCdevice_struct;
 struct ALCcontext_struct;

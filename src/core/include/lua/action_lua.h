@@ -1,9 +1,9 @@
 #ifndef ACTION_LUA_6DRO5ZC8
 #define ACTION_LUA_6DRO5ZC8
 
-#include "global.h"
+#include "core/Global"
 
-#include "action.h"
+#include "core/Action"
 
 #include <string>
 

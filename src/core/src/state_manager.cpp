@@ -1,8 +1,7 @@
-#include "state_manager.h"
+#include "core/StateManager"
 
-#include "state.h"
-
-#include "debug.h"
+#include "core/State"
+#include "core/Debug"
 
 using namespace Baukasten;
 

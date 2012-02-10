@@ -1,7 +1,7 @@
-#include "graphics_interface.h"
-#include "igraphics.h"
+#include "graphics/GraphicsInterface"
 
-#include "glfw/glfw_graphics.h"
+#include "graphics/GraphicsImpl"
+#include "graphics/IGraphics"
 
 using namespace Baukasten;
 

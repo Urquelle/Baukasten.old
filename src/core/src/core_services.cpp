@@ -1,9 +1,9 @@
-#include "core_services.h"
+#include "core/CoreServices"
 
-#include "debug.h"
-#include "iaudio.h"
-#include "igraphics.h"
-#include "iinput.h"
+#include "core/Debug"
+#include "audio/IAudio"
+#include "graphics/IGraphics"
+#include "input/IInput"
 
 using namespace Baukasten;
 

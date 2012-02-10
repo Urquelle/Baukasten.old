@@ -1,6 +1,6 @@
-#include "action_lambda.h"
+#include "core/ActionLambda"
 
-#include "debug.h"
+#include "core/Debug"
 
 using namespace Baukasten;
 

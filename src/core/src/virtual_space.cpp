@@ -1,7 +1,7 @@
-#include "virtual_space.h"
+#include "core/VirtualSpace"
 
-#include "debug.h"
-#include "form.h"
+#include "core/Debug"
+#include "core/Form"
 
 using namespace Baukasten;
 

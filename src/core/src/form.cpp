@@ -1,9 +1,9 @@
-#include "form.h"
+#include "core/Form"
 
-#include "debug.h"
-#include "game_entity.h"
-#include "logical_space.h"
-#include "virtual_space.h"
+#include "core/Debug"
+#include "core/GameEntity"
+#include "core/LogicalSpace"
+#include "core/VirtualSpace"
 
 #include <algorithm>
 

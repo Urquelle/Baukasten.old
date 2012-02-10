@@ -1,9 +1,9 @@
 #ifndef IINPUT_EQ5AS93H
 #define IINPUT_EQ5AS93H
 
-#include "global.h"
+#include "core/Global"
 
-#include "input_interface.h"
+#include "input/InputInterface"
 
 namespace Baukasten {
 	class CoreServices;

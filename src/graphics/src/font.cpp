@@ -1,7 +1,7 @@
-#include "font.h"
+#include "graphics/Font"
 
-#include "colour.h"
-#include "debug.h"
+#include "core/Colour"
+#include "core/Debug"
 
 #include <cmath>
 

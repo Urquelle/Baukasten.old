@@ -1,6 +1,6 @@
-#include "action.h"
+#include "core/Action"
 
-#include "game_entity.h"
+#include "core/GameEntity"
 
 #include <algorithm>
 

@@ -1,11 +1,10 @@
 #ifndef IGRAPHICS_HHQEW1LG
 #define IGRAPHICS_HHQEW1LG
 
-#include "global.h"
-#include "../../util/Util"
-
-#include "graphics_interface.h"
-#include "colour.h"
+#include "core/Colour"
+#include "core/Global"
+#include "graphics/GraphicsInterface"
+#include "util/Util"
 
 namespace Baukasten {
 	class Form;

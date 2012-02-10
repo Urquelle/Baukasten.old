@@ -1,7 +1,7 @@
-#include "openal/openal_audio.h"
+#include "audio/AudioImpl"
 
-#include <core_services.h>
-#include <debug.h>
+#include <core/CoreServices>
+#include <core/Debug>
 
 #include <AL/al.h>
 #include <AL/alc.h>

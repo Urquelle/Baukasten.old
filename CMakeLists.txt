@@ -5,12 +5,6 @@ project (Baukasten)
 set (Baukasten_VERSION_MAJOR 0)
 set (Baukasten_VERSION_MINOR 1)
 
-set( Core_INCLUDE_DIR ${CMAKE_CURRENT_SOURCE_DIR}/src/core/include )
-set( Audio_INCLUDE_DIR ${CMAKE_CURRENT_SOURCE_DIR}/src/audio/include )
-set( Graphics_INCLUDE_DIR ${CMAKE_CURRENT_SOURCE_DIR}/src/graphics/include )
-set( Input_INCLUDE_DIR ${CMAKE_CURRENT_SOURCE_DIR}/src/input/include )
-set( Core_LIB_DIR ${CMAKE_CURRENT_SOURCE_DIR}/lib )
-
 set(CMAKE_CXX_FLAGS "-std=gnu++0x")
 
 if( NOT ( CMAKE_BUILD_TYPE STREQUAL Debug ) )

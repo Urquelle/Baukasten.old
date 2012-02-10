@@ -1,7 +1,7 @@
-#include "entity_manager.h"
+#include "core/EntityManager"
 
-#include "entity.h"
-#include "debug.h"
+#include "core/Entity"
+#include "core/Debug"
 
 using namespace Baukasten;
 

@@ -1,6 +1,6 @@
-#include "entity_type.h"
+#include "core/EntityType"
 
-#include "debug.h"
+#include "core/Debug"
 
 #include <algorithm>
 

@@ -1,6 +1,6 @@
-#include "input_interface.h"
+#include "input/InputInterface"
 
-#include "glfw/glfw_input.h"
+#include "input/InputImpl"
 
 using namespace Baukasten;
 

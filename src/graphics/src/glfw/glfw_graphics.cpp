@@ -1,9 +1,9 @@
-#include "glfw/glfw_graphics.h"
-#include "font.h"
+#include "graphics/GraphicsImpl"
 
-#include "core_services.h"
-#include "form.h"
-#include "../../util/Util"
+#include "core/CoreServices"
+#include "core/Form"
+#include "graphics/Font"
+#include "util/Util"
 
 #include <GL/glew.h>
 #include <GL/gl.h>

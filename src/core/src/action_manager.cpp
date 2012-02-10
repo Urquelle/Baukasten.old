@@ -1,9 +1,8 @@
-#include "action_manager.h"
+#include "core/ActionManager"
 
-#include "action.h"
-#include "game_entity.h"
-
-#include "debug.h"
+#include "core/Action"
+#include "core/Debug"
+#include "core/GameEntity"
 
 #include <algorithm>
 

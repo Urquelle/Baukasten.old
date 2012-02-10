@@ -1,8 +1,8 @@
-#include "lua/action_lua.h"
+#include "core/ActionLua"
 
-#include "debug.h"
-#include "game_entity.h"
-#include "lua/bindings.h"
+#include "core/Debug"
+#include "core/GameEntity"
+#include "core/Bindings"
 
 #include <exception>
 

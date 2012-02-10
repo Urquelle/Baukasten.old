@@ -1,8 +1,8 @@
 #ifndef FONT_H_I5KJO3DB
 #define FONT_H_I5KJO3DB
 
-#include "global.h"
-#include "../../util/Util"
+#include "core/Global"
+#include "util/Util"
 
 namespace Baukasten {
 	class FontPrivate;

@@ -1,22 +1,22 @@
 #ifndef GLOBAL_LUA_S7HRAEG3
 #define GLOBAL_LUA_S7HRAEG3
 
-#include "global.h"
+#include "core/Global"
 
-#include "action.h"
-#include "action_lua.h"
-#include "drawable.h"
-#include "entity.h"
-#include "entity_type.h"
-#include "form.h"
-#include "game_entity.h"
-#include "generic_state.h"
-#include "igraphics.h"
-#include "logical_space.h"
-#include "state.h"
-#include "virtual_space.h"
+#include "core/Action"
+#include "core/ActionLua"
+#include "core/Drawable"
+#include "core/Entity"
+#include "core/EntityType"
+#include "core/Form"
+#include "core/GameEntity"
+#include "core/GenericState"
+#include "graphics/IGraphics"
+#include "core/LogicalSpace"
+#include "core/State"
+#include "core/VirtualSpace"
 
-#include "slb/SLB.hpp"
+#include "core/include/slb/SLB.hpp"
 
 void wrapClasses()
 {

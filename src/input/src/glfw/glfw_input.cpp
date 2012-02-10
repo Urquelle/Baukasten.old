@@ -1,8 +1,8 @@
-#include "glfw/glfw_input.h"
+#include "input/InputImpl"
 
-#include "core_services.h"
-#include "debug.h"
-#include "igraphics.h"
+#include "core/CoreServices"
+#include "core/Debug"
+#include "graphics/IGraphics"
 
 #include <GL/glfw.h>
 

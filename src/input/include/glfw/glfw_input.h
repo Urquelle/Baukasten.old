@@ -1,9 +1,9 @@
 #ifndef GLFW_INPUT_H_XWQRTCFU
 #define GLFW_INPUT_H_XWQRTCFU
 
-#include "global.h"
+#include "core/Global"
 
-#include "iinput.h"
+#include "input/IInput"
 
 namespace Baukasten {
 	class CoreServices;

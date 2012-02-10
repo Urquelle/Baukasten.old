@@ -1,7 +1,7 @@
 #ifndef IAUDIO_H_YOASQ2PU
 #define IAUDIO_H_YOASQ2PU
 
-#include "global.h"
+#include "core/Global"
 
 #include "audio_interface.h"
 
