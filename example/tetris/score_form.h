@@ -1,9 +1,8 @@
 #ifndef SCORE_FORM_H_MPIAXVNA
 #define SCORE_FORM_H_MPIAXVNA
 
-#include <global.h>
-
-#include <form.h>
+#include "core/Global"
+#include "core/Form"
 
 class ScoreForm : public Baukasten::Form {
 public:

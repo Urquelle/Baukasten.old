@@ -1,8 +1,5 @@
 include_directories(
-	${Core_INCLUDE_DIR}
-	${Audio_INCLUDE_DIR}
-	${Graphics_INCLUDE_DIR}
-	${Input_INCLUDE_DIR}
+	"../src"
 	"/usr/include/sigc++-2.0"
 	"/usr/lib64/sigc++-2.0/include"
 )

@@ -1,6 +1,6 @@
 #include "form2d.h"
 
-#include <igraphics.h>
+#include "graphics/IGraphics"
 
 using namespace Baukasten;
 

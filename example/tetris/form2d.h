@@ -1,9 +1,8 @@
 #ifndef WORLDMAP_FORM_OPYB550X
 #define WORLDMAP_FORM_OPYB550X
 
-#include <global.h>
-
-#include <form.h>
+#include "core/Global"
+#include "core/Form"
 
 class Form2d : public Baukasten::Form {
 public:

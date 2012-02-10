@@ -1,19 +1,19 @@
 #include "game.h"
 
 #include "actions.h"
-#include "field_form.h"
 #include "block_form.h"
+#include "field_form.h"
 #include "form2d.h"
 #include "score_form.h"
 
-#include <lua/action_lua.h>
-#include <core_services.h>
-#include <generic_state.h>
-#include <iaudio.h>
-#include <igraphics.h>
-#include <iinput.h>
-#include <logical_space.h>
-#include <virtual_space.h>
+#include "audio/IAudio"
+#include "core/ActionLua"
+#include "core/GenericState"
+#include "core/LogicalSpace"
+#include "core/VirtualSpace"
+#include "core/CoreServices"
+#include "graphics/IGraphics"
+#include "input/IInput"
 
 using namespace Baukasten;
 

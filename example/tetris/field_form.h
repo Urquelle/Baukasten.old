@@ -1,9 +1,8 @@
 #ifndef FIELD_FORM_D01BMD3U
 #define FIELD_FORM_D01BMD3U
 
-#include <global.h>
-
-#include <form.h>
+#include "core/Global"
+#include "core/Form"
 
 class FieldForm : public Baukasten::Form {
 public:

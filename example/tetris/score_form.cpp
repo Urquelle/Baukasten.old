@@ -1,7 +1,7 @@
 #include "score_form.h"
 
-#include <generic_state.h>
-#include <igraphics.h>
+#include "core/GenericState"
+#include "graphics/IGraphics"
 
 #include <sstream>
 

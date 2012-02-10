@@ -3,11 +3,11 @@
 
 #include "constants.h"
 
-#include <action_lambda.h>
-#include <form.h>
-#include <generic_state.h>
-#include <logical_space.h>
-#include <virtual_space.h>
+#include "core/ActionLambda"
+#include "core/Form"
+#include "core/GenericState"
+#include "core/LogicalSpace"
+#include "core/VirtualSpace"
 
 #include <cstdlib>
 #include <ctime>

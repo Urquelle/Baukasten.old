@@ -1,8 +1,8 @@
 #ifndef GAME_QC1L8Y4Z
 #define GAME_QC1L8Y4Z
 
-#include <game_entity.h>
-#include <input_interface.h>
+#include "core/GameEntity"
+#include "input/InputInterface"
 
 namespace Baukasten {
 	class IInput;
