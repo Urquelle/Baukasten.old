@@ -11,25 +11,29 @@ if( NOT ( CMAKE_BUILD_TYPE STREQUAL Debug ) )
 	add_definitions( -DNDEBUG )
 endif()
 
+option( WITH_DOC  "add documentation." FALSE )
+
 add_subdirectory(src)
 add_subdirectory(example)
 add_subdirectory(test)
 
-find_package( Doxygen )
-if (DOXYGEN_FOUND)
-	set(DOXYGEN_INPUT Doxyfile)
-	set(DOXYGEN_OUTPUT "${CMAKE_INSTALL_PREFIX}/doc")
+if( WITH_DOC )
+	find_package( Doxygen )
+	if (DOXYGEN_FOUND)
+		set(DOXYGEN_INPUT Doxyfile)
+		set(DOXYGEN_OUTPUT "${CMAKE_INSTALL_PREFIX}/doc")
 
-	add_custom_command(
-		OUTPUT ${DOXYGEN_OUTPUT}
-		COMMAND ${CMAKE_COMMAND} -E echo_append "Building API Documentation..."
-		COMMAND ${DOXYGEN_EXECUTABLE} ${DOXYGEN_INPUT}
-		COMMAND ${CMAKE_COMMAND} -E echo "Done."
-		WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
-		DEPENDS ${DOXYGEN_INPUT}
-	)
+		add_custom_command(
+			OUTPUT ${DOXYGEN_OUTPUT}
+			COMMAND ${CMAKE_COMMAND} -E echo_append "Building API Documentation..."
+			COMMAND ${DOXYGEN_EXECUTABLE} ${DOXYGEN_INPUT}
+			COMMAND ${CMAKE_COMMAND} -E echo "Done."
+			WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
+			DEPENDS ${DOXYGEN_INPUT}
+		)
 
-	add_custom_target(doc DEPENDS ${DOXYGEN_OUTPUT})
+		add_custom_target(doc DEPENDS ${DOXYGEN_OUTPUT})
 
-	install(DIRECTORY doc/ DESTINATION ${DOXYGEN_OUTPUT})
-endif(DOXYGEN_FOUND)
+		install(DIRECTORY doc/ DESTINATION ${DOXYGEN_OUTPUT})
+	endif(DOXYGEN_FOUND)
+endif( WITH_DOC )
