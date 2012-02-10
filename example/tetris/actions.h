@@ -193,7 +193,7 @@ DoActionFunction recalc([]( Action *action, GameEntity *field ) {
 	setBlockFields( field, IN_MOTION );
 
 	if ( block ) {
-		v3<float> pos = block->getForm()->getPosition();
+		vec3<float> pos = block->getForm()->getPosition();
 
 		int currMatrix = block->getForm()->getState<StateInt*>( "state:currentMatrix" )->getValue();
 		int rows = field->getState<StateInt*>( "state:rows" )->getValue();

@@ -24,19 +24,19 @@ BlockForm::render()
 	Colour cSet( 255, 0, 0, 255 );
 	Colour cClean( 255, 255, 255, 255 );
 
-	int x = getPosition().getX();
+	int x = getPosition()[BK_X];
 	int x_offset = 0;
-	int y = getPosition().getY();
+	int y = getPosition()[BK_Y];
 	int y_offset = 0;
-	v3<float> pos;
-	v2<float> size({ (float)(BLOCK_WIDTH), (float)(BLOCK_HEIGHT) });
+	vec3<float> pos;
+	vec2<float> size({ (float)(BLOCK_WIDTH), (float)(BLOCK_HEIGHT) });
 
 	for ( int i = 0; i < 16; ++i ) {
 		x_offset = ( i % 4 ) * BLOCK_WIDTH;
 		y_offset = (int)( i / 4 ) * BLOCK_HEIGHT;
 
-		pos.setX((float)(x + x_offset));
-		pos.setY((float)(y + y_offset));
+		pos.set( BK_X, (float)(x + x_offset) );
+		pos.set( BK_Y, (float)(y + y_offset) );
 
 		if ( matrix[ i ] == 1 ) {
 			getGraphics()->drawRect( size, pos, cSet );

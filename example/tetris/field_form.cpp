@@ -31,7 +31,7 @@ void FieldForm::render()
 	int i = 0;
 	int j = 0;
 	auto pos = getPosition();
-	v2<float> size({ 40.0, 40.0 });
+	vec2<float> size({ 40.0, 40.0 });
 
 	Colour cSet( 255, 0, 0, 255 );
 	Colour cInMotion( 255, 125, 125, 255 );
@@ -44,8 +44,8 @@ void FieldForm::render()
 	getGraphics()->drawRect( { 5.0, 40.0 }, {230.0, (float)(20 + row * 40), 0.0}, cControl );
 
 	for_each( matrix.begin(), matrix.end(), [&i, &j, &pos, size, this, &cSet, &cControl, &cInMotion]( int k ) {
-		float x = pos.getX() + 40 * ( i % FIELD_WIDTH );
-		float y = pos.getY() + 40 * j;
+		float x = pos[BK_X] + 40 * ( i % FIELD_WIDTH );
+		float y = pos[BK_Y] + 40 * j;
 
 		auto graphics = this->getGraphics();
 
