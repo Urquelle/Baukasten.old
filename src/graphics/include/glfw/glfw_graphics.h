@@ -34,6 +34,7 @@ namespace Baukasten {
 		void drawText( const wchar_t*, const v3<float>&, const Colour& );
 
 		string getServiceName() const { return "GLFW"; }
+		float getFps() const;
 
 		void setWindowCaption( const std::wstring& );
 

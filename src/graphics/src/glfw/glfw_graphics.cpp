@@ -31,6 +31,19 @@ void checkForError()
 	}
 }
 
+void computeFps( float &t0, float &t1, float &frames, float &fps )
+{
+	t1 = glfwGetTime();
+
+	if ( ( t1 - t0 ) >= 1.0 || frames == 0 ) {
+		fps = frames / ( t1 - t0 );
+		t0 = t1;
+		frames = 0;
+	}
+
+	frames++;
+}
+
 using namespace Baukasten;
 
 // GlfGraphicsP {{{
@@ -56,6 +69,8 @@ public:
 
 	int init( CoreServices *services )
 	{
+		mT0 = glfwGetTime();
+
 		if ( !glfwInit() ) {
 			return 0;
 		}
@@ -85,6 +100,8 @@ public:
 	void
 	render( Form *form )
 	{
+		computeFps( mT0, mT1, mFrames, mFps );
+
 		glClear( GL_COLOR_BUFFER_BIT );
 
 		form->constructScene();
@@ -113,6 +130,12 @@ public:
 		mNodes.clear();
 		glDisableClientState( GL_VERTEX_ARRAY );
 		glfwSwapBuffers();
+	}
+
+	float
+	getFps() const
+	{
+		return mFps;
 	}
 
 	void
@@ -240,6 +263,11 @@ private:
 	GlfwGraphics* 			mMaster;
 	vector<GraphicsNode*>	mNodes;
 	Font*					mFont;
+
+	float					mT0;
+	float					mT1;
+	float					mFrames;
+	float					mFps;
 };
 
 // }}}
@@ -323,6 +351,12 @@ void
 GlfwGraphics::drawText( const wchar_t *text, const v3<float> &pos, const Colour &colour )
 {
 	mImpl->drawText( text, pos, colour );
+}
+
+float
+GlfwGraphics::getFps() const
+{
+	return mImpl->getFps();
 }
 
 void
