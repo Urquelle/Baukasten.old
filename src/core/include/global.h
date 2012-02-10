@@ -18,38 +18,13 @@ namespace Baukasten {
 	class State;
 	class VirtualSpace;
 
+	enum Dim {
+		BK_X = 0, BK_WIDTH = 0,
+		BK_Y = 1, BK_HEIGHT = 1,
+		BK_Z, BK_W
+	};
+
 	using namespace std;
-
-	template<class T> class v2 {
-	public:
-		v2() {}
-		v2( T x, T y ) :
-			mX( x ), mY( y ) {}
-
-		T getX() const { return mX; }
-		T getY() const { return mY; }
-
-	private:
-		T mX, mY;
-	};
-
-	template<class T> class v3 {
-	public:
-		v3() {}
-		v3( T x, T y, T z ) :
-			mX( x ), mY( y ), mZ( z ) {}
-
-		T getX() const { return mX; }
-		T getY() const { return mY; }
-		T getZ() const { return mZ; }
-
-		void setX( T x ) { mX = x; }
-		void setY( T y ) { mY = y; }
-		void setZ( T z ) { mZ = z; }
-
-	private:
-		T mX, mY, mZ;
-	};
 
 	typedef map<string, shared_ptr<Entity>>	EntityMap;
 	typedef list<shared_ptr<Entity>>		EntityList;

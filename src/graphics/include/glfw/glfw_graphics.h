@@ -2,6 +2,7 @@
 #define GLFW_GRAPHICS_H_CMJ6TAUE
 
 #include "global.h"
+#include "../../util/Util"
 
 #include "igraphics.h"
 
@@ -18,7 +19,7 @@ namespace Baukasten {
 
 		int init( CoreServices* );
 
-		void createWindow( const v2<int>&, const std::wstring& );
+		void createWindow( const vec2<int>&, const std::wstring& );
 
 		void render( Form* );
 		void shutdown();
@@ -26,12 +27,12 @@ namespace Baukasten {
 		void loadResource( const string&, const string& );
 		void freeResource( const string& );
 
-		void drawCircle( const v3<float>&, const uint, const Colour& );
-		void drawImage( const string&, const v2<float>&, const v3<float>& );
-		void drawLine( const v3<float>&, const v3<float>&, const Colour& );
-		void drawPoint( const v3<float>&, const uint, const Colour& );
-		void drawRect( const v2<float>&, const v3<float>&, const Colour& );
-		void drawText( const wchar_t*, const v3<float>&, const Colour& );
+		void drawCircle( const vec3<float>&, const uint, const Colour& );
+		void drawImage( const string&, const vec2<float>&, const vec3<float>& );
+		void drawLine( const vec3<float>&, const vec3<float>&, const Colour& );
+		void drawPoint( const vec3<float>&, const uint, const Colour& );
+		void drawRect( const vec2<float>&, const vec3<float>&, const Colour& );
+		void drawText( const wchar_t*, const vec3<float>&, const Colour& );
 
 		string getServiceName() const { return "GLFW"; }
 		float getFps() const;

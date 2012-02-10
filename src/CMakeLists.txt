@@ -4,6 +4,7 @@ include( core/CMakeLists.txt )
 include( graphics/CMakeLists.txt )
 include( audio/CMakeLists.txt )
 include( input/CMakeLists.txt )
+include( util/CMakeLists.txt )
 
 include_directories( ${CORE_INC} ${AUDIO_INC} ${GRAPHICS_INC} ${INPUT_INC} )
 link_directories(

@@ -37,10 +37,9 @@ namespace Baukasten {
 			FT_Set_Char_Size( mFace, size * 64, 0, 100, 0 );
 		}
 
-		void render( const v3<float> &pos, const char *text, const Colour &c )
+		void render( const vec3<float> &pos, const char *text, const Colour &c )
 		{
 			BK_ASSERT( mFace != 0, "couldn't load font!" );
-			BK_DEBUG( "render text:" << text );
 
 			uint numChars = strlen( text );
 			FT_GlyphSlot slot = mFace->glyph;
@@ -54,8 +53,8 @@ namespace Baukasten {
 			matrix.yx = (FT_Fixed)( sin( angle ) * 0x10000L );
 			matrix.yy = (FT_Fixed)( cos( angle ) * 0x10000L );
 
-			pen.x = pos.getX();
-			pen.y = pos.getY();
+			pen.x = pos[BK_X];
+			pen.y = pos[BK_Y];
 
 			for (uint n = 0; n < numChars; ++n) {
 				FT_Set_Transform( mFace, &matrix, &pen );
@@ -99,7 +98,7 @@ Font::setSize( const uint size )
 }
 
 void
-Font::render( const v3<float> &pos, const char *text, const Colour &c )
+Font::render( const vec3<float> &pos, const char *text, const Colour &c )
 {
 	mImpl->render( pos, text, c );
 }

@@ -2,6 +2,8 @@
 #define RENDERABLE_ENTITY_H
 
 #include "global.h"
+#include "../../util/Util"
+
 #include "entity.h"
 
 namespace Baukasten {
@@ -37,14 +39,14 @@ namespace Baukasten {
 		 * \param position a three point vector which represents
 		 * the position of the object in a 3d space.
 		 */
-		void setPosition( const v3<float> );
+		void setPosition( const vec3<float> );
 
 		/*! \brief getter method for position. */
-		const v3<float> getPosition() const;
+		const vec3<float> getPosition() const;
 
-		void setSize( const v2<float> );
+		void setSize( const vec2<float> );
 
-		const v2<float> getSize() const;
+		const vec2<float> getSize() const;
 
 		/*! \brief set the rotation around the x-axis.
 		 *
@@ -78,13 +80,13 @@ namespace Baukasten {
 
 	protected:
 		// position of the object
-		v3<float>   mPosition;
+		vec3<float>   mPosition;
 
 		// size of the object
-		v2<float>	mSize;
+		vec2<float>	mSize;
 
 		// orientation the object is looking at
-		v3<float>	mOrientation;
+		vec3<float>	mOrientation;
 
 		// rotation around the x-axis
 		float   mPitch;

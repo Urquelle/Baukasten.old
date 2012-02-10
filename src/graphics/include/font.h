@@ -2,6 +2,7 @@
 #define FONT_H_I5KJO3DB
 
 #include "global.h"
+#include "../../util/Util"
 
 namespace Baukasten {
 	class FontPrivate;
@@ -17,7 +18,7 @@ namespace Baukasten {
 		void setFace( const char* );
 		void setSize( const uint );
 
-		void render( const v3<float>&, const char*, const Colour& );
+		void render( const vec3<float>&, const char*, const Colour& );
 
 	private:
 		friend class FontPrivate;

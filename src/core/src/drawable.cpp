@@ -12,24 +12,24 @@ Drawable::~Drawable()
 }
 
 void
-Drawable::setPosition( const v3<float> position )
+Drawable::setPosition( const vec3<float> position )
 {
 	mPosition = position;
 }
 
-const v3<float>
+const vec3<float>
 Drawable::getPosition() const
 {
 	return mPosition;
 }
 
 void
-Drawable::setSize( const v2<float> size )
+Drawable::setSize( const vec2<float> size )
 {
 	mSize = size;
 }
 
-const v2<float>
+const vec2<float>
 Drawable::getSize() const
 {
 	return mSize;

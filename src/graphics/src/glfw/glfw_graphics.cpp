@@ -3,6 +3,7 @@
 
 #include "core_services.h"
 #include "form.h"
+#include "../../util/Util"
 
 #include <GL/glew.h>
 #include <GL/gl.h>
@@ -87,13 +88,13 @@ public:
 		return 1;
 	}
 
-	void createWindow( const v2<int> &size, const std::wstring &title )
+	void createWindow( const vec2<int> &size, const std::wstring &title )
 	{
-		glfwSetWindowSize( (GLsizei) size.getX(), (GLsizei) size.getY() );
-		glViewport( 0, 0, size.getX(), size.getY() );
+		glfwSetWindowSize( (GLsizei) size[BK_X], (GLsizei) size[BK_Y] );
+		glViewport( 0, 0, size[BK_X], size[BK_Y] );
 		glMatrixMode( GL_PROJECTION );
 		glLoadIdentity();
-		gluOrtho2D( 0.0, (GLdouble) size.getX(), (GLdouble) size.getY(), 0.0 );
+		gluOrtho2D( 0.0, (GLdouble) size[BK_X], (GLdouble) size[BK_Y], 0.0 );
 		setWindowCaption( title );
 	}
 
@@ -151,35 +152,35 @@ public:
 	}
 
 	void
-	drawCircle( const v3<float> &pos, const uint radius, const Colour &c )
+	drawCircle( const vec3<float> &pos, const uint radius, const Colour &c )
 	{
 		glBegin(GL_TRIANGLE_FAN);
-			glVertex2f( pos.getX(), pos.getY() );
+			glVertex2f( pos[BK_X], pos[BK_Y] );
 			for ( float i = 0; i <= 2 * M_PI + 0.1; i += 0.1 ) {
 				glVertex2f(
-					pos.getX() + sin(i) * radius,
-					pos.getY() + cos(i) * radius
+					pos[BK_X] + sin(i) * radius,
+					pos[BK_Y] + cos(i) * radius
 				);
 			}
 		glEnd();
 	}
 
 	void
-	drawImage( const string &filePath, const v2<float> &size, const v3<float> &pos )
+	drawImage( const string &filePath, const vec2<float> &size, const vec3<float> &pos )
 	{
 		BK_DEBUG( "drawImage: implement me!!" );
 	}
 
 	void
-	drawLine( const v3<float> &from, const v3<float> &to, const Colour &c )
+	drawLine( const vec3<float> &from, const vec3<float> &to, const Colour &c )
 	{
 		float r, g, b;
 		c.getRgbF( &r, &g, &b );
 
 		GLfloat vertices[] = {
 			r, g, b,
-			from.getX(), from.getY(),
-			to.getX(), to.getY()
+			from[BK_X], from[BK_Y],
+			to[BK_X], to[BK_Y]
 		};
 
 		GraphicsNode *node = new GraphicsNode();
@@ -197,14 +198,14 @@ public:
 	}
 
 	void
-	drawPoint( const v3<float> &pos, const uint size, const Colour &c )
+	drawPoint( const vec3<float> &pos, const uint size, const Colour &c )
 	{
 		float r, g, b;
 		c.getRgbF( &r, &g, &b );
 
 		GLfloat vertices[] = {
 			r, g, b,
-			pos.getX(), pos.getY()
+			pos[BK_X], pos[BK_Y]
 		};
 
 		GraphicsNode *node = new GraphicsNode();
@@ -222,17 +223,17 @@ public:
 	}
 
 	void
-	drawRect( const v2<float> &size, const v3<float> &pos, const Colour &c )
+	drawRect( const vec2<float> &size, const vec3<float> &pos, const Colour &c )
 	{
 		float r, g, b;
 		c.getRgbF( &r, &g, &b );
 
 		GLfloat vertices[] = {
 			r, g, b,
-			pos.getX(),					pos.getY(),
-			pos.getX() + size.getX(),	pos.getY(),
-			pos.getX() + size.getX(),	pos.getY() + size.getY(),
-			pos.getX(),					pos.getY() + size.getY()
+			pos[BK_X],					pos[BK_Y],
+			pos[BK_X] + size[BK_WIDTH],	pos[BK_Y],
+			pos[BK_X] + size[BK_WIDTH],	pos[BK_Y] + size[BK_HEIGHT],
+			pos[BK_X],					pos[BK_Y] + size[BK_HEIGHT]
 		};
 
 		GraphicsNode *node = new GraphicsNode();
@@ -250,7 +251,7 @@ public:
 	}
 
 	void
-	drawText( const wchar_t *text, const v3<float> &pos, const Colour &c )
+	drawText( const wchar_t *text, const vec3<float> &pos, const Colour &c )
 	{
 		mFont->render(
 			pos,
@@ -289,7 +290,7 @@ GlfwGraphics::init( CoreServices *services )
 }
 
 void
-GlfwGraphics::createWindow( const v2<int> &size, const std::wstring &title )
+GlfwGraphics::createWindow( const vec2<int> &size, const std::wstring &title )
 {
 	mImpl->createWindow( size, title );
 }
@@ -319,36 +320,36 @@ GlfwGraphics::freeResource( const string &id )
 }
 
 void
-GlfwGraphics::drawCircle( const v3<float> &pos, const uint radius, const Colour &c )
+GlfwGraphics::drawCircle( const vec3<float> &pos, const uint radius, const Colour &c )
 {
 	mImpl->drawCircle( pos, radius, c );
 }
 
 void
-GlfwGraphics::drawImage( const string &filePath, const v2<float> &size, const v3<float> &pos )
+GlfwGraphics::drawImage( const string &filePath, const vec2<float> &size, const vec3<float> &pos )
 {
 }
 
 void
-GlfwGraphics::drawLine( const v3<float> &from, const v3<float> &to, const Colour &colour )
+GlfwGraphics::drawLine( const vec3<float> &from, const vec3<float> &to, const Colour &colour )
 {
 	mImpl->drawLine( from, to, colour );
 }
 
 void
-GlfwGraphics::drawPoint( const v3<float> &pos, const uint size, const Colour &colour )
+GlfwGraphics::drawPoint( const vec3<float> &pos, const uint size, const Colour &colour )
 {
 	mImpl->drawPoint( pos, size, colour );
 }
 
 void
-GlfwGraphics::drawRect( const v2<float> &size, const v3<float> &pos, const Colour &colour )
+GlfwGraphics::drawRect( const vec2<float> &size, const vec3<float> &pos, const Colour &colour )
 {
 	mImpl->drawRect( size, pos, colour );
 }
 
 void
-GlfwGraphics::drawText( const wchar_t *text, const v3<float> &pos, const Colour &colour )
+GlfwGraphics::drawText( const wchar_t *text, const vec3<float> &pos, const Colour &colour )
 {
 	mImpl->drawText( text, pos, colour );
 }
