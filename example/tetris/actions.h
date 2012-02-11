@@ -21,10 +21,10 @@ bool
 collisionDetected( GameEntity *block, GameEntity *field )
 {
 	bool retValue = false;
-	int rows = field->getState<StateInt*>( "state:rows" )->getValue();
+	int rows = field->state<StateInt*>( "state:rows" )->value();
 	int fields = FIELD_SIZE * rows;
 
-	auto fieldMatrix = field->getForm()->getState<StateIntVector*>( "state:field" )->getValues();
+	auto fieldMatrix = field->form()->state<StateIntVector*>( "state:field" )->values();
 	for ( int i = 0; i < fields; ++i ) {
 		if ( fieldMatrix[ i ] == IN_MOTION && ( ( i + FIELD_SIZE ) < fields ) && ( fieldMatrix[ i + FIELD_SIZE ] == SET ) ) {
 			retValue = true;
@@ -40,13 +40,13 @@ collisionDetected( GameEntity *block, GameEntity *field )
 
 void setBlockFields( GameEntity *field, int value = SET )
 {
-	Form *fieldForm = field->getForm();
+	Form *fieldForm = field->form();
 
-	auto row = fieldForm->getState<StateInt*>( "block:row" )->getValue();
-	auto block = fieldForm->getState<StateIntVector*>( "block:current" )->getValues();
-	auto column = fieldForm->getState<StateInt*>( "block:column" )->getValue();
-	auto matrixState = fieldForm->getState<StateIntVector*>( "state:field" );
-	auto matrix = matrixState->getValues();
+	auto row = fieldForm->state<StateInt*>( "block:row" )->value();
+	auto block = fieldForm->state<StateIntVector*>( "block:current" )->values();
+	auto column = fieldForm->state<StateInt*>( "block:column" )->value();
+	auto matrixState = fieldForm->state<StateIntVector*>( "state:field" );
+	auto matrix = matrixState->values();
 
 	for( int i = 0, j = 0; i < matrix.size(); ++i ) {
 		int startBlock = ( row * FIELD_SIZE ) + ( column - 1 );
@@ -73,8 +73,8 @@ void setBlockFields( GameEntity *field, int value = SET )
 }
 
 DoActionFunction pauseGame([]( Action *action, GameEntity *entity ) {
-	entity->getState<StateBool*>( "state:pause" )->setValue(
-		!entity->getState<StateBool*>( "state:pause" )->getValue()
+	entity->state<StateBool*>( "state:pause" )->setValue(
+		!entity->state<StateBool*>( "state:pause" )->value()
 	);
 });
 
@@ -88,43 +88,43 @@ DoActionFunction nextBlock([]( Action *action, GameEntity *entity ) {
 	srand( time( 0 ) );
 
 	GameEntity *block = 0;
-	GameEntity *field = entity->getParent()->getChild( "entity:field" );
-	GameEntity *nextBlock = entity->getChild( blocks[ rand() % 7 ] );
+	GameEntity *field = entity->parent()->child( "entity:field" );
+	GameEntity *nextBlock = entity->child( blocks[ rand() % 7 ] );
 
-	if ( field->getForm()->getLSpace()->hasEntity( "block:next" ) ) {
-		block = field->getForm()->getLSpace()->getEntity( "block:next" );
+	if ( field->form()->lSpace()->hasEntity( "block:next" ) ) {
+		block = field->form()->lSpace()->entity( "block:next" );
 	} else {
-		block = entity->getChild( blocks[ rand() % 7 ] );
+		block = entity->child( blocks[ rand() % 7 ] );
 	}
 
-	field->getForm()->getState<StateIntVector*>( "block:current" )->setValues(
-		block->getForm()->getState<StateIntVector*>( "state:matrix" )->getValues()
+	field->form()->state<StateIntVector*>( "block:current" )->setValues(
+		block->form()->state<StateIntVector*>( "state:matrix" )->values()
 	);
 
-	entity->getParent()->getForm()->addToLSpace( "block:current", block );
-	field->getState<StateInt*>( "state:column" )->setValue(5);
-	field->getForm()->getState<StateInt*>( "block:column" )->setValue( 5 );
+	entity->parent()->form()->addToLSpace( "block:current", block );
+	field->state<StateInt*>( "state:column" )->setValue(5);
+	field->form()->state<StateInt*>( "block:column" )->setValue( 5 );
 
-	field->getForm()->removeFromLSpace( "block:next" );
-	field->getForm()->removeFromVSpace( "block:next" );
-	field->getForm()->addToLSpace( "block:next", nextBlock );
-	field->getForm()->addToVSpace( "block:next", nextBlock->getForm() );
-	nextBlock->getForm()->setPosition( { 800, 40, 0 } );
+	field->form()->removeFromLSpace( "block:next" );
+	field->form()->removeFromVSpace( "block:next" );
+	field->form()->addToLSpace( "block:next", nextBlock );
+	field->form()->addToVSpace( "block:next", nextBlock->form() );
+	nextBlock->form()->setPosition( { 800, 40, 0 } );
 
 	setBlockFields( field, IN_MOTION );
 
 	if ( collisionDetected( block, field ) ) {
-		entity->getParent()->invokeAction( "action:gameOver", field );
+		entity->parent()->invokeAction( "action:gameOver", field );
 	}
 });
 
 DoActionFunction moveRight([]( Action *action, GameEntity *entity ) {
 
-	auto gamePaused = entity->getState<StateBool*>( "state:pause" );
-	if ( gamePaused && gamePaused->getValue() ) return; // do nothing on pause
+	auto gamePaused = entity->state<StateBool*>( "state:pause" );
+	if ( gamePaused && gamePaused->value() ) return; // do nothing on pause
 
-	GameEntity *field = entity->getChild( "entity:field" );
-	auto fieldMatrix = field->getForm()->getState<StateIntVector*>( "state:field" )->getValues();
+	GameEntity *field = entity->child( "entity:field" );
+	auto fieldMatrix = field->form()->state<StateIntVector*>( "state:field" )->values();
 
 	bool v = false;
 	for ( int i = 0; i < ( FIELD_SIZE * ROW_COUNT ); ++i ) {
@@ -139,21 +139,21 @@ DoActionFunction moveRight([]( Action *action, GameEntity *entity ) {
 		}
 	}
 
-	StateInt *column = field->getForm()->getState<StateInt*>( "block:column" );
+	StateInt *column = field->form()->state<StateInt*>( "block:column" );
 	if ( !v ) {
 		setBlockFields( field, CLEAN );
-		column->setValue( column->getValue() + 1 );
+		column->setValue( column->value() + 1 );
 		setBlockFields( field, IN_MOTION );
 	}
 });
 
 DoActionFunction moveLeft([]( Action *action, GameEntity *entity ) {
 
-	auto gamePaused = entity->getState<StateBool*>( "state:pause" );
-	if ( gamePaused && gamePaused->getValue() ) return; // do nothing on pause
+	auto gamePaused = entity->state<StateBool*>( "state:pause" );
+	if ( gamePaused && gamePaused->value() ) return; // do nothing on pause
 
-	GameEntity *field = entity->getChild( "entity:field" );
-	auto fieldMatrix = field->getForm()->getState<StateIntVector*>( "state:field" )->getValues();
+	GameEntity *field = entity->child( "entity:field" );
+	auto fieldMatrix = field->form()->state<StateIntVector*>( "state:field" )->values();
 
 	bool v = false;
 	for ( int i = 0; i < ( FIELD_SIZE * ROW_COUNT ); ++i ) {
@@ -168,35 +168,35 @@ DoActionFunction moveLeft([]( Action *action, GameEntity *entity ) {
 		}
 	}
 
-	StateInt *column = field->getForm()->getState<StateInt*>( "block:column" );
+	StateInt *column = field->form()->state<StateInt*>( "block:column" );
 	if ( !v ) {
 		setBlockFields( field, CLEAN );
-		column->setValue( column->getValue() - 1 );
+		column->setValue( column->value() - 1 );
 		setBlockFields( field, IN_MOTION );
 	}
 });
 
 DoActionFunction recalc([]( Action *action, GameEntity *field ) {
 
-	auto gamePaused = field->getParent()->getState<StateBool*>( "state:pause" );
-	if ( gamePaused && gamePaused->getValue() ) return; // do nothing on pause
+	auto gamePaused = field->parent()->state<StateBool*>( "state:pause" );
+	if ( gamePaused && gamePaused->value() ) return; // do nothing on pause
 
-	GameEntity *block = field->getParent()->getForm()->getLSpace()->getEntity( "block:current" );
+	GameEntity *block = field->parent()->form()->lSpace()->entity( "block:current" );
 
-	StateInt *step = field->getForm()->getState<StateInt*>( "state:step" );
-	step->setValue( step->getValue() + 1 );
+	StateInt *step = field->form()->state<StateInt*>( "state:step" );
+	step->setValue( step->value() + 1 );
 
 	setBlockFields( field, CLEAN );
-	float row = step->getValue() / BLOCK_HEIGHT;
-	row += ( step->getValue() % BLOCK_HEIGHT == 0 ) ? 0 : 1;
-	field->getForm()->getState<StateInt*>( "block:row" )->setValue( row );
+	float row = step->value() / BLOCK_HEIGHT;
+	row += ( step->value() % BLOCK_HEIGHT == 0 ) ? 0 : 1;
+	field->form()->state<StateInt*>( "block:row" )->setValue( row );
 	setBlockFields( field, IN_MOTION );
 
 	if ( block ) {
-		vec3<float> pos = block->getForm()->getPosition();
+		vec3<float> pos = block->form()->position();
 
-		int currMatrix = block->getForm()->getState<StateInt*>( "state:currentMatrix" )->getValue();
-		int rows = field->getState<StateInt*>( "state:rows" )->getValue();
+		int currMatrix = block->form()->state<StateInt*>( "state:currentMatrix" )->value();
+		int rows = field->state<StateInt*>( "state:rows" )->value();
 
 		if ( collisionDetected( block, field ) ) {
 			field->invokeAction( "action:clearCompleteRows" );
@@ -204,17 +204,17 @@ DoActionFunction recalc([]( Action *action, GameEntity *field ) {
 			setBlockFields( field, SET );
 			step->setValue( 0 );
 
-			field->getForm()->getState<StateInt*>( "block:row" )->setValue( 0 );
-			field->getParent()->getForm()->removeFromLSpace( "block:current" );
-			field->getParent()->getChild( "entity:group" )->invokeAction( "action:nextBlock" );
+			field->form()->state<StateInt*>( "block:row" )->setValue( 0 );
+			field->parent()->form()->removeFromLSpace( "block:current" );
+			field->parent()->child( "entity:group" )->invokeAction( "action:nextBlock" );
 		}
 	}
 });
 
 DoActionFunction clearCompleteRows([]( Action *action, GameEntity *entity ) {
-	GameEntity *field = action->getSource();
-	auto fieldMatrix = field->getForm()->getState<StateIntVector*>( "state:field" )->getValues();
-	auto score = field->getParent()->getChild( "entity:score" );
+	GameEntity *field = action->source();
+	auto fieldMatrix = field->form()->state<StateIntVector*>( "state:field" )->values();
+	auto score = field->parent()->child( "entity:score" );
 
 	int setBlocksCount = 0;
 	int points = 0;
@@ -236,7 +236,7 @@ DoActionFunction clearCompleteRows([]( Action *action, GameEntity *entity ) {
 			// ... else collect the points
 			} else if ( completeRows.size() > 0 ) {
 				// add new points
-				score->getState<StateInt*>( "state:linesCleared" )->setValue( completeRows.size() );
+				score->state<StateInt*>( "state:linesCleared" )->setValue( completeRows.size() );
 				score->invokeAction( "action:collectPoints" );
 
 				// clear the rows
@@ -251,7 +251,7 @@ DoActionFunction clearCompleteRows([]( Action *action, GameEntity *entity ) {
 				}
 
 				// set matrix
-				field->getForm()->getState<StateIntVector*>( "state:field" )->setValues( fieldMatrix );
+				field->form()->state<StateIntVector*>( "state:field" )->setValues( fieldMatrix );
 
 				completeRows.clear();
 			}
@@ -270,18 +270,18 @@ DoneFunction recalcDone([]( const Action *action ) {
 });
 
 DoActionFunction collectPoints([]( Action *action, GameEntity *entity ) {
-	auto score = action->getSource()->getState<StateInt*>( "state:score" );
-	auto lines = action->getSource()->getState<StateInt*>( "state:linesCleared" );
+	auto score = action->source()->state<StateInt*>( "state:score" );
+	auto lines = action->source()->state<StateInt*>( "state:linesCleared" );
 	int points = 0;
 
-	if ( lines->getValue() == 4 )
+	if ( lines->value() == 4 )
 		points = 1000;
 	else
-		points = lines->getValue() * 50;
+		points = lines->value() * 50;
 
 	lines->setValue( 0 );
-	score->setValue( score->getValue() + points );
-	action->getSource()->getForm()->getState<StateInt*>( "state:score" )->setValue( score->getValue() );
+	score->setValue( score->value() + points );
+	action->source()->form()->state<StateInt*>( "state:score" )->setValue( score->value() );
 });
 
 #endif /* end of include guard: ACTIONS_J8BEDW58 */

@@ -24,13 +24,13 @@ FieldForm::~FieldForm()
 
 void FieldForm::render()
 {
-	auto matrix = getState<StateIntVector*>( "state:field" )->getValues();
-	auto column = getState<StateInt*>( "block:column" )->getValue();
-	auto row = getState<StateInt*>( "block:row" )->getValue();
+	auto matrix = state<StateIntVector*>( "state:field" )->values();
+	auto column = state<StateInt*>( "block:column" )->value();
+	auto row = state<StateInt*>( "block:row" )->value();
 
 	int i = 0;
 	int j = 0;
-	auto pos = getPosition();
+	auto pos = position();
 	vec2<float> size({ 40.0, 40.0 });
 
 	Colour cSet( 255, 0, 0, 255 );
@@ -38,16 +38,16 @@ void FieldForm::render()
 	Colour cControl( 255, 125, 125, 125 );
 
 	// draw current column
-	getGraphics()->drawRect( { 40.0, 5.0 }, {(float)(240 + column * 40), 10.0, 0.0}, cControl );
+	graphics()->drawRect( { 40.0, 5.0 }, {(float)(240 + column * 40), 10.0, 0.0}, cControl );
 
 	// draw current row
-	getGraphics()->drawRect( { 5.0, 40.0 }, {230.0, (float)(20 + row * 40), 0.0}, cControl );
+	graphics()->drawRect( { 5.0, 40.0 }, {230.0, (float)(20 + row * 40), 0.0}, cControl );
 
 	for_each( matrix.begin(), matrix.end(), [&i, &j, &pos, size, this, &cSet, &cControl, &cInMotion]( int k ) {
 		float x = pos[BK_X] + 40 * ( i % FIELD_WIDTH );
 		float y = pos[BK_Y] + 40 * j;
 
-		auto graphics = this->getGraphics();
+		auto graphics = this->graphics();
 
 		// draw already occupied blocks
 		if ( SET == k ) {
