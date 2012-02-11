@@ -75,6 +75,20 @@ namespace Baukasten {
 			return *this;
 		}
 
+		bool operator==( const vec3<T> &other )
+		{
+			return (
+				data[0] == other.data[0] &&
+				data[1] == other.data[1] &&
+				data[2] == other.data[2]
+			);
+		}
+
+		bool operator!=( const vec3<T> &other )
+		{
+			return !operator==(other);
+		}
+
 		vec3<T>& operator+( const vec3<T> &other )
 		{
 			data[0] += other.data[0];
