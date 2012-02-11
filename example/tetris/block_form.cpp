@@ -1,7 +1,7 @@
 #include "block_form.h"
 
-#include "core/Colour"
 #include "core/GenericState"
+#include "graphics/Colour"
 #include "graphics/IGraphics"
 
 using namespace Baukasten;

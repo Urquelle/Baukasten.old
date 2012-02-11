@@ -2,8 +2,8 @@
 
 #include "constants.h"
 
-#include "core/Colour"
 #include "core/GenericState"
+#include "graphics/Colour"
 #include "graphics/IGraphics"
 
 #include <algorithm>
