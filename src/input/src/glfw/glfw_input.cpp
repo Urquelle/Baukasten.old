@@ -11,7 +11,6 @@ using namespace Baukasten;
 Key
 key( int _key )
 {
-	BK_DEBUG("in key");
 	Key t_key = Key::KEY_NONE;
 
 	switch ( _key ) {
