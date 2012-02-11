@@ -11,7 +11,7 @@ IAudio*
 AudioInterface::instance()
 {
 	if ( !mInstance ) {
-		mInstance = new OpenALAudio();
+		mInstance = new Audio();
 	}
 
 	return mInstance;

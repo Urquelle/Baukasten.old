@@ -11,7 +11,7 @@ IGraphics*
 GraphicsInterface::instance()
 {
 	if ( !mInstance ) {
-		mInstance = new GlfwGraphics();
+		mInstance = new Graphics();
 	}
 
 	return mInstance;

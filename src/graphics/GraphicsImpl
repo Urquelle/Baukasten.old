@@ -1,1 +1,4 @@
 #include "include/glfw/glfw_graphics.h"
+namespace Baukasten {
+typedef GlfwGraphics Graphics;
+}

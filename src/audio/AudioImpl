@@ -1,1 +1,4 @@
 #include "include/openal/openal_audio.h"
+namespace Baukasten {
+typedef OpenALAudio Audio;
+}

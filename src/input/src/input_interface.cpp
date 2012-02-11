@@ -10,7 +10,7 @@ IInput*
 InputInterface::instance()
 {
 	if ( !mInstance ) {
-		mInstance = new GlfwInput();
+		mInstance = new Input();
 	}
 
 	return mInstance;
