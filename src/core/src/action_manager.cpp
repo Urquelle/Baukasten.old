@@ -32,19 +32,19 @@ ActionManager::addAction( const std::string &id, Action *action )
 }
 
 Action*
-ActionManager::getAction( const std::string &id ) const
+ActionManager::action( const std::string &id ) const
 {
 	return get( id );
 }
 
 ActionManager::TMap
-ActionManager::getActions() const
+ActionManager::actions() const
 {
-	return getAll();
+	return all();
 }
 
 list<Action*>
-ActionManager::getInvokedActions() const
+ActionManager::invokedActions() const
 {
 	return mActionQueue;
 }
@@ -58,16 +58,16 @@ ActionManager::hasAction( const std::string &id ) const
 void
 ActionManager::invokeAction( const std::string &id )
 {
-	Action *action = getAction( id );
+	Action *_action = action( id );
 
-	if ( action && !action->isActive() ) {
-		action->clear();
-		action->setActive( true );
-		mActionQueue.push_back( action );
+	if ( _action && !_action->isActive() ) {
+		_action->clear();
+		_action->setActive( true );
+		mActionQueue.push_back( _action );
 
-		action->getSource()->onActionInvoked().emit(
-			action->getSource(),
-			action
+		_action->source()->onActionInvoked().emit(
+			_action->source(),
+			_action
 		);
 	}
 }
@@ -76,17 +76,17 @@ void
 ActionManager::invokeAction( const std::string &id, GameEntity *target )
 {
 	BK_ASSERT( target != 0, "target must not be 0" );
-	Action *action = getAction( id );
+	Action *_action = action( id );
 
-	if ( action && !action->isActive() ) {
-		action->clear();
-		action->setActive( true );
-		action->setTarget( target );
-		mActionQueue.push_back( action );
+	if ( _action && !_action->isActive() ) {
+		_action->clear();
+		_action->setActive( true );
+		_action->setTarget( target );
+		mActionQueue.push_back( _action );
 
-		action->getSource()->onActionInvoked().emit(
-			action->getSource(),
-			action
+		_action->source()->onActionInvoked().emit(
+			_action->source(),
+			_action
 		);
 	}
 }
@@ -94,17 +94,17 @@ ActionManager::invokeAction( const std::string &id, GameEntity *target )
 void
 ActionManager::invokeAction( const std::string &id, list<GameEntity*> targets )
 {
-	Action *action = getAction( id );
+	Action *_action = action( id );
 
-	if ( action && !action->isActive() ) {
-		action->clear();
-		action->setActive( true );
-		action->setTargets( targets );
-		mActionQueue.push_back( action );
+	if ( _action && !_action->isActive() ) {
+		_action->clear();
+		_action->setActive( true );
+		_action->setTargets( targets );
+		mActionQueue.push_back( _action );
 
-		action->getSource()->onActionInvoked().emit(
-			action->getSource(),
-			action
+		_action->source()->onActionInvoked().emit(
+			_action->source(),
+			_action
 		);
 	}
 }
@@ -112,13 +112,13 @@ ActionManager::invokeAction( const std::string &id, list<GameEntity*> targets )
 void
 ActionManager::dropAction( const std::string &id )
 {
-	Action *action = getAction( id );
+	Action *_action = action( id );
 
-	if ( action && action->isActive() ) {
-		action->setActive( false );
+	if ( _action && _action->isActive() ) {
+		_action->setActive( false );
 		mActionQueue.erase(
-			find_if( mActionQueue.begin(), mActionQueue.end(), [action](Action *a) {
-				return a == action;
+			find_if( mActionQueue.begin(), mActionQueue.end(), [_action](Action *a) {
+				return a == _action;
 			})
 		);
 	}

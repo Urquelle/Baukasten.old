@@ -49,31 +49,31 @@ CoreServices::shutdown()
 }
 
 IAudio*
-CoreServices::getAudioService() const
+CoreServices::audioService() const
 {
 	return mAudio;
 }
 
 IInput*
-CoreServices::getInputService() const
+CoreServices::inputService() const
 {
 	return mInput;
 }
 
 IGraphics*
-CoreServices::getVideoService() const
+CoreServices::videoService() const
 {
 	return mGraphics;
 }
 
 int
-CoreServices::getArgumentsCount()
+CoreServices::argumentsCount()
 {
 	return mArgc;
 }
 
 char**
-CoreServices::getArguments() const
+CoreServices::arguments() const
 {
 	return mArgv;
 }

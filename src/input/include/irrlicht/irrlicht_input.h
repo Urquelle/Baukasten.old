@@ -22,7 +22,7 @@ namespace Baukasten {
 		bool init( CoreServices* );
 		void process() const;
 		void shutdown();
-		string getServiceName() const { return "Irrlicht"; }
+		string serviceName() const { return "Irrlicht"; }
 
 		void setDevice( irr::IrrlichtDevice* );
 

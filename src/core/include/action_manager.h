@@ -26,7 +26,7 @@ namespace Baukasten {
 
 		/*! \brief adds an Action object to the map.
 		 *
-		 * adds the given Action object to the map. Action::getId() is
+		 * adds the given Action object to the map. Action::id() is
 		 * used as the key for the map.
 		 *
 		 * \param action Action object to insert.
@@ -52,10 +52,10 @@ namespace Baukasten {
 		 * \param id key in the map under which the object was inserted.
 		 * \return a pointer to the Action object if found, NULL otherwise.
 		 */
-		Action* getAction( const std::string& ) const;
+		Action* action( const std::string& ) const;
 
 		/*! \brief returns the map of objects. */
-		TMap getActions() const;
+		TMap actions() const;
 
 		/*! \brief returns a list of currently active actions.
 		 *
@@ -64,7 +64,7 @@ namespace Baukasten {
 		 *
 		 * \return ActionList actions in the execution queue.
 		 */
-		list<Action*> getInvokedActions() const;
+		list<Action*> invokedActions() const;
 
 		/*! \brief returns wheter the the key's present in the map.
 		 *

@@ -51,7 +51,7 @@ namespace Baukasten {
 		virtual ~Action();
 
 		/*! \brief return action's source GameEntity */
-		GameEntity* getSource() const;
+		GameEntity* source() const;
 
 		/*! \brief clear action's target and targets objects
 		 *
@@ -83,7 +83,7 @@ namespace Baukasten {
 		 *
 		 * \return GameEntity object if set, 0 otherwise.
 		 */
-		GameEntity* getTarget();
+		GameEntity* target();
 
 		/*! \brief set target objects.
 		 *
@@ -97,7 +97,7 @@ namespace Baukasten {
 		 *
 		 * \return GameEntityList as a list of targets.
 		 */
-		list<GameEntity*> getTargets();
+		list<GameEntity*> targets();
 
 		/*! \brief returns bool whether or not the action should be dropped.
 		 *

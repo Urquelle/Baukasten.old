@@ -16,12 +16,12 @@ namespace Baukasten {
 		void init( int, char** );
 		void shutdown();
 
-		IAudio*		getAudioService() const;
-		IInput*		getInputService() const;
-		IGraphics*	getVideoService() const;
+		IAudio*		audioService() const;
+		IInput*		inputService() const;
+		IGraphics*	videoService() const;
 
-		int			getArgumentsCount();
-		char**		getArguments() const;
+		int			argumentsCount();
+		char**		arguments() const;
 
 	private:
 		CoreServices();

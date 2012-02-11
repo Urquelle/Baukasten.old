@@ -16,7 +16,7 @@ namespace Baukasten {
 		bool init( CoreServices* );
 		void process() const;
 		void shutdown();
-		string getServiceName() const { return "GLFW"; }
+		string serviceName() const { return "GLFW"; }
 	};
 } /* Baukasten */
 

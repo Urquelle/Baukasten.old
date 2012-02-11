@@ -15,7 +15,7 @@ LogicalSpace::~LogicalSpace()
 }
 
 GameEntity*
-LogicalSpace::getEntity( const string &id ) const
+LogicalSpace::entity( const string &id ) const
 {
 	auto it = mMap.find( id );
 	if ( it == mMap.end() )
@@ -49,11 +49,11 @@ void
 LogicalSpace::addEntity( GameEntity *entity )
 {
 	BK_ASSERT( entity != 0, "entity must not be 0." );
-	addEntity( entity->getId(), entity );
+	addEntity( entity->id(), entity );
 }
 
 list<GameEntity*>
-LogicalSpace::getEntities() const
+LogicalSpace::entities() const
 {
 	return mList;
 }
@@ -69,7 +69,7 @@ LogicalSpace::removeEntity( const string &id )
 {
 	mMap.erase( mMap.find( id ) );
 	mList.remove_if( [&id]( GameEntity *entity ) {
-		return entity->getId() == id;
+		return entity->id() == id;
 	});
 }
 

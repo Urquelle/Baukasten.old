@@ -134,7 +134,7 @@ public:
 	}
 
 	float
-	getFps() const
+	fps() const
 	{
 		return mFps;
 	}
@@ -175,7 +175,7 @@ public:
 	drawLine( const vec3<float> &from, const vec3<float> &to, const Colour &c )
 	{
 		float r, g, b;
-		c.getRgbF( &r, &g, &b );
+		c.rgbF( &r, &g, &b );
 
 		GLfloat vertices[] = {
 			r, g, b,
@@ -201,7 +201,7 @@ public:
 	drawPoint( const vec3<float> &pos, const uint size, const Colour &c )
 	{
 		float r, g, b;
-		c.getRgbF( &r, &g, &b );
+		c.rgbF( &r, &g, &b );
 
 		GLfloat vertices[] = {
 			r, g, b,
@@ -226,7 +226,7 @@ public:
 	drawRect( const vec2<float> &size, const vec3<float> &pos, const Colour &c )
 	{
 		float r, g, b;
-		c.getRgbF( &r, &g, &b );
+		c.rgbF( &r, &g, &b );
 
 		GLfloat vertices[] = {
 			r, g, b,
@@ -355,9 +355,9 @@ GlfwGraphics::drawText( const wchar_t *text, const vec3<float> &pos, const Colou
 }
 
 float
-GlfwGraphics::getFps() const
+GlfwGraphics::fps() const
 {
-	return mImpl->getFps();
+	return mImpl->fps();
 }
 
 void

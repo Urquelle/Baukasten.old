@@ -42,11 +42,11 @@ namespace Baukasten {
 		void setPosition( const vec3<float> );
 
 		/*! \brief getter method for position. */
-		const vec3<float> getPosition() const;
+		const vec3<float> position() const;
 
 		void setSize( const vec2<float> );
 
-		const vec2<float> getSize() const;
+		const vec2<float> size() const;
 
 		/*! \brief set the rotation around the x-axis.
 		 *
@@ -55,25 +55,25 @@ namespace Baukasten {
 		void setPitch( const float );
 
 		/*! getter method for the rotation around the x-axis. */
-		const float getPitch() const;
+		const float pitch() const;
 
 		/*! setter method for object's rotation around the y-axis. */
 		void setYaw( const float );
 
 		/*! getter method for object's rotation around the y-axis. */
-		const float getYaw() const;
+		const float yaw() const;
 
 		/*! setter method for object's rotation around the z-axis. */
 		void setRoll( const float );
 
 		/*! getter method for object's rotation around the z-axis. */
-		const float getRoll() const;
+		const float roll() const;
 
 		/*! setter method for object's scale ratio. */
 		void setScale( const float );
 
 		/*! getter method for object's scale ratio. */
-		const float getScale() const;
+		const float scale() const;
 
 		/*! sets the visibility of the object. */
 		virtual void setVisible( bool );

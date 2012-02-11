@@ -29,10 +29,10 @@ namespace Baukasten {
 		{
 		}
 
-		const T& getValue() const
+		const T& value() const
 		{
 			if ( mIntState )
-				return ( static_cast<GenericState<T>*>( mIntState ) )->getValue();
+				return ( static_cast<GenericState<T>*>( mIntState ) )->value();
 
 			return mValue;
 		}
@@ -48,7 +48,7 @@ namespace Baukasten {
 
 		GenericState<T>* pack()
 		{
-			GenericState<T> *newState = new GenericState<T>( getId() );
+			GenericState<T> *newState = new GenericState<T>( id() );
 			newState->mIntState = this;
 			return newState;
 		}
@@ -76,15 +76,15 @@ namespace Baukasten {
 		{
 		}
 
-		const T& getValue( const int i ) const
+		const T& value( const int i ) const
 		{
 			if ( mIntState )
-				return ( static_cast<GenericState<vector<T>>*>( mIntState ) )->getValue( i );
+				return ( static_cast<GenericState<vector<T>>*>( mIntState ) )->value( i );
 
 			return mValues.at( i );
 		}
 
-		vector<T> getValues() const
+		vector<T> values() const
 		{
 			return mValues;
 		}
@@ -122,12 +122,12 @@ namespace Baukasten {
 
 		void setValues( GenericState<vector<T>> *state )
 		{
-			mValues = state->getValues();
+			mValues = state->values();
 		}
 
 		GenericState<vector<T>>* pack()
 		{
-			GenericState<vector<T>> *newState = new GenericState<vector<T>>( getId() );
+			GenericState<vector<T>> *newState = new GenericState<vector<T>>( id() );
 			newState->mIntState = this;
 			return newState;
 		}

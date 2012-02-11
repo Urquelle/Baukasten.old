@@ -192,13 +192,13 @@ namespace Baukasten {
 			case EET_KEY_INPUT_EVENT:
 				if ( event.KeyInput.PressedDown ) {
 					mInput->mOnKeyDown.emit(
-						getKey( event.KeyInput.Key ),
-						getModifier( event.KeyInput )
+						key( event.KeyInput.Key ),
+						modifier( event.KeyInput )
 					);
 				} else if ( !event.KeyInput.PressedDown ) {
 					mInput->mOnKeyUp.emit(
-						getKey( event.KeyInput.Key ),
-						getModifier( event.KeyInput )
+						key( event.KeyInput.Key ),
+						modifier( event.KeyInput )
 					);
 				}
 				break;
@@ -229,10 +229,10 @@ IrrlichtInput::init( CoreServices *coreServices )
 	BK_ASSERT( coreServices != 0, "coreServices must not be 0." );
 
 	IrrlichtGraphics *graphics =
-		dynamic_cast<IrrlichtGraphics*>( coreServices->getVideoService() );
+		dynamic_cast<IrrlichtGraphics*>( coreServices->videoService() );
 
 	BK_ASSERT( graphics != 0, "graphics must not be 0." );
-	graphics->getDevice()->setEventReceiver( mImpl.get() );
+	graphics->device()->setEventReceiver( mImpl.get() );
 
 	return true;
 }

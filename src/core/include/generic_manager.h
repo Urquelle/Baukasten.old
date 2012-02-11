@@ -47,7 +47,7 @@ namespace Baukasten {
 		virtual void add( T *t )
 		{
 			BK_ASSERT( t != 0, "t must not be 0." );
-			add( t->getId(), t );
+			add( t->id(), t );
 		}
 
 		/*! \brief add object t to the collection.
@@ -90,7 +90,7 @@ namespace Baukasten {
 		 *
 		 * \return map of object pointers of type T.
 		 */
-		virtual TMap getAll() const
+		virtual TMap all() const
 		{
 			return mMap;
 		}

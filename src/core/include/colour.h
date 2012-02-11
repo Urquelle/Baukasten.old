@@ -11,19 +11,19 @@ namespace Baukasten
 
 		virtual ~Colour();
 
-		inline int getRed() const { return mR; }
-		inline int getGreen() const { return mG; }
-		inline int getBlue() const { return mB; }
-		inline int getAlpha() const { return mA; }
+		inline int red() const { return mR; }
+		inline int green() const { return mG; }
+		inline int blue() const { return mB; }
+		inline int alpha() const { return mA; }
 
-		void getRgb( int*, int*, int*, int *a = 0 ) const;
+		void rgb( int*, int*, int*, int *a = 0 ) const;
 
-		inline float getRedF() const { return getRed() / 256.0; }
-		inline float getGreenF() const { return getGreen() / 256.0; }
-		inline float getBlueF() const { return getBlue() / 256.0; }
-		inline float getAlphaF() const { return getAlpha() / 256.0; }
+		inline float redF() const { return red() / 256.0; }
+		inline float greenF() const { return green() / 256.0; }
+		inline float blueF() const { return blue() / 256.0; }
+		inline float alphaF() const { return alpha() / 256.0; }
 
-		void getRgbF( float*, float*, float*, float *a = 0 ) const;
+		void rgbF( float*, float*, float*, float *a = 0 ) const;
 
 	private:
 		int mR;

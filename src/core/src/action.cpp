@@ -20,7 +20,7 @@ Action::~Action()
 }
 
 GameEntity*
-Action::getSource() const
+Action::source() const
 {
 	return mSource;
 }
@@ -52,7 +52,7 @@ Action::setTarget( GameEntity *target )
 }
 
 GameEntity*
-Action::getTarget()
+Action::target()
 {
 	return mTarget;
 }
@@ -64,7 +64,7 @@ Action::setTargets( list<GameEntity*> &targets )
 }
 
 list<GameEntity*>
-Action::getTargets()
+Action::targets()
 {
 	return mTargets;
 }
@@ -78,31 +78,31 @@ Action::done() const
 void
 Action::run()
 {
-	auto source = getSource();
+	auto _source = source();
 
 	// remove the action from the execution queue
 	if ( done() )
-		source->dropAction( getId() );
+		_source->dropAction( id() );
 
-	auto target = getTarget();
-	if ( target ) {
-		source->onActionRun().emit( source, this );
-		doAction( target );
+	auto _target = target();
+	if ( _target ) {
+		_source->onActionRun().emit( _source, this );
+		doAction( _target );
 		return;
 	}
 
-	auto targets = getTargets();
-	if ( !targets.empty() ) {
-		for_each( targets.begin(), targets.end(), [source, this]( GameEntity* entity ) {
-			source->onActionRun().emit( source, this );
+	auto _targets = targets();
+	if ( !_targets.empty() ) {
+		for_each( _targets.begin(), _targets.end(), [_source, this]( GameEntity* entity ) {
+			_source->onActionRun().emit( _source, this );
 			doAction( entity );
 		});
 		return;
 	}
 
-	if ( !target && targets.empty() ) {
-		source->onActionRun().emit( source, this );
-		doAction( getSource() );
+	if ( !_target && _targets.empty() ) {
+		_source->onActionRun().emit( _source, this );
+		doAction( _source );
 	}
 }
 

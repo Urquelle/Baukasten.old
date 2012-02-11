@@ -27,8 +27,8 @@ namespace Baukasten {
 		virtual void drawRect( const vec2<float>&, const vec3<float>&, const Colour& ) = 0;
 		virtual void drawText( const wchar_t*, const vec3<float>&, const Colour& ) = 0;
 
-		virtual string getServiceName() const = 0;
-		virtual float getFps() const = 0;
+		virtual string serviceName() const = 0;
+		virtual float fps() const = 0;
 		bool isInitialised() const { return mInitialised; }
 		virtual void setWindowCaption( const std::wstring& ) = 0;
 

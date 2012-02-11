@@ -18,7 +18,7 @@ Drawable::setPosition( const vec3<float> position )
 }
 
 const vec3<float>
-Drawable::getPosition() const
+Drawable::position() const
 {
 	return mPosition;
 }
@@ -30,7 +30,7 @@ Drawable::setSize( const vec2<float> size )
 }
 
 const vec2<float>
-Drawable::getSize() const
+Drawable::size() const
 {
 	return mSize;
 }
@@ -42,7 +42,7 @@ Drawable::setPitch( const float pitch )
 }
 
 const
-float Drawable::getPitch() const
+float Drawable::pitch() const
 {
 	return mPitch;
 }
@@ -54,7 +54,7 @@ Drawable::setYaw( const float yaw )
 }
 
 const float
-Drawable::getYaw() const
+Drawable::yaw() const
 {
 	return mYaw;
 }
@@ -66,7 +66,7 @@ Drawable::setRoll( const float roll )
 }
 
 const float
-Drawable::getRoll() const
+Drawable::roll() const
 {
 	return mRoll;
 }
@@ -78,7 +78,7 @@ Drawable::setScale( const float scale )
 }
 
 const float
-Drawable::getScale() const
+Drawable::scale() const
 {
 	return mScale;
 }

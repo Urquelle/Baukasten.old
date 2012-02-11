@@ -17,7 +17,7 @@ Colour::~Colour()
 }
 
 void
-Colour::getRgb( int *r, int *g, int *b, int *a ) const
+Colour::rgb( int *r, int *g, int *b, int *a ) const
 {
 	if ( !r || !g || !b )
 		return;
@@ -31,16 +31,16 @@ Colour::getRgb( int *r, int *g, int *b, int *a ) const
 }
 
 void
-Colour::getRgbF( float *r, float *g, float *b, float *a ) const
+Colour::rgbF( float *r, float *g, float *b, float *a ) const
 {
 	if ( !r || !g || !b )
 		return;
 
-	*r = getRedF();
-	*g = getGreenF();
-	*b = getBlueF();
+	*r = redF();
+	*g = greenF();
+	*b = blueF();
 
 	if ( a )
-		*a = getAlphaF();
+		*a = alphaF();
 }
 

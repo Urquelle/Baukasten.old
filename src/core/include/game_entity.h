@@ -26,22 +26,22 @@ namespace Baukasten {
 		virtual ~GameEntity();
 
 		void setType( EntityType* );
-		EntityType* getType() const;
+		EntityType* type() const;
 
 		void setForm( Form* );
-		Form* getForm() const;
+		Form* form() const;
 
 		void addState( State* );
 		void addState( const std::string&, State* );
 		bool hasState( const std::string& ) const;
 
 		template<class T>
-		T getState( const std::string &id )
+		T state( const std::string &id )
 		{
-			T state = StateManager::getState<T>( id );
+			T state = StateManager::state<T>( id );
 
-			if ( !state && getType() ) {
-				state = getType()->getState<T>( id );
+			if ( !state && type() ) {
+				state = type()->state<T>( id );
 
 				if ( state ) {
 					state = state->pack();
@@ -53,12 +53,12 @@ namespace Baukasten {
 		}
 
 		void addChild( GameEntity* );
-		GameEntity* getChild( const std::string& ) const;
-		GameEntityMap getChildren() const;
+		GameEntity* child( const std::string& ) const;
+		GameEntityMap children() const;
 		void removeChild( const std::string& );
 
 		void setParent( GameEntity* );
-		GameEntity* getParent() const;
+		GameEntity* parent() const;
 
 		virtual void runActions();
 

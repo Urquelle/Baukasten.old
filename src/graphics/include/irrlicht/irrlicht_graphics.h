@@ -46,12 +46,12 @@ namespace Baukasten {
 		void drawText( const wchar_t*, const v3<float>&, const Colour& );
 
 		void setWindowCaption( const std::wstring& );
-		string getServiceName() const { return "Irrlicht"; }
+		string serviceName() const { return "Irrlicht"; }
 
-		IrrlichtDevice* getDevice() const;
-		video::IVideoDriver* getDriver() const;
-		scene::ISceneManager* getSceneManager() const;
-		gui::IGUIEnvironment* getGui() const;
+		IrrlichtDevice* device() const;
+		video::IVideoDriver* driver() const;
+		scene::ISceneManager* sceneManager() const;
+		gui::IGUIEnvironment* gui() const;
 
 	private:
 		IrrlichtDevice* 		mDevice;

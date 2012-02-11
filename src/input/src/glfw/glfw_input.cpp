@@ -9,11 +9,12 @@
 using namespace Baukasten;
 
 Key
-getKey( int key )
+key( int _key )
 {
+	BK_DEBUG("in key");
 	Key t_key = Key::KEY_NONE;
 
-	switch ( key ) {
+	switch ( _key ) {
 	case 'A': t_key = Key::KEY_A; break;
 	case 'B': t_key = Key::KEY_B; break;
 	case 'C': t_key = Key::KEY_C; break;
@@ -112,24 +113,24 @@ getKey( int key )
 }
 
 Modifier
-getModifier( int key )
+modifier( int _key )
 {
 	Modifier mod = Modifier::KEYMOD_NONE;
 	return mod;
 }
 
-void GLFWCALL inputHandler( int key, int state )
+void GLFWCALL inputHandler( int _key, int state )
 {
 	auto service = static_cast<GlfwInput*>(
-			CoreServices::instance()->getInputService() );
+			CoreServices::instance()->inputService() );
 
-	if ( service->getServiceName() != "GLFW" )
+	if ( service->serviceName() != "GLFW" )
 		return;
 
 	if ( state == GLFW_PRESS )
-		service->onKeyDown().emit( getKey( key ), getModifier( key ) );
+		service->onKeyDown().emit( key( _key ), modifier( _key ) );
 	else if ( state == GLFW_RELEASE )
-		service->onKeyUp().emit( getKey( key ), getModifier( key ) );
+		service->onKeyUp().emit( key( _key ), modifier( _key ) );
 }
 
 GlfwInput::GlfwInput()

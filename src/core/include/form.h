@@ -23,18 +23,18 @@ namespace Baukasten {
 		void addToLSpace( GameEntity* );
 		void addToLSpace( const string&, GameEntity* );
 		void removeFromLSpace( const std::string& );
-		LogicalSpace* getLSpace() const;
+		LogicalSpace* lSpace() const;
 
 		void addToVSpace( Form* );
 		void addToVSpace( const string&, Form* );
 		void removeFromVSpace( const std::string& );
-		VirtualSpace* getVSpace() const;
+		VirtualSpace* vSpace() const;
 
 		virtual void constructScene();
 		virtual void render();
 
 	protected:
-		IGraphics *getGraphics() const;
+		IGraphics *graphics() const;
 
 		shared_ptr<LogicalSpace> mLSpace;
 		shared_ptr<VirtualSpace> mVSpace;

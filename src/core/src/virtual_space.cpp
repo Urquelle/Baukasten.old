@@ -14,7 +14,7 @@ VirtualSpace::~VirtualSpace()
 }
 
 Form*
-VirtualSpace::getEntity( const std::string &id ) const
+VirtualSpace::entity( const std::string &id ) const
 {
 	auto it = mMap.find( id );
 	if ( it == mMap.end() )
@@ -41,15 +41,15 @@ VirtualSpace::addEntity( Form *entity )
 {
 	BK_ASSERT( entity != 0, "entity must not be 0." );
 	BK_ASSERT(
-		!hasEntity( entity->getId() ),
-		"id " << entity->getId() << " must be unique in the collection."
+		!hasEntity( entity->id() ),
+		"id " << entity->id() << " must be unique in the collection."
 	);
 
-	addEntity( entity->getId(), entity );
+	addEntity( entity->id(), entity );
 }
 
 list<Form*>
-VirtualSpace::getEntities() const
+VirtualSpace::entities() const
 {
 	return mList;
 }
@@ -65,7 +65,7 @@ VirtualSpace::removeEntity( const string &id )
 {
 	mMap.erase( mMap.find( id ) );
 	mList.remove_if( [&id]( Form *form ) {
-		return form->getId() == id;
+		return form->id() == id;
 	});
 }
 

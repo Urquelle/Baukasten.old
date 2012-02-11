@@ -28,9 +28,9 @@ StateManager::addState( const std::string &id, State *state )
 }
 
 StateManager::TMap
-StateManager::getStates() const
+StateManager::states() const
 {
-	return getAll();
+	return all();
 }
 
 bool

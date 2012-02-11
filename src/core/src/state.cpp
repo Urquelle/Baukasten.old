@@ -15,7 +15,7 @@ State::~State()
 State*
 State::pack()
 {
-	State *state = new State( getId() );
+	State *state = new State( id() );
 	state->mIntState = this;
 	return state;
 }

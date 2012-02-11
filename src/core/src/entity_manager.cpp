@@ -28,15 +28,15 @@ EntityManager::addEntity( const std::string &id, Entity *entity )
 }
 
 Entity*
-EntityManager::getEntity( const std::string &id ) const
+EntityManager::entity( const std::string &id ) const
 {
 	return get( id );
 }
 
 EntityManager::TMap
-EntityManager::getEntities() const
+EntityManager::entities() const
 {
-	return getAll();
+	return all();
 }
 
 bool

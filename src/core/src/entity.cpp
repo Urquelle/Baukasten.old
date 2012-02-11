@@ -12,7 +12,7 @@ Entity::Entity( const std::string &id ) :
 
 Entity::~Entity()
 {
-	BK_DEBUG( getId() + " destroyed." );
+	BK_DEBUG( id() + " destroyed." );
 }
 
 Entity&
@@ -21,7 +21,7 @@ Entity::operator=( const Entity &other )
 	if ( this == &other )
 		return *this;
 
-	mId = other.getId();
+	mId = other.id();
 
 	return *this;
 }
@@ -29,11 +29,11 @@ Entity::operator=( const Entity &other )
 bool
 Entity::operator==( const Entity &other ) const
 {
-	return ( getId() == other.getId() );
+	return ( id() == other.id() );
 }
 
 const std::string&
-Entity::getId() const
+Entity::id() const
 {
 	return mId;
 }

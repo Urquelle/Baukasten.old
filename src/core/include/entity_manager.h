@@ -14,8 +14,8 @@ namespace Baukasten {
 
 		void addEntity( Entity* );
 		void addEntity( const std::string&, Entity* );
-		Entity* getEntity( const std::string& ) const;
-		TMap getEntities() const;
+		Entity* entity( const std::string& ) const;
+		TMap entities() const;
 		bool hasEntity( const std::string& ) const;
 		void removeEntity( const std::string& );
 	};

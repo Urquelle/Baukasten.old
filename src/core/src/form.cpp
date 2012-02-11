@@ -26,7 +26,7 @@ void
 Form::addToLSpace( GameEntity *entity )
 {
 	BK_ASSERT( entity != 0, "entity must not be 0." );
-	addToLSpace( entity->getId(), entity );
+	addToLSpace( entity->id(), entity );
 }
 
 void
@@ -44,7 +44,7 @@ Form::removeFromLSpace( const std::string &id )
 }
 
 LogicalSpace*
-Form::getLSpace() const
+Form::lSpace() const
 {
 	return mLSpace.get();
 }
@@ -71,7 +71,7 @@ Form::removeFromVSpace( const std::string &id )
 }
 
 VirtualSpace*
-Form::getVSpace() const
+Form::vSpace() const
 {
 	return mVSpace.get();
 }
@@ -79,7 +79,7 @@ Form::getVSpace() const
 void
 Form::constructScene()
 {
-	auto entities = mVSpace->getEntities();
+	auto entities = mVSpace->entities();
 	for_each( entities.begin(), entities.end(), []( Form* f ) {
 		f->constructScene();
 		f->render();
@@ -92,7 +92,7 @@ Form::render()
 }
 
 IGraphics*
-Form::getGraphics() const
+Form::graphics() const
 {
 	return mGraphics;
 }

@@ -30,7 +30,7 @@ void ActionLua::doAction( GameEntity *entity )
 	s.doString( "SLB.using(SLB)" );
 	s.set( "entity", entity );
 	s.set( "action", this );
-	s.set( "source", getSource() );
+	s.set( "source", source() );
 
 	try {
 		s.doFile( mFilePath );

@@ -13,10 +13,10 @@ using namespace std;
 bool
 isAncestor( GameEntity *entity, GameEntity *child )
 {
-	while ( GameEntity *parent = entity->getParent() ) {
+	while ( GameEntity *parent = entity->parent() ) {
 		if ( parent == child )
 			return true;
-		parent = parent->getParent();
+		parent = parent->parent();
 	}
 	return false;
 }
@@ -31,10 +31,10 @@ GameEntity::GameEntity( const std::string &id ) :
 }
 
 GameEntity::GameEntity( const GameEntity &rhs ) :
-	Entity( rhs.getId() ),
-	mType( rhs.getType() ),
-	mForm( rhs.getForm() ),
-	mParent( rhs.getParent() )
+	Entity( rhs.id() ),
+	mType( rhs.type() ),
+	mForm( rhs.form() ),
+	mParent( rhs.parent() )
 {
 }
 
@@ -50,7 +50,7 @@ GameEntity::setType( EntityType *type )
 }
 
 EntityType*
-GameEntity::getType() const
+GameEntity::type() const
 {
 	return mType;
 }
@@ -63,7 +63,7 @@ GameEntity::setForm( Form *form )
 }
 
 Form*
-GameEntity::getForm() const
+GameEntity::form() const
 {
 	return mForm.get();
 }
@@ -84,15 +84,15 @@ void
 GameEntity::addState( State *state )
 {
 	if ( state )
-		addState( state->getId(), state );
+		addState( state->id(), state );
 }
 
 bool
 GameEntity::hasState( const std::string &id ) const
 {
 	bool answer = StateManager::hasState( id );
-	if ( !answer && getType() )
-		answer = getType()->hasState( id );
+	if ( !answer && type() )
+		answer = type()->hasState( id );
 
 	return answer;
 }
@@ -106,21 +106,21 @@ GameEntity::addChild( GameEntity *child )
 		"you can't assign a parent GameEntity to be its own grandchild."
 	);
 
-	if ( mChildren.find( child->getId() ) == mChildren.end() ) {
-		mChildren[ child->getId() ] = shared_ptr<GameEntity>( child );
+	if ( mChildren.find( child->id() ) == mChildren.end() ) {
+		mChildren[ child->id() ] = shared_ptr<GameEntity>( child );
 		child->setParent( this );
 	}
 }
 
 GameEntity*
-GameEntity::getChild( const std::string &id ) const
+GameEntity::child( const std::string &id ) const
 {
 	auto it = mChildren.find( id );
 	return ( it == mChildren.end() ) ? 0 : it->second.get();
 }
 
 GameEntityMap
-GameEntity::getChildren() const
+GameEntity::children() const
 {
 	return mChildren;
 }
@@ -141,7 +141,7 @@ GameEntity::setParent( GameEntity *parent )
 }
 
 GameEntity*
-GameEntity::getParent() const
+GameEntity::parent() const
 {
 	return mParent;
 }
@@ -150,15 +150,15 @@ void
 GameEntity::runActions()
 {
 	// run own actions first
-	auto al = getInvokedActions();
+	auto al = invokedActions();
 	for_each( al.begin(), al.end(), []( Action *a ) {
 		a->run();
 	});
 
 	// run children's actions
-	Form *form = getForm();
-	if ( form )
-		getForm()->getLSpace()->runActions();
+	Form *_form = form();
+	if ( _form )
+		_form->lSpace()->runActions();
 }
 
 StateSignal&

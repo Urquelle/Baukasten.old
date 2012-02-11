@@ -29,8 +29,8 @@ OpenALAudio::~OpenALAudio()
 int
 OpenALAudio::init( CoreServices *services )
 {
-	mArgc = services->getArgumentsCount();
-	mArgv = services->getArguments();
+	mArgc = services->argumentsCount();
+	mArgv = services->arguments();
 
 	alutInit( &mArgc, mArgv );
 

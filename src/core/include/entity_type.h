@@ -13,23 +13,23 @@ namespace Baukasten {
 		virtual ~EntityType();
 
 		void setParent( EntityType* );
-		EntityType* getParent() const;
+		EntityType* parent() const;
 
 		void addChild( EntityType* );
 		void removeChild( const EntityType* );
 
 		template<class T>
-		T getState( const std::string &id ) const
+		T state( const std::string &id ) const
 		{
-			T state = StateManager::getState<T>( id );
+			T state = StateManager::state<T>( id );
 
 			if ( !state && mParent )
-				state = mParent->getState<T>( id );
+				state = mParent->state<T>( id );
 
 			return state;
 		}
 
-		State* getEntityState( const std::string& );
+		State* entityState( const std::string& );
 
 	private:
 		EntityType*		mParent;

@@ -26,7 +26,7 @@ void wrapClasses()
 	SLB::Class<Entity>("Entity")
 		.comment("Wrapper for the Entity Class.")
 		.constructor<const std::string&>()
-		.const_set("getId", &Entity::getId);
+		.const_set("id", &Entity::id);
 
 	// register Drawable class
 	SLB::Class<Drawable,SLB::Instance::NoCopy>("Drawable")
@@ -34,22 +34,22 @@ void wrapClasses()
 		.inherits<Entity>()
 		.set("setPosition", &Drawable::setPosition)
 			.param("position")
-		.set("getPosition", &Drawable::getPosition)
+		.set("position", &Drawable::position)
 		.set("setSize", &Drawable::setSize)
 			.param("size")
-		.set("getSize", &Drawable::getSize)
+		.set("size", &Drawable::size)
 		.set("setPitch", &Drawable::setPitch)
 			.param("float value")
-		.const_set("getPitch", &Drawable::getPitch)
+		.const_set("pitch", &Drawable::pitch)
 		.set("setYaw", &Drawable::setYaw)
 			.param("float value")
-		.const_set("getYaw", &Drawable::getYaw)
+		.const_set("yaw", &Drawable::yaw)
 		.set("setRoll", &Drawable::setRoll)
 			.param("float value")
-		.const_set("getRoll", &Drawable::getRoll)
+		.const_set("roll", &Drawable::roll)
 		.set("setScale", &Drawable::setScale)
 			.param("float value")
-		.const_set("getScale", &Drawable::getScale)
+		.const_set("scale", &Drawable::scale)
 		.set("setVisible", &Drawable::setVisible)
 			.param("bool value to set the visibility");
 
@@ -59,9 +59,9 @@ void wrapClasses()
 		.constructor()
 		.set("addEntity", ( void (EntityManager::*)(Entity*) ) &EntityManager::addEntity)
 			.param("Entity object")
-		.set("getEntity", &EntityManager::getEntity)
+		.set("entity", &EntityManager::entity)
 			.param("Entity id")
-		.const_set("getEntities", &EntityManager::getEntities)
+		.const_set("entities", &EntityManager::entities)
 		.const_set("hasEntity", &EntityManager::hasEntity)
 		.set("removeEntity", &EntityManager::removeEntity)
 			.param("Entity id");
@@ -75,8 +75,8 @@ void wrapClasses()
 		.set("addState", ( void (StateManager::*)(const std::string&, State*) ) &StateManager::addState)
 			.param("ID of the State")
 			.param("State Object")
-		.const_set("getState", &StateManager::getState<State*>)
-		.const_set("getStates", &StateManager::getStates)
+		.const_set("state", &StateManager::state<State*>)
+		.const_set("states", &StateManager::states)
 		.const_set("hasState", &StateManager::hasState);
 
 	// register ActionManager class
@@ -88,9 +88,9 @@ void wrapClasses()
 		.set("addAction", ( void (ActionManager::*)(const std::string&, Action*) ) &ActionManager::addAction)
 			.param("ID of the Action")
 			.param("Action Object")
-		.set("getAction", &ActionManager::getAction)
+		.set("action", &ActionManager::action)
 			.param("ID of the Action")
-		.set("getActions", &ActionManager::getActions)
+		.set("actions", &ActionManager::actions)
 			.comment("Returns a Map of assigned Actions.")
 		.set("hasAction", &ActionManager::hasAction)
 			.param("ID of the Action to look for")
@@ -109,14 +109,14 @@ void wrapClasses()
 	SLB::Class<Action,SLB::Instance::NoCopy>("Action")
 		.comment("Action Wrapper")
 		.inherits<Entity>()
-		.set("getSource", &Action::getSource)
+		.set("source", &Action::source)
 		.set("clear", &Action::clear)
 		.set("isActive", &Action::isActive)
 		.set("setActive", &Action::setActive)
 			.param("bool to indicate whether the action should stay in the queue")
 		.set("setTarget", &Action::setTarget)
 			.param("GameEntity as the target")
-		.set("getTarget", &Action::getTarget);
+		.set("target", &Action::target);
 
 	// register the ActionLua Class
 	SLB::Class<ActionLua>("ActionLua")
@@ -135,13 +135,13 @@ void wrapClasses()
 		.inherits<StateManager>()
 		.set("setParent", &EntityType::setParent)
 			.param("EntityType as objects parent")
-		.const_set("getParent", &EntityType::getParent)
+		.const_set("parent", &EntityType::parent)
 		.set("addChild", &EntityType::addChild)
 			.param("EntityType as objects child.")
 		.set("removeChild", &EntityType::removeChild)
-		.set("getState", &EntityType::getState<State*>)
+		.set("state", &EntityType::state<State*>)
 			.param("State ID")
-		.set("getEntityState", &EntityType::getEntityState);
+		.set("entityState", &EntityType::entityState);
 
 	// register GameEntity Class
 	SLB::Class<GameEntity>("GameEntity")
@@ -152,18 +152,18 @@ void wrapClasses()
 		.inherits<ActionManager>()
 		.set("setType", &GameEntity::setType)
 			.param("the EntityType.")
-		.set("getType", &GameEntity::getType)
+		.set("type", &GameEntity::type)
 		.set("hasState", &GameEntity::hasState)
 			.param("state id")
-		.set("getState", &GameEntity::getState<State*>)
+		.set("state", &GameEntity::state<State*>)
 			.param("state id")
-		.set("getParent", &GameEntity::getParent)
-		.set("getChild", &GameEntity::getChild)
+		.set("parent", &GameEntity::parent)
+		.set("child", &GameEntity::child)
 			.param("child id")
-		.const_set("getChildren", &GameEntity::getChildren)
+		.const_set("children", &GameEntity::children)
 		.set("addChild", &GameEntity::addChild)
 			.param("gameentity object")
-		.set("getForm", &GameEntity::getForm)
+		.set("form", &GameEntity::form)
 		.set("runActions", &GameEntity::runActions);
 
 	// register State Class
@@ -181,7 +181,7 @@ void wrapClasses()
 		.inherits<Entity>()
 		.set("setValue",&StateInt::setValue)
 			.param("expects an integer.")
-		.set("getValue",&StateInt::getValue);
+		.set("value",&StateInt::value);
 
 	// register GenericState with string as the template argument
 	SLB::Class<StateString>("StateString")
@@ -192,7 +192,7 @@ void wrapClasses()
 		.inherits<Entity>()
 		.set("setValue",&StateString::setValue)
 			.param("expects a string.")
-		.set("getValue",&StateString::getValue);
+		.set("value",&StateString::value);
 
 	// register GenericState with boolean as the template argument
 	SLB::Class<StateBool>("StateBool")
@@ -203,7 +203,7 @@ void wrapClasses()
 		.inherits<Entity>()
 		.set("setValue",&StateBool::setValue)
 			.param("expects a boolean.")
-		.set("getValue",&StateBool::getValue);
+		.set("value",&StateBool::value);
 
 	SLB::Class<StateIntVector>("StateIntVector")
 		.comment("Wrapper for the StateIntVector Class.")
@@ -216,7 +216,7 @@ void wrapClasses()
 			.param("int value")
 		.set("setValues", ( void (StateIntVector::*)(StateIntVector*) ) &StateIntVector::setValues)
 			.param("values")
-		.set("getValue",&StateIntVector::getValue)
+		.set("value",&StateIntVector::value)
 			.param("index int value");
 
 	// register Form class
@@ -234,7 +234,7 @@ void wrapClasses()
 			.param("Entity object")
 		.set("removeFromLSpace", &Form::removeFromLSpace)
 			.param("Entity id expected")
-		.set("getLSpace", &Form::getLSpace)
+		.set("lSpace", &Form::lSpace)
 		.set("addToVSpace", ( void (Form::*)(Form*) ) &Form::addToVSpace)
 			.param("Entity expected")
 		.set("addToVSpace", ( void (Form::*)(const std::string&, Form*) ) &Form::addToVSpace)
@@ -242,20 +242,20 @@ void wrapClasses()
 			.param("Entity object")
 		.set("removeFromVSpace", &Form::removeFromVSpace)
 			.param("Entity id expected")
-		.set("getVSpace", &Form::getVSpace);
+		.set("vSpace", &Form::vSpace);
 
 	// register LogicalSpace class
 	SLB::Class<LogicalSpace>("LogicalSpace")
 		.comment("LogicalSpace class")
 		.constructor()
-		.set("getEntity", &LogicalSpace::getEntity)
+		.set("entity", &LogicalSpace::entity)
 			.param("Entity id");
 
 	// register VirtualSpace class
 	SLB::Class<VirtualSpace>("VirtualSpace")
 		.comment("VirtualSpace class")
 		.constructor()
-		.set("getEntity", &VirtualSpace::getEntity)
+		.set("entity", &VirtualSpace::entity)
 			.param("Entity id");
 
 	// register vec3<float> struct

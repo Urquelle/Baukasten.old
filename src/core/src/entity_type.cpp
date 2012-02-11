@@ -27,7 +27,7 @@ EntityType::setParent( EntityType *parent )
 }
 
 EntityType*
-EntityType::getParent() const
+EntityType::parent() const
 {
 	return mParent;
 }
@@ -58,7 +58,7 @@ EntityType::removeChild( const EntityType *child )
 }
 
 State*
-EntityType::getEntityState( const std::string &id )
+EntityType::entityState( const std::string &id )
 {
 	return 0;
 }
