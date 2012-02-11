@@ -8,7 +8,7 @@ set(
 include_directories(
 	"/usr/include/sigc++-2.0"
 	"/usr/lib64/sigc++-2.0/include"
-	"../src/core/include"
+	"../src"
 )
 
 link_directories( ${Core_LIB_DIR} ${CMAKE_INSTALL_PREFIX}/lib )

@@ -1,7 +1,7 @@
 #ifndef ENTITY_TEST_WM92AXC3
 #define ENTITY_TEST_WM92AXC3
 
-#include <entity.h>
+#include "core/Entity"
 
 #include <cppunit/TestFixture.h>
 #include <cppunit/extensions/HelperMacros.h>

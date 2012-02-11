@@ -1,8 +1,8 @@
 #ifndef ACTION_TEST_5J551I3N
 #define ACTION_TEST_5J551I3N
 
-#include <action_manager.h>
-#include <entity.h>
+#include "core/ActionManager"
+#include "core/Entity"
 
 #include <cppunit/TestFixture.h>
 #include <cppunit/extensions/HelperMacros.h>
