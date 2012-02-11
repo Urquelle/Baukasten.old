@@ -32,7 +32,7 @@ Entity::operator==( const Entity &other ) const
 	return ( id() == other.id() );
 }
 
-const std::string&
+string
 Entity::id() const
 {
 	return mId;

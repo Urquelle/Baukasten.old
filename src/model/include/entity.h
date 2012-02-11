@@ -51,10 +51,10 @@ namespace Baukasten {
 		 *
 		 * \return the id of the object.
 		 */
-		const std::string& id() const;
+		string id() const;
 
 	private:
-		std::string mId;
+		string mId;
 	};
 }
 
