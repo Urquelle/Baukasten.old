@@ -1,9 +1,9 @@
 #ifndef IAUDIO_H_YOASQ2PU
 #define IAUDIO_H_YOASQ2PU
 
-#include "core/Global"
+#include "model/Global"
 
-#include "audio_interface.h"
+#include "audio/AudioInterface"
 
 namespace Baukasten {
 	class CoreServices;

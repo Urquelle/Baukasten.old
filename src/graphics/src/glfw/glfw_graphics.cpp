@@ -1,9 +1,8 @@
 #include "graphics/GraphicsImpl"
 
-#include "core/CoreServices"
-#include "core/Form"
-#include "graphics/Font"
-#include "util/Util"
+#include "core/Font"
+#include "model/CoreServices"
+#include "model/Form"
 
 #include <GL/glew.h>
 #include <GL/gl.h>

@@ -1,7 +1,7 @@
 #ifndef BLOCK_FORM_21IENA7S
 #define BLOCK_FORM_21IENA7S
 
-#include "core/Form"
+#include "model/Form"
 
 class BlockForm : public Baukasten::Form {
 public:

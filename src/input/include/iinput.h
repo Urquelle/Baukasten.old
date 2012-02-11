@@ -1,7 +1,7 @@
 #ifndef IINPUT_EQ5AS93H
 #define IINPUT_EQ5AS93H
 
-#include "core/Global"
+#include "model/Global"
 
 #include "input/InputInterface"
 

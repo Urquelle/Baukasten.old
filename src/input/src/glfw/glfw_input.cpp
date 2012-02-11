@@ -1,8 +1,8 @@
 #include "input/InputImpl"
 
-#include "core/CoreServices"
-#include "core/Debug"
 #include "graphics/IGraphics"
+#include "model/CoreServices"
+#include "model/Debug"
 
 #include <GL/glfw.h>
 

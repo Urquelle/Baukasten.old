@@ -4,7 +4,7 @@ include_directories(
 	"/usr/lib64/sigc++-2.0/include"
 )
 
-link_directories( ${Core_LIB_DIR} ${CMAKE_INSTALL_PREFIX}/lib )
+link_directories( "${CMAKE_SOURCE_DIR}/lib" )
 
 set(CMAKE_SKIP_BUILD_RPATH  FALSE)
 set(CMAKE_BUILD_WITH_INSTALL_RPATH FALSE)

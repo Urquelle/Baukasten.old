@@ -1,8 +1,8 @@
 #ifndef FIELD_FORM_D01BMD3U
 #define FIELD_FORM_D01BMD3U
 
-#include "core/Global"
-#include "core/Form"
+#include "model/Form"
+#include "model/Global"
 
 class FieldForm : public Baukasten::Form {
 public:

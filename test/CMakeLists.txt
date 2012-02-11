@@ -11,7 +11,7 @@ include_directories(
 	"../src"
 )
 
-link_directories( ${Core_LIB_DIR} ${CMAKE_INSTALL_PREFIX}/lib )
+link_directories( ${CMAKE_SOURCE_DIR}/lib )
 
 add_executable( testSuite ${test_SRCS} )
 target_link_libraries( testSuite Baukasten SLB cppunit png jpeg bz2 )

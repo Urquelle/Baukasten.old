@@ -1,30 +1,5 @@
 set (
-    core_SRCS
-    core/src/action.cpp
-	core/src/action_lambda.cpp
-	core/src/action_manager.cpp
-	core/src/core_services.cpp
-    core/src/drawable.cpp
-    core/src/entity.cpp
-	core/src/entity_manager.cpp
-    core/src/entity_type.cpp
-    core/src/form.cpp
-	core/src/game_entity.cpp
-    core/src/logical_space.cpp
-    core/src/state.cpp
-	core/src/state_manager.cpp
-    core/src/virtual_space.cpp
+	core_SRCS
+	core/src/colour.cpp
+	core/src/font.cpp
 )
-
-include_directories(
-	"/usr/include/sigc++-2.0"
-	"/usr/lib64/sigc++-2.0/include"
-)
-
-# compile lua action class
-if( WITH_LUA )
-	set( core_SRCS ${core_SRCS} core/src/lua/action_lua.cpp )
-	set( slb_LINKDIR ${CMAKE_HOME_DIRECTORY}/lib/ )
-	install(FILES ${CMAKE_HOME_DIRECTORY}/lib/libSLB.so DESTINATION lib/)
-endif()
-

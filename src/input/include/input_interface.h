@@ -1,7 +1,7 @@
 #ifndef INPUTINTERFACE_AKBKP72C
 #define INPUTINTERFACE_AKBKP72C
 
-#include "core/Global"
+#include "model/Global"
 
 #include <sigc++/sigc++.h>
 

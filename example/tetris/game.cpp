@@ -7,13 +7,13 @@
 #include "score_form.h"
 
 #include "audio/IAudio"
-#include "core/ActionLua"
-#include "core/GenericState"
-#include "core/LogicalSpace"
-#include "core/VirtualSpace"
-#include "core/CoreServices"
 #include "graphics/IGraphics"
 #include "input/IInput"
+#include "model/ActionLua"
+#include "model/GenericState"
+#include "model/LogicalSpace"
+#include "model/VirtualSpace"
+#include "model/CoreServices"
 
 using namespace Baukasten;
 

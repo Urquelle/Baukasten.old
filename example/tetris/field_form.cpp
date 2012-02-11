@@ -2,9 +2,9 @@
 
 #include "constants.h"
 
-#include "core/GenericState"
-#include "graphics/Colour"
+#include "core/Colour"
 #include "graphics/IGraphics"
+#include "model/GenericState"
 
 #include <algorithm>
 

@@ -1,7 +1,7 @@
 #ifndef OPENAL_AUDIO_H_EBPNAPHY
 #define OPENAL_AUDIO_H_EBPNAPHY
 
-#include "core/Global"
+#include "model/Global"
 
 #include "audio/IAudio"
 

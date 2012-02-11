@@ -1,7 +1,7 @@
 #ifndef GLFW_INPUT_H_XWQRTCFU
 #define GLFW_INPUT_H_XWQRTCFU
 
-#include "core/Global"
+#include "model/Global"
 
 #include "input/IInput"
 

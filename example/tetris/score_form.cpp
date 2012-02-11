@@ -1,6 +1,6 @@
 #include "score_form.h"
 
-#include "core/GenericState"
+#include "model/GenericState"
 #include "graphics/IGraphics"
 
 #include <sstream>

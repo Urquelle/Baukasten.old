@@ -1,8 +1,8 @@
 #ifndef SCORE_FORM_H_MPIAXVNA
 #define SCORE_FORM_H_MPIAXVNA
 
-#include "core/Global"
-#include "core/Form"
+#include "model/Form"
+#include "model/Global"
 
 class ScoreForm : public Baukasten::Form {
 public:

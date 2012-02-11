@@ -1,9 +1,10 @@
 option( WITH_LUA  "compile with Lua support." TRUE )
 
+include( audio/CMakeLists.txt )
 include( core/CMakeLists.txt )
 include( graphics/CMakeLists.txt )
-include( audio/CMakeLists.txt )
 include( input/CMakeLists.txt )
+include( model/CMakeLists.txt )
 include( util/CMakeLists.txt )
 
 include_directories( ${CMAKE_CURRENT_SOURCE_DIR} )
@@ -15,12 +16,12 @@ link_directories(
 )
 
 add_definitions( -DEXPORT_LIB=1 -Wall )
-add_library( Baukasten SHARED ${core_SRCS} ${audio_SRCS} ${graphics_SRCS} ${input_SRCS} )
+add_library( Baukasten SHARED ${model_SRCS} ${core_SRCS} ${audio_SRCS} ${graphics_SRCS} ${input_SRCS} )
 
 set_target_properties( Baukasten PROPERTIES SOVERSION 0.0.1 )
 
 target_link_libraries( Baukasten sigc-2.0 SLB openal alut GL GLEW GLU glfw freetype )
 
-install(DIRECTORY core/include/ DESTINATION ${CMAKE_INSTALL_PREFIX}/include)
+install(DIRECTORY model/include/ DESTINATION ${CMAKE_INSTALL_PREFIX}/include)
 install(TARGETS Baukasten LIBRARY DESTINATION lib/)
-install(FILES ${core_HEADER} DESTINATION include/)
+install(FILES ${model_HEADER} DESTINATION include/)
