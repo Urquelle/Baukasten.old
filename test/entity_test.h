@@ -27,7 +27,7 @@ public:
 	void testId()
 	{
 		string expected = "entity:test";
-		CPPUNIT_ASSERT_EQUAL( expected, entity->getId() );
+		CPPUNIT_ASSERT_EQUAL( expected, entity->id() );
 	}
 
 private:
