@@ -1,6 +1,9 @@
 -- TODO v-0.1 --
 * document core/input/graphics classes
 * add and document audio interface to coreservices
+* graphics: implement font/text rendering
+* graphics: implement image rendering
+* code: use type-rich APIs
 
 -- TODO --
 * implement example game
