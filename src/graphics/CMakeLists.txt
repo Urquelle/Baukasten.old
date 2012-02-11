@@ -1,5 +1,3 @@
-set( GRAPHICS_INC ${CMAKE_CURRENT_SOURCE_DIR}/graphics/include )
-
 include_directories( "/usr/include/freetype2" )
 
 set (
