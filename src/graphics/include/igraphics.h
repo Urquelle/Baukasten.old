@@ -1,8 +1,8 @@
 #ifndef IGRAPHICS_HHQEW1LG
 #define IGRAPHICS_HHQEW1LG
 
-#include "core/Colour"
 #include "core/Global"
+#include "graphics/Colour"
 #include "graphics/GraphicsInterface"
 #include "util/Util"
 

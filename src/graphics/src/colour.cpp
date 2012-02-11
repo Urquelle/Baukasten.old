@@ -1,4 +1,4 @@
-#include "core/Colour"
+#include "graphics/Colour"
 
 using namespace Baukasten;
 

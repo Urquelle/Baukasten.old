@@ -1,7 +1,7 @@
 #include "graphics/Font"
 
-#include "core/Colour"
 #include "core/Debug"
+#include "graphics/Colour"
 
 #include <cmath>
 
