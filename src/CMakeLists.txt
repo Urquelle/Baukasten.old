@@ -16,12 +16,39 @@ link_directories(
 )
 
 add_definitions( -DEXPORT_LIB=1 -Wall )
-add_library( Baukasten SHARED ${model_SRCS} ${core_SRCS} ${audio_SRCS} ${graphics_SRCS} ${input_SRCS} )
+add_library( Baukasten SHARED ${model_SRCS} ${core_SRCS} ${audio_SRCS}
+	${graphics_SRCS} ${input_SRCS} ${util_SRCS} )
 
 set_target_properties( Baukasten PROPERTIES SOVERSION 0.0.1 )
 
 target_link_libraries( Baukasten sigc-2.0 SLB openal alut GL GLEW GLU glfw freetype )
 
-install(DIRECTORY model/include/ DESTINATION ${CMAKE_INSTALL_PREFIX}/include)
+install(
+	DIRECTORY audio/
+	DESTINATION ${CMAKE_INSTALL_PREFIX}/audio
+	PATTERN *.cpp EXCLUDE
+	PATTERN *.txt EXCLUDE
+)
+
+install(
+	DIRECTORY core/
+	DESTINATION ${CMAKE_INSTALL_PREFIX}/core
+	PATTERN *.cpp EXCLUDE
+	PATTERN *.txt EXCLUDE
+)
+
+install(
+	DIRECTORY graphics/
+	DESTINATION ${CMAKE_INSTALL_PREFIX}/graphics
+	PATTERN *.cpp EXCLUDE
+	PATTERN *.txt EXCLUDE
+)
+
+install(
+	DIRECTORY model/
+	DESTINATION ${CMAKE_INSTALL_PREFIX}/model
+	PATTERN *.cpp EXCLUDE
+	PATTERN *.txt EXCLUDE
+)
+
 install(TARGETS Baukasten LIBRARY DESTINATION lib/)
-install(FILES ${model_HEADER} DESTINATION include/)
