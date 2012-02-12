@@ -18,6 +18,9 @@ namespace Baukasten {
 
 		vec2<T>& operator=( const vec2<T> &other )
 		{
+			if ( this == &other )
+				return *this;
+
 			data = { other.data[0], other.data[1] };
 			return *this;
 		}
@@ -37,6 +40,9 @@ namespace Baukasten {
 
 		vec2<T>& operator+( const vec2<T> &other )
 		{
+			if ( this == &other )
+				return *this;
+
 			data[0] += other.data[0];
 			data[1] += other.data[1];
 			return *this;
@@ -71,6 +77,9 @@ namespace Baukasten {
 
 		vec3<T>& operator=( const vec3<T> &other )
 		{
+			if ( this == &other )
+				return *this;
+
 			data = { other.data[0], other.data[1], other[2] };
 			return *this;
 		}
@@ -91,6 +100,9 @@ namespace Baukasten {
 
 		vec3<T>& operator+( const vec3<T> &other )
 		{
+			if ( this == &other )
+				return *this;
+
 			data[0] += other.data[0];
 			data[1] += other.data[1];
 			data[2] += other.data[2];
