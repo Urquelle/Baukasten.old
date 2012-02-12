@@ -1,10 +1,12 @@
 #include "core/Colour"
 
+#include "model/Debug"
+
 using namespace Baukasten;
 
-Colour::Colour()
+Colour::Colour() :
+	mR(0), mG(0), mB(0), mA(255)
 {
-	Colour( 0, 0, 0, 0 );
 }
 
 Colour::Colour( int r, int g, int b, int a ) :
