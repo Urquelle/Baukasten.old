@@ -21,10 +21,10 @@ namespace Baukasten {
 
 		virtual void createWindow( const vec2<int>&, const std::wstring& ) = 0;
 
-		virtual void drawCircle( const vec3<float>&, const uint, const Color& ) = 0;
+		virtual void drawCircle( const vec3<float>&, const int32, const Color& ) = 0;
 		virtual void drawImage( const string&, const vec2<float>&, const vec3<float>& ) = 0;
 		virtual void drawLine( const vec3<float>&, const vec3<float>&, const Color& ) = 0;
-		virtual void drawPoint( const vec3<float>&, const uint, const Color& ) = 0;
+		virtual void drawPoint( const vec3<float>&, const int32, const Color& ) = 0;
 		virtual void drawRect( const vec2<float>&, const vec3<float>&, const Color& ) = 0;
 		virtual void drawText( const wchar_t*, const vec3<float>&, const Color& ) = 0;
 

@@ -27,10 +27,10 @@ namespace Baukasten {
 		void loadResource( const string&, const string& );
 		void freeResource( const string& );
 
-		void drawCircle( const vec3<float>&, const uint, const Color& );
+		void drawCircle( const vec3<float>&, const int32, const Color& );
 		void drawImage( const string&, const vec2<float>&, const vec3<float>& );
 		void drawLine( const vec3<float>&, const vec3<float>&, const Color& );
-		void drawPoint( const vec3<float>&, const uint, const Color& );
+		void drawPoint( const vec3<float>&, const int32, const Color& );
 		void drawRect( const vec2<float>&, const vec3<float>&, const Color& );
 		void drawText( const wchar_t*, const vec3<float>&, const Color& );
 

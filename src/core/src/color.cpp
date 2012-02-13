@@ -8,7 +8,7 @@ using namespace Baukasten;
 #define BK_RGBA( r, g, b, a ) \
 	((a << 24) | ((r & 0xff) << 16) | ((g & 0xff) << 8) | (b & 0xff))
 
-static const uint bk_colors[] = {
+static const int32 bk_colors[] = {
 	BK_RGB(   0,   0,   0 ), // black
 	BK_RGB( 255, 255, 255 ), // white
 	BK_RGB( 255,   0,   0 ), // red
@@ -22,7 +22,7 @@ Color::Color() :
 {
 }
 
-Color::Color( uint r, uint g, uint b, uint a ) :
+Color::Color( int32 r, int32 g, int32 b, int32 a ) :
 	mColor( BK_RGBA( r, g, b, a ) )
 {
 }
@@ -45,7 +45,7 @@ Color::Color( Color const *other )
 
 Color::Color( const Colors value )
 {
-	int size = sizeof( bk_colors ) / sizeof( uint );
+	int size = sizeof( bk_colors ) / sizeof( int32 );
 	mColor = ( value >= size ) ?
 		bk_colors[BK_BLACK] :
 		bk_colors[value];
@@ -55,38 +55,38 @@ Color::~Color()
 {
 }
 
-uint
+int32
 Color::red() const
 {
 	return ( mColor >> 16 ) & 0xff;
 }
 
-uint
+int32
 Color::green() const
 {
 	return ( mColor >> 8 ) & 0xff;
 }
 
-uint
+int32
 Color::blue() const
 {
 	return ( mColor ) & 0xff;
 }
 
-uint
+int32
 Color::alpha() const
 {
 	return ( mColor >> 24 ) & 0xff;
 }
 
-uint
+int32
 Color::value() const
 {
 	return mColor;
 }
 
 void
-Color::rgb( uint *r, uint *g, uint *b, uint *a ) const
+Color::rgb( int32 *r, int32 *g, int32 *b, int32 *a ) const
 {
 	if ( !r || !g || !b )
 		return;
