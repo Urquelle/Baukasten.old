@@ -21,6 +21,7 @@ class ColourTest : public TestFixture {
     CPPUNIT_TEST( testOpEqualInt );
     CPPUNIT_TEST( testOpNotEqual );
     CPPUNIT_TEST( testOpNotEqualInt );
+    CPPUNIT_TEST( testOutOfIndex );
 	CPPUNIT_TEST_SUITE_END();
 public:
 	void setUp()
@@ -121,6 +122,19 @@ public:
     {
         Colour c3( 0, 0, 255, 255 );
         CPPUNIT_ASSERT_EQUAL( true, c3 == Colour::BK_BLUE );
+    }
+
+    void testOutOfIndex()
+    {
+        int BK_FANTASY_COLOR = 9999;
+
+        Colour c3( (Colour::Colours) BK_FANTASY_COLOR );
+        uint r = 0, g = 0, b = 0, a = 255;
+
+        CPPUNIT_ASSERT_EQUAL( r, c3.red() );
+        CPPUNIT_ASSERT_EQUAL( g, c3.green() );
+        CPPUNIT_ASSERT_EQUAL( b, c3.blue() );
+        CPPUNIT_ASSERT_EQUAL( a, c3.alpha() );
     }
 
 private:

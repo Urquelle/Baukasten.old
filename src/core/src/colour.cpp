@@ -43,9 +43,12 @@ Colour::Colour( Colour const *other )
 	mColor = other->value();
 }
 
-Colour::Colour( const Colours value ) :
-	mColor( bk_colors[value] )
+Colour::Colour( const Colours value )
 {
+	int size = sizeof( bk_colors ) / sizeof( uint );
+	mColor = ( value >= size ) ?
+		bk_colors[BK_BLACK] :
+		bk_colors[value];
 }
 
 Colour::~Colour()
