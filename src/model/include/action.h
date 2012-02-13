@@ -1,8 +1,8 @@
 #ifndef ACTION_4GNSEOOP
 #define ACTION_4GNSEOOP
 
-#include "global.h"
-#include "entity.h"
+#include "model/Entity"
+#include "model/Global"
 
 #include <string>
 #include <list>

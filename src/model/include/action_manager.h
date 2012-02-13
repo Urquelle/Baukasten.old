@@ -1,8 +1,8 @@
 #ifndef INC_ACTIONS_GW487EFJ
 #define INC_ACTIONS_GW487EFJ
 
-#include "global.h"
-#include "generic_manager.h"
+#include "model/Global"
+#include "model/GenericManager"
 
 namespace Baukasten {
 	class Action;

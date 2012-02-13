@@ -1,11 +1,10 @@
 #ifndef GENERIC_MANAGER_4A46G9D2
 #define GENERIC_MANAGER_4A46G9D2
 
-#include "global.h"
-
-#include "action.h"
-#include "debug.h"
-#include "state.h"
+#include "model/Action"
+#include "model/Debug"
+#include "model/Global"
+#include "model/State"
 
 namespace Baukasten {
 	using namespace std;

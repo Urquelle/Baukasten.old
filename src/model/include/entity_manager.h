@@ -1,9 +1,8 @@
 #ifndef ENTITY_MANAGER_ZCJZL2J5
 #define ENTITY_MANAGER_ZCJZL2J5
 
-#include "global.h"
-
-#include "generic_manager.h"
+#include "model/GenericManager"
+#include "model/Global"
 
 namespace Baukasten {
 	class BAUKASTEN_EXPORT EntityManager :

@@ -1,7 +1,7 @@
 #ifndef CORE_SERVICES_8D741217
 #define CORE_SERVICES_8D741217
 
-#include "global.h"
+#include "model/Global"
 
 namespace Baukasten {
 	class IAudio;

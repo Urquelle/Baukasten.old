@@ -1,9 +1,8 @@
 #ifndef INC_STATES_18NEVRSZ
 #define INC_STATES_18NEVRSZ
 
-#include "global.h"
-
-#include "generic_manager.h"
+#include "model/GenericManager"
+#include "model/Global"
 
 namespace Baukasten {
 	class State;

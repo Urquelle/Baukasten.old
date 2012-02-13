@@ -1,10 +1,9 @@
 #ifndef GENERIC_STATE_7VBP3DTZ
 #define GENERIC_STATE_7VBP3DTZ
 
-#include "global.h"
-
-#include "game_entity.h"
-#include "state.h"
+#include "model/GameEntity"
+#include "model/Global"
+#include "model/State"
 
 #include <vector>
 #include <string>

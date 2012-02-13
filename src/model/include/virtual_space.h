@@ -1,7 +1,7 @@
 #ifndef VIRTUAL_SPACE_H
 #define VIRTUAL_SPACE_H
 
-#include "global.h"
+#include "model/Global"
 
 namespace Baukasten {
 	class Form;

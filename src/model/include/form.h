@@ -1,11 +1,10 @@
 #ifndef FORM_H
 #define FORM_H
 
-#include "model/Global"
-
 #include "model/Drawable"
-#include "entity_manager.h"
-#include "state_manager.h"
+#include "model/EntityManager"
+#include "model/Global"
+#include "model/StateManager"
 
 #include <string>
 

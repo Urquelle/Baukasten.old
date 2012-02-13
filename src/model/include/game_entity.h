@@ -1,12 +1,11 @@
 #ifndef GAME_ENTITY_W1MJLLNE
 #define GAME_ENTITY_W1MJLLNE
 
-#include "global.h"
-
-#include "action_manager.h"
-#include "entity.h"
-#include "entity_type.h"
-#include "state_manager.h"
+#include "model/ActionManager"
+#include "model/Entity"
+#include "model/EntityType"
+#include "model/Global"
+#include "model/StateManager"
 
 #include <sigc++/sigc++.h>
 

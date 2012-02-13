@@ -1,9 +1,9 @@
 #ifndef ENTITY_TYPE_XJ90PEI
 #define ENTITY_TYPE_XJ90PEI
 
-#include "entity.h"
-#include "global.h"
-#include "state_manager.h"
+#include "model/Entity"
+#include "model/Global"
+#include "model/StateManager"
 
 namespace Baukasten {
 	class BAUKASTEN_EXPORT EntityType :

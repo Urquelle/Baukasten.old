@@ -1,9 +1,8 @@
 #ifndef ACTION_LAMBDA_A41U943N
 #define ACTION_LAMBDA_A41U943N
 
-#include "global.h"
-
-#include "action.h"
+#include "model/Global"
+#include "model/Action"
 
 #include <algorithm>
 

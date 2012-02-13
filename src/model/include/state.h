@@ -1,9 +1,8 @@
 #ifndef STATE_H
 #define STATE_H
 
-#include "model/Global"
-
 #include "model/Entity"
+#include "model/Global"
 
 #include <sigc++/sigc++.h>
 

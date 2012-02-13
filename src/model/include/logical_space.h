@@ -1,7 +1,7 @@
 #ifndef LOGICAL_SPACE_H
 #define LOGICAL_SPACE_H
 
-#include "global.h"
+#include "model/Global"
 
 namespace Baukasten {
 	class BAUKASTEN_EXPORT LogicalSpace {
