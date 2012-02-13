@@ -6,9 +6,12 @@
 #include <memory>
 #include <string>
 
-using namespace std;
-
 namespace Baukasten {
+
+	typedef char int8;
+	typedef int int16;
+	typedef unsigned int int32;
+
 	class Action;
 	class Drawable;
 	class Entity;

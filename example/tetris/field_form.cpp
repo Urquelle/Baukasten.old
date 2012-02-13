@@ -2,7 +2,7 @@
 
 #include "constants.h"
 
-#include "core/Colour"
+#include "core/Color"
 #include "graphics/IGraphics"
 #include "model/GenericState"
 
@@ -33,9 +33,9 @@ void FieldForm::render()
 	auto pos = position();
 	vec2<float> size({ 40.0, 40.0 });
 
-	Colour cSet( 255, 0, 0, 255 );
-	Colour cInMotion( 255, 125, 125, 255 );
-	Colour cControl( 255, 125, 125, 125 );
+	Color cSet( 255, 0, 0, 255 );
+	Color cInMotion( 255, 125, 125, 255 );
+	Color cControl( 255, 125, 125, 125 );
 
 	// draw current column
 	graphics()->drawRect( { 40.0, 5.0 }, {(float)(240 + column * 40), 10.0, 0.0}, cControl );

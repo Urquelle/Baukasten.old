@@ -1,6 +1,6 @@
 #include "block_form.h"
 
-#include "core/Colour"
+#include "core/Color"
 #include "graphics/IGraphics"
 #include "model/GenericState"
 
@@ -21,8 +21,8 @@ void
 BlockForm::render()
 {
 	auto matrix = state<StateIntVector*>( "state:matrix1" )->values();
-	Colour cSet( 255, 0, 0, 255 );
-	Colour cClean( 255, 255, 255, 255 );
+	Color cSet( 255, 0, 0, 255 );
+	Color cClean( 255, 255, 255, 255 );
 
 	int x = position()[BK_X];
 	int x_offset = 0;

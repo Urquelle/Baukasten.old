@@ -6,7 +6,7 @@
 
 namespace Baukasten {
 	class FontPrivate;
-	class Colour;
+	class Color;
 
 	class Font {
 	public:
@@ -18,7 +18,7 @@ namespace Baukasten {
 		void setFace( const char* );
 		void setSize( const uint );
 
-		void render( const vec3<float>&, const char*, const Colour& );
+		void render( const vec3<float>&, const char*, const Color& );
 
 	private:
 		friend class FontPrivate;

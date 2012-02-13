@@ -3,7 +3,7 @@
 
 #include "model/Global"
 
-#include "core/Colour"
+#include "core/Color"
 #include "core/Math"
 #include "graphics/GraphicsInterface"
 
@@ -21,12 +21,12 @@ namespace Baukasten {
 
 		virtual void createWindow( const vec2<int>&, const std::wstring& ) = 0;
 
-		virtual void drawCircle( const vec3<float>&, const uint, const Colour& ) = 0;
+		virtual void drawCircle( const vec3<float>&, const uint, const Color& ) = 0;
 		virtual void drawImage( const string&, const vec2<float>&, const vec3<float>& ) = 0;
-		virtual void drawLine( const vec3<float>&, const vec3<float>&, const Colour& ) = 0;
-		virtual void drawPoint( const vec3<float>&, const uint, const Colour& ) = 0;
-		virtual void drawRect( const vec2<float>&, const vec3<float>&, const Colour& ) = 0;
-		virtual void drawText( const wchar_t*, const vec3<float>&, const Colour& ) = 0;
+		virtual void drawLine( const vec3<float>&, const vec3<float>&, const Color& ) = 0;
+		virtual void drawPoint( const vec3<float>&, const uint, const Color& ) = 0;
+		virtual void drawRect( const vec2<float>&, const vec3<float>&, const Color& ) = 0;
+		virtual void drawText( const wchar_t*, const vec3<float>&, const Color& ) = 0;
 
 		virtual string serviceName() const = 0;
 		virtual float fps() const = 0;

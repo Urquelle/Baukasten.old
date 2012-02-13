@@ -24,9 +24,9 @@ ScoreForm::render()
 	std::wstringstream sScore;
 	sScore << score;
 
-	Colour colour( 128, 0, 0, 255 );
+	Color color( 128, 0, 0, 255 );
 
 	// draw score
-	graphics()->drawText( sScore.str().c_str(), position(), colour );
+	graphics()->drawText( sScore.str().c_str(), position(), color );
 }
 

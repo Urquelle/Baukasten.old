@@ -1,4 +1,4 @@
-#include "core/Colour"
+#include "core/Color"
 
 #include "model/Debug"
 
@@ -17,17 +17,17 @@ static const uint bk_colors[] = {
 	BK_RGB( 128, 128, 128 )  // gray
 };
 
-Colour::Colour() :
+Color::Color() :
 	mColor( bk_colors[BK_BLACK] )
 {
 }
 
-Colour::Colour( uint r, uint g, uint b, uint a ) :
+Color::Color( uint r, uint g, uint b, uint a ) :
 	mColor( BK_RGBA( r, g, b, a ) )
 {
 }
 
-Colour::Colour( const Colour &other )
+Color::Color( const Color &other )
 {
 	if ( this == &other )
 		return;
@@ -35,7 +35,7 @@ Colour::Colour( const Colour &other )
 	mColor = other.value();
 }
 
-Colour::Colour( Colour const *other )
+Color::Color( Color const *other )
 {
 	if ( this == other )
 		return;
@@ -43,7 +43,7 @@ Colour::Colour( Colour const *other )
 	mColor = other->value();
 }
 
-Colour::Colour( const Colours value )
+Color::Color( const Colors value )
 {
 	int size = sizeof( bk_colors ) / sizeof( uint );
 	mColor = ( value >= size ) ?
@@ -51,42 +51,42 @@ Colour::Colour( const Colours value )
 		bk_colors[value];
 }
 
-Colour::~Colour()
+Color::~Color()
 {
 }
 
 uint
-Colour::red() const
+Color::red() const
 {
 	return ( mColor >> 16 ) & 0xff;
 }
 
 uint
-Colour::green() const
+Color::green() const
 {
 	return ( mColor >> 8 ) & 0xff;
 }
 
 uint
-Colour::blue() const
+Color::blue() const
 {
 	return ( mColor ) & 0xff;
 }
 
 uint
-Colour::alpha() const
+Color::alpha() const
 {
 	return ( mColor >> 24 ) & 0xff;
 }
 
 uint
-Colour::value() const
+Color::value() const
 {
 	return mColor;
 }
 
 void
-Colour::rgb( uint *r, uint *g, uint *b, uint *a ) const
+Color::rgb( uint *r, uint *g, uint *b, uint *a ) const
 {
 	if ( !r || !g || !b )
 		return;
@@ -100,31 +100,31 @@ Colour::rgb( uint *r, uint *g, uint *b, uint *a ) const
 }
 
 float
-Colour::redF() const
+Color::redF() const
 {
 	return red() / 255.0;
 }
 
 float
-Colour::greenF() const
+Color::greenF() const
 {
 	return green() / 255.0;
 }
 
 float
-Colour::blueF() const
+Color::blueF() const
 {
 	return blue() / 255.0;
 }
 
 float
-Colour::alphaF() const
+Color::alphaF() const
 {
 	return alpha() / 255.0;
 }
 
 void
-Colour::rgbF( float *r, float *g, float *b, float *a ) const
+Color::rgbF( float *r, float *g, float *b, float *a ) const
 {
 	if ( !r || !g || !b )
 		return;
@@ -137,8 +137,8 @@ Colour::rgbF( float *r, float *g, float *b, float *a ) const
 		*a = alphaF();
 }
 
-Colour&
-Colour::operator=( const Colour &other )
+Color&
+Color::operator=( const Color &other )
 {
 	if ( this == &other )
 		return *this;
@@ -148,7 +148,7 @@ Colour::operator=( const Colour &other )
 }
 
 bool
-Colour::operator==( const Colour &other ) const
+Color::operator==( const Color &other ) const
 {
 	if ( this == &other )
 		return true;
@@ -159,13 +159,13 @@ Colour::operator==( const Colour &other ) const
 }
 
 bool
-Colour::operator==( const Colours &colour ) const
+Color::operator==( const Colors &color ) const
 {
-	return mColor == bk_colors[colour];
+	return mColor == bk_colors[color];
 }
 
 bool
-Colour::operator!=( const Colour &other ) const
+Color::operator!=( const Color &other ) const
 {
 	if ( this == &other )
 		return false;
@@ -175,9 +175,9 @@ Colour::operator!=( const Colour &other ) const
 }
 
 bool
-Colour::operator!=( const Colours &colour ) const
+Color::operator!=( const Colors &color ) const
 {
-	return !operator==( colour );
+	return !operator==( color );
 
 }
 

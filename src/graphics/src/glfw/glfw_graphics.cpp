@@ -114,13 +114,13 @@ public:
 
 			glBindBuffer( GL_ARRAY_BUFFER, node->vbo );
 
-			// read first three bytes off of the buffer to get the colour
-			GLuint colourSize = sizeof( float ) * 3;
-			GLfloat *colour = static_cast<GLfloat*>( glMapBufferRange( GL_ARRAY_BUFFER, 0, colourSize, GL_MAP_READ_BIT ) );
-			if ( colour )
-				glColor3fv( colour );
+			// read first three bytes off of the buffer to get the color
+			GLuint colorSize = sizeof( float ) * 3;
+			GLfloat *color = static_cast<GLfloat*>( glMapBufferRange( GL_ARRAY_BUFFER, 0, colorSize, GL_MAP_READ_BIT ) );
+			if ( color )
+				glColor3fv( color );
 
-			glVertexPointer( node->vertexCount, GL_FLOAT, 0, BUFFER_OFFSET(colourSize) );
+			glVertexPointer( node->vertexCount, GL_FLOAT, 0, BUFFER_OFFSET(colorSize) );
 			glDrawArrays( node->type, 0, node->indexCount );
 
 			glBindBuffer( GL_ARRAY_BUFFER, 0 );
@@ -151,7 +151,7 @@ public:
 	}
 
 	void
-	drawCircle( const vec3<float> &pos, const uint radius, const Colour &c )
+	drawCircle( const vec3<float> &pos, const uint radius, const Color &c )
 	{
 		glBegin(GL_TRIANGLE_FAN);
 			glVertex2f( pos[BK_X], pos[BK_Y] );
@@ -171,7 +171,7 @@ public:
 	}
 
 	void
-	drawLine( const vec3<float> &from, const vec3<float> &to, const Colour &c )
+	drawLine( const vec3<float> &from, const vec3<float> &to, const Color &c )
 	{
 		float r, g, b;
 		c.rgbF( &r, &g, &b );
@@ -197,7 +197,7 @@ public:
 	}
 
 	void
-	drawPoint( const vec3<float> &pos, const uint size, const Colour &c )
+	drawPoint( const vec3<float> &pos, const uint size, const Color &c )
 	{
 		float r, g, b;
 		c.rgbF( &r, &g, &b );
@@ -222,7 +222,7 @@ public:
 	}
 
 	void
-	drawRect( const vec2<float> &size, const vec3<float> &pos, const Colour &c )
+	drawRect( const vec2<float> &size, const vec3<float> &pos, const Color &c )
 	{
 		float r, g, b;
 		c.rgbF( &r, &g, &b );
@@ -250,7 +250,7 @@ public:
 	}
 
 	void
-	drawText( const wchar_t *text, const vec3<float> &pos, const Colour &c )
+	drawText( const wchar_t *text, const vec3<float> &pos, const Color &c )
 	{
 		mFont->render(
 			pos,
@@ -319,7 +319,7 @@ GlfwGraphics::freeResource( const string &id )
 }
 
 void
-GlfwGraphics::drawCircle( const vec3<float> &pos, const uint radius, const Colour &c )
+GlfwGraphics::drawCircle( const vec3<float> &pos, const uint radius, const Color &c )
 {
 	mImpl->drawCircle( pos, radius, c );
 }
@@ -330,27 +330,27 @@ GlfwGraphics::drawImage( const string &filePath, const vec2<float> &size, const 
 }
 
 void
-GlfwGraphics::drawLine( const vec3<float> &from, const vec3<float> &to, const Colour &colour )
+GlfwGraphics::drawLine( const vec3<float> &from, const vec3<float> &to, const Color &color )
 {
-	mImpl->drawLine( from, to, colour );
+	mImpl->drawLine( from, to, color );
 }
 
 void
-GlfwGraphics::drawPoint( const vec3<float> &pos, const uint size, const Colour &colour )
+GlfwGraphics::drawPoint( const vec3<float> &pos, const uint size, const Color &color )
 {
-	mImpl->drawPoint( pos, size, colour );
+	mImpl->drawPoint( pos, size, color );
 }
 
 void
-GlfwGraphics::drawRect( const vec2<float> &size, const vec3<float> &pos, const Colour &colour )
+GlfwGraphics::drawRect( const vec2<float> &size, const vec3<float> &pos, const Color &color )
 {
-	mImpl->drawRect( size, pos, colour );
+	mImpl->drawRect( size, pos, color );
 }
 
 void
-GlfwGraphics::drawText( const wchar_t *text, const vec3<float> &pos, const Colour &colour )
+GlfwGraphics::drawText( const wchar_t *text, const vec3<float> &pos, const Color &color )
 {
-	mImpl->drawText( text, pos, colour );
+	mImpl->drawText( text, pos, color );
 }
 
 float

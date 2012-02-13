@@ -1,6 +1,6 @@
 #include "core/Font"
 
-#include "core/Colour"
+#include "core/Color"
 #include "model/Debug"
 
 #include <cmath>
@@ -37,7 +37,7 @@ namespace Baukasten {
 			FT_Set_Char_Size( mFace, size * 64, 0, 100, 0 );
 		}
 
-		void render( const vec3<float> &pos, const char *text, const Colour &c )
+		void render( const vec3<float> &pos, const char *text, const Color &c )
 		{
 			BK_ASSERT( mFace != 0, "couldn't load font!" );
 
@@ -98,7 +98,7 @@ Font::setSize( const uint size )
 }
 
 void
-Font::render( const vec3<float> &pos, const char *text, const Colour &c )
+Font::render( const vec3<float> &pos, const char *text, const Color &c )
 {
 	mImpl->render( pos, text, c );
 }

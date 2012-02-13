@@ -27,12 +27,12 @@ namespace Baukasten {
 		void loadResource( const string&, const string& );
 		void freeResource( const string& );
 
-		void drawCircle( const vec3<float>&, const uint, const Colour& );
+		void drawCircle( const vec3<float>&, const uint, const Color& );
 		void drawImage( const string&, const vec2<float>&, const vec3<float>& );
-		void drawLine( const vec3<float>&, const vec3<float>&, const Colour& );
-		void drawPoint( const vec3<float>&, const uint, const Colour& );
-		void drawRect( const vec2<float>&, const vec3<float>&, const Colour& );
-		void drawText( const wchar_t*, const vec3<float>&, const Colour& );
+		void drawLine( const vec3<float>&, const vec3<float>&, const Color& );
+		void drawPoint( const vec3<float>&, const uint, const Color& );
+		void drawRect( const vec2<float>&, const vec3<float>&, const Color& );
+		void drawText( const wchar_t*, const vec3<float>&, const Color& );
 
 		string serviceName() const { return "GLFW"; }
 		float fps() const;
