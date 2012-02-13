@@ -7,27 +7,44 @@ namespace Baukasten {
 
 	class BAUKASTEN_EXPORT Colour {
 	public:
+		enum Colours {
+			BK_BLACK,	BK_WHITE,
+			BK_RED	,	BK_GREEN,
+			BK_BLUE,	BK_GRAY
+		};
+
 		Colour();
-		Colour( int, int, int, int );
+		Colour( uint, uint, uint, uint );
+		Colour( const Colour& );
+		Colour( Colour const* );
+		Colour( const Colours );
 
 		virtual ~Colour();
 
-		inline int red() const { return mR; }
-		inline int green() const { return mG; }
-		inline int blue() const { return mB; }
-		inline int alpha() const { return mA; }
+		uint red() const;
+		uint green() const;
+		uint blue() const;
+		uint alpha() const;
+		uint value() const;
 
-		void rgb( int*, int*, int*, int *a = 0 ) const;
+		void rgb( uint*, uint*, uint*, uint *a = 0 ) const;
 
-		inline float redF() const { return red() / 255.0; }
-		inline float greenF() const { return green() / 255.0; }
-		inline float blueF() const { return blue() / 255.0; }
-		inline float alphaF() const { return alpha() / 255.0; }
+		float redF() const;
+		float greenF() const;
+		float blueF() const;
+		float alphaF() const;
 
 		void rgbF( float*, float*, float*, float *a = 0 ) const;
 
+		Colour& operator=( const Colour& );
+
+		bool operator==( const Colour& ) const;
+		bool operator==( const Colours& ) const;
+		bool operator!=( const Colour& ) const;
+		bool operator!=( const Colours& ) const;
+
 	private:
-		int mR, mG, mB, mA;
+		uint mColor;
 	};
 } /* Baukasten */
 
