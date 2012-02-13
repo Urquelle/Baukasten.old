@@ -124,6 +124,8 @@ namespace Baukasten {
 			if ( i > 2 || i < 0 ) return;
 			data[i] = value;
 		}
+
+		// TODO: calculate normal
 	};
 } /* Baukasten */
 

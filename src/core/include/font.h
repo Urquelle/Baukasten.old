@@ -20,6 +20,9 @@ namespace Baukasten {
 
 		void render( const vec3<float>&, const char*, const Color& );
 
+		// TODO: don't render, return bitmap data instead for the graphics
+		// backend.
+
 	private:
 		friend class FontPrivate;
 		FontPrivate*	mImpl;

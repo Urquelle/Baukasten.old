@@ -33,6 +33,8 @@ namespace Baukasten {
 		bool isInitialised() const { return mInitialised; }
 		virtual void setWindowCaption( const std::wstring& ) = 0;
 
+		// TODO: keep 3d in mind (frustum, z-coord, cams, ...)
+
 	protected:
 		bool mInitialised;
 	};
