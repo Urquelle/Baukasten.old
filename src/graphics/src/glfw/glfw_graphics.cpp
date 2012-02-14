@@ -3,6 +3,7 @@
 #include "core/Font"
 #include "model/CoreServices"
 #include "model/Form"
+#include "graphics/include/glfw/node.h"
 
 #include <GL/glew.h>
 #include <GL/gl.h>
@@ -49,14 +50,7 @@ computeFps( float &t0, float &t1, float &frames, float &fps )
 
 using namespace Baukasten;
 
-// GlfGraphicsP {{{
 
-struct GraphicsNode {
-	GLuint vbo;
-	GLenum type;
-	int vertexCount;
-	int indexCount;
-};
 
 class Baukasten::GlfwGraphicsP {
 public:
@@ -111,27 +105,13 @@ public:
 		form->render();
 
 		glEnableClientState( GL_VERTEX_ARRAY );
-		GraphicsNode *node = 0;
 		for ( int32 i = 0; i < mNodes.size(); ++i ) {
-			node = mNodes[i];
-
-			glBindBuffer( GL_ARRAY_BUFFER, node->vbo );
-
-			// read first three bytes off of the buffer to get the color
-			GLuint colorSize = sizeof( float ) * 3;
-			GLfloat *color = static_cast<GLfloat*>( glMapBufferRange( GL_ARRAY_BUFFER, 0, colorSize, GL_MAP_READ_BIT ) );
-			if ( color )
-				glColor3fv( color );
-
-			glVertexPointer( node->vertexCount, GL_FLOAT, 0, BUFFER_OFFSET(colorSize) );
-			glDrawArrays( node->type, 0, node->indexCount );
-
-			glBindBuffer( GL_ARRAY_BUFFER, 0 );
-			glDeleteBuffers( 1, &node->vbo );
+			mNodes[i]->render();
 		}
+		glDisableClientState( GL_VERTEX_ARRAY );
 
 		mNodes.clear();
-		glDisableClientState( GL_VERTEX_ARRAY );
+
 		glfwSwapBuffers();
 	}
 
@@ -185,11 +165,7 @@ public:
 			to[BK_X], to[BK_Y]
 		};
 
-		GraphicsNode *node = new GraphicsNode();
-
-		node->type = GL_POINTS;
-		node->vertexCount = 2;
-		node->indexCount = 2;
+		LineNode *node = new LineNode( GL_POINTS, 2, 2 );
 
 		glGenBuffers( 1, &node->vbo );
 		glBindBuffer( GL_ARRAY_BUFFER, node->vbo );
@@ -210,11 +186,7 @@ public:
 			pos[BK_X], pos[BK_Y]
 		};
 
-		GraphicsNode *node = new GraphicsNode();
-
-		node->type = GL_POINTS;
-		node->vertexCount = 2;
-		node->indexCount = 1;
+		PointNode *node = new PointNode( GL_POINTS, 2, 1 );
 
 		glGenBuffers( 1, &node->vbo );
 		glBindBuffer( GL_ARRAY_BUFFER, node->vbo );
@@ -238,11 +210,7 @@ public:
 			pos[BK_X],					pos[BK_Y] + size[BK_HEIGHT]
 		};
 
-		GraphicsNode *node = new GraphicsNode();
-
-		node->type = GL_QUADS;
-		node->vertexCount = 2;
-		node->indexCount = 4;
+		QuadNode *node = new QuadNode( GL_QUADS, 2, 4 );
 
 		glGenBuffers( 1, &node->vbo );
 		glBindBuffer( GL_ARRAY_BUFFER, node->vbo );
@@ -263,14 +231,13 @@ public:
 	}
 
 private:
-	GlfwGraphics* 			mMaster;
-	vector<GraphicsNode*>	mNodes;
-	Font*					mFont;
-
 	float					mT0;
 	float					mT1;
 	float					mFrames;
 	float					mFps;
+	GlfwGraphics*		mMaster;
+	vector<Node*>		mNodes;
+	Font*				mFont;
 };
 
 // }}}
