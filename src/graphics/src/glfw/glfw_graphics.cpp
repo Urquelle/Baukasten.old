@@ -1,8 +1,10 @@
 #include "graphics/GraphicsImpl"
 
 #include "core/Font"
+#include "graphics/Image"
 #include "model/CoreServices"
 #include "model/Form"
+
 #include "graphics/include/glfw/node.h"
 
 #include <GL/glew.h>

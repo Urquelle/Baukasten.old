@@ -5,4 +5,5 @@ set (
 	graphics/src/glfw/glfw_graphics.cpp
 	graphics/src/glfw/node.cpp
 	graphics/src/graphics_interface.cpp
+	graphics/src/image.cpp
 )
