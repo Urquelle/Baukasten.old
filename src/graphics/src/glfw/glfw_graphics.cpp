@@ -16,14 +16,16 @@
 
 #define BUFFER_OFFSET(offset) ((char*) NULL + offset)
 
-string toString( const wstring &s )
+string
+toString( const wstring &s )
 {
 	string str( s.begin(), s.end() );
 	str.assign( s.begin(), s.end() );
 	return str;
 }
 
-void checkForError()
+void
+checkForError()
 {
 	GLuint errCode = glGetError();
 	if ( errCode != GL_NO_ERROR ) {
@@ -31,7 +33,8 @@ void checkForError()
 	}
 }
 
-void computeFps( float &t0, float &t1, float &frames, float &fps )
+void
+computeFps( float &t0, float &t1, float &frames, float &fps )
 {
 	t1 = glfwGetTime();
 
