@@ -14,7 +14,7 @@
 #include <cstring>
 #include <vector>
 
-#define BUFFER_OFFSET(offset) ((GLvoid *) NULL + offset)
+#define BUFFER_OFFSET(offset) ((char*) NULL + offset)
 
 string toString( const wstring &s )
 {
