@@ -24,8 +24,7 @@ namespace Baukasten {
 		// backend.
 
 	private:
-		friend class FontPrivate;
-		FontPrivate*	mImpl;
+		BK_PIMPL_PTR(Font);
 	};
 } /* Baukasten */
 

@@ -28,8 +28,7 @@ namespace Baukasten {
 		u32        width()   const;
 
 	private:
-		friend class ImagePrivate;
-		ImagePrivate*	mImpl;
+		BK_PIMPL_PTR(Image);
 	};
 } /* Baukasten */
 

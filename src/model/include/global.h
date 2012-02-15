@@ -49,6 +49,10 @@ namespace Baukasten {
 	typedef list<shared_ptr<State>>			StateList;
 }
 
+#define BK_PIMPL_PTR( Class ) \
+	friend class Class##Private; \
+	Class##Private* mImpl
+
 #if defined(EXPORT_LIB)
 #   define BAUKASTEN_EXPORT __attribute__((visibility("default")))
 #else
