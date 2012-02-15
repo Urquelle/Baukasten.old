@@ -107,7 +107,7 @@ public:
 		form->render();
 
 		glEnableClientState( GL_VERTEX_ARRAY );
-		for ( int32 i = 0; i < mNodes.size(); ++i ) {
+		for ( s32 i = 0; i < mNodes.size(); ++i ) {
 			mNodes[i]->render();
 		}
 		glDisableClientState( GL_VERTEX_ARRAY );
@@ -136,7 +136,7 @@ public:
 	}
 
 	void
-	drawCircle( const vec3<float> &pos, const int32 radius, const Color &c )
+	drawCircle( const vec3<float> &pos, const u32 radius, const Color &c )
 	{
 		glBegin(GL_TRIANGLE_FAN);
 			glVertex2f( pos[BK_X], pos[BK_Y] );
@@ -178,7 +178,7 @@ public:
 	}
 
 	void
-	drawPoint( const vec3<float> &pos, const int32 size, const Color &c )
+	drawPoint( const vec3<float> &pos, const u32 size, const Color &c )
 	{
 		float r, g, b;
 		c.rgbF( &r, &g, &b );
@@ -291,7 +291,7 @@ GlfwGraphics::freeResource( const string &id )
 }
 
 void
-GlfwGraphics::drawCircle( const vec3<float> &pos, const int32 radius, const Color &c )
+GlfwGraphics::drawCircle( const vec3<float> &pos, const u32 radius, const Color &c )
 {
 	mImpl->drawCircle( pos, radius, c );
 }
@@ -308,7 +308,7 @@ GlfwGraphics::drawLine( const vec3<float> &from, const vec3<float> &to, const Co
 }
 
 void
-GlfwGraphics::drawPoint( const vec3<float> &pos, const int32 size, const Color &color )
+GlfwGraphics::drawPoint( const vec3<float> &pos, const u32 size, const Color &color )
 {
 	mImpl->drawPoint( pos, size, color );
 }

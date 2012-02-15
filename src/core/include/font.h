@@ -16,7 +16,7 @@ namespace Baukasten {
 		virtual ~Font();
 
 		void setFace( const char* );
-		void setSize( const int32 );
+		void setSize( const u32 );
 
 		void render( const vec3<float>&, const char*, const Color& );
 

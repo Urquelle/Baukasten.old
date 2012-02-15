@@ -50,7 +50,7 @@ public:
 
 	void testInit()
 	{
-        uint r = 0, g = 0, b = 0, a = 255;
+        u32 r = 0, g = 0, b = 0, a = 255;
 
         CPPUNIT_ASSERT_EQUAL( r, c1->red() );
         CPPUNIT_ASSERT_EQUAL( g, c1->green() );
@@ -61,7 +61,7 @@ public:
     void testCopyCtor()
     {
         Color c3 = c2;
-        uint r = 125, g = 125, b = 125, a = 255;
+        u32 r = 125, g = 125, b = 125, a = 255;
 
         CPPUNIT_ASSERT_EQUAL( r, c3.red() );
         CPPUNIT_ASSERT_EQUAL( g, c3.green() );
@@ -73,7 +73,7 @@ public:
     {
         Color c3( Color::BK_WHITE );
 
-        uint r = 255, g = 255, b = 255, a = 255;
+        u32 r = 255, g = 255, b = 255, a = 255;
 
         CPPUNIT_ASSERT_EQUAL( r, c3.red() );
         CPPUNIT_ASSERT_EQUAL( g, c3.green() );
@@ -88,7 +88,7 @@ public:
 
         c3 = c4;
 
-        uint r = 0, g = 125, b = 255, a = 255;
+        u32 r = 0, g = 125, b = 255, a = 255;
 
         CPPUNIT_ASSERT_EQUAL( r, c3.red() );
         CPPUNIT_ASSERT_EQUAL( g, c3.green() );
@@ -129,7 +129,7 @@ public:
         int BK_FANTASY_COLOR = 9999;
 
         Color c3( (Color::Colors) BK_FANTASY_COLOR );
-        uint r = 0, g = 0, b = 0, a = 255;
+        u32 r = 0, g = 0, b = 0, a = 255;
 
         CPPUNIT_ASSERT_EQUAL( r, c3.red() );
         CPPUNIT_ASSERT_EQUAL( g, c3.green() );

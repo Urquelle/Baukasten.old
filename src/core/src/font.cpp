@@ -32,7 +32,7 @@ namespace Baukasten {
 		{
 		}
 
-		void setSize( const int32 size )
+		void setSize( const u32 size )
 		{
 			FT_Set_Char_Size( mFace, size * 64, 0, 100, 0 );
 		}
@@ -41,7 +41,7 @@ namespace Baukasten {
 		{
 			BK_ASSERT( mFace != 0, "couldn't load font!" );
 
-			int32 numChars = strlen( text );
+			u32 numChars = strlen( text );
 			FT_GlyphSlot slot = mFace->glyph;
 			FT_Vector pen;
 			FT_Matrix matrix;
@@ -56,7 +56,7 @@ namespace Baukasten {
 			pen.x = pos[BK_X];
 			pen.y = pos[BK_Y];
 
-			for (int32 n = 0; n < numChars; ++n) {
+			for (u32 n = 0; n < numChars; ++n) {
 				FT_Set_Transform( mFace, &matrix, &pen );
 				FT_Load_Char( mFace, text[n], FT_LOAD_RENDER );
 				pen.x += slot->advance.x;
@@ -92,7 +92,7 @@ Font::setFace( const char *filePath )
 }
 
 void
-Font::setSize( const int32 size )
+Font::setSize( const u32 size )
 {
 	mImpl->setSize( size );
 }

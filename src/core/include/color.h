@@ -14,20 +14,20 @@ namespace Baukasten {
 		};
 
 		Color();
-		Color( int32, int32, int32, int32 );
+		Color( u32, u32, u32, u32 );
 		Color( const Color& );
 		Color( Color const* );
 		Color( const Colors );
 
 		virtual ~Color();
 
-		int32 red() const;
-		int32 green() const;
-		int32 blue() const;
-		int32 alpha() const;
-		int32 value() const;
+		u32 red() const;
+		u32 green() const;
+		u32 blue() const;
+		u32 alpha() const;
+		u32 value() const;
 
-		void rgb( int32*, int32*, int32*, int32 *a = 0 ) const;
+		void rgb( u32*, u32*, u32*, u32 *a = 0 ) const;
 
 		float redF() const;
 		float greenF() const;
@@ -44,7 +44,7 @@ namespace Baukasten {
 		bool operator!=( const Colors& ) const;
 
 	private:
-		int32 mColor;
+		u32 mColor;
 	};
 } /* Baukasten */
 

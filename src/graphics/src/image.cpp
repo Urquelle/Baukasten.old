@@ -118,19 +118,19 @@ namespace Baukasten {
 			}
 		}
 
-		char*
+		u8*
 		data() const
 		{
 			return mInfo->data;
 		}
 
-		vec2<int>
+		vec2<u32>
 		dim() const
 		{
 			return { mInfo->width, mInfo->height };
 		}
 
-		int
+		u32
 		height() const
 		{
 			return mInfo->height;
@@ -158,7 +158,7 @@ namespace Baukasten {
 			}
 		}
 
-		int32
+		u32
 		size() const
 		{
 			return mInfo->size;
@@ -170,7 +170,7 @@ namespace Baukasten {
 			return mType;
 		}
 
-		int
+		u32
 		width() const
 		{
 			return mInfo->width;
@@ -200,19 +200,19 @@ Image::close()
 	mImpl->close();
 }
 
-char*
+u8*
 Image::data() const
 {
 	return mImpl->data();
 }
 
-vec2<int>
+vec2<u32>
 Image::dim() const
 {
 	return mImpl->dim();
 }
 
-int
+u32
 Image::height() const
 {
 	return mImpl->height();
@@ -230,7 +230,7 @@ Image::read()
 	mImpl->read();
 }
 
-int32
+u32
 Image::size() const
 {
 	return mImpl->size();
@@ -242,7 +242,7 @@ Image::type() const
 	return mImpl->type();
 }
 
-int
+u32
 Image::width() const
 {
 	return mImpl->width();

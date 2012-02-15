@@ -9,9 +9,10 @@
 
 namespace Baukasten {
 
-	typedef char int8;
-	typedef int int16;
-	typedef unsigned int int32;
+	typedef  signed    char  s8;
+	typedef  unsigned  char  u8;
+	typedef  signed    int   u32;
+	typedef  unsigned  int   s32;
 
 	class Action;
 	class Drawable;
