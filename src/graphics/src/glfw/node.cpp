@@ -87,14 +87,21 @@ Node::render()
 }
 
 void
+Node::addTexture( GlTexture *tex )
+{
+	mImpl->addTexture( tex );
+}
+
+void
 Node::cleanup()
 {
 	mImpl->cleanup();
 }
 
 // LineNode
-LineNode::LineNode( GLenum glType, int vertexCount, int indexCount ) :
-	Node( glType, vertexCount, indexCount )
+LineNode::LineNode( GLenum glType, const u32 vertexCount, const u32 indexCount ) :
+	Node( glType, vertexCount, indexCount ),
+	mWidth( 1.0 ), mStipple( 1 )
 {
 }
 
@@ -103,13 +110,45 @@ LineNode::~LineNode()
 }
 
 void
+LineNode::setPattern( const u16 pattern )
+{
+	mStipple = pattern;
+}
+
+u16
+LineNode::pattern() const
+{
+	return mStipple;
+}
+
+void
+LineNode::setWidth( const float width )
+{
+	mWidth = width;
+}
+
+float
+LineNode::width() const
+{
+	return mWidth;
+}
+
+void
 LineNode::prepare()
 {
-	// do some preparations 'n shit
+	glLineWidth( mWidth );
+	glLineStipple( 1, mStipple );
+	glEnable( GL_LINE_STIPPLE );
+}
+
+void
+LineNode::cleanup()
+{
+	glDisable( GL_LINE_STIPPLE );
 }
 
 // PointNode
-PointNode::PointNode( GLenum glType, int vertexCount, int indexCount ) :
+PointNode::PointNode( GLenum glType, const u32 vertexCount, const u32 indexCount ) :
 	Node( glType, vertexCount, indexCount )
 {
 }
@@ -119,13 +158,25 @@ PointNode::~PointNode()
 }
 
 void
+PointNode::setSize( const u32 size )
+{
+	mSize = size;
+}
+
+u32
+PointNode::size() const
+{
+	return mSize;
+}
+
+void
 PointNode::prepare()
 {
-	// do some preparations 'n shit
+	glPointSize( mSize );
 }
 
 // QuadNode
-QuadNode::QuadNode( GLenum glType, int vertexCount, int indexCount ) :
+QuadNode::QuadNode( GLenum glType, const u32 vertexCount, const u32 indexCount ) :
 	Node( glType, vertexCount, indexCount )
 {
 }
@@ -138,54 +189,5 @@ void
 QuadNode::prepare()
 {
 	// do some preparations 'n shit
-}
-
-// TextureNode
-TextureNode::TextureNode( ITexture *tex) :
-	Node( 0, 0, 0 ),
-	mTexture( tex )
-{
-}
-
-TextureNode::~TextureNode()
-{
-}
-
-void
-TextureNode::prepare()
-{
-	glBindBuffer( GL_PIXEL_UNPACK_BUFFER, vbo );
-}
-
-void
-TextureNode::cleanup()
-{
-	glBindBuffer( GL_PIXEL_UNPACK_BUFFER, 0 );
-}
-
-void
-TextureNode::render()
-{
-	prepare();
-
-	glRasterPos2i( mPosition[BK_X], mSize[BK_HEIGHT] );
-	glDrawPixels(
-		mSize[BK_WIDTH], mSize[BK_HEIGHT],
-		GL_RGB, GL_UNSIGNED_BYTE, BUFFER_OFFSET(0)
-	);
-
-	cleanup();
-}
-
-void
-TextureNode::setSize( const vec2<float> &size )
-{
-	mSize = size;
-}
-
-void
-TextureNode::setPosition( const vec3<float> &pos )
-{
-	mPosition = pos;
 }
 

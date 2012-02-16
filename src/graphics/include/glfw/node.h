@@ -42,46 +42,31 @@ namespace Baukasten {
 		LineNode( GLenum, const u32, const u32 );
 		virtual ~LineNode();
 
-	private:
-		void prepare();
+		void setPattern( const u16 );
+		u16 pattern() const;
 
-		// keep some rendering flags here, which
-		// might be used while rendering
-	};
-
-	class PointNode : public Node {
-	public:
-		PointNode( GLenum, int, int );
-		virtual ~PointNode();
-
-	private:
-		void prepare();
-
-		// keep some rendering flags here, which
-		// might be used while rendering
-	};
-
-	class ITexture;
-	class TextureNode : public Node {
-	public:
-		TextureNode( ITexture* );
-		virtual ~TextureNode();
-
-		void render();
-
-		void setSize( const vec2<float>& );
-		void setPosition( const vec3<float>& );
-		void setSize( const u32 );
-		u32 size() const;
+		void setWidth( const float );
+		float width() const;
 
 	private:
 		void prepare();
 		void cleanup();
 
-		// keep some rendering flags here, which
-		// might be used while rendering
-		vec3<float> mPosition;
-		ITexture*	mTexture;
+		float mWidth;
+		u16 mStipple;
+	};
+
+	class PointNode : public Node {
+	public:
+		PointNode( GLenum, const u32, const u32 );
+		virtual ~PointNode();
+
+		void setSize( const u32 );
+		u32 size() const;
+
+	private:
+		void prepare();
+
 		u32 mSize;
 	};
 } /* Baukasten */
