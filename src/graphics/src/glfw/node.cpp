@@ -56,16 +56,16 @@ namespace Baukasten {
 		}
 
 	private:
-		Node*	mMaster;
-		GLenum	mGlType;
-
-		int		mVertexCount;
-		int		mIndexCount;
-		char*	mOffset;
+		GLenum          mGlType;
+		u32             mIndexCount;
+		Node*           mMaster;
+		s8*             mOffset;
+		u32             mVertexCount;
 	};
 } /* Baukasten */
 
-Node::Node( GLenum glType, int vertexCount, int indexCount ) :
+// Node
+Node::Node( GLenum glType, const u32 vertexCount, const u32 indexCount ) :
 	mImpl( new NodePrivate( this, glType, vertexCount, indexCount ) )
 {
 }

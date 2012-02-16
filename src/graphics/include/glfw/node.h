@@ -12,7 +12,7 @@ namespace Baukasten {
 
 	class Node {
 	public:
-		Node( GLenum, int, int );
+		Node( GLenum, const u32, const u32 );
 		virtual ~Node();
 
 		virtual void render();
@@ -28,7 +28,7 @@ namespace Baukasten {
 
 	class QuadNode : public Node {
 	public:
-		QuadNode( GLenum, int, int );
+		QuadNode( GLenum, const u32, const u32 );
 		virtual ~QuadNode();
 
 	private:
@@ -40,7 +40,7 @@ namespace Baukasten {
 
 	class LineNode : public Node {
 	public:
-		LineNode( GLenum, int, int );
+		LineNode( GLenum, const u32, const u32 );
 		virtual ~LineNode();
 
 	private:
@@ -72,6 +72,8 @@ namespace Baukasten {
 
 		void setSize( const vec2<float>& );
 		void setPosition( const vec3<float>& );
+		void setSize( const u32 );
+		u32 size() const;
 
 	private:
 		void prepare();
@@ -79,9 +81,9 @@ namespace Baukasten {
 
 		// keep some rendering flags here, which
 		// might be used while rendering
-		vec2<float> mSize;
 		vec3<float> mPosition;
 		ITexture*	mTexture;
+		u32 mSize;
 	};
 } /* Baukasten */
 
