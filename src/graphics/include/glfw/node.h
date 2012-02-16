@@ -22,8 +22,7 @@ namespace Baukasten {
 		virtual void prepare();
 		virtual void cleanup();
 
-		friend class NodePrivate;
-		NodePrivate* mImpl;
+		BK_PIMPL_PTR( Node );
 	};
 
 	class QuadNode : public Node {
