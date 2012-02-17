@@ -7,8 +7,6 @@
 #include <GL/glext.h>
 
 
-#define BUFFER_OFFSET(offset) ((char*) NULL + offset)
-
 using namespace Baukasten;
 
 namespace Baukasten {

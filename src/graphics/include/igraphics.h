@@ -1,10 +1,9 @@
 #ifndef IGRAPHICS_HHQEW1LG
 #define IGRAPHICS_HHQEW1LG
 
-#include "model/Global"
-
 #include "core/Color"
 #include "core/Math"
+#include "graphics/Global"
 #include "graphics/GraphicsInterface"
 
 namespace Baukasten {

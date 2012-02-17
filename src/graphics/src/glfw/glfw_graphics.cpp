@@ -12,7 +12,7 @@
 
 #include <cmath>
 
-#define BUFFER_OFFSET(offset) ((char*) NULL + offset)
+using namespace Baukasten;
 
 string
 toString( const wstring &s )
@@ -45,7 +45,6 @@ computeFps( float &t0, float &t1, float &frames, float &fps )
 	frames++;
 }
 
-using namespace Baukasten;
 
 
 

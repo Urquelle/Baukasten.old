@@ -1,9 +1,8 @@
 #ifndef GLFW_GRAPHICS_H_CMJ6TAUE
 #define GLFW_GRAPHICS_H_CMJ6TAUE
 
-#include "model/Global"
-
 #include "core/Math"
+#include "graphics/Global"
 #include "graphics/IGraphics"
 
 namespace Baukasten {

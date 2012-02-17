@@ -1,8 +1,8 @@
 #ifndef NODE_H_AROBCMPN
 #define NODE_H_AROBCMPN
 
-#include "model/Global"
 #include "core/Math"
+#include "graphics/Global"
 
 #include <GL/glew.h>
 #include <GL/gl.h>

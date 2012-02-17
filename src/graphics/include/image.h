@@ -2,7 +2,7 @@
 #define IMAGE_H_9GZDLWPR
 
 #include "core/Math"
-#include "model/Global"
+#include "graphics/Global"
 
 namespace Baukasten {
 	class ImagePrivate;

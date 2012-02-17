@@ -1,7 +1,7 @@
 #ifndef IMAGE_FUNCTIONS_H_JA5FSB6J
 #define IMAGE_FUNCTIONS_H_JA5FSB6J
 
-#include "model/Global"
+#include "graphics/Global"
 
 #include <png.h>
 #include <cstdlib>
