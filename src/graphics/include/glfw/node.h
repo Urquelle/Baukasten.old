@@ -9,6 +9,7 @@
 
 namespace Baukasten {
 	class NodePrivate;
+	class GlTexture;
 
 	class Node {
 	public:
@@ -16,6 +17,8 @@ namespace Baukasten {
 		virtual ~Node();
 
 		virtual void render();
+
+		void addTexture( GlTexture* );
 
 		GLuint vbo;
 	protected:

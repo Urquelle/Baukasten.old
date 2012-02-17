@@ -2,6 +2,7 @@
 
 #include "core/Font"
 #include "graphics/Image"
+#include "graphics/include/glfw/gl_texture.h"
 #include "model/CoreServices"
 #include "model/Form"
 
@@ -45,8 +46,23 @@ computeFps( float &t0, float &t1, float &frames, float &fps )
 	frames++;
 }
 
+GlTexture*
+texture( const string &source, vector<GlTexture*> *textures )
+{
+	GlTexture *tex = 0;
+	for ( s32 i = 0; i < textures->size(); ++i ) {
+		GlTexture *t = textures->at(i);
+		if ( t && t->source() == source ) {
+			tex = t;
+			break;
+		}
+	}
+
+	return tex;
+}
 
 
+// GlfGraphicsP {{{
 
 class Baukasten::GlfwGraphicsP {
 public:
@@ -99,14 +115,17 @@ public:
 		form->render();
 
 		glEnableClientState( GL_VERTEX_ARRAY );
+		glEnableClientState( GL_TEXTURE_COORD_ARRAY );
 		for ( s32 i = 0; i < mNodes.size(); ++i ) {
 			mNodes[i]->render();
 		}
+		glDisableClientState( GL_TEXTURE_COORD_ARRAY );
 		glDisableClientState( GL_VERTEX_ARRAY );
 
 		mNodes.clear();
 
 		glfwSwapBuffers();
+		BK_DEBUG( "fps: " << fps() );
 	}
 
 	float
@@ -142,9 +161,70 @@ public:
 	}
 
 	void
-	drawImage( const string &filePath, const vec2<float> &size, const vec3<float> &pos )
+	drawImage( const string &filePath, const vec2<float> &size,
+			const vec3<float> &pos )
 	{
-		BK_DEBUG( "drawImage: implement me!!" );
+		float xMin = pos[BK_X], xMax = pos[BK_X] + size[BK_WIDTH];
+		float yMin = pos[BK_Y], yMax = pos[BK_Y] + size[BK_HEIGHT];
+
+		GLfloat vertices[] = {
+			// color
+			0.0f, 0.0f, 0.0f,
+
+			// vertices
+			xMin, yMin,
+			xMax, yMin,
+			xMax, yMax,
+			xMin, yMax
+		};
+
+		GlTexture *tex = texture( filePath, &mTextures );
+		if ( !tex ) {
+			float divX = size[BK_WIDTH];
+			float divY = size[BK_HEIGHT];
+
+			GLfloat texCoords[] = {
+				xMin / divX, yMin / divY,
+				xMax / divX, yMin / divY,
+				xMax / divX, yMax / divY,
+				xMin / divX, yMax / divY
+			};
+
+			Image image( filePath );
+			image.read();
+
+			tex = new GlTexture( filePath, size );
+
+			// upload texture data
+			glEnable( GL_TEXTURE_2D );
+			glGenTextures( 1, &tex->tbo );
+			glBindTexture( GL_TEXTURE_2D, tex->tbo );
+			glPixelStorei( GL_UNPACK_ALIGNMENT, 1 );
+
+			glTexImage2D(
+				GL_TEXTURE_2D, 0, GL_RGBA8,
+				image.width(), image.height(), 0, GL_RGBA8,
+				GL_UNSIGNED_SHORT, image.data()
+			);
+
+			// upload texture coordinates
+			glGenBuffers( 1, &tex->cbo );
+			glBindBuffer( GL_ARRAY_BUFFER, tex->cbo );
+			glBufferData( GL_ARRAY_BUFFER, sizeof( texCoords ), texCoords, GL_DYNAMIC_DRAW );
+			glBindBuffer( GL_ARRAY_BUFFER, 0 );
+		}
+
+		QuadNode *node = new QuadNode( GL_QUADS, 2, 4 );
+
+		node->addTexture( tex );
+
+		glGenBuffers( 1, &node->vbo );
+		glBindBuffer( GL_ARRAY_BUFFER, node->vbo );
+		glBufferData( GL_ARRAY_BUFFER, sizeof( vertices ), vertices, GL_DYNAMIC_DRAW );
+		glBindBuffer( GL_ARRAY_BUFFER, 0 );
+
+		mNodes.push_back( node );
+		mTextures.push_back( tex );
 	}
 
 	void
@@ -233,13 +313,12 @@ public:
 	}
 
 private:
-	float					mT0;
-	float					mT1;
-	float					mFrames;
-	float					mFps;
 	GlfwGraphics*		mMaster;
 	vector<Node*>		mNodes;
+	vector<GlTexture*>	mTextures;
 	Font*				mFont;
+
+	float				mT0, mT1, mFrames, mFps;
 };
 
 // }}}
