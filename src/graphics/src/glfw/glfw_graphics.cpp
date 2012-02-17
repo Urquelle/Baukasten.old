@@ -204,15 +204,18 @@ public:
 	void
 	drawRect( const vec2<float> &size, const vec3<float> &pos, const Color &c )
 	{
+		float xMin = pos[BK_X], xMax = pos[BK_X] + size[BK_WIDTH];
+		float yMin = pos[BK_Y], yMax = pos[BK_Y] + size[BK_HEIGHT];
+
 		float r, g, b;
 		c.rgbF( &r, &g, &b );
 
 		GLfloat vertices[] = {
 			r, g, b,
-			pos[BK_X],					pos[BK_Y],
-			pos[BK_X] + size[BK_WIDTH],	pos[BK_Y],
-			pos[BK_X] + size[BK_WIDTH],	pos[BK_Y] + size[BK_HEIGHT],
-			pos[BK_X],					pos[BK_Y] + size[BK_HEIGHT]
+			xMin, yMin,
+			xMax, yMin,
+			xMax, yMax,
+			xMin, yMax
 		};
 
 		QuadNode *node = new QuadNode( GL_QUADS, 2, 4 );
