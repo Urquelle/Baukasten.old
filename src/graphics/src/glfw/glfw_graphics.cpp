@@ -154,7 +154,8 @@ public:
 	}
 
 	void
-	drawLine( const vec3<float> &from, const vec3<float> &to, const Color &c )
+	drawLine( const vec3<float> &from, const vec3<float> &to,
+			const Color &c, const float width = 1.0f )
 	{
 		float r, g, b;
 		c.rgbF( &r, &g, &b );
@@ -166,6 +167,8 @@ public:
 		};
 
 		LineNode *node = new LineNode( GL_POINTS, 2, 2 );
+
+		node->setWidth( width );
 
 		glGenBuffers( 1, &node->vbo );
 		glBindBuffer( GL_ARRAY_BUFFER, node->vbo );
@@ -187,6 +190,8 @@ public:
 		};
 
 		PointNode *node = new PointNode( GL_POINTS, 2, 1 );
+
+		node->setSize( size );
 
 		glGenBuffers( 1, &node->vbo );
 		glBindBuffer( GL_ARRAY_BUFFER, node->vbo );
@@ -300,9 +305,10 @@ GlfwGraphics::drawImage( const string &filePath, const vec2<float> &size, const 
 }
 
 void
-GlfwGraphics::drawLine( const vec3<float> &from, const vec3<float> &to, const Color &color )
+GlfwGraphics::drawLine( const vec3<float> &from, const vec3<float> &to,
+		const Color &color, const float width )
 {
-	mImpl->drawLine( from, to, color );
+	mImpl->drawLine( from, to, color, width );
 }
 
 void
