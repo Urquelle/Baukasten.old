@@ -1,10 +1,12 @@
 #ifndef AUDIO_INTERFACE_H_21IELBUV
 #define AUDIO_INTERFACE_H_21IELBUV
 
+#include "audio/Global"
+
 namespace Baukasten {
 	class IAudio;
 
-	class AudioInterface {
+	class BAUKASTEN_EXPORT AudioInterface {
 	public:
 		static IAudio* instance();
 		virtual ~AudioInterface ();

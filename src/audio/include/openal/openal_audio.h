@@ -1,8 +1,7 @@
 #ifndef OPENAL_AUDIO_H_EBPNAPHY
 #define OPENAL_AUDIO_H_EBPNAPHY
 
-#include "model/Global"
-
+#include "audio/Global"
 #include "audio/IAudio"
 
 struct ALCdevice_struct;

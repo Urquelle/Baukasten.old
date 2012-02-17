@@ -1,2 +1,1 @@
-#include "model/Global"
 #include "graphics/include/global.h"

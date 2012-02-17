@@ -1,31 +1,32 @@
 #ifndef IINPUT_EQ5AS93H
 #define IINPUT_EQ5AS93H
 
-#include "model/Global"
-
+#include "input/Global"
 #include "input/InputInterface"
 
 namespace Baukasten {
+
 	class CoreServices;
+	class IInputPrivate;
 
 	class BAUKASTEN_EXPORT IInput {
 	public:
-		IInput() : mInitialised( false ) {}
+		IInput();
 		virtual bool init( CoreServices* ) = 0;
 		virtual void process() const = 0;
 		virtual void shutdown() {}
 		virtual string serviceName() const = 0;
 
-		KeyEvent onKeyDown() const { return mOnKeyDown; }
-		KeyEvent onKeyUp() const { return mOnKeyUp; }
+		KeyEvent* onKeyDown();
+		KeyEvent* onKeyUp();
 
-		bool isInitialised() const { return mInitialised; }
+		bool isInitialised() const;
 
 	protected:
-		KeyEvent mOnKeyDown;
-		KeyEvent mOnKeyUp;
+		void setInitialised( bool );
 
-		bool mInitialised;
+	private:
+		BK_PIMPL_PTR( IInput );
 	};
 } /* Baukasten */
 

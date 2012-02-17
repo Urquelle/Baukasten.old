@@ -127,9 +127,9 @@ void GLFWCALL inputHandler( int _key, int state )
 		return;
 
 	if ( state == GLFW_PRESS )
-		service->onKeyDown().emit( key( _key ), modifier( _key ) );
+		service->onKeyDown()->emit( key( _key ), modifier( _key ) );
 	else if ( state == GLFW_RELEASE )
-		service->onKeyUp().emit( key( _key ), modifier( _key ) );
+		service->onKeyUp()->emit( key( _key ), modifier( _key ) );
 }
 
 GlfwInput::GlfwInput()
@@ -146,7 +146,7 @@ GlfwInput::init( CoreServices* )
 	// for the callback to work the window
 	// must have already been created
 	glfwSetKeyCallback( inputHandler );
-	mInitialised = true;
+	setInitialised( true );
 	return true;
 }
 
@@ -158,6 +158,6 @@ GlfwInput::process() const
 void
 GlfwInput::shutdown()
 {
-	mInitialised = false;
+	setInitialised( false );
 }
 

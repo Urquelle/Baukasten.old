@@ -1,8 +1,7 @@
 #ifndef GLFW_INPUT_H_XWQRTCFU
 #define GLFW_INPUT_H_XWQRTCFU
 
-#include "model/Global"
-
+#include "input/Global"
 #include "input/IInput"
 
 namespace Baukasten {
