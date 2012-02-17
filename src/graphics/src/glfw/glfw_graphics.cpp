@@ -8,14 +8,9 @@
 #include "graphics/include/glfw/node.h"
 
 #include <GL/glew.h>
-#include <GL/gl.h>
-#include <GL/glu.h>
-#include <GL/glext.h>
 #include <GL/glfw.h>
 
 #include <cmath>
-#include <cstring>
-#include <vector>
 
 #define BUFFER_OFFSET(offset) ((char*) NULL + offset)
 
