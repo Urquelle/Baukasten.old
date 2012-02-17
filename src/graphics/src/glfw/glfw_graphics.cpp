@@ -297,14 +297,17 @@ GlfwGraphics::freeResource( const string &id )
 }
 
 void
-GlfwGraphics::drawCircle( const vec3<float> &pos, const u32 radius, const Color &c )
+GlfwGraphics::drawCircle( const vec3<float> &pos, const u32 radius,
+		const Color &c )
 {
 	mImpl->drawCircle( pos, radius, c );
 }
 
 void
-GlfwGraphics::drawImage( const string &filePath, const vec2<float> &size, const vec3<float> &pos )
+GlfwGraphics::drawImage( const string &filePath, const vec2<float> &size,
+		const vec3<float> &pos )
 {
+	mImpl->drawImage( filePath, size, pos );
 }
 
 void
@@ -315,19 +318,22 @@ GlfwGraphics::drawLine( const vec3<float> &from, const vec3<float> &to,
 }
 
 void
-GlfwGraphics::drawPoint( const vec3<float> &pos, const u32 size, const Color &color )
+GlfwGraphics::drawPoint( const vec3<float> &pos,
+		const u32 size, const Color &color )
 {
 	mImpl->drawPoint( pos, size, color );
 }
 
 void
-GlfwGraphics::drawRect( const vec2<float> &size, const vec3<float> &pos, const Color &color )
+GlfwGraphics::drawRect( const vec2<float> &size,
+		const vec3<float> &pos, const Color &color )
 {
 	mImpl->drawRect( size, pos, color );
 }
 
 void
-GlfwGraphics::drawText( const wchar_t *text, const vec3<float> &pos, const Color &color )
+GlfwGraphics::drawText( const wchar_t *text, const vec3<float> &pos,
+		const Color &color )
 {
 	mImpl->drawText( text, pos, color );
 }

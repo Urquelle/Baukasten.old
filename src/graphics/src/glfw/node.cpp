@@ -14,9 +14,11 @@ using namespace Baukasten;
 namespace Baukasten {
 	class NodePrivate {
 	public:
-		NodePrivate(Node *master, GLenum glType, int vertexCount, int indexCount) :
-			mMaster( master ), mGlType( glType ), mVertexCount( vertexCount ),
-			mIndexCount( indexCount )
+		NodePrivate(Node *master, GLenum glType, const u32 vertexCount, const u32 indexCount) :
+			mGlType( glType ),
+			mIndexCount( indexCount ),
+			mMaster( master ),
+			mVertexCount( vertexCount )
 		{
 		}
 
@@ -31,7 +33,9 @@ namespace Baukasten {
 
 			// read first three bytes off of the buffer to get the color
 			GLuint colorSize = sizeof( float ) * 3;
-			GLfloat *color = static_cast<GLfloat*>( glMapBufferRange( GL_ARRAY_BUFFER, 0, colorSize, GL_MAP_READ_BIT ) );
+			GLfloat *color = static_cast<GLfloat*>(
+				glMapBufferRange( GL_ARRAY_BUFFER, 0, colorSize, GL_MAP_READ_BIT )
+			);
 
 			if ( color )
 				glColor3fv( color );
