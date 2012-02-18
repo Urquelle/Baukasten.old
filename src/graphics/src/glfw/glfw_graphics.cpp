@@ -151,7 +151,7 @@ public:
 	{
 		glBegin(GL_TRIANGLE_FAN);
 			glVertex2f( pos[BK_X], pos[BK_Y] );
-			for ( float i = 0; i <= 2 * M_PI + 0.1; i += 0.1 ) {
+			for ( float i = 0; i <= 2 * M_PI + 0.1f; i += 0.1f ) {
 				glVertex2f(
 					pos[BK_X] + sin(i) * radius,
 					pos[BK_Y] + cos(i) * radius
