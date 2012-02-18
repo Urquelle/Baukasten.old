@@ -31,8 +31,14 @@ GlfwInput::~GlfwInput()
 }
 
 bool
-GlfwInput::init( CoreServices* )
+GlfwInput::init( CoreServices *service )
 {
+	if ( service->videoService()->serviceName() != "GLFW" )
+		BK_ERROR( "incompatible video backend!" );
+
+	if ( !service->videoService()->isInitialised() )
+		BK_ERROR( "video service must be initialised." );
+
 	// for the callback to work the window
 	// must have already been created
 	glfwSetKeyCallback( inputHandler );
