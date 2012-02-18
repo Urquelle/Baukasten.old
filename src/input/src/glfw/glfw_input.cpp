@@ -36,8 +36,17 @@ GlfwInput::init( CoreServices* )
 	// for the callback to work the window
 	// must have already been created
 	glfwSetKeyCallback( inputHandler );
+	glfwEnable( GLFW_KEY_REPEAT );
 	setInitialised( true );
 	return true;
+}
+
+KeyState
+GlfwInput::keyState( const Key key ) const
+{
+	return ( glfwGetKey( (int)key ) == GLFW_PRESS )
+		? KeyState::PRESSED
+		: KeyState::RELEASED;
 }
 
 void

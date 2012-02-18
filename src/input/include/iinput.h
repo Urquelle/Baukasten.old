@@ -12,10 +12,13 @@ namespace Baukasten {
 	class BAUKASTEN_EXPORT IInput {
 	public:
 		IInput();
+
 		virtual bool init( CoreServices* ) = 0;
 		virtual void process() const = 0;
 		virtual void shutdown() {}
 		virtual string serviceName() const = 0;
+
+		virtual KeyState keyState( const Key ) const = 0;
 
 		KeyEvent* onKeyDown();
 		KeyEvent* onKeyUp();
