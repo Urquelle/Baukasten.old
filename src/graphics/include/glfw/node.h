@@ -35,9 +35,6 @@ namespace Baukasten {
 
 	private:
 		void prepare();
-
-		// keep some rendering flags here, which
-		// might be used while rendering
 	};
 
 	class LineNode : public Node {
