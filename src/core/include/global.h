@@ -18,6 +18,11 @@ namespace Baukasten {
 
 }
 
+#define BK_RGB(r, g, b) \
+    ((0xff << 24) | ((r & 0xff) << 16) | ((g & 0xff) << 8) | (b & 0xff))
+#define BK_RGBA( r, g, b, a ) \
+	((a << 24) | ((r & 0xff) << 16) | ((g & 0xff) << 8) | (b & 0xff))
+
 #define BK_PIMPL_PTR( Class ) \
 	friend class Class##Private; \
 	Class##Private* mImpl

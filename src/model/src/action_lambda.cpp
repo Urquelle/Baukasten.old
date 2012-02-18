@@ -1,6 +1,6 @@
 #include "model/ActionLambda"
 
-#include "model/Debug"
+#include "core/Debug"
 
 using namespace Baukasten;
 

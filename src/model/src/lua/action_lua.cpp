@@ -1,6 +1,6 @@
 #include "model/ActionLua"
 
-#include "model/Debug"
+#include "core/Debug"
 #include "model/GameEntity"
 #include "model/Bindings"
 

@@ -2,8 +2,8 @@
 #define Color_TEST_H_KIEQYUWU
 
 #include "core/Color"
-#include "model/Debug"
-#include "model/Global"
+#include "core/Debug"
+#include "core/Global"
 
 #include <cppunit/TestFixture.h>
 #include <cppunit/extensions/HelperMacros.h>

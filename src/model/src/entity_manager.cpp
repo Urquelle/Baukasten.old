@@ -1,7 +1,7 @@
 #include "model/EntityManager"
 
+#include "core/Debug"
 #include "model/Entity"
-#include "model/Debug"
 
 using namespace Baukasten;
 

@@ -1,7 +1,7 @@
 #include "model/ActionManager"
 
+#include "core/Debug"
 #include "model/Action"
-#include "model/Debug"
 #include "model/GameEntity"
 
 #include <algorithm>

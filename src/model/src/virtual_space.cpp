@@ -1,6 +1,6 @@
 #include "model/VirtualSpace"
 
-#include "model/Debug"
+#include "core/Debug"
 #include "model/Form"
 
 using namespace Baukasten;

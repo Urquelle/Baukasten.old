@@ -1,6 +1,6 @@
 #include "model/Form"
 
-#include "model/Debug"
+#include "core/Debug"
 #include "model/GameEntity"
 #include "model/LogicalSpace"
 #include "model/VirtualSpace"

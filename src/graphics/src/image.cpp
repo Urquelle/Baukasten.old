@@ -1,6 +1,6 @@
 #include "graphics/Image"
 
-#include "model/Debug"
+#include "core/Debug"
 
 #include "graphics/include/image_functions.h"
 

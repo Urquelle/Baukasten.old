@@ -1,6 +1,6 @@
 #include "graphics/include/glfw/node.h"
 
-#include "model/Debug"
+#include "core/Debug"
 #include "graphics/include/glfw/gl_texture.h"
 
 #include <GL/glu.h>

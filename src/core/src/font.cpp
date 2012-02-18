@@ -1,7 +1,7 @@
 #include "core/Font"
 
 #include "core/Color"
-#include "model/Debug"
+#include "core/Debug"
 
 #include <cmath>
 

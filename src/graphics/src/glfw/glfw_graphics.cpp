@@ -1,9 +1,9 @@
 #include "graphics/GraphicsImpl"
 
+#include "core/CoreServices"
 #include "core/Font"
 #include "graphics/Image"
 #include "graphics/include/glfw/gl_texture.h"
-#include "model/CoreServices"
 #include "model/Form"
 
 #include "graphics/include/glfw/node.h"

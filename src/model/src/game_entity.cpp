@@ -1,7 +1,7 @@
 #include "model/GameEntity"
 
+#include "core/Debug"
 #include "model/Action"
-#include "model/Debug"
 #include "model/Form"
 #include "model/LogicalSpace"
 

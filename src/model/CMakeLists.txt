@@ -3,7 +3,6 @@ set (
     model/src/action.cpp
 	model/src/action_lambda.cpp
 	model/src/action_manager.cpp
-	model/src/core_services.cpp
     model/src/drawable.cpp
     model/src/entity.cpp
 	model/src/entity_manager.cpp

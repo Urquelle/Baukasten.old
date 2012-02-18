@@ -1,12 +1,8 @@
 #include "core/Color"
 
-#include "model/Debug"
+#include "core/Debug"
 
 using namespace Baukasten;
-#define BK_RGB(r, g, b) \
-    ((0xff << 24) | ((r & 0xff) << 16) | ((g & 0xff) << 8) | (b & 0xff))
-#define BK_RGBA( r, g, b, a ) \
-	((a << 24) | ((r & 0xff) << 16) | ((g & 0xff) << 8) | (b & 0xff))
 
 static const u32 bk_colors[] = {
 	BK_RGB(   0,   0,   0 ), // black

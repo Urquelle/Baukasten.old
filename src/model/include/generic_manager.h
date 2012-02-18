@@ -1,8 +1,8 @@
 #ifndef GENERIC_MANAGER_4A46G9D2
 #define GENERIC_MANAGER_4A46G9D2
 
+#include "core/Debug"
 #include "model/Action"
-#include "model/Debug"
 #include "model/Global"
 #include "model/State"
 

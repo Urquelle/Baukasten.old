@@ -1,7 +1,7 @@
 #include "model/StateManager"
 
+#include "core/Debug"
 #include "model/State"
-#include "model/Debug"
 
 using namespace Baukasten;
 

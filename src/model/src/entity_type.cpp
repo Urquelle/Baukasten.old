@@ -1,6 +1,6 @@
 #include "model/EntityType"
 
-#include "model/Debug"
+#include "core/Debug"
 
 #include <algorithm>
 

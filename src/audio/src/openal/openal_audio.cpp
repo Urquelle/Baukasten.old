@@ -1,7 +1,7 @@
 #include "audio/AudioImpl"
 
-#include "model/CoreServices"
-#include "model/Debug"
+#include "core/CoreServices"
+#include "core/Debug"
 
 #include <AL/al.h>
 #include <AL/alc.h>

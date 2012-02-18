@@ -1,6 +1,6 @@
 #include "graphics/include/glfw/gl_texture.h"
 
-#include "model/Debug"
+#include "core/Debug"
 
 #include <GL/gl.h>
 

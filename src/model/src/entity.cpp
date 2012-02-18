@@ -1,6 +1,6 @@
 #include "model/Entity"
 
-#include "model/Debug"
+#include "core/Debug"
 #include "model/State"
 
 using namespace Baukasten;

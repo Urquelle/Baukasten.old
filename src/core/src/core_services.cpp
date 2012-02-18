@@ -1,7 +1,7 @@
-#include "model/CoreServices"
+#include "core/CoreServices"
 
-#include "model/Debug"
 #include "audio/IAudio"
+#include "core/Debug"
 #include "graphics/IGraphics"
 #include "input/IInput"
 
