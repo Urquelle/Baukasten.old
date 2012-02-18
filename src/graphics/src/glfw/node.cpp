@@ -41,9 +41,9 @@ namespace Baukasten {
 			glVertexPointer( mVertexCount, GL_FLOAT, 0, BUFFER_OFFSET( colorSize ) );
 
 			if ( mTextures.size() > 0 ) {
-				glBindBuffer( GL_ARRAY_BUFFER, mTextures[0]->cbo );
+				glBindBuffer( GL_ARRAY_BUFFER, mTextures[0]->cbo() );
 				glTexCoordPointer( 2, GL_UNSIGNED_BYTE, 0, BUFFER_OFFSET(0) );
-				glBindTexture( GL_TEXTURE_2D, mTextures[0]->tbo );
+				glBindTexture( GL_TEXTURE_2D, mTextures[0]->tbo() );
 			}
 		}
 

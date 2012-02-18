@@ -15,14 +15,16 @@ namespace Baukasten {
 		GlTexture( const string&, const vec2<float>& );
 		virtual ~GlTexture();
 
-		u32     bufferObject() const;
-		void    setBufferObject( u32 );
 		string  source() const;
 
-		GLuint tbo, cbo;
+		void setCbo( GLuint );
+		GLuint cbo() const;
+
+		void setTbo( GLuint );
+		GLuint tbo() const;
 
 	private:
-		BK_PIMPL_PTR(GlTexture);
+		BK_PIMPL_PTR( GlTexture );
 	};
 } /* Baukasten  */
 

@@ -125,7 +125,6 @@ public:
 		mNodes.clear();
 
 		glfwSwapBuffers();
-		BK_DEBUG( "fps: " << fps() );
 	}
 
 	float
@@ -143,6 +142,10 @@ public:
 	void
 	shutdown()
 	{
+		for ( s32 i = 0; i < mTextures.size(); ++i )
+			delete mTextures.at(i);
+
+		mTextures.clear();
 		glfwTerminate();
 	}
 
@@ -194,12 +197,15 @@ public:
 			image.read();
 
 			tex = new GlTexture( filePath, size );
+			mTextures.push_back( tex );
 
 			// upload texture data
+			GLuint tbo;
 			glEnable( GL_TEXTURE_2D );
-			glGenTextures( 1, &tex->tbo );
-			glBindTexture( GL_TEXTURE_2D, tex->tbo );
+			glGenTextures( 1, &tbo );
+			glBindTexture( GL_TEXTURE_2D, tbo );
 			glPixelStorei( GL_UNPACK_ALIGNMENT, 1 );
+			tex->setTbo( tbo );
 
 			glTexImage2D(
 				GL_TEXTURE_2D, 0, GL_RGBA8,
@@ -208,9 +214,12 @@ public:
 			);
 
 			// upload texture coordinates
-			glGenBuffers( 1, &tex->cbo );
-			glBindBuffer( GL_ARRAY_BUFFER, tex->cbo );
+			GLuint cbo;
+			glGenBuffers( 1, &cbo );
+			glBindBuffer( GL_ARRAY_BUFFER, cbo );
 			glBufferData( GL_ARRAY_BUFFER, sizeof( texCoords ), texCoords, GL_DYNAMIC_DRAW );
+			tex->setCbo( cbo );
+
 			glBindBuffer( GL_ARRAY_BUFFER, 0 );
 		}
 
@@ -224,7 +233,6 @@ public:
 		glBindBuffer( GL_ARRAY_BUFFER, 0 );
 
 		mNodes.push_back( node );
-		mTextures.push_back( tex );
 	}
 
 	void
