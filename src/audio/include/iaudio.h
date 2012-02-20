@@ -9,7 +9,7 @@ namespace Baukasten {
 
 	class BAUKASTEN_EXPORT IAudio {
 	public:
-		IAudio() : mInitialised( false ) {}
+		IAudio() : m_initialised( false ) {}
 		virtual int init( CoreServices* ) = 0;
 		virtual void shutdown() = 0;
 
@@ -24,7 +24,7 @@ namespace Baukasten {
 		virtual void stop( const std::string& ) = 0;
 
 	protected:
-		bool mInitialised;
+		bool m_initialised;
 	};
 } /* Baukasten */
 

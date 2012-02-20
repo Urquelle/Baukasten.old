@@ -52,8 +52,8 @@ namespace Baukasten {
 		void prepare();
 		void cleanup();
 
-		float mWidth;
-		u16 mStipple;
+		float m_width;
+		u16 m_stipple;
 	};
 
 	class PointNode : public Node {
@@ -67,7 +67,7 @@ namespace Baukasten {
 	private:
 		void prepare();
 
-		u32 mSize;
+		u32 m_size;
 	};
 } /* Baukasten */
 

@@ -6,78 +6,78 @@ namespace Baukasten {
 	class IInputPrivate {
 	public:
 		IInputPrivate( IInput *master ) :
-			mMaster( master ),
-			mOnKeyDown( new KeyEvent() ),
-			mOnKeyUp( new KeyEvent() ),
-			mInitialised( false )
+			m_master( master ),
+			m_onKeyDown( new KeyEvent() ),
+			m_onKeyUp( new KeyEvent() ),
+			m_initialised( false )
 		{
 		}
 
 		virtual ~IInputPrivate()
 		{
-			delete mOnKeyDown;
-			delete mOnKeyUp;
+			delete m_onKeyDown;
+			delete m_onKeyUp;
 		}
 
 		KeyEvent*
 		onKeyDown()
 		{
-			return mOnKeyDown;
+			return m_onKeyDown;
 		}
 
 		KeyEvent*
 		onKeyUp()
 		{
-			return mOnKeyUp;
+			return m_onKeyUp;
 		}
 
 		bool
 		isInitialised() const
 		{
-			return mInitialised;
+			return m_initialised;
 		}
 
 		void
 		setInitialised( bool init )
 		{
-			mInitialised = init;
+			m_initialised = init;
 		}
 
 	private:
-		IInput *mMaster;
-		KeyEvent *mOnKeyDown;
-		KeyEvent *mOnKeyUp;
+		IInput *m_master;
+		KeyEvent *m_onKeyDown;
+		KeyEvent *m_onKeyUp;
 
-		bool mInitialised;
+		bool m_initialised;
 	};
 } /* Baukasten */
 
 IInput::IInput() :
-	mImpl( new IInputPrivate( this ) )
+	m_impl( new IInputPrivate( this ) )
 {
 }
 
 Baukasten::KeyEvent*
 IInput::onKeyDown()
 {
-	return mImpl->onKeyDown();
+	return m_impl->onKeyDown();
 }
 
 Baukasten::KeyEvent*
 IInput::onKeyUp()
 {
-	return mImpl->onKeyUp();
+	return m_impl->onKeyUp();
 }
 
 bool
 IInput::isInitialised() const
 {
-	return mImpl->isInitialised();
+	return m_impl->isInitialised();
 }
 
 void
 IInput::setInitialised( bool init )
 {
-	mImpl->setInitialised( init );
+	m_impl->setInitialised( init );
 }
 

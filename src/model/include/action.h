@@ -45,7 +45,7 @@ namespace Baukasten {
 		 * \param source GameEntity object as action's source.
 		 * \param id id of the action object.
 		 */
-		Action( GameEntity&, const std::string& );
+		Action( GameEntity&, const string& );
 
 		/*! \brief destructor */
 		virtual ~Action();
@@ -135,10 +135,10 @@ namespace Baukasten {
 		virtual void doAction( GameEntity* ) = 0;
 
 	private:
-		GameEntity*			mSource;
-		GameEntity*			mTarget;
-		list<GameEntity*>	mTargets;
-		bool				mActive;
+		GameEntity*			m_source;
+		GameEntity*			m_target;
+		list<GameEntity*>	m_targets;
+		bool				m_active;
 	};
 } /* Baukasten */
 

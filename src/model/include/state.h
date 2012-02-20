@@ -11,7 +11,7 @@
 namespace Baukasten {
 	class BAUKASTEN_EXPORT State : public Entity {
 	public:
-		State( const std::string& );
+		State( const string& );
 		virtual ~State();
 
 		virtual State* pack();
@@ -19,10 +19,10 @@ namespace Baukasten {
 		sigc::signal<void, State*> onChange();
 
 	protected:
-		State*	mIntState;
+		State*	m_intState;
 
 	private:
-		sigc::signal<void, State*>	mChanged;
+		sigc::signal<void, State*>	m_changed;
 	};
 } /* Baukasten */
 

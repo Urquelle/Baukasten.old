@@ -46,7 +46,7 @@ ActionManager::actions() const
 list<Action*>
 ActionManager::invokedActions() const
 {
-	return mActionQueue;
+	return m_actionQueue;
 }
 
 bool
@@ -63,7 +63,7 @@ ActionManager::invokeAction( const std::string &id )
 	if ( _action && !_action->isActive() ) {
 		_action->clear();
 		_action->setActive( true );
-		mActionQueue.push_back( _action );
+		m_actionQueue.push_back( _action );
 
 		_action->source()->onActionInvoked().emit(
 			_action->source(),
@@ -82,7 +82,7 @@ ActionManager::invokeAction( const std::string &id, GameEntity *target )
 		_action->clear();
 		_action->setActive( true );
 		_action->setTarget( target );
-		mActionQueue.push_back( _action );
+		m_actionQueue.push_back( _action );
 
 		_action->source()->onActionInvoked().emit(
 			_action->source(),
@@ -100,7 +100,7 @@ ActionManager::invokeAction( const std::string &id, list<GameEntity*> targets )
 		_action->clear();
 		_action->setActive( true );
 		_action->setTargets( targets );
-		mActionQueue.push_back( _action );
+		m_actionQueue.push_back( _action );
 
 		_action->source()->onActionInvoked().emit(
 			_action->source(),
@@ -116,8 +116,8 @@ ActionManager::dropAction( const std::string &id )
 
 	if ( _action && _action->isActive() ) {
 		_action->setActive( false );
-		mActionQueue.erase(
-			find_if( mActionQueue.begin(), mActionQueue.end(), [_action](Action *a) {
+		m_actionQueue.erase(
+			find_if( m_actionQueue.begin(), m_actionQueue.end(), [_action](Action *a) {
 				return a == _action;
 			})
 		);

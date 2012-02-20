@@ -14,73 +14,73 @@ Drawable::~Drawable()
 void
 Drawable::setPosition( const vec3<float> position )
 {
-	mPosition = position;
+	m_position = position;
 }
 
 const vec3<float>
 Drawable::position() const
 {
-	return mPosition;
+	return m_position;
 }
 
 void
 Drawable::setSize( const vec2<float> size )
 {
-	mSize = size;
+	m_size = size;
 }
 
 const vec2<float>
 Drawable::size() const
 {
-	return mSize;
+	return m_size;
 }
 
 void
 Drawable::setPitch( const float pitch )
 {
-	mPitch = pitch;
+	m_pitch = pitch;
 }
 
 const
 float Drawable::pitch() const
 {
-	return mPitch;
+	return m_pitch;
 }
 
 void
 Drawable::setYaw( const float yaw )
 {
-	mYaw = yaw;
+	m_yaw = yaw;
 }
 
 const float
 Drawable::yaw() const
 {
-	return mYaw;
+	return m_yaw;
 }
 
 void
 Drawable::setRoll( const float roll )
 {
-	mRoll = roll;
+	m_roll = roll;
 }
 
 const float
 Drawable::roll() const
 {
-	return mRoll;
+	return m_roll;
 }
 
 void
 Drawable::setScale( const float scale )
 {
-	mScale = scale;
+	m_scale = scale;
 }
 
 const float
 Drawable::scale() const
 {
-	return mScale;
+	return m_scale;
 }
 
 void

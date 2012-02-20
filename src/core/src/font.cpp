@@ -14,14 +14,14 @@ namespace Baukasten {
 	class FontPrivate {
 	public:
 		FontPrivate( Font *f ) :
-			mMaster( f )
+			m_master( f )
 		{
-			FT_Init_FreeType( &mLib );
+			FT_Init_FreeType( &m_lib );
 			FT_New_Face(
-				mLib, "/usr/share/fonts/corefonts/arial.ttf",
-				0, &mFace
+				m_lib, "/usr/share/fonts/corefonts/arial.ttf",
+				0, &m_face
 			);
-			FT_Set_Char_Size( mFace, 12 * 64, 0, 100, 0 );
+			FT_Set_Char_Size( m_face, 12 * 64, 0, 100, 0 );
 		}
 
 		virtual ~FontPrivate()
@@ -34,15 +34,15 @@ namespace Baukasten {
 
 		void setSize( const u32 size )
 		{
-			FT_Set_Char_Size( mFace, size * 64, 0, 100, 0 );
+			FT_Set_Char_Size( m_face, size * 64, 0, 100, 0 );
 		}
 
 		void render( const vec3<float> &pos, const char *text, const Color &c )
 		{
-			BK_ASSERT( mFace != 0, "couldn't load font!" );
+			BK_ASSERT( m_face != 0, "couldn't load font!" );
 
 			u32 numChars = strlen( text );
-			FT_GlyphSlot slot = mFace->glyph;
+			FT_GlyphSlot slot = m_face->glyph;
 			FT_Vector pen;
 			FT_Matrix matrix;
 
@@ -57,22 +57,22 @@ namespace Baukasten {
 			pen.y = pos[BK_Y];
 
 			for (u32 n = 0; n < numChars; ++n) {
-				FT_Set_Transform( mFace, &matrix, &pen );
-				FT_Load_Char( mFace, text[n], FT_LOAD_RENDER );
+				FT_Set_Transform( m_face, &matrix, &pen );
+				FT_Load_Char( m_face, text[n], FT_LOAD_RENDER );
 				pen.x += slot->advance.x;
 				pen.y += slot->advance.y;
 			}
 		}
 
 	private:
-		Font* 		mMaster;
-		FT_Library	mLib;
-		FT_Face		mFace;
+		Font* 		m_master;
+		FT_Library	m_lib;
+		FT_Face		m_face;
 	};
 } /* Baukasten */
 
 Font::Font() :
-	mImpl( new FontPrivate( this ) )
+	m_impl( new FontPrivate( this ) )
 {
 }
 
@@ -88,18 +88,18 @@ Font::~Font()
 void
 Font::setFace( const char *filePath )
 {
-	mImpl->setFace( filePath );
+	m_impl->setFace( filePath );
 }
 
 void
 Font::setSize( const u32 size )
 {
-	mImpl->setSize( size );
+	m_impl->setSize( size );
 }
 
 void
 Font::render( const vec3<float> &pos, const char *text, const Color &c )
 {
-	mImpl->render( pos, text, c );
+	m_impl->render( pos, text, c );
 }
 

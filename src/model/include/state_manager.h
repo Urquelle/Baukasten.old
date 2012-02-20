@@ -14,16 +14,16 @@ namespace Baukasten {
 		virtual ~StateManager();
 
 		void addState( State* );
-		void addState( const std::string&, State* );
+		void addState( const string&, State* );
 
 		template<class T>
-		T state( const std::string &id ) const
+		T state( const string &id ) const
 		{
 			return static_cast<T>( get( id ) );
 		}
 
 		TMap states() const;
-		bool hasState( const std::string& ) const;
+		bool hasState( const string& ) const;
 	};
 } /* Baukasten */
 

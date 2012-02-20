@@ -10,62 +10,62 @@ namespace Baukasten {
 	class ImagePrivate {
 	public:
 		ImagePrivate( const string path ) :
-			mPath( path ), mInfo( new ImageInfo() )
+			m_path( path ), m_info( new ImageInfo() )
 		{
-			mHandle = fopen( path.c_str(), "rb" );
-			if ( !mHandle )
+			m_handle = fopen( path.c_str(), "rb" );
+			if ( !m_handle )
 				BK_DEBUG( path << " couldn't be opened!" );
 
-			mType = _type( mHandle );
-			mIsOpen = true;
+			m_type = _type( m_handle );
+			m_isOpen = true;
 		}
 
 		virtual ~ImagePrivate()
 		{
-			fclose( mHandle );
-			mHandle = 0;
-			delete mInfo->data;
+			fclose( m_handle );
+			m_handle = 0;
+			delete m_info->data;
 		}
 
 		void
 		close()
 		{
 			if ( isOpen() ) {
-				fclose( mHandle );
-				mIsOpen = false;
-				mHandle = 0;
-				delete mInfo->data;
+				fclose( m_handle );
+				m_isOpen = false;
+				m_handle = 0;
+				delete m_info->data;
 			}
 		}
 
 		u8*
 		data() const
 		{
-			return mInfo->data;
+			return m_info->data;
 		}
 
 		vec2<u32>
 		dim() const
 		{
-			return { mInfo->width, mInfo->height };
+			return { m_info->width, m_info->height };
 		}
 
 		bool
 		hasAlpha() const
 		{
-			return mInfo->alpha;
+			return m_info->alpha;
 		}
 
 		u32
 		height() const
 		{
-			return mInfo->height;
+			return m_info->height;
 		}
 
 		bool
 		isOpen() const
 		{
-			return mIsOpen;
+			return m_isOpen;
 		}
 
 		void
@@ -73,15 +73,15 @@ namespace Baukasten {
 		{
 			bool result = false;
 
-			switch ( mType ) {
+			switch ( m_type ) {
 			case Image::PNG:
-				result = _readPng( mHandle, mInfo );
+				result = _readPng( m_handle, m_info );
 				break;
 			case Image::JPEG:
-				result = _readJpeg( mHandle, mInfo );
+				result = _readJpeg( m_handle, m_info );
 				break;
 			case Image::GIF:
-				result = _readGif( mHandle, mInfo );
+				result = _readGif( m_handle, m_info );
 				break;
 			case Image::NO_TYPE:
 				break;
@@ -91,32 +91,32 @@ namespace Baukasten {
 		u32
 		size() const
 		{
-			return mInfo->size;
+			return m_info->size;
 		}
 
 		Image::ImageType
 		type() const
 		{
-			return mType;
+			return m_type;
 		}
 
 		u32
 		width() const
 		{
-			return mInfo->width;
+			return m_info->width;
 		}
 
 	private:
-		FILE*				mHandle;
-		Image::ImageType	mType;
-		string				mPath;
-		bool				mIsOpen;
-		ImageInfo*			mInfo;
+		FILE*				m_handle;
+		Image::ImageType	m_type;
+		string				m_path;
+		bool				m_isOpen;
+		ImageInfo*			m_info;
 	};
 } /* Baukasten */
 
 Image::Image( const string &path ) :
-	mImpl( new ImagePrivate( path ) )
+	m_impl( new ImagePrivate( path ) )
 {
 }
 
@@ -127,60 +127,60 @@ Image::~Image()
 void
 Image::close()
 {
-	mImpl->close();
+	m_impl->close();
 }
 
 u8*
 Image::data() const
 {
-	return mImpl->data();
+	return m_impl->data();
 }
 
 vec2<u32>
 Image::dim() const
 {
-	return mImpl->dim();
+	return m_impl->dim();
 }
 
 bool
 Image::hasAlpha() const
 {
-	return mImpl->hasAlpha();
+	return m_impl->hasAlpha();
 }
 
 u32
 Image::height() const
 {
-	return mImpl->height();
+	return m_impl->height();
 }
 
 bool
 Image::isOpen() const
 {
-	return mImpl->isOpen();
+	return m_impl->isOpen();
 }
 
 void
 Image::read()
 {
-	mImpl->read();
+	m_impl->read();
 }
 
 u32
 Image::size() const
 {
-	return mImpl->size();
+	return m_impl->size();
 }
 
 Image::ImageType
 Image::type() const
 {
-	return mImpl->type();
+	return m_impl->type();
 }
 
 u32
 Image::width() const
 {
-	return mImpl->width();
+	return m_impl->width();
 }
 

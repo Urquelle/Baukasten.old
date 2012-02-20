@@ -13,7 +13,7 @@ namespace Baukasten {
 	private:
 		GraphicsInterface() {}
 
-		static IGraphics* mInstance;
+		static IGraphics* m_instance;
 	};
 } /* Baukasten */
 

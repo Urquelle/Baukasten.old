@@ -24,7 +24,7 @@ namespace Baukasten {
 		 *
 		 * \param id a string which becomes the id of the object.
 		 */
-		Entity( const std::string& );
+		Entity( const string& );
 
 		/*! Destructor */
 		virtual ~Entity();
@@ -54,7 +54,7 @@ namespace Baukasten {
 		string id() const;
 
 	private:
-		string mId;
+		string m_id;
 	};
 }
 

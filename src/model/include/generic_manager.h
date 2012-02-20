@@ -40,7 +40,7 @@ namespace Baukasten {
 
 		/*! \brief add object t to the collection.
 		 *
-		 * \see add( const std::string&, T* )
+		 * \see add( const string&, T* )
 		 * \param t an object to add to the map.
 		 */
 		virtual void add( T *t )
@@ -62,7 +62,7 @@ namespace Baukasten {
 			BK_ASSERT( t != 0, "t must not be 0." );
 			BK_ASSERT( !has( id ), "id " << id << " must be unique in the collection." );
 
-			mMap[ id ] = shared_ptr<T>( t );
+			m_map[ id ] = shared_ptr<T>( t );
 		}
 
 		/*! \brief fetch an object from the map.
@@ -75,9 +75,9 @@ namespace Baukasten {
 		 */
 		virtual T* get( const string &id ) const
 		{
-			typename TMap::const_iterator it = mMap.find( id );
+			typename TMap::const_iterator it = m_map.find( id );
 
-			if ( it == mMap.end() )
+			if ( it == m_map.end() )
 				return 0;
 
 			return it->second.get();
@@ -91,7 +91,7 @@ namespace Baukasten {
 		 */
 		virtual TMap all() const
 		{
-			return mMap;
+			return m_map;
 		}
 
 		/*! \brief query whether the map contains the id.
@@ -104,7 +104,7 @@ namespace Baukasten {
 		 */
 		virtual bool has( const string &id ) const
 		{
-			return mMap.count( id ) > 0;
+			return m_map.count( id ) > 0;
 		}
 
 		/*! \brief remove the object to the given id.
@@ -116,11 +116,11 @@ namespace Baukasten {
 		 */
 		virtual void remove( const string &id )
 		{
-			mMap.erase( mMap.find( id ) );
+			m_map.erase( m_map.find( id ) );
 		}
 
 	protected:
-		TMap mMap;
+		TMap m_map;
 	};
 } /* Baukasten */
 

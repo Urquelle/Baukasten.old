@@ -4,16 +4,16 @@
 
 using namespace Baukasten;
 
-IInput* InputInterface::mInstance = 0;
+IInput* InputInterface::m_instance = 0;
 
 IInput*
 InputInterface::instance()
 {
-	if ( !mInstance ) {
-		mInstance = new Input();
+	if ( !m_instance ) {
+		m_instance = new Input();
 	}
 
-	return mInstance;
+	return m_instance;
 }
 
 InputInterface::InputInterface()

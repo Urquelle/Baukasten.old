@@ -16,17 +16,17 @@ namespace Baukasten {
 	class BAUKASTEN_EXPORT Form : public Drawable,
 	public EntityManager, public StateManager {
 	public:
-		Form( const std::string&, IGraphics *graphics = 0 );
+		Form( const string&, IGraphics *graphics = 0 );
 		virtual ~Form();
 
 		void addToLSpace( GameEntity* );
 		void addToLSpace( const string&, GameEntity* );
-		void removeFromLSpace( const std::string& );
+		void removeFromLSpace( const string& );
 		LogicalSpace* lSpace() const;
 
 		void addToVSpace( Form* );
 		void addToVSpace( const string&, Form* );
-		void removeFromVSpace( const std::string& );
+		void removeFromVSpace( const string& );
 		VirtualSpace* vSpace() const;
 
 		virtual void constructScene();
@@ -35,9 +35,9 @@ namespace Baukasten {
 	protected:
 		IGraphics *graphics() const;
 
-		shared_ptr<LogicalSpace> mLSpace;
-		shared_ptr<VirtualSpace> mVSpace;
-		IGraphics *mGraphics;
+		shared_ptr<LogicalSpace> m_lSpace;
+		shared_ptr<VirtualSpace> m_vSpace;
+		IGraphics *m_graphics;
 	};
 }
 

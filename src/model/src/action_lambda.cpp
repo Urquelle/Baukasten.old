@@ -11,8 +11,8 @@ ActionLambda::ActionLambda(
 		DoneFunction *doneFunc
 		) :
 	Action( source, id ),
-	mDoAction( doActFunc ),
-	mDone( doneFunc )
+	m_doAction( doActFunc ),
+	m_done( doneFunc )
 {
 }
 
@@ -24,28 +24,28 @@ void
 ActionLambda::setDoActionFunction( DoActionFunction *func )
 {
 	BK_ASSERT( func != 0, "function pointer must not be 0." );
-	mDoAction = func;
+	m_doAction = func;
 }
 
 void
 ActionLambda::setDoneFunction( DoneFunction *func )
 {
 	BK_ASSERT( func != 0, "function pointer must not be 0." );
-	mDone = func;
+	m_done = func;
 }
 
 bool
 ActionLambda::done() const
 {
-	if ( !mDone )
+	if ( !m_done )
 		return Action::done();
-	return (*mDone)( this );
+	return (*m_done)( this );
 }
 
 void
 ActionLambda::doAction( GameEntity *entity )
 {
-	BK_ASSERT( mDoAction != 0, "function pointer must not be 0." );
-	(*mDoAction)( this, entity );
+	BK_ASSERT( m_doAction != 0, "function pointer must not be 0." );
+	(*m_doAction)( this, entity );
 }
 

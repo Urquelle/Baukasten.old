@@ -25,16 +25,16 @@ isAncestor( GameEntity *entity, GameEntity *child )
 
 GameEntity::GameEntity( const std::string &id ) :
 	Entity( id ),
-	mType( 0 ),
-	mParent( 0 )
+	m_type( 0 ),
+	m_parent( 0 )
 {
 }
 
 GameEntity::GameEntity( const GameEntity &rhs ) :
 	Entity( rhs.id() ),
-	mType( rhs.type() ),
-	mForm( rhs.form() ),
-	mParent( rhs.parent() )
+	m_type( rhs.type() ),
+	m_form( rhs.form() ),
+	m_parent( rhs.parent() )
 {
 }
 
@@ -46,26 +46,26 @@ void
 GameEntity::setType( EntityType *type )
 {
 	if ( type )
-		mType = type;
+		m_type = type;
 }
 
 EntityType*
 GameEntity::type() const
 {
-	return mType;
+	return m_type;
 }
 
 void
 GameEntity::setForm( Form *form )
 {
 	BK_ASSERT( form != 0, "form must not be 0." );
-	mForm = shared_ptr<Form>( form );
+	m_form = shared_ptr<Form>( form );
 }
 
 Form*
 GameEntity::form() const
 {
-	return mForm.get();
+	return m_form.get();
 }
 
 void
@@ -106,8 +106,8 @@ GameEntity::addChild( GameEntity *child )
 		"you can't assign a parent GameEntity to be its own grandchild."
 	);
 
-	if ( mChildren.find( child->id() ) == mChildren.end() ) {
-		mChildren[ child->id() ] = shared_ptr<GameEntity>( child );
+	if ( m_children.find( child->id() ) == m_children.end() ) {
+		m_children[ child->id() ] = shared_ptr<GameEntity>( child );
 		child->setParent( this );
 	}
 }
@@ -115,20 +115,20 @@ GameEntity::addChild( GameEntity *child )
 GameEntity*
 GameEntity::child( const std::string &id ) const
 {
-	auto it = mChildren.find( id );
-	return ( it == mChildren.end() ) ? 0 : it->second.get();
+	auto it = m_children.find( id );
+	return ( it == m_children.end() ) ? 0 : it->second.get();
 }
 
 GameEntityMap
 GameEntity::children() const
 {
-	return mChildren;
+	return m_children;
 }
 
 void
 GameEntity::removeChild( const std::string &id )
 {
-	mChildren.erase( mChildren.find( id ) );
+	m_children.erase( m_children.find( id ) );
 }
 
 void
@@ -137,13 +137,13 @@ GameEntity::setParent( GameEntity *parent )
 	BK_ASSERT( parent != 0, "parent must not be 0." );
 	BK_ASSERT( parent != this, "GameEntity object can't be its own parent." );
 
-	mParent = parent;
+	m_parent = parent;
 }
 
 GameEntity*
 GameEntity::parent() const
 {
-	return mParent;
+	return m_parent;
 }
 
 void
@@ -164,24 +164,24 @@ GameEntity::runActions()
 StateSignal&
 GameEntity::onStateChanged()
 {
-	return mStateChanged;
+	return m_stateChanged;
 }
 
 ActionSignal&
 GameEntity::onActionInvoked()
 {
-	return mActionInvoked;
+	return m_actionInvoked;
 }
 
 ActionSignal&
 GameEntity::onActionRun()
 {
-	return mActionRun;
+	return m_actionRun;
 }
 
 void
 GameEntity::stateChanged( State *state )
 {
-	mStateChanged.emit( this, state );
+	m_stateChanged.emit( this, state );
 }
 

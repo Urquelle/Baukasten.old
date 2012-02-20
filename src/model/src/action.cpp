@@ -9,9 +9,9 @@ using namespace std;
 
 Action::Action( GameEntity &source, const std::string &id ) :
 	Entity( id ),
-	mSource( &source ),
-	mTarget( 0 ),
-	mActive( false )
+	m_source( &source ),
+	m_target( 0 ),
+	m_active( false )
 {
 }
 
@@ -22,51 +22,51 @@ Action::~Action()
 GameEntity*
 Action::source() const
 {
-	return mSource;
+	return m_source;
 }
 
 void
 Action::clear()
 {
-	mTarget = 0;
-	mTargets.erase( mTargets.begin(), mTargets.end() );
+	m_target = 0;
+	m_targets.erase( m_targets.begin(), m_targets.end() );
 }
 
 bool
 Action::isActive() const
 {
-	return mActive;
+	return m_active;
 }
 
 void
 Action::setActive( bool active )
 {
-	mActive = active;
+	m_active = active;
 }
 
 void
 Action::setTarget( GameEntity *target )
 {
 	BK_ASSERT( target != 0, "target must not be 0." );
-	mTarget = target;
+	m_target = target;
 }
 
 GameEntity*
 Action::target()
 {
-	return mTarget;
+	return m_target;
 }
 
 void
 Action::setTargets( list<GameEntity*> &targets )
 {
-	mTargets = targets;
+	m_targets = targets;
 }
 
 list<GameEntity*>
 Action::targets()
 {
-	return mTargets;
+	return m_targets;
 }
 
 bool

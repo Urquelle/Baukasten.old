@@ -20,7 +20,7 @@ namespace Baukasten {
 		public ActionManager, public StateManager {
 	public:
 
-		GameEntity( const std::string& );
+		GameEntity( const string& );
 		GameEntity( const GameEntity& );
 		virtual ~GameEntity();
 
@@ -31,11 +31,11 @@ namespace Baukasten {
 		Form* form() const;
 
 		void addState( State* );
-		void addState( const std::string&, State* );
-		bool hasState( const std::string& ) const;
+		void addState( const string&, State* );
+		bool hasState( const string& ) const;
 
 		template<class T>
-		T state( const std::string &id )
+		T state( const string &id )
 		{
 			T state = StateManager::state<T>( id );
 
@@ -52,9 +52,9 @@ namespace Baukasten {
 		}
 
 		void addChild( GameEntity* );
-		GameEntity* child( const std::string& ) const;
+		GameEntity* child( const string& ) const;
 		GameEntityMap children() const;
-		void removeChild( const std::string& );
+		void removeChild( const string& );
 
 		void setParent( GameEntity* );
 		GameEntity* parent() const;
@@ -68,15 +68,15 @@ namespace Baukasten {
 	private:
 		void stateChanged( State* );
 
-		EntityType*			mType;
-		shared_ptr<Form>	mForm;
-		GameEntityMap		mChildren;
-		GameEntity*			mParent;
+		EntityType*			m_type;
+		shared_ptr<Form>	m_form;
+		GameEntityMap		m_children;
+		GameEntity*			m_parent;
 
 		// signals
-		StateSignal		mStateChanged;
-		ActionSignal	mActionInvoked;
-		ActionSignal	mActionRun;
+		StateSignal		m_stateChanged;
+		ActionSignal	m_actionInvoked;
+		ActionSignal	m_actionRun;
 	};
 } /* Baukasten */
 

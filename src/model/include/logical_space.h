@@ -19,8 +19,8 @@ namespace Baukasten {
 		void removeEntity( const string& );
 
 	private:
-		list<GameEntity*>			mList;
-		map<string, GameEntity*>	mMap;
+		list<GameEntity*>			m_list;
+		map<string, GameEntity*>	m_map;
 	};
 }
 

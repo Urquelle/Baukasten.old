@@ -17,7 +17,7 @@ namespace Baukasten {
 	private:
 		InputInterface();
 
-		static IInput* mInstance;
+		static IInput* m_instance;
 	};
 } /* Baukasten */
 

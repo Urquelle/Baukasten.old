@@ -25,7 +25,7 @@ namespace Baukasten {
 
 #define BK_PIMPL_PTR( Class ) \
 	friend class Class##Private; \
-	Class##Private* mImpl
+	Class##Private* m_impl
 
 #if defined(EXPORT_LIB)
 #   define BAUKASTEN_EXPORT __attribute__((visibility("default")))

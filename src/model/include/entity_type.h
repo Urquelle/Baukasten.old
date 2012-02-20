@@ -9,7 +9,7 @@ namespace Baukasten {
 	class BAUKASTEN_EXPORT EntityType :
 		public Entity, public StateManager {
 	public:
-		EntityType( const std::string& );
+		EntityType( const string& );
 		virtual ~EntityType();
 
 		void setParent( EntityType* );
@@ -19,21 +19,21 @@ namespace Baukasten {
 		void removeChild( const EntityType* );
 
 		template<class T>
-		T state( const std::string &id ) const
+		T state( const string &id ) const
 		{
 			T state = StateManager::state<T>( id );
 
-			if ( !state && mParent )
-				state = mParent->state<T>( id );
+			if ( !state && m_parent )
+				state = m_parent->state<T>( id );
 
 			return state;
 		}
 
-		State* entityState( const std::string& );
+		State* entityState( const string& );
 
 	private:
-		EntityType*		mParent;
-		EntityTypeList	mChildren;
+		EntityType*		m_parent;
+		EntityTypeList	m_children;
 	};
 } /* Baukasten */
 

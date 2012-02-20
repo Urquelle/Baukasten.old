@@ -13,14 +13,14 @@ namespace Baukasten {
 	class BAUKASTEN_EXPORT GenericState : public State {
 	public:
 
-		GenericState( const std::string &id ) :
+		GenericState( const string &id ) :
 			State( id )
 		{
 		}
 
-		GenericState( const std::string &id, T value ) :
+		GenericState( const string &id, T value ) :
 			State( id ),
-			mValue( value )
+			m_value( value )
 		{
 		}
 
@@ -30,30 +30,30 @@ namespace Baukasten {
 
 		const T& value() const
 		{
-			if ( mIntState )
-				return ( static_cast<GenericState<T>*>( mIntState ) )->value();
+			if ( m_intState )
+				return ( static_cast<GenericState<T>*>( m_intState ) )->value();
 
-			return mValue;
+			return m_value;
 		}
 
 		void setValue( const T &value )
 		{
-			if ( mIntState )
-				mIntState = 0;
+			if ( m_intState )
+				m_intState = 0;
 
-			mValue = value;
+			m_value = value;
 			onChange().emit( this );
 		}
 
 		GenericState<T>* pack()
 		{
 			GenericState<T> *newState = new GenericState<T>( id() );
-			newState->mIntState = this;
+			newState->m_intState = this;
 			return newState;
 		}
 
 	private:
-		T mValue;
+		T m_value;
 	};
 
 	template<class T>
@@ -67,7 +67,7 @@ namespace Baukasten {
 
 		GenericState( const string &id, vector<T> values ) :
 			State( id ),
-			mValues( values )
+			m_values( values )
 		{
 		}
 
@@ -77,62 +77,62 @@ namespace Baukasten {
 
 		const T& value( const int i ) const
 		{
-			if ( mIntState )
-				return ( static_cast<GenericState<vector<T>>*>( mIntState ) )->value( i );
+			if ( m_intState )
+				return ( static_cast<GenericState<vector<T>>*>( m_intState ) )->value( i );
 
-			return mValues.at( i );
+			return m_values.at( i );
 		}
 
 		vector<T> values() const
 		{
-			return mValues;
+			return m_values;
 		}
 
 		void addValue( const T &value )
 		{
-			if ( mIntState )
-				mIntState = 0;
+			if ( m_intState )
+				m_intState = 0;
 
-			mValues.push_back( value );
+			m_values.push_back( value );
 			onChange().emit( this );
 		}
 
 		void setValue( const unsigned int i, const T &value )
 		{
-			if ( mIntState )
-				mIntState = 0;
+			if ( m_intState )
+				m_intState = 0;
 
 			BK_ASSERT(
-				i < mValues.size(),
+				i < m_values.size(),
 				"position to include the value must not be greater than collection's size"
 			);
 
-			mValues[i] = value;
+			m_values[i] = value;
 			onChange().emit( this );
 		}
 
 		void setValues( vector<T> values )
 		{
-			if ( mIntState )
-				mIntState = 0;
-			mValues = values;
+			if ( m_intState )
+				m_intState = 0;
+			m_values = values;
 			onChange().emit( this );
 		}
 
 		void setValues( GenericState<vector<T>> *state )
 		{
-			mValues = state->values();
+			m_values = state->values();
 		}
 
 		GenericState<vector<T>>* pack()
 		{
 			GenericState<vector<T>> *newState = new GenericState<vector<T>>( id() );
-			newState->mIntState = this;
+			newState->m_intState = this;
 			return newState;
 		}
 
 	private:
-		std::vector<T> mValues;
+		vector<T> m_values;
 	};
 
 	// typedef some often used genericstates

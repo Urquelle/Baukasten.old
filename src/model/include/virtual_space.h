@@ -11,7 +11,7 @@ namespace Baukasten {
 		VirtualSpace();
 		virtual ~VirtualSpace();
 
-		Form* entity( const std::string& ) const;
+		Form* entity( const string& ) const;
 		void addEntity( const string&, Form* );
 		void addEntity( Form* );
 		list<Form*> entities() const;
@@ -19,8 +19,8 @@ namespace Baukasten {
 		void removeEntity( const string& );
 
 	private:
-		list<Form*>			mList;
-		map<string, Form*>	mMap;
+		list<Form*>			m_list;
+		map<string, Form*>	m_map;
 	};
 }
 

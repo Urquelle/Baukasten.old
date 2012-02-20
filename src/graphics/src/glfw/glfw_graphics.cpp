@@ -3,103 +3,48 @@
 #include "core/CoreServices"
 #include "core/Font"
 #include "graphics/Image"
-#include "graphics/include/glfw/gl_texture.h"
 #include "model/Form"
 
+#include "graphics/include/glfw/gl_texture.h"
+#include "graphics/include/glfw/glfw_graphics_functions.h"
 #include "graphics/include/glfw/node.h"
-
-#include <GL/glew.h>
-#include <GL/glfw.h>
-
-#include <cmath>
 
 using namespace Baukasten;
 
-string
-toString( const wstring &s )
-{
-	string str( s.begin(), s.end() );
-	str.assign( s.begin(), s.end() );
-	return str;
-}
-
-void
-checkForError()
-{
-	GLuint errCode = glGetError();
-	if ( errCode != GL_NO_ERROR ) {
-		BK_DEBUG( gluErrorString( errCode ) );
-	}
-}
-
-void
-computeFps( float &t0, float &t1, float &frames, float &fps )
-{
-	t1 = glfwGetTime();
-
-	if ( ( t1 - t0 ) >= 1.0 || frames == 0 ) {
-		fps = frames / ( t1 - t0 );
-		t0 = t1;
-		frames = 0;
-	}
-
-	frames++;
-}
-
-GlTexture*
-texture( const string &source, vector<GlTexture*> *textures )
-{
-	GlTexture *tex = 0;
-	for ( s32 i = 0; i < textures->size(); ++i ) {
-		GlTexture *t = textures->at(i);
-		if ( t && t->source() == source ) {
-			tex = t;
-			break;
-		}
-	}
-
-	return tex;
-}
-
-
-// GlfGraphicsP {{{
-
-class Baukasten::GlfwGraphicsP {
+// GlfGraphicsPrivate {{{
+class Baukasten::GlfwGraphicsPrivate {
 public:
-	GlfwGraphicsP( GlfwGraphics *master ) :
-		mMaster( master ),
-		mFont( new Font() )
+	GlfwGraphicsPrivate( GlfwGraphics *master ) :
+		m_master( master ),
+		m_font( new Font() ),
+		m_program( 0 )
 	{
 	}
 
-	virtual ~GlfwGraphicsP()
+	virtual ~GlfwGraphicsPrivate()
 	{
 	}
 
 	int init( CoreServices *services )
 	{
-		mT0 = glfwGetTime();
+		bool result = false;
 
-		if ( !glfwInit() ) {
-			return 0;
-		}
+		m_t0 = glfwGetTime();
 
-		glfwOpenWindow( 640, 480, 0, 0, 0, 0, 0, 0, GLFW_WINDOW );
-		glViewport( 0, 0, 640.0, 480.0 );
-		glLoadIdentity();
-		gluOrtho2D( 0.0, 640.0, 480.0, 0.0 );
-		glewInit();
+		result = _init();
+		result = _initProgram( &m_program );
 
-		mMaster->mInitialised = true;
+		m_master->m_initialised = true;
 
 		return 1;
 	}
 
 	void createWindow( const vec2<int> &size, const std::wstring &title )
 	{
+		glMatrixMode( GL_PROJECTION );
+		glLoadIdentity();
 		glfwSetWindowSize( (GLsizei) size[BK_X], (GLsizei) size[BK_Y] );
 		glViewport( 0, 0, size[BK_X], size[BK_Y] );
-		glLoadIdentity();
 		gluOrtho2D( 0.0, (GLdouble) size[BK_X], (GLdouble) size[BK_Y], 0.0 );
 		setWindowCaption( title );
 	}
@@ -107,9 +52,10 @@ public:
 	void
 	render( Form *form )
 	{
-		computeFps( mT0, mT1, mFrames, mFps );
+		_computeFps( m_t0, m_t1, m_frames, m_fps );
 
-		glClear( GL_COLOR_BUFFER_BIT );
+	 	glClear( GL_COLOR_BUFFER_BIT );
+		glUseProgram( m_program );
 
 		form->constructScene();
 		form->render();
@@ -122,7 +68,7 @@ public:
 		glDisableClientState( GL_TEXTURE_COORD_ARRAY );
 		glDisableClientState( GL_VERTEX_ARRAY );
 
-		mNodes.clear();
+		m_nodes.clear();
 
 		glfwSwapBuffers();
 	}
@@ -130,22 +76,22 @@ public:
 	float
 	fps() const
 	{
-		return mFps;
+		return m_fps;
 	}
 
 	void
 	setWindowCaption( const std::wstring &title )
 	{
-		glfwSetWindowTitle( toString( title ).c_str() );
+		glfwSetWindowTitle( _toString( title ).c_str() );
 	}
 
 	void
 	shutdown()
 	{
-		for ( s32 i = 0; i < mTextures.size(); ++i )
-			delete mTextures.at(i);
+		for ( s32 i = 0; i < m_textures.size(); ++i )
+			delete m_textures.at(i);
 
-		mTextures.clear();
+		m_textures.clear();
 		glfwTerminate();
 	}
 
@@ -232,7 +178,7 @@ public:
 		glBufferData( GL_ARRAY_BUFFER, sizeof( vertices ), vertices, GL_DYNAMIC_DRAW );
 		glBindBuffer( GL_ARRAY_BUFFER, 0 );
 
-		mNodes.push_back( node );
+		m_nodes.push_back( node );
 	}
 
 	void
@@ -257,7 +203,7 @@ public:
 		glBufferData( GL_ARRAY_BUFFER, sizeof( vertices ), vertices, GL_DYNAMIC_DRAW );
 		glBindBuffer( GL_ARRAY_BUFFER, 0 );
 
-		mNodes.push_back( node );
+		m_nodes.push_back( node );
 	}
 
 	void
@@ -280,7 +226,7 @@ public:
 		glBufferData( GL_ARRAY_BUFFER, sizeof( vertices ), vertices, GL_DYNAMIC_DRAW );
 		glBindBuffer( GL_ARRAY_BUFFER, 0 );
 
-		mNodes.push_back( node );
+		m_nodes.push_back( node );
 	}
 
 	void
@@ -307,127 +253,116 @@ public:
 		glBufferData( GL_ARRAY_BUFFER, sizeof( vertices ), vertices, GL_DYNAMIC_DRAW );
 		glBindBuffer( GL_ARRAY_BUFFER, 0 );
 
-		mNodes.push_back( node );
+		m_nodes.push_back( node );
 	}
 
 	void
 	drawText( const wchar_t *text, const vec3<float> &pos, const Color &c )
 	{
-		mFont->render(
+		m_font->render(
 			pos,
-			toString( wstring(text) ).c_str(),
+			_toString( wstring(text) ).c_str(),
 			c
 		);
 	}
 
 private:
-	GlfwGraphics*		mMaster;
-	vector<Node*>		mNodes;
-	vector<GlTexture*>	mTextures;
-	Font*				mFont;
+	GlfwGraphics*		m_master;
+	vector<Node*>		m_nodes;
+	vector<GlTexture*>	m_textures;
+	Font*				m_font;
+	GLuint              m_program;
 
-	float				mT0, mT1, mFrames, mFps;
+	float				m_t0, m_t1, m_frames, m_fps;
 };
 
 // }}}
 
 GlfwGraphics::GlfwGraphics() :
-	mImpl( new GlfwGraphicsP( this ) )
+	m_impl( new GlfwGraphicsPrivate( this ) )
 {
 }
 
 GlfwGraphics::~GlfwGraphics()
 {
-	delete mImpl;
+	delete m_impl;
 }
 
 int
 GlfwGraphics::init( CoreServices *services )
 {
-	return mImpl->init( services );
+	return m_impl->init( services );
 }
 
 void
 GlfwGraphics::createWindow( const vec2<int> &size, const std::wstring &title )
 {
-	mImpl->createWindow( size, title );
+	m_impl->createWindow( size, title );
 }
 
 void
 GlfwGraphics::render( Form *form )
 {
-	mImpl->render( form );
+	m_impl->render( form );
 }
 
 void
 GlfwGraphics::shutdown()
 {
-	mImpl->shutdown();
-}
-
-void
-GlfwGraphics::loadResource( const string &path, const string &id )
-{
-	BK_DEBUG( "implement me!" );
-}
-
-void
-GlfwGraphics::freeResource( const string &id )
-{
-	BK_DEBUG( "implement me!" );
+	m_impl->shutdown();
 }
 
 void
 GlfwGraphics::drawCircle( const vec3<float> &pos, const u32 radius,
 		const Color &c )
 {
-	mImpl->drawCircle( pos, radius, c );
+	m_impl->drawCircle( pos, radius, c );
 }
 
 void
 GlfwGraphics::drawImage( const string &filePath, const vec2<float> &size,
 		const vec3<float> &pos )
 {
-	mImpl->drawImage( filePath, size, pos );
+	m_impl->drawImage( filePath, size, pos );
 }
 
 void
 GlfwGraphics::drawLine( const vec3<float> &from, const vec3<float> &to,
 		const Color &color, const float width )
 {
-	mImpl->drawLine( from, to, color, width );
+	m_impl->drawLine( from, to, color, width );
 }
 
 void
 GlfwGraphics::drawPoint( const vec3<float> &pos,
 		const u32 size, const Color &color )
 {
-	mImpl->drawPoint( pos, size, color );
+	m_impl->drawPoint( pos, size, color );
 }
 
 void
 GlfwGraphics::drawRect( const vec2<float> &size,
 		const vec3<float> &pos, const Color &color )
 {
-	mImpl->drawRect( size, pos, color );
+	m_impl->drawRect( size, pos, color );
 }
 
 void
 GlfwGraphics::drawText( const wchar_t *text, const vec3<float> &pos,
 		const Color &color )
 {
-	mImpl->drawText( text, pos, color );
+	m_impl->drawText( text, pos, color );
 }
 
 float
 GlfwGraphics::fps() const
 {
-	return mImpl->fps();
+	return m_impl->fps();
 }
 
 void
 GlfwGraphics::setWindowCaption( const std::wstring &title )
 {
-	mImpl->setWindowCaption( title );
+	m_impl->setWindowCaption( title );
 }
 

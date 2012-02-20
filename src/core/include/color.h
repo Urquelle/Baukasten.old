@@ -44,7 +44,7 @@ namespace Baukasten {
 		bool operator!=( const Colors& ) const;
 
 	private:
-		u32 mColor;
+		u32 m_color;
 	};
 } /* Baukasten */
 

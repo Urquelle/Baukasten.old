@@ -12,11 +12,12 @@ namespace Baukasten {
 
 	class BAUKASTEN_EXPORT IGraphics {
 	public:
-		IGraphics() : mInitialised( false ) {}
 		virtual int init( CoreServices* ) = 0;
 		virtual void shutdown() = 0;
+		IGraphics() : m_initialised( false ) {}
 
 		virtual void render( Form* ) = 0;
+		bool isInitialised() const { return m_initialised; }
 
 		virtual void createWindow( const vec2<int>&, const std::wstring& ) = 0;
 
@@ -32,13 +33,12 @@ namespace Baukasten {
 
 		virtual string serviceName() const = 0;
 		virtual float fps() const = 0;
-		bool isInitialised() const { return mInitialised; }
 		virtual void setWindowCaption( const std::wstring& ) = 0;
 
-		// TODO: keep 3d in mind (frustum, z-coord, cams, ...)
+		// TODO: keep 3d in mind (frustum, z-coord, cams, matrix, ...)
 
 	protected:
-		bool mInitialised;
+		bool m_initialised;
 	};
 }
 

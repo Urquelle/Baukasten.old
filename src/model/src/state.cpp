@@ -4,7 +4,7 @@ using namespace Baukasten;
 
 State::State( const std::string &id ) :
 	Entity( id ),
-	mIntState( 0 )
+	m_intState( 0 )
 {
 }
 
@@ -16,13 +16,13 @@ State*
 State::pack()
 {
 	State *state = new State( id() );
-	state->mIntState = this;
+	state->m_intState = this;
 	return state;
 }
 
 sigc::signal<void, State*>
 State::onChange()
 {
-	return mChanged;
+	return m_changed;
 }
 

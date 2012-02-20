@@ -31,11 +31,11 @@ namespace Baukasten {
 		void stop( const string& );
 
 	private:
-		ALCdevice_struct*	mDevice;
-		ALCcontext_struct*	mContext;
-		BufferMap			mBuffers;
-		int					mArgc;
-		char**				mArgv;
+		ALCdevice_struct*	m_device;
+		ALCcontext_struct*	m_context;
+		BufferMap			m_buffers;
+		int					m_argc;
+		char**				m_argv;
 	};
 } /* Baukasten */
 

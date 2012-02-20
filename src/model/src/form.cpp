@@ -12,9 +12,9 @@ using namespace std;
 
 Form::Form( const std::string &id, IGraphics *graphics ) :
 	Drawable( id ),
-	mLSpace( new LogicalSpace() ),
-	mVSpace( new VirtualSpace() ),
-	mGraphics( graphics )
+	m_lSpace( new LogicalSpace() ),
+	m_vSpace( new VirtualSpace() ),
+	m_graphics( graphics )
 {
 }
 
@@ -33,53 +33,53 @@ void
 Form::addToLSpace( const string &id, GameEntity *entity )
 {
 	BK_ASSERT( entity != 0, "entity must not be 0." );
-	mLSpace->addEntity( id, entity );
+	m_lSpace->addEntity( id, entity );
 }
 
 void
 Form::removeFromLSpace( const std::string &id )
 {
-	if ( mLSpace->hasEntity( id ) )
-		mLSpace->removeEntity( id );
+	if ( m_lSpace->hasEntity( id ) )
+		m_lSpace->removeEntity( id );
 }
 
 LogicalSpace*
 Form::lSpace() const
 {
-	return mLSpace.get();
+	return m_lSpace.get();
 }
 
 void
 Form::addToVSpace( Form *entity )
 {
 	BK_ASSERT( entity != 0, "entity must not be 0." );
-	mVSpace->addEntity( entity );
+	m_vSpace->addEntity( entity );
 }
 
 void
 Form::addToVSpace( const string &id, Form *entity )
 {
 	BK_ASSERT( entity != 0, "entity must not be 0." );
-	mVSpace->addEntity( id, entity );
+	m_vSpace->addEntity( id, entity );
 }
 
 void
 Form::removeFromVSpace( const std::string &id )
 {
-	if ( mVSpace->hasEntity( id ) )
-		mVSpace->removeEntity( id );
+	if ( m_vSpace->hasEntity( id ) )
+		m_vSpace->removeEntity( id );
 }
 
 VirtualSpace*
 Form::vSpace() const
 {
-	return mVSpace.get();
+	return m_vSpace.get();
 }
 
 void
 Form::constructScene()
 {
-	auto entities = mVSpace->entities();
+	auto entities = m_vSpace->entities();
 	for_each( entities.begin(), entities.end(), []( Form* f ) {
 		f->constructScene();
 		f->render();
@@ -94,6 +94,6 @@ Form::render()
 IGraphics*
 Form::graphics() const
 {
-	return mGraphics;
+	return m_graphics;
 }
 

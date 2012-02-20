@@ -26,12 +26,12 @@ namespace Baukasten {
 	private:
 		CoreServices();
 
-		IAudio*		mAudio;
-		IGraphics*	mGraphics;
-		IInput*		mInput;
+		IAudio*		m_audio;
+		IGraphics*	m_graphics;
+		IInput*		m_input;
 
-		int			mArgc;
-		char**		mArgv;
+		int			m_argc;
+		char**		m_argv;
 	};
 } /* Baukasten */
 

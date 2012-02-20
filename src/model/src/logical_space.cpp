@@ -17,8 +17,8 @@ LogicalSpace::~LogicalSpace()
 GameEntity*
 LogicalSpace::entity( const string &id ) const
 {
-	auto it = mMap.find( id );
-	if ( it == mMap.end() )
+	auto it = m_map.find( id );
+	if ( it == m_map.end() )
 		return 0;
 
 	return it->second;
@@ -27,7 +27,7 @@ LogicalSpace::entity( const string &id ) const
 void
 LogicalSpace::runActions()
 {
-	for_each( mList.begin(), mList.end(), []( GameEntity *entity ) {
+	for_each( m_list.begin(), m_list.end(), []( GameEntity *entity ) {
 		entity->runActions();
 	});
 }
@@ -41,8 +41,8 @@ LogicalSpace::addEntity( const string &id, GameEntity *entity )
 		"id " << id << " must be unique in the collection."
 	);
 
-	mMap[ id ] = entity;
-	mList.push_back( entity );
+	m_map[ id ] = entity;
+	m_list.push_back( entity );
 }
 
 void
@@ -55,20 +55,20 @@ LogicalSpace::addEntity( GameEntity *entity )
 list<GameEntity*>
 LogicalSpace::entities() const
 {
-	return mList;
+	return m_list;
 }
 
 bool
 LogicalSpace::hasEntity( const string &id ) const
 {
-	return mMap.count( id );
+	return m_map.count( id );
 }
 
 void
 LogicalSpace::removeEntity( const string &id )
 {
-	mMap.erase( mMap.find( id ) );
-	mList.remove_if( [&id]( GameEntity *entity ) {
+	m_map.erase( m_map.find( id ) );
+	m_list.remove_if( [&id]( GameEntity *entity ) {
 		return entity->id() == id;
 	});
 }

@@ -22,7 +22,7 @@ namespace Baukasten {
 		 *
 		 * \param id object id.
 		 */
-		Drawable( const std::string& );
+		Drawable( const string& );
 
 		/*! \brief destructor */
 		virtual ~Drawable();
@@ -80,25 +80,25 @@ namespace Baukasten {
 
 	protected:
 		// position of the object
-		vec3<float>   mPosition;
+		vec3<float>   m_position;
 
 		// size of the object
-		vec2<float>	mSize;
+		vec2<float>	m_size;
 
 		// orientation the object is looking at
-		vec3<float>	mOrientation;
+		vec3<float>	m_orientation;
 
 		// rotation around the x-axis
-		float   mPitch;
+		float   m_pitch;
 
 		// rotation around the y-axis
-		float   mYaw;
+		float   m_yaw;
 
 		// rotation around the z-axis
-		float   mRoll;
+		float   m_roll;
 
 		// scaling factor of the object
-		float   mScale;
+		float   m_scale;
 	};
 }
 

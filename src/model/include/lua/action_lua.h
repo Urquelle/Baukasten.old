@@ -20,8 +20,8 @@ namespace Baukasten {
 		virtual void doAction( GameEntity* );
 
 	private:
-		const std::string	mFilePath;
-		lua_State*			mL;
+		const std::string	m_filePath;
+		lua_State*			m_l;
 	};
 } /* Baukasten */
 

@@ -16,8 +16,8 @@ VirtualSpace::~VirtualSpace()
 Form*
 VirtualSpace::entity( const std::string &id ) const
 {
-	auto it = mMap.find( id );
-	if ( it == mMap.end() )
+	auto it = m_map.find( id );
+	if ( it == m_map.end() )
 		return 0;
 
 	return it->second;
@@ -32,8 +32,8 @@ VirtualSpace::addEntity( const string &id, Form *entity )
 		"id " << id << " must be unique in the collection."
 	);
 
-	mMap[ id ] = entity;
-	mList.push_back( entity );
+	m_map[ id ] = entity;
+	m_list.push_back( entity );
 }
 
 void
@@ -51,20 +51,20 @@ VirtualSpace::addEntity( Form *entity )
 list<Form*>
 VirtualSpace::entities() const
 {
-	return mList;
+	return m_list;
 }
 
 bool
 VirtualSpace::hasEntity( const string &id ) const
 {
-	return mMap.count( id );
+	return m_map.count( id );
 }
 
 void
 VirtualSpace::removeEntity( const string &id )
 {
-	mMap.erase( mMap.find( id ) );
-	mList.remove_if( [&id]( Form *form ) {
+	m_map.erase( m_map.find( id ) );
+	m_list.remove_if( [&id]( Form *form ) {
 		return form->id() == id;
 	});
 }

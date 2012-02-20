@@ -30,7 +30,7 @@ namespace Baukasten {
 		 * used as the key for the map.
 		 *
 		 * \param action Action object to insert.
-		 * \sa addAction( const std::string&, Action* )
+		 * \sa addAction( const string&, Action* )
 		 */
 		void addAction( Action* );
 
@@ -42,7 +42,7 @@ namespace Baukasten {
 		 * \param action Action object to insert.
 		 * \param id string which is used as the map key.
 		 */
-		void addAction( const std::string&, Action* );
+		void addAction( const string&, Action* );
 
 		/*! \brief returns the Action object to the given id.
 		 *
@@ -52,7 +52,7 @@ namespace Baukasten {
 		 * \param id key in the map under which the object was inserted.
 		 * \return a pointer to the Action object if found, NULL otherwise.
 		 */
-		Action* action( const std::string& ) const;
+		Action* action( const string& ) const;
 
 		/*! \brief returns the map of objects. */
 		TMap actions() const;
@@ -70,7 +70,7 @@ namespace Baukasten {
 		 *
 		 * \return true if key found, false otherwise.
 		 */
-		bool hasAction( const std::string& ) const;
+		bool hasAction( const string& ) const;
 
 		/*! \brief put action into the execution queue.
 		 *
@@ -79,7 +79,7 @@ namespace Baukasten {
 		 *
 		 * \param id id of the action.
 		 */
-		void invokeAction( const std::string& );
+		void invokeAction( const string& );
 
 		/*! \brief put action into the execution queue.
 		 *
@@ -89,7 +89,7 @@ namespace Baukasten {
 		 * \param id id of the action.
 		 * \param target target object.
 		 */
-		void invokeAction( const std::string&, GameEntity* );
+		void invokeAction( const string&, GameEntity* );
 
 		/*! \brief put action into the execution queue.
 		 *
@@ -99,7 +99,7 @@ namespace Baukasten {
 		 * \param id id of the action.
 		 * \param targets target objects.
 		 */
-		void invokeAction( const std::string&, list<GameEntity*> );
+		void invokeAction( const string&, list<GameEntity*> );
 
 		/*! \brief drop action from the execution queue.
 		 *
@@ -108,10 +108,10 @@ namespace Baukasten {
 		 *
 		 * \param id id of action.
 		 */
-		void dropAction( const std::string& );
+		void dropAction( const string& );
 
 	private:
-		list<Action*> mActionQueue;
+		list<Action*> m_actionQueue;
 	};
 } /* Baukasten */
 

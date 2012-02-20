@@ -5,15 +5,15 @@
 
 using namespace Baukasten;
 
-IGraphics* GraphicsInterface::mInstance = 0;
+IGraphics* GraphicsInterface::m_instance = 0;
 
 IGraphics*
 GraphicsInterface::instance()
 {
-	if ( !mInstance ) {
-		mInstance = new Graphics();
+	if ( !m_instance ) {
+		m_instance = new Graphics();
 	}
 
-	return mInstance;
+	return m_instance;
 }
 

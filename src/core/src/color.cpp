@@ -4,7 +4,7 @@
 
 using namespace Baukasten;
 
-static const u32 bk_colors[] = {
+static const u32 _bk_colors[] = {
 	BK_RGB(   0,   0,   0 ), // black
 	BK_RGB( 255, 255, 255 ), // white
 	BK_RGB( 255,   0,   0 ), // red
@@ -14,12 +14,12 @@ static const u32 bk_colors[] = {
 };
 
 Color::Color() :
-	mColor( bk_colors[BK_BLACK] )
+	m_color( _bk_colors[BK_BLACK] )
 {
 }
 
 Color::Color( u32 r, u32 g, u32 b, u32 a ) :
-	mColor( BK_RGBA( r, g, b, a ) )
+	m_color( BK_RGBA( r, g, b, a ) )
 {
 }
 
@@ -28,7 +28,7 @@ Color::Color( const Color &other )
 	if ( this == &other )
 		return;
 
-	mColor = other.value();
+	m_color = other.value();
 }
 
 Color::Color( Color const *other )
@@ -36,15 +36,15 @@ Color::Color( Color const *other )
 	if ( this == other )
 		return;
 
-	mColor = other->value();
+	m_color = other->value();
 }
 
 Color::Color( const Colors value )
 {
-	int size = sizeof( bk_colors ) / sizeof( u32 );
-	mColor = ( value >= size ) ?
-		bk_colors[BK_BLACK] :
-		bk_colors[value];
+	int size = sizeof( _bk_colors ) / sizeof( u32 );
+	m_color = ( value >= size ) ?
+		_bk_colors[BK_BLACK] :
+		_bk_colors[value];
 }
 
 Color::~Color()
@@ -54,31 +54,31 @@ Color::~Color()
 u32
 Color::red() const
 {
-	return ( mColor >> 16 ) & 0xff;
+	return ( m_color >> 16 ) & 0xff;
 }
 
 u32
 Color::green() const
 {
-	return ( mColor >> 8 ) & 0xff;
+	return ( m_color >> 8 ) & 0xff;
 }
 
 u32
 Color::blue() const
 {
-	return ( mColor ) & 0xff;
+	return ( m_color ) & 0xff;
 }
 
 u32
 Color::alpha() const
 {
-	return ( mColor >> 24 ) & 0xff;
+	return ( m_color >> 24 ) & 0xff;
 }
 
 u32
 Color::value() const
 {
-	return mColor;
+	return m_color;
 }
 
 void
@@ -87,12 +87,12 @@ Color::rgb( u32 *r, u32 *g, u32 *b, u32 *a ) const
 	if ( !r || !g || !b )
 		return;
 
-	*r = ( mColor >> 16 ) & 0xff;
-	*g = ( mColor >> 8 ) & 0xff;
-	*b = ( mColor ) & 0xff;
+	*r = ( m_color >> 16 ) & 0xff;
+	*g = ( m_color >> 8 ) & 0xff;
+	*b = ( m_color ) & 0xff;
 
 	if ( a )
-		*a = ( mColor >> 24 ) & 0xff;
+		*a = ( m_color >> 24 ) & 0xff;
 }
 
 float
@@ -139,7 +139,7 @@ Color::operator=( const Color &other )
 	if ( this == &other )
 		return *this;
 
-	mColor = other.value();
+	m_color = other.value();
 	return *this;
 }
 
@@ -150,14 +150,14 @@ Color::operator==( const Color &other ) const
 		return true;
 
 	return (
-		mColor	== other.value()
+		m_color	== other.value()
 	);
 }
 
 bool
 Color::operator==( const Colors &color ) const
 {
-	return mColor == bk_colors[color];
+	return m_color == _bk_colors[color];
 }
 
 bool

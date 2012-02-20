@@ -14,7 +14,7 @@ namespace Baukasten {
 	private:
 		AudioInterface() {}
 
-		static IAudio* mInstance;
+		static IAudio* m_instance;
 	};
 } /* Baukasten */
 

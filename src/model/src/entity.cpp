@@ -6,7 +6,7 @@
 using namespace Baukasten;
 
 Entity::Entity( const std::string &id ) :
-	mId( id )
+	m_id( id )
 {
 }
 
@@ -21,7 +21,7 @@ Entity::operator=( const Entity &other )
 	if ( this == &other )
 		return *this;
 
-	mId = other.id();
+	m_id = other.id();
 
 	return *this;
 }
@@ -35,6 +35,6 @@ Entity::operator==( const Entity &other ) const
 string
 Entity::id() const
 {
-	return mId;
+	return m_id;
 }
 

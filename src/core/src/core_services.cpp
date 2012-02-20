@@ -15,66 +15,66 @@ CoreServices::instance()
 }
 
 CoreServices::CoreServices() :
-	mAudio( AudioInterface::instance() ),
-	mGraphics( GraphicsInterface::instance() ),
-	mInput( InputInterface::instance() )
+	m_audio( AudioInterface::instance() ),
+	m_graphics( GraphicsInterface::instance() ),
+	m_input( InputInterface::instance() )
 {
 }
 
 CoreServices::~CoreServices()
 {
 	BK_DEBUG( "destroy CoreServices" );
-	mAudio->shutdown();
-	mGraphics->shutdown();
-	mInput->shutdown();
+	m_audio->shutdown();
+	m_graphics->shutdown();
+	m_input->shutdown();
 }
 
 void
 CoreServices::init( int argc, char* argv[] )
 {
-	mArgc = argc;
-	mArgv = argv;
+	m_argc = argc;
+	m_argv = argv;
 
-	mAudio->init( this );
-	mGraphics->init( this );
-	mInput->init( this );
+	m_audio->init( this );
+	m_graphics->init( this );
+	m_input->init( this );
 }
 
 void
 CoreServices::shutdown()
 {
-	mInput->shutdown();
-	mGraphics->shutdown();
-	mAudio->shutdown();
+	m_input->shutdown();
+	m_graphics->shutdown();
+	m_audio->shutdown();
 }
 
 IAudio*
 CoreServices::audioService() const
 {
-	return mAudio;
+	return m_audio;
 }
 
 IInput*
 CoreServices::inputService() const
 {
-	return mInput;
+	return m_input;
 }
 
 IGraphics*
 CoreServices::videoService() const
 {
-	return mGraphics;
+	return m_graphics;
 }
 
 int
 CoreServices::argumentsCount()
 {
-	return mArgc;
+	return m_argc;
 }
 
 char**
 CoreServices::arguments() const
 {
-	return mArgv;
+	return m_argv;
 }
 

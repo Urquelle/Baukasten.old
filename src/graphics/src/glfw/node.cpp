@@ -13,10 +13,10 @@ namespace Baukasten {
 	class NodePrivate {
 	public:
 		NodePrivate(Node *master, GLenum glType, const u32 vertexCount, const u32 indexCount) :
-			mGlType( glType ),
-			mIndexCount( indexCount ),
-			mMaster( master ),
-			mVertexCount( vertexCount )
+			m_glType( glType ),
+			m_indexCount( indexCount ),
+			m_master( master ),
+			m_vertexCount( vertexCount )
 		{
 		}
 
@@ -27,7 +27,7 @@ namespace Baukasten {
 		void
 		prepare()
 		{
-			glBindBuffer( GL_ARRAY_BUFFER, mMaster->vbo );
+			glBindBuffer( GL_ARRAY_BUFFER, m_master->vbo );
 
 			// read first three bytes off of the buffer to get the color
 			GLuint colorSize = sizeof( float ) * 3;
@@ -51,14 +51,14 @@ namespace Baukasten {
 		render()
 		{
 			prepare();
-			glDrawArrays( mGlType, 0, mIndexCount );
+			glDrawArrays( m_glType, 0, m_indexCount );
 			cleanup();
 		}
 
 		void
 		addTexture( GlTexture *tex )
 		{
-			mTextures.push_back( tex );
+			m_textures.push_back( tex );
 		}
 
 		void
@@ -66,22 +66,22 @@ namespace Baukasten {
 		{
 			glBindBuffer( GL_ARRAY_BUFFER, 0 );
 			glBindTexture( GL_TEXTURE_2D, 0 );
-			glDeleteBuffers( 1, &mMaster->vbo );
+			glDeleteBuffers( 1, &m_master->vbo );
 		}
 
 	private:
-		GLenum          mGlType;
-		u32             mIndexCount;
-		Node*           mMaster;
-		s8*             mOffset;
-		vector<GlTexture*>  mTextures;
-		u32             mVertexCount;
+		GLenum          m_glType;
+		u32             m_indexCount;
+		Node*           m_master;
+		s8*             m_offset;
+		vector<GlTexture*>  m_textures;
+		u32             m_vertexCount;
 	};
 } /* Baukasten */
 
 // Node
 Node::Node( GLenum glType, const u32 vertexCount, const u32 indexCount ) :
-	mImpl( new NodePrivate( this, glType, vertexCount, indexCount ) )
+	m_impl( new NodePrivate( this, glType, vertexCount, indexCount ) )
 {
 }
 
@@ -92,31 +92,31 @@ Node::~Node()
 void
 Node::prepare()
 {
-	mImpl->prepare();
+	m_impl->prepare();
 }
 
 void
 Node::render()
 {
-	mImpl->render();
+	m_impl->render();
 }
 
 void
 Node::addTexture( GlTexture *tex )
 {
-	mImpl->addTexture( tex );
+	m_impl->addTexture( tex );
 }
 
 void
 Node::cleanup()
 {
-	mImpl->cleanup();
+	m_impl->cleanup();
 }
 
 // LineNode
 LineNode::LineNode( GLenum glType, const u32 vertexCount, const u32 indexCount ) :
 	Node( glType, vertexCount, indexCount ),
-	mWidth( 1.0 ), mStipple( 1 )
+	m_width( 1.0 ), m_stipple( 1 )
 {
 }
 
@@ -127,32 +127,32 @@ LineNode::~LineNode()
 void
 LineNode::setPattern( const u16 pattern )
 {
-	mStipple = pattern;
+	m_stipple = pattern;
 }
 
 u16
 LineNode::pattern() const
 {
-	return mStipple;
+	return m_stipple;
 }
 
 void
 LineNode::setWidth( const float width )
 {
-	mWidth = width;
+	m_width = width;
 }
 
 float
 LineNode::width() const
 {
-	return mWidth;
+	return m_width;
 }
 
 void
 LineNode::prepare()
 {
-	glLineWidth( mWidth );
-	glLineStipple( 1, mStipple );
+	glLineWidth( m_width );
+	glLineStipple( 1, m_stipple );
 	glEnable( GL_LINE_STIPPLE );
 }
 
@@ -175,19 +175,19 @@ PointNode::~PointNode()
 void
 PointNode::setSize( const u32 size )
 {
-	mSize = size;
+	m_size = size;
 }
 
 u32
 PointNode::size() const
 {
-	return mSize;
+	return m_size;
 }
 
 void
 PointNode::prepare()
 {
-	glPointSize( mSize );
+	glPointSize( m_size );
 }
 
 // QuadNode

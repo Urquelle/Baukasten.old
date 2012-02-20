@@ -9,7 +9,7 @@ namespace Baukasten {
 
 	class CoreServices;
 	class Form;
-	class GlfwGraphicsP;
+	class GlfwGraphicsPrivate;
 
 	class BAUKASTEN_EXPORT GlfwGraphics : public IGraphics {
 	public:
@@ -22,10 +22,6 @@ namespace Baukasten {
 
 		void render( Form* );
 		void shutdown();
-
-		void loadResource( const string&, const string& );
-		void freeResource( const string& );
-
 		void drawCircle( const vec3<float>&, const u32, const Color& );
 		void drawImage( const string&, const vec2<float>&, const vec3<float>& );
 		void drawLine( const vec3<float>&, const vec3<float>&,
@@ -40,8 +36,7 @@ namespace Baukasten {
 		void setWindowCaption( const std::wstring& );
 
 	private:
-		GlfwGraphicsP*	mImpl;
-		friend class GlfwGraphicsP;
+		BK_PIMPL_PTR( GlfwGraphics );
 	};
 } /* Baukasten */
 

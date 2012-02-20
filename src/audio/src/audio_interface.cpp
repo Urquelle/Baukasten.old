@@ -5,14 +5,14 @@
 
 using namespace Baukasten;
 
-IAudio* AudioInterface::mInstance = 0;
+IAudio* AudioInterface::m_instance = 0;
 
 IAudio*
 AudioInterface::instance()
 {
-	if ( !mInstance ) {
-		mInstance = new Audio();
+	if ( !m_instance ) {
+		m_instance = new Audio();
 	}
 
-	return mInstance;
+	return m_instance;
 }

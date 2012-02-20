@@ -12,93 +12,93 @@ namespace Baukasten {
 	public:
 		GlTexturePrivate( GlTexture *master, const string &path,
 				const vec2<float> &size ) :
-			mMaster( master ),
-			mSize( size ),
-			mSource( path )
+			m_master( master ),
+			m_size( size ),
+			m_source( path )
 		{
 		}
 
 		virtual ~GlTexturePrivate()
 		{
-			glDeleteTextures( 1, &mTbo );
+			glDeleteTextures( 1, &m_tbo );
 		}
 
 		string
 		source() const
 		{
-			return mSource;
+			return m_source;
 		}
 
 		void
 		setCbo( GLuint cbo )
 		{
-			mCbo = cbo;
+			m_cbo = cbo;
 		}
 
 		GLuint
 		cbo() const
 		{
-			return mCbo;
+			return m_cbo;
 		}
 
 		void
 		setTbo( GLuint tbo )
 		{
-			mTbo = tbo;
+			m_tbo = tbo;
 		}
 
 		GLuint
 		tbo() const
 		{
-			return mTbo;
+			return m_tbo;
 		}
 
 	private:
-		GLuint       mCbo;
-		GlTexture*   mMaster;
-		vec2<float>  mSize;
-		string       mSource;
-		GLuint       mTbo;
+		GLuint       m_cbo;
+		GlTexture*   m_master;
+		vec2<float>  m_size;
+		string       m_source;
+		GLuint       m_tbo;
 	};
 } /* Baukasten */
 
 GlTexture::GlTexture( const string &filePath, const vec2<float> &size ) :
-	mImpl( new GlTexturePrivate( this, filePath, size ) )
+	m_impl( new GlTexturePrivate( this, filePath, size ) )
 {
 }
 
 GlTexture::~GlTexture()
 {
-	delete mImpl;
+	delete m_impl;
 }
 
 string
 GlTexture::source() const
 {
-	return mImpl->source();
+	return m_impl->source();
 }
 
 void
 GlTexture::setCbo( GLuint cbo )
 {
-	mImpl->setCbo( cbo );
+	m_impl->setCbo( cbo );
 }
 
 GLuint
 GlTexture::cbo() const
 {
-	return mImpl->cbo();
+	return m_impl->cbo();
 }
 
 void
 GlTexture::setTbo( GLuint tbo )
 {
-	mImpl->setTbo( tbo );
+	m_impl->setTbo( tbo );
 }
 
 GLuint
 GlTexture::tbo() const
 {
-	return mImpl->tbo();
+	return m_impl->tbo();
 }
 

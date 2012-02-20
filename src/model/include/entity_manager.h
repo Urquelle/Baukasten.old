@@ -12,11 +12,11 @@ namespace Baukasten {
 		virtual ~EntityManager();
 
 		void addEntity( Entity* );
-		void addEntity( const std::string&, Entity* );
-		Entity* entity( const std::string& ) const;
+		void addEntity( const string&, Entity* );
+		Entity* entity( const string& ) const;
 		TMap entities() const;
-		bool hasEntity( const std::string& ) const;
-		void removeEntity( const std::string& );
+		bool hasEntity( const string& ) const;
+		void removeEntity( const string& );
 	};
 } /* Baukasten */
 

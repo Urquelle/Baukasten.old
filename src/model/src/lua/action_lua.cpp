@@ -13,7 +13,7 @@ ActionLua::ActionLua(
 		const std::string &id,
 		const std::string &filePath ) :
 	Action( source, id ),
-	mFilePath( filePath )
+	m_filePath( filePath )
 {
 	wrapClasses();
 }
@@ -33,9 +33,9 @@ void ActionLua::doAction( GameEntity *entity )
 	s.set( "source", source() );
 
 	try {
-		s.doFile( mFilePath );
+		s.doFile( m_filePath );
 	} catch ( std::exception &e ) {
-		BK_DEBUG( e.what() << ": make sure the file " << mFilePath << " is available." );
+		BK_DEBUG( e.what() << ": make sure the file " << m_filePath << " is available." );
 		BK_ABORT();
 	}
 }
