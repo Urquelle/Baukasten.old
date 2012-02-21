@@ -16,12 +16,7 @@ namespace Baukasten {
 		GlfwGraphics();
 		virtual ~GlfwGraphics();
 
-		int init( CoreServices* );
-
 		void createWindow( const vec2<int>&, const std::wstring& );
-
-		void render( Form* );
-		void shutdown();
 		void drawCircle( const vec3<float>&, const u32, const Color& );
 		void drawImage( const string&, const vec2<float>&, const vec3<float>& );
 		void drawLine( const vec3<float>&, const vec3<float>&,
@@ -29,11 +24,12 @@ namespace Baukasten {
 		void drawPoint( const vec3<float>&, const u32, const Color& );
 		void drawRect( const vec2<float>&, const vec3<float>&, const Color& );
 		void drawText( const wchar_t*, const vec3<float>&, const Color& );
-
-		string serviceName() const { return "GLFW"; }
 		float fps() const;
-
+		int init( CoreServices* );
+		void render( Form* );
+		string serviceName() const { return "GLFW"; }
 		void setWindowCaption( const std::wstring& );
+		void shutdown();
 
 	private:
 		BK_PIMPL_PTR( GlfwGraphics );
