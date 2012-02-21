@@ -75,7 +75,7 @@ namespace Baukasten {
 		{
 		}
 
-		const T& value( const int i ) const
+		const T& value( const s32 i ) const
 		{
 			if ( m_intState )
 				return ( static_cast<GenericState<vector<T>>*>( m_intState ) )->value( i );
@@ -97,7 +97,7 @@ namespace Baukasten {
 			onChange().emit( this );
 		}
 
-		void setValue( const unsigned int i, const T &value )
+		void setValue( const s32 i, const T &value )
 		{
 			if ( m_intState )
 				m_intState = 0;
@@ -136,7 +136,7 @@ namespace Baukasten {
 	};
 
 	// typedef some often used genericstates
-	typedef GenericState<int>				StateInt;
+	typedef GenericState<s32>				StateInt;
 	typedef GenericState<float>				StateFloat;
 	typedef GenericState<string>			StateString;
 	typedef GenericState<bool>				StateBool;
