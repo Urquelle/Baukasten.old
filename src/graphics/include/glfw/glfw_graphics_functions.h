@@ -14,18 +14,20 @@ const char *_bk_vertex_shader (
 	"#version 120\n"
 
 	"attribute vec4 position;\n"
+	"attribute vec4 color;\n"
+
 	"void main()\n"
 	"{\n"
 	"   gl_Position = position;\n"
+	"	gl_FrontColor = color;\n"
 	"}\n"
 );
 
 const char *_bk_fragment_shader (
 	"#version 120\n"
-
 	"void main()\n"
 	"{\n"
-	"   gl_FragColor = vec4(1.0f, 1.0f, 1.0f, 1.0f);\n"
+	"   gl_FragColor = gl_Color;\n"
 	"}\n"
 );
 

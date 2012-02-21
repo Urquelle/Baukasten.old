@@ -60,14 +60,11 @@ public:
 		form->constructScene();
 		form->render();
 
-		glEnableClientState( GL_VERTEX_ARRAY );
-		glEnableClientState( GL_TEXTURE_COORD_ARRAY );
-		for ( s32 i = 0; i < mNodes.size(); ++i ) {
-			mNodes[i]->render();
+		for ( s32 i = 0; i < m_nodes.size(); ++i ) {
+			m_nodes[i]->render();
 		}
-		glDisableClientState( GL_TEXTURE_COORD_ARRAY );
-		glDisableClientState( GL_VERTEX_ARRAY );
 
+		glUseProgram(0);
 		m_nodes.clear();
 
 		glfwSwapBuffers();
@@ -113,65 +110,24 @@ public:
 	drawImage( const string &filePath, const vec2<float> &size,
 			const vec3<float> &pos )
 	{
-		float xMin = pos[BK_X], xMax = pos[BK_X] + size[BK_WIDTH];
-		float yMin = pos[BK_Y], yMax = pos[BK_Y] + size[BK_HEIGHT];
+		float xDiv = 1024 / 2, yDiv = 768 / 2;
+
+		// transform display space coordinates to clip space
+		float xMin = ( pos[BK_X] - xDiv ) / xDiv;
+		float xMax = ( pos[BK_X] + size[BK_WIDTH] - xDiv ) / xDiv;
+		float yMin = ( pos[BK_Y] - yDiv ) / yDiv;
+		float yMax = ( pos[BK_Y] + size[BK_HEIGHT] - yDiv ) / yDiv;
 
 		GLfloat vertices[] = {
-			// color
-			0.0f, 0.0f, 0.0f,
-
-			// vertices
-			xMin, yMin,
-			xMax, yMin,
-			xMax, yMax,
-			xMin, yMax
+			xMin, yMin, pos[BK_Z],
+			xMax, yMin, pos[BK_Z],
+			xMax, yMax, pos[BK_Z],
+			xMin, yMax, pos[BK_Z]
 		};
 
-		GlTexture *tex = texture( filePath, &mTextures );
-		if ( !tex ) {
-			float divX = size[BK_WIDTH];
-			float divY = size[BK_HEIGHT];
-
-			GLfloat texCoords[] = {
-				xMin / divX, yMin / divY,
-				xMax / divX, yMin / divY,
-				xMax / divX, yMax / divY,
-				xMin / divX, yMax / divY
-			};
-
-			Image image( filePath );
-			image.read();
-
-			tex = new GlTexture( filePath, size );
-			mTextures.push_back( tex );
-
-			// upload texture data
-			GLuint tbo;
-			glEnable( GL_TEXTURE_2D );
-			glGenTextures( 1, &tbo );
-			glBindTexture( GL_TEXTURE_2D, tbo );
-			glPixelStorei( GL_UNPACK_ALIGNMENT, 1 );
-			tex->setTbo( tbo );
-
-			glTexImage2D(
-				GL_TEXTURE_2D, 0, GL_RGBA8,
-				image.width(), image.height(), 0, GL_RGBA8,
-				GL_UNSIGNED_SHORT, image.data()
-			);
-
-			// upload texture coordinates
-			GLuint cbo;
-			glGenBuffers( 1, &cbo );
-			glBindBuffer( GL_ARRAY_BUFFER, cbo );
-			glBufferData( GL_ARRAY_BUFFER, sizeof( texCoords ), texCoords, GL_DYNAMIC_DRAW );
-			tex->setCbo( cbo );
-
-			glBindBuffer( GL_ARRAY_BUFFER, 0 );
-		}
 
 		QuadNode *node = new QuadNode( GL_QUADS, 2, 4 );
 
-		node->addTexture( tex );
 
 		glGenBuffers( 1, &node->vbo );
 		glBindBuffer( GL_ARRAY_BUFFER, node->vbo );
@@ -212,14 +168,19 @@ public:
 		float r, g, b;
 		c.rgbF( &r, &g, &b );
 
+		float xDiv = 1024 / 2, yDiv = 768 / 2;
+		float x = ( pos[BK_X] - xDiv ) / xDiv;
+		float y = ( pos[BK_Y] - yDiv ) / yDiv * -1;
+
 		GLfloat vertices[] = {
-			r, g, b,
-			pos[BK_X], pos[BK_Y]
+			x, y, pos[BK_Z],
+			r, g, b
 		};
 
-		PointNode *node = new PointNode( GL_POINTS, 2, 1 );
+		PointNode *node = new PointNode( GL_POINTS, 3, 1 );
 
 		node->setSize( size );
+		node->setProgram( m_program );
 
 		glGenBuffers( 1, &node->vbo );
 		glBindBuffer( GL_ARRAY_BUFFER, node->vbo );
@@ -232,21 +193,31 @@ public:
 	void
 	drawRect( const vec2<float> &size, const vec3<float> &pos, const Color &c )
 	{
-		float xMin = pos[BK_X], xMax = pos[BK_X] + size[BK_WIDTH];
-		float yMin = pos[BK_Y], yMax = pos[BK_Y] + size[BK_HEIGHT];
-
 		float r, g, b;
 		c.rgbF( &r, &g, &b );
 
+		float xDiv = 1024 / 2, yDiv = 768 / 2;
+
+		// transform display space coordinates to clip space
+		float xMin = ( pos[BK_X] - xDiv ) / xDiv;
+		float xMax = ( pos[BK_X] + size[BK_WIDTH] - xDiv ) / xDiv;
+		float yMin = ( pos[BK_Y] - yDiv ) / yDiv * -1;
+		float yMax = ( pos[BK_Y] + size[BK_HEIGHT] - yDiv ) / yDiv * -1;
+
 		GLfloat vertices[] = {
+			xMin, yMin, pos[BK_Z],
+			xMax, yMin, pos[BK_Z],
+			xMax, yMax, pos[BK_Z],
+			xMin, yMax, pos[BK_Z],
 			r, g, b,
-			xMin, yMin,
-			xMax, yMin,
-			xMax, yMax,
-			xMin, yMax
+			r, g, b,
+			r, g, b,
+			r, g, b,
 		};
 
-		QuadNode *node = new QuadNode( GL_QUADS, 2, 4 );
+		QuadNode *node = new QuadNode( GL_QUADS, 3, 4 );
+
+		node->setProgram( m_program );
 
 		glGenBuffers( 1, &node->vbo );
 		glBindBuffer( GL_ARRAY_BUFFER, node->vbo );

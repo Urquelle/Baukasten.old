@@ -19,6 +19,7 @@ namespace Baukasten {
 		virtual void render();
 
 		void addTexture( GlTexture* );
+		void setProgram( GLuint );
 
 		GLuint vbo;
 	protected:

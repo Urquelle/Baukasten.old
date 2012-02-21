@@ -29,22 +29,30 @@ namespace Baukasten {
 		{
 			glBindBuffer( GL_ARRAY_BUFFER, m_master->vbo );
 
-			// read first three bytes off of the buffer to get the color
-			GLuint colorSize = sizeof( float ) * 3;
-			GLfloat *color = static_cast<GLfloat*>(
-				glMapBufferRange( GL_ARRAY_BUFFER, 0, colorSize, GL_MAP_READ_BIT )
+			GLuint position = glGetAttribLocation( m_program, "position" );
+			GLuint color = glGetAttribLocation( m_program, "color" );
+
+			glEnableVertexAttribArray(position);
+			glEnableVertexAttribArray(color);
+
+			glVertexAttribPointer(
+				position,
+				m_vertexCount,
+				GL_FLOAT,
+				GL_FALSE,
+				0,
+				BUFFER_OFFSET( 0 )
 			);
 
-			if ( color )
-				glColor3fv( color );
+			glVertexAttribPointer(
+				color,
+				3,
+				GL_FLOAT,
+				GL_FALSE,
+				0,
+				BUFFER_OFFSET( m_vertexCount * m_indexCount * sizeof(float) )
+			);
 
-			glVertexPointer( mVertexCount, GL_FLOAT, 0, BUFFER_OFFSET( colorSize ) );
-
-			if ( mTextures.size() > 0 ) {
-				glBindBuffer( GL_ARRAY_BUFFER, mTextures[0]->cbo() );
-				glTexCoordPointer( 2, GL_UNSIGNED_BYTE, 0, BUFFER_OFFSET(0) );
-				glBindTexture( GL_TEXTURE_2D, mTextures[0]->tbo() );
-			}
 		}
 
 		void
@@ -62,17 +70,28 @@ namespace Baukasten {
 		}
 
 		void
+		setProgram( GLuint program )
+		{
+			m_program = program;
+		}
+
+		void
 		cleanup()
 		{
 			glBindBuffer( GL_ARRAY_BUFFER, 0 );
 			glBindTexture( GL_TEXTURE_2D, 0 );
 			glDeleteBuffers( 1, &m_master->vbo );
+			glDisable( GL_TEXTURE_2D );
+
+			glDisableVertexAttribArray(0);
+			glDisableVertexAttribArray(1);
 		}
 
 	private:
 		GLenum          m_glType;
 		u32             m_indexCount;
 		Node*           m_master;
+		GLuint          m_program;
 		s8*             m_offset;
 		vector<GlTexture*>  m_textures;
 		u32             m_vertexCount;
@@ -105,6 +124,12 @@ void
 Node::addTexture( GlTexture *tex )
 {
 	m_impl->addTexture( tex );
+}
+
+void
+Node::setProgram( GLuint program )
+{
+	m_impl->setProgram( program );
 }
 
 void
