@@ -45,7 +45,6 @@ public:
 		glLoadIdentity();
 		glfwSetWindowSize( (GLsizei) size[BK_X], (GLsizei) size[BK_Y] );
 		glViewport( 0, 0, size[BK_X], size[BK_Y] );
-		gluOrtho2D( 0.0, (GLdouble) size[BK_X], (GLdouble) size[BK_Y], 0.0 );
 		setWindowCaption( title );
 	}
 
