@@ -28,7 +28,7 @@ namespace Baukasten {
 		{
 		}
 
-		const T& value() const
+		T value() const
 		{
 			if ( m_intState )
 				return ( static_cast<GenericState<T>*>( m_intState ) )->value();
@@ -75,7 +75,7 @@ namespace Baukasten {
 		{
 		}
 
-		const T& value( const s32 i ) const
+		T value( const s32 i ) const
 		{
 			if ( m_intState )
 				return ( static_cast<GenericState<vector<T>>*>( m_intState ) )->value( i );
