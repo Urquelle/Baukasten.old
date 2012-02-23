@@ -46,6 +46,7 @@ public:
 		glfwSetWindowSize( (GLsizei) size[BK_X], (GLsizei) size[BK_Y] );
 		glViewport( 0, 0, size[BK_X], size[BK_Y] );
 		setWindowCaption( title );
+		m_windowSize = size;
 	}
 
 	void
@@ -242,10 +243,10 @@ private:
 	vector<GlTexture*>	m_textures;
 	Font*				m_font;
 	GLuint              m_program;
+	vec2<u32>           m_windowSize;
 
 	float				m_t0, m_t1, m_frames, m_fps;
 };
-
 // }}}
 
 GlfwGraphics::GlfwGraphics() :
