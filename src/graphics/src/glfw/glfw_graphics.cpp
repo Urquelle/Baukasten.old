@@ -6,7 +6,7 @@
 #include "model/Form"
 
 #include "graphics/include/glfw/gl_texture.h"
-#include "graphics/include/glfw/glfw_graphics_functions.h"
+#include "graphics/include/glfw/glfw_graphics_helper.h"
 #include "graphics/include/glfw/node.h"
 
 using namespace Baukasten;

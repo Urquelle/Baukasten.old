@@ -40,8 +40,6 @@ _init()
 
 	glfwOpenWindow( 640, 480, 0, 0, 0, 0, 0, 0, GLFW_WINDOW );
 	glViewport( 0, 0, 640.0, 480.0 );
-	glMatrixMode( GL_PROJECTION );
-	glLoadIdentity();
 	glewInit();
 
 	return true;

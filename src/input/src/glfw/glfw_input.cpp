@@ -4,7 +4,7 @@
 #include "core/Debug"
 #include "graphics/IGraphics"
 
-#include "input/include/glfw/glfw_input_functions.h"
+#include "input/include/glfw/glfw_input_helper.h"
 
 using namespace Baukasten;
 
