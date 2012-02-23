@@ -19,11 +19,11 @@ using namespace Baukasten;
 
 Game::Game( const string &id, int argc, char **argv ) :
 	GameEntity( id ),
-	mAudio( 0 ),
-	mGraphics( 0 ),
-	mInput( 0 ),
-	mArgc( argc ),
-	mArgv( argv )
+	m_audio( 0 ),
+	m_graphics( 0 ),
+	m_input( 0 ),
+	m_argc( argc ),
+	m_argv( argv )
 {
 	addAction( new ActionLua( *this, "action:rotate", "scripts/rotate.lua" ) );
 	addAction( new ActionLambda( *this, "action:moveLeft", &moveLeft ) );
@@ -53,22 +53,22 @@ void Game::init()
 {
 	CoreServices* service = CoreServices::instance();
 
-	service->init( mArgc, mArgv );
+	service->init( m_argc, m_argv );
 
-	mInput = service->inputService();
-	mGraphics = service->videoService();
-	mGraphics->createWindow( { 1024, 768 }, L"Tetris" );
-	mAudio = service->audioService();
+	m_input = service->inputService();
+	m_graphics = service->videoService();
+	m_graphics->createWindow( { 1024, 768 }, L"Tetris" );
+	m_audio = service->audioService();
 
-	mAudio->loadFile( "media/tetris_theme.wav", "audio:main" );
-	mAudio->play( "audio:main", 0, 0, true );
+	m_audio->loadFile( "media/tetris_theme.wav", "audio:main" );
+	//m_audio->play( "audio:main", 0, 0, true );
 
-	mInput->onKeyDown()->connect( sigc::mem_fun( this, &Game::onKeyDown ) );
+	m_input->onKeyDown()->connect( sigc::mem_fun( this, &Game::onKeyDown ) );
 
 	// init main display
 	GameEntity *display = new GameEntity( "entity:display ");
 	display->setForm(
-		new Form2d( "form:display", "media/display.png", mGraphics )
+		new Form2d( "form:display", "media/display.png", m_graphics )
 	);
 
 	display->form()->setPosition( { 0, 0, 0 } );
@@ -85,7 +85,7 @@ void Game::init()
 	field->addState( new StateInt( "state:column", 0 ) );
 	field->addState( new StateInt( "state:row", 0 ) );
 	field->addState( new StateInt( "state:rows", 18 ) );
-	field->setForm( new FieldForm( "form:field", mGraphics ) );
+	field->setForm( new FieldForm( "form:field", m_graphics ) );
 	field->form()->addState( new StateIntVector( "block:current" ) );
 	field->form()->addState( new StateInt( "state:step", 0 ) );
 	field->form()->addState( new StateInt( "block:column", 5 ) );
@@ -122,7 +122,7 @@ void Game::init()
 
 	// init blocks
 	GameEntity *blockO = new GameEntity( "block:o" );
-	blockO->setForm( new BlockForm( "form:o", mGraphics ) );
+	blockO->setForm( new BlockForm( "form:o", m_graphics ) );
 	blockO->form()->addState( new StateInt( "state:currentMatrix", 1 ) );
 	blockO->form()->addState( new StateIntVector( "state:matrix1", {
 		0, 0, 0, 0,
@@ -153,7 +153,7 @@ void Game::init()
 	));
 
 	GameEntity *blockZ = new GameEntity( "block:z" );
-	blockZ->setForm( new BlockForm( "form:z", mGraphics ) );
+	blockZ->setForm( new BlockForm( "form:z", m_graphics ) );
 	blockZ->form()->addState( new StateInt( "state:currentMatrix", 1 ) );
 	blockZ->form()->addState( new StateIntVector( "state:matrix1", {
 		0, 0, 0, 0,
@@ -184,7 +184,7 @@ void Game::init()
 	));
 
 	GameEntity *blockS = new GameEntity( "block:s" );
-	blockS->setForm( new BlockForm( "form:s", mGraphics ) );
+	blockS->setForm( new BlockForm( "form:s", m_graphics ) );
 	blockS->form()->addState( new StateInt( "state:currentMatrix", 1 ) );
 	blockS->form()->addState( new StateIntVector( "state:matrix1", {
 		0, 0, 0, 0,
@@ -215,7 +215,7 @@ void Game::init()
 	));
 
 	GameEntity *blockT = new GameEntity( "block:t" );
-	blockT->setForm( new BlockForm( "form:t", mGraphics ) );
+	blockT->setForm( new BlockForm( "form:t", m_graphics ) );
 	blockT->form()->addState( new StateInt( "state:currentMatrix", 1 ) );
 	blockT->form()->addState( new StateIntVector( "state:matrix1", {
 		0, 0, 0, 0,
@@ -246,7 +246,7 @@ void Game::init()
 	));
 
 	GameEntity *blockL = new GameEntity( "block:l" );
-	blockL->setForm( new BlockForm( "form:l", mGraphics ) );
+	blockL->setForm( new BlockForm( "form:l", m_graphics ) );
 	blockL->form()->addState( new StateInt( "state:currentMatrix", 1 ) );
 	blockL->form()->addState( new StateIntVector( "state:matrix1", {
 		0, 1, 0, 0,
@@ -277,7 +277,7 @@ void Game::init()
 	));
 
 	GameEntity *blockJ = new GameEntity( "block:j" );
-	blockJ->setForm( new BlockForm( "form:j", mGraphics ) );
+	blockJ->setForm( new BlockForm( "form:j", m_graphics ) );
 	blockJ->form()->addState( new StateInt( "state:currentMatrix", 1 ) );
 	blockJ->form()->addState( new StateIntVector( "state:matrix1", {
 		0, 0, 1, 0,
@@ -308,7 +308,7 @@ void Game::init()
 	));
 
 	GameEntity *blockI = new GameEntity( "block:i" );
-	blockI->setForm( new BlockForm( "form:i", mGraphics ) );
+	blockI->setForm( new BlockForm( "form:i", m_graphics ) );
 	blockI->form()->addState( new StateInt( "state:currentMatrix", 1 ) );
 	blockI->form()->addState( new StateIntVector( "state:matrix1", {
 		0, 1, 0, 0,
@@ -357,7 +357,7 @@ void Game::init()
 	score->addState( new StateInt( "state:score", 0 ) );
 	score->addState( new StateInt( "state:linesCleared", 0 ) );
 	score->addAction( new ActionLambda( *score, "action:collectPoints", &collectPoints ) );
-	score->setForm( new ScoreForm( "form:score", mGraphics ) );
+	score->setForm( new ScoreForm( "form:score", m_graphics ) );
 	score->form()->addState( new StateInt( "state:score", 0 ) );
 	score->form()->setPosition( { 800, 300, 0 } );
 
@@ -370,8 +370,8 @@ void Game::run()
 {
 	while ( state<StateBool*>( "state:keepRunning" )->value() ) {
 		runActions();
-		mInput->process();
-		mGraphics->render( form() );
+		m_input->process();
+		m_graphics->render( form() );
 	}
 }
 

@@ -24,11 +24,11 @@ protected:
 	void run();
 
 private:
-	Baukasten::IAudio*		mAudio;
-	Baukasten::IGraphics*	mGraphics;
-	Baukasten::IInput*		mInput;
-	int mArgc;
-	char** mArgv;
+	Baukasten::IAudio*		m_audio;
+	Baukasten::IGraphics*	m_graphics;
+	Baukasten::IInput*		m_input;
+	int m_argc;
+	char** m_argv;
 };
 
 #endif /* end of include guard: GAME_QC1L8Y4Z */
