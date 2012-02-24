@@ -12,11 +12,11 @@ using namespace Baukasten;
 namespace Baukasten {
 	class NodePrivate {
 	public:
-		NodePrivate(Node *master, GLenum glType, const u32 vertexCount, const u32 indexCount) :
-			m_glType( glType ),
+		NodePrivate(GLenum type,
+				const u32 dataPerVertex, const u32 indexCount) :
+			m_dataPerVertex( dataPerVertex ),
 			m_indexCount( indexCount ),
-			m_master( master ),
-			m_vertexCount( vertexCount )
+			m_tbo( 0 ), m_type( type ), m_vbo( 0 )
 		{
 		}
 
@@ -27,46 +27,42 @@ namespace Baukasten {
 		void
 		prepare()
 		{
-			glBindBuffer( GL_ARRAY_BUFFER, m_master->vbo );
+			glBindBuffer( GL_ARRAY_BUFFER, m_vbo );
+			glUseProgram( m_program );
 
 			GLuint position = glGetAttribLocation( m_program, "position" );
-			GLuint color = glGetAttribLocation( m_program, "color" );
+			GLuint color    = glGetAttribLocation( m_program, "color" );
 
 			glEnableVertexAttribArray(position);
 			glEnableVertexAttribArray(color);
 
 			glVertexAttribPointer(
-				position,
-				m_vertexCount,
-				GL_FLOAT,
-				GL_FALSE,
-				0,
-				BUFFER_OFFSET( 0 )
+				position, m_dataPerVertex,
+				GL_FLOAT, GL_FALSE,
+				0, BUFFER_OFFSET( 0 )
 			);
 
 			glVertexAttribPointer(
-				color,
-				3,
-				GL_FLOAT,
-				GL_FALSE,
-				0,
-				BUFFER_OFFSET( m_vertexCount * m_indexCount * sizeof(float) )
+				color, 4,
+				GL_FLOAT, GL_FALSE,
+				0, BUFFER_OFFSET( m_dataPerVertex * m_indexCount * sizeof(float) )
 			);
 
+			if ( m_tbo ) {
+				//glEnable( GL_TEXTURE_2D );
+				//glBindBuffer( GL_ARRAY_BUFFER, m_textures[0]->cbo() );
+				//glTexCoordPointer( 2, GL_UNSIGNED_BYTE, 0, BUFFER_OFFSET(0) );
+				//glTexEnvf( GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_REPLACE );
+				//glBindTexture( GL_TEXTURE_2D, m_textures[0]->tbo() );
+			}
 		}
 
 		void
 		render()
 		{
 			prepare();
-			glDrawArrays( m_glType, 0, m_indexCount );
+			glDrawArrays( m_type, 0, m_indexCount );
 			cleanup();
-		}
-
-		void
-		addTexture( GlTexture *tex )
-		{
-			m_textures.push_back( tex );
 		}
 
 		void
@@ -76,31 +72,50 @@ namespace Baukasten {
 		}
 
 		void
+		setTexture( const GLuint tbo )
+		{
+			m_tbo = tbo;
+		}
+
+		void
+		setVbo( const GLuint vbo )
+		{
+			m_vbo = vbo;
+		}
+
+		void
 		cleanup()
 		{
+			glUseProgram( 0 );
 			glBindBuffer( GL_ARRAY_BUFFER, 0 );
 			glBindTexture( GL_TEXTURE_2D, 0 );
-			glDeleteBuffers( 1, &m_master->vbo );
+			glDeleteBuffers( 1, &m_vbo );
 			glDisable( GL_TEXTURE_2D );
 
 			glDisableVertexAttribArray(0);
 			glDisableVertexAttribArray(1);
 		}
 
+		GLuint
+		vbo() const
+		{
+			return m_vbo;
+		}
+
 	private:
-		GLenum          m_glType;
-		u32             m_indexCount;
-		Node*           m_master;
-		GLuint          m_program;
-		s8*             m_offset;
-		vector<GlTexture*>  m_textures;
-		u32             m_vertexCount;
+		u32     m_dataPerVertex;
+		u32     m_indexCount;
+		s8*     m_offset;
+		GLuint  m_program;
+		GLuint  m_tbo;
+		GLenum  m_type;
+		GLuint  m_vbo;
 	};
 } /* Baukasten */
 
 // Node
-Node::Node( GLenum glType, const u32 vertexCount, const u32 indexCount ) :
-	m_impl( new NodePrivate( this, glType, vertexCount, indexCount ) )
+Node::Node( GLenum type, const u32 dataPerVertex, const u32 indexCount ) :
+	m_impl( new NodePrivate( type, dataPerVertex, indexCount ) )
 {
 }
 
@@ -121,15 +136,27 @@ Node::render()
 }
 
 void
-Node::addTexture( GlTexture *tex )
-{
-	m_impl->addTexture( tex );
-}
-
-void
 Node::setProgram( GLuint program )
 {
 	m_impl->setProgram( program );
+}
+
+void
+Node::setTexture( const GLuint tbo )
+{
+	m_impl->setTexture( tbo );
+}
+
+void
+Node::setVbo( GLuint vbo )
+{
+	m_impl->setVbo( vbo );
+}
+
+GLuint
+Node::vbo() const
+{
+	return m_impl->vbo();
 }
 
 void
@@ -139,8 +166,8 @@ Node::cleanup()
 }
 
 // LineNode
-LineNode::LineNode( GLenum glType, const u32 vertexCount, const u32 indexCount ) :
-	Node( glType, vertexCount, indexCount ),
+LineNode::LineNode( GLenum type, const u32 dataPerVertex, const u32 indexCount ) :
+	Node( type, dataPerVertex, indexCount ),
 	m_width( 1.0 ), m_stipple( 1 )
 {
 }
@@ -188,8 +215,8 @@ LineNode::cleanup()
 }
 
 // PointNode
-PointNode::PointNode( GLenum glType, const u32 vertexCount, const u32 indexCount ) :
-	Node( glType, vertexCount, indexCount )
+PointNode::PointNode( GLenum type, const u32 dataPerVertex, const u32 indexCount ) :
+	Node( type, dataPerVertex, indexCount )
 {
 }
 
@@ -216,8 +243,8 @@ PointNode::prepare()
 }
 
 // QuadNode
-QuadNode::QuadNode( GLenum glType, const u32 vertexCount, const u32 indexCount ) :
-	Node( glType, vertexCount, indexCount )
+QuadNode::QuadNode( GLenum type, const u32 dataPerVertex, const u32 indexCount ) :
+	Node( type, dataPerVertex, indexCount )
 {
 }
 
@@ -228,6 +255,5 @@ QuadNode::~QuadNode()
 void
 QuadNode::prepare()
 {
-	// do some preparations 'n shit
 }
 

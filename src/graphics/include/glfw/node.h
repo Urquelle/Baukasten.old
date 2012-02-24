@@ -9,7 +9,6 @@
 
 namespace Baukasten {
 	class NodePrivate;
-	class GlTexture;
 
 	class Node {
 	public:
@@ -18,10 +17,12 @@ namespace Baukasten {
 
 		virtual void render();
 
-		void addTexture( GlTexture* );
-		void setProgram( GLuint );
+		GLuint  program() const;
+		void    setProgram( const GLuint );
+		void    setTexture( const GLuint );
+		void    setVbo( const GLuint );
+		GLuint  vbo() const;
 
-		GLuint vbo;
 	protected:
 		virtual void prepare();
 		virtual void cleanup();

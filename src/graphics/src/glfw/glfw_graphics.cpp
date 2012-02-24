@@ -32,7 +32,7 @@ public:
 		m_t0 = glfwGetTime();
 
 		result = _init();
-		result = _initProgram( &m_program );
+		result = _initProgram( m_program );
 
 		m_master->m_initialised = true;
 
@@ -41,8 +41,6 @@ public:
 
 	void createWindow( const vec2<int> &size, const std::wstring &title )
 	{
-		glMatrixMode( GL_PROJECTION );
-		glLoadIdentity();
 		glfwSetWindowSize( (GLsizei) size[BK_X], (GLsizei) size[BK_Y] );
 		glViewport( 0, 0, size[BK_X], size[BK_Y] );
 		setWindowCaption( title );
@@ -55,7 +53,6 @@ public:
 		_computeFps( m_t0, m_t1, m_frames, m_fps );
 
 	 	glClear( GL_COLOR_BUFFER_BIT );
-		glUseProgram( m_program );
 
 		form->constructScene();
 		form->render();
@@ -64,9 +61,7 @@ public:
 			m_nodes[i]->render();
 		}
 
-		glUseProgram(0);
 		m_nodes.clear();
-
 		glfwSwapBuffers();
 	}
 
@@ -119,20 +114,47 @@ public:
 		float yMax = ( pos[BK_Y] + size[BK_HEIGHT] - yDiv ) / yDiv;
 
 		GLfloat vertices[] = {
-			xMin, yMin, pos[BK_Z],
-			xMax, yMin, pos[BK_Z],
-			xMax, yMax, pos[BK_Z],
-			xMin, yMax, pos[BK_Z]
+			xMin, yMin, pos[BK_Z], 1.0f,
+			xMax, yMin, pos[BK_Z], 1.0f,
+			xMax, yMax, pos[BK_Z], 1.0f,
+			xMin, yMax, pos[BK_Z], 1.0f
 		};
+
+		Image image( filePath );
+		image.read();
+
+			//upload texture data
+		GLuint tbo;
+		glGenTextures( 1, &tbo );
+		glBindTexture( GL_TEXTURE_2D, tbo );
+		glPixelStorei( GL_UNPACK_ALIGNMENT, 1 );
+
+		glTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR );
+		glTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR );
+		glTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_WRAP_S,     GL_CLAMP_TO_EDGE );
+		glTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_WRAP_T,     GL_CLAMP_TO_EDGE );
+
+		glTexImage2D(
+			GL_TEXTURE_2D, 0, GL_RGBA8,
+			image.width(), image.height(), 0, GL_RGBA8,
+			GL_UNSIGNED_SHORT, image.data()
+		);
+
+		image.close();
+
 
 
 		QuadNode *node = new QuadNode( GL_QUADS, 2, 4 );
 
-
-		glGenBuffers( 1, &node->vbo );
-		glBindBuffer( GL_ARRAY_BUFFER, node->vbo );
+		GLuint vbo;
+		glGenBuffers( 1, &vbo );
+		glBindBuffer( GL_ARRAY_BUFFER, vbo );
 		glBufferData( GL_ARRAY_BUFFER, sizeof( vertices ), vertices, GL_DYNAMIC_DRAW );
 		glBindBuffer( GL_ARRAY_BUFFER, 0 );
+
+		node->setProgram( m_program );
+		node->setTexture( tbo );
+		node->setVbo( vbo );
 
 		m_nodes.push_back( node );
 	}
@@ -141,23 +163,33 @@ public:
 	drawLine( const vec3<float> &from, const vec3<float> &to,
 			const Color &c, const float width = 1.0f )
 	{
-		float r, g, b;
-		c.rgbF( &r, &g, &b );
+		float r, g, b, a;
+		c.rgbF( &r, &g, &b, &a );
+
+		float xDiv = m_windowSize[BK_X] / 2, yDiv = m_windowSize[BK_Y] / 2;
+		float fromX = ( from[BK_X] - xDiv ) / xDiv;
+		float fromY = ( from[BK_Y] - yDiv ) / yDiv;
+		float toX = ( to[BK_X] - xDiv ) / xDiv;
+		float toY = ( to[BK_Y] - yDiv ) / yDiv;
 
 		GLfloat vertices[] = {
-			r, g, b,
-			from[BK_X], from[BK_Y],
-			to[BK_X], to[BK_Y]
+			fromX, fromY, from[BK_Z], 1.0f,
+			toX,   toY,   to[BK_Z],   1.0f,
+			r, g, b, a,
+			r, g, b, a
 		};
 
-		LineNode *node = new LineNode( GL_POINTS, 2, 2 );
+		LineNode *node = new LineNode( GL_POINTS, 4, 2 );
 
-		node->setWidth( width );
-
-		glGenBuffers( 1, &node->vbo );
-		glBindBuffer( GL_ARRAY_BUFFER, node->vbo );
+		GLuint vbo;
+		glGenBuffers( 1, &vbo );
+		glBindBuffer( GL_ARRAY_BUFFER, vbo );
 		glBufferData( GL_ARRAY_BUFFER, sizeof( vertices ), vertices, GL_DYNAMIC_DRAW );
 		glBindBuffer( GL_ARRAY_BUFFER, 0 );
+
+		node->setProgram( m_program );
+		node->setVbo( vbo );
+		node->setWidth( width );
 
 		m_nodes.push_back( node );
 	}
@@ -165,27 +197,29 @@ public:
 	void
 	drawPoint( const vec3<float> &pos, const u32 size, const Color &c )
 	{
-		float r, g, b;
-		c.rgbF( &r, &g, &b );
+		float r, g, b, a;
+		c.rgbF( &r, &g, &b, &a );
 
-		float xDiv = 1024 / 2, yDiv = 768 / 2;
+		float xDiv = m_windowSize[BK_X] / 2, yDiv = m_windowSize[BK_Y] / 2;
 		float x = ( pos[BK_X] - xDiv ) / xDiv;
 		float y = ( pos[BK_Y] - yDiv ) / yDiv * -1;
 
 		GLfloat vertices[] = {
-			x, y, pos[BK_Z],
-			r, g, b
+			x, y, pos[BK_Z], 1.0f,
+			r, g, b, a
 		};
 
-		PointNode *node = new PointNode( GL_POINTS, 3, 1 );
+		PointNode *node = new PointNode( GL_POINTS, 4, 1 );
 
-		node->setSize( size );
-		node->setProgram( m_program );
-
-		glGenBuffers( 1, &node->vbo );
-		glBindBuffer( GL_ARRAY_BUFFER, node->vbo );
+		GLuint vbo;
+		glGenBuffers( 1, &vbo );
+		glBindBuffer( GL_ARRAY_BUFFER, vbo );
 		glBufferData( GL_ARRAY_BUFFER, sizeof( vertices ), vertices, GL_DYNAMIC_DRAW );
 		glBindBuffer( GL_ARRAY_BUFFER, 0 );
+
+		node->setProgram( m_program );
+		node->setSize( size );
+		node->setVbo( vbo );
 
 		m_nodes.push_back( node );
 	}
@@ -193,10 +227,10 @@ public:
 	void
 	drawRect( const vec2<float> &size, const vec3<float> &pos, const Color &c )
 	{
-		float r, g, b;
-		c.rgbF( &r, &g, &b );
+		float r, g, b, a;
+		c.rgbF( &r, &g, &b, &a );
 
-		float xDiv = 1024 / 2, yDiv = 768 / 2;
+		float xDiv = m_windowSize[BK_X] / 2, yDiv = m_windowSize[BK_Y] / 2;
 
 		// transform display space coordinates to clip space
 		float xMin = ( pos[BK_X] - xDiv ) / xDiv;
@@ -205,24 +239,26 @@ public:
 		float yMax = ( pos[BK_Y] + size[BK_HEIGHT] - yDiv ) / yDiv * -1;
 
 		GLfloat vertices[] = {
-			xMin, yMin, pos[BK_Z],
-			xMax, yMin, pos[BK_Z],
-			xMax, yMax, pos[BK_Z],
-			xMin, yMax, pos[BK_Z],
-			r, g, b,
-			r, g, b,
-			r, g, b,
-			r, g, b,
+			xMin, yMin, pos[BK_Z], 1.0f,
+			xMax, yMin, pos[BK_Z], 1.0f,
+			xMax, yMax, pos[BK_Z], 1.0f,
+			xMin, yMax, pos[BK_Z], 1.0f,
+			r, g, b, a,
+			r, g, b, a,
+			r, g, b, a,
+			r, g, b, a
 		};
 
-		QuadNode *node = new QuadNode( GL_QUADS, 3, 4 );
+		QuadNode *node = new QuadNode( GL_QUADS, 4, 4 );
 
-		node->setProgram( m_program );
-
-		glGenBuffers( 1, &node->vbo );
-		glBindBuffer( GL_ARRAY_BUFFER, node->vbo );
+		GLuint vbo;
+		glGenBuffers( 1, &vbo );
+		glBindBuffer( GL_ARRAY_BUFFER, vbo );
 		glBufferData( GL_ARRAY_BUFFER, sizeof( vertices ), vertices, GL_DYNAMIC_DRAW );
 		glBindBuffer( GL_ARRAY_BUFFER, 0 );
+
+		node->setProgram( m_program );
+		node->setVbo( vbo );
 
 		m_nodes.push_back( node );
 	}
@@ -244,7 +280,6 @@ private:
 	Font*				m_font;
 	GLuint              m_program;
 	vec2<u32>           m_windowSize;
-
 	float				m_t0, m_t1, m_frames, m_fps;
 };
 // }}}

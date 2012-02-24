@@ -78,12 +78,12 @@ _createShader( GLenum type, const char *shaderData )
 }
 
 bool
-_initProgram( GLuint *prog )
+_initProgram( GLuint &program )
 {
 	GLuint vertexShader = _createShader( GL_VERTEX_SHADER, _bk_vertex_shader );
 	GLuint fragmentShader = _createShader( GL_FRAGMENT_SHADER, _bk_fragment_shader );
 
-	GLuint program = *prog = glCreateProgram();
+	program = glCreateProgram();
 
 	glAttachShader( program, vertexShader );
 	glAttachShader( program, fragmentShader );
