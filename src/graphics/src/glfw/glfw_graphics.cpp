@@ -41,10 +41,8 @@ public:
 
 	void createWindow( const vec2<int> &size, const std::wstring &title )
 	{
-		glfwSetWindowSize( (GLsizei) size[BK_X], (GLsizei) size[BK_Y] );
-		glViewport( 0, 0, size[BK_X], size[BK_Y] );
+		setWindowSize( size );
 		setWindowCaption( title );
-		m_windowSize = size;
 	}
 
 	void
@@ -69,12 +67,6 @@ public:
 	fps() const
 	{
 		return m_fps;
-	}
-
-	void
-	setWindowCaption( const std::wstring &title )
-	{
-		glfwSetWindowTitle( _toString( title ).c_str() );
 	}
 
 	void
@@ -273,6 +265,20 @@ public:
 		);
 	}
 
+	void
+	setWindowCaption( const std::wstring &title )
+	{
+		glfwSetWindowTitle( _toString( title ).c_str() );
+	}
+
+	void
+	setWindowSize( const vec2<int> &size )
+	{
+		glfwSetWindowSize( (GLsizei) size[BK_X], (GLsizei) size[BK_Y] );
+		glViewport( 0, 0, size[BK_X], size[BK_Y] );
+		m_windowSize = size;
+	}
+
 private:
 	GlfwGraphics*		m_master;
 	vector<Node*>		m_nodes;
@@ -370,5 +376,11 @@ void
 GlfwGraphics::setWindowCaption( const std::wstring &title )
 {
 	m_impl->setWindowCaption( title );
+}
+
+void
+GlfwGraphics::setWindowSize( const u32 width, const u32 height )
+{
+	m_impl->setWindowSize( { width, height } );
 }
 

@@ -29,6 +29,7 @@ namespace Baukasten {
 		void render( Form* );
 		string serviceName() const { return "GLFW"; }
 		void setWindowCaption( const std::wstring& );
+		void setWindowSize( const u32, const u32 );
 		void shutdown();
 
 	private:

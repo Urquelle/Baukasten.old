@@ -25,11 +25,19 @@ const char *_bk_vertex_shader (
 
 const char *_bk_fragment_shader (
 	"#version 120\n"
+
 	"void main()\n"
 	"{\n"
 	"   gl_FragColor = gl_Color;\n"
 	"}\n"
 );
+
+void GLFWCALL
+_resize( int width, int height )
+{
+	auto graphics = CoreServices::instance()->videoService();
+	graphics->setWindowSize( width, height );
+}
 
 bool
 _init()
@@ -39,6 +47,7 @@ _init()
 	}
 
 	glfwOpenWindow( 640, 480, 0, 0, 0, 0, 0, 0, GLFW_WINDOW );
+	glfwSetWindowSizeCallback( _resize );
 	glViewport( 0, 0, 640.0, 480.0 );
 	glewInit();
 

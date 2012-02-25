@@ -31,6 +31,7 @@ namespace Baukasten {
 		virtual void render( Form* ) = 0;
 		virtual string serviceName() const = 0;
 		virtual void setWindowCaption( const std::wstring& ) = 0;
+		virtual void setWindowSize( const u32, const u32 ) = 0;
 		virtual void shutdown() = 0;
 
 		// TODO: keep 3d in mind (frustum, z-coord, cams, matrix, ...)
