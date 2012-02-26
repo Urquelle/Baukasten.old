@@ -2,7 +2,7 @@
 
 #include "core/Debug"
 
-#include "graphics/include/image_functions.h"
+#include "graphics/include/image_helper.h"
 
 using namespace Baukasten;
 

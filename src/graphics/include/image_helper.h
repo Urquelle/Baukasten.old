@@ -19,6 +19,9 @@ _type( FILE *f )
 {
 	Image::ImageType t = Image::NO_TYPE;
 
+	if ( !f )
+		return t;
+
 	// check for png
 	png_byte header[8];
 	fread( header, 1, 8, f );
