@@ -41,7 +41,7 @@ public:
 		return 1;
 	}
 
-	void createWindow( const vec2<int> &size, const std::wstring &title )
+	void createWindow( const vec2<u32> &size, const wstring &title )
 	{
 		setWindowSize( size );
 		setWindowCaption( title );
@@ -290,13 +290,13 @@ public:
 	}
 
 	void
-	setWindowCaption( const std::wstring &title )
+	setWindowCaption( const wstring &title )
 	{
 		glfwSetWindowTitle( _toString( title ).c_str() );
 	}
 
 	void
-	setWindowSize( const vec2<int> &size )
+	setWindowSize( const vec2<u32> &size )
 	{
 		BK_DEBUG( "in window resize" );
 		glfwSetWindowSize( (GLsizei) size[BK_X], (GLsizei) size[BK_Y] );
@@ -336,7 +336,7 @@ GlfwGraphics::init( CoreServices *services )
 }
 
 void
-GlfwGraphics::createWindow( const vec2<int> &size, const std::wstring &title )
+GlfwGraphics::createWindow( const vec2<u32> &size, const wstring &title )
 {
 	m_impl->createWindow( size, title );
 }
@@ -409,7 +409,7 @@ GlfwGraphics::fps() const
 }
 
 void
-GlfwGraphics::setWindowCaption( const std::wstring &title )
+GlfwGraphics::setWindowCaption( const wstring &title )
 {
 	m_impl->setWindowCaption( title );
 }

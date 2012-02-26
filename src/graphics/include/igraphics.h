@@ -17,7 +17,7 @@ namespace Baukasten {
 
 		bool isInitialised() const { return m_initialised; }
 
-		virtual void createWindow( const vec2<int>&, const std::wstring& ) = 0;
+		virtual void createWindow( const vec2<u32>&, const wstring& ) = 0;
 		virtual void drawCircle( const vec3<float>&, const u32, const Color& ) = 0;
 		virtual void drawImage( const string&, const vec2<float>&,
 				const vec3<float>& ) = 0;
@@ -33,11 +33,9 @@ namespace Baukasten {
 		virtual int init( CoreServices* ) = 0;
 		virtual void render( Form* ) = 0;
 		virtual string serviceName() const = 0;
-		virtual void setWindowCaption( const std::wstring& ) = 0;
+		virtual void setWindowCaption( const wstring& ) = 0;
 		virtual void setWindowSize( const u32, const u32 ) = 0;
 		virtual void shutdown() = 0;
-
-		// TODO: keep 3d in mind (frustum, z-coord, cams, matrix, ...)
 
 	protected:
 		bool m_initialised;

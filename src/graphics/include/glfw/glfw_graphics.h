@@ -17,7 +17,7 @@ namespace Baukasten {
 		GlfwGraphics();
 		virtual ~GlfwGraphics();
 
-		void createWindow( const vec2<int>&, const std::wstring& );
+		void createWindow( const vec2<u32>&, const wstring& );
 		void drawCircle( const vec3<float>&, const u32, const Color& );
 		void drawImage( const string&, const vec2<float>&, const vec3<float>& );
 		void drawImage( Image&, const vec2<float>&, const vec3<float>& );
@@ -30,7 +30,7 @@ namespace Baukasten {
 		int init( CoreServices* );
 		void render( Form* );
 		string serviceName() const { return "GLFW"; }
-		void setWindowCaption( const std::wstring& );
+		void setWindowCaption( const wstring& );
 		void setWindowSize( const u32, const u32 );
 		void shutdown();
 
