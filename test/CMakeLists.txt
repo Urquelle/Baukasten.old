@@ -25,5 +25,5 @@ endif("${isSystemDir}" STREQUAL "-1")
 add_executable( testSuite ${test_SRCS} )
 target_link_libraries( testSuite Baukasten cppunit )
 
-install(TARGETS testSuite RUNTIME DESTINATION bin/)
-install(DIRECTORY files DESTINATION bin/)
+install(TARGETS testSuite RUNTIME DESTINATION bin)
+install(DIRECTORY files DESTINATION bin)

@@ -66,4 +66,4 @@ install(
 	PATTERN *.txt EXCLUDE
 )
 
-install(TARGETS Baukasten LIBRARY DESTINATION lib/)
+install(TARGETS Baukasten LIBRARY DESTINATION lib)
