@@ -4,3 +4,4 @@ doc/*
 *.zip
 *.user
 tags
+.vimrc
