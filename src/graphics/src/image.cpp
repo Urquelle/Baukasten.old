@@ -12,6 +12,7 @@ namespace Baukasten {
 		ImagePrivate( const string path ) :
 			m_path( path ), m_info( new ImageInfo() )
 		{
+			m_info->data = 0;
 			m_handle = fopen( path.c_str(), "rb" );
 			if ( !m_handle )
 				BK_DEBUG( path << " couldn't be opened!" );
@@ -22,9 +23,13 @@ namespace Baukasten {
 
 		virtual ~ImagePrivate()
 		{
-			fclose( m_handle );
+			if ( m_handle )
+				fclose( m_handle );
 			m_handle = 0;
-			delete m_info->data;
+
+			if ( m_info->data )
+				delete m_info->data;
+			m_info->data = 0;
 		}
 
 		void
@@ -35,6 +40,7 @@ namespace Baukasten {
 				m_isOpen = false;
 				m_handle = 0;
 				delete m_info->data;
+				m_info->data = 0;
 			}
 		}
 
@@ -68,9 +74,23 @@ namespace Baukasten {
 			return m_isOpen;
 		}
 
+		bool
+		isRead() const
+		{
+			return m_info->data != 0;
+		}
+
+		string
+		path() const
+		{
+			return m_path;
+		}
+
 		void
 		read()
 		{
+			if ( isRead() ) return;
+
 			bool result = false;
 
 			switch ( m_type ) {
@@ -122,6 +142,7 @@ Image::Image( const string &path ) :
 
 Image::~Image()
 {
+	delete m_impl;
 }
 
 void
@@ -158,6 +179,18 @@ bool
 Image::isOpen() const
 {
 	return m_impl->isOpen();
+}
+
+bool
+Image::isRead() const
+{
+	return m_impl->isRead();
+}
+
+string
+Image::path() const
+{
+	return m_impl->path();
 }
 
 void

@@ -23,6 +23,8 @@ namespace Baukasten {
 		bool       hasAlpha()  const;
 		u32        height()    const;
 		bool       isOpen()    const;
+		bool       isRead() const;
+		string     path() const;
 		void       read();
 		u32        size()      const;
 		ImageType  type()      const;

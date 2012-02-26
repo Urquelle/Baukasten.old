@@ -137,7 +137,7 @@ _checkForError()
 }
 
 void
-_computeFps( float &t0, float &t1, float &frames, float &fps )
+_computeFps( float &t0, float &t1, u32 &frames, float &fps )
 {
 	t1 = glfwGetTime();
 

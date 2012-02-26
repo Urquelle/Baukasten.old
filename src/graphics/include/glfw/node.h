@@ -19,8 +19,9 @@ namespace Baukasten {
 
 		GLuint  program() const;
 		void    setProgram( const GLuint );
-		void    setTexture( const GLuint );
+		void    setTbo( const GLuint );
 		void    setVbo( const GLuint );
+		GLuint  tbo() const;
 		GLuint  vbo() const;
 
 	protected:
@@ -34,6 +35,8 @@ namespace Baukasten {
 	public:
 		QuadNode( GLenum, const u32, const u32 );
 		virtual ~QuadNode();
+
+		void render();
 
 	private:
 		void prepare();

@@ -1,23 +1,25 @@
-#include "graphics/GraphicsImpl"
+#include "graphics/include/glfw/glfw_graphics.h"
 
 #include "core/CoreServices"
 #include "core/Font"
 #include "graphics/Image"
 #include "model/Form"
 
-#include "graphics/include/glfw/gl_texture.h"
 #include "graphics/include/glfw/glfw_graphics_helper.h"
 #include "graphics/include/glfw/node.h"
 
 using namespace Baukasten;
 
+typedef map<string, GLuint> GLCache;
+
 // GlfGraphicsPrivate {{{
 class Baukasten::GlfwGraphicsPrivate {
 public:
 	GlfwGraphicsPrivate( GlfwGraphics *master ) :
-		m_master( master ),
 		m_font( new Font() ),
-		m_program( 0 )
+		m_master( master ),
+		m_program( 0 ),
+		m_vao( 0 )
 	{
 	}
 
@@ -94,12 +96,24 @@ public:
 	}
 
 	void
-	drawImage( const string &filePath, const vec2<float> &size,
+	drawImage( const string &path, const vec2<float> &size,
 			const vec3<float> &pos )
 	{
-		float xDiv = 1024 / 2, yDiv = 768 / 2;
+		Image image( path );
+		auto t = m_cache.find( path );
+		if ( t == m_cache.end() ) {
+			image.read();
+		}
+		drawImage( image, size, pos );
+	}
 
-		// transform display space coordinates to clip space
+	void
+	drawImage( Image &image, const vec2<float> &size, const vec3<float> &pos )
+	{
+		float xDiv = m_windowSize[BK_WIDTH] / 2,
+			yDiv = m_windowSize[BK_HEIGHT] / 2;
+
+		// transform to normalised [-1.0, 1.0]
 		float xMin = ( pos[BK_X] - xDiv ) / xDiv;
 		float xMax = ( pos[BK_X] + size[BK_WIDTH] - xDiv ) / xDiv;
 		float yMin = ( pos[BK_Y] - yDiv ) / yDiv;
@@ -112,29 +126,38 @@ public:
 			xMin, yMax, pos[BK_Z], 1.0f
 		};
 
-		Image image( filePath );
-		image.read();
-
-			//upload texture data
 		GLuint tbo;
-		glGenTextures( 1, &tbo );
-		glBindTexture( GL_TEXTURE_2D, tbo );
-		glPixelStorei( GL_UNPACK_ALIGNMENT, 1 );
+		auto t = m_cache.find( image.path() );
+		if ( t == m_cache.end() ) {
+			if ( !image.isRead() )
+				image.read();
 
-		glTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR );
-		glTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR );
-		glTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_WRAP_S,     GL_CLAMP_TO_EDGE );
-		glTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_WRAP_T,     GL_CLAMP_TO_EDGE );
+			glGenTextures( 1, &tbo );
+			glBindTexture( GL_TEXTURE_2D, tbo );
+			glPixelStorei( GL_UNPACK_ALIGNMENT, 1 );
 
-		glTexImage2D(
-			GL_TEXTURE_2D, 0, GL_RGBA8,
-			image.width(), image.height(), 0, GL_RGBA8,
-			GL_UNSIGNED_SHORT, image.data()
-		);
+			glfwLoadTexture2D( image.path().c_str(), 0 );
 
-		image.close();
+			glTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT );
+			glTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT );
+			glTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR );
+			glTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR );
 
+			glBindTexture( GL_TEXTURE_2D, 0 );
 
+			//glTexImage2D(
+				//GL_TEXTURE_2D, 0, GL_RGBA8,
+				//image.width(), image.height(), 0, GL_RGBA8,
+				//GL_UNSIGNED_SHORT, image.data()
+			//);
+
+			image.close();
+
+			m_cache[ image.path() ] = tbo;
+		} else {
+			BK_DEBUG( "cache hit on resource: " << image.path() );
+			tbo = t->second;
+		}
 
 		QuadNode *node = new QuadNode( GL_QUADS, 2, 4 );
 
@@ -145,7 +168,7 @@ public:
 		glBindBuffer( GL_ARRAY_BUFFER, 0 );
 
 		node->setProgram( m_program );
-		node->setTexture( tbo );
+		node->setTbo( tbo );
 		node->setVbo( vbo );
 
 		m_nodes.push_back( node );
@@ -192,7 +215,8 @@ public:
 		float r, g, b, a;
 		c.rgbF( &r, &g, &b, &a );
 
-		float xDiv = m_windowSize[BK_X] / 2, yDiv = m_windowSize[BK_Y] / 2;
+		float xDiv = m_windowSize[BK_WIDTH] / 2,
+			  yDiv = m_windowSize[BK_HEIGHT] / 2;
 		float x = ( pos[BK_X] - xDiv ) / xDiv;
 		float y = ( pos[BK_Y] - yDiv ) / yDiv * -1;
 
@@ -274,19 +298,24 @@ public:
 	void
 	setWindowSize( const vec2<int> &size )
 	{
+		BK_DEBUG( "in window resize" );
 		glfwSetWindowSize( (GLsizei) size[BK_X], (GLsizei) size[BK_Y] );
 		glViewport( 0, 0, size[BK_X], size[BK_Y] );
 		m_windowSize = size;
 	}
 
 private:
-	GlfwGraphics*		m_master;
-	vector<Node*>		m_nodes;
-	vector<GlTexture*>	m_textures;
-	Font*				m_font;
-	GLuint              m_program;
-	vec2<u32>           m_windowSize;
-	float				m_t0, m_t1, m_frames, m_fps;
+	Font*          m_font;
+	float          m_fps;
+	u32            m_frames;
+	GlfwGraphics*  m_master;
+	vector<Node*>  m_nodes;
+	GLCache        m_cache;
+	GLuint         m_program;
+	float          m_t0;
+	float          m_t1;
+	GLuint         m_vao;
+	vec2<u32>      m_windowSize;
 };
 // }}}
 
@@ -336,6 +365,13 @@ GlfwGraphics::drawImage( const string &filePath, const vec2<float> &size,
 		const vec3<float> &pos )
 {
 	m_impl->drawImage( filePath, size, pos );
+}
+
+void
+GlfwGraphics::drawImage( Image &image, const vec2<float> &size,
+		const vec3<float> &pos )
+{
+	m_impl->drawImage( image, size, pos );
 }
 
 void

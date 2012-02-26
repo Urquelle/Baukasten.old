@@ -9,6 +9,7 @@
 namespace Baukasten {
 	class CoreServices;
 	class Form;
+	class Image;
 
 	class BAUKASTEN_EXPORT IGraphics {
 	public:
@@ -19,6 +20,8 @@ namespace Baukasten {
 		virtual void createWindow( const vec2<int>&, const std::wstring& ) = 0;
 		virtual void drawCircle( const vec3<float>&, const u32, const Color& ) = 0;
 		virtual void drawImage( const string&, const vec2<float>&,
+				const vec3<float>& ) = 0;
+		virtual void drawImage( Image&, const vec2<float>&,
 				const vec3<float>& ) = 0;
 		virtual void drawLine( const vec3<float>&, const vec3<float>&,
 				const Color&, const float ) = 0;

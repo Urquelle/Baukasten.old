@@ -10,6 +10,7 @@ namespace Baukasten {
 	class CoreServices;
 	class Form;
 	class GlfwGraphicsPrivate;
+	class Image;
 
 	class BAUKASTEN_EXPORT GlfwGraphics : public IGraphics {
 	public:
@@ -19,6 +20,7 @@ namespace Baukasten {
 		void createWindow( const vec2<int>&, const std::wstring& );
 		void drawCircle( const vec3<float>&, const u32, const Color& );
 		void drawImage( const string&, const vec2<float>&, const vec3<float>& );
+		void drawImage( Image&, const vec2<float>&, const vec3<float>& );
 		void drawLine( const vec3<float>&, const vec3<float>&,
 				const Color&, const float );
 		void drawPoint( const vec3<float>&, const u32, const Color& );

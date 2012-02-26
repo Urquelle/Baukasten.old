@@ -72,7 +72,7 @@ namespace Baukasten {
 		}
 
 		void
-		setTexture( const GLuint tbo )
+		setTbo( const GLuint tbo )
 		{
 			m_tbo = tbo;
 		}
@@ -94,6 +94,12 @@ namespace Baukasten {
 
 			glDisableVertexAttribArray(0);
 			glDisableVertexAttribArray(1);
+		}
+
+		GLuint
+		tbo() const
+		{
+			return m_tbo;
 		}
 
 		GLuint
@@ -142,15 +148,21 @@ Node::setProgram( GLuint program )
 }
 
 void
-Node::setTexture( const GLuint tbo )
+Node::setTbo( const GLuint tbo )
 {
-	m_impl->setTexture( tbo );
+	m_impl->setTbo( tbo );
 }
 
 void
 Node::setVbo( GLuint vbo )
 {
 	m_impl->setVbo( vbo );
+}
+
+GLuint
+Node::tbo() const
+{
+	return m_impl->tbo();
 }
 
 GLuint
@@ -255,5 +267,27 @@ QuadNode::~QuadNode()
 void
 QuadNode::prepare()
 {
+	if ( tbo() ) {
+		glBindBuffer( GL_ARRAY_BUFFER, vbo() );
+		glEnable( GL_TEXTURE_2D );
+		glBindTexture( GL_TEXTURE_2D, tbo() );
+	}
+}
+
+void
+QuadNode::render()
+{
+	if ( tbo() ) {
+		prepare();
+		glBegin( GL_QUADS );
+			glTexCoord2f( 0.0, 0.0 ); glVertex3f( -1.0, -1.0, 0.0 );
+			glTexCoord2f( 0.0, 1.0 ); glVertex3f( -1.0,  1.0, 0.0 );
+			glTexCoord2f( 1.0, 1.0 ); glVertex3f(  1.0,  1.0, 0.0 );
+			glTexCoord2f( 1.0, 0.0 ); glVertex3f(  1.0, -1.0, 0.0 );
+		glEnd();
+		cleanup();
+	} else {
+		Node::render();
+	}
 }
 
