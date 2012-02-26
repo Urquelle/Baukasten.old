@@ -18,17 +18,17 @@ namespace Baukasten {
 		virtual ~Image();
 
 		void       close();
-		u8*        data()      const;
-		vec2<u32>  dim()       const;
-		bool       hasAlpha()  const;
-		u32        height()    const;
-		bool       isOpen()    const;
+		u8*        data() const;
+		vec2<u32>  dim() const;
+		bool       hasAlpha() const;
+		u32        height() const;
+		bool       isOpen() const;
 		bool       isRead() const;
 		string     path() const;
 		void       read();
-		u32        size()      const;
-		ImageType  type()      const;
-		u32        width()     const;
+		u32        size() const;
+		ImageType  type() const;
+		u32        width() const;
 
 	private:
 		BK_PIMPL_PTR(Image);
