@@ -68,7 +68,7 @@ void Game::init()
 	// init main display
 	GameEntity *display = new GameEntity( "entity:display ");
 	display->setForm(
-		new Form2d( "form:display", "media/display.tga", m_graphics )
+		new Form2d( "form:display", "media/display.png", m_graphics )
 	);
 
 	display->form()->setPosition( { 0, 0, 0 } );
