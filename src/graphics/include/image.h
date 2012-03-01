@@ -9,11 +9,6 @@ namespace Baukasten {
 
 	class BAUKASTEN_EXPORT Image {
 	public:
-		enum ImageType {
-			NO_TYPE,
-			PNG, JPEG, GIF
-		};
-
 		explicit Image( const string& );
 		virtual ~Image();
 
@@ -22,12 +17,10 @@ namespace Baukasten {
 		vec2<u32>  dim() const;
 		bool       hasAlpha() const;
 		u32        height() const;
-		bool       isOpen() const;
 		bool       isRead() const;
 		string     path() const;
 		void       read();
 		u32        size() const;
-		ImageType  type() const;
 		u32        width() const;
 
 	private:

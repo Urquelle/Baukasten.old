@@ -129,33 +129,26 @@ public:
 		GLuint tbo;
 		auto t = m_cache.find( image.path() );
 		if ( t == m_cache.end() ) {
-			if ( !image.isRead() )
-				image.read();
+			image.read();
 
 			glGenTextures( 1, &tbo );
 			glBindTexture( GL_TEXTURE_2D, tbo );
-			glPixelStorei( GL_UNPACK_ALIGNMENT, 1 );
 
-			glfwLoadTexture2D( image.path().c_str(), 0 );
+			glTexImage2D(
+				GL_TEXTURE_2D, 0, GL_RGBA,
+				image.width(), image.height(), 0, GL_RGBA,
+				GL_UNSIGNED_BYTE, image.data()
+			);
 
-			glTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT );
-			glTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT );
 			glTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR );
 			glTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR );
 
 			glBindTexture( GL_TEXTURE_2D, 0 );
 
-			//glTexImage2D(
-				//GL_TEXTURE_2D, 0, GL_RGBA8,
-				//image.width(), image.height(), 0, GL_RGBA8,
-				//GL_UNSIGNED_SHORT, image.data()
-			//);
-
 			image.close();
 
 			m_cache[ image.path() ] = tbo;
 		} else {
-			BK_DEBUG( "cache hit on resource: " << image.path() );
 			tbo = t->second;
 		}
 

@@ -22,7 +22,7 @@ add_library( Baukasten SHARED ${model_SRCS} ${core_SRCS} ${audio_SRCS}
 
 set_target_properties( Baukasten PROPERTIES SOVERSION 0.0.1 )
 
-target_link_libraries( Baukasten sigc-2.0 SLB openal png jpeg  alut GL GLEW GLU glfw freetype )
+target_link_libraries( Baukasten sigc-2.0 SLB freeimage openal png jpeg  alut GL GLEW GLU glfw freetype )
 
 install(
 	DIRECTORY audio/

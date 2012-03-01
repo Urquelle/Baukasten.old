@@ -10,38 +10,21 @@ namespace Baukasten {
 	class ImagePrivate {
 	public:
 		ImagePrivate( const string path ) :
-			m_path( path ), m_info( new ImageInfo() )
+			m_info( new ImageInfo() ),
+			m_path( path )
 		{
 			m_info->data = 0;
-			m_handle = fopen( path.c_str(), "rb" );
-			if ( !m_handle )
-				BK_DEBUG( path << " couldn't be opened!" );
-
-			m_type = _type( m_handle );
-			m_isOpen = true;
 		}
 
 		virtual ~ImagePrivate()
 		{
-			if ( m_handle )
-				fclose( m_handle );
-			m_handle = 0;
-
-			if ( m_info->data )
-				delete m_info->data;
-			m_info->data = 0;
+			_free( m_info );
 		}
 
 		void
 		close()
 		{
-			if ( isOpen() ) {
-				fclose( m_handle );
-				m_isOpen = false;
-				m_handle = 0;
-				delete m_info->data;
-				m_info->data = 0;
-			}
+			_free( m_info );
 		}
 
 		u8*
@@ -69,12 +52,6 @@ namespace Baukasten {
 		}
 
 		bool
-		isOpen() const
-		{
-			return m_isOpen;
-		}
-
-		bool
 		isRead() const
 		{
 			return m_info->data != 0;
@@ -90,34 +67,13 @@ namespace Baukasten {
 		read()
 		{
 			if ( isRead() ) return;
-
-			bool result = false;
-
-			switch ( m_type ) {
-			case Image::PNG:
-				result = _readPng( m_handle, m_info );
-				break;
-			case Image::JPEG:
-				result = _readJpeg( m_handle, m_info );
-				break;
-			case Image::GIF:
-				result = _readGif( m_handle, m_info );
-				break;
-			case Image::NO_TYPE:
-				break;
-			}
+			_read( m_path, m_info );
 		}
 
 		u32
 		size() const
 		{
 			return m_info->size;
-		}
-
-		Image::ImageType
-		type() const
-		{
-			return m_type;
 		}
 
 		u32
@@ -127,11 +83,8 @@ namespace Baukasten {
 		}
 
 	private:
-		FILE*				m_handle;
-		Image::ImageType	m_type;
-		string				m_path;
-		bool				m_isOpen;
-		ImageInfo*			m_info;
+		ImageInfo*  m_info;
+		string      m_path;
 	};
 } /* Baukasten */
 
@@ -176,12 +129,6 @@ Image::height() const
 }
 
 bool
-Image::isOpen() const
-{
-	return m_impl->isOpen();
-}
-
-bool
 Image::isRead() const
 {
 	return m_impl->isRead();
@@ -203,12 +150,6 @@ u32
 Image::size() const
 {
 	return m_impl->size();
-}
-
-Image::ImageType
-Image::type() const
-{
-	return m_impl->type();
 }
 
 u32
