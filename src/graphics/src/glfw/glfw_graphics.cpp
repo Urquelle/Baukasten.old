@@ -291,7 +291,6 @@ public:
 	void
 	setWindowSize( const vec2<u32> &size )
 	{
-		BK_DEBUG( "in window resize" );
 		glfwSetWindowSize( (GLsizei) size[BK_X], (GLsizei) size[BK_Y] );
 		glViewport( 0, 0, size[BK_X], size[BK_Y] );
 		m_windowSize = size;
