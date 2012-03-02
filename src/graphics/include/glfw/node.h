@@ -28,6 +28,10 @@ namespace Baukasten {
 		virtual void prepare();
 		virtual void cleanup();
 
+		u32 dataPerVertex() const;
+		u32 indexCount() const;
+		GLenum type() const;
+
 		BK_PIMPL_PTR( Node );
 	};
 

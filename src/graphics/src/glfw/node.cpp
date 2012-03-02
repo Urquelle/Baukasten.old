@@ -108,6 +108,24 @@ namespace Baukasten {
 			return m_vbo;
 		}
 
+		u32
+		dataPerVertex() const
+		{
+			return m_dataPerVertex;
+		}
+
+		u32
+		indexCount() const
+		{
+			return m_indexCount;
+		}
+
+		GLenum
+		type() const
+		{
+			return m_type;
+		}
+
 	private:
 		u32     m_dataPerVertex;
 		u32     m_indexCount;
@@ -175,6 +193,24 @@ void
 Node::cleanup()
 {
 	m_impl->cleanup();
+}
+
+u32
+Node::dataPerVertex() const
+{
+	return m_impl->dataPerVertex();
+}
+
+u32
+Node::indexCount() const
+{
+	return m_impl->indexCount();
+}
+
+GLenum
+Node::type() const
+{
+	return m_impl->type();
 }
 
 // LineNode
