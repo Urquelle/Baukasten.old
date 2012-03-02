@@ -20,6 +20,8 @@ _read( const string &path, ImageInfo *info )
 
 	FREE_IMAGE_FORMAT fif = FreeImage_GetFileType( path.c_str(), 0 );
 	FIBITMAP *image = FreeImage_Load( fif, path.c_str(), 0 );
+
+	// convert image to be of format BGRA
 	image = FreeImage_ConvertTo32Bits( image );
 
 	info->width = FreeImage_GetWidth( image );
@@ -29,6 +31,7 @@ _read( const string &path, ImageInfo *info )
 	u8 *pixels = static_cast<u8*>( FreeImage_GetBits( image ) );
 	info->data = new u8[ info->size ];
 
+	// convert BGRA to RGBA
 	for( int i = 0; i < info->width * info->height; i++ ) {
 		info->data[i*4+0]= pixels[i*4+2];
 		info->data[i*4+1]= pixels[i*4+1];
