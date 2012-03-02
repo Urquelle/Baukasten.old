@@ -161,7 +161,7 @@ public:
 			tbo = t->second;
 		}
 
-		QuadNode *node = new QuadNode( GL_QUADS, 2, 4 );
+		QuadNode *node = new QuadNode( GL_QUADS, 4, 4 );
 
 		GLuint vbo;
 		glGenBuffers( 1, &vbo );
