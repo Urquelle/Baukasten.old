@@ -303,11 +303,28 @@ QuadNode::~QuadNode()
 void
 QuadNode::prepare()
 {
-	if ( tbo() ) {
-		glBindBuffer( GL_ARRAY_BUFFER, vbo() );
-		glEnable( GL_TEXTURE_2D );
-		glBindTexture( GL_TEXTURE_2D, tbo() );
-	}
+	glEnable( GL_TEXTURE_2D );
+
+	glBindBuffer( GL_ARRAY_BUFFER, vbo() );
+	glBindTexture( GL_TEXTURE_2D, tbo() );
+
+	glEnableClientState( GL_VERTEX_ARRAY );
+	glEnableClientState( GL_TEXTURE_COORD_ARRAY );
+
+	glVertexPointer( dataPerVertex(), GL_FLOAT, 0, BUFFER_OFFSET( 0 ) );
+	glTexCoordPointer( 4, GL_FLOAT, 0, BUFFER_OFFSET( dataPerVertex() * indexCount() * 4 ) );
+}
+
+void
+QuadNode::cleanup()
+{
+	glDisable( GL_TEXTURE_2D );
+
+	glBindBuffer( GL_ARRAY_BUFFER, 0 );
+	glBindTexture( GL_TEXTURE_2D, 0 );
+
+	glDisableClientState( GL_VERTEX_ARRAY );
+	glDisableClientState( GL_TEXTURE_COORD_ARRAY );
 }
 
 void
@@ -315,12 +332,7 @@ QuadNode::render()
 {
 	if ( tbo() ) {
 		prepare();
-		glBegin( GL_QUADS );
-			glTexCoord2f( 0.0, 0.0 ); glVertex3f( -1.0, -1.0, 0.0 );
-			glTexCoord2f( 0.0, 1.0 ); glVertex3f( -1.0,  1.0, 0.0 );
-			glTexCoord2f( 1.0, 1.0 ); glVertex3f(  1.0,  1.0, 0.0 );
-			glTexCoord2f( 1.0, 0.0 ); glVertex3f(  1.0, -1.0, 0.0 );
-		glEnd();
+		glDrawArrays( type(), 0, indexCount() );
 		cleanup();
 	} else {
 		Node::render();

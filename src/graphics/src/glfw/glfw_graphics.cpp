@@ -116,14 +116,23 @@ public:
 		// transform to normalised [-1.0, 1.0]
 		float xMin = ( pos[BK_X] - xDiv ) / xDiv;
 		float xMax = ( pos[BK_X] + size[BK_WIDTH] - xDiv ) / xDiv;
-		float yMin = ( pos[BK_Y] - yDiv ) / yDiv;
-		float yMax = ( pos[BK_Y] + size[BK_HEIGHT] - yDiv ) / yDiv;
+		float yMin = ( pos[BK_Y] - yDiv ) / yDiv * -1.0f;
+		float yMax = ( pos[BK_Y] + size[BK_HEIGHT] - yDiv ) / yDiv * -1.0f;
 
 		GLfloat vertices[] = {
+			// vertex coordinates
 			xMin, yMin, pos[BK_Z], 1.0f,
 			xMax, yMin, pos[BK_Z], 1.0f,
 			xMax, yMax, pos[BK_Z], 1.0f,
-			xMin, yMax, pos[BK_Z], 1.0f
+			xMin, yMax, pos[BK_Z], 1.0f,
+
+			// texture coordinates
+			// ** we have to remap the coordinates here somewhat, as the
+			// ** y vertex coordinates are mirrored by the -1.0 multiplication
+			0.0f, 1.0f, 0.0f,      1.0f,
+			1.0f, 1.0f, 0.0f,      1.0f,
+			1.0f, 0.0f, 0.0f,      1.0f,
+			0.0f, 0.0f, 0.0f,      1.0f
 		};
 
 		GLuint tbo;

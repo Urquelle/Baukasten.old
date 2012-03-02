@@ -44,6 +44,7 @@ namespace Baukasten {
 
 	private:
 		void prepare();
+		void cleanup();
 	};
 
 	class LineNode : public Node {
