@@ -17,8 +17,8 @@ link_directories(
 )
 
 add_definitions( -DEXPORT_LIB=1 -Wall )
-add_library( Baukasten SHARED ${model_SRCS} ${core_SRCS} ${audio_SRCS}
-	${graphics_SRCS} ${input_SRCS} ${io_SRCS} ${util_SRCS} )
+add_library( Baukasten SHARED ${audio_SRCS} ${core_SRCS} ${graphics_SRCS}
+	${input_SRCS} ${io_SRCS} ${model_SRCS} ${util_SRCS} )
 
 set_target_properties( Baukasten PROPERTIES SOVERSION 0.0.1 )
 
