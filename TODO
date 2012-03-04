@@ -1,14 +1,20 @@
+-- TODO v-0.2 --
+* implement serialisation
+* implement save/load functionality
+
 -- TODO v-0.1 --
 * document core/input/graphics classes
 * add and document audio interface to coreservices
 * graphics: implement font/text rendering
-* graphics: implement image rendering
-* code: use type-rich APIs
+* switch bindings to swig
 
 -- TODO --
 * implement example game
+* implement unit tests
 
 -- DONE --
+* refactor header files
+* graphics: implement image rendering
 * define IGraphics interface.
 * define IInput interface.
 * move lib/ directory to project root.
