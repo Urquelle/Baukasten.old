@@ -294,7 +294,8 @@ public:
 	void
 	setWindowCaption( const wstring &title )
 	{
-		glfwSetWindowTitle( _toString( title ).c_str() );
+		m_title = _toString( title );
+		glfwSetWindowTitle( m_title.c_str() );
 	}
 
 	void
@@ -306,15 +307,16 @@ public:
 	}
 
 private:
+	GLCache        m_cache;
 	Font*          m_font;
 	float          m_fps;
 	u32            m_frames;
 	GlfwGraphics*  m_master;
 	vector<Node*>  m_nodes;
-	GLCache        m_cache;
 	GLuint         m_program;
 	float          m_t0;
 	float          m_t1;
+	string         m_title;
 	GLuint         m_vao;
 	vec2<u32>      m_windowSize;
 };
