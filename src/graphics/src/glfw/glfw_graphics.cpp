@@ -110,14 +110,11 @@ public:
 	void
 	drawImage( Image &image, const vec2<float> &size, const vec3<float> &pos )
 	{
-		float xDiv = m_windowSize[BK_WIDTH] / 2,
-			yDiv = m_windowSize[BK_HEIGHT] / 2;
-
 		// transform to normalised [-1.0, 1.0]
-		float xMin = ( pos[BK_X] - xDiv ) / xDiv;
-		float xMax = ( pos[BK_X] + size[BK_WIDTH] - xDiv ) / xDiv;
-		float yMin = ( pos[BK_Y] - yDiv ) / yDiv * -1.0f;
-		float yMax = ( pos[BK_Y] + size[BK_HEIGHT] - yDiv ) / yDiv * -1.0f;
+		float xMin = _normalise( m_windowSize[BK_WIDTH], pos[BK_X] );
+		float xMax = _normalise( m_windowSize[BK_WIDTH], pos[BK_X] + size[BK_WIDTH] );
+		float yMin = _normalise( m_windowSize[BK_HEIGHT], pos[BK_Y] ) * -1;
+		float yMax = _normalise( m_windowSize[BK_HEIGHT], pos[BK_Y] + size[BK_HEIGHT] ) * -1;
 
 		GLfloat vertices[] = {
 			// vertex coordinates
@@ -217,10 +214,8 @@ public:
 		float r, g, b, a;
 		c.rgbF( &r, &g, &b, &a );
 
-		float xDiv = m_windowSize[BK_WIDTH] / 2,
-			  yDiv = m_windowSize[BK_HEIGHT] / 2;
-		float x = ( pos[BK_X] - xDiv ) / xDiv;
-		float y = ( pos[BK_Y] - yDiv ) / yDiv * -1;
+		float x = _normalise( m_windowSize[BK_WIDTH], pos[BK_X] );
+		float y = _normalise( m_windowSize[BK_HEIGHT], pos[BK_Y] ) * -1;
 
 		GLfloat vertices[] = {
 			x, y, pos[BK_Z], 1.0f,
@@ -248,13 +243,11 @@ public:
 		float r, g, b, a;
 		c.rgbF( &r, &g, &b, &a );
 
-		float xDiv = m_windowSize[BK_X] / 2, yDiv = m_windowSize[BK_Y] / 2;
-
 		// transform display space coordinates to clip space
-		float xMin = ( pos[BK_X] - xDiv ) / xDiv;
-		float xMax = ( pos[BK_X] + size[BK_WIDTH] - xDiv ) / xDiv;
-		float yMin = ( pos[BK_Y] - yDiv ) / yDiv * -1;
-		float yMax = ( pos[BK_Y] + size[BK_HEIGHT] - yDiv ) / yDiv * -1;
+		float xMin = _normalise( m_windowSize[BK_WIDTH], pos[BK_X] );
+		float xMax = _normalise( m_windowSize[BK_WIDTH], pos[BK_X] + size[BK_WIDTH] );
+		float yMin = _normalise( m_windowSize[BK_HEIGHT], pos[BK_Y] ) * -1;
+		float yMax = _normalise( m_windowSize[BK_HEIGHT], pos[BK_Y] + size[BK_HEIGHT] ) * -1;
 
 		GLfloat vertices[] = {
 			xMin, yMin, pos[BK_Z], 1.0f,
