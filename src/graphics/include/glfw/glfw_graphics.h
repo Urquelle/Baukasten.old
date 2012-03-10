@@ -25,7 +25,7 @@ namespace Baukasten {
 				const Color&, const float );
 		void drawPoint( const vec3<float>&, const u32, const Color& );
 		void drawRect( const vec2<float>&, const vec3<float>&, const Color& );
-		void drawText( const wchar_t*, const vec3<float>&, const Color& );
+		void drawText( const string&, const vec3<float>&, const Color& );
 		float fps() const;
 		int init( CoreServices* );
 		void render( Form* );

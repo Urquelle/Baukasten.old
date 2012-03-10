@@ -1,3 +1,4 @@
+#include "Font"
 #include "GraphicsImpl"
 #include "GraphicsInterface"
 #include "IGraphics"

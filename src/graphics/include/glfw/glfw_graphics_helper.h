@@ -1,6 +1,7 @@
 #ifndef GLFW_GRAPHICS_FUNCTIONS_H_SRTQPXNJ
 #define GLFW_GRAPHICS_FUNCTIONS_H_SRTQPXNJ
 
+#include "graphics/Font"
 #include "graphics/Global"
 
 #include <GL/glew.h>
@@ -31,6 +32,12 @@ const char *_bk_fragment_shader (
 	"   gl_FragColor = gl_Color;\n"
 	"}\n"
 );
+
+float _normalise( const int size, const float i )
+{
+	float div = size / 2;
+	return ( i - div ) / div;
+}
 
 void GLFWCALL
 _resize( int width, int height )

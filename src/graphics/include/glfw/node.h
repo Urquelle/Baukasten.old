@@ -1,6 +1,7 @@
 #ifndef NODE_H_AROBCMPN
 #define NODE_H_AROBCMPN
 
+#include "core/Color"
 #include "core/Math"
 #include "core/Color"
 #include "graphics/Global"
@@ -79,6 +80,19 @@ namespace Baukasten {
 		void prepare();
 
 		u32 m_size;
+	};
+
+	class IFont;
+	class TextNodePrivate;
+	class TextNode : public Node {
+	public:
+		TextNode( IFont*, const string&, const vec3<float>&, const Color& );
+		virtual ~TextNode();
+
+		void render();
+
+	private:
+		BK_PIMPL_PTR( TextNode );
 	};
 } /* Baukasten */
 

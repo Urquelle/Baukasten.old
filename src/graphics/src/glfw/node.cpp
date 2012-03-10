@@ -1,6 +1,7 @@
 #include "graphics/include/glfw/node.h"
 
 #include "core/Debug"
+#include "graphics/Font"
 #include "graphics/include/glfw/gl_texture.h"
 
 #include <GL/glu.h>
@@ -336,5 +337,53 @@ QuadNode::render()
 	} else {
 		Node::render();
 	}
+}
+
+// TextNodePrivate
+class Baukasten::TextNodePrivate {
+public:
+	TextNodePrivate( IFont *font, const string &text, const vec3<float> &pos,
+			const Color &c ) :
+		m_font( font ),
+		m_text( text ),
+		m_pos( pos ),
+		m_color( c )
+	{
+	}
+
+	~TextNodePrivate()
+	{
+	}
+
+	void
+	render()
+	{
+		m_font->render( m_text, m_pos, m_color );
+	}
+
+private:
+	IFont*       m_font;
+	string       m_text;
+	vec3<float>  m_pos;
+	Color        m_color;
+};
+
+// TextNode
+TextNode::TextNode( IFont *font, const string &text,
+		const vec3<float> &pos, const Color &c ) :
+	Node( 0, 0, 0 ),
+	m_impl( new TextNodePrivate( font, text, pos, c ) )
+{
+}
+
+TextNode::~TextNode()
+{
+	delete m_impl;
+}
+
+void
+TextNode::render()
+{
+	m_impl->render();
 }
 

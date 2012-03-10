@@ -1,7 +1,7 @@
 #include "graphics/include/glfw/glfw_graphics.h"
 
 #include "core/CoreServices"
-#include "core/Font"
+#include "graphics/Font"
 #include "graphics/Image"
 #include "model/Form"
 
@@ -16,7 +16,7 @@ typedef map<string, GLuint> GLCache;
 class Baukasten::GlfwGraphicsPrivate {
 public:
 	GlfwGraphicsPrivate( GlfwGraphics *master ) :
-		m_font( new Font() ),
+		m_font( 0 ),
 		m_master( master ),
 		m_program( 0 ),
 		m_vao( 0 )
@@ -35,6 +35,8 @@ public:
 
 		result = _init();
 		result = _initProgram( m_program );
+
+		m_font = new Font( "/usr/share/fonts/corefonts/georgia.ttf" );
 
 		m_master->m_initialised = true;
 
@@ -275,13 +277,10 @@ public:
 	}
 
 	void
-	drawText( const wchar_t *text, const vec3<float> &pos, const Color &c )
+	drawText( const string &text, const vec3<float> &pos, const Color &c )
 	{
-		m_font->render(
-			pos,
-			_toString( wstring(text) ).c_str(),
-			c
-		);
+		TextNode *node = new TextNode( m_font, text, pos, c );
+		m_nodes.push_back( node );
 	}
 
 	void
@@ -392,7 +391,7 @@ GlfwGraphics::drawRect( const vec2<float> &size,
 }
 
 void
-GlfwGraphics::drawText( const wchar_t *text, const vec3<float> &pos,
+GlfwGraphics::drawText( const string &text, const vec3<float> &pos,
 		const Color &color )
 {
 	m_impl->drawText( text, pos, color );

@@ -1,0 +1,4 @@
+#include "include/glfw/gl_font.h"
+namespace Baukasten {
+typedef GlFont Font;
+}
