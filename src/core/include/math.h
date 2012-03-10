@@ -1,7 +1,7 @@
 #ifndef STRUCTURES_H_IESIJQDA
 #define STRUCTURES_H_IESIJQDA
 
-#include "model/Global"
+#include "core/Global"
 
 namespace Baukasten {
 
