@@ -52,17 +52,17 @@ void FieldForm::render()
 		// draw already occupied blocks
 		if ( SET == k ) {
 			graphics->drawRect( size, {x, y, 0.0}, cSet );
-			graphics->drawText( L"1", {x + 20, y + 20, 0.0}, cControl );
+			graphics->drawText( "1", {x + 20, y + 20, 0.0}, cControl );
 		}
 
 		// draw falling blocks
 		if ( IN_MOTION == k ) {
 			graphics->drawRect( size, {x, y, 0.0}, cInMotion );
-			graphics->drawText( L"2", {x + 20, y + 20, 0.0}, cControl );
+			graphics->drawText( "2", {x + 20, y + 20, 0.0}, cControl );
 		}
 
 		if ( CLEAN == k ) {
-			graphics->drawText( L"0", {x + 20, y + 20, 0.0}, cControl );
+			graphics->drawText( "0", {x + 20, y + 20, 0.0}, cControl );
 		}
 
 		// draw + on the field

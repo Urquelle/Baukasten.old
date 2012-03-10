@@ -21,12 +21,12 @@ ScoreForm::render()
 {
 	int score = state<StateInt*>( "state:score" )->value();
 
-	std::wstringstream sScore;
+	std::stringstream sScore;
 	sScore << score;
 
 	Color color( 128, 0, 0, 255 );
 
 	// draw score
-	graphics()->drawText( sScore.str().c_str(), position(), color );
+	graphics()->drawText( sScore.str(), position(), color );
 }
 
