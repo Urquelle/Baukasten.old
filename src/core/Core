@@ -1,3 +1,5 @@
 #include "Color"
 #include "CoreServices"
+#include "Debug"
+#include "Global"
 #include "Math"

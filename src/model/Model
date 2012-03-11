@@ -3,8 +3,6 @@
 #include "ActionLua"
 #include "ActionManager"
 #include "Bindings"
-#include "CoreServices"
-#include "Debug"
 #include "Drawable"
 #include "Entity"
 #include "EntityManager"

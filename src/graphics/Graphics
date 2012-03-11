@@ -1,5 +1,7 @@
 #include "Font"
+#include "Global"
 #include "GraphicsImpl"
 #include "GraphicsInterface"
+#include "IFont"
 #include "IGraphics"
 #include "Image"
