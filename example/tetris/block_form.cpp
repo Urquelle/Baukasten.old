@@ -22,7 +22,6 @@ BlockForm::render()
 {
 	auto matrix = state<StateIntVector*>( "state:matrix1" )->values();
 	Color cSet( 255, 0, 0, 255 );
-	Color cClean( 255, 255, 255, 255 );
 
 	int x = position()[BK_X];
 	int x_offset = 0;
