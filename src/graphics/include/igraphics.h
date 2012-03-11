@@ -9,6 +9,7 @@
 namespace Baukasten {
 	class CoreServices;
 	class Form;
+	class IFont;
 	class Image;
 
 	class BAUKASTEN_EXPORT IGraphics {
@@ -29,6 +30,8 @@ namespace Baukasten {
 		virtual void drawRect( const vec2<float>&, const vec3<float>&,
 				const Color& ) = 0;
 		virtual void drawText( const string&, const vec3<float>&, const Color& ) = 0;
+		virtual void drawText( IFont*, const string&,
+				const vec3<float>&, const Color& ) = 0;
 		virtual float fps() const = 0;
 		virtual int init( CoreServices* ) = 0;
 		virtual void render( Form* ) = 0;

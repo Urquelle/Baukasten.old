@@ -10,6 +10,7 @@ namespace Baukasten {
 	class CoreServices;
 	class Form;
 	class GlfwGraphicsPrivate;
+	class IFont;
 	class Image;
 
 	class BAUKASTEN_EXPORT GlfwGraphics : public IGraphics {
@@ -26,6 +27,7 @@ namespace Baukasten {
 		void drawPoint( const vec3<float>&, const u32, const Color& );
 		void drawRect( const vec2<float>&, const vec3<float>&, const Color& );
 		void drawText( const string&, const vec3<float>&, const Color& );
+		void drawText( IFont*, const string&, const vec3<float>&, const Color& );
 		float fps() const;
 		int init( CoreServices* );
 		void render( Form* );

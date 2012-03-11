@@ -279,7 +279,13 @@ public:
 	void
 	drawText( const string &text, const vec3<float> &pos, const Color &c )
 	{
-		TextNode *node = new TextNode( m_font, text, pos, c );
+		drawText( m_font, text, pos, c );
+	}
+
+	void
+	drawText( IFont *font, const string &text, const vec3<float> &pos, const Color &c )
+	{
+		TextNode *node = new TextNode( font, text, pos, c );
 		m_nodes.push_back( node );
 	}
 
@@ -395,6 +401,13 @@ GlfwGraphics::drawText( const string &text, const vec3<float> &pos,
 		const Color &color )
 {
 	m_impl->drawText( text, pos, color );
+}
+
+void
+GlfwGraphics::drawText( IFont *font, const string &text, const vec3<float> &pos,
+		const Color &color )
+{
+	m_impl->drawText( font, text, pos, color );
 }
 
 float
