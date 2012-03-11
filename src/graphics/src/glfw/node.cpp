@@ -262,6 +262,8 @@ LineNode::cleanup()
 	glDisable( GL_LINE_STIPPLE );
 }
 
+// TODO: implement render method in order for prepare to take effect.
+
 // PointNode
 PointNode::PointNode( GLenum type, const u32 dataPerVertex, const u32 indexCount ) :
 	Node( type, dataPerVertex, indexCount )
@@ -289,6 +291,8 @@ PointNode::prepare()
 {
 	glPointSize( m_size );
 }
+
+// TODO: implement render method in order for prepare to take effect.
 
 // QuadNode
 QuadNode::QuadNode( GLenum type, const u32 dataPerVertex, const u32 indexCount ) :

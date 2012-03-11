@@ -36,6 +36,7 @@ public:
 		result = _init();
 		result = _initProgram( m_program );
 
+		// TODO: create and use internal font here.
 		m_font = new Font( "/usr/share/fonts/corefonts/georgia.ttf" );
 
 		m_master->m_initialised = true;
