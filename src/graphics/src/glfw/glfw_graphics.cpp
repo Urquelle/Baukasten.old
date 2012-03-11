@@ -87,12 +87,12 @@ public:
 	void
 	drawCircle( const vec3<float> &pos, const u32 radius, const Color &c )
 	{
-		glBegin(GL_TRIANGLE_FAN);
+		glBegin( GL_TRIANGLE_FAN );
 			glVertex2f( pos[BK_X], pos[BK_Y] );
 			for ( float i = 0; i <= 2 * M_PI + 0.1f; i += 0.1f ) {
 				glVertex2f(
-					pos[BK_X] + sin(i) * radius,
-					pos[BK_Y] + cos(i) * radius
+					pos[BK_X] + sin( i ) * radius,
+					pos[BK_Y] + cos( i ) * radius
 				);
 			}
 		glEnd();
@@ -185,9 +185,9 @@ public:
 
 		float xDiv = m_windowSize[BK_X] / 2, yDiv = m_windowSize[BK_Y] / 2;
 		float fromX = ( from[BK_X] - xDiv ) / xDiv;
-		float fromY = ( from[BK_Y] - yDiv ) / yDiv;
+		float fromY = ( from[BK_Y] - yDiv ) / yDiv * -1;
 		float toX = ( to[BK_X] - xDiv ) / xDiv;
-		float toY = ( to[BK_Y] - yDiv ) / yDiv;
+		float toY = ( to[BK_Y] - yDiv ) / yDiv * -1;
 
 		GLfloat vertices[] = {
 			fromX, fromY, from[BK_Z], 1.0f,
