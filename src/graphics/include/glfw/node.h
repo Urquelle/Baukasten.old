@@ -2,6 +2,7 @@
 #define NODE_H_AROBCMPN
 
 #include "core/Math"
+#include "core/Color"
 #include "graphics/Global"
 
 #include <GL/glew.h>

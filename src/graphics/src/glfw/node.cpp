@@ -6,7 +6,6 @@
 #include <GL/glu.h>
 #include <GL/glext.h>
 
-
 using namespace Baukasten;
 
 namespace Baukasten {
