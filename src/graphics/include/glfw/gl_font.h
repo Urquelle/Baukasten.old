@@ -9,9 +9,8 @@
 namespace Baukasten {
 	class GlFontPrivate;
 
-	class GlFont : public IFont {
+	class BAUKASTEN_EXPORT GlFont : public IFont {
 	public:
-		GlFont();
 		GlFont( const string& );
 		GlFont( const string&, const u32 );
 
@@ -19,6 +18,12 @@ namespace Baukasten {
 
 		virtual void render( const string&,
 				const vec3<float>&, const Color& );
+
+		virtual void setSize( const u32 );
+		virtual u32 size() const;
+
+		virtual void setFont( const string& );
+		virtual string font() const;
 
 	private:
 		BK_PIMPL_PTR( GlFont );
