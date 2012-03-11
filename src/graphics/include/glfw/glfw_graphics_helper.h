@@ -157,20 +157,5 @@ _computeFps( float &t0, float &t1, u32 &frames, float &fps )
 	frames++;
 }
 
-GlTexture*
-_texture( const string &source, vector<GlTexture*> *textures )
-{
-	GlTexture *tex = 0;
-	for ( s32 i = 0; i < textures->size(); ++i ) {
-		GlTexture *t = textures->at(i);
-		if ( t && t->source() == source ) {
-			tex = t;
-			break;
-		}
-	}
-
-	return tex;
-}
-
 #endif /* end of include guard: GLFW_GRAPHICS_FUNCTIONS_H_SRTQPXNJ */
 
