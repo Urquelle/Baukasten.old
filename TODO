@@ -5,7 +5,6 @@
 -- TODO v-0.1 --
 * document core/input/graphics classes
 * add and document audio interface to coreservices
-* graphics: implement font/text rendering
 * switch bindings to swig
 
 -- TODO --
@@ -13,6 +12,7 @@
 * implement unit tests
 
 -- DONE --
+* graphics: implement font/text rendering
 * refactor header files
 * graphics: implement image rendering
 * define IGraphics interface.
