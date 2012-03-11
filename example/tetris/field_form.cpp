@@ -3,6 +3,7 @@
 #include "constants.h"
 
 #include "core/Color"
+#include "graphics/Font"
 #include "graphics/IGraphics"
 #include "model/GenericState"
 
@@ -14,7 +15,8 @@ const int FIELD_WIDTH = 12;
 const int BLOCK_WIDTH = 4;
 
 FieldForm::FieldForm( const string &id, IGraphics *graphics ) :
-	Form( id, graphics )
+	Form( id, graphics ),
+	m_font( new Font( "/usr/share/fonts/corefonts/arial.ttf", 10 ) )
 {
 }
 
@@ -52,17 +54,17 @@ void FieldForm::render()
 		// draw already occupied blocks
 		if ( SET == k ) {
 			graphics->drawRect( size, {x, y, 0.0}, cSet );
-			graphics->drawText( "1", {x + 20, y + 20, 0.0}, cControl );
+			graphics->drawText( m_font, "1", {x + 20, y + 20, 0.0}, cControl );
 		}
 
 		// draw falling blocks
 		if ( IN_MOTION == k ) {
 			graphics->drawRect( size, {x, y, 0.0}, cInMotion );
-			graphics->drawText( "2", {x + 20, y + 20, 0.0}, cControl );
+			graphics->drawText( m_font, "2", {x + 20, y + 20, 0.0}, Color( 0, 0, 0, 255 ) );
 		}
 
 		if ( CLEAN == k ) {
-			graphics->drawText( "0", {x + 20, y + 20, 0.0}, cControl );
+			graphics->drawText( m_font, "0", {x + 20, y + 20, 0.0}, cControl );
 		}
 
 		// draw + on the field

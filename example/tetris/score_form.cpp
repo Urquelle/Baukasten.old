@@ -1,14 +1,16 @@
 #include "score_form.h"
 
-#include "model/GenericState"
+#include "graphics/Font"
 #include "graphics/IGraphics"
+#include "model/GenericState"
 
 #include <sstream>
 
 using namespace Baukasten;
 
 ScoreForm::ScoreForm( const string &id, IGraphics *graphics ) :
-	Form( id, graphics )
+	Form( id, graphics ),
+	m_font( new Font( "/usr/share/fonts/corefonts/arial.ttf", 20 ) )
 {
 }
 
@@ -22,11 +24,11 @@ ScoreForm::render()
 	int score = state<StateInt*>( "state:score" )->value();
 
 	std::stringstream sScore;
-	sScore << score;
+	sScore << "Your Score: " << score;
 
 	Color color( 128, 0, 0, 255 );
 
 	// draw score
-	graphics()->drawText( sScore.str(), position(), color );
+	graphics()->drawText( m_font, sScore.str(), position(), color );
 }
 

@@ -4,6 +4,10 @@
 #include "model/Form"
 #include "model/Global"
 
+namespace Baukasten {
+	class IFont;
+} /* Baukasten */
+
 class ScoreForm : public Baukasten::Form {
 public:
 	ScoreForm( const string&, Baukasten::IGraphics* );
@@ -12,7 +16,7 @@ public:
 	void render();
 
 private:
-	/* data */
+	Baukasten::IFont* m_font;
 };
 
 #endif /* end of include guard: SCORE_FORM_H_MPIAXVNA */
