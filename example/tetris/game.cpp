@@ -26,10 +26,22 @@ Game::Game( const string &id, int argc, char **argv ) :
 	m_argv( argv )
 {
 	addAction( new ActionLua( *this, "action:rotate", "scripts/rotate.lua" ) );
-	addAction( new ActionLambda( *this, "action:moveLeft", &moveLeft ) );
-	addAction( new ActionLambda( *this, "action:moveRight", &moveRight ) );
-	addAction( new ActionLambda( *this, "action:pause", &pauseGame ) );
-	addAction( new ActionLambda( *this, "action:gameOver", &gameOver ) );
+	addAction( new ActionLambda( *this, "action:moveLeft", moveLeft ) );
+	addAction( new ActionLambda( *this, "action:moveRight", moveRight ) );
+
+	addAction( new ActionLambda( *this, "action:pause",
+		([]( Action *action, GameEntity *entity ) {
+			entity->state<StateBool*>( "state:pause" )->setValue(
+				!entity->state<StateBool*>( "state:pause" )->value()
+			);
+		})
+	) );
+
+	addAction( new ActionLambda( *this, "action:gameOver",
+		([]( Action *action, GameEntity *field ) {
+		 	field->dropAction( "action:recalculate" );
+		})
+	) );
 
 	addState( new StateBool( "state:keepRunning", true ) );
 	addState( new StateBool( "state:pause", false ) );
@@ -80,8 +92,8 @@ void Game::init()
 
 	// init playfield
 	GameEntity *field = new GameEntity( "entity:field" );
-	field->addAction( new ActionLambda( *field, "action:recalculate", &recalc, &recalcDone ) );
-	field->addAction( new ActionLambda( *field, "action:clearCompleteRows", &clearCompleteRows ) );
+	field->addAction( new ActionLambda( *field, "action:recalculate", recalc, false ) );
+	field->addAction( new ActionLambda( *field, "action:clearCompleteRows", clearCompleteRows ) );
 	field->addState( new StateInt( "state:column", 0 ) );
 	field->addState( new StateInt( "state:row", 0 ) );
 	field->addState( new StateInt( "state:rows", 18 ) );
@@ -339,7 +351,7 @@ void Game::init()
 	));
 
 	GameEntity *blockGroup = new GameEntity( "entity:group" );
-	blockGroup->addAction( new ActionLambda( *blockGroup, "action:nextBlock", &nextBlock ) );
+	blockGroup->addAction( new ActionLambda( *blockGroup, "action:nextBlock", nextBlock ) );
 	blockGroup->addChild( blockO );
 	blockGroup->addChild( blockZ );
 	blockGroup->addChild( blockS );
@@ -356,7 +368,7 @@ void Game::init()
 	GameEntity *score = new GameEntity( "entity:score" );
 	score->addState( new StateInt( "state:score", 0 ) );
 	score->addState( new StateInt( "state:linesCleared", 0 ) );
-	score->addAction( new ActionLambda( *score, "action:collectPoints", &collectPoints ) );
+	score->addAction( new ActionLambda( *score, "action:collectPoints", collectPoints ) );
 	score->setForm( new ScoreForm( "form:score", m_graphics ) );
 	score->form()->addState( new StateInt( "state:score", 0 ) );
 	score->form()->setPosition( { 800, 300, 0 } );

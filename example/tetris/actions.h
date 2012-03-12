@@ -72,16 +72,6 @@ void setBlockFields( GameEntity *field, int value = SET )
 	}
 }
 
-DoActionFunction pauseGame([]( Action *action, GameEntity *entity ) {
-	entity->state<StateBool*>( "state:pause" )->setValue(
-		!entity->state<StateBool*>( "state:pause" )->value()
-	);
-});
-
-DoActionFunction gameOver([]( Action *action, GameEntity *field ) {
-	field->dropAction( "action:recalculate" );
-});
-
 DoActionFunction nextBlock([]( Action *action, GameEntity *entity ) {
 	string blocks[] = { "block:i", "block:j", "block:z", "block:s", "block:l", "block:t", "block:o" };
 
