@@ -12,18 +12,24 @@ namespace Baukasten {
 
 	class BAUKASTEN_EXPORT ActionLambda : public Action {
 	public:
-		ActionLambda( GameEntity&, const string&, DoActionFunction *doActFunc = 0, DoneFunction *doneFunc = 0 );
+		ActionLambda( GameEntity&, const string&,
+				DoActionFunction doActFunc );
+		ActionLambda( GameEntity&, const string&,
+				DoActionFunction doActFunc, bool );
+		ActionLambda( GameEntity&, const string&,
+				DoActionFunction doActFunc, DoneFunction doneFunc );
+
 		virtual ~ActionLambda();
 
 		bool done() const;
 		void doAction( GameEntity* );
 
-		void setDoActionFunction( DoActionFunction* );
-		void setDoneFunction( DoneFunction* );
+		void setDoActionFunction( DoActionFunction );
+		void setDoneFunction( DoneFunction );
 
 	private:
-		DoActionFunction*	m_doAction;
-		DoneFunction*		m_done;
+		DoActionFunction  m_doAction;
+		DoneFunction      m_done;
 	};
 } /* Baukasten */
 

@@ -4,12 +4,29 @@
 
 using namespace Baukasten;
 
-ActionLambda::ActionLambda(
-		GameEntity &source,
-		const std::string &id,
-		DoActionFunction *doActFunc,
-		DoneFunction *doneFunc
-		) :
+ActionLambda::ActionLambda( GameEntity &source,
+		const string &id, DoActionFunction func ) :
+	Action( source, id ),
+	m_doAction( func )
+{
+	m_done = ([]( const Action* ) {
+		return true;
+	});
+}
+
+ActionLambda::ActionLambda( GameEntity &source,
+		const string &id, DoActionFunction func, bool done ) :
+	Action( source, id ),
+	m_doAction( func )
+{
+	m_done = ([done]( const Action* ) {
+		return done;
+	});
+}
+
+ActionLambda::ActionLambda( GameEntity &source,
+		const string &id, DoActionFunction doActFunc,
+		DoneFunction doneFunc ) :
 	Action( source, id ),
 	m_doAction( doActFunc ),
 	m_done( doneFunc )
@@ -21,16 +38,14 @@ ActionLambda::~ActionLambda()
 }
 
 void
-ActionLambda::setDoActionFunction( DoActionFunction *func )
+ActionLambda::setDoActionFunction( DoActionFunction func )
 {
-	BK_ASSERT( func != 0, "function pointer must not be 0." );
 	m_doAction = func;
 }
 
 void
-ActionLambda::setDoneFunction( DoneFunction *func )
+ActionLambda::setDoneFunction( DoneFunction func )
 {
-	BK_ASSERT( func != 0, "function pointer must not be 0." );
 	m_done = func;
 }
 
@@ -39,13 +54,12 @@ ActionLambda::done() const
 {
 	if ( !m_done )
 		return Action::done();
-	return (*m_done)( this );
+	return m_done( this );
 }
 
 void
 ActionLambda::doAction( GameEntity *entity )
 {
-	BK_ASSERT( m_doAction != 0, "function pointer must not be 0." );
-	(*m_doAction)( this, entity );
+	m_doAction( this, entity );
 }
 
