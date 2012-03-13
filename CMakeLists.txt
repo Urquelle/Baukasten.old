@@ -2,9 +2,11 @@ cmake_minimum_required(VERSION 2.8)
 
 project (Baukasten)
 
-set (Baukasten_VERSION_MAJOR 0)
-set (Baukasten_VERSION_MINOR 1)
+set(LIB_MAJOR 0)
+set(LIB_MINOR 1)
+set(LIB_PATCH 0)
 
+add_definitions( -DLIB_MAJOR=${LIB_MAJOR} -DLIB_MINOR=${LIB_MINOR} -DLIB_PATCH=${LIB_PATCH} )
 set(CMAKE_CXX_FLAGS "-std=gnu++0x")
 
 if( NOT ( CMAKE_BUILD_TYPE STREQUAL Debug ) )
