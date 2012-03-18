@@ -13,15 +13,16 @@ namespace Baukasten {
 		virtual int init( CoreServices* ) = 0;
 		virtual void shutdown() = 0;
 
-		virtual void loadFile( const std::string&, const std::string& ) = 0;
-		virtual void freeResource( const std::string& ) = 0;
+		virtual void loadFile( const string&, const string& ) = 0;
+		virtual void freeResource( const string& ) = 0;
 
-		virtual void play( const std::string& ) = 0;
-		virtual void play( const std::string&, bool ) = 0;
-		virtual void play( const std::string&, int, int, bool ) = 0;
 
-		virtual void pause( const std::string& ) = 0;
-		virtual void stop( const std::string& ) = 0;
+		virtual void play( const string& ) = 0;
+		virtual void play( const string&, bool ) = 0;
+		virtual void play( const string&, u32, u32, bool ) = 0;
+
+		virtual void pause( const string& ) = 0;
+		virtual void stop( const string& ) = 0;
 
 	protected:
 		bool m_initialised;
