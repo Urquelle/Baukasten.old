@@ -370,6 +370,37 @@ QuadNode::outline() const
 	return ( type() == GL_LINE_LOOP );
 }
 
+// PolyNode
+PolyNode::PolyNode( GLenum type, const u32 dataPerVertex, const u32 indexCount ) :
+	Node( type, dataPerVertex, indexCount )
+{
+}
+
+PolyNode::~PolyNode()
+{
+}
+
+void
+PolyNode::render()
+{
+	Node::render();
+}
+
+void
+PolyNode::setOutline( bool outline )
+{
+	if ( outline )
+		setType( GL_LINE_LOOP );
+	else
+		setType( GL_POLYGON );
+}
+
+bool
+PolyNode::outline() const
+{
+	return ( type() == GL_LINE_LOOP );
+}
+
 // TextNodePrivate
 class Baukasten::TextNodePrivate {
 public:

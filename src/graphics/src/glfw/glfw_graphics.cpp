@@ -289,6 +289,46 @@ public:
 	}
 
 	void
+	drawPolygon( const vector<vec3<float>> &vertices,
+			const Color &c, bool outline = true )
+	{
+		float r, g, b, a;
+		c.rgbF( &r, &g, &b, &a );
+
+		vector<float> normVertices;
+
+		// push vertices
+		for (s32 i = 0; i < vertices.size(); ++i) {
+			normVertices.push_back( _normalise( m_windowSize[BK_WIDTH], vertices[i][BK_X] ) );
+			normVertices.push_back( _normalise( m_windowSize[BK_HEIGHT], vertices[i][BK_Y] ) * -1.0 );
+			normVertices.push_back( 0.0 ); // z
+			normVertices.push_back( 1.0 ); // w
+		}
+
+		// push color
+		for (s32 i = 0; i < vertices.size(); ++i ) {
+			normVertices.push_back( r );
+			normVertices.push_back( g );
+			normVertices.push_back( b );
+			normVertices.push_back( a );
+		}
+
+		PolyNode *node = new PolyNode( GL_POLYGON, 4, vertices.size() );
+
+		GLuint vbo;
+		glGenBuffers( 1, &vbo );
+		glBindBuffer( GL_ARRAY_BUFFER, vbo );
+		glBufferData( GL_ARRAY_BUFFER, normVertices.size() * 4, &normVertices[0], GL_DYNAMIC_DRAW );
+		glBindBuffer( GL_ARRAY_BUFFER, 0 );
+
+		node->setProgram( m_program );
+		node->setVbo( vbo );
+		node->setOutline( outline );
+
+		m_nodes.push_back( node );
+	}
+
+	void
 	setWindowCaption( const wstring &title )
 	{
 		m_title = _toString( title );
@@ -386,6 +426,13 @@ GlfwGraphics::drawPoint( const vec3<float> &pos,
 		const u32 size, const Color &color )
 {
 	m_impl->drawPoint( pos, size, color );
+}
+
+void
+GlfwGraphics::drawPolygon( const vector<vec3<float>> &vertices,
+		const Color &c, bool outline )
+{
+	m_impl->drawPolygon( vertices, c, outline );
 }
 
 void

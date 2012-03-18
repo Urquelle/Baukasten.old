@@ -86,6 +86,17 @@ namespace Baukasten {
 		u32 m_size;
 	};
 
+	class PolyNode : public Node {
+	public:
+		PolyNode( GLenum, const u32, const u32 );
+		virtual ~PolyNode();
+
+		void render();
+
+		void setOutline( const bool );
+		bool outline() const;
+	};
+
 	class IFont;
 	class TextNodePrivate;
 	class TextNode : public Node {

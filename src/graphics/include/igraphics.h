@@ -27,6 +27,8 @@ namespace Baukasten {
 		virtual void drawLine( const vec3<float>&, const vec3<float>&,
 				const Color&, const float ) = 0;
 		virtual void drawPoint( const vec3<float>&, const u32, const Color& ) = 0;
+		virtual void drawPolygon( const vector<vec3<float>>&,
+				const Color&, bool outline = false ) = 0;
 		virtual void drawRect( const vec2<float>&, const vec3<float>&,
 				const Color&, bool outline = false ) = 0;
 		virtual void drawText( const string&, const vec3<float>&, const Color& ) = 0;
