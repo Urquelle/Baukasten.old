@@ -237,7 +237,8 @@ public:
 	}
 
 	void
-	drawRect( const vec2<float> &size, const vec3<float> &pos, const Color &c )
+	drawRect( const vec2<float> &size, const vec3<float> &pos,
+			const Color &c, bool outline = false )
 	{
 		float r, g, b, a;
 		c.rgbF( &r, &g, &b, &a );
@@ -269,6 +270,7 @@ public:
 
 		node->setProgram( m_program );
 		node->setVbo( vbo );
+		node->setOutline( outline );
 
 		m_nodes.push_back( node );
 	}
@@ -388,9 +390,9 @@ GlfwGraphics::drawPoint( const vec3<float> &pos,
 
 void
 GlfwGraphics::drawRect( const vec2<float> &size,
-		const vec3<float> &pos, const Color &color )
+		const vec3<float> &pos, const Color &color, bool outline )
 {
-	m_impl->drawRect( size, pos, color );
+	m_impl->drawRect( size, pos, color, outline );
 }
 
 void

@@ -25,7 +25,8 @@ namespace Baukasten {
 		void drawLine( const vec3<float>&, const vec3<float>&,
 				const Color&, const float );
 		void drawPoint( const vec3<float>&, const u32, const Color& );
-		void drawRect( const vec2<float>&, const vec3<float>&, const Color& );
+		void drawRect( const vec2<float>&, const vec3<float>&,
+				const Color&, bool outline = false );
 		void drawText( const string&, const vec3<float>&, const Color& );
 		void drawText( IFont*, const string&, const vec3<float>&, const Color& );
 		float fps() const;

@@ -45,6 +45,9 @@ namespace Baukasten {
 
 		void render();
 
+		void    setOutline( const bool );
+		bool    outline() const;
+
 	private:
 		void prepare();
 		void cleanup();

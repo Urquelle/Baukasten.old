@@ -355,6 +355,21 @@ QuadNode::render()
 	}
 }
 
+void
+QuadNode::setOutline( bool outline )
+{
+	if ( outline )
+		setType( GL_LINE_LOOP );
+	else
+		setType( GL_QUADS );
+}
+
+bool
+QuadNode::outline() const
+{
+	return ( type() == GL_LINE_LOOP );
+}
+
 // TextNodePrivate
 class Baukasten::TextNodePrivate {
 public:
