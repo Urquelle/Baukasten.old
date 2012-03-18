@@ -131,6 +131,15 @@ namespace Baukasten {
 			alSourceStop( data->m_source );
 		}
 
+		void
+		setVolume( const string &id, const float volume )
+		{
+			OpenALData *data = m_buffers[ id ];
+			BK_ASSERT( data != NULL, "nothing with the given id " << id << " could be found!" );
+
+			alSourcef( data->m_source, AL_GAIN, volume );
+		}
+
 	private:
 		ALCdevice_struct*	m_device;
 		ALCcontext_struct*	m_context;
@@ -179,7 +188,12 @@ void
 OpenALAudio::freeResource( const string &id )
 {
 	m_impl->freeResource( id );
+}
 
+void
+OpenALAudio::setVolume( const string &id, const float volume )
+{
+	m_impl->setVolume( id, volume );
 }
 
 void

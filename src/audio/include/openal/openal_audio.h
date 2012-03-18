@@ -19,6 +19,8 @@ namespace Baukasten {
 		void loadFile( const string&, const string& );
 		void freeResource( const string& );
 
+		void setVolume( const string&, const float );
+
 		void play( const string& );
 		void play( const string&, bool );
 		void play( const string&, u32, u32, bool );
