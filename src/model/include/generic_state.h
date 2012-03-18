@@ -24,7 +24,7 @@ namespace Baukasten {
 		{
 		}
 
-		~GenericState()
+		virtual ~GenericState()
 		{
 		}
 
@@ -71,7 +71,7 @@ namespace Baukasten {
 		{
 		}
 
-		~GenericState()
+		virtual ~GenericState()
 		{
 		}
 
