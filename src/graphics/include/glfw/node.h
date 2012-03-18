@@ -33,6 +33,7 @@ namespace Baukasten {
 		u32 dataPerVertex() const;
 		u32 indexCount() const;
 		GLenum type() const;
+		void setType( GLenum );
 
 		BK_PIMPL_PTR( Node );
 	};

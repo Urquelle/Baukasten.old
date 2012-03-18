@@ -126,6 +126,12 @@ namespace Baukasten {
 			return m_type;
 		}
 
+		void
+		setType( GLenum type )
+		{
+			m_type = type;
+		}
+
 	private:
 		u32     m_dataPerVertex;
 		u32     m_indexCount;
@@ -211,6 +217,12 @@ GLenum
 Node::type() const
 {
 	return m_impl->type();
+}
+
+void
+Node::setType( GLenum type )
+{
+	m_impl->setType( type );
 }
 
 // LineNode
