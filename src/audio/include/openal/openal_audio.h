@@ -4,13 +4,9 @@
 #include "audio/Global"
 #include "audio/IAudio"
 
-struct ALCdevice_struct;
-struct ALCcontext_struct;
-
 namespace Baukasten {
 
-	class OpenALData;
-	typedef map<const string, OpenALData*> BufferMap;
+	class OpenALAudioPrivate;
 
 	class OpenALAudio : public IAudio {
 	public:
@@ -25,17 +21,13 @@ namespace Baukasten {
 
 		void play( const string& );
 		void play( const string&, bool );
-		void play( const string&, int, int, bool );
+		void play( const string&, u32, u32, bool );
 
 		void pause( const string& );
 		void stop( const string& );
 
 	private:
-		ALCdevice_struct*	m_device;
-		ALCcontext_struct*	m_context;
-		BufferMap			m_buffers;
-		int					m_argc;
-		char**				m_argv;
+		BK_PIMPL_PTR( OpenALAudio );
 	};
 } /* Baukasten */
 
