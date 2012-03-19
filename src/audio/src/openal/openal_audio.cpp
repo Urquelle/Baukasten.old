@@ -156,7 +156,7 @@ OpenALAudio::~OpenALAudio()
 int
 OpenALAudio::init( CoreServices *services )
 {
-	m_impl->init( services->argumentsCount(), services->arguments() );
+	m_impl->init( services->argc(), services->argv() );
 	m_initialised = true;
 	return 1;
 }

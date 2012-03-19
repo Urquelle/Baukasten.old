@@ -20,8 +20,8 @@ namespace Baukasten {
 		IInput*		inputService() const;
 		IGraphics*	videoService() const;
 
-		int			argumentsCount();
-		char**		arguments() const;
+		int         argc();
+		char**      argv() const;
 
 	private:
 		CoreServices();

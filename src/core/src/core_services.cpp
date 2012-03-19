@@ -67,13 +67,13 @@ CoreServices::videoService() const
 }
 
 int
-CoreServices::argumentsCount()
+CoreServices::argc()
 {
 	return m_argc;
 }
 
 char**
-CoreServices::arguments() const
+CoreServices::argv() const
 {
 	return m_argv;
 }
