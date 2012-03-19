@@ -9,9 +9,6 @@
 
 using namespace Baukasten;
 
-struct ALCdevice_struct;
-struct ALCcontext_struct;
-
 namespace Baukasten {
 
 	struct OpenALData {
@@ -141,11 +138,9 @@ namespace Baukasten {
 		}
 
 	private:
-		ALCdevice_struct*	m_device;
-		ALCcontext_struct*	m_context;
-		BufferMap			m_buffers;
-		int					m_argc;
-		char**				m_argv;
+		ALCdevice*   m_device;
+		ALCcontext*  m_context;
+		BufferMap    m_buffers;
 	};
 }
 
