@@ -16,9 +16,9 @@ namespace Baukasten {
 		void init( int, char** );
 		void shutdown();
 
-		IAudio*		audioService() const;
-		IInput*		inputService() const;
-		IGraphics*	videoService() const;
+		IAudio*     audioService() const;
+		IInput*     inputService() const;
+		IGraphics*  videoService() const;
 
 		int         argc();
 		char**      argv() const;
@@ -26,12 +26,11 @@ namespace Baukasten {
 	private:
 		CoreServices();
 
-		IAudio*		m_audio;
-		IGraphics*	m_graphics;
-		IInput*		m_input;
-
-		int			m_argc;
-		char**		m_argv;
+		IAudio*     m_audio;
+		IGraphics*  m_graphics;
+		IInput*     m_input;
+		int         m_argc;
+		char**      m_argv;
 	};
 } /* Baukasten */
 
