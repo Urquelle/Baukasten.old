@@ -56,34 +56,36 @@ namespace Baukasten {
 		T m_value;
 	};
 
-	template<class T>
-	class BAUKASTEN_EXPORT GenericState<vector<T>> : public State {
+	template<template<class, class> class V, class T>
+	class BAUKASTEN_EXPORT GenericStateCollection : public State {
+		typedef V<T, allocator<T>> Container;
+		typedef GenericStateCollection<V,T> ThisType;
 	public:
 
-		GenericState( const string &id ) :
+		GenericStateCollection( const string &id ) :
 			State( id )
 		{
 		}
 
-		GenericState( const string &id, vector<T> values ) :
+		GenericStateCollection( const string &id, Container values ) :
 			State( id ),
 			m_values( values )
 		{
 		}
 
-		virtual ~GenericState()
+		virtual ~GenericStateCollection()
 		{
 		}
 
 		T value( const s32 i ) const
 		{
 			if ( m_intState )
-				return ( static_cast<GenericState<vector<T>>*>( m_intState ) )->value( i );
+				return ( static_cast<ThisType*>( m_intState ) )->value( i );
 
 			return m_values.at( i );
 		}
 
-		vector<T> values() const
+		Container values() const
 		{
 			return m_values;
 		}
@@ -111,7 +113,7 @@ namespace Baukasten {
 			onChange().emit( this );
 		}
 
-		void setValues( vector<T> values )
+		void setValues( Container values )
 		{
 			if ( m_intState )
 				m_intState = 0;
@@ -119,29 +121,29 @@ namespace Baukasten {
 			onChange().emit( this );
 		}
 
-		void setValues( GenericState<vector<T>> *state )
+		void setValues( ThisType *state )
 		{
 			m_values = state->values();
 		}
 
-		GenericState<vector<T>>* pack()
+		ThisType* pack()
 		{
-			GenericState<vector<T>> *newState = new GenericState<vector<T>>( id() );
+			ThisType *newState = new ThisType( id() );
 			newState->m_intState = this;
 			return newState;
 		}
 
 	private:
-		vector<T> m_values;
+		V<T, allocator<T>> m_values;
 	};
 
 	// typedef some often used genericstates
-	typedef GenericState<s32>				StateInt;
-	typedef GenericState<float>				StateFloat;
-	typedef GenericState<string>			StateString;
-	typedef GenericState<bool>				StateBool;
-	typedef GenericState<vector<string>>	StateStringVector;
-	typedef GenericState<vector<int>>		StateIntVector;
+	typedef  GenericState<s32>                      StateInt;
+	typedef  GenericState<float>                    StateFloat;
+	typedef  GenericState<string>                   StateString;
+	typedef  GenericState<bool>                     StateBool;
+	typedef  GenericStateCollection<vector,string>  StateStringVector;
+	typedef  GenericStateCollection<vector,int>     StateIntVector;
 } /* Baukasten */
 
 #endif /* end of include guard: GENERIC_STATE_7VBP3DTZ */
