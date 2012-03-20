@@ -144,6 +144,7 @@ namespace Baukasten {
 	typedef  GenericState<bool>                     StateBool;
 	typedef  GenericStateCollection<vector,string>  StateStringVector;
 	typedef  GenericStateCollection<vector,int>     StateIntVector;
+	typedef  GenericStateCollection<vector,float>   StateFloatVector;
 } /* Baukasten */
 
 #endif /* end of include guard: GENERIC_STATE_7VBP3DTZ */
