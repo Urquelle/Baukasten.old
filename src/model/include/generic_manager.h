@@ -7,7 +7,6 @@
 #include "model/State"
 
 namespace Baukasten {
-	using namespace std;
 
 	/*! \defgroup manager Manager Classes */
 
