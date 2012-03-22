@@ -20,7 +20,7 @@ namespace Baukasten {
 	 * \tparam T class to use as second parameter of the map.
 	 */
 	template<class T>
-	class GenericManager {
+	class BAUKASTEN_EXPORT GenericManager {
 	public:
 		typedef map<string, shared_ptr<T>> TMap;
 
