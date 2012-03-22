@@ -58,7 +58,7 @@ namespace Baukasten {
 
 	template<template<class, class> class V, class T>
 	class BAUKASTEN_EXPORT GenericStateCollection : public State {
-		typedef V<T, allocator<T>> Container;
+		typedef V<T, allocator<T> > Container;
 		typedef GenericStateCollection<V,T> ThisType;
 	public:
 
@@ -134,7 +134,7 @@ namespace Baukasten {
 		}
 
 	private:
-		V<T, allocator<T>> m_values;
+		V<T, allocator<T> > m_values;
 	};
 
 	// typedef some often used genericstates

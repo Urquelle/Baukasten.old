@@ -22,7 +22,7 @@ namespace Baukasten {
 	template<class T>
 	class BAUKASTEN_EXPORT GenericManager {
 	public:
-		typedef map<string, shared_ptr<T>> TMap;
+		typedef map<string, shared_ptr<T> > TMap;
 
 		/*! constructor
 		 *
