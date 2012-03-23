@@ -14,7 +14,7 @@ namespace Baukasten {
 
 	class BAUKASTEN_EXPORT IGraphics {
 	public:
-		enum Flags {
+		enum InfoFlags {
 			DRAW_FPS     = 1 << 0,
 			DRAW_VERSION = 1 << 1,
 			DRAW_TIME    = 1 << 2,
@@ -27,7 +27,7 @@ namespace Baukasten {
 
 		virtual void createWindow( const vec2<u32>&, const wstring& ) = 0;
 		virtual void drawInfo( const vec3<float>&,
-				bool compact = false, Flags = DRAW_ALL ) = 0;
+				bool compact = false, InfoFlags = DRAW_ALL ) = 0;
 		virtual void drawCircle( const vec3<float>&, const u32, const Color& ) = 0;
 		virtual void drawImage( const string&, const vec2<float>&,
 				const vec3<float>& ) = 0;

@@ -85,7 +85,7 @@ public:
 
 	void
 	drawInfo( const vec3<float> &pos, bool compact,
-			IGraphics::Flags flags = IGraphics::DRAW_ALL )
+			IGraphics::InfoFlags flags = IGraphics::DRAW_ALL )
 	{
 		float x = pos[BK_X], y = pos[BK_Y];
 
@@ -449,7 +449,7 @@ GlfwGraphics::shutdown()
 
 void
 GlfwGraphics::drawInfo( const vec3<float> &pos,
-		bool compact, Flags flags )
+		bool compact, InfoFlags flags )
 {
 	m_impl->drawInfo( pos, compact, flags );
 }
