@@ -3,12 +3,12 @@
 
 namespace Baukasten {
 
-	typedef  signed    char  s8;
-	typedef  unsigned  char  u8;
-	typedef  signed    short s16;
-	typedef  unsigned  short u16;
-	typedef  signed    int   u32;
-	typedef  unsigned  int   s32;
+	typedef signed   char  s8;
+	typedef unsigned char  u8;
+	typedef signed   short s16;
+	typedef unsigned short u16;
+	typedef signed   int   u32;
+	typedef unsigned int   s32;
 
 	enum Dim {
 		BK_X = 0, BK_WIDTH = 0,
