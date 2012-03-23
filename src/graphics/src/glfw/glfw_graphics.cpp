@@ -1,12 +1,15 @@
 #include "graphics/include/glfw/glfw_graphics.h"
 
 #include "core/CoreServices"
+#include "core/Version"
 #include "graphics/Font"
 #include "graphics/Image"
 #include "model/Form"
 
 #include "graphics/include/glfw/glfw_graphics_helper.h"
 #include "graphics/include/glfw/node.h"
+
+#include <sstream>
 
 using namespace Baukasten;
 
@@ -78,6 +81,57 @@ public:
 	shutdown()
 	{
 		glfwTerminate();
+	}
+
+	void
+	drawInfo( const vec3<float> &pos, bool compact,
+			IGraphics::Flags flags = IGraphics::DRAW_ALL )
+	{
+		float x = pos[BK_X], y = pos[BK_Y];
+
+		Color white( { 255, 255, 255, 120 } );
+		Color black( { 0, 0, 0, 255 } );
+		vec2<float> size({ 200, 150 });
+
+		if ( compact )
+			size = { 300, 20 };
+
+		// draw semitransparent rect
+		drawRect( size, { x, y, 0.0 }, white );
+		x += 10;
+
+		// draw fps
+		if ( flags & IGraphics::DRAW_FPS ) {
+			stringstream _fps;
+			_fps << "fps: " << fps();
+			drawText( _fps.str(), { x, y + 15, 0 }, black );
+		}
+
+		// draw version
+		if ( flags & IGraphics::DRAW_VERSION ) {
+			stringstream _version;
+			_version << "version: " << version();
+			if ( compact ) {
+				x += 100;
+			} else {
+				y += 20;
+			}
+
+			drawText( _version.str(), { x, y + 15, 0 }, black );
+		}
+
+		// draw time
+		if ( flags & IGraphics::DRAW_TIME ) {
+			stringstream _time;
+			_time << "time: " << glfwGetTime();
+			if ( compact ) {
+				x += 100;
+			} else {
+				y += 20;
+			}
+
+			drawText( _time.str(), { x, y + 15, 0 }, black );
+		}
 	}
 
 	void
@@ -391,6 +445,13 @@ void
 GlfwGraphics::shutdown()
 {
 	m_impl->shutdown();
+}
+
+void
+GlfwGraphics::drawInfo( const vec3<float> &pos,
+		bool compact, Flags flags )
+{
+	m_impl->drawInfo( pos, compact, flags );
 }
 
 void

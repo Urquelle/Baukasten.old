@@ -19,6 +19,8 @@ namespace Baukasten {
 		virtual ~GlfwGraphics();
 
 		void createWindow( const vec2<u32>&, const wstring& );
+		void drawInfo( const vec3<float>&,
+				bool compact, Flags = DRAW_ALL );
 		void drawCircle( const vec3<float>&, const u32, const Color& );
 		void drawImage( const string&, const vec2<float>&, const vec3<float>& );
 		void drawImage( Image&, const vec2<float>&, const vec3<float>& );
