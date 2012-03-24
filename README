@@ -1,4 +1,5 @@
-=DESCRIPTION=
+DESCRIPTION
+===========
 
 Baukasten represents a possible implementation of the object model as described by Britt L. Hannah.
 
@@ -35,7 +36,8 @@ this is done through assignment of states as its properties, other entities, and
 
 states can be set through the addState() methods, actions can be assigned with the addAction() method.
 
-=INSTALLATION=
+INSTALLATION
+============
 
 grab the sources from either github or gitorious
 
@@ -43,12 +45,18 @@ grab the sources from either github or gitorious
 	https://gitorious.org/codingninja/baukasten
 
 to build the sources create a build directory in the root directory of Baukasten and start cmake, followed
-by make && make install, to install the libs, docs, and include files:
+by make && make install, to install the libs, and include files:
 
 	cd Baukasten
 	mkdir build && cd build
 	cmake ..
 	make && make install
+
+in order for the documentation being built and installed the following sequence of commands is needed
+
+	cd Baukasten
+	mkdir build && cd build
+	cmake .. -DWITH_DOC=1
 
 Baukasten supports Lua as its scripting language. action classes can be instantiated with a path to the
 lua script. whenever the action is executed the given script is executed.
