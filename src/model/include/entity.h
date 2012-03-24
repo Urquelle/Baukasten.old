@@ -3,8 +3,6 @@
 
 #include "model/Global"
 
-#include <string>
-
 /*! \brief Mainnamespace of the Project.
  *
  * All Classes of the Project are inside this namespace.
