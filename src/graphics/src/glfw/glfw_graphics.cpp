@@ -123,7 +123,7 @@ public:
 		// draw time
 		if ( flags & IGraphics::DRAW_TIME ) {
 			stringstream _time;
-			_time << "time: " << glfwGetTime();
+			_time << "time: " << time();
 			if ( compact ) {
 				x += 100;
 			} else {
