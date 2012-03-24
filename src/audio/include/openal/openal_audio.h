@@ -20,6 +20,7 @@ namespace Baukasten {
 		void freeResource( const string& );
 
 		void setVolume( const string&, const float );
+		void setVolumeFactor( const float );
 
 		void play( const string& );
 		void play( const string&, bool );

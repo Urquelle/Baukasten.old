@@ -12,16 +12,19 @@ using namespace Baukasten;
 namespace Baukasten {
 
 	struct OpenALData {
+		string m_id;
 		string m_path;
 		ALuint m_buffer;
 		ALuint m_source;
+		float  m_gain;
 	};
 
 	typedef map<const string, OpenALData*> BufferMap;
 
 	class OpenALAudioPrivate {
 	public:
-		OpenALAudioPrivate()
+		OpenALAudioPrivate() :
+			m_gainFactor( 1.0 )
 		{
 		}
 
@@ -79,9 +82,10 @@ namespace Baukasten {
 
 			OpenALData *data = new OpenALData();
 
-			data->m_buffer = buffer;
-			data->m_source = source;
+			data->m_id      =  id;
 			data->m_path    =  path;
+			data->m_buffer  =  buffer;
+			data->m_source  =  source;
 
 			m_buffers[ id ] = data;
 		}
@@ -134,13 +138,26 @@ namespace Baukasten {
 			OpenALData *data = m_buffers[ id ];
 			BK_ASSERT( data != NULL, "nothing with the given id " << id << " could be found!" );
 
-			alSourcef( data->m_source, AL_GAIN, volume );
+			data->m_gain = volume;
+			alSourcef( data->m_source, AL_GAIN, volume * m_gainFactor );
+		}
+
+		void
+		setVolumeFactor( const float volume )
+		{
+			m_gainFactor = volume;
+			OpenALData *data;
+			for( auto i = m_buffers.begin(); i != m_buffers.end(); ++i ) {
+				data = i->second;
+				setVolume( data->m_id, data->m_gain );
+			}
 		}
 
 	private:
 		ALCdevice*   m_device;
 		ALCcontext*  m_context;
 		BufferMap    m_buffers;
+		float        m_gainFactor;
 	};
 }
 
@@ -189,6 +206,12 @@ void
 OpenALAudio::setVolume( const string &id, const float volume )
 {
 	m_impl->setVolume( id, volume );
+}
+
+void
+OpenALAudio::setVolumeFactor( const float factor )
+{
+	m_impl->setVolumeFactor( factor );
 }
 
 void
