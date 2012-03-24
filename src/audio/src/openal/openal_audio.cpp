@@ -12,7 +12,7 @@ using namespace Baukasten;
 namespace Baukasten {
 
 	struct OpenALData {
-		string m_filePath;
+		string m_path;
 		ALuint m_buffer;
 		ALuint m_source;
 	};
@@ -79,9 +79,9 @@ namespace Baukasten {
 
 			OpenALData *data = new OpenALData();
 
-			data->m_filePath = path;
 			data->m_buffer = buffer;
 			data->m_source = source;
+			data->m_path    =  path;
 
 			m_buffers[ id ] = data;
 		}
