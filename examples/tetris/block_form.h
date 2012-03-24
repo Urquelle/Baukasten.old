@@ -8,7 +8,7 @@ public:
 	const int BLOCK_WIDTH;
 	const int BLOCK_HEIGHT;
 
-	BlockForm( const string&, Baukasten::IGraphics* );
+	BlockForm( const std::string&, Baukasten::IGraphics* );
 	virtual ~BlockForm();
 
 	void render();

@@ -16,7 +16,7 @@ endif()
 option( WITH_DOC  "add documentation." FALSE )
 
 add_subdirectory(src)
-add_subdirectory(example)
+add_subdirectory(examples)
 add_subdirectory(test)
 
 if( WITH_DOC )

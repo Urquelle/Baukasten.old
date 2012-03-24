@@ -12,7 +12,7 @@ namespace Baukasten {
 
 class Game : public Baukasten::GameEntity {
 public:
-	Game ( const string&, int, char** );
+	Game ( const std::string&, int, char** );
 	virtual ~Game();
 
 	void start();

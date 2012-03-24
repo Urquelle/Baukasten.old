@@ -12,7 +12,7 @@ public:
 	void render();
 
 private:
-	string m_fileName;
+    std::string m_fileName;
 };
 
 #endif /* end of include guard: WORLDMAP_FORM_OPYB550X */

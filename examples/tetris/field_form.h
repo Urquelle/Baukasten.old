@@ -10,7 +10,7 @@ namespace Baukasten {
 
 class FieldForm : public Baukasten::Form {
 public:
-	FieldForm( const string&, Baukasten::IGraphics* );
+	FieldForm( const std::string&, Baukasten::IGraphics* );
 	virtual ~FieldForm();
 
 	void render();

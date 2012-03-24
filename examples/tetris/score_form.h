@@ -10,7 +10,7 @@ namespace Baukasten {
 
 class ScoreForm : public Baukasten::Form {
 public:
-	ScoreForm( const string&, Baukasten::IGraphics* );
+	ScoreForm( const std::string&, Baukasten::IGraphics* );
 	virtual ~ScoreForm();
 
 	void render();
