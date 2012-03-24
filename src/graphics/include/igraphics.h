@@ -50,6 +50,7 @@ namespace Baukasten {
 		virtual void setWindowCaption( const wstring& ) = 0;
 		virtual void setWindowSize( const u32, const u32 ) = 0;
 		virtual void shutdown() = 0;
+		virtual float time() const = 0;
 
 	protected:
 		bool m_initialised;

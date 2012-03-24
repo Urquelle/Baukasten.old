@@ -397,6 +397,12 @@ public:
 		m_windowSize = size;
 	}
 
+	float
+	time() const
+	{
+		return glfwGetTime();
+	}
+
 private:
 	GLCache        m_cache;
 	Font*          m_font;
@@ -533,5 +539,11 @@ void
 GlfwGraphics::setWindowSize( const u32 width, const u32 height )
 {
 	m_impl->setWindowSize( { width, height } );
+}
+
+float
+GlfwGraphics::time() const
+{
+	return m_impl->time();
 }
 

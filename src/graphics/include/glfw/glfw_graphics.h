@@ -40,6 +40,7 @@ namespace Baukasten {
 		void setWindowCaption( const wstring& );
 		void setWindowSize( const u32, const u32 );
 		void shutdown();
+		float time() const;
 
 	private:
 		BK_PIMPL_PTR( GlfwGraphics );
