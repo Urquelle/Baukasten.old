@@ -7,6 +7,8 @@
 #include <ft2build.h>
 #include FT_FREETYPE_H
 
+using namespace std;
+
 const char *f_shader_data =
 "#version 120\n"
 
