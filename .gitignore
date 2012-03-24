@@ -6,3 +6,6 @@ doc/*
 tags
 .vimrc
 *.orig
+*.kdev4
+.kdev4/*
+*~
