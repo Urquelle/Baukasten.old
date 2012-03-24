@@ -25,6 +25,7 @@ namespace Baukasten {
 		virtual ~GameEntity();
 
 		void setType( EntityType* );
+		void addType( EntityType* );
 		EntityType* type() const;
 
 		void setForm( Form* );

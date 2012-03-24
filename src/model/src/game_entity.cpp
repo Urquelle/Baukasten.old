@@ -49,6 +49,19 @@ GameEntity::setType( EntityType *type )
 		m_type = type;
 }
 
+void
+GameEntity::addType( EntityType *type )
+{
+	if ( !type || type == m_type ) return;
+	if ( !m_type ) {
+		m_type = type;
+	} else {
+		type->setParent( m_type );
+		m_type = type;
+	}
+
+}
+
 EntityType*
 GameEntity::type() const
 {
