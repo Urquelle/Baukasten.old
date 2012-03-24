@@ -9,11 +9,11 @@
 namespace Baukasten {
 	using namespace std;
 
-	enum class KeyState {
+	enum KeyState {
 		PRESSED, RELEASED
 	};
 
-	enum class Key {
+	enum Key {
 		KEY_NONE = 0,
 
 		KEY_0 = 48, KEY_1, KEY_2, KEY_3, KEY_4, KEY_5, KEY_6,
@@ -32,7 +32,7 @@ namespace Baukasten {
 		KEY_RETURN
 	};
 
-	enum class Modifier {
+	enum Modifier {
 		KEYMOD_NONE			= 1u << 0,
 		KEYMOD_LCTRL		= 1u << 1,
 		KEYMOD_RCTRL		= 1u << 2,
