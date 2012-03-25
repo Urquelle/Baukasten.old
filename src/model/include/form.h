@@ -35,6 +35,7 @@ namespace Baukasten {
 	protected:
 		IGraphics *graphics() const;
 
+	private:
 		shared_ptr<LogicalSpace> m_lSpace;
 		shared_ptr<VirtualSpace> m_vSpace;
 		IGraphics *m_graphics;
