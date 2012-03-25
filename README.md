@@ -1,11 +1,13 @@
-DESCRIPTION
-===========
+BAUKASTEN ENGINE	{#mainpage}
+================
 
-Baukasten represents a possible implementation of the object model as described by Britt L. Hannah.
+DESCRIPTION			{#description}
+===========
+%Baukasten represents a possible implementation of the object model as described by Britt L. Hannah.
 
 The object model consists of five major classes:
 
-	* action
+	* [ActionClass]
 	* entity
 	* form
 	* state
@@ -36,13 +38,10 @@ this is done through assignment of states as its properties, other entities, and
 
 states can be set through the addState() methods, actions can be assigned with the addAction() method.
 
-INSTALLATION
+INSTALLATION		{#installation}
 ============
 
-grab the sources from either github or gitorious
-
-	https://github.com/NoobSaibot/Baukasten
-	https://gitorious.org/codingninja/baukasten
+grab the sources from [bitbucket], [github] or [gitorious].
 
 to build the sources create a build directory in the root directory of Baukasten and start cmake, followed
 by make && make install, to install the libs, and include files:
@@ -60,3 +59,8 @@ in order for the documentation being built and installed the following sequence 
 
 Baukasten supports Lua as its scripting language. action classes can be instantiated with a path to the
 lua script. whenever the action is executed the given script is executed.
+
+[bitbucket]: https://bitbucket.org/noobsaibot/baukasten "Bitbucket Repository"
+[github]: https://github.com/NoobSaibot/Baukasten "Github Repository"
+[gitorious]: https://gitorious.org/codingninja/baukasten "Gitorious Repository"
+[ActionClass]: @ref Baukasten::Action "Action class"
