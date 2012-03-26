@@ -21,14 +21,14 @@ EntityManager::addEntity( Entity *entity )
 }
 
 void
-EntityManager::addEntity( const std::string &id, Entity *entity )
+EntityManager::addEntity( const string &id, Entity *entity )
 {
 	BK_ASSERT( entity != 0, "entity must not be 0." );
 	add( id, entity );
 }
 
 Entity*
-EntityManager::entity( const std::string &id ) const
+EntityManager::entity( const string &id ) const
 {
 	return get( id );
 }
@@ -40,13 +40,13 @@ EntityManager::entities() const
 }
 
 bool
-EntityManager::hasEntity( const std::string &id ) const
+EntityManager::hasEntity( const string &id ) const
 {
 	return has( id );
 }
 
 void
-EntityManager::removeEntity( const std::string &id )
+EntityManager::removeEntity( const string &id )
 {
 	remove( id );
 }

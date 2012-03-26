@@ -7,7 +7,7 @@
 using namespace Baukasten;
 using namespace std;
 
-EntityType::EntityType( const std::string &id ) :
+EntityType::EntityType( const string &id ) :
 	Entity( id ),
 	m_parent( 0 )
 {
@@ -58,7 +58,7 @@ EntityType::removeChild( const EntityType *child )
 }
 
 State*
-EntityType::entityState( const std::string &id )
+EntityType::entityState( const string &id )
 {
 	return 0;
 }

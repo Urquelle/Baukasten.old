@@ -227,7 +227,7 @@ OpenALAudio::play( const string &id, bool loop )
 }
 
 void
-OpenALAudio::play( const string &id, int from, int to, bool loop )
+OpenALAudio::play( const string &id, u32 from, u32 to, bool loop )
 {
 	m_impl->play( id, from, to, loop );
 }

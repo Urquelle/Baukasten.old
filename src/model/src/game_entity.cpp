@@ -23,7 +23,7 @@ isAncestor( GameEntity *entity, GameEntity *child )
 
 // --------- GameEntity ---------------- //
 
-GameEntity::GameEntity( const std::string &id ) :
+GameEntity::GameEntity( const string &id ) :
 	Entity( id ),
 	m_type( 0 ),
 	m_parent( 0 )
@@ -82,7 +82,7 @@ GameEntity::form() const
 }
 
 void
-GameEntity::addState( const std::string &id, State *state )
+GameEntity::addState( const string &id, State *state )
 {
 	BK_ASSERT( state != 0, "state must not be 0." );
 
@@ -101,7 +101,7 @@ GameEntity::addState( State *state )
 }
 
 bool
-GameEntity::hasState( const std::string &id ) const
+GameEntity::hasState( const string &id ) const
 {
 	bool answer = StateManager::hasState( id );
 	if ( !answer && type() )
@@ -126,7 +126,7 @@ GameEntity::addChild( GameEntity *child )
 }
 
 GameEntity*
-GameEntity::child( const std::string &id ) const
+GameEntity::child( const string &id ) const
 {
 	auto it = m_children.find( id );
 	return ( it == m_children.end() ) ? 0 : it->second.get();
@@ -139,7 +139,7 @@ GameEntity::children() const
 }
 
 void
-GameEntity::removeChild( const std::string &id )
+GameEntity::removeChild( const string &id )
 {
 	m_children.erase( m_children.find( id ) );
 }

@@ -21,7 +21,7 @@ StateManager::addState( State *state )
 }
 
 void
-StateManager::addState( const std::string &id, State *state )
+StateManager::addState( const string &id, State *state )
 {
 	BK_ASSERT( state != 0, "state must not be 0." );
 	add( id, state );
@@ -34,7 +34,7 @@ StateManager::states() const
 }
 
 bool
-StateManager::hasState( const std::string &id ) const
+StateManager::hasState( const string &id ) const
 {
 	return has( id );
 }

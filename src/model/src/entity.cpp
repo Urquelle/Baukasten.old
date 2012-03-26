@@ -5,7 +5,7 @@
 
 using namespace Baukasten;
 
-Entity::Entity( const std::string &id ) :
+Entity::Entity( const string &id ) :
 	m_id( id )
 {
 }

@@ -2,7 +2,7 @@
 
 using namespace Baukasten;
 
-Drawable::Drawable( const std::string &id ) :
+Drawable::Drawable( const string &id ) :
 	Entity( id )
 {
 }

@@ -7,7 +7,7 @@
 using namespace Baukasten;
 using namespace std;
 
-Action::Action( GameEntity &source, const std::string &id ) :
+Action::Action( GameEntity &source, const string &id ) :
 	Entity( id ),
 	m_source( &source ),
 	m_target( 0 ),

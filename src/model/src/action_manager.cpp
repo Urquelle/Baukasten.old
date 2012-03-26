@@ -25,14 +25,14 @@ ActionManager::addAction( Action *action )
 }
 
 void
-ActionManager::addAction( const std::string &id, Action *action )
+ActionManager::addAction( const string &id, Action *action )
 {
 	BK_ASSERT( action != 0, "action must not be 0" );
 	add( id, action );
 }
 
 Action*
-ActionManager::action( const std::string &id ) const
+ActionManager::action( const string &id ) const
 {
 	return get( id );
 }
@@ -50,13 +50,13 @@ ActionManager::invokedActions() const
 }
 
 bool
-ActionManager::hasAction( const std::string &id ) const
+ActionManager::hasAction( const string &id ) const
 {
 	return has( id );
 }
 
 void
-ActionManager::invokeAction( const std::string &id )
+ActionManager::invokeAction( const string &id )
 {
 	Action *_action = action( id );
 
@@ -73,7 +73,7 @@ ActionManager::invokeAction( const std::string &id )
 }
 
 void
-ActionManager::invokeAction( const std::string &id, GameEntity *target )
+ActionManager::invokeAction( const string &id, GameEntity *target )
 {
 	BK_ASSERT( target != 0, "target must not be 0" );
 	Action *_action = action( id );
@@ -92,7 +92,7 @@ ActionManager::invokeAction( const std::string &id, GameEntity *target )
 }
 
 void
-ActionManager::invokeAction( const std::string &id, list<GameEntity*> targets )
+ActionManager::invokeAction( const string &id, list<GameEntity*> targets )
 {
 	Action *_action = action( id );
 
@@ -110,7 +110,7 @@ ActionManager::invokeAction( const std::string &id, list<GameEntity*> targets )
 }
 
 void
-ActionManager::dropAction( const std::string &id )
+ActionManager::dropAction( const string &id )
 {
 	Action *_action = action( id );
 
