@@ -113,14 +113,21 @@ GameEntity::hasState( const string &id ) const
 void
 GameEntity::addChild( GameEntity *child )
 {
+	if ( child )
+		addChild( child->id(), child );
+}
+
+void
+GameEntity::addChild( const string &id, GameEntity *child )
+{
 	BK_ASSERT( this != child, "you can't have a GameEntity be its own child." );
 	BK_ASSERT(
 		!isAncestor( this, child ),
 		"you can't assign a parent GameEntity to be its own grandchild."
 	);
 
-	if ( m_children.find( child->id() ) == m_children.end() ) {
-		m_children[ child->id() ] = shared_ptr<GameEntity>( child );
+	if ( m_children.find( id ) == m_children.end() ) {
+		m_children[ id ] = shared_ptr<GameEntity>( child );
 		child->setParent( this );
 	}
 }
