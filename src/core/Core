@@ -2,5 +2,6 @@
 #include "CoreServices"
 #include "Debug"
 #include "Global"
+#include "IServiceInterface"
 #include "Math"
 #include "Version"
