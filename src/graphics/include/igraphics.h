@@ -12,6 +12,11 @@ namespace Baukasten {
 	class IFont;
 	class Image;
 
+	/*!
+	 * \brief Graphics interface declaration.
+	 *
+	 * \ingroup graphics interface
+	 */
 	class BAUKASTEN_EXPORT IGraphics {
 	public:
 		enum InfoFlags {

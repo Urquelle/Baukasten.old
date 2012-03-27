@@ -1,3 +1,18 @@
+/*!
+ * \file model/include/global.h
+ *
+ * \brief global include file for Model module.
+ *
+ * in this file are all declarations that are used in the
+ * model module.
+ */
+
+/*! \defgroup action Action */
+/*! \defgroup entity Entity */
+/*! \defgroup interface Interface */
+/*! \defgroup manager Manager */
+/*! \defgroup model Model */
+
 #ifndef GLOBAL_H
 #define GLOBAL_H
 
@@ -21,6 +36,11 @@ namespace Baukasten {
 	class State;
 	class VirtualSpace;
 
+	/*!
+	 * the map consists of a key string, being the id of the
+	 * Entity and the Entity object itself, which is stored
+	 * in a shared_ptr.
+	 */
 	typedef map<string, shared_ptr<Entity> > EntityMap;
 	typedef list<shared_ptr<Entity> >		EntityList;
 

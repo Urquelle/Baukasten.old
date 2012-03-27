@@ -3,18 +3,15 @@
 
 #include "model/Global"
 
-/*! \brief Mainnamespace of the Project.
- *
- * All Classes of the Project are inside this namespace.
- */
 namespace Baukasten {
-	/*! \defgroup entity Entity Classes */
-
-	/*! \brief baseclass.
+	/*!
+	 * \brief base class in the model module.
 	 *
-	 * \ingroup entity
+	 * \ingroup model entity
 	 *
-	 * baseclass with an id field.
+	 * \headerfile Entity "model/Entity"
+	 *
+	 * base class with an id field.
 	 */
 	class BAUKASTEN_EXPORT Entity {
 	public:
@@ -31,7 +28,7 @@ namespace Baukasten {
 		 *
 		 * the id field of the rhs object is assigned to the lhs object.
 		 *
-		 * \param other an entity object to take the id from.
+		 * \param other an Entity object to be copied from.
 		 * \return a reference to the lhs object.
 		 */
 		Entity& operator=( const Entity& );

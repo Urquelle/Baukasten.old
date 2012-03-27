@@ -9,7 +9,9 @@ namespace Baukasten {
 
 	/*! \brief implements action container class.
 	 *
-	 * \ingroup action
+	 * \ingroup model manager
+	 *
+	 * \headerfile ActionManager "model/ActionManager"
 	 *
 	 * wrapps methods implemented in GenericManager to limit the usage
 	 * of this class to Action classes only.

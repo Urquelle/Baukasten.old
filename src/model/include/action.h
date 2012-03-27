@@ -10,11 +10,11 @@
 namespace Baukasten {
 	class GameEntity;
 
-	/*! \defgroup action Action Classes */
-
 	/*! \brief action class.
 	 *
-	 * \ingroup action
+	 * \ingroup model action
+	 *
+	 * \headerfile Action "model/Action"
 	 *
 	 * action class implements the action entity in britt l. hannah's
 	 * object model. instances of this class operate on entitie's states
@@ -50,7 +50,14 @@ namespace Baukasten {
 		/*! \brief destructor */
 		virtual ~Action();
 
-		/*! \brief return action's source GameEntity */
+		/*! \brief return action's source GameEntity
+		 *
+		 * every action can operate upon different GameEntity objects.
+		 *
+		 * 1. its source game entity, that the action is assigned to,
+		 * 2. given target game entity
+		 * 3. a list of target game entites
+		 */
 		GameEntity* source() const;
 
 		/*! \brief clear action's target and targets objects
@@ -132,7 +139,7 @@ namespace Baukasten {
 		 *
 		 * \param entity object to operate on.
 		 */
-		virtual void doAction( GameEntity* ) = 0;
+		virtual void doAction( GameEntity *entity ) = 0;
 
 	private:
 		GameEntity*			m_source;

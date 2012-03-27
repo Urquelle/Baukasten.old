@@ -8,11 +8,12 @@
 
 namespace Baukasten {
 
-	/*! \defgroup manager Manager Classes */
-
-	/*! \brief implementation of a container class.
+	/*!
+	 * \brief implementation of a container class.
 	 *
-	 * \ingroup manager
+	 * \ingroup model manager
+	 *
+	 * \headerfile GenericManager "model/GenericManager"
 	 *
 	 * implements a container with arbitrary object type.
 	 * adds methods to act upon the collection.
@@ -24,7 +25,8 @@ namespace Baukasten {
 	public:
 		typedef map<string, shared_ptr<T> > TMap;
 
-		/*! constructor
+		/*!
+		 * constructor
 		 *
 		 * nothing fancy here.
 		 */
@@ -37,7 +39,8 @@ namespace Baukasten {
 		{
 		}
 
-		/*! \brief add object t to the collection.
+		/*!
+		 * \brief add object t to the collection.
 		 *
 		 * \see add( const string&, T* )
 		 * \param t an object to add to the map.
@@ -48,7 +51,8 @@ namespace Baukasten {
 			add( t->id(), t );
 		}
 
-		/*! \brief add object t to the collection.
+		/*!
+		 * \brief add object t to the collection.
 		 *
 		 * adds object t to the object map if t is a valid pointer
 		 * and if id isn't already taken by another object.
@@ -64,7 +68,8 @@ namespace Baukasten {
 			m_map[ id ] = shared_ptr<T>( t );
 		}
 
-		/*! \brief fetch an object from the map.
+		/*!
+		 * \brief fetch an object from the map.
 		 *
 		 * fetch an object with the given id from the collection.
 		 *
@@ -82,7 +87,8 @@ namespace Baukasten {
 			return it->second.get();
 		}
 
-		/*! \brief fetch all objects from the map.
+		/*!
+		 * \brief fetch all objects from the map.
 		 *
 		 * returns the map with all the objects.
 		 *
@@ -93,7 +99,8 @@ namespace Baukasten {
 			return m_map;
 		}
 
-		/*! \brief query whether the map contains the id.
+		/*!
+		 * \brief query whether the map contains the id.
 		 *
 		 * queries the map whether there's an entry to the
 		 * given id.
@@ -106,7 +113,8 @@ namespace Baukasten {
 			return m_map.count( id ) > 0;
 		}
 
-		/*! \brief remove the object to the given id.
+		/*!
+		 * \brief remove the object to the given id.
 		 *
 		 * removes the object from the map. basically it calls
 		 * the erase function on the map.

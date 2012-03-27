@@ -8,9 +8,12 @@
 
 namespace Baukasten {
 
-	/*! \brief represents a drawable object.
+	/*!
+	 * \brief represents a drawable object.
 	 *
-	 * \ingroup entity
+	 * \ingroup model entity
+	 *
+	 * \headerfile Drawable "model/Drawable"
 	 *
 	 * drawable objects can be stored in the VirtualSpace
 	 * map and be rendered by whatever rendering engine is used.
@@ -18,7 +21,8 @@ namespace Baukasten {
 	class BAUKASTEN_EXPORT Drawable : public Entity {
 	public:
 
-		/*! \brief constructor
+		/*!
+		 * \brief constructor
 		 *
 		 * \param id object id.
 		 */
@@ -27,14 +31,16 @@ namespace Baukasten {
 		/*! \brief destructor */
 		virtual ~Drawable();
 
-		/*! \brief renders the object
+		/*!
+		 * \brief renders the object
 		 *
 		 * render method is called once every iteration of
 		 * the mainloop.
 		 */
 		virtual void render() = 0;
 
-		/*! \brief set position of the object.
+		/*!
+		 * \brief set position of the object.
 		 *
 		 * \param position a three point vector which represents
 		 * the position of the object in a 3d space.
@@ -48,7 +54,8 @@ namespace Baukasten {
 
 		const vec2<float> size() const;
 
-		/*! \brief set the rotation around the x-axis.
+		/*!
+		 * \brief set the rotation around the x-axis.
 		 *
 		 * \param pitch rotation value.
 		 */

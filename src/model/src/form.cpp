@@ -10,7 +10,7 @@
 using namespace Baukasten;
 using namespace std;
 
-Form::Form( const std::string &id, IGraphics *graphics ) :
+Form::Form( const string &id, IGraphics *graphics ) :
 	Drawable( id ),
 	m_lSpace( new LogicalSpace() ),
 	m_vSpace( new VirtualSpace() ),
@@ -37,7 +37,7 @@ Form::addToLSpace( const string &id, GameEntity *entity )
 }
 
 void
-Form::removeFromLSpace( const std::string &id )
+Form::removeFromLSpace( const string &id )
 {
 	if ( m_lSpace->hasEntity( id ) )
 		m_lSpace->removeEntity( id );
@@ -64,7 +64,7 @@ Form::addToVSpace( const string &id, Form *entity )
 }
 
 void
-Form::removeFromVSpace( const std::string &id )
+Form::removeFromVSpace( const string &id )
 {
 	if ( m_vSpace->hasEntity( id ) )
 		m_vSpace->removeEntity( id );
