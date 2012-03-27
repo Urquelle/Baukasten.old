@@ -30,21 +30,17 @@ public:
 	{
 	}
 
-	int init( CoreServices *services )
+	void
+	init( CoreServices *services )
 	{
-		bool result = false;
-
 		m_t0 = glfwGetTime();
 
-		result = _init();
-		result = _initProgram( m_program );
+		_init();
+		_initProgram( m_program );
 
 		// TODO: create and use internal font here.
 		m_font = new Font( "/usr/share/fonts/corefonts/georgia.ttf" );
-
-		m_master->m_initialised = true;
-
-		return 1;
+		m_master->setIsReady( true );
 	}
 
 	void createWindow( const vec2<u32> &size, const wstring &title )
@@ -420,6 +416,7 @@ private:
 // }}}
 
 GlfwGraphics::GlfwGraphics() :
+	IGraphics( "GLFW" ),
 	m_impl( new GlfwGraphicsPrivate( this ) )
 {
 }
@@ -429,10 +426,10 @@ GlfwGraphics::~GlfwGraphics()
 	delete m_impl;
 }
 
-int
+void
 GlfwGraphics::init( CoreServices *services )
 {
-	return m_impl->init( services );
+	m_impl->init( services );
 }
 
 void

@@ -22,7 +22,8 @@ void GLFWCALL inputHandler( int key, int state )
 		service->onKeyUp()->emit( _key( key ), _modifier( key ) );
 }
 
-GlfwInput::GlfwInput()
+GlfwInput::GlfwInput() :
+	IInput( "GLFW" )
 {
 }
 
@@ -30,21 +31,20 @@ GlfwInput::~GlfwInput()
 {
 }
 
-bool
+void
 GlfwInput::init( CoreServices *service )
 {
 	if ( service->videoService()->serviceName() != "GLFW" )
 		BK_ERROR( "incompatible video backend!" );
 
-	if ( !service->videoService()->isInitialised() )
+	if ( !service->videoService()->isReady() )
 		BK_ERROR( "video service must be initialised." );
 
 	// for the callback to work the window
 	// must have already been created
 	glfwSetKeyCallback( inputHandler );
 	glfwEnable( GLFW_KEY_REPEAT );
-	setInitialised( true );
-	return true;
+	setIsReady( true );
 }
 
 KeyState
@@ -63,6 +63,6 @@ GlfwInput::process() const
 void
 GlfwInput::shutdown()
 {
-	setInitialised( false );
+	setIsReady( false );
 }
 

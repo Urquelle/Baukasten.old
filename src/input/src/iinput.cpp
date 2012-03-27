@@ -8,8 +8,7 @@ namespace Baukasten {
 		IInputPrivate( IInput *master ) :
 			m_master( master ),
 			m_onKeyDown( new KeyEvent() ),
-			m_onKeyUp( new KeyEvent() ),
-			m_initialised( false )
+			m_onKeyUp( new KeyEvent() )
 		{
 		}
 
@@ -31,18 +30,6 @@ namespace Baukasten {
 			return m_onKeyUp;
 		}
 
-		bool
-		isInitialised() const
-		{
-			return m_initialised;
-		}
-
-		void
-		setInitialised( bool init )
-		{
-			m_initialised = init;
-		}
-
 	private:
 		IInput *m_master;
 		KeyEvent *m_onKeyDown;
@@ -52,7 +39,8 @@ namespace Baukasten {
 	};
 } /* Baukasten */
 
-IInput::IInput() :
+IInput::IInput( const string &name ) :
+	IServiceInterface( name ),
 	m_impl( new IInputPrivate( this ) )
 {
 }
@@ -67,17 +55,5 @@ Baukasten::KeyEvent*
 IInput::onKeyUp()
 {
 	return m_impl->onKeyUp();
-}
-
-bool
-IInput::isInitialised() const
-{
-	return m_impl->isInitialised();
-}
-
-void
-IInput::setInitialised( bool init )
-{
-	m_impl->setInitialised( init );
 }
 

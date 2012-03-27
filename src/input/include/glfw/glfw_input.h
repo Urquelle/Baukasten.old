@@ -12,7 +12,7 @@ namespace Baukasten {
 		GlfwInput();
 		virtual ~GlfwInput();
 
-		bool      init( CoreServices* );
+		void      init( CoreServices* );
 		KeyState  keyState( const Key ) const;
 		void      process() const;
 		string    serviceName() const { return "GLFW"; }

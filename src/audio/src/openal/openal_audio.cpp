@@ -23,8 +23,9 @@ namespace Baukasten {
 
 	class OpenALAudioPrivate {
 	public:
-		OpenALAudioPrivate() :
-			m_gainFactor( 1.0 )
+		OpenALAudioPrivate( OpenALAudio *master ) :
+			m_gainFactor( 1.0 ),
+			m_master( master )
 		{
 		}
 
@@ -32,22 +33,21 @@ namespace Baukasten {
 		{
 		}
 
-		int
+		void
 		init( int argc, char *argv[] )
 		{
 			alutInit( &argc, argv );
 
 			m_device = alcOpenDevice( NULL );
 			if ( !m_device )
-				return 0;
+				return;
 
 			m_context = alcCreateContext( m_device, NULL );
 			if ( !m_context )
-				return 0;
+				return;
 
 			alcMakeContextCurrent( m_context );
-
-			return 1;
+			m_master->setIsReady( true );
 		}
 
 		void shutdown()
@@ -67,6 +67,12 @@ namespace Baukasten {
 				alDeleteBuffers( 1, &(data->m_buffer) );
 				alDeleteSources( 1, &(data->m_source) );
 			}
+		}
+
+		bool
+		isReady() const
+		{
+			return m_ready;
 		}
 
 		void
@@ -154,15 +160,18 @@ namespace Baukasten {
 		}
 
 	private:
-		ALCdevice*   m_device;
-		ALCcontext*  m_context;
 		BufferMap    m_buffers;
+		ALCcontext*  m_context;
+		ALCdevice*   m_device;
 		float        m_gainFactor;
+		OpenALAudio* m_master;
+		bool         m_ready;
 	};
 }
 
 OpenALAudio::OpenALAudio() :
-	m_impl( new OpenALAudioPrivate() )
+	IAudio( "OpenAL" ),
+	m_impl( new OpenALAudioPrivate( this ) )
 {
 }
 
@@ -170,25 +179,22 @@ OpenALAudio::~OpenALAudio()
 {
 }
 
-int
+void
 OpenALAudio::init( CoreServices *services )
 {
 	m_impl->init( services->argc(), services->argv() );
-	m_initialised = true;
-	return 1;
 }
 
 void
 OpenALAudio::shutdown()
 {
 	m_impl->shutdown();
-	m_initialised = false;
 }
 
 void
 OpenALAudio::loadFile( const string &path, const string &id )
 {
-	if ( !m_initialised ) {
+	if ( !isReady() ) {
 		BK_DEBUG( "loadFile called with uninitialised OpenAL environment!" );
 		return;
 	}

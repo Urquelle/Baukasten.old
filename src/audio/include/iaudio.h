@@ -3,6 +3,7 @@
 
 #include "audio/AudioInterface"
 #include "audio/Global"
+#include "core/IServiceInterface"
 
 namespace Baukasten {
 
@@ -15,11 +16,9 @@ namespace Baukasten {
 	 * defines methods which an implementation class has to
 	 * implement in order to be used as Audio Service.
 	 */
-	class BAUKASTEN_EXPORT IAudio {
+	class BAUKASTEN_EXPORT IAudio : public IServiceInterface {
 	public:
-		/*! constructor */
-		IAudio() : m_initialised( false ) {}
-
+		IAudio( const string &name ) : IServiceInterface( name ) {}
 		/*! \brief initialises the audio service.
 		 *
 		 * do everything in this method to initialise
@@ -28,7 +27,7 @@ namespace Baukasten {
 		 * \param services CoreServices pointer.
 		 * \return 1 if initialisation successfull, 0 otherwise.
 		 */
-		virtual int init( CoreServices *services ) = 0;
+		virtual void init( CoreServices *services ) = 0;
 
 		/*! \brief shutdown the audio service.
 		 *
@@ -82,9 +81,6 @@ namespace Baukasten {
 
 		virtual void pause( const string& ) = 0;
 		virtual void stop( const string& ) = 0;
-
-	protected:
-		bool m_initialised;
 	};
 } /* Baukasten */
 

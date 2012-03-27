@@ -2,6 +2,7 @@
 #define IGRAPHICS_HHQEW1LG
 
 #include "core/Color"
+#include "core/IServiceInterface"
 #include "core/Math"
 #include "graphics/Global"
 #include "graphics/GraphicsInterface"
@@ -17,7 +18,7 @@ namespace Baukasten {
 	 *
 	 * \ingroup graphics interface
 	 */
-	class BAUKASTEN_EXPORT IGraphics {
+	class BAUKASTEN_EXPORT IGraphics : public IServiceInterface {
 	public:
 		enum InfoFlags {
 			DRAW_FPS     = 1 << 0,
@@ -26,9 +27,7 @@ namespace Baukasten {
 			DRAW_ALL     = DRAW_FPS + DRAW_VERSION + DRAW_TIME
 		};
 
-		IGraphics() : m_initialised( false ) {}
-
-		bool isInitialised() const { return m_initialised; }
+		IGraphics( const string &name ) : IServiceInterface( name ) {}
 
 		virtual void createWindow( const vec2<u32>&, const wstring& ) = 0;
 		virtual void drawInfo( const vec3<float>&,
@@ -49,16 +48,11 @@ namespace Baukasten {
 		virtual void drawText( IFont*, const string&,
 				const vec3<float>&, const Color& ) = 0;
 		virtual float fps() const = 0;
-		virtual int init( CoreServices* ) = 0;
 		virtual void render( Form* ) = 0;
-		virtual string serviceName() const = 0;
 		virtual void setWindowCaption( const wstring& ) = 0;
 		virtual void setWindowSize( const u32, const u32 ) = 0;
 		virtual void shutdown() = 0;
 		virtual float time() const = 0;
-
-	protected:
-		bool m_initialised;
 	};
 }
 

@@ -34,9 +34,8 @@ namespace Baukasten {
 		void drawText( const string&, const vec3<float>&, const Color& );
 		void drawText( IFont*, const string&, const vec3<float>&, const Color& );
 		float fps() const;
-		int init( CoreServices* );
+		void init( CoreServices* );
 		void render( Form* );
-		string serviceName() const { return "GLFW"; }
 		void setWindowCaption( const wstring& );
 		void setWindowSize( const u32, const u32 );
 		void shutdown();

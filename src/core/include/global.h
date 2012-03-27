@@ -1,7 +1,10 @@
 #ifndef GLOBAL_H_ZBKWGLP0
 #define GLOBAL_H_ZBKWGLP0
 
+#include <string>
+
 namespace Baukasten {
+	using namespace std;
 
 	typedef signed   char  s8;
 	typedef unsigned char  u8;
