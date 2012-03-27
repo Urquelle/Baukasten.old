@@ -7,8 +7,6 @@
 
 #include <string>
 
-class lua_State;
-
 namespace Baukasten {
 	class GameEntity;
 
@@ -21,7 +19,6 @@ namespace Baukasten {
 
 	private:
 		const std::string	m_filePath;
-		lua_State*			m_l;
 	};
 } /* Baukasten */
 
