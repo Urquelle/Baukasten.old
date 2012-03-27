@@ -10,10 +10,10 @@ using namespace Baukasten;
 
 ActionLua::ActionLua(
 		GameEntity &source,
-		const std::string &id,
-		const std::string &filePath ) :
+		const string &id,
+		const string &path ) :
 	Action( source, id ),
-	m_filePath( filePath )
+	m_path( path )
 {
 	wrapClasses();
 }
@@ -33,9 +33,9 @@ void ActionLua::doAction( GameEntity *entity )
 	s.set( "source", source() );
 
 	try {
-		s.doFile( m_filePath );
-	} catch ( std::exception &e ) {
-		BK_DEBUG( e.what() << ": make sure the file " << m_filePath << " is available." );
+		s.doFile( m_path );
+	} catch ( exception &e ) {
+		BK_DEBUG( e.what() << ": make sure the file " << m_path << " is available." );
 		BK_ABORT();
 	}
 }
