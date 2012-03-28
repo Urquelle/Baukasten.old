@@ -1,4 +1,4 @@
-#include "core/CoreServices"
+#include "services/Services"
 
 #include "audio/IAudio"
 #include "core/Debug"
@@ -7,30 +7,30 @@
 
 using namespace Baukasten;
 
-CoreServices*
-CoreServices::instance()
+Services*
+Services::instance()
 {
-	static CoreServices instance;
+	static Services instance;
 	return &instance;
 }
 
-CoreServices::CoreServices() :
+Services::Services() :
 	m_audio( AudioInterface::instance() ),
 	m_graphics( GraphicsInterface::instance() ),
 	m_input( InputInterface::instance() )
 {
 }
 
-CoreServices::~CoreServices()
+Services::~Services()
 {
-	BK_DEBUG( "destroy CoreServices" );
+	BK_DEBUG( "destroy Services" );
 	m_audio->shutdown();
 	m_graphics->shutdown();
 	m_input->shutdown();
 }
 
 void
-CoreServices::init( int argc, char* argv[] )
+Services::init( int argc, char* argv[] )
 {
 	m_argc = argc;
 	m_argv = argv;
@@ -41,7 +41,7 @@ CoreServices::init( int argc, char* argv[] )
 }
 
 void
-CoreServices::shutdown()
+Services::shutdown()
 {
 	m_input->shutdown();
 	m_graphics->shutdown();
@@ -49,31 +49,31 @@ CoreServices::shutdown()
 }
 
 IAudio*
-CoreServices::audioService() const
+Services::audioService() const
 {
 	return m_audio;
 }
 
 IInput*
-CoreServices::inputService() const
+Services::inputService() const
 {
 	return m_input;
 }
 
 IGraphics*
-CoreServices::videoService() const
+Services::videoService() const
 {
 	return m_graphics;
 }
 
 int
-CoreServices::argc()
+Services::argc()
 {
 	return m_argc;
 }
 
 char**
-CoreServices::argv() const
+Services::argv() const
 {
 	return m_argv;
 }

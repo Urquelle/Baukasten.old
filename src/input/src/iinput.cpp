@@ -40,7 +40,7 @@ namespace Baukasten {
 } /* Baukasten */
 
 IInput::IInput( const string &name ) :
-	IServiceInterface( name ),
+	IService( name ),
 	m_impl( new IInputPrivate( this ) )
 {
 }

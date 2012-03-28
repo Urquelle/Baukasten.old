@@ -1,16 +1,16 @@
 #ifndef IINPUT_EQ5AS93H
 #define IINPUT_EQ5AS93H
 
-#include "core/IServiceInterface"
 #include "input/Global"
 #include "input/InputInterface"
+#include "services/IService"
 
 namespace Baukasten {
 
-	class CoreServices;
 	class IInputPrivate;
+	class Services;
 
-	class BAUKASTEN_EXPORT IInput : public IServiceInterface {
+	class BAUKASTEN_EXPORT IInput : public IService {
 	public:
 		IInput( const string& );
 

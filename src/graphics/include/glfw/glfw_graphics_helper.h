@@ -42,7 +42,7 @@ float _normalise( const int size, const float i )
 void GLFWCALL
 _resize( int width, int height )
 {
-	auto graphics = CoreServices::instance()->videoService();
+	auto graphics = Services::instance()->videoService();
 	graphics->setWindowSize( width, height );
 }
 

@@ -1,10 +1,10 @@
 #include "graphics/include/glfw/glfw_graphics.h"
 
-#include "core/CoreServices"
 #include "core/Version"
 #include "graphics/Font"
 #include "graphics/Image"
 #include "model/Form"
+#include "services/Services"
 
 #include "graphics/include/glfw/glfw_graphics_helper.h"
 #include "graphics/include/glfw/node.h"
@@ -31,7 +31,7 @@ public:
 	}
 
 	void
-	init( CoreServices *services )
+	init( Services *services )
 	{
 		m_t0 = glfwGetTime();
 
@@ -427,7 +427,7 @@ GlfwGraphics::~GlfwGraphics()
 }
 
 void
-GlfwGraphics::init( CoreServices *services )
+GlfwGraphics::init( Services *services )
 {
 	m_impl->init( services );
 }

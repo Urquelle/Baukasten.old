@@ -1,17 +1,16 @@
-#ifndef CORE_SERVICES_8D741217
-#define CORE_SERVICES_8D741217
+#pragma once
 
-#include "model/Global"
+#include "services/Global"
 
 namespace Baukasten {
 	class IAudio;
 	class IGraphics;
 	class IInput;
 
-	class BAUKASTEN_EXPORT CoreServices {
+	class BAUKASTEN_EXPORT Services {
 	public:
-		static CoreServices* instance();
-		virtual ~CoreServices();
+		static Services* instance();
+		virtual ~Services();
 
 		void init( int, char** );
 		void shutdown();
@@ -24,7 +23,7 @@ namespace Baukasten {
 		char**      argv() const;
 
 	private:
-		CoreServices();
+		Services();
 
 		IAudio*     m_audio;
 		IGraphics*  m_graphics;
@@ -34,4 +33,3 @@ namespace Baukasten {
 	};
 } /* Baukasten */
 
-#endif /* end of include guard: CORE_SERVICES_8D741217 */

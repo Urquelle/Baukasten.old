@@ -3,11 +3,11 @@
 
 #include "audio/AudioInterface"
 #include "audio/Global"
-#include "core/IServiceInterface"
+#include "services/IService"
 
 namespace Baukasten {
 
-	class CoreServices;
+	class Services;
 
 	/*! \brief Audio Interface declaration.
 	 *
@@ -16,18 +16,18 @@ namespace Baukasten {
 	 * defines methods which an implementation class has to
 	 * implement in order to be used as Audio Service.
 	 */
-	class BAUKASTEN_EXPORT IAudio : public IServiceInterface {
+	class BAUKASTEN_EXPORT IAudio : public IService {
 	public:
-		IAudio( const string &name ) : IServiceInterface( name ) {}
+		IAudio( const string &name ) : IService( name ) {}
 		/*! \brief initialises the audio service.
 		 *
 		 * do everything in this method to initialise
 		 * the audio service.
 		 *
-		 * \param services CoreServices pointer.
+		 * \param services Services pointer.
 		 * \return 1 if initialisation successfull, 0 otherwise.
 		 */
-		virtual void init( CoreServices *services ) = 0;
+		virtual void init( Services *services ) = 0;
 
 		/*! \brief shutdown the audio service.
 		 *

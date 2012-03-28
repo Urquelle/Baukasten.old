@@ -5,14 +5,14 @@
 #include "input/IInput"
 
 namespace Baukasten {
-	class CoreServices;
+	class Services;
 
 	class BAUKASTEN_EXPORT GlfwInput : public IInput {
 	public:
 		GlfwInput();
 		virtual ~GlfwInput();
 
-		void      init( CoreServices* );
+		void      init( Services* );
 		KeyState  keyState( const Key ) const;
 		void      process() const;
 		string    serviceName() const { return "GLFW"; }

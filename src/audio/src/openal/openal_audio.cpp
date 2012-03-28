@@ -1,7 +1,7 @@
 #include "audio/AudioImpl"
 
-#include "core/CoreServices"
 #include "core/Debug"
+#include "services/Services"
 
 #include <AL/al.h>
 #include <AL/alc.h>
@@ -180,7 +180,7 @@ OpenALAudio::~OpenALAudio()
 }
 
 void
-OpenALAudio::init( CoreServices *services )
+OpenALAudio::init( Services *services )
 {
 	m_impl->init( services->argc(), services->argv() );
 }

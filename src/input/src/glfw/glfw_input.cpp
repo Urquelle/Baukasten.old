@@ -1,8 +1,8 @@
 #include "input/InputImpl"
 
-#include "core/CoreServices"
 #include "core/Debug"
 #include "graphics/IGraphics"
+#include "services/Services"
 
 #include "input/include/glfw/glfw_input_helper.h"
 
@@ -11,7 +11,7 @@ using namespace Baukasten;
 void GLFWCALL inputHandler( int key, int state )
 {
 	auto service = static_cast<GlfwInput*>(
-			CoreServices::instance()->inputService() );
+			Services::instance()->inputService() );
 
 	if ( service->serviceName() != "GLFW" )
 		return;
@@ -32,9 +32,9 @@ GlfwInput::~GlfwInput()
 }
 
 void
-GlfwInput::init( CoreServices *service )
+GlfwInput::init( Services *service )
 {
-	if ( service->videoService()->serviceName() != "GLFW" )
+	if ( service->videoService()->name() != "GLFW" )
 		BK_ERROR( "incompatible video backend!" );
 
 	if ( !service->videoService()->isReady() )
