@@ -7,13 +7,13 @@
 #include "score_form.h"
 
 #include "audio/IAudio"
-#include "core/CoreServices"
 #include "graphics/IGraphics"
 #include "input/IInput"
 #include "model/ActionLua"
 #include "model/GenericState"
 #include "model/LogicalSpace"
 #include "model/VirtualSpace"
+#include "services/Services"
 
 using namespace Baukasten;
 
@@ -51,7 +51,7 @@ Game::Game( const string &id, int argc, char **argv ) :
 
 Game::~Game()
 {
-	CoreServices* service = CoreServices::instance();
+	Services* service = Services::instance();
 	service->shutdown();
 }
 
@@ -63,7 +63,7 @@ void Game::start()
 
 void Game::init()
 {
-	CoreServices* service = CoreServices::instance();
+	Services* service = Services::instance();
 
 	service->init( m_argc, m_argv );
 
