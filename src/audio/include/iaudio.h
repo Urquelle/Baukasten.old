@@ -2,6 +2,7 @@
 
 #include "audio/AudioInterface"
 #include "audio/Global"
+#include "core/Math"
 #include "services/IService"
 
 namespace Baukasten {
@@ -98,6 +99,26 @@ namespace Baukasten {
 		 * \param factor float value in the range [0, 1].
 		 */
 		virtual void setVolumeFactor( const float factor ) = 0;
+
+		/*!
+		 * \brief set the position of the audio source.
+		 *
+		 * sets the 3d position of the audio source.
+		 *
+		 * \param id key under which the audio resource is stored in the collection.
+		 * \param position position of the audio source in the game space.
+		 */
+		virtual void setPosition( const string &id, const vec3<float> &position ) = 0;
+
+		/*!
+		 * \brief set the direction of the audio source.
+		 *
+		 * sets the direction of the audio source.
+		 *
+		 * \param id key under which the audio resource is stored in the collection.
+		 * \param direction direction of the audio source in the game space.
+		 */
+		virtual void setDirection( const string &id, const vec3<float> &direction ) = 0;
 
 		/*!
 		 * \brief play audio resource from the collection.

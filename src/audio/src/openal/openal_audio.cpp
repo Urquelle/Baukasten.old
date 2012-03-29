@@ -159,6 +159,26 @@ namespace Baukasten {
 			}
 		}
 
+		void
+		setPosition( const string &id, const vec3<float> &pos )
+		{
+			OpenALData *data = m_buffers[ id ];
+			BK_ASSERT( data != NULL, "nothing with the given id " << id << " could be found!" );
+
+			ALfloat _pos[]{ pos[BK_X], pos[BK_Y], pos[BK_Z] };
+			alSourcefv( data->m_source, AL_POSITION, _pos );
+		}
+
+		void
+		setDirection( const string &id, const vec3<float> &dir )
+		{
+			OpenALData *data = m_buffers[ id ];
+			BK_ASSERT( data != NULL, "nothing with the given id " << id << " could be found!" );
+
+			ALfloat _dir[]{ dir[BK_X], dir[BK_Y], dir[BK_Z] };
+			alSourcefv( data->m_source, AL_DIRECTION, _dir );
+		}
+
 	private:
 		BufferMap    m_buffers;
 		ALCcontext*  m_context;
@@ -218,6 +238,18 @@ void
 OpenALAudio::setVolumeFactor( const float factor )
 {
 	m_impl->setVolumeFactor( factor );
+}
+
+void
+OpenALAudio::setPosition( const string &id, const vec3<float> &pos )
+{
+	m_impl->setPosition( id, pos );
+}
+
+void
+OpenALAudio::setDirection( const string &id, const vec3<float> &dir )
+{
+	m_impl->setDirection( id, dir );
 }
 
 void
