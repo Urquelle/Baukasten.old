@@ -6,9 +6,28 @@
 namespace Baukasten {
 	class IAudio;
 
+	/*!
+	 * \brief audio interface class.
+	 * \ingroup services audio interface
+	 * \headerfile AudioInterface "audio/AudioInterface"
+	 *
+	 * the class provides the interface to retrieve an object
+	 * implementing the IAudio interface.
+	 */
 	class BAUKASTEN_EXPORT AudioInterface {
 	public:
+
+		/*!
+		 * \brief singleton method to retrieve implementation.
+		 *
+		 * singleton method which provides the interface to retrieve
+		 * the object implementing the IAudio interface.
+		 *
+		 * \return pointer to an IAudio object.
+		 */
 		static IAudio* instance();
+
+		/*! \brief destructor. */
 		virtual ~AudioInterface ();
 
 	private:

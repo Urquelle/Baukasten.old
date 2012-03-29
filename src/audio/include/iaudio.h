@@ -1,5 +1,4 @@
-#ifndef IAUDIO_H_YOASQ2PU
-#define IAUDIO_H_YOASQ2PU
+#pragma once
 
 #include "audio/AudioInterface"
 #include "audio/Global"
@@ -9,23 +8,37 @@ namespace Baukasten {
 
 	class Services;
 
-	/*! \brief Audio Interface declaration.
-	 *
-	 * \ingroup audio interface
+	/*!
+	 * \brief audio interface declaration.
+	 * \ingroup services audio interface
+	 * \headerfile IAudio "audio/IAudio"
 	 *
 	 * defines methods which an implementation class has to
 	 * implement in order to be used as Audio Service.
+	 *
+	 * \todo needs further improvement such as:
+	 * 	- ability to create a source.
+	 * 	- set attributes per source (loop, from, to, volume, ...)
+	 * 	- change the "to" attribute to "duration"
 	 */
 	class BAUKASTEN_EXPORT IAudio : public IService {
 	public:
+
+		/*!
+		 * \brief constructor.
+		 *
+		 * basic constructor of the class.
+		 *
+		 * \param name name of the service.
+		 */
 		IAudio( const string &name ) : IService( name ) {}
+
 		/*! \brief initialises the audio service.
 		 *
-		 * do everything in this method to initialise
-		 * the audio service.
+		 * method to initialise anything in order to be able
+		 * to provide the audio service.
 		 *
 		 * \param services Services pointer.
-		 * \return 1 if initialisation successfull, 0 otherwise.
 		 */
 		virtual void init( Services *services ) = 0;
 
@@ -73,16 +86,79 @@ namespace Baukasten {
 		 * \param volume value to be set
 		 */
 		virtual void setVolume( const string &id, const float volume ) = 0;
-		virtual void setVolumeFactor( const float ) = 0;
 
-		virtual void play( const string& ) = 0;
-		virtual void play( const string&, bool ) = 0;
-		virtual void play( const string&, u32, u32, bool ) = 0;
+		/*!
+		 * \brief set global volume factor.
+		 *
+		 * in order for being able to control global volume, this method
+		 * provides the possibility to set the global volume factor.
+		 *
+		 * the volume value of every source is multiplied by this factor.
+		 *
+		 * \param factor float value in the range [0, 1].
+		 */
+		virtual void setVolumeFactor( const float factor ) = 0;
 
-		virtual void pause( const string& ) = 0;
-		virtual void stop( const string& ) = 0;
+		/*!
+		 * \brief play audio resource from the collection.
+		 *
+		 * plays an audio resource from the collection with the
+		 * given id. plays the resource from the beginning to the
+		 * end, and only once.
+		 *
+		 * \param id key under which the resource is stored in the collection.
+		 */
+		virtual void play( const string &id ) = 0;
+
+		/*!
+		 * \brief play audio resource from the collection.
+		 *
+		 * plays an audio resource from the collection with the given id. the
+		 * second argument notifies the service whether or not to loop
+		 * the resource. playes the resource from the beginning to the
+		 * end.
+		 *
+		 * \param id key under which the resource is stored in the collection.
+		 * \param loop indicates whether the resource should start all over, once
+		 * the end is reached.
+		 */
+		virtual void play( const string &id, bool loop ) = 0;
+
+		/*!
+		 * \brief play audio resource from the collection.
+		 *
+		 * plays an audio resource from the collection with the given id. the
+		 * additional arguments tell the service where to start playing the
+		 * source and where to end. the last argument tells the service whether
+		 * to loop the resource.
+		 *
+		 * \param id key under which the resource is stored in the collection.
+		 * \param from starting point.
+		 * \param to stops playback at this point.
+		 * \param loop indicates whether the resource should start all over, once
+		 * the end is reached.
+		 *
+		 * \note from and to playback has not been implemented yet!
+		 */
+		virtual void play( const string &id, u32 from, u32 to, bool loop ) = 0;
+
+		/*!
+		 * \brief pauses the playback.
+		 *
+		 * pauses the playback of the given resource.
+		 *
+		 * \param id key under which the resource is stored in the collection.
+		 */
+		virtual void pause( const string &id ) = 0;
+
+		/*!
+		 * \brief stops the playback.
+		 *
+		 * stops the playback of the given resource.
+		 *
+		 * \param id key under which the resource is stored in the collection.
+		 */
+		virtual void stop( const string &id ) = 0;
 	};
 } /* Baukasten */
-
-#endif /* end of include guard: IAUDIO_H_YOASQ2PU */
 

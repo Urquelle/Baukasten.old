@@ -6,8 +6,8 @@
  *
  * \brief global include file for Audio module.
  *
- * in this file are all declarations that are used in the
- * audio module.
+ * this file contains all the basic declarations that
+ * are used across the audio module.
  */
 
 /*! \defgroup audio Audio */
