@@ -112,12 +112,11 @@ namespace Baukasten {
 		}
 
 		void
-		play( const string &id, int from, int to, bool loop )
+		play( const string &id, int from, int to )
 		{
 			OpenALData *data = m_buffers[ id ];
 			BK_ASSERT( data != NULL, "nothing with the given id " << id << " could be found!" );
 
-			alSourcei( data->m_source, AL_LOOPING, loop );
 			alSourcei( data->m_source, AL_SEC_OFFSET, from );
 			alSourcePlay( data->m_source );
 		}
@@ -177,6 +176,15 @@ namespace Baukasten {
 
 			ALfloat _dir[]{ dir[BK_X], dir[BK_Y], dir[BK_Z] };
 			alSourcefv( data->m_source, AL_DIRECTION, _dir );
+		}
+
+		void
+		setLoop( const string &id, bool loop )
+		{
+			OpenALData *data = m_buffers[ id ];
+			BK_ASSERT( data != NULL, "nothing with the given id " << id << " could be found!" );
+
+			alSourcei( data->m_source, AL_LOOPING, loop );
 		}
 
 	private:
@@ -253,21 +261,21 @@ OpenALAudio::setDirection( const string &id, const vec3<float> &dir )
 }
 
 void
+OpenALAudio::setLoop( const string &id, bool loop )
+{
+	m_impl->setLoop( id, loop );
+}
+
+void
 OpenALAudio::play( const string &id )
 {
-	play( id, false );
+	play( id, 0, 0 );
 }
 
 void
-OpenALAudio::play( const string &id, bool loop )
+OpenALAudio::play( const string &id, u32 from, u32 to )
 {
-	play( id, 0, 0, loop );
-}
-
-void
-OpenALAudio::play( const string &id, u32 from, u32 to, bool loop )
-{
-	m_impl->play( id, from, to, loop );
+	m_impl->play( id, from, to );
 }
 
 void

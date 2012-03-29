@@ -52,17 +52,17 @@ namespace Baukasten {
 		/*! \sa IAudio::setPosition() */
 		void setPosition( const string&, const vec3<float>& );
 
+		/*! \sa IAudio::setLoop() */
+		void setLoop( const string&, bool );
+
 		/*! \sa IAudio::setDirection() */
 		void setDirection( const string&, const vec3<float>& );
 
 		/*! \sa IAudio::play( const string& ) */
 		void play( const string& );
 
-		/*! \sa IAudio::play( const string&, bool ) */
-		void play( const string&, bool );
-
 		/*! \sa IAudio::play( const string&, u32, u32, bool ) */
-		void play( const string&, u32, u32, bool );
+		void play( const string&, u32, u32 );
 
 		/*! \sa IAudio::pause() */
 		void pause( const string& );

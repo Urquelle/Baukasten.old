@@ -121,6 +121,17 @@ namespace Baukasten {
 		virtual void setDirection( const string &id, const vec3<float> &direction ) = 0;
 
 		/*!
+		 * \brief set whether the audio resource's playback should be looped.
+		 *
+		 * sets the loop property of the source, which tells the service whether
+		 * to start the source all over again, once the end is reached.
+		 *
+		 * \param id key under which the audio resource is stored in the collection.
+		 * \param loop loop flag.
+		 */
+		virtual void setLoop( const string &id, bool loop ) = 0;
+
+		/*!
 		 * \brief play audio resource from the collection.
 		 *
 		 * plays an audio resource from the collection with the
@@ -135,20 +146,6 @@ namespace Baukasten {
 		 * \brief play audio resource from the collection.
 		 *
 		 * plays an audio resource from the collection with the given id. the
-		 * second argument notifies the service whether or not to loop
-		 * the resource. playes the resource from the beginning to the
-		 * end.
-		 *
-		 * \param id key under which the resource is stored in the collection.
-		 * \param loop indicates whether the resource should start all over, once
-		 * the end is reached.
-		 */
-		virtual void play( const string &id, bool loop ) = 0;
-
-		/*!
-		 * \brief play audio resource from the collection.
-		 *
-		 * plays an audio resource from the collection with the given id. the
 		 * additional arguments tell the service where to start playing the
 		 * source and where to end. the last argument tells the service whether
 		 * to loop the resource.
@@ -156,12 +153,10 @@ namespace Baukasten {
 		 * \param id key under which the resource is stored in the collection.
 		 * \param from starting point.
 		 * \param to stops playback at this point.
-		 * \param loop indicates whether the resource should start all over, once
-		 * the end is reached.
 		 *
 		 * \note from and to playback has not been implemented yet!
 		 */
-		virtual void play( const string &id, u32 from, u32 to, bool loop ) = 0;
+		virtual void play( const string &id, u32 from, u32 to ) = 0;
 
 		/*!
 		 * \brief pauses the playback.
