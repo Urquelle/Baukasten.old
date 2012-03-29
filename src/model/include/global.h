@@ -3,13 +3,12 @@
  *
  * \brief global include file for Model module.
  *
- * in this file are all declarations that are used in the
- * model module.
+ * this file contains all the basic declarations that
+ * are used across the model module.
  */
 
 /*! \defgroup action Action */
 /*! \defgroup entity Entity */
-/*! \defgroup interface Interface */
 /*! \defgroup manager Manager */
 /*! \defgroup model Model */
 
