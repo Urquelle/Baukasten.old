@@ -1,6 +1,16 @@
 #ifndef GLOBAL_H_SEZP3I7H
 #define GLOBAL_H_SEZP3I7H
 
+/*!
+ * \file input/include/global.h
+ * \brief global include file for Input module.
+ *
+ * this file contains all the basic declarations that
+ * are used across the input module.
+ */
+
+/*! \defgroup input Input */
+
 #include "core/Global"
 
 #include <sigc++/sigc++.h>
@@ -9,10 +19,12 @@
 namespace Baukasten {
 	using namespace std;
 
+	/*! possible states of a key. */
 	enum KeyState {
 		PRESSED, RELEASED
 	};
 
+	/*! all keys recognised by the Input interface. */
 	enum Key {
 		KEY_NONE = 0,
 
@@ -32,6 +44,7 @@ namespace Baukasten {
 		KEY_RETURN
 	};
 
+	/*! all modifier keys recognised by the Input interface. */
 	enum Modifier {
 		KEYMOD_NONE			= 1u << 0,
 		KEYMOD_LCTRL		= 1u << 1,
@@ -43,6 +56,7 @@ namespace Baukasten {
 		KEYMOD_ALT			= 1u << 7
 	};
 
+	/*! keyEvent signal. */
 	typedef sigc::signal<void, Key, Modifier> KeyEvent;
 
 } /* Baukasten */
