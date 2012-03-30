@@ -30,7 +30,7 @@ Services::~Services()
 }
 
 void
-Services::init( int argc, char* argv[] )
+Services::init( int argc, char** argv )
 {
 	m_argc = argc;
 	m_argv = argv;
