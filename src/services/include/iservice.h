@@ -46,8 +46,6 @@ namespace Baukasten {
 		 *
 		 * everything that is needed to clean up the service, should go in
 		 * this method.
-		 *
-		 * \param services pointer to Services object.
 		 */
 		virtual void shutdown() = 0;
 
