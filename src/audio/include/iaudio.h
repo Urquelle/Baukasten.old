@@ -15,7 +15,7 @@ namespace Baukasten {
 	 * \headerfile IAudio "audio/IAudio"
 	 *
 	 * defines methods which an implementation class has to
-	 * implement in order to be used as Audio Service.
+	 * provide in order to be used as Audio Service.
 	 *
 	 * \todo needs further improvement such as:
 	 * 	- ability to create a source.
