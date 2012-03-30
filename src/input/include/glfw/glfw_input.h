@@ -15,7 +15,6 @@ namespace Baukasten {
 		void      init( Services* );
 		KeyState  keyState( const Key ) const;
 		void      process() const;
-		string    serviceName() const { return "GLFW"; }
 		void      shutdown();
 	};
 } /* Baukasten */

@@ -13,7 +13,7 @@ void GLFWCALL inputHandler( int key, int state )
 	auto service = static_cast<GlfwInput*>(
 			Services::instance()->inputService() );
 
-	if ( service->serviceName() != "GLFW" )
+	if ( service->name() != "GLFW" )
 		return;
 
 	if ( state == GLFW_PRESS )
