@@ -42,6 +42,16 @@ namespace Baukasten {
 		virtual void init( Services *services ) = 0;
 
 		/*!
+		 * \brief method to shutdown the service.
+		 *
+		 * everything that is needed to clean up the service, should go in
+		 * this method.
+		 *
+		 * \param services pointer to Services object.
+		 */
+		virtual void shutdown() = 0;
+
+		/*!
 		 * \brief setter for the ready attribute.
 		 *
 		 * sets the value of the ready attribute of a service, which indicates

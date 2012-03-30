@@ -34,12 +34,6 @@ namespace Baukasten {
 		 */
 		IAudio( const string &name ) : IService( name ) {}
 
-		/*! \brief shutdown the audio service.
-		 *
-		 * shutdown the audio service.
-		 */
-		virtual void shutdown() = 0;
-
 		/*! \brief loads an audio file for later use.
 		 *
 		 * loads an audio file with the given path, and stores

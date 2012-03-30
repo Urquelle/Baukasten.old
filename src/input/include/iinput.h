@@ -15,7 +15,6 @@ namespace Baukasten {
 		IInput( const string& );
 
 		virtual void process() const = 0;
-		virtual void shutdown() {}
 
 		virtual KeyState keyState( const Key ) const = 0;
 
