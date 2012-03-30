@@ -1,7 +1,7 @@
 #ifndef Color_H_NGT4WABN
 #define Color_H_NGT4WABN
 
-#include "model/Global"
+#include "core/Global"
 
 namespace Baukasten {
 
