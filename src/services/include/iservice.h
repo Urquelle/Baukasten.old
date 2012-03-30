@@ -13,7 +13,7 @@ namespace Baukasten {
 	 * declares the methods that an interface class has to define, and
 	 * provides a common implementation for a couple of the methods.
 	 */
-	class IService {
+	class BAUKASTEN_EXPORT IService {
 	public:
 
 		/*!
