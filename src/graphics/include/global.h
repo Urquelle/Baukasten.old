@@ -4,6 +4,7 @@
 #include "core/Global"
 
 #include <string>
+#include <vector>
 
 namespace Baukasten {
 using namespace std;
