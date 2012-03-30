@@ -34,15 +34,6 @@ namespace Baukasten {
 		 */
 		IAudio( const string &name ) : IService( name ) {}
 
-		/*! \brief initialises the audio service.
-		 *
-		 * method to initialise anything in order to be able
-		 * to provide the audio service.
-		 *
-		 * \param services Services pointer.
-		 */
-		virtual void init( Services *services ) = 0;
-
 		/*! \brief shutdown the audio service.
 		 *
 		 * shutdown the audio service.
