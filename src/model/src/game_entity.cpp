@@ -2,6 +2,7 @@
 
 #include "core/Debug"
 #include "model/Action"
+#include "model/ActionManager"
 #include "model/Form"
 #include "model/LogicalSpace"
 
@@ -25,16 +26,20 @@ isAncestor( GameEntity *entity, GameEntity *child )
 
 GameEntity::GameEntity( const string &id ) :
 	Entity( id ),
-	m_type( 0 ),
-	m_parent( 0 )
+	m_actions( new ActionManager() ),
+	m_parent( 0 ),
+	m_states( new StateManager() ),
+	m_type( 0 )
 {
 }
 
 GameEntity::GameEntity( const GameEntity &rhs ) :
 	Entity( rhs.id() ),
-	m_type( rhs.type() ),
+	m_actions( new ActionManager() ),
 	m_form( rhs.form() ),
-	m_parent( rhs.parent() )
+	m_parent( rhs.parent() ),
+	m_states( new StateManager() ),
+	m_type( rhs.type() )
 {
 }
 
@@ -90,7 +95,7 @@ GameEntity::addState( const string &id, State *state )
 		sigc::mem_fun( this, &GameEntity::stateChanged )
 	);
 
-	StateManager::addState( id, state );
+	m_states->addState( id, state );
 }
 
 void
@@ -103,7 +108,7 @@ GameEntity::addState( State *state )
 bool
 GameEntity::hasState( const string &id ) const
 {
-	bool answer = StateManager::hasState( id );
+	bool answer = m_states->hasState( id );
 	if ( !answer && type() )
 		answer = type()->hasState( id );
 
@@ -166,11 +171,71 @@ GameEntity::parent() const
 	return m_parent;
 }
 
+Action*
+GameEntity::action( const string &id ) const
+{
+	return m_actions->action( id );
+}
+
+map<string, shared_ptr<Action> >
+GameEntity::actions() const
+{
+	return m_actions->actions();
+}
+
+list<Action*>
+GameEntity::invokedActions() const
+{
+	return m_actions->invokedActions();
+}
+
+void
+GameEntity::addAction( Action *action )
+{
+	m_actions->addAction( action );
+}
+
+void
+GameEntity::addAction( const string &id, Action *action )
+{
+	m_actions->addAction( id, action );
+}
+
+bool
+GameEntity::hasAction( const string &id ) const
+{
+	return m_actions->hasAction( id );
+}
+
+void
+GameEntity::dropAction( const string &id )
+{
+	m_actions->dropAction( id );
+}
+
+void
+GameEntity::invokeAction( const string &id )
+{
+	m_actions->invokeAction( id );
+}
+
+void
+GameEntity::invokeAction( const string &id, GameEntity *target )
+{
+	m_actions->invokeAction( id, target );
+}
+
+void
+GameEntity::invokeAction( const string &id, list<GameEntity*> targets )
+{
+	m_actions->invokeAction( id, targets );
+}
+
 void
 GameEntity::runActions()
 {
 	// run own actions first
-	auto al = invokedActions();
+	auto al = m_actions->invokedActions();
 	for_each( al.begin(), al.end(), []( Action *a ) {
 		a->run();
 	});

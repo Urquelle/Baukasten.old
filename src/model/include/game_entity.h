@@ -1,15 +1,14 @@
 #ifndef GAME_ENTITY_W1MJLLNE
 #define GAME_ENTITY_W1MJLLNE
 
-#include "model/ActionManager"
 #include "model/Entity"
 #include "model/EntityType"
 #include "model/Global"
-#include "model/StateManager"
 
 #include <sigc++/sigc++.h>
 
 namespace Baukasten {
+	class ActionManager;
 	class EntityType;
 	class Form;
 
@@ -32,8 +31,7 @@ namespace Baukasten {
 	 * to the GameEntity, that represent any attribute of your desired
 	 * entity (e. g. hitpoints, level, gender, ...).
 	 */
-	class BAUKASTEN_EXPORT GameEntity : public Entity,
-		public ActionManager, public StateManager {
+	class BAUKASTEN_EXPORT GameEntity : public Entity {
 	public:
 
 		/*!
@@ -164,7 +162,7 @@ namespace Baukasten {
 		template<class T>
 		T state( const string &id )
 		{
-			T state = StateManager::state<T>( id );
+			T state = m_states->state<T>( id );
 
 			if ( !state && type() ) {
 				state = type()->state<T>( id );
@@ -269,6 +267,36 @@ namespace Baukasten {
 		 */
 		GameEntity* parent() const;
 
+		/*! \sa ActionManager::action() */
+		Action* action( const string& ) const;
+
+		/*! \sa ActionManager::actions() */
+		map<string, shared_ptr<Action> > actions() const;
+
+		/*! \sa ActionManager::invokedActions() */
+		list<Action*> invokedActions() const;
+
+		/*! \sa ActionManager::addAction( Action* ) */
+		void addAction( Action* );
+
+		/*! \sa ActionManager::addAction( const string&, Action* ) */
+		void addAction( const string&, Action* );
+
+		/*! \sa ActionManager::hasAction() */
+		bool hasAction( const string& ) const;
+
+		/*! \sa ActionManager::dropAction() */
+		void dropAction( const string& );
+
+		/*! \sa ActionManager::invokeAction( const string& ) */
+		void invokeAction( const string& );
+
+		/*! \sa ActionManager::invokeAction( const string&, GameEntity* ) */
+		void invokeAction( const string&, GameEntity* );
+
+		/*! \sa ActionManager::invokeAction( const string&, list<GameEntity*> ) */
+		void invokeAction( const string&, list<GameEntity*> );
+
 		/*!
 		 * \brief runs all invoked actions.
 		 *
@@ -310,10 +338,12 @@ namespace Baukasten {
 	private:
 		void stateChanged( State* );
 
-		EntityType*			m_type;
-		shared_ptr<Form>	m_form;
-		GameEntityMap		m_children;
-		GameEntity*			m_parent;
+		ActionManager*    m_actions;
+		GameEntityMap     m_children;
+		shared_ptr<Form>  m_form;
+		GameEntity*       m_parent;
+		StateManager*     m_states;
+		EntityType*       m_type;
 
 		// signals
 		StateSignal		m_stateChanged;

@@ -4,17 +4,7 @@
 #include "model/Global"
 
 #include "graphics/IGraphics"
-#include "model/Action"
-#include "model/ActionLua"
-#include "model/Drawable"
-#include "model/Entity"
-#include "model/EntityType"
-#include "model/Form"
-#include "model/GameEntity"
-#include "model/GenericState"
-#include "model/LogicalSpace"
-#include "model/State"
-#include "model/VirtualSpace"
+#include "model/Model"
 
 #include "model/include/slb/SLB.hpp"
 
@@ -148,8 +138,6 @@ void wrapClasses()
 		.comment("Wrapper for the GameEntity Class.")
 		.constructor<const std::string&>()
 		.inherits<Entity>()
-		.inherits<StateManager>()
-		.inherits<ActionManager>()
 		.set("setType", &GameEntity::setType)
 			.param("the EntityType.")
 		.set("type", &GameEntity::type)
