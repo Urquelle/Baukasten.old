@@ -4,8 +4,6 @@
 #ifndef NDEBUG
 
 #include <iostream>
-#include <cassert>
-#include <cstdlib>
 
 using namespace std;
 
