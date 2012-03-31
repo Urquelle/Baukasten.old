@@ -12,6 +12,7 @@ namespace Baukasten {
 	typedef unsigned short u16;
 	typedef signed   int   u32;
 	typedef unsigned int   s32;
+	typedef float          f32;
 
 	enum Dim {
 		BK_X = 0, BK_WIDTH = 0,
@@ -19,6 +20,56 @@ namespace Baukasten {
 		BK_Z,     BK_W
 	};
 
+}
+
+/*!
+ * \brief swap 2 byte integer.
+ *
+ * swaps LSB <-> MSB of a 2 byte integer.
+ *
+ * \param value 16 bit / 2 byte integer value to be swapped.
+ */
+inline Baukasten::u16
+_bk_swap_u16( Baukasten::u16 value )
+{
+	return ( ( ( value & 0x00FF ) << 8 ) | ( ( value & 0xFF00 >> 8 ) ) );
+}
+
+/*!
+ * \brief swap 4 byte integer.
+ *
+ * swaps the order of bytes of a 4 byte integer.
+ *
+ * \param value 32 bit / 4 byte integer value to be swapped.
+ */
+inline Baukasten::u32
+_bk_swap_u32( Baukasten::u32 value )
+{
+	return (
+		( ( value & 0x000000FF ) << 24 ) | ( ( value & 0x0000FF00 << 8 ) ) |
+		( ( value & 0xFF000000 ) >> 24 ) | ( ( value & 0x00FF0000 >> 8 ) )
+	);
+}
+
+union _bk_u32f32 {
+	Baukasten::u32 m_asu32;
+	Baukasten::f32 m_asf32;
+};
+
+/*!
+ * \brief swap 4 byte float.
+ *
+ * swaps the order of bytes of a 4 byte float.
+ *
+ * \param value 32 bit / 4 byte  float value to be swapped.
+ */
+inline Baukasten::f32
+_bk_swap_f32( Baukasten::f32 value )
+{
+	_bk_u32f32 v;
+	v.m_asf32 = value;
+	v.m_asu32 = _bk_swap_u32( v.m_asu32 );
+	return v.m_asu32;
 }
 
 #define BK_RGB(r, g, b) \
