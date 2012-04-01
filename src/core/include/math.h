@@ -3,6 +3,8 @@
 
 #include "core/Global"
 
+#include <cmath>
+
 namespace Baukasten {
 
 	template<class T>
@@ -10,10 +12,9 @@ namespace Baukasten {
 		T data[2];
 
 		vec2() { vec2( (T)0, (T)0 ); }
-		vec2( T _f, T _s ) : data({_f, _s }) {}
-		vec2( const vec2<T> &other )
+		vec2( T _f, T _s ) : data{_f, _s } {}
+		vec2( const vec2<T> &other ) : data{ other.data[0], other.data[1] }
 		{
-			data = { other.data[0], other.data[1] };
 		}
 
 		vec2<T>& operator=( const vec2<T> &other )
@@ -40,11 +41,17 @@ namespace Baukasten {
 
 		vec2<T>& operator+( const vec2<T> &other )
 		{
-			if ( this == &other )
-				return *this;
-
 			data[0] += other.data[0];
 			data[1] += other.data[1];
+
+			return *this;
+		}
+
+		vec2<T>& operator+( const T value )
+		{
+			data[0] += value;
+			data[1] += value;
+
 			return *this;
 		}
 
@@ -100,16 +107,88 @@ namespace Baukasten {
 
 		vec3<T>& operator+( const vec3<T> &other )
 		{
-			if ( this == &other )
-				return *this;
-
 			data[0] += other.data[0];
 			data[1] += other.data[1];
 			data[2] += other.data[2];
+
 			return *this;
 		}
 
-		T operator[]( const unsigned int i ) const
+		vec3<T>& operator+( const T value )
+		{
+			data[0] += value;
+			data[1] += value;
+			data[2] += value;
+
+			return *this;
+		}
+
+		vec3<T>& operator*( const vec3<T> &other )
+		{
+			data[0] *= other.data[0];
+			data[1] *= other.data[1];
+			data[2] *= other.data[2];
+
+			return *this;
+		}
+
+		vec3<T>& operator*( const T value )
+		{
+			data[0] *= value;
+			data[1] *= value;
+			data[2] *= value;
+
+			return *this;
+		}
+
+		T mag() const
+		{
+			return sqrt(
+				data[0] * data[0] +
+				data[1] * data[1] +
+				data[2] * data[2]
+			);
+		}
+
+		T magSqr() const
+		{
+			return(
+				data[0]*data[0]+
+				data[1]*data[1]+
+				data[2]*data[2]
+			);
+		}
+
+		vec3<T> norm() const
+		{
+			vec3<T> t( *this );
+			T n = 1/t.mag();
+
+			return ( t*n );
+		}
+
+		T dot( const vec3<T> &other )
+		{
+			return (
+				data[0] * other.data[0] +
+				data[1] * other.data[1] +
+				data[2] * other.data[2]
+			);
+		}
+
+		/*!
+		 * \brief cross product of two vectors.
+		 */
+		vec3<T> cross( const vec3<T> &other )
+		{
+			return {
+				data[BK_Y]*other.data[BK_Z] - data[BK_Z]*other.data[BK_Y],
+				data[BK_Z]*other.data[BK_X] - data[BK_X]*other.data[BK_Z],
+				data[BK_X]*other.data[BK_Y] - data[BK_Y]*other.data[BK_X]
+			};
+		}
+
+		T operator[]( const u32 i ) const
 		{
 			if ( i > 2 || i < 0 ) return -1;
 			return data[i];
@@ -124,9 +203,12 @@ namespace Baukasten {
 			if ( i > 2 || i < 0 ) return;
 			data[i] = value;
 		}
-
-		// TODO: calculate normal
 	};
+
+	typedef vec2<u32> vec2i;
+	typedef vec2<f32> vec2f;
+	typedef vec3<u32> vec3i;
+	typedef vec3<f32> vec3f;
 } /* Baukasten */
 
 #endif /* end of include guard: STRUCTURES_H_IESIJQDA */
