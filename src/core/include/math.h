@@ -55,6 +55,54 @@ namespace Baukasten {
 			return *this;
 		}
 
+		vec2<T>& operator*( const vec2<T> &other )
+		{
+			data[0] *= other.data[0];
+			data[1] *= other.data[1];
+
+			return *this;
+		}
+
+		vec2<T>& operator*( const T value )
+		{
+			data[0] *= value;
+			data[1] *= value;
+
+			return *this;
+		}
+
+		T mag() const
+		{
+			return sqrt(
+				data[0] * data[0] +
+				data[1] * data[1]
+			);
+		}
+
+		T magSqr() const
+		{
+			return(
+				data[0]*data[0]+
+				data[1]*data[1]
+			);
+		}
+
+		vec2<T> norm() const
+		{
+			vec2<T> t( *this );
+			T n = 1/t.mag();
+
+			return ( t*n );
+		}
+
+		T dot( const vec2<T> &other )
+		{
+			return (
+				data[0] * other.data[0] +
+				data[1] * other.data[1]
+			);
+		}
+
 		T operator[]( const int i ) const
 		{
 			if ( i > 1 || i < 0 ) return -1;
