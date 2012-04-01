@@ -1,5 +1,9 @@
 option( WITH_LUA  "compile with Lua support." TRUE )
 
+if( ASSERTIONS_ENABLED )
+	add_definitions( -DASSERTIONS_ENABLED )
+endif()
+
 include( audio/CMakeLists.txt )
 include( core/CMakeLists.txt )
 include( graphics/CMakeLists.txt )

@@ -1,5 +1,6 @@
 #include "audio/AudioImpl"
 
+#include "core/Assert"
 #include "core/Debug"
 #include "services/Services"
 
