@@ -45,67 +45,67 @@ namespace Baukasten {
 		 * \param position a three point vector which represents
 		 * the position of the object in a 3d space.
 		 */
-		void setPosition( const vec3<float> );
+		void setPosition( const vec3f );
 
 		/*! \brief getter method for position. */
-		const vec3<float> position() const;
+		const vec3f position() const;
 
-		void setSize( const vec2<float> );
+		void setSize( const vec2f );
 
-		const vec2<float> size() const;
+		const vec2f size() const;
 
 		/*!
 		 * \brief set the rotation around the x-axis.
 		 *
 		 * \param pitch rotation value.
 		 */
-		void setPitch( const float );
+		void setPitch( const f32 );
 
 		/*! getter method for the rotation around the x-axis. */
-		const float pitch() const;
+		const f32 pitch() const;
 
 		/*! setter method for object's rotation around the y-axis. */
-		void setYaw( const float );
+		void setYaw( const f32 );
 
 		/*! getter method for object's rotation around the y-axis. */
-		const float yaw() const;
+		const f32 yaw() const;
 
 		/*! setter method for object's rotation around the z-axis. */
-		void setRoll( const float );
+		void setRoll( const f32 );
 
 		/*! getter method for object's rotation around the z-axis. */
-		const float roll() const;
+		const f32 roll() const;
 
 		/*! setter method for object's scale ratio. */
-		void setScale( const float );
+		void setScale( const f32 );
 
 		/*! getter method for object's scale ratio. */
-		const float scale() const;
+		const f32 scale() const;
 
 		/*! sets the visibility of the object. */
 		virtual void setVisible( bool );
 
 	protected:
 		// position of the object
-		vec3<float>   m_position;
+		vec3f m_position;
 
 		// size of the object
-		vec2<float>	m_size;
+		vec2f m_size;
 
 		// orientation the object is looking at
-		vec3<float>	m_orientation;
+		vec3f m_orientation;
 
-		// rotation around the x-axis
-		float   m_pitch;
+		// rotation about the x-axis
+		f32 m_pitch;
 
-		// rotation around the y-axis
-		float   m_yaw;
+		// rotation about the y-axis
+		f32 m_yaw;
 
-		// rotation around the z-axis
-		float   m_roll;
+		// rotation about the z-axis
+		f32 m_roll;
 
 		// scaling factor of the object
-		float   m_scale;
+		f32 m_scale;
 	};
 }
 
