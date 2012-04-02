@@ -82,9 +82,6 @@ namespace Baukasten {
 		/*! getter method for object's scale ratio. */
 		const f32 scale() const;
 
-		/*! sets the visibility of the object. */
-		virtual void setVisible( bool );
-
 	protected:
 		// position of the object
 		vec3f m_position;

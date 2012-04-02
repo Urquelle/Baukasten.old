@@ -39,9 +39,7 @@ void wrapClasses()
 		.const_set("roll", &Drawable::roll)
 		.set("setScale", &Drawable::setScale)
 			.param("float value")
-		.const_set("scale", &Drawable::scale)
-		.set("setVisible", &Drawable::setVisible)
-			.param("bool value to set the visibility");
+		.const_set("scale", &Drawable::scale);
 
 	// register EntityManager class
 	SLB::Class<EntityManager>("EntityManager")
