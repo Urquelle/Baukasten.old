@@ -18,7 +18,7 @@ Color::Color() :
 {
 }
 
-Color::Color( u32 r, u32 g, u32 b, u32 a ) :
+Color::Color( const u32 r, const u32 g, const u32 b, const u32 a ) :
 	m_color( BK_RGBA( r, g, b, a ) )
 {
 }
