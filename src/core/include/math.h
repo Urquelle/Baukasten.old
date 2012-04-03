@@ -7,16 +7,50 @@
 
 namespace Baukasten {
 
+	/*!
+	 * \brief two dimension vector struct.
+	 * \ingroup core math
+	 * \headerfile Math "core/Math"
+	 *
+	 * provides basic functionality for dealing with 2d vector
+	 * manipulation.
+	 */
 	template<class T>
 	struct vec2 {
 		T data[2];
 
+		/*! \brief constructor */
 		vec2() { vec2( (T)0, (T)0 ); }
+
+		/*!
+		 * \brief constructor
+		 *
+		 * initialises internal data with the given values.
+		 *
+		 * \param _f value for the first component.
+		 * \param _s value for the second component.
+		 */
 		vec2( T _f, T _s ) : data{_f, _s } {}
+
+		/*!
+		 * \brief copy constructor.
+		 *
+		 * copies the data from the given vec2 struct.
+		 *
+		 * \param other vec2 struct.
+		 */
 		vec2( const vec2<T> &other ) : data{ other.data[0], other.data[1] }
 		{
 		}
 
+		/*!
+		 * \brief assignment operator.
+		 *
+		 * assignes the data from the given vec2 struct.
+		 *
+		 * \param other vec2 struct to copy from.
+		 * \return reference to altered vec2 struct.
+		 */
 		vec2<T>& operator=( const vec2<T> &other )
 		{
 			if ( this == &other )
@@ -26,6 +60,14 @@ namespace Baukasten {
 			return *this;
 		}
 
+		/*!
+		 * \brief equality operator.
+		 *
+		 * compare two vec2 structs.
+		 *
+		 * \param other vec2 struct to compare with.
+		 * \return true if every component of the two structs are the same, false otherwise.
+		 */
 		bool operator==( const vec2<T> &other )
 		{
 			return (
@@ -34,11 +76,27 @@ namespace Baukasten {
 			);
 		}
 
+		/*!
+		 * \brief unequality operator.
+		 *
+		 * compare two vec2 structs for their unequality.
+		 *
+		 * \param other vec2 struct to compare with.
+		 * \return false if at least one component differs, true otherwise.
+		 */
 		bool operator!=( const vec2<T> &other )
 		{
 			return !operator==(other);
 		}
 
+		/*!
+		 * \brief addition operator.
+		 *
+		 * adds the given vec2 struct's components.
+		 *
+		 * \param other vec2 struct which components are added.
+		 * \return reference to an altered vec2 struct.
+		 */
 		vec2<T>& operator+( const vec2<T> &other )
 		{
 			data[0] += other.data[0];
@@ -47,6 +105,14 @@ namespace Baukasten {
 			return *this;
 		}
 
+		/*!
+		 * \brief addition operator.
+		 *
+		 * adds the given value to each component of the vec2.
+		 *
+		 * \param value value that is added.
+		 * \return reference to an altered vec2 struct.
+		 */
 		vec2<T>& operator+( const T value )
 		{
 			data[0] += value;
@@ -55,6 +121,15 @@ namespace Baukasten {
 			return *this;
 		}
 
+		/*!
+		 * \brief multiplication operator.
+		 *
+		 * multiplicates every field i of the component with the field
+		 * j of the given component.
+		 *
+		 * \param other vec2 struct.
+		 * \return reference to an altered vec2 struct.
+		 */
 		vec2<T>& operator*( const vec2<T> &other )
 		{
 			data[0] *= other.data[0];
@@ -63,6 +138,14 @@ namespace Baukasten {
 			return *this;
 		}
 
+		/*!
+		 * \brief multiplication operator.
+		 *
+		 * multiplicates every field of the component with the given value.
+		 *
+		 * \param value value that is added.
+		 * \return reference to an altered vec2 struct.
+		 */
 		vec2<T>& operator*( const T value )
 		{
 			data[0] *= value;
@@ -71,6 +154,14 @@ namespace Baukasten {
 			return *this;
 		}
 
+		/*!
+		 * \brief calculates the magnitude.
+		 *
+		 * calculates the magnitude of the vec2 struct fields.
+		 *
+		 * \sqrt{ x^2 + y^2 }
+		 * \return calculated magnitude scalar.
+		 */
 		T mag() const
 		{
 			return sqrt(
@@ -79,6 +170,14 @@ namespace Baukasten {
 			);
 		}
 
+		/*!
+		 * \brief calculates the magnitude^2.
+		 *
+		 * calculates the magnitude^2 of the vec2 struct fields.
+		 *
+		 * x^2 + y^2
+		 * \return calculated magnitude^2 scalar.
+		 */
 		T magSqr() const
 		{
 			return(
@@ -87,6 +186,13 @@ namespace Baukasten {
 			);
 		}
 
+		/*!
+		 * \brief returns normalised vector.
+		 *
+		 * calculates and returns a normalised vector.
+		 *
+		 * \return normalised vec2 struct.
+		 */
 		vec2<T> norm() const
 		{
 			vec2<T> t( *this );
@@ -95,6 +201,14 @@ namespace Baukasten {
 			return ( t*n );
 		}
 
+		/*!
+		 * \brief calculates the dot product.
+		 *
+		 * calculates the dot product with the given vec2.
+		 *
+		 * \param other vec2 struct.
+		 * \return dot product scalar.
+		 */
 		T dot( const vec2<T> &other )
 		{
 			return (
@@ -103,15 +217,20 @@ namespace Baukasten {
 			);
 		}
 
+		/*! operator[] */
 		T operator[]( const int i ) const
 		{
 			if ( i > 1 || i < 0 ) return -1;
 			return data[i];
 		}
 
+		/*! getter for the first element. */
 		inline T first() const { return data[0]; }
+
+		/*! getter for the second element. */
 		inline T second() const { return data[1]; }
 
+		/*! set the i-th element to the given value. */
 		void set( int i, const T &value )
 		{
 			if ( i > 1 || i < 0 ) return;
@@ -123,13 +242,40 @@ namespace Baukasten {
 	struct vec3 {
 		T data[3];
 
+		/*! \brief constructor */
 		vec3() { vec3( (T)0, (T)0, (T)0 ); }
+
+		/*!
+		 * \brief constructor
+		 *
+		 * initialises internal data with the given values.
+		 *
+		 * \param _f value for the first component.
+		 * \param _s value for the second component.
+		 * \param _t value for the third component.
+		 */
 		vec3( T _f, T _s, T _t ) : data({ _f, _s, _t }) {}
+
+		/*!
+		 * \brief copy constructor.
+		 *
+		 * copies the data from the given vec3 struct.
+		 *
+		 * \param other vec3 struct.
+		 */
 		vec3( const vec3<T> &other )
 		{
 			data = { other.data[0], other.data[1], other[2] };
 		}
 
+		/*!
+		 * \brief assignment operator.
+		 *
+		 * assignes the data from the given vec3 struct.
+		 *
+		 * \param other vec3 struct to copy from.
+		 * \return reference to altered vec3 struct.
+		 */
 		vec3<T>& operator=( const vec3<T> &other )
 		{
 			if ( this == &other )
@@ -139,6 +285,14 @@ namespace Baukasten {
 			return *this;
 		}
 
+		/*!
+		 * \brief equality operator.
+		 *
+		 * compare two vec3 structs.
+		 *
+		 * \param other vec3 struct to compare with.
+		 * \return true if every component of the two structs are the same, false otherwise.
+		 */
 		bool operator==( const vec3<T> &other )
 		{
 			return (
@@ -148,11 +302,27 @@ namespace Baukasten {
 			);
 		}
 
+		/*!
+		 * \brief unequality operator.
+		 *
+		 * compare two vec3 structs for their unequality.
+		 *
+		 * \param other vec3 struct to compare with.
+		 * \return false if at least one component differs, true otherwise.
+		 */
 		bool operator!=( const vec3<T> &other )
 		{
 			return !operator==(other);
 		}
 
+		/*!
+		 * \brief addition operator.
+		 *
+		 * adds the given vec3 struct's components.
+		 *
+		 * \param other vec3 struct which components are added.
+		 * \return reference to an altered vec3 struct.
+		 */
 		vec3<T>& operator+( const vec3<T> &other )
 		{
 			data[0] += other.data[0];
@@ -162,6 +332,14 @@ namespace Baukasten {
 			return *this;
 		}
 
+		/*!
+		 * \brief addition operator.
+		 *
+		 * adds the given value to each component of the vec3.
+		 *
+		 * \param value value that is added.
+		 * \return reference to an altered vec3 struct.
+		 */
 		vec3<T>& operator+( const T value )
 		{
 			data[0] += value;
@@ -171,6 +349,15 @@ namespace Baukasten {
 			return *this;
 		}
 
+		/*!
+		 * \brief multiplication operator.
+		 *
+		 * multiplicates every field i of the component with the field
+		 * j of the given component.
+		 *
+		 * \param other vec3 struct.
+		 * \return reference to an altered vec3 struct.
+		 */
 		vec3<T>& operator*( const vec3<T> &other )
 		{
 			data[0] *= other.data[0];
@@ -180,6 +367,14 @@ namespace Baukasten {
 			return *this;
 		}
 
+		/*!
+		 * \brief multiplication operator.
+		 *
+		 * multiplicates every field of the component with the given value.
+		 *
+		 * \param value value that is added.
+		 * \return reference to an altered vec3 struct.
+		 */
 		vec3<T>& operator*( const T value )
 		{
 			data[0] *= value;
@@ -189,6 +384,14 @@ namespace Baukasten {
 			return *this;
 		}
 
+		/*!
+		 * \brief calculates the magnitude.
+		 *
+		 * calculates the magnitude of the vec3 struct fields.
+		 *
+		 * \sqrt{ x^2 + y^2 + z^2 }
+		 * \return calculated magnitude scalar.
+		 */
 		T mag() const
 		{
 			return sqrt(
@@ -198,6 +401,14 @@ namespace Baukasten {
 			);
 		}
 
+		/*!
+		 * \brief calculates the magnitude^2.
+		 *
+		 * calculates the magnitude^2 of the vec3 struct fields.
+		 *
+		 * x^2 + y^2 + z^2
+		 * \return calculated magnitude^2 scalar.
+		 */
 		T magSqr() const
 		{
 			return(
@@ -207,6 +418,13 @@ namespace Baukasten {
 			);
 		}
 
+		/*!
+		 * \brief returns normalised vector.
+		 *
+		 * calculates and returns a normalised vector.
+		 *
+		 * \return normalised vec3 struct.
+		 */
 		vec3<T> norm() const
 		{
 			vec3<T> t( *this );
@@ -215,6 +433,14 @@ namespace Baukasten {
 			return ( t*n );
 		}
 
+		/*!
+		 * \brief calculates the dot product.
+		 *
+		 * calculates the dot product with the given vec3.
+		 *
+		 * \param other vec3 struct.
+		 * \return dot product scalar.
+		 */
 		T dot( const vec3<T> &other )
 		{
 			return (
@@ -226,6 +452,8 @@ namespace Baukasten {
 
 		/*!
 		 * \brief cross product of two vectors.
+		 * \param other vec3 struct.
+		 * \return vec3 struct.
 		 */
 		vec3<T> cross( const vec3<T> &other )
 		{
@@ -236,16 +464,23 @@ namespace Baukasten {
 			};
 		}
 
+		/*! operator[] */
 		T operator[]( const u32 i ) const
 		{
 			if ( i > 2 || i < 0 ) return -1;
 			return data[i];
 		}
 
+		/*! getter for the first element. */
 		inline T first() const { return data[0]; }
+
+		/*! getter for the second element. */
 		inline T second() const { return data[1]; }
+
+		/*! getter for the third element. */
 		inline T third() const { return data[2]; }
 
+		/*! set the i-th element to the given value. */
 		void set( int i, const T &value )
 		{
 			if ( i > 2 || i < 0 ) return;

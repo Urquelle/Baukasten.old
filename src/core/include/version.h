@@ -7,9 +7,17 @@
 
 namespace Baukasten {
 	using namespace std;
+
+	/*! lib's version string */
 	string version();
+
+	/*! lib's major version */
 	u32 major();
+
+	/*! lib's minor version */
 	u32 minor();
+
+	/*! lib's patch version */
 	u32 patch();
 } /* Baukasten */
 

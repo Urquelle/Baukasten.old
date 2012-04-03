@@ -1,6 +1,18 @@
 #ifndef GLOBAL_H_ZBKWGLP0
 #define GLOBAL_H_ZBKWGLP0
 
+/*!
+ * \file core/include/global.h
+ *
+ * \brief global include file for Core module.
+ *
+ * this file contains all the basic declarations that
+ * are used across the core module.
+ */
+
+/*! \defgroup core Core */
+/*! \defgroup math Mathimatics */
+
 #include <string>
 
 namespace Baukasten {
