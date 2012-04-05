@@ -26,9 +26,7 @@ ScoreForm::render()
 	std::stringstream sScore;
 	sScore << "Your Score: " << score;
 
-	Color color( 128, 0, 0, 255 );
-
 	// draw score
-	graphics()->drawText( m_font, sScore.str(), position(), color );
+	graphics()->drawText( m_font, sScore.str(), position(), Color( Color::BK_GREEN ) );
 }
 
