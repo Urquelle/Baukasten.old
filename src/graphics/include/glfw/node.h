@@ -61,14 +61,14 @@ namespace Baukasten {
 		void setPattern( const u16 );
 		u16 pattern() const;
 
-		void setWidth( const float );
-		float width() const;
+		void setWidth( const f32 );
+		f32 width() const;
 
 	private:
 		void prepare();
 		void cleanup();
 
-		float m_width;
+		f32 m_width;
 		u16 m_stipple;
 	};
 
@@ -101,7 +101,7 @@ namespace Baukasten {
 	class TextNodePrivate;
 	class TextNode : public Node {
 	public:
-		TextNode( IFont*, const string&, const vec3<float>&, const Color& );
+		TextNode( IFont*, const string&, const vec3<f32>&, const Color& );
 		virtual ~TextNode();
 
 		void render();

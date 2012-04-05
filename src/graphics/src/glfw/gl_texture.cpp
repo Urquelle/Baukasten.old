@@ -11,7 +11,7 @@ namespace Baukasten {
 	class GlTexturePrivate {
 	public:
 		GlTexturePrivate( GlTexture *master, const string &path,
-				const vec2<float> &size ) :
+				const vec2<f32> &size ) :
 			m_master( master ),
 			m_size( size ),
 			m_source( path )

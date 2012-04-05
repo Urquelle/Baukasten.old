@@ -12,7 +12,7 @@ namespace Baukasten {
 
 	class BAUKASTEN_EXPORT GlTexture : public ITexture {
 	public:
-		GlTexture( const string&, const vec2<float>& );
+		GlTexture( const string&, const vec2<f32>& );
 		virtual ~GlTexture();
 
 		string  source() const;

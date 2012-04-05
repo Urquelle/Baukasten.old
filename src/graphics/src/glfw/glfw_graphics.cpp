@@ -67,7 +67,7 @@ public:
 		glfwSwapBuffers();
 	}
 
-	float
+	f32
 	fps() const
 	{
 		return m_fps;
@@ -80,14 +80,14 @@ public:
 	}
 
 	void
-	drawInfo( const vec3<float> &pos, bool compact,
+	drawInfo( const vec3<f32> &pos, bool compact,
 			IGraphics::InfoFlags flags = IGraphics::DRAW_ALL )
 	{
-		float x = pos[BK_X], y = pos[BK_Y];
+		f32 x = pos[BK_X], y = pos[BK_Y];
 
 		Color white( { 255, 255, 255, 120 } );
 		Color black( { 0, 0, 0, 255 } );
-		vec2<float> size({ 200, 150 });
+		vec2<f32> size({ 200, 150 });
 
 		if ( compact )
 			size = { 300, 20 };
@@ -131,11 +131,11 @@ public:
 	}
 
 	void
-	drawCircle( const vec3<float> &pos, const u32 radius, const Color &c )
+	drawCircle( const vec3<f32> &pos, const u32 radius, const Color &c )
 	{
 		glBegin( GL_TRIANGLE_FAN );
 			glVertex2f( pos[BK_X], pos[BK_Y] );
-			for ( float i = 0; i <= 2 * M_PI + 0.1f; i += 0.1f ) {
+			for ( f32 i = 0; i <= 2 * M_PI + 0.1f; i += 0.1f ) {
 				glVertex2f(
 					pos[BK_X] + sin( i ) * radius,
 					pos[BK_Y] + cos( i ) * radius
@@ -145,8 +145,8 @@ public:
 	}
 
 	void
-	drawImage( const string &path, const vec2<float> &size,
-			const vec3<float> &pos )
+	drawImage( const string &path, const vec2<f32> &size,
+			const vec3<f32> &pos )
 	{
 		Image image( path );
 		auto t = m_cache.find( path );
@@ -157,13 +157,13 @@ public:
 	}
 
 	void
-	drawImage( Image &image, const vec2<float> &size, const vec3<float> &pos )
+	drawImage( Image &image, const vec2<f32> &size, const vec3<f32> &pos )
 	{
 		// transform to normalised [-1.0, 1.0]
-		float xMin = _normalise( m_windowSize[BK_WIDTH], pos[BK_X] );
-		float xMax = _normalise( m_windowSize[BK_WIDTH], pos[BK_X] + size[BK_WIDTH] );
-		float yMin = _normalise( m_windowSize[BK_HEIGHT], pos[BK_Y] ) * -1;
-		float yMax = _normalise( m_windowSize[BK_HEIGHT], pos[BK_Y] + size[BK_HEIGHT] ) * -1;
+		f32 xMin = _normalise( m_windowSize[BK_WIDTH], pos[BK_X] );
+		f32 xMax = _normalise( m_windowSize[BK_WIDTH], pos[BK_X] + size[BK_WIDTH] );
+		f32 yMin = _normalise( m_windowSize[BK_HEIGHT], pos[BK_Y] ) * -1;
+		f32 yMax = _normalise( m_windowSize[BK_HEIGHT], pos[BK_Y] + size[BK_HEIGHT] ) * -1;
 
 		GLfloat vertices[] = {
 			// vertex coordinates
@@ -223,17 +223,17 @@ public:
 	}
 
 	void
-	drawLine( const vec3<float> &from, const vec3<float> &to,
-			const Color &c, const float width = 1.0f )
+	drawLine( const vec3<f32> &from, const vec3<f32> &to,
+			const Color &c, const f32 width = 1.0f )
 	{
-		float r, g, b, a;
+		f32 r, g, b, a;
 		c.rgbF( &r, &g, &b, &a );
 
-		float xDiv = m_windowSize[BK_X] / 2, yDiv = m_windowSize[BK_Y] / 2;
-		float fromX = ( from[BK_X] - xDiv ) / xDiv;
-		float fromY = ( from[BK_Y] - yDiv ) / yDiv * -1;
-		float toX = ( to[BK_X] - xDiv ) / xDiv;
-		float toY = ( to[BK_Y] - yDiv ) / yDiv * -1;
+		f32 xDiv = m_windowSize[BK_X] / 2, yDiv = m_windowSize[BK_Y] / 2;
+		f32 fromX = ( from[BK_X] - xDiv ) / xDiv;
+		f32 fromY = ( from[BK_Y] - yDiv ) / yDiv * -1;
+		f32 toX = ( to[BK_X] - xDiv ) / xDiv;
+		f32 toY = ( to[BK_Y] - yDiv ) / yDiv * -1;
 
 		GLfloat vertices[] = {
 			fromX, fromY, from[BK_Z], 1.0f,
@@ -258,13 +258,13 @@ public:
 	}
 
 	void
-	drawPoint( const vec3<float> &pos, const u32 size, const Color &c )
+	drawPoint( const vec3<f32> &pos, const u32 size, const Color &c )
 	{
-		float r, g, b, a;
+		f32 r, g, b, a;
 		c.rgbF( &r, &g, &b, &a );
 
-		float x = _normalise( m_windowSize[BK_WIDTH], pos[BK_X] );
-		float y = _normalise( m_windowSize[BK_HEIGHT], pos[BK_Y] ) * -1;
+		f32 x = _normalise( m_windowSize[BK_WIDTH], pos[BK_X] );
+		f32 y = _normalise( m_windowSize[BK_HEIGHT], pos[BK_Y] ) * -1;
 
 		GLfloat vertices[] = {
 			x, y, pos[BK_Z], 1.0f,
@@ -287,17 +287,17 @@ public:
 	}
 
 	void
-	drawRect( const vec2<float> &size, const vec3<float> &pos,
+	drawRect( const vec2<f32> &size, const vec3<f32> &pos,
 			const Color &c, bool outline = false )
 	{
-		float r, g, b, a;
+		f32 r, g, b, a;
 		c.rgbF( &r, &g, &b, &a );
 
 		// transform display space coordinates to clip space
-		float xMin = _normalise( m_windowSize[BK_WIDTH], pos[BK_X] );
-		float xMax = _normalise( m_windowSize[BK_WIDTH], pos[BK_X] + size[BK_WIDTH] );
-		float yMin = _normalise( m_windowSize[BK_HEIGHT], pos[BK_Y] ) * -1;
-		float yMax = _normalise( m_windowSize[BK_HEIGHT], pos[BK_Y] + size[BK_HEIGHT] ) * -1;
+		f32 xMin = _normalise( m_windowSize[BK_WIDTH], pos[BK_X] );
+		f32 xMax = _normalise( m_windowSize[BK_WIDTH], pos[BK_X] + size[BK_WIDTH] );
+		f32 yMin = _normalise( m_windowSize[BK_HEIGHT], pos[BK_Y] ) * -1;
+		f32 yMax = _normalise( m_windowSize[BK_HEIGHT], pos[BK_Y] + size[BK_HEIGHT] ) * -1;
 
 		GLfloat vertices[] = {
 			xMin, yMin, pos[BK_Z], 1.0f,
@@ -326,26 +326,26 @@ public:
 	}
 
 	void
-	drawText( const string &text, const vec3<float> &pos, const Color &c )
+	drawText( const string &text, const vec3<f32> &pos, const Color &c )
 	{
 		drawText( m_font, text, pos, c );
 	}
 
 	void
-	drawText( IFont *font, const string &text, const vec3<float> &pos, const Color &c )
+	drawText( IFont *font, const string &text, const vec3<f32> &pos, const Color &c )
 	{
 		TextNode *node = new TextNode( font, text, pos, c );
 		m_nodes.push_back( node );
 	}
 
 	void
-	drawPolygon( const vector<vec3<float>> &vertices,
+	drawPolygon( const vector<vec3<f32>> &vertices,
 			const Color &c, bool outline = true )
 	{
-		float r, g, b, a;
+		f32 r, g, b, a;
 		c.rgbF( &r, &g, &b, &a );
 
-		vector<float> normVertices;
+		vector<f32> normVertices;
 
 		// push vertices
 		for (s32 i = 0; i < vertices.size(); ++i) {
@@ -393,7 +393,7 @@ public:
 		m_windowSize = size;
 	}
 
-	float
+	f32
 	time() const
 	{
 		return glfwGetTime();
@@ -402,13 +402,13 @@ public:
 private:
 	GLCache        m_cache;
 	Font*          m_font;
-	float          m_fps;
+	f32          m_fps;
 	u32            m_frames;
 	GlfwGraphics*  m_master;
 	vector<Node*>  m_nodes;
 	GLuint         m_program;
-	float          m_t0;
-	float          m_t1;
+	f32          m_t0;
+	f32          m_t1;
 	string         m_title;
 	GLuint         m_vao;
 	vec2<u32>      m_windowSize;
@@ -451,76 +451,76 @@ GlfwGraphics::shutdown()
 }
 
 void
-GlfwGraphics::drawInfo( const vec3<float> &pos,
+GlfwGraphics::drawInfo( const vec3<f32> &pos,
 		bool compact, InfoFlags flags )
 {
 	m_impl->drawInfo( pos, compact, flags );
 }
 
 void
-GlfwGraphics::drawCircle( const vec3<float> &pos, const u32 radius,
+GlfwGraphics::drawCircle( const vec3<f32> &pos, const u32 radius,
 		const Color &c )
 {
 	m_impl->drawCircle( pos, radius, c );
 }
 
 void
-GlfwGraphics::drawImage( const string &filePath, const vec2<float> &size,
-		const vec3<float> &pos )
+GlfwGraphics::drawImage( const string &filePath, const vec2<f32> &size,
+		const vec3<f32> &pos )
 {
 	m_impl->drawImage( filePath, size, pos );
 }
 
 void
-GlfwGraphics::drawImage( Image &image, const vec2<float> &size,
-		const vec3<float> &pos )
+GlfwGraphics::drawImage( Image &image, const vec2<f32> &size,
+		const vec3<f32> &pos )
 {
 	m_impl->drawImage( image, size, pos );
 }
 
 void
-GlfwGraphics::drawLine( const vec3<float> &from, const vec3<float> &to,
-		const Color &color, const float width )
+GlfwGraphics::drawLine( const vec3<f32> &from, const vec3<f32> &to,
+		const Color &color, const f32 width )
 {
 	m_impl->drawLine( from, to, color, width );
 }
 
 void
-GlfwGraphics::drawPoint( const vec3<float> &pos,
+GlfwGraphics::drawPoint( const vec3<f32> &pos,
 		const u32 size, const Color &color )
 {
 	m_impl->drawPoint( pos, size, color );
 }
 
 void
-GlfwGraphics::drawPolygon( const vector<vec3<float>> &vertices,
+GlfwGraphics::drawPolygon( const vector<vec3<f32>> &vertices,
 		const Color &c, bool outline )
 {
 	m_impl->drawPolygon( vertices, c, outline );
 }
 
 void
-GlfwGraphics::drawRect( const vec2<float> &size,
-		const vec3<float> &pos, const Color &color, bool outline )
+GlfwGraphics::drawRect( const vec2<f32> &size,
+		const vec3<f32> &pos, const Color &color, bool outline )
 {
 	m_impl->drawRect( size, pos, color, outline );
 }
 
 void
-GlfwGraphics::drawText( const string &text, const vec3<float> &pos,
+GlfwGraphics::drawText( const string &text, const vec3<f32> &pos,
 		const Color &color )
 {
 	m_impl->drawText( text, pos, color );
 }
 
 void
-GlfwGraphics::drawText( IFont *font, const string &text, const vec3<float> &pos,
+GlfwGraphics::drawText( IFont *font, const string &text, const vec3<f32> &pos,
 		const Color &color )
 {
 	m_impl->drawText( font, text, pos, color );
 }
 
-float
+f32
 GlfwGraphics::fps() const
 {
 	return m_impl->fps();
@@ -538,7 +538,7 @@ GlfwGraphics::setWindowSize( const u32 width, const u32 height )
 	m_impl->setWindowSize( { width, height } );
 }
 
-float
+f32
 GlfwGraphics::time() const
 {
 	return m_impl->time();

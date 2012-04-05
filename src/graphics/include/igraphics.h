@@ -30,28 +30,28 @@ namespace Baukasten {
 		IGraphics( const string &name ) : IService( name ) {}
 
 		virtual void createWindow( const vec2<u32>&, const wstring& ) = 0;
-		virtual void drawInfo( const vec3<float>&,
+		virtual void drawInfo( const vec3<f32>&,
 				bool compact = false, InfoFlags = DRAW_ALL ) = 0;
-		virtual void drawCircle( const vec3<float>&, const u32, const Color& ) = 0;
-		virtual void drawImage( const string&, const vec2<float>&,
-				const vec3<float>& ) = 0;
-		virtual void drawImage( Image&, const vec2<float>&,
-				const vec3<float>& ) = 0;
-		virtual void drawLine( const vec3<float>&, const vec3<float>&,
-				const Color&, const float ) = 0;
-		virtual void drawPoint( const vec3<float>&, const u32, const Color& ) = 0;
-		virtual void drawPolygon( const vector<vec3<float> >&,
+		virtual void drawCircle( const vec3<f32>&, const u32, const Color& ) = 0;
+		virtual void drawImage( const string&, const vec2<f32>&,
+				const vec3<f32>& ) = 0;
+		virtual void drawImage( Image&, const vec2<f32>&,
+				const vec3<f32>& ) = 0;
+		virtual void drawLine( const vec3<f32>&, const vec3<f32>&,
+				const Color&, const f32 ) = 0;
+		virtual void drawPoint( const vec3<f32>&, const u32, const Color& ) = 0;
+		virtual void drawPolygon( const vector<vec3<f32> >&,
 				const Color&, bool outline = false ) = 0;
-		virtual void drawRect( const vec2<float>&, const vec3<float>&,
+		virtual void drawRect( const vec2<f32>&, const vec3<f32>&,
 				const Color&, bool outline = false ) = 0;
-		virtual void drawText( const string&, const vec3<float>&, const Color& ) = 0;
+		virtual void drawText( const string&, const vec3<f32>&, const Color& ) = 0;
 		virtual void drawText( IFont*, const string&,
-				const vec3<float>&, const Color& ) = 0;
-		virtual float fps() const = 0;
+				const vec3<f32>&, const Color& ) = 0;
+		virtual f32 fps() const = 0;
 		virtual void render( Form* ) = 0;
 		virtual void setWindowCaption( const wstring& ) = 0;
 		virtual void setWindowSize( const u32, const u32 ) = 0;
-		virtual float time() const = 0;
+		virtual f32 time() const = 0;
 	};
 }
 

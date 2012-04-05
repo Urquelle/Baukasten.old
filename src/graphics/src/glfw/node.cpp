@@ -45,7 +45,7 @@ namespace Baukasten {
 			glVertexAttribPointer(
 				color, 4,
 				GL_FLOAT, GL_FALSE,
-				0, BUFFER_OFFSET( m_dataPerVertex * m_indexCount * sizeof(float) )
+				0, BUFFER_OFFSET( m_dataPerVertex * m_indexCount * sizeof(f32) )
 			);
 
 			if ( m_tbo ) {
@@ -249,12 +249,12 @@ LineNode::pattern() const
 }
 
 void
-LineNode::setWidth( const float width )
+LineNode::setWidth( const f32 width )
 {
 	m_width = width;
 }
 
-float
+f32
 LineNode::width() const
 {
 	return m_width;
@@ -404,7 +404,7 @@ PolyNode::outline() const
 // TextNodePrivate
 class Baukasten::TextNodePrivate {
 public:
-	TextNodePrivate( IFont *font, const string &text, const vec3<float> &pos,
+	TextNodePrivate( IFont *font, const string &text, const vec3<f32> &pos,
 			const Color &c ) :
 		m_font( font ),
 		m_text( text ),
@@ -426,13 +426,13 @@ public:
 private:
 	IFont*       m_font;
 	string       m_text;
-	vec3<float>  m_pos;
+	vec3<f32>  m_pos;
 	Color        m_color;
 };
 
 // TextNode
 TextNode::TextNode( IFont *font, const string &text,
-		const vec3<float> &pos, const Color &c ) :
+		const vec3<f32> &pos, const Color &c ) :
 	Node( 0, 0, 0 ),
 	m_impl( new TextNodePrivate( font, text, pos, c ) )
 {

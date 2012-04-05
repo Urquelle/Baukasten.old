@@ -17,7 +17,7 @@ namespace Baukasten {
 		virtual ~GlFont();
 
 		virtual void render( const string&,
-				const vec3<float>&, const Color& );
+				const vec3<f32>&, const Color& );
 
 		virtual void setSize( const u32 );
 		virtual u32 size() const;

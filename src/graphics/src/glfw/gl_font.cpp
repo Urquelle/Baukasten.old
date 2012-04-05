@@ -20,8 +20,8 @@ public:
 		return;
 	}
 
-	void render(const char *text, _atlas *a, float x,
-			float y, float sx, float sy, const Color &col)
+	void render(const char *text, _atlas *a, f32 x,
+			f32 y, f32 sx, f32 sy, const Color &col)
 	{
 		glUseProgram( m_program );
 
@@ -49,10 +49,10 @@ public:
 		/* Loop through all characters */
 		for ( p = (const uint8_t *)text; *p; p++ ) {
 			/* Calculate the vertex and texture coordinates */
-			float x2 =  x + a->c[*p].bl * sx;
-			float y2 = -y - a->c[*p].bt * sy;
-			float w = a->c[*p].bw * sx;
-			float h = a->c[*p].bh * sy;
+			f32 x2 =  x + a->c[*p].bl * sx;
+			f32 y2 = -y - a->c[*p].bt * sy;
+			f32 w = a->c[*p].bw * sx;
+			f32 h = a->c[*p].bh * sy;
 
 			/* Advance the cursor to the start of the next character */
 			x += a->c[*p].ax * sx;
@@ -78,15 +78,15 @@ public:
 		glUseProgram( 0 );
 	}
 
-	void display( const string &text, const vec3<float> &pos, const Color &c )
+	void display( const string &text, const vec3<f32> &pos, const Color &c )
 	{
 		int width, height;
 		glfwGetWindowSize( &width, &height );
-		float sx = 2.0 / width;
-		float sy = 2.0 / height;
+		f32 sx = 2.0 / width;
+		f32 sy = 2.0 / height;
 
-		float x = ( pos[BK_X] - width / 2 ) / ( width / 2 );
-		float y = ( pos[BK_Y] - height / 2 ) / ( height / 2 ) * -1;
+		f32 x = ( pos[BK_X] - width / 2 ) / ( width / 2 );
+		f32 y = ( pos[BK_Y] - height / 2 ) / ( height / 2 ) * -1;
 
 		render( text.c_str(), m_atlas, x, y, sx, sy, c );
 	}
@@ -161,7 +161,7 @@ GlFont::~GlFont()
 }
 
 void
-GlFont::render( const string &text, const vec3<float> &pos, const Color &c )
+GlFont::render( const string &text, const vec3<f32> &pos, const Color &c )
 {
 	m_impl->display( text, pos, c );
 }
