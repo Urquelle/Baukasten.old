@@ -1,14 +1,15 @@
 #ifndef GRAPHICS_INTERFACE_WNTJGIN0
 #define GRAPHICS_INTERFACE_WNTJGIN0
 
+#include "graphics/Global"
+
 namespace Baukasten {
-	class Form;
+
 	class IGraphics;
 
-	class GraphicsInterface {
+	class BAUKASTEN_EXPORT GraphicsInterface {
 	public:
 		static IGraphics* instance();
-		virtual ~GraphicsInterface() {}
 
 	private:
 		GraphicsInterface() {}

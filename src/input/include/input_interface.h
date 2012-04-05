@@ -27,9 +27,6 @@ namespace Baukasten {
 		 */
 		static IInput* instance();
 
-		/*! destructor. */
-		virtual ~InputInterface();
-
 	private:
 		InputInterface();
 

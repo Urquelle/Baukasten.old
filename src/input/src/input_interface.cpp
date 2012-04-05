@@ -20,7 +20,3 @@ InputInterface::InputInterface()
 {
 }
 
-InputInterface::~InputInterface()
-{
-}
-

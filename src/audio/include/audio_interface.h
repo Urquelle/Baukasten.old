@@ -27,9 +27,6 @@ namespace Baukasten {
 		 */
 		static IAudio* instance();
 
-		/*! \brief destructor. */
-		virtual ~AudioInterface ();
-
 	private:
 		AudioInterface() {}
 
