@@ -14,12 +14,25 @@ namespace Baukasten {
 	class Services;
 
 	/*!
-	 * \brief Graphics interface declaration.
+	 * \ingroup services
+	 * @{
 	 *
-	 * \ingroup graphics interface
+	 * \addtogroup graphics
+	 * @{
+	 *
+	 * \class IGraphics
+	 * \brief Graphics interface declaration.
+	 * \headerfile IGraphics "graphics/IGraphics"
+	 *
+	 * declares methods that Form objects can use in order to
+	 * represent the objects graphically.
 	 */
 	class BAUKASTEN_EXPORT IGraphics : public IService {
 	public:
+
+		/*!
+		 * flags that are used with the drawInfo method.
+		 */
 		enum InfoFlags {
 			DRAW_FPS     = 1 << 0,
 			DRAW_VERSION = 1 << 1,
@@ -27,19 +40,120 @@ namespace Baukasten {
 			DRAW_ALL     = DRAW_FPS + DRAW_VERSION + DRAW_TIME
 		};
 
+		/*!
+		 * \brief constructor
+		 *
+		 * receives a name of the service that implements the igraphics interface. this
+		 * name can be used later to show it as info, or for other services to query
+		 * the current graphics backend used if it depends on a certain backend.
+		 *
+		 * \param name name of the graphics service ( e. g. opengl, directx )
+		 */
 		IGraphics( const string &name ) : IService( name ) {}
 
-		virtual void createWindow( const vec2<u32>&, const wstring& ) = 0;
-		virtual void drawInfo( const vec3<f32>&,
-				bool compact = false, InfoFlags = DRAW_ALL ) = 0;
-		virtual void drawCircle( const vec3<f32>&, const u32, const Color& ) = 0;
-		virtual void drawImage( const string&, const vec2<f32>&,
-				const vec3<f32>& ) = 0;
-		virtual void drawImage( Image&, const vec2<f32>&,
-				const vec3<f32>& ) = 0;
-		virtual void drawLine( const vec3<f32>&, const vec3<f32>&,
-				const Color&, const f32 ) = 0;
-		virtual void drawPoint( const vec3<f32>&, const u32, const Color& ) = 0;
+		/*!
+		 * \brief creates a window.
+		 *
+		 * creates a window with the given size and title.
+		 *
+		 * \param size size of the window.
+		 * \param title window title.
+		 */
+		virtual void createWindow( const vec2<u32> &size, const wstring &title ) = 0;
+
+		/*!
+		 * \brief draws an info box on the canvas.
+		 *
+		 * draws a box with internal graphics/library information. the information that is
+		 * shown depends on the given InfoFlags. the following information can be displayed
+		 * in the current version:
+		 *
+		 * - Framerate
+		 *
+		 * - Library version
+		 *
+		 * - Time
+		 *
+		 * \param position where the box is drawn.
+		 * \param compact whether the box is shown with the every info on its own
+		 * row, or compact on a single row.
+		 * \param flags which info to show.
+		 */
+		virtual void drawInfo( const vec3<f32> &position,
+				bool compact = false, InfoFlags flags = DRAW_ALL ) = 0;
+
+		/*!
+		 * \brief draws a circle.
+		 *
+		 * draws a solid circle of a given radius on the given position with the given
+		 * color.
+		 *
+		 * \param position position where the circle will be drawn.
+		 * \param radius u32 value of the radius.
+		 * \param color color the circle is filled with.
+		 */
+		virtual void drawCircle( const vec3<f32> &position,
+				const u32 radius, const Color &color ) = 0;
+
+		/*!
+		 * \brief draws an image.
+		 *
+		 * the image, of which the path is given, once loaded is present to be drawn
+		 * at the given position and the given size.
+		 *
+		 * \param path path to the image.
+		 * \param size size of the image.
+		 * \param position position where the image will be drawn.
+		 */
+		virtual void drawImage( const string &path, const vec2<f32> &size,
+				const vec3<f32> &position ) = 0;
+
+		/*!
+		 * \brief draws an image.
+		 *
+		 * the image, that is given, is pushed into internal cache and drawn after that.
+		 * the cache is in place in order to prevent loading of the image in every frame.
+		 *
+		 * \param image Image object.
+		 * \param size size of the image.
+		 * \param position position where the image will be drawn.
+		 */
+		virtual void drawImage( Image &image, const vec2<f32> &size,
+				const vec3<f32> &position ) = 0;
+
+		/*!
+		 * \brief draws a line.
+		 *
+		 * draws a line with the given `from` and `to` positions. the given
+		 * color is used to draw the line.
+		 *
+		 * the last parameter describes the pattern of the drawn line.
+		 *
+		 * \param from position to start the drawing.
+		 * \param to position where the line stops.
+		 * \param color the color of the line.
+		 * \param pattern the pattern of the line.
+		 */
+		virtual void drawLine( const vec3<f32> &from, const vec3<f32> &to,
+				const Color &color, const f32 pattern ) = 0;
+
+		/*!
+		 * \brief draws a point.
+		 *
+		 * draw a point on a given position and the given size and color.
+		 *
+		 * \param position position of the point.
+		 * \param size size of the point.
+		 * \param color color of the point.
+		 */
+		virtual void drawPoint( const vec3<f32> &position,
+				const u32 size, const Color &color ) = 0;
+
+		/*!
+		 * \brief draws a polygon.
+		 *
+		 *
+		 */
 		virtual void drawPolygon( const vector<vec3<f32> >&,
 				const Color&, bool outline = false ) = 0;
 		virtual void drawRect( const vec2<f32>&, const vec3<f32>&,
@@ -53,6 +167,8 @@ namespace Baukasten {
 		virtual void setWindowSize( const u32, const u32 ) = 0;
 		virtual f32 time() const = 0;
 	};
+	/** @} */
+	/** @} */
 }
 
 #endif /* end of include guard: IGRAPHICS_HHQEW1LG */

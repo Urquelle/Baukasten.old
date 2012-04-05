@@ -7,8 +7,14 @@ namespace Baukasten {
 	class IInput;
 
 	/*!
+	 * \ingroup services
+	 * @{
+	 *
+	 * \addtogroup input
+	 * @{
+	 *
+	 * \class InputInterface
 	 * \brief input interface class.
-	 * \ingroup services input interface
 	 * \headerfile InputInterface "input/InputInterface"
 	 *
 	 * the class provides the interface to retrieve an object
@@ -32,6 +38,8 @@ namespace Baukasten {
 
 		static IInput* m_instance;
 	};
+	/** @} */
+	/** @} */
 } /* Baukasten */
 
 #endif /* end of include guard: INPUTINTERFACE_AKBKP72C */

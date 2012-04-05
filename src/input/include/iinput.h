@@ -11,8 +11,14 @@ namespace Baukasten {
 	class Services;
 
 	/*!
+	 * \ingroup services
+	 * @{
+	 *
+	 * \addtogroup input
+	 * @{
+	 *
+	 * \class IInput
 	 * \brief input module interface.
-	 * \ingroup services input interface
 	 * \headerfile IInput "input/IInput"
 	 *
 	 * defines methods which an implementation class has to
@@ -71,6 +77,8 @@ namespace Baukasten {
 	private:
 		BK_PIMPL_PTR( IInput );
 	};
+	/** @} */
+	/** @} */
 } /* Baukasten */
 
 #endif /* end of include guard: IINPUT_EQ5AS93H */

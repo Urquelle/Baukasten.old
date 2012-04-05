@@ -11,7 +11,7 @@
  */
 
 /*! \defgroup core Core */
-/*! \defgroup math Mathimatics */
+/*! \defgroup math Mathematics */
 
 #include <string>
 

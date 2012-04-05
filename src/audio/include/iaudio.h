@@ -10,8 +10,14 @@ namespace Baukasten {
 	class Services;
 
 	/*!
+	 * \ingroup services
+	 * @{
+	 *
+	 * \addtogroup audio
+	 * @{
+	 *
+	 * \class IAudio
 	 * \brief audio interface declaration.
-	 * \ingroup services audio interface
 	 * \headerfile IAudio "audio/IAudio"
 	 *
 	 * defines methods which an implementation class has to
@@ -161,5 +167,7 @@ namespace Baukasten {
 		 */
 		virtual void stop( const string &id ) = 0;
 	};
+	/** @} */
+	/** @} */
 } /* Baukasten */
 

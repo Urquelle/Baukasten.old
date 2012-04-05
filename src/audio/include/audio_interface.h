@@ -7,8 +7,14 @@ namespace Baukasten {
 	class IAudio;
 
 	/*!
+	 * \ingroup services
+	 * @{
+	 *
+	 * \addtogroup audio
+	 * @{
+	 *
+	 * \class AudioInterface
 	 * \brief audio interface class.
-	 * \ingroup services audio interface
 	 * \headerfile AudioInterface "audio/AudioInterface"
 	 *
 	 * the class provides the interface to retrieve an object
@@ -32,6 +38,8 @@ namespace Baukasten {
 
 		static IAudio* m_instance;
 	};
+	/** @} */
+	/** @} */
 } /* Baukasten */
 
 #endif /* end of include guard: AUDIO_INTERFACE_H_21IELBUV */

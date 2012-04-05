@@ -8,8 +8,14 @@ namespace Baukasten {
 	class IInput;
 
 	/*!
-	 * \brief provides the interface to the core services.
 	 * \ingroup services
+	 * @{
+	 *
+	 * \addtogroup interface
+	 * @{
+	 *
+	 * \class Services
+	 * \brief provides the interface to the core services.
 	 * \headerfile Services "services/Services"
 	 *
 	 * provides methods to retrieve the objects that implement
@@ -98,5 +104,7 @@ namespace Baukasten {
 		int         m_argc;
 		char**      m_argv;
 	};
+	/** @} */
+	/** @} */
 } /* Baukasten */
 

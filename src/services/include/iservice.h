@@ -6,8 +6,14 @@ namespace Baukasten {
 	class Services;
 
 	/*!
+	 * \ingroup services
+	 * @{
+	 *
+	 * \addtogroup interface
+	 * @{
+	 *
+	 * \class IService
 	 * \brief service interface declaration.
-	 * \ingroup services interface
 	 * \headerfile IService "services/IService"
 	 *
 	 * declares the methods that an interface class has to define, and
@@ -80,5 +86,7 @@ namespace Baukasten {
 		bool m_ready;
 		string m_name;
 	};
+	/** @} */
+	/** @} */
 }
 

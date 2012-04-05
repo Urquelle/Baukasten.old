@@ -9,8 +9,14 @@ namespace Baukasten {
 	class OpenALAudioPrivate;
 
 	/*!
+	 * \ingroup services
+	 * @{
+	 *
+	 * \addtogroup audio
+	 * @{
+	 *
+	 * \class OpenALAudio
 	 * \brief class implementing the IAudio interface.
-	 * \ingroup services audio
 	 * \headerfile AudioImpl "audio/AudioImpl"
 	 *
 	 * using the OpenAL library, this class implements the IAudio interface
@@ -73,6 +79,8 @@ namespace Baukasten {
 	private:
 		BK_PIMPL_PTR( OpenALAudio );
 	};
+	/** @} */
+	/** @} */
 } /* Baukasten */
 
 #endif /* end of include guard: OPENAL_AUDIO_H_EBPNAPHY */

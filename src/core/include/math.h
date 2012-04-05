@@ -8,8 +8,14 @@
 namespace Baukasten {
 
 	/*!
+	 * \ingroup core
+	 * @{
+	 *
+	 * \addtogroup math
+	 * @{
+	 *
+	 * \class vec2
 	 * \brief two dimension vector struct.
-	 * \ingroup core math
 	 * \headerfile Math "core/Math"
 	 *
 	 * provides basic functionality for dealing with 2d vector
@@ -238,6 +244,14 @@ namespace Baukasten {
 		}
 	};
 
+	/*!
+	 * \class vec3
+	 * \brief three dimension vector struct.
+	 * \headerfile Math "core/Math"
+	 *
+	 * provides basic functionality for dealing with 3d vector
+	 * manipulation.
+	 */
 	template<class T>
 	struct vec3 {
 		T data[3];
@@ -487,6 +501,8 @@ namespace Baukasten {
 			data[i] = value;
 		}
 	};
+	/** @} */
+	/** @} */
 
 	typedef vec2<u32> vec2i;
 	typedef vec2<f32> vec2f;
