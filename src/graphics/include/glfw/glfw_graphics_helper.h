@@ -33,20 +33,21 @@ const char *_bk_fragment_shader (
 	"}\n"
 );
 
-float _normalise( const int size, const float i )
+static f32
+_normalise( const int size, const f32 i )
 {
-	float div = size / 2;
+	f32 div = size / 2;
 	return ( i - div ) / div;
 }
 
-void GLFWCALL
+static void GLFWCALL
 _resize( int width, int height )
 {
 	auto graphics = Services::instance()->videoService();
 	graphics->setWindowSize( width, height );
 }
 
-bool
+static bool
 _init()
 {
 	if ( !glfwInit() ) {
@@ -61,7 +62,7 @@ _init()
 	return true;
 }
 
-GLuint
+static GLuint
 _createShader( GLenum type, const char *shaderData )
 {
 	GLuint shader = glCreateShader( type );
@@ -93,7 +94,7 @@ _createShader( GLenum type, const char *shaderData )
 	return shader;
 }
 
-bool
+static bool
 _initProgram( GLuint &program )
 {
 	GLuint vertexShader = _createShader( GL_VERTEX_SHADER, _bk_vertex_shader );
@@ -126,7 +127,7 @@ _initProgram( GLuint &program )
 	return true;
 }
 
-string
+static string
 _toString( const wstring &s )
 {
 	string str( s.begin(), s.end() );
@@ -134,7 +135,7 @@ _toString( const wstring &s )
 	return str;
 }
 
-void
+static void
 _checkForError()
 {
 	GLuint errCode = glGetError();
@@ -143,7 +144,7 @@ _checkForError()
 	}
 }
 
-void
+static void
 _computeFps( float &t0, float &t1, u32 &frames, float &fps )
 {
 	t1 = glfwGetTime();

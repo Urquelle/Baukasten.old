@@ -7,7 +7,7 @@
 
 using namespace Baukasten;
 
-Key
+static Key
 _key( int key )
 {
 	Key t_key = Key::KEY_NONE;
@@ -110,7 +110,7 @@ _key( int key )
 	return t_key;
 }
 
-Modifier
+static Modifier
 _modifier( int key )
 {
 	Modifier mod = Modifier::KEYMOD_NONE;

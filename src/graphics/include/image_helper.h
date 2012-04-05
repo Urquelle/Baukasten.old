@@ -13,7 +13,7 @@ struct ImageInfo {
 	u8* data;
 };
 
-void
+static void
 _read( const string &path, ImageInfo *info )
 {
 	FreeImage_Initialise( true );
@@ -40,7 +40,7 @@ _read( const string &path, ImageInfo *info )
 	}
 }
 
-void
+static void
 _free( ImageInfo *info )
 {
 	if ( info->data ) {
