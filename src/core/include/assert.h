@@ -5,7 +5,7 @@
 
 #include <iostream>
 
-#define BK_ABORT() abort()
+#define BK_ABORT() asm( "int3" )
 #define BK_ASSERT( TST, MSG ) \
 	if ( TST ) { \
 	} else { \
