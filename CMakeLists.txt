@@ -3,7 +3,7 @@ cmake_minimum_required(VERSION 2.8)
 project (Baukasten)
 
 set(LIB_MAJOR 0)
-set(LIB_MINOR 1)
+set(LIB_MINOR 2)
 set(LIB_PATCH 0)
 
 set(CMAKE_MODULE_PATH ${CMAKE_CURRENT_SOURCE_DIR}/cmake)

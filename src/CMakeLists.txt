@@ -34,7 +34,8 @@ add_library( Baukasten SHARED
 	${util_SRCS}
 )
 
-set_target_properties( Baukasten PROPERTIES SOVERSION 0.0.1 )
+set_target_properties( Baukasten PROPERTIES SOVERSION
+	${LIB_MAJOR}.${LIB_MINOR}.${LIB_PATCH} )
 
 target_link_libraries( Baukasten sigc-2.0 SLB freeimage openal alut GL GLEW GLU glfw freetype )
 
