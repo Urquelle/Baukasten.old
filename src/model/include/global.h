@@ -41,22 +41,22 @@ namespace Baukasten {
 	 * in a shared_ptr.
 	 */
 	typedef map<string, shared_ptr<Entity> > EntityMap;
-	typedef list<shared_ptr<Entity> >		EntityList;
+	typedef vector<shared_ptr<Entity> >		EntityList;
 
 	typedef map<string, shared_ptr<EntityType> > EntityTypeMap;
-	typedef list<shared_ptr<EntityType> >	EntityTypeList;
+	typedef vector<shared_ptr<EntityType> >	EntityTypeList;
 
 	typedef map<string, shared_ptr<GameEntity> > GameEntityMap;
-	typedef list<shared_ptr<GameEntity> >	GameEntityList;
+	typedef vector<shared_ptr<GameEntity> >	GameEntityList;
 
 	typedef map<string, shared_ptr<Action> >	ActionMap;
-	typedef list<shared_ptr<Action> >		ActionList;
+	typedef vector<shared_ptr<Action> >		ActionList;
 
 	typedef map<string, LogicalSpace*>		LSpaces;
 	typedef map<string, shared_ptr<VirtualSpace> > VSpaces;
 
 	typedef map<string, shared_ptr<State> >	StateMap;
-	typedef list<shared_ptr<State> >			StateList;
+	typedef vector<shared_ptr<State> >			StateList;
 } /* Baukasten */
 
 
