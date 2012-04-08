@@ -59,7 +59,7 @@ namespace Baukasten {
 		 * \param size size of the window.
 		 * \param title window title.
 		 */
-		virtual void createWindow( const vec2<u32> &size, const wstring &title ) = 0;
+		virtual void createWindow( const vec2<u32> &size, const string &title ) = 0;
 
 		/*!
 		 * \brief draws an info box on the canvas.
@@ -163,8 +163,8 @@ namespace Baukasten {
 				const vec3<f32>&, const Color& ) = 0;
 		virtual f32 fps() const = 0;
 		virtual void render( Form* ) = 0;
-		virtual void setWindowCaption( const wstring& ) = 0;
 		virtual void setWindowSize( const u32, const u32 ) = 0;
+		virtual void setWindowTitle( const string &title ) = 0;
 		virtual f32 time() const = 0;
 	};
 	/** @} */

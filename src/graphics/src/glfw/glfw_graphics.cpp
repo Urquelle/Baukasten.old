@@ -43,10 +43,10 @@ public:
 		m_master->setIsReady( true );
 	}
 
-	void createWindow( const vec2<u32> &size, const wstring &title )
+	void createWindow( const vec2<u32> &size, const string &title )
 	{
 		setWindowSize( size );
-		setWindowCaption( title );
+		setWindowTitle( title );
 	}
 
 	void
@@ -379,10 +379,9 @@ public:
 	}
 
 	void
-	setWindowCaption( const wstring &title )
+	setWindowTitle( const string &title )
 	{
-		m_title = _toString( title );
-		glfwSetWindowTitle( m_title.c_str() );
+		glfwSetWindowTitle( title.c_str() );
 	}
 
 	void
@@ -433,7 +432,7 @@ GlfwGraphics::init( Services *services )
 }
 
 void
-GlfwGraphics::createWindow( const vec2<u32> &size, const wstring &title )
+GlfwGraphics::createWindow( const vec2<u32> &size, const string &title )
 {
 	m_impl->createWindow( size, title );
 }
@@ -527,9 +526,9 @@ GlfwGraphics::fps() const
 }
 
 void
-GlfwGraphics::setWindowCaption( const wstring &title )
+GlfwGraphics::setWindowTitle( const string &title )
 {
-	m_impl->setWindowCaption( title );
+	m_impl->setWindowTitle( title );
 }
 
 void
