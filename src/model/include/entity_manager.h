@@ -7,10 +7,14 @@
 namespace Baukasten {
 
 	/*!
+	 * \ingroup model
+	 * @{
+	 *
+	 * \addtogroup entity
+	 * @{
+	 *
+	 * \class EntityManager
 	 * \brief manager class, with Entity specialisation.
-	 *
-	 * \ingroup model manager
-	 *
 	 * \headerfile EntityManager "model/EntityManager"
 	 *
 	 * implements manager methods to operate upon Entity classes.
@@ -81,6 +85,8 @@ namespace Baukasten {
 		 */
 		void removeEntity( const string& );
 	};
+	/** @} */
+	/** @} */
 } /* Baukasten */
 
 #endif /* end of include guard: ENTITY_MANAGER_ZCJZL2J5 */

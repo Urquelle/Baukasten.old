@@ -16,10 +16,14 @@ namespace Baukasten {
 	typedef sigc::signal<void, GameEntity*, Action*> ActionSignal;
 
 	/*!
+	 * \ingroup model
+	 * @{
+	 *
+	 * \addtogroup entity
+	 * @{
+	 *
+	 * \class GameEntity
 	 * \brief represents an abstract entity that is a part of a game.
-	 *
-	 * \ingroup model entity
-	 *
 	 * \headerfile GameEntity "model/GameEntity"
 	 *
 	 * this class is the container which is meant to
@@ -350,6 +354,8 @@ namespace Baukasten {
 		ActionSignal	m_actionInvoked;
 		ActionSignal	m_actionRun;
 	};
+	/** @} */
+	/** @} */
 } /* Baukasten */
 
 #endif /* end of include guard: GAME_ENTITY_W1MJLLNE */

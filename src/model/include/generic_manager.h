@@ -10,10 +10,14 @@
 namespace Baukasten {
 
 	/*!
+	 * \ingroup model
+	 * @{
+	 *
+	 * \addtogroup manager
+	 * @{
+	 *
+	 * \class GenericManager
 	 * \brief implementation of a container class.
-	 *
-	 * \ingroup model manager
-	 *
 	 * \headerfile GenericManager "model/GenericManager"
 	 *
 	 * implements a container with arbitrary object type.
@@ -130,6 +134,8 @@ namespace Baukasten {
 	protected:
 		TMap m_map;
 	};
+	/** @} */
+	/** @} */
 } /* Baukasten */
 
 #endif /* end of include guard: GENERIC_MANAGER_4A46G9D2 */

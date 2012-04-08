@@ -5,10 +5,14 @@
 
 namespace Baukasten {
 	/*!
+	 * \ingroup model
+	 * @{
+	 *
+	 * \addtogroup entity
+	 * @{
+	 *
+	 * \class Entity
 	 * \brief base class in the model module.
-	 *
-	 * \ingroup model entity
-	 *
 	 * \headerfile Entity "model/Entity"
 	 *
 	 * base class with an id field.
@@ -51,6 +55,8 @@ namespace Baukasten {
 	private:
 		string m_id;
 	};
+	/** @} */
+	/** @} */
 }
 
 #endif // ENTITY_H

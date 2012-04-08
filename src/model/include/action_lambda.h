@@ -11,10 +11,14 @@ namespace Baukasten {
 	typedef function<void ( Action*, GameEntity* )> DoActionFunction;
 
 	/*!
+	 * \ingroup model
+	 * @{
+	 *
+	 * \addtogroup action
+	 * @{
+	 *
+	 * \class ActionLambda
 	 * \brief action lambda class.
-	 *
-	 * \ingroup model action
-	 *
 	 * \headerfile ActionLambda "model/ActionLambda"
 	 *
 	 * action lambda class implements the action entity in the given
@@ -110,6 +114,8 @@ namespace Baukasten {
 		DoActionFunction  m_doAction;
 		DoneFunction      m_done;
 	};
+	/** @} */
+	/** @} */
 } /* Baukasten */
 
 #endif /* end of include guard: ACTION_LAMBDA_A41U943N */

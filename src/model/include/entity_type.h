@@ -7,10 +7,14 @@
 
 namespace Baukasten {
 	/*!
+	 * \ingroup model
+	 * @{
+	 *
+	 * \addtogroup entity
+	 * @{
+	 *
+	 * \class EntityType
 	 * \brief base class in the model module.
-	 *
-	 * \ingroup model entity
-	 *
 	 * \headerfile EntityType "model/EntityType"
 	 *
 	 * represents an abstraction of what an entity can be. consists of state and
@@ -107,6 +111,8 @@ namespace Baukasten {
 		EntityType*		m_parent;
 		EntityTypeList	m_children;
 	};
+	/** @} */
+	/** @} */
 } /* Baukasten */
 
 #endif /* end of include guard: ENTITY_TYPE_XJ90PEI */

@@ -7,11 +7,16 @@
 namespace Baukasten {
 	class Action;
 
-	/*! \brief implements action container class.
+	/*!
+	 * \ingroup model
+	 * @{
 	 *
-	 * \ingroup model manager
+	 * \addtogroup action
+	 * @{
 	 *
+	 * \class ActionManager
 	 * \headerfile ActionManager "model/ActionManager"
+	 * \brief implements action container class.
 	 *
 	 * wrapps methods implemented in GenericManager to limit the usage
 	 * of this class to Action classes only.
@@ -115,6 +120,8 @@ namespace Baukasten {
 	private:
 		list<Action*> m_actionQueue;
 	};
+	/** @} */
+	/** @} */
 } /* Baukasten */
 
 #endif /* end of include guard: INC_ACTIONS_GW487EFJ */

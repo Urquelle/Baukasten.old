@@ -14,11 +14,12 @@ namespace Baukasten {
 	class IGraphics;
 
 	/*!
-	 * \brief implementation of the Form entity in the model.
-	 *
-	 * \headerfile Form "model/Form"
-	 *
 	 * \ingroup model
+	 * @{
+	 *
+	 * \class Form
+	 * \brief implementation of the Form entity in the model.
+	 * \headerfile Form "model/Form"
 	 *
 	 * Form represents the graphics presentation layer of each Entity.
 	 * this class communicates directly with the graphicsService in
@@ -167,6 +168,7 @@ namespace Baukasten {
 		shared_ptr<VirtualSpace> m_vSpace;
 		IGraphics *m_graphics;
 	};
+	/** @} */
 }
 
 #endif // FORM_H

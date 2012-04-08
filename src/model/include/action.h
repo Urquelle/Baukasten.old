@@ -10,10 +10,15 @@
 namespace Baukasten {
 	class GameEntity;
 
-	/*! \brief action class.
+	/*!
+	 * \ingroup model
+	 * @{
 	 *
-	 * \ingroup model action
+	 * \addtogroup action
+	 * @{
 	 *
+	 * \class Action
+	 * \brief action class.
 	 * \headerfile Action "model/Action"
 	 *
 	 * action class implements the action entity in britt l. hannah's
@@ -147,6 +152,8 @@ namespace Baukasten {
 		list<GameEntity*>	m_targets;
 		bool				m_active;
 	};
+	/** @} */
+	/** @} */
 } /* Baukasten */
 
 #endif /* end of include guard: ACTION_4GNSEOOP */

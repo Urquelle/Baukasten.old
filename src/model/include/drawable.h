@@ -9,10 +9,14 @@
 namespace Baukasten {
 
 	/*!
+	 * \ingroup model
+	 * @{
+	 *
+	 * \addtogroup entity
+	 * @{
+	 *
+	 * \class Drawable
 	 * \brief represents a drawable object.
-	 *
-	 * \ingroup model entity
-	 *
 	 * \headerfile Drawable "model/Drawable"
 	 *
 	 * drawable objects can be stored in the VirtualSpace
@@ -50,8 +54,10 @@ namespace Baukasten {
 		/*! \brief getter method for position. */
 		const vec3f position() const;
 
+		/*! set the object's size. */
 		void setSize( const vec2f );
 
+		/*! returns the object's size. */
 		const vec2f size() const;
 
 		/*!
@@ -104,6 +110,8 @@ namespace Baukasten {
 		// scaling factor of the object
 		f32 m_scale;
 	};
+	/** @} */
+	/** @} */
 }
 
 #endif // RENDERABLE_ENTITY_H

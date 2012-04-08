@@ -152,19 +152,93 @@ namespace Baukasten {
 		/*!
 		 * \brief draws a polygon.
 		 *
+		 * draws a polygon with an arbitrary amount of vertices.
 		 *
+		 * \note no validation takes place to ensure the polygon to be convex.
+		 * \param vertices a vector of vertices.
+		 * \param color color to draw the polygon in.
+		 * \param outline if true no filling of polygon takes place.
 		 */
-		virtual void drawPolygon( const vector<vec3<f32> >&,
-				const Color&, bool outline = false ) = 0;
-		virtual void drawRect( const vec2<f32>&, const vec3<f32>&,
-				const Color&, bool outline = false ) = 0;
-		virtual void drawText( const string&, const vec3<f32>&, const Color& ) = 0;
-		virtual void drawText( IFont*, const string&,
-				const vec3<f32>&, const Color& ) = 0;
+		virtual void drawPolygon( const vector<vec3<f32> > &vertices,
+				const Color &color, bool outline = false ) = 0;
+
+		/*!
+		 * \brief draws a rectangle.
+		 *
+		 * draws a rectangle with the given size at the given position.
+		 *
+		 * \param size size of the rectangle.
+		 * \param position position where to draw the rectangle.
+		 * \param color color to draw the rectangle in.
+		 * \param outline if true no filling of rectangle takes place.
+		 */
+		virtual void drawRect( const vec2<f32> &size, const vec3<f32> &position,
+				const Color &color, bool outline = false ) = 0;
+
+		/*!
+		 * \brief draws a text.
+		 *
+		 * draws the given string with the standard font.
+		 *
+		 * \param text string to be drawn.
+		 * \param position position where the text is drawn.
+		 * \param color color of the drawn text.
+		 */
+		virtual void drawText( const string &text,
+				const vec3<f32> &position, const Color &color ) = 0;
+
+		/*!
+		 * \brief draws a text.
+		 *
+		 * draws the given string with the give font.
+		 *
+		 * \param font Font to be used to draw the text.
+		 * \param text string to be drawn.
+		 * \param position position where the text is drawn.
+		 * \param color color of the drawn text.
+		 */
+		virtual void drawText( IFont *font, const string &text,
+				const vec3<f32> &position, const Color &color ) = 0;
+
+		/*!
+		 * \brief current frame rate.
+		 * \return f32 value representing the current frame rate.
+		 */
 		virtual f32 fps() const = 0;
-		virtual void render( Form* ) = 0;
-		virtual void setWindowSize( const u32, const u32 ) = 0;
+
+		/*!
+		 * \brief rendering routine.
+		 *
+		 * the main routine to draw the objects. every backend has to reimplement
+		 * this function as different steps have to be made in order to render.
+		 *
+		 * \param form Form object that is to be drawn.
+		 */
+		virtual void render( Form *form ) = 0;
+
+		/*!
+		 * \brief set the window title.
+		 *
+		 * sets the title of the application window.
+		 *
+		 * \param title string containing the title.
+		 */
 		virtual void setWindowTitle( const string &title ) = 0;
+
+		/*!
+		 * \brief set the application window size.
+		 *
+		 * sets the size of the application window.
+		 *
+		 * \param width width of the window.
+		 * \param height height of the window.
+		 */
+		virtual void setWindowSize( const u32 width, const u32 height ) = 0;
+
+		/*!
+		 * \brief returns the time that passed after application started.
+		 * \return f32 value of the time passed after application started..
+		 */
 		virtual f32 time() const = 0;
 	};
 	/** @} */
