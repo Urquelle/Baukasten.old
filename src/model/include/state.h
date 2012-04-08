@@ -6,8 +6,6 @@
 
 #include <sigc++/sigc++.h>
 
-#include <string>
-
 namespace Baukasten {
 	class BAUKASTEN_EXPORT State : public Entity {
 	public:
