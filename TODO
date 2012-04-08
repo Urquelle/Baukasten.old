@@ -1,17 +1,21 @@
+-- FUTURE --
+* implement serialisation.
+* implement save/load functionality.
+* implement memory management.
+
 -- TODO v-0.2 --
-* implement serialisation
-* implement save/load functionality
-
--- TODO v-0.1 --
-* document core/input/graphics classes
-* add and document audio interface to coreservices
-* switch bindings to swig
-
--- TODO --
-* implement example game
-* implement unit tests
+* switch bindings to swig (ongoing as swig has some bugs that
+have to be fixed first)
+* document code.
+* extend unit tests (switch to gtest)
+* implement managed model classes.
+* use own font on default.
 
 -- DONE --
+* v0.1 tagged
+* implement example game
+* add and document audio interface to coreservices
+* document core/input/graphics classes
 * graphics: implement font/text rendering
 * refactor header files
 * graphics: implement image rendering
