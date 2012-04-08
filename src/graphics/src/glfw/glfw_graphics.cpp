@@ -465,10 +465,10 @@ GlfwGraphics::drawCircle( const vec3<f32> &pos, const u32 radius,
 }
 
 void
-GlfwGraphics::drawImage( const string &filePath, const vec2<f32> &size,
+GlfwGraphics::drawImage( const string &path, const vec2<f32> &size,
 		const vec3<f32> &pos )
 {
-	m_impl->drawImage( filePath, size, pos );
+	m_impl->drawImage( path, size, pos );
 }
 
 void
