@@ -5,10 +5,12 @@ project (Baukasten)
 set(LIB_MAJOR 0)
 set(LIB_MINOR 2)
 set(LIB_PATCH 0)
+set(LIB_NAME "Flotiball")
 
 set(CMAKE_MODULE_PATH ${CMAKE_CURRENT_SOURCE_DIR}/cmake)
 
-add_definitions( -DLIB_MAJOR=${LIB_MAJOR} -DLIB_MINOR=${LIB_MINOR} -DLIB_PATCH=${LIB_PATCH} )
+add_definitions( -DLIB_MAJOR=${LIB_MAJOR} -DLIB_MINOR=${LIB_MINOR}
+	-DLIB_PATCH=${LIB_PATCH} -DLIB_NAME=${LIB_NAME} )
 set(CMAKE_CXX_FLAGS "-std=gnu++0x")
 
 if( NOT ( CMAKE_BUILD_TYPE STREQUAL Debug ) )

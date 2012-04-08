@@ -4,6 +4,8 @@
 
 using namespace Baukasten;
 
+#define _BK_TOSTR(X) #X
+
 namespace Baukasten {
 	string
 	version()
@@ -29,6 +31,12 @@ namespace Baukasten {
 	patch()
 	{
 		return LIB_PATCH;
+	}
+
+	string
+	name()
+	{
+		return _BK_TOSTR( LIB_NAME );
 	}
 }
 

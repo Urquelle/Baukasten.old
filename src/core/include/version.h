@@ -19,6 +19,9 @@ namespace Baukasten {
 
 	/*! lib's patch version */
 	u32 patch();
+
+	/*! lib's version name */
+	string name();
 } /* Baukasten */
 
 #endif /* end of include guard: VERSION_H_NWQEK9HM */
