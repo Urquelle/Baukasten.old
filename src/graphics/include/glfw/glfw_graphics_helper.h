@@ -144,7 +144,7 @@ _checkForError()
 	}
 }
 
-static void
+static inline void
 _computeFps( f32 &t0, f32 &t1, u32 &frames, f32 &fps )
 {
 	t1 = glfwGetTime();
