@@ -127,23 +127,6 @@ _initProgram( GLuint &program )
 	return true;
 }
 
-static string
-_toString( const wstring &s )
-{
-	string str( s.begin(), s.end() );
-	str.assign( s.begin(), s.end() );
-	return str;
-}
-
-static void
-_checkForError()
-{
-	GLuint errCode = glGetError();
-	if ( errCode != GL_NO_ERROR ) {
-		BK_DEBUG( gluErrorString( errCode ) );
-	}
-}
-
 static inline void
 _computeFps( f32 &t0, f32 &t1, u32 &frames, f32 &fps )
 {
