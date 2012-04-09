@@ -79,7 +79,7 @@ namespace Baukasten {
 		 * row, or compact on a single row.
 		 * \param flags which info to show.
 		 */
-		virtual void drawInfo( const vec3<f32> &position,
+		virtual void drawInfo( IFont *font, const vec3<f32> &position,
 				bool compact = false, InfoFlags flags = DRAW_ALL ) = 0;
 
 		/*!
@@ -174,18 +174,6 @@ namespace Baukasten {
 		 */
 		virtual void drawRect( const vec2<f32> &size, const vec3<f32> &position,
 				const Color &color, bool outline = false ) = 0;
-
-		/*!
-		 * \brief draws a text.
-		 *
-		 * draws the given string with the standard font.
-		 *
-		 * \param text string to be drawn.
-		 * \param position position where the text is drawn.
-		 * \param color color of the drawn text.
-		 */
-		virtual void drawText( const string &text,
-				const vec3<f32> &position, const Color &color ) = 0;
 
 		/*!
 		 * \brief draws a text.

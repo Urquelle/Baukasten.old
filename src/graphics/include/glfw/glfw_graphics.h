@@ -19,7 +19,7 @@ namespace Baukasten {
 		virtual ~GlfwGraphics();
 
 		void createWindow( const vec2<u32>&, const string& );
-		void drawInfo( const vec3<f32>&,
+		void drawInfo( IFont*, const vec3<f32>&,
 				bool compact, InfoFlags = DRAW_ALL );
 		void drawCircle( const vec3<f32>&, const u32, const Color& );
 		void drawImage( const string&, const vec2<f32>&, const vec3<f32>& );
@@ -31,7 +31,6 @@ namespace Baukasten {
 				const Color&, bool outline = false );
 		void drawRect( const vec2<f32>&, const vec3<f32>&,
 				const Color&, bool outline = false );
-		void drawText( const string&, const vec3<f32>&, const Color& );
 		void drawText( IFont*, const string&, const vec3<f32>&, const Color& );
 		f32 fps() const;
 		void init( Services* );

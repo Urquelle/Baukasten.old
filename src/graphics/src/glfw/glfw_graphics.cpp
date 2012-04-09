@@ -19,7 +19,6 @@ typedef map<string, GLuint> GLCache;
 class Baukasten::GlfwGraphicsPrivate {
 public:
 	GlfwGraphicsPrivate( GlfwGraphics *master ) :
-		m_font( 0 ),
 		m_master( master ),
 		m_program( 0 ),
 		m_vao( 0 )
@@ -38,8 +37,6 @@ public:
 		_init();
 		_initProgram( m_program );
 
-		// TODO: create and use internal font here.
-		m_font = new Font( "/usr/share/fonts/corefonts/georgia.ttf" );
 		m_master->setIsReady( true );
 	}
 
@@ -80,7 +77,7 @@ public:
 	}
 
 	void
-	drawInfo( const vec3<f32> &pos, bool compact,
+	drawInfo( IFont *font, const vec3<f32> &pos, bool compact,
 			IGraphics::InfoFlags flags = IGraphics::DRAW_ALL )
 	{
 		f32 x = pos[BK_X], y = pos[BK_Y];
@@ -100,7 +97,7 @@ public:
 		if ( flags & IGraphics::DRAW_FPS ) {
 			stringstream _fps;
 			_fps << "fps: " << fps();
-			drawText( _fps.str(), { x, y + 15, 0 }, black );
+			drawText( font, _fps.str(), { x, y + 15, 0 }, black );
 		}
 
 		// draw version
@@ -113,7 +110,7 @@ public:
 				y += 20;
 			}
 
-			drawText( _version.str(), { x, y + 15, 0 }, black );
+			drawText( font, _version.str(), { x, y + 15, 0 }, black );
 		}
 
 		// draw time
@@ -126,7 +123,7 @@ public:
 				y += 20;
 			}
 
-			drawText( _time.str(), { x, y + 15, 0 }, black );
+			drawText( font, _time.str(), { x, y + 15, 0 }, black );
 		}
 	}
 
@@ -326,12 +323,6 @@ public:
 	}
 
 	void
-	drawText( const string &text, const vec3<f32> &pos, const Color &c )
-	{
-		drawText( m_font, text, pos, c );
-	}
-
-	void
 	drawText( IFont *font, const string &text, const vec3<f32> &pos, const Color &c )
 	{
 		TextNode *node = new TextNode( font, text, pos, c );
@@ -400,7 +391,6 @@ public:
 
 private:
 	GLCache        m_cache;
-	Font*          m_font;
 	f32          m_fps;
 	u32            m_frames;
 	GlfwGraphics*  m_master;
@@ -450,10 +440,10 @@ GlfwGraphics::shutdown()
 }
 
 void
-GlfwGraphics::drawInfo( const vec3<f32> &pos,
+GlfwGraphics::drawInfo( IFont *font, const vec3<f32> &pos,
 		bool compact, InfoFlags flags )
 {
-	m_impl->drawInfo( pos, compact, flags );
+	m_impl->drawInfo( font, pos, compact, flags );
 }
 
 void
@@ -503,13 +493,6 @@ GlfwGraphics::drawRect( const vec2<f32> &size,
 		const vec3<f32> &pos, const Color &color, bool outline )
 {
 	m_impl->drawRect( size, pos, color, outline );
-}
-
-void
-GlfwGraphics::drawText( const string &text, const vec3<f32> &pos,
-		const Color &color )
-{
-	m_impl->drawText( text, pos, color );
 }
 
 void
