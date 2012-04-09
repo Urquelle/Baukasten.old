@@ -74,6 +74,7 @@ namespace Baukasten {
 		 *
 		 * - Time
 		 *
+		 * \param font font to be used to draw the text.
 		 * \param position where the box is drawn.
 		 * \param compact whether the box is shown with the every info on its own
 		 * row, or compact on a single row.
