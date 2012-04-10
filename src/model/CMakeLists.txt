@@ -10,6 +10,7 @@ set (
     model/src/form.cpp
 	model/src/game_entity.cpp
     model/src/logical_space.cpp
+	model/src/model_interface.cpp
     model/src/state.cpp
 	model/src/state_manager.cpp
     model/src/virtual_space.cpp

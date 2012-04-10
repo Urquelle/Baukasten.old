@@ -9,6 +9,7 @@
 
 namespace Baukasten {
 	class ActionManager;
+	struct ElementNode;
 	class EntityType;
 	class Form;
 
@@ -36,24 +37,8 @@ namespace Baukasten {
 	 * entity (e. g. hitpoints, level, gender, ...).
 	 */
 	class BAUKASTEN_EXPORT GameEntity : public Entity {
+		friend class ElementNode;
 	public:
-
-		/*!
-		 * \brief constructor
-		 *
-		 * \param id id of the new object.
-		 */
-		GameEntity( const string& );
-
-		/*!
-		 * \brief copy constructor
-		 *
-		 * \param rhs GameEntity object.
-		 */
-		GameEntity( const GameEntity& );
-
-		/*! \brief destructor */
-		virtual ~GameEntity();
 
 		/*!
 		 * \brief set the type of the entity.
@@ -340,11 +325,17 @@ namespace Baukasten {
 		ActionSignal& onActionRun();
 
 	private:
+
+		GameEntity( const string& );
+		GameEntity( const GameEntity& );
+		virtual ~GameEntity();
+
 		void stateChanged( State* );
 
 		ActionManager*    m_actions;
 		GameEntityMap     m_children;
 		shared_ptr<Form>  m_form;
+		ElementNode*      m_node;
 		GameEntity*       m_parent;
 		StateManager*     m_states;
 		EntityType*       m_type;

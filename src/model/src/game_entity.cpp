@@ -27,6 +27,7 @@ isAncestor( GameEntity *entity, GameEntity *child )
 GameEntity::GameEntity( const string &id ) :
 	Entity( id ),
 	m_actions( new ActionManager() ),
+	m_node( 0 ),
 	m_parent( 0 ),
 	m_states( new StateManager() ),
 	m_type( 0 )
@@ -37,6 +38,7 @@ GameEntity::GameEntity( const GameEntity &rhs ) :
 	Entity( rhs.id() ),
 	m_actions( new ActionManager() ),
 	m_form( rhs.form() ),
+	m_node( 0 ),
 	m_parent( rhs.parent() ),
 	m_states( new StateManager() ),
 	m_type( rhs.type() )
@@ -132,7 +134,7 @@ GameEntity::addChild( const string &id, GameEntity *child )
 	);
 
 	if ( m_children.find( id ) == m_children.end() ) {
-		m_children[ id ] = shared_ptr<GameEntity>( child );
+		m_children[ id ] = child;
 		child->setParent( this );
 	}
 }
@@ -141,7 +143,7 @@ GameEntity*
 GameEntity::child( const string &id ) const
 {
 	auto it = m_children.find( id );
-	return ( it == m_children.end() ) ? 0 : it->second.get();
+	return ( it == m_children.end() ) ? 0 : it->second;
 }
 
 GameEntityMap

@@ -2,15 +2,15 @@
 #define GAME_QC1L8Y4Z
 
 #include "input/InputInterface"
-#include "model/GameEntity"
 
 namespace Baukasten {
+    class GameEntity;
 	class IInput;
 	class IGraphics;
 	class IAudio;
 } /* Baukasten */
 
-class Game : public Baukasten::GameEntity {
+class Game {
 public:
 	Game ( const std::string&, int, char** );
 	virtual ~Game();
@@ -24,6 +24,7 @@ protected:
 	void run();
 
 private:
+    Baukasten::GameEntity*  m_game;
 	Baukasten::IAudio*		m_audio;
 	Baukasten::IGraphics*	m_graphics;
 	Baukasten::IInput*		m_input;

@@ -132,9 +132,8 @@ void wrapClasses()
 		.set("entityState", &EntityType::entityState);
 
 	// register GameEntity Class
-	SLB::Class<GameEntity>("GameEntity")
+	SLB::Class<GameEntity,SLB::Instance::NoCopyNoDestroy>("GameEntity")
 		.comment("Wrapper for the GameEntity Class.")
-		.constructor<const std::string&>()
 		.inherits<Entity>()
 		.set("setType", &GameEntity::setType)
 			.param("the EntityType.")

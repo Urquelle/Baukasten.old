@@ -2,6 +2,7 @@
 #include "color_test.h"
 #include "entity_test.h"
 #include "file_test.h"
+#include "game_entity_test.h"
 #include "image_test.h"
 #include "math_test.h"
 
@@ -15,6 +16,7 @@ int main(int argc, const char *argv[])
 	runner.addTest( ColorTest::suite() );
 	runner.addTest( EntityTest::suite() );
 	runner.addTest( FileTest::suite() );
+	runner.addTest( GameEntityTest::suite() );
 	runner.addTest( MathTest::suite() );
 	runner.addTest( ImageTest::suite() );
 	runner.run();

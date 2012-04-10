@@ -46,7 +46,7 @@ namespace Baukasten {
 	typedef map<string, shared_ptr<EntityType> > EntityTypeMap;
 	typedef vector<shared_ptr<EntityType> >	EntityTypeList;
 
-	typedef map<string, shared_ptr<GameEntity> > GameEntityMap;
+	typedef map<string, GameEntity*> GameEntityMap;
 	typedef vector<shared_ptr<GameEntity> >	GameEntityList;
 
 	typedef map<string, shared_ptr<Action> >	ActionMap;

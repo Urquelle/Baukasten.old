@@ -12,24 +12,27 @@
 #include "model/ActionLua"
 #include "model/GenericState"
 #include "model/LogicalSpace"
+#include "model/ModelInterface"
 #include "model/VirtualSpace"
 #include "services/Services"
 
 using namespace Baukasten;
 
 Game::Game( const string &id, int argc, char **argv ) :
-	GameEntity( id ),
+	m_game( 0 ),
 	m_audio( 0 ),
 	m_graphics( 0 ),
 	m_input( 0 ),
 	m_argc( argc ),
 	m_argv( argv )
 {
-	addAction( new ActionLua( *this, "action:rotate", "scripts/rotate.lua" ) );
-	addAction( new ActionLambda( *this, "action:moveLeft", moveLeft ) );
-	addAction( new ActionLambda( *this, "action:moveRight", moveRight ) );
+	m_game = ModelInterface::instance().createEntity( id );
 
-	addAction( new ActionLambda( *this, "action:pause",
+	m_game->addAction( new ActionLua( *m_game, "action:rotate", "scripts/rotate.lua" ) );
+	m_game->addAction( new ActionLambda( *m_game, "action:moveLeft", moveLeft ) );
+	m_game->addAction( new ActionLambda( *m_game, "action:moveRight", moveRight ) );
+
+	m_game->addAction( new ActionLambda( *m_game, "action:pause",
 		([]( Action *action, GameEntity *entity ) {
 			entity->state<StateBool*>( "state:pause" )->setValue(
 				!entity->state<StateBool*>( "state:pause" )->value()
@@ -37,21 +40,22 @@ Game::Game( const string &id, int argc, char **argv ) :
 		})
 	) );
 
-	addAction( new ActionLambda( *this, "action:gameOver",
+	m_game->addAction( new ActionLambda( *m_game, "action:gameOver",
 		([]( Action *action, GameEntity *field ) {
 		 	field->dropAction( "action:recalculate" );
 		})
 	) );
 
-	addState( new StateBool( "state:keepRunning", true ) );
-	addState( new StateBool( "state:pause", false ) );
+	m_game->addState( new StateBool( "state:keepRunning", true ) );
+	m_game->addState( new StateBool( "state:pause", false ) );
 
-	setForm( new Form( "form:main" ) );
+	m_game->setForm( new Form( "form:main" ) );
 }
 
 Game::~Game()
 {
 	Services* service = Services::instance();
+	ModelInterface::instance().shutdown();
 	service->shutdown();
 }
 
@@ -64,6 +68,7 @@ void Game::start()
 void Game::init()
 {
 	Services* service = Services::instance();
+	ModelInterface &model = ModelInterface::instance();
 
 	service->init( m_argc, m_argv );
 
@@ -80,7 +85,7 @@ void Game::init()
 	m_input->onKeyDown()->connect( sigc::mem_fun( this, &Game::onKeyDown ) );
 
 	// init main display
-	GameEntity *display = new GameEntity( "entity:display ");
+	GameEntity *display = model.createEntity( "entity:display ", m_game );
 	display->setForm(
 		new Form2d( "form:display", "media/display.png", m_graphics )
 	);
@@ -88,12 +93,12 @@ void Game::init()
 	display->form()->setPosition( { 0, 0, 0 } );
 	display->form()->setSize( { 1024, 768 } );
 
-	addChild( display );
-	form()->addToVSpace( display->form() );
-	form()->addToLSpace( display );
+	m_game->addChild( display );
+	m_game->form()->addToVSpace( display->form() );
+	m_game->form()->addToLSpace( display );
 
 	// init playfield
-	GameEntity *field = new GameEntity( "entity:field" );
+	GameEntity *field = model.createEntity( "entity:field", m_game );
 	field->addAction( new ActionLambda( *field, "action:recalculate", recalc, false ) );
 	field->addAction( new ActionLambda( *field, "action:clearCompleteRows", clearCompleteRows ) );
 	field->addState( new StateInt( "state:column", 0 ) );
@@ -129,13 +134,15 @@ void Game::init()
 		0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0
 	}));
 
-	addChild( field );
-	form()->addToVSpace( field->form() );
-	form()->addToLSpace( field );
+	m_game->addChild( field );
+	m_game->form()->addToVSpace( field->form() );
+	m_game->form()->addToLSpace( field );
 	field->invokeAction( "action:recalculate" );
 
+	GameEntity *blockGroup = model.createEntity( "entity:group", m_game );
+
 	// init blocks
-	GameEntity *blockO = new GameEntity( "block:o" );
+	GameEntity *blockO = model.createEntity( "block:o", blockGroup );
 	blockO->setForm( new BlockForm( "form:o", m_graphics ) );
 	blockO->form()->addState( new StateInt( "state:currentMatrix", 1 ) );
 	blockO->form()->addState( new StateIntVector( "state:matrix1", {
@@ -166,7 +173,7 @@ void Game::init()
 		blockO->form()->state<StateIntVector*>( "state:matrix1" )->values()
 	));
 
-	GameEntity *blockZ = new GameEntity( "block:z" );
+	GameEntity *blockZ = model.createEntity( "block:z", blockGroup );
 	blockZ->setForm( new BlockForm( "form:z", m_graphics ) );
 	blockZ->form()->addState( new StateInt( "state:currentMatrix", 1 ) );
 	blockZ->form()->addState( new StateIntVector( "state:matrix1", {
@@ -197,7 +204,7 @@ void Game::init()
 		blockZ->form()->state<StateIntVector*>( "state:matrix1" )->values()
 	));
 
-	GameEntity *blockS = new GameEntity( "block:s" );
+	GameEntity *blockS = model.createEntity( "block:s", blockGroup );
 	blockS->setForm( new BlockForm( "form:s", m_graphics ) );
 	blockS->form()->addState( new StateInt( "state:currentMatrix", 1 ) );
 	blockS->form()->addState( new StateIntVector( "state:matrix1", {
@@ -228,7 +235,7 @@ void Game::init()
 		blockS->form()->state<StateIntVector*>( "state:matrix1" )->values()
 	));
 
-	GameEntity *blockT = new GameEntity( "block:t" );
+	GameEntity *blockT = model.createEntity( "block:t", blockGroup );
 	blockT->setForm( new BlockForm( "form:t", m_graphics ) );
 	blockT->form()->addState( new StateInt( "state:currentMatrix", 1 ) );
 	blockT->form()->addState( new StateIntVector( "state:matrix1", {
@@ -259,7 +266,7 @@ void Game::init()
 		blockT->form()->state<StateIntVector*>( "state:matrix1" )->values()
 	));
 
-	GameEntity *blockL = new GameEntity( "block:l" );
+	GameEntity *blockL = model.createEntity( "block:l", blockGroup );
 	blockL->setForm( new BlockForm( "form:l", m_graphics ) );
 	blockL->form()->addState( new StateInt( "state:currentMatrix", 1 ) );
 	blockL->form()->addState( new StateIntVector( "state:matrix1", {
@@ -290,7 +297,7 @@ void Game::init()
 		blockL->form()->state<StateIntVector*>( "state:matrix1" )->values()
 	));
 
-	GameEntity *blockJ = new GameEntity( "block:j" );
+	GameEntity *blockJ = model.createEntity( "block:j", blockGroup );
 	blockJ->setForm( new BlockForm( "form:j", m_graphics ) );
 	blockJ->form()->addState( new StateInt( "state:currentMatrix", 1 ) );
 	blockJ->form()->addState( new StateIntVector( "state:matrix1", {
@@ -321,7 +328,7 @@ void Game::init()
 		blockJ->form()->state<StateIntVector*>( "state:matrix1" )->values()
 	));
 
-	GameEntity *blockI = new GameEntity( "block:i" );
+	GameEntity *blockI = model.createEntity( "block:i", blockGroup );
 	blockI->setForm( new BlockForm( "form:i", m_graphics ) );
 	blockI->form()->addState( new StateInt( "state:currentMatrix", 1 ) );
 	blockI->form()->addState( new StateIntVector( "state:matrix1", {
@@ -352,7 +359,6 @@ void Game::init()
 		blockI->form()->state<StateIntVector*>( "state:matrix1" )->values()
 	));
 
-	GameEntity *blockGroup = new GameEntity( "entity:group" );
 	blockGroup->addAction( new ActionLambda( *blockGroup, "action:nextBlock", nextBlock ) );
 	blockGroup->addChild( blockO );
 	blockGroup->addChild( blockZ );
@@ -362,12 +368,12 @@ void Game::init()
 	blockGroup->addChild( blockJ );
 	blockGroup->addChild( blockI );
 
-	addChild( blockGroup );
+	m_game->addChild( blockGroup );
 	blockGroup->invokeAction( "action:nextBlock" );
-	form()->addToLSpace( blockGroup );
+	m_game->form()->addToLSpace( blockGroup );
 
 	// create and add the score window object
-	GameEntity *score = new GameEntity( "entity:score" );
+	GameEntity *score = model.createEntity( "entity:score", m_game );
 	score->addState( new StateInt( "state:score", 0 ) );
 	score->addState( new StateInt( "state:linesCleared", 0 ) );
 	score->addAction( new ActionLambda( *score, "action:collectPoints", collectPoints ) );
@@ -375,17 +381,17 @@ void Game::init()
 	score->form()->addState( new StateInt( "state:score", 0 ) );
 	score->form()->setPosition( { 800, 300, 0 } );
 
-	addChild( score );
-	form()->addToLSpace( score );
-	form()->addToVSpace( score->form() );
+	m_game->addChild( score );
+	m_game->form()->addToLSpace( score );
+	m_game->form()->addToVSpace( score->form() );
 }
 
 void Game::run()
 {
-	while ( state<StateBool*>( "state:keepRunning" )->value() ) {
-		runActions();
+	while ( m_game->state<StateBool*>( "state:keepRunning" )->value() ) {
+		m_game->runActions();
 		m_input->process();
-		m_graphics->render( form() );
+		m_graphics->render( m_game->form() );
 	}
 }
 
@@ -394,21 +400,21 @@ void Game::onKeyDown( Key key, Modifier mod )
 	switch ( key ) {
 	case Key::KEY_P:
 	case Key::KEY_SPACE:
-		invokeAction( "action:pause" );
+		m_game->invokeAction( "action:pause" );
 		break;
 	case Key::KEY_Q:
-		state<StateBool*>( "state:keepRunning" )->setValue( false );
+		m_game->state<StateBool*>( "state:keepRunning" )->setValue( false );
 		break;
 	case Key::KEY_ARROW_UP:
-		invokeAction( "action:rotate" );
+		m_game->invokeAction( "action:rotate" );
 		break;
 	case Key::KEY_ARROW_DOWN:
 		break;
 	case Key::KEY_ARROW_RIGHT:
-		invokeAction( "action:moveRight" );
+		m_game->invokeAction( "action:moveRight" );
 		break;
 	case Key::KEY_ARROW_LEFT:
-		invokeAction( "action:moveLeft" );
+		m_game->invokeAction( "action:moveLeft" );
 		break;
 	}
 }
