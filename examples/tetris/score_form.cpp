@@ -8,8 +8,8 @@
 
 using namespace Baukasten;
 
-ScoreForm::ScoreForm( const string &id, IGraphics *graphics ) :
-	Form( id, graphics ),
+ScoreForm::ScoreForm( const string &id ) :
+	Form( id ),
 	m_font( new Font( "/usr/share/fonts/corefonts/arial.ttf", 20 ) )
 {
 }
@@ -27,6 +27,6 @@ ScoreForm::render()
 	sScore << "Your Score: " << score;
 
 	// draw score
-	graphics()->drawText( m_font, sScore.str(), position(), Color( Color::BK_GREEN ) );
+	graphics().drawText( m_font, sScore.str(), position(), Color( Color::BK_GREEN ) );
 }
 

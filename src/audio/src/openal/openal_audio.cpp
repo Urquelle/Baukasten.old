@@ -209,9 +209,9 @@ OpenALAudio::~OpenALAudio()
 }
 
 void
-OpenALAudio::init( Services *services )
+OpenALAudio::init( Services &services )
 {
-	m_impl->init( services->argc(), services->argv() );
+	m_impl->init( services.argc(), services.argv() );
 }
 
 void

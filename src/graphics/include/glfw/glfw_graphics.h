@@ -33,7 +33,7 @@ namespace Baukasten {
 				const Color&, bool outline = false );
 		void drawText( IFont*, const string&, const vec3<f32>&, const Color& );
 		f32 fps() const;
-		void init( Services* );
+		void init( Services& );
 		void render( Form* );
 		void setWindowTitle( const string& );
 		void setWindowSize( const u32, const u32 );

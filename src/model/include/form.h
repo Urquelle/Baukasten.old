@@ -9,9 +9,9 @@
 #include <string>
 
 namespace Baukasten {
+	class IGraphics;
 	class LogicalSpace;
 	class VirtualSpace;
-	class IGraphics;
 
 	/*!
 	 * \ingroup model
@@ -37,9 +37,8 @@ namespace Baukasten {
 		 * \brief constructor
 		 *
 		 * \param id unique name of the object.
-		 * \param graphics IGraphics dirived class that implements the interface.
 		 */
-		Form( const string&, IGraphics *graphics = 0 );
+		Form( const string& );
 
 		/*! destructor */
 		virtual ~Form();
@@ -154,19 +153,16 @@ namespace Baukasten {
 		 */
 		virtual void render();
 
-	protected:
 		/*!
-		 * \brief getter method for the IGraphics implementation.
-		 *
-		 * returns the object from a class that implements the IGraphics
-		 * interface.
-		 */
-		IGraphics *graphics() const;
+		* \brief getter method for the IGraphics implementation.
+		* \return the object from a class that implements the IGraphics
+		* interface.
+		*/
+		IGraphics& graphics();
 
 	private:
 		shared_ptr<LogicalSpace> m_lSpace;
 		shared_ptr<VirtualSpace> m_vSpace;
-		IGraphics *m_graphics;
 	};
 	/** @} */
 }

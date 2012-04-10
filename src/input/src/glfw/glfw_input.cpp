@@ -10,16 +10,15 @@ using namespace Baukasten;
 
 void GLFWCALL inputHandler( int key, int state )
 {
-	auto service = static_cast<GlfwInput*>(
-			Services::instance()->inputService() );
+	auto &service = Services::instance().inputService();
 
-	if ( service->name() != "GLFW" )
+	if ( service.name() != "GLFW" )
 		return;
 
 	if ( state == GLFW_PRESS )
-		service->onKeyDown()->emit( _key( key ), _modifier( key ) );
+		service.onKeyDown()->emit( _key( key ), _modifier( key ) );
 	else if ( state == GLFW_RELEASE )
-		service->onKeyUp()->emit( _key( key ), _modifier( key ) );
+		service.onKeyUp()->emit( _key( key ), _modifier( key ) );
 }
 
 GlfwInput::GlfwInput() :
@@ -32,12 +31,12 @@ GlfwInput::~GlfwInput()
 }
 
 void
-GlfwInput::init( Services *service )
+GlfwInput::init( Services &service )
 {
-	if ( service->videoService()->name() != "GLFW" )
+	if ( service.videoService().name() != "GLFW" )
 		BK_ERROR( "incompatible video backend!" );
 
-	if ( !service->videoService()->isReady() )
+	if ( !service.videoService().isReady() )
 		BK_ERROR( "video service must be initialised." );
 
 	// for the callback to work the window

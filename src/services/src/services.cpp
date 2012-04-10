@@ -7,11 +7,11 @@
 
 using namespace Baukasten;
 
-Services*
+Services&
 Services::instance()
 {
 	static Services instance;
-	return &instance;
+	return instance;
 }
 
 Services::Services() :
@@ -35,9 +35,9 @@ Services::init( int argc, char** argv )
 	m_argc = argc;
 	m_argv = argv;
 
-	m_audio->init( this );
-	m_graphics->init( this );
-	m_input->init( this );
+	m_audio->init( *this );
+	m_graphics->init( *this );
+	m_input->init( *this );
 }
 
 void
@@ -48,22 +48,22 @@ Services::shutdown()
 	m_audio->shutdown();
 }
 
-IAudio*
+IAudio&
 Services::audioService() const
 {
-	return m_audio;
+	return *m_audio;
 }
 
-IInput*
+IInput&
 Services::inputService() const
 {
-	return m_input;
+	return *m_input;
 }
 
-IGraphics*
+IGraphics&
 Services::videoService() const
 {
-	return m_graphics;
+	return *m_graphics;
 }
 
 int

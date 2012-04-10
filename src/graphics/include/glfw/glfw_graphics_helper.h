@@ -43,8 +43,7 @@ _normalise( const int size, const f32 i )
 static void GLFWCALL
 _resize( int width, int height )
 {
-	auto graphics = Services::instance()->videoService();
-	graphics->setWindowSize( width, height );
+	Services::instance().videoService().setWindowSize( width, height );
 }
 
 static bool

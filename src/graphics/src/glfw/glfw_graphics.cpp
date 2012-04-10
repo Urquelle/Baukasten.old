@@ -30,7 +30,7 @@ public:
 	}
 
 	void
-	init( Services *services )
+	init( Services &services )
 	{
 		m_t0 = glfwGetTime();
 
@@ -416,7 +416,7 @@ GlfwGraphics::~GlfwGraphics()
 }
 
 void
-GlfwGraphics::init( Services *services )
+GlfwGraphics::init( Services &services )
 {
 	m_impl->init( services );
 }

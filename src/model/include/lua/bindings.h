@@ -210,7 +210,7 @@ void wrapClasses()
 	// register Form class
 	SLB::Class<Form>("Form")
 		.comment("Form class")
-		.constructor<const std::string&, IGraphics*>()
+		.constructor<const std::string&>()
 		.inherits<Entity>()
 		.inherits<Drawable>()
 		.inherits<StateManager>()

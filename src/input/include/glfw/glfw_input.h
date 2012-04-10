@@ -31,7 +31,7 @@ namespace Baukasten {
 		virtual ~GlfwInput();
 
 		/*! \sa IInput::init() */
-		void      init( Services* );
+		void      init( Services& );
 
 		/*! \sa IInput::keyState() */
 		KeyState  keyState( const Key ) const;

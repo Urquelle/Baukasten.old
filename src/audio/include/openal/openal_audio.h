@@ -38,7 +38,7 @@ namespace Baukasten {
 		virtual ~OpenALAudio();
 
 		/*! \sa IAudio::init() */
-		void init( Services* );
+		void init( Services& );
 
 		/*! \sa IAudio::shutdown() */
 		void shutdown();

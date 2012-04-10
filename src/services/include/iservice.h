@@ -45,7 +45,7 @@ namespace Baukasten {
 		 *
 		 * \param services pointer to Services object.
 		 */
-		virtual void init( Services *services ) = 0;
+		virtual void init( Services &services ) = 0;
 
 		/*!
 		 * \brief method to shutdown the service.

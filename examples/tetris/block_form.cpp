@@ -6,8 +6,8 @@
 
 using namespace Baukasten;
 
-BlockForm::BlockForm( const string &id, IGraphics *graphics ) :
-	Form( id, graphics ),
+BlockForm::BlockForm( const string &id ) :
+	Form( id ),
 	BLOCK_WIDTH( 40 ),
 	BLOCK_HEIGHT( 40 )
 {
@@ -38,7 +38,7 @@ BlockForm::render()
 		pos.set( BK_Y, (float)(y + y_offset) );
 
 		if ( matrix[ i ] == 1 ) {
-			graphics()->drawRect( size, pos, cSet );
+			graphics().drawRect( size, pos, cSet );
 		}
 	}
 }

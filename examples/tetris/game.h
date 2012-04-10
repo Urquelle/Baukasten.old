@@ -5,9 +5,6 @@
 
 namespace Baukasten {
     class GameEntity;
-	class IInput;
-	class IGraphics;
-	class IAudio;
 } /* Baukasten */
 
 class Game {
@@ -24,10 +21,7 @@ protected:
 	void run();
 
 private:
-    Baukasten::GameEntity*  m_game;
-	Baukasten::IAudio*		m_audio;
-	Baukasten::IGraphics*	m_graphics;
-	Baukasten::IInput*		m_input;
+    Baukasten::GameEntity* m_game;
 	int m_argc;
 	char** m_argv;
 };

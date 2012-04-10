@@ -6,7 +6,7 @@
 
 class Form2d : public Baukasten::Form {
 public:
-	Form2d( const std::string&, const std::string&, Baukasten::IGraphics* );
+	Form2d( const std::string&, const std::string& );
 	virtual ~Form2d();
 
 	void render();

@@ -31,7 +31,7 @@ namespace Baukasten {
 		 *
 		 * \return pointer to a static Services object.
 		 */
-		static Services* instance();
+		static Services& instance();
 
 		/*! destructor */
 		virtual ~Services();
@@ -61,7 +61,7 @@ namespace Baukasten {
 		 *
 		 * \return pointer to IAudio object.
 		 */
-		IAudio*     audioService() const;
+		IAudio&     audioService() const;
 
 		/*!
 		 * \brief provides access to the input interface.
@@ -71,7 +71,7 @@ namespace Baukasten {
 		 *
 		 * \return pointer to IInput object.
 		 */
-		IInput*     inputService() const;
+		IInput&     inputService() const;
 
 		/*!
 		 * \brief provides access to the graphics interface.
@@ -81,7 +81,7 @@ namespace Baukasten {
 		 *
 		 * \return pointer to IGraphics object.
 		 */
-		IGraphics*  videoService() const;
+		IGraphics&  videoService() const;
 
 		/*!
 		 * \brief get the number of command line arguments.
@@ -97,6 +97,8 @@ namespace Baukasten {
 
 	private:
 		Services();
+		Services( const Services& );
+		Services& operator=( const Services& );
 
 		IAudio*     m_audio;
 		IGraphics*  m_graphics;

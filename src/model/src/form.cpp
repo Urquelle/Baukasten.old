@@ -4,17 +4,17 @@
 #include "model/GameEntity"
 #include "model/LogicalSpace"
 #include "model/VirtualSpace"
+#include "services/Services"
 
 #include <algorithm>
 
 using namespace Baukasten;
 using namespace std;
 
-Form::Form( const string &id, IGraphics *graphics ) :
+Form::Form( const string &id ) :
 	Drawable( id ),
 	m_lSpace( new LogicalSpace() ),
-	m_vSpace( new VirtualSpace() ),
-	m_graphics( graphics )
+	m_vSpace( new VirtualSpace() )
 {
 }
 
@@ -91,9 +91,9 @@ Form::render()
 {
 }
 
-IGraphics*
-Form::graphics() const
+IGraphics&
+Form::graphics()
 {
-	return m_graphics;
+	return Services::instance().videoService();
 }
 
