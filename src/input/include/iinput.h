@@ -75,7 +75,7 @@ namespace Baukasten {
 		KeyEvent* onKeyUp();
 
 	private:
-		BK_PIMPL_PTR( IInput );
+		BK_IMPL_PTR( IInput );
 	};
 	/** @} */
 	/** @} */

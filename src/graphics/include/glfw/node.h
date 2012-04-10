@@ -35,7 +35,7 @@ namespace Baukasten {
 		GLenum type() const;
 		void setType( GLenum );
 
-		BK_PIMPL_PTR( Node );
+		BK_IMPL_PTR( Node );
 	};
 
 	class QuadNode : public Node {
@@ -107,7 +107,7 @@ namespace Baukasten {
 		void render();
 
 	private:
-		BK_PIMPL_PTR( TextNode );
+		BK_IMPL_PTR( TextNode );
 	};
 } /* Baukasten */
 

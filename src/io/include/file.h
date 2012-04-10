@@ -20,7 +20,7 @@ namespace Baukasten {
 		u32    size() const;
 
 	private:
-		BK_PIMPL_PTR( File );
+		BK_IMPL_PTR( File );
 	};
 } /* Baukasten  */
 

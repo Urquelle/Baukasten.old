@@ -26,7 +26,7 @@ namespace Baukasten {
 		virtual string font() const;
 
 	private:
-		BK_PIMPL_PTR( GlFont );
+		BK_IMPL_PTR( GlFont );
 	};
 } /* Baukasten */
 

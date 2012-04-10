@@ -41,7 +41,7 @@ namespace Baukasten {
 		f32 time() const;
 
 	private:
-		BK_PIMPL_PTR( GlfwGraphics );
+		BK_IMPL_PTR( GlfwGraphics );
 	};
 } /* Baukasten */
 

@@ -70,7 +70,7 @@ namespace Baukasten {
 		u32        width() const;
 
 	private:
-		BK_PIMPL_PTR(Image);
+		BK_IMPL_PTR(Image);
 	};
 	/** @} */
 	/** @} */

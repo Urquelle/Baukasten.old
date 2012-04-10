@@ -24,7 +24,7 @@ namespace Baukasten {
 		GLuint tbo() const;
 
 	private:
-		BK_PIMPL_PTR( GlTexture );
+		BK_IMPL_PTR( GlTexture );
 	};
 } /* Baukasten  */
 

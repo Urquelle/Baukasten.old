@@ -89,7 +89,7 @@ _bk_swap_f32( Baukasten::f32 value )
 #define BK_RGBA( r, g, b, a ) \
 	((a << 24) | ((r & 0xff) << 16) | ((g & 0xff) << 8) | (b & 0xff))
 
-#define BK_PIMPL_PTR( Class ) \
+#define BK_IMPL_PTR( Class ) \
 	friend class Class##Private; \
 	Class##Private* m_impl
 

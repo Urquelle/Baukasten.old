@@ -77,7 +77,7 @@ namespace Baukasten {
 		void stop( const string& );
 
 	private:
-		BK_PIMPL_PTR( OpenALAudio );
+		BK_IMPL_PTR( OpenALAudio );
 	};
 	/** @} */
 	/** @} */

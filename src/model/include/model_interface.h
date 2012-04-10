@@ -122,7 +122,7 @@ namespace Baukasten {
 		ModelInterface& operator=( const ModelInterface& );
 
 		static ModelInterface* m_instance;
-		BK_PIMPL_PTR( ModelInterface );
+		BK_IMPL_PTR( ModelInterface );
 	};
 	/** @} */
 	/** @} */
