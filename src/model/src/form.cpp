@@ -14,7 +14,8 @@ using namespace std;
 Form::Form( const string &id ) :
 	Drawable( id ),
 	m_lSpace( new LogicalSpace() ),
-	m_vSpace( new VirtualSpace() )
+	m_vSpace( new VirtualSpace() ),
+	m_states( new StateManager() )
 {
 }
 
@@ -89,6 +90,18 @@ Form::constructScene()
 void
 Form::render()
 {
+}
+
+void
+Form::addState( State *state )
+{
+	m_states->addState( state );
+}
+
+void
+Form::addState( const string &id, State *state )
+{
+	m_states->addState( id, state );
 }
 
 IGraphics&

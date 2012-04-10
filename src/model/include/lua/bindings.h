@@ -213,8 +213,6 @@ void wrapClasses()
 		.constructor<const std::string&>()
 		.inherits<Entity>()
 		.inherits<Drawable>()
-		.inherits<StateManager>()
-		.inherits<EntityManager>()
 		.set("addToLSpace", ( void (Form::*)(GameEntity*) ) &Form::addToLSpace)
 			.param("Entity expected")
 		.set("addToLSpace", ( void (Form::*)(const std::string&, GameEntity*) ) &Form::addToLSpace)
@@ -230,6 +228,8 @@ void wrapClasses()
 			.param("Entity object")
 		.set("removeFromVSpace", &Form::removeFromVSpace)
 			.param("Entity id expected")
+		.const_set("state", &Form::state<State*>)
+			.param("State id" )
 		.set("vSpace", &Form::vSpace);
 
 	// register LogicalSpace class

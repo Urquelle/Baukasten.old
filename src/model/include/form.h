@@ -2,7 +2,6 @@
 #define FORM_H
 
 #include "model/Drawable"
-#include "model/EntityManager"
 #include "model/Global"
 #include "model/StateManager"
 
@@ -30,8 +29,7 @@ namespace Baukasten {
 	 *
 	 * \include examples/tetris/score_form.cpp
 	 */
-	class BAUKASTEN_EXPORT Form : public Drawable,
-	public EntityManager, public StateManager {
+	class BAUKASTEN_EXPORT Form : public Drawable {
 	public:
 		/*!
 		 * \brief constructor
@@ -154,6 +152,27 @@ namespace Baukasten {
 		virtual void render();
 
 		/*!
+		 * \brief add a state object.
+		 * \sa StateManager::addState()
+		 */
+		void addState( State* );
+
+		/*!
+		 * \brief add a state object.
+		 * \sa StateManager::addState()
+		 */
+		void addState( const string&, State* );
+
+		/*!
+		 * \brief fetch a State object.
+		 * \sa StateManager::state()
+		 */
+		template<class T> T state( const string &id ) const
+		{
+			return m_states->state<T>( id );
+		}
+
+		/*!
 		* \brief getter method for the IGraphics implementation.
 		* \return the object from a class that implements the IGraphics
 		* interface.
@@ -163,6 +182,7 @@ namespace Baukasten {
 	private:
 		shared_ptr<LogicalSpace> m_lSpace;
 		shared_ptr<VirtualSpace> m_vSpace;
+		shared_ptr<StateManager> m_states;
 	};
 	/** @} */
 }
