@@ -81,7 +81,7 @@ namespace Baukasten {
 		 *
 		 * \return pointer to IGraphics object.
 		 */
-		IGraphics&  videoService() const;
+		IGraphics&  graphicsService() const;
 
 		/*!
 		 * \brief get the number of command line arguments.

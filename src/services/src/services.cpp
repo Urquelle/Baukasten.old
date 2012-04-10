@@ -61,7 +61,7 @@ Services::inputService() const
 }
 
 IGraphics&
-Services::videoService() const
+Services::graphicsService() const
 {
 	return *m_graphics;
 }

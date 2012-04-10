@@ -69,7 +69,7 @@ void Game::init()
 	service.init( m_argc, m_argv );
 
 	IInput &m_input = service.inputService();
-	IGraphics &m_graphics = service.videoService();
+	IGraphics &m_graphics = service.graphicsService();
 	IAudio &m_audio = service.audioService();
 
 	m_graphics.createWindow( { 1024, 768 }, "Tetris" );
@@ -388,7 +388,7 @@ void Game::run()
 	while ( m_game->state<StateBool*>( "state:keepRunning" )->value() ) {
 		m_game->runActions();
 		Services::instance().inputService().process();
-		Services::instance().videoService().render( m_game->form() );
+		Services::instance().graphicsService().render( m_game->form() );
 	}
 }
 

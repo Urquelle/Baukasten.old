@@ -107,6 +107,6 @@ Form::addState( const string &id, State *state )
 IGraphics&
 Form::graphics()
 {
-	return Services::instance().videoService();
+	return Services::instance().graphicsService();
 }
 
