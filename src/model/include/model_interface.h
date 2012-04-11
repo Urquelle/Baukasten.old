@@ -8,12 +8,6 @@ namespace Baukasten {
 	class GameEntity;
 	class ModelInterfacePrivate;
 
-	// hier können alle speicher allozierungen kontrolliert werden.
-	// zusätzlich kann hier der baum von objekten vorgehalten werden, und
-	// für jedes objekt eine eindeutige id erstellt werden.
-	// damit das funktioniert, müssen natürlich alle konstruktoren der objekte
-	// privat gemacht werden, und die ModelInterface klasse als ihr friend
-	// deklariert werden.
 	/*!
 	 * \ingroup model
 	 * @{
