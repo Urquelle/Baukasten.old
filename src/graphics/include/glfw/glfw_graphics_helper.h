@@ -46,21 +46,6 @@ _resize( int width, int height )
 	Services::instance().graphicsService().setWindowSize( width, height );
 }
 
-static bool
-_init()
-{
-	if ( !glfwInit() ) {
-		return 0;
-	}
-
-	glfwOpenWindow( 640, 480, 0, 0, 0, 0, 0, 0, GLFW_WINDOW );
-	glfwSetWindowSizeCallback( _resize );
-	glViewport( 0, 0, 640.0, 480.0 );
-	glewInit();
-
-	return true;
-}
-
 static GLuint
 _createShader( GLenum type, const char *shaderData )
 {

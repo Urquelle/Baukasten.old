@@ -41,6 +41,14 @@ namespace Baukasten {
 		};
 
 		/*!
+		 * flags that are used with createWindow method.
+		 */
+		enum WindowFlags {
+			WINDOW = 1,
+			FULLSCREEN
+		};
+
+		/*!
 		 * \brief constructor
 		 *
 		 * receives a name of the service that implements the igraphics interface. this
@@ -59,7 +67,8 @@ namespace Baukasten {
 		 * \param size size of the window.
 		 * \param title window title.
 		 */
-		virtual void createWindow( const vec2<u32> &size, const string &title ) = 0;
+		virtual void createWindow( const vec2<u32> &size, const string &title,
+				WindowFlags flags = FULLSCREEN ) = 0;
 
 		/*!
 		 * \brief draws an info box on the canvas.

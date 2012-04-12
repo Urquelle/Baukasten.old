@@ -3,6 +3,7 @@
 #include "core/Version"
 #include "graphics/Font"
 #include "graphics/Image"
+#include "input/IInput"
 #include "model/Form"
 #include "services/Services"
 
@@ -27,23 +28,39 @@ public:
 
 	virtual ~GlfwGraphicsPrivate()
 	{
+		glfwTerminate();
 	}
 
 	void
 	init( Services &services )
 	{
 		m_t0 = glfwGetTime();
-
-		_init();
-		_initProgram( m_program );
-
 		m_master->setIsReady( true );
 	}
 
-	void createWindow( const vec2<u32> &size, const string &title )
+	void createWindow( const vec2<u32> &size, const string &title,
+			IGraphics::WindowFlags flags )
 	{
+		glfwInit();
+
+		u32 mode = 0;
+		if ( flags & IGraphics::WINDOW ) mode = GLFW_WINDOW;
+		else if ( flags & IGraphics::FULLSCREEN ) mode = GLFW_FULLSCREEN;
+
+		glfwOpenWindow( size[BK_WIDTH], size[BK_HEIGHT], 0, 0, 0, 0, 0, 0, mode );
+		glfwSetWindowSizeCallback( _resize );
+		glViewport( 0, 0, size[BK_WIDTH], size[BK_HEIGHT] );
+		glewInit();
+
+		_initProgram( m_program );
+
 		setWindowSize( size );
 		setWindowTitle( title );
+
+		// notify input service
+		Services::instance().inputService().init(
+			Services::instance()
+		);
 	}
 
 	void
@@ -422,9 +439,10 @@ GlfwGraphics::init( Services &services )
 }
 
 void
-GlfwGraphics::createWindow( const vec2<u32> &size, const string &title )
+GlfwGraphics::createWindow( const vec2<u32> &size,
+		const string &title, WindowFlags flags )
 {
-	m_impl->createWindow( size, title );
+	m_impl->createWindow( size, title, flags );
 }
 
 void
