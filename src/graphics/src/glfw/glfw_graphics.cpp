@@ -130,6 +130,16 @@ public:
 			drawText( font, _version.str(), { x, y + 15, 0 }, black );
 		}
 
+		// draw version name
+		if ( flags & IGraphics::DRAW_VERSION_NAME ) {
+			if ( compact ) {
+				x += 100;
+			} else {
+				y += 20;
+			}
+			drawText( font, "version name: " + name(), { x, y + 15, 0 }, black );
+		}
+
 		// draw time
 		if ( flags & IGraphics::DRAW_TIME ) {
 			stringstream _time;

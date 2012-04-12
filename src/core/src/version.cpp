@@ -1,10 +1,13 @@
 #include "core/include/version.h"
 
+#include "core/Debug"
+
 #include <sstream>
 
 using namespace Baukasten;
 
-#define _BK_TOSTR(X) #X
+#define _BK_WRAP(X) #X
+#define _BK_TOSTR(X) _BK_WRAP(X)
 
 namespace Baukasten {
 	string

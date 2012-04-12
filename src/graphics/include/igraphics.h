@@ -34,10 +34,11 @@ namespace Baukasten {
 		 * flags that are used with the drawInfo method.
 		 */
 		enum InfoFlags {
-			DRAW_FPS     = 1 << 0,
-			DRAW_VERSION = 1 << 1,
-			DRAW_TIME    = 1 << 2,
-			DRAW_ALL     = DRAW_FPS + DRAW_VERSION + DRAW_TIME
+			DRAW_FPS          = 1 << 0,
+			DRAW_VERSION      = 1 << 1,
+			DRAW_VERSION_NAME = 1 << 2,
+			DRAW_TIME         = 1 << 3,
+			DRAW_ALL          = DRAW_FPS + DRAW_VERSION + DRAW_VERSION_NAME + DRAW_TIME
 		};
 
 		/*!
@@ -80,6 +81,8 @@ namespace Baukasten {
 		 * - Framerate
 		 *
 		 * - Library version
+		 *
+		 * - Library version name
 		 *
 		 * - Time
 		 *
