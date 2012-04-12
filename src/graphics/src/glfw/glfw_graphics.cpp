@@ -408,13 +408,13 @@ public:
 
 private:
 	GLCache        m_cache;
-	f32          m_fps;
+	f32            m_fps;
 	u32            m_frames;
 	GlfwGraphics*  m_master;
 	vector<Node*>  m_nodes;
 	GLuint         m_program;
-	f32          m_t0;
-	f32          m_t1;
+	f32            m_t0;
+	f32            m_t1;
 	string         m_title;
 	GLuint         m_vao;
 	vec2<u32>      m_windowSize;
