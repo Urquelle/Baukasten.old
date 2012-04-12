@@ -72,7 +72,7 @@ void Game::init()
 	IGraphics &m_graphics = service.graphicsService();
 	IAudio &m_audio = service.audioService();
 
-	m_graphics.createWindow( { 1024, 768 }, "Tetris" );
+	m_graphics.createWindow( { 1024, 768 }, "Tetris", IGraphics::WINDOW );
 
 	m_audio.loadFile( "media/tetris_theme.wav", "audio:main" );
 	m_audio.setVolume( "audio:main", 0.3 );
