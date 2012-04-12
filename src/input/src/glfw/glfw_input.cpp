@@ -36,9 +36,6 @@ GlfwInput::init( Services &service )
 	if ( service.graphicsService().name() != "GLFW" )
 		BK_ERROR( "incompatible video backend!" );
 
-	if ( !service.graphicsService().isReady() )
-		BK_ERROR( "video service must be initialised." );
-
 	// for the callback to work the window
 	// must have already been created
 	glfwSetKeyCallback( inputHandler );
