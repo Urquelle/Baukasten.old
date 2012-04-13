@@ -4,6 +4,7 @@
 #include "block_form.h"
 #include "field_form.h"
 #include "form2d.h"
+#include "info_form.h"
 #include "score_form.h"
 
 #include "audio/IAudio"
@@ -381,6 +382,13 @@ void Game::init()
 	m_game->addChild( score );
 	m_game->form()->addToLSpace( score );
 	m_game->form()->addToVSpace( score->form() );
+
+	// create info entity
+	GameEntity *info = model.createEntity( "entity:info", m_game );
+	info->setForm( new InfoForm( "form:info" ) );
+
+	m_game->addChild( info );
+	m_game->form()->addToVSpace( info->form() );
 }
 
 void Game::run()
