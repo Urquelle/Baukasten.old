@@ -386,6 +386,8 @@ void Game::init()
 	// create info entity
 	GameEntity *info = model.createEntity( "entity:info", m_game );
 	info->setForm( new InfoForm( "form:info" ) );
+	info->form()->setPosition( { 10, 20, 0 } );
+	info->form()->setSize( { 200, 100 } );
 
 	m_game->addChild( info );
 	m_game->form()->addToVSpace( info->form() );

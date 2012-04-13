@@ -22,20 +22,27 @@ public:
 
 	virtual void render()
 	{
-		graphics().drawRect( { 200, 100 }, { 10, 20, 0.0 }, Color::BK_WHITE );
+		graphics().drawRect( size(), position(), Color::BK_WHITE );
 
 		graphics().drawText(
 			m_font, "q to Quit",
-			{ 15, 35, 0.0}, Color::BK_BLACK );
+			{ position()[BK_X] + 5, position()[BK_Y] + 15, 0 },
+			Color::BK_BLACK );
+
 		graphics().drawText(
 			m_font, "right arrow to move right",
-			{ 15, 50, 0.0}, Color::BK_BLACK );
+			{ position()[BK_X] + 5, position()[BK_Y] + 30, 0 },
+			Color::BK_BLACK );
+
 		graphics().drawText(
 			m_font, "left arrow to move left",
-			{ 15, 65, 0.0}, Color::BK_BLACK );
+			{ position()[BK_X] + 5, position()[BK_Y] + 45, 0 },
+			Color::BK_BLACK );
+
 		graphics().drawText(
 			m_font, "up arrow to rotate",
-			{ 15, 80, 0.0}, Color::BK_BLACK );
+			{ position()[BK_X] + 5, position()[BK_Y] + 60, 0 },
+			Color::BK_BLACK );
 	}
 
 private:
