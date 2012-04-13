@@ -4,16 +4,36 @@
 #include "model/Form"
 #include "model/Global"
 
-namespace Baukasten {
-	class IFont;
-} /* Baukasten */
+#include "graphics/Font"
+#include "graphics/IGraphics"
+#include "model/GenericState"
 
-class ScoreForm : public Baukasten::Form {
+#include <sstream>
+
+using namespace Baukasten;
+
+class ScoreForm : public Form {
 public:
-	ScoreForm( const std::string& );
-	virtual ~ScoreForm();
+	ScoreForm( const string &id ) :
+        Form( id ),
+        m_font( new Font( "/usr/share/fonts/corefonts/arial.ttf", 20 ) )
+    {
+    }
 
-	void render();
+	virtual ~ScoreForm()
+    {
+    }
+
+	void render()
+    {
+        int score = state<StateInt*>( "state:score" )->value();
+
+        stringstream sScore;
+        sScore << "Your Score: " << score;
+
+        // draw score
+        graphics().drawText( m_font, sScore.str(), position(), Color( Color::BK_GREEN ) );
+    }
 
 private:
 	Baukasten::IFont* m_font;
