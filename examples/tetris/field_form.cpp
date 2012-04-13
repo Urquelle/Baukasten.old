@@ -11,9 +11,6 @@
 
 using namespace Baukasten;
 
-const int FIELD_WIDTH = 12;
-const int BLOCK_WIDTH = 4;
-
 FieldForm::FieldForm( const string &id ) :
 	Form( id ),
 	m_font( new Font( "/usr/share/fonts/corefonts/arial.ttf", 10 ) )

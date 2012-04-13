@@ -14,23 +14,20 @@
 
 using namespace Baukasten;
 
-const int BLOCK_WIDTH = 4, BLOCK_HEIGHT = 40, FIELD_SIZE = 12, ROW_COUNT = 18;
-const int LIMIT_TOP = 0, LIMIT_RIGHT = 1, LIMIT_BOTTOM = 2, LIMIT_LEFT = 3;
-
 bool
 collisionDetected( GameEntity *block, GameEntity *field )
 {
 	bool retValue = false;
 	int rows = field->state<StateInt*>( "state:rows" )->value();
-	int fields = FIELD_SIZE * rows;
+	int fields = FIELD_WIDTH * rows;
 
 	auto fieldMatrix = field->form()->state<StateIntVector*>( "state:field" )->values();
 	for ( int i = 0; i < fields; ++i ) {
-		if ( fieldMatrix[ i ] == IN_MOTION && ( ( i + FIELD_SIZE ) < fields ) && ( fieldMatrix[ i + FIELD_SIZE ] == SET ) ) {
+		if ( fieldMatrix[ i ] == IN_MOTION && ( ( i + FIELD_WIDTH ) < fields ) && ( fieldMatrix[ i + FIELD_WIDTH ] == SET ) ) {
 			retValue = true;
 		}
 
-		if ( fieldMatrix[ i ] == IN_MOTION && ( i + FIELD_SIZE ) > ( fields - 1 ) ) {
+		if ( fieldMatrix[ i ] == IN_MOTION && ( i + FIELD_WIDTH ) > ( fields - 1 ) ) {
 			retValue = true;
 		}
 	}
@@ -49,13 +46,13 @@ void setBlockFields( GameEntity *field, int value = SET )
 	auto matrix = matrixState->values();
 
 	for( int i = 0, j = 0; i < matrix.size(); ++i ) {
-		int startBlock = ( row * FIELD_SIZE ) + ( column - 1 );
-		int endBlock = ( ( row + 3 ) * FIELD_SIZE ) + ( column + 2 );
-		int range = ( i - column + 1 ) % FIELD_SIZE;
-		j = (int)( i / FIELD_SIZE );
+		int startBlock = ( row * FIELD_WIDTH ) + ( column - 1 );
+		int endBlock = ( ( row + 3 ) * FIELD_WIDTH ) + ( column + 2 );
+		int range = ( i - column + 1 ) % FIELD_WIDTH;
+		j = (int)( i / FIELD_WIDTH );
 
 		if ( block.size() && i >= startBlock && i <= endBlock && range >= 0 && range < BLOCK_WIDTH ) {
-			int index = ( i - row * FIELD_SIZE - column + 1 ) - ( FIELD_SIZE - BLOCK_WIDTH ) * ( j - row );
+			int index = ( i - row * FIELD_WIDTH - column + 1 ) - ( FIELD_WIDTH - BLOCK_WIDTH ) * ( j - row );
 
 			// skip iteration if index outside valid range
 			if ( index < 0 || index > 15 )
@@ -117,14 +114,14 @@ DoActionFunction moveRight([]( Action *action, GameEntity *entity ) {
 	auto fieldMatrix = field->form()->state<StateIntVector*>( "state:field" )->values();
 
 	bool v = false;
-	for ( int i = 0; i < ( FIELD_SIZE * ROW_COUNT ); ++i ) {
+	for ( int i = 0; i < ( FIELD_WIDTH * FIELD_HEIGHT ); ++i ) {
 		if ( v ) break;
 		if ( fieldMatrix[ i ] == IN_MOTION ) {
 			// either the right field border is reached ...
-			if ( ( i % FIELD_SIZE ) == ( FIELD_SIZE - 1 ) )
+			if ( ( i % FIELD_WIDTH ) == ( FIELD_WIDTH - 1 ) )
 				v = true;
 			// ... or there are some set blocks in the way
-			if ( ( i + 1 ) % FIELD_SIZE > 0 && ( ( i + 1 ) <= ( FIELD_SIZE * ROW_COUNT ) ) && fieldMatrix[ i + 1 ] == SET )
+			if ( ( i + 1 ) % FIELD_WIDTH > 0 && ( ( i + 1 ) <= ( FIELD_WIDTH * FIELD_HEIGHT ) ) && fieldMatrix[ i + 1 ] == SET )
 				v = true;
 		}
 	}
@@ -146,14 +143,14 @@ DoActionFunction moveLeft([]( Action *action, GameEntity *entity ) {
 	auto fieldMatrix = field->form()->state<StateIntVector*>( "state:field" )->values();
 
 	bool v = false;
-	for ( int i = 0; i < ( FIELD_SIZE * ROW_COUNT ); ++i ) {
+	for ( int i = 0; i < ( FIELD_WIDTH * FIELD_HEIGHT ); ++i ) {
 		if ( v ) break;
 		if ( fieldMatrix[ i ] == IN_MOTION ) {
 			// either the left field border is reached ...
-			if ( ( i % FIELD_SIZE ) == 0 )
+			if ( ( i % FIELD_WIDTH ) == 0 )
 				v = true;
 			// ... or there are some set blocks in the way
-			if ( ( ( i - 1 ) % FIELD_SIZE ) < ( FIELD_SIZE - 1 ) && ( ( i - 1 ) >= 0 ) && fieldMatrix[ i - 1 ] == SET )
+			if ( ( ( i - 1 ) % FIELD_WIDTH ) < ( FIELD_WIDTH - 1 ) && ( ( i - 1 ) >= 0 ) && fieldMatrix[ i - 1 ] == SET )
 				v = true;
 		}
 	}
@@ -177,8 +174,8 @@ DoActionFunction recalc([]( Action *action, GameEntity *field ) {
 	step->setValue( step->value() + 1 );
 
 	setBlockFields( field, CLEAN );
-	float row = step->value() / BLOCK_HEIGHT;
-	row += ( step->value() % BLOCK_HEIGHT == 0 ) ? 0 : 1;
+	float row = step->value() / BLOCK_PX_HEIGHT;
+	row += ( step->value() % BLOCK_PX_HEIGHT == 0 ) ? 0 : 1;
 	field->form()->state<StateInt*>( "block:row" )->setValue( row );
 	setBlockFields( field, IN_MOTION );
 
@@ -208,10 +205,10 @@ DoActionFunction clearCompleteRows([]( Action *action, GameEntity *entity ) {
 
 	int setBlocksCount = 0;
 	int points = 0;
-	int currRow = ROW_COUNT - 1, prevRow = ROW_COUNT - 1;
+	int currRow = FIELD_HEIGHT - 1, prevRow = FIELD_HEIGHT - 1;
 	vector<int> completeRows;
-	for ( int i = ( FIELD_SIZE * ROW_COUNT ) - 1; i >= 0; --i ) {
-		currRow = (int)( i / FIELD_SIZE );
+	for ( int i = ( FIELD_WIDTH * FIELD_HEIGHT ) - 1; i >= 0; --i ) {
+		currRow = (int)( i / FIELD_WIDTH );
 
 		// if still in the same row and this block is set
 		if ( currRow == prevRow && fieldMatrix[ i ] == SET ) {
@@ -220,7 +217,7 @@ DoActionFunction clearCompleteRows([]( Action *action, GameEntity *entity ) {
 		// if the next row's reached -- remember we go up the field, from 17 down to 0 ...
 		} else if( currRow < prevRow ) {
 			// ... and the row was complete
-			if ( setBlocksCount == FIELD_SIZE ) {
+			if ( setBlocksCount == FIELD_WIDTH ) {
 				completeRows.push_back( prevRow );
 
 			// ... else collect the points
@@ -230,9 +227,9 @@ DoActionFunction clearCompleteRows([]( Action *action, GameEntity *entity ) {
 				score->invokeAction( "action:collectPoints" );
 
 				// clear the rows
-				int shiftBy = FIELD_SIZE * ( completeRows[0] - completeRows[completeRows.size() - 1] + 1 );
-				int shiftTo = completeRows[0] * FIELD_SIZE + FIELD_SIZE - 1;
-				int shiftFrom = ( completeRows[ completeRows.size() - 1 ] - 1 ) * FIELD_SIZE + FIELD_SIZE - 1;
+				int shiftBy = FIELD_WIDTH * ( completeRows[0] - completeRows[completeRows.size() - 1] + 1 );
+				int shiftTo = completeRows[0] * FIELD_WIDTH + FIELD_WIDTH - 1;
+				int shiftFrom = ( completeRows[ completeRows.size() - 1 ] - 1 ) * FIELD_WIDTH + FIELD_WIDTH - 1;
 
 				for( ; shiftFrom >= 0; --shiftTo, --shiftFrom ) {
 					if( fieldMatrix[ shiftTo ] != IN_MOTION && fieldMatrix[ shiftFrom ] != IN_MOTION ) {
