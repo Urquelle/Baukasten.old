@@ -23,7 +23,7 @@ public:
 
 	virtual void render()
     {
-        auto matrix = state<StateIntVector*>( "state:matrix1" )->values();
+        auto matrix = state<StateIntVector*>( "state:matrix" )->values();
 
         Color cSet( Color::BK_RED );
         Color cClean( Color::BK_WHITE );

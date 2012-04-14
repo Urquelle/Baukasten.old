@@ -77,6 +77,7 @@ DoActionFunction nextBlock([]( Action *action, GameEntity *entity ) {
 	GameEntity *block = 0;
 	GameEntity *field = entity->parent()->child( "entity:field" );
 	GameEntity *nextBlock = entity->child( blocks[ rand() % 7 ] );
+	GameEntity *preview = field->parent()->child( "entity:preview" );
 
 	if ( field->form()->lSpace()->hasEntity( "block:next" ) ) {
 		block = field->form()->lSpace()->entity( "block:next" );
@@ -93,10 +94,11 @@ DoActionFunction nextBlock([]( Action *action, GameEntity *entity ) {
 	field->form()->state<StateInt*>( "block:column" )->setValue( 5 );
 
 	field->form()->removeFromLSpace( "block:next" );
-	field->form()->removeFromVSpace( "block:next" );
 	field->form()->addToLSpace( "block:next", nextBlock );
-	field->form()->addToVSpace( "block:next", nextBlock->form() );
-	nextBlock->form()->setPosition( { 800, 40, 0 } );
+
+	preview->form()->state<StateIntVector*>( "state:matrix" )->setValues(
+		nextBlock->form()->state<StateIntVector*>( "state:matrix1" )->values()
+	);
 
 	setBlockFields( field, IN_MOTION );
 

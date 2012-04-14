@@ -391,6 +391,15 @@ void Game::init()
 
 	m_game->addChild( info );
 	m_game->form()->addToVSpace( info->form() );
+
+	// create preview entity
+	GameEntity *preview = model.createEntity( "entity:preview", m_game );
+	preview->setForm( new BlockForm( "form:preview" ) );
+	preview->form()->addState( new StateIntVector( "state:matrix" ) );
+	preview->form()->setPosition( { 800, 40, 0 } );
+
+	m_game->addChild( preview );
+	m_game->form()->addToVSpace( preview->form() );
 }
 
 void Game::run()
