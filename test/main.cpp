@@ -5,6 +5,7 @@
 #include "game_entity_test.h"
 #include "image_test.h"
 #include "math_test.h"
+#include "vector2_test.h"
 
 #include <cppunit/ui/text/TestRunner.h>
 
@@ -19,6 +20,7 @@ int main(int argc, const char *argv[])
 	runner.addTest( GameEntityTest::suite() );
 	runner.addTest( MathTest::suite() );
 	runner.addTest( ImageTest::suite() );
+	runner.addTest( Vector2Test::suite() );
 	runner.run();
 	return 0;
 }

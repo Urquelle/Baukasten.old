@@ -61,8 +61,8 @@ Vector2::operator==( const Vector2 &other ) const
 	f32 tolerance = 0.00000001;
 
 	if (
-		fabs( m_data[0] - other[0] ) > tolerance &&
-		fabs( m_data[1] - other[1] ) > tolerance
+		fabs( m_data[0] - other[0] ) < tolerance &&
+		fabs( m_data[1] - other[1] ) < tolerance
 	) return true;
 
 	return false;
@@ -110,16 +110,16 @@ Vector2::operator/( const Vector2 &other ) const
 Vector2
 Vector2::operator/( const f32 value ) const
 {
-	return Vector2(
-		( value != 0 ) ? m_data[0] / value : FLT_MAX,
-		( value != 0 ) ? m_data[1] / value : FLT_MAX
-	);
+	if ( value == 0 )
+		return Vector2( FLT_MAX, FLT_MAX );
+
+	return Vector2( m_data[0] / value, m_data[1] / value );
 }
 
 f32
 Vector2::operator[]( const u32 index ) const
 {
-	BK_ASSERT( index < 2 && index > 0, "index out of bounds." );
+	BK_ASSERT( index < 2 && index >= 0, "index out of bounds." );
 	return m_data[ index ];
 }
 

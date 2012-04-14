@@ -25,11 +25,11 @@ namespace Baukasten {
 		Vector2  operator/( const f32 ) const;
 		f32      operator[]( const u32 ) const;
 
-		f32 mag() const;
-		f32 magSqr() const;
-		Vector2 normalised() const;
+		f32      mag() const;
+		f32      magSqr() const;
+		Vector2  normalised() const;
 		Vector2& normalise();
-		f32 dot( const Vector2& ) const;
+		f32      dot( const Vector2& ) const;
 
 	private:
 		f32          m_data[2];
