@@ -28,12 +28,12 @@ public:
         Color cSet( Color::BK_RED );
         Color cClean( Color::BK_WHITE );
 
-        int x = position()[BK_X];
-        int x_offset = 0;
-        int y = position()[BK_Y];
-        int y_offset = 0;
-        vec3<float> pos;
-        vec2<float> size({ (float)(BLOCK_PX_WIDTH), (float)(BLOCK_PX_HEIGHT) });
+        u32 x = position()[BK_X];
+        u32 x_offset = 0;
+        u32 y = position()[BK_Y];
+        u32 y_offset = 0;
+        vec3f pos;
+        vec2f size({ (float)(BLOCK_PX_WIDTH), (float)(BLOCK_PX_HEIGHT) });
 
         for ( int i = 0; i < BLOCK_SIZE; ++i ) {
             x_offset = ( i % BLOCK_WIDTH ) * BLOCK_PX_WIDTH;
