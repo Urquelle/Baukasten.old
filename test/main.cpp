@@ -6,6 +6,7 @@
 #include "image_test.h"
 #include "math_test.h"
 #include "vector2_test.h"
+#include "vector3_test.h"
 
 #include <cppunit/ui/text/TestRunner.h>
 
@@ -21,6 +22,7 @@ int main(int argc, const char *argv[])
 	runner.addTest( MathTest::suite() );
 	runner.addTest( ImageTest::suite() );
 	runner.addTest( Vector2Test::suite() );
+	runner.addTest( Vector3Test::suite() );
 	runner.run();
 	return 0;
 }
