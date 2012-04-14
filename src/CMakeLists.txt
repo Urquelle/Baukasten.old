@@ -9,6 +9,7 @@ include( core/CMakeLists.txt )
 include( graphics/CMakeLists.txt )
 include( input/CMakeLists.txt )
 include( io/CMakeLists.txt )
+include( math/CMakeLists.txt )
 include( model/CMakeLists.txt )
 include( services/CMakeLists.txt )
 include( util/CMakeLists.txt )
@@ -29,6 +30,7 @@ add_library( Baukasten SHARED
 	${graphics_SRCS}
 	${input_SRCS}
 	${io_SRCS}
+	${math_SRCS}
 	${model_SRCS}
 	${services_SRCS}
 	${util_SRCS}
@@ -68,8 +70,8 @@ install(
 )
 
 install(
-	DIRECTORY util/
-	DESTINATION ${CMAKE_INSTALL_PREFIX}/util
+	DIRECTORY math/
+	DESTINATION ${CMAKE_INSTALL_PREFIX}/math
 	PATTERN *.cpp EXCLUDE
 	PATTERN *.txt EXCLUDE
 )
@@ -77,6 +79,13 @@ install(
 install(
 	DIRECTORY model/
 	DESTINATION ${CMAKE_INSTALL_PREFIX}/model
+	PATTERN *.cpp EXCLUDE
+	PATTERN *.txt EXCLUDE
+)
+
+install(
+	DIRECTORY util/
+	DESTINATION ${CMAKE_INSTALL_PREFIX}/util
 	PATTERN *.cpp EXCLUDE
 	PATTERN *.txt EXCLUDE
 )
