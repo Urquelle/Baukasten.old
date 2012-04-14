@@ -26,22 +26,22 @@ public:
 
 		graphics().drawText(
 			m_font, "q to Quit",
-			{ position()[BK_X] + 5, position()[BK_Y] + 15, 0 },
+			position() + vec3<f32>{ 5, 15, 0 },
 			Color::BK_BLACK );
 
 		graphics().drawText(
 			m_font, "right arrow to move right",
-			{ position()[BK_X] + 5, position()[BK_Y] + 30, 0 },
+			position() + vec3<f32>{ 5, 30, 0 },
 			Color::BK_BLACK );
 
 		graphics().drawText(
 			m_font, "left arrow to move left",
-			{ position()[BK_X] + 5, position()[BK_Y] + 45, 0 },
+			position() + vec3<f32>{ 5, 45, 0 },
 			Color::BK_BLACK );
 
 		graphics().drawText(
 			m_font, "up arrow to rotate",
-			{ position()[BK_X] + 5, position()[BK_Y] + 60, 0 },
+			position() + vec3<f32>{ 5, 60, 0 },
 			Color::BK_BLACK );
 	}
 
