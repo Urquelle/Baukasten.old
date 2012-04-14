@@ -164,6 +164,12 @@ namespace Baukasten {
 		void addState( const string&, State* );
 
 		/*!
+		 * \brief query the object for the presence of a state.
+		 * \sa StateManager::hasState()
+		 */
+		bool hasState( const string& ) const;
+
+		/*!
 		 * \brief fetch a State object.
 		 * \sa StateManager::state()
 		 */

@@ -104,6 +104,12 @@ Form::addState( const string &id, State *state )
 	m_states->addState( id, state );
 }
 
+bool
+Form::hasState( const string &id ) const
+{
+	return m_states->hasState( id );
+}
+
 IGraphics&
 Form::graphics()
 {
