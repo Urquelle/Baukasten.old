@@ -74,7 +74,7 @@ namespace Baukasten {
 		 * \param other vec2 struct to compare with.
 		 * \return true if every component of the two structs are the same, false otherwise.
 		 */
-		bool operator==( const vec2<T> &other )
+		bool operator==( const vec2<T> &other ) const
 		{
 			return (
 				data[0] == other.data[0] &&
@@ -90,7 +90,7 @@ namespace Baukasten {
 		 * \param other vec2 struct to compare with.
 		 * \return false if at least one component differs, true otherwise.
 		 */
-		bool operator!=( const vec2<T> &other )
+		bool operator!=( const vec2<T> &other ) const
 		{
 			return !operator==(other);
 		}
@@ -101,14 +101,14 @@ namespace Baukasten {
 		 * adds the given vec2 struct's components.
 		 *
 		 * \param other vec2 struct which components are added.
-		 * \return reference to an altered vec2 struct.
+		 * \return new vec2 struct with the added values.
 		 */
-		vec2<T>& operator+( const vec2<T> &other )
+		vec2<T> operator+( const vec2<T> &other ) const
 		{
-			data[0] += other.data[0];
-			data[1] += other.data[1];
-
-			return *this;
+			return vec2<T>{
+				data[0] + other.data[0],
+				data[1] + other.data[1]
+			};
 		}
 
 		/*!
@@ -117,14 +117,14 @@ namespace Baukasten {
 		 * adds the given value to each component of the vec2.
 		 *
 		 * \param value value that is added.
-		 * \return reference to an altered vec2 struct.
+		 * \return new vec2 struct with the added values.
 		 */
-		vec2<T>& operator+( const T value )
+		vec2<T> operator+( const T value ) const
 		{
-			data[0] += value;
-			data[1] += value;
-
-			return *this;
+			return vec2<T>{
+				data[0] + value,
+				data[1] + value
+			};
 		}
 
 		/*!
@@ -134,14 +134,14 @@ namespace Baukasten {
 		 * j of the given component.
 		 *
 		 * \param other vec2 struct.
-		 * \return reference to an altered vec2 struct.
+		 * \return new vec2 struct with multiplied values.
 		 */
-		vec2<T>& operator*( const vec2<T> &other )
+		vec2<T> operator*( const vec2<T> &other ) const
 		{
-			data[0] *= other.data[0];
-			data[1] *= other.data[1];
-
-			return *this;
+			return vec2<T>{
+				data[0] * other.data[0],
+				data[1] * other.data[1]
+			};
 		}
 
 		/*!
@@ -150,14 +150,14 @@ namespace Baukasten {
 		 * multiplicates every field of the component with the given value.
 		 *
 		 * \param value value that is added.
-		 * \return reference to an altered vec2 struct.
+		 * \return new vec2 struct with multiplied values.
 		 */
-		vec2<T>& operator*( const T value )
+		vec2<T> operator*( const T value ) const
 		{
-			data[0] *= value;
-			data[1] *= value;
-
-			return *this;
+			return vec2<T>{
+				data[0] * value,
+				data[1] * value
+			};
 		}
 
 		/*!
@@ -307,7 +307,7 @@ namespace Baukasten {
 		 * \param other vec3 struct to compare with.
 		 * \return true if every component of the two structs are the same, false otherwise.
 		 */
-		bool operator==( const vec3<T> &other )
+		bool operator==( const vec3<T> &other ) const
 		{
 			return (
 				data[0] == other.data[0] &&
@@ -324,7 +324,7 @@ namespace Baukasten {
 		 * \param other vec3 struct to compare with.
 		 * \return false if at least one component differs, true otherwise.
 		 */
-		bool operator!=( const vec3<T> &other )
+		bool operator!=( const vec3<T> &other ) const
 		{
 			return !operator==(other);
 		}
@@ -335,15 +335,15 @@ namespace Baukasten {
 		 * adds the given vec3 struct's components.
 		 *
 		 * \param other vec3 struct which components are added.
-		 * \return reference to an altered vec3 struct.
+		 * \return new vec3 struct with the added values.
 		 */
-		vec3<T>& operator+( const vec3<T> &other )
+		vec3<T> operator+( const vec3<T> &other ) const
 		{
-			data[0] += other.data[0];
-			data[1] += other.data[1];
-			data[2] += other.data[2];
-
-			return *this;
+			return vec3<T>{
+				data[0] + other.data[0],
+				data[1] + other.data[1],
+				data[2] + other.data[2]
+			};
 		}
 
 		/*!
@@ -352,15 +352,15 @@ namespace Baukasten {
 		 * adds the given value to each component of the vec3.
 		 *
 		 * \param value value that is added.
-		 * \return reference to an altered vec3 struct.
+		 * \return new vec3 struct with the added values.
 		 */
-		vec3<T>& operator+( const T value )
+		vec3<T> operator+( const T value ) const
 		{
-			data[0] += value;
-			data[1] += value;
-			data[2] += value;
-
-			return *this;
+			return vec3<T>{
+				data[0] + value,
+				data[1] + value,
+				data[2] + value
+			};
 		}
 
 		/*!
@@ -370,15 +370,15 @@ namespace Baukasten {
 		 * j of the given component.
 		 *
 		 * \param other vec3 struct.
-		 * \return reference to an altered vec3 struct.
+		 * \return new vec3 struct with multiplied values.
 		 */
-		vec3<T>& operator*( const vec3<T> &other )
+		vec3<T> operator*( const vec3<T> &other ) const
 		{
-			data[0] *= other.data[0];
-			data[1] *= other.data[1];
-			data[2] *= other.data[2];
-
-			return *this;
+			return vec3<T>{
+				data[0] * other.data[0],
+				data[1] * other.data[1],
+				data[2] * other.data[2]
+			};
 		}
 
 		/*!
@@ -389,13 +389,13 @@ namespace Baukasten {
 		 * \param value value that is added.
 		 * \return reference to an altered vec3 struct.
 		 */
-		vec3<T>& operator*( const T value )
+		vec3<T> operator*( const T value ) const
 		{
-			data[0] *= value;
-			data[1] *= value;
-			data[2] *= value;
-
-			return *this;
+			return vec3<T>{
+				data[0] * value,
+				data[1] * value,
+				data[2] * value
+			};
 		}
 
 		/*!
