@@ -5,6 +5,7 @@
 #include "game_entity_test.h"
 #include "image_test.h"
 #include "math_test.h"
+#include "vector_test.h"
 #include "vector2_test.h"
 #include "vector3_test.h"
 
@@ -21,6 +22,7 @@ int main(int argc, const char *argv[])
 	runner.addTest( GameEntityTest::suite() );
 	runner.addTest( MathTest::suite() );
 	runner.addTest( ImageTest::suite() );
+	runner.addTest( VectorTest::suite() );
 	runner.addTest( Vector2Test::suite() );
 	runner.addTest( Vector3Test::suite() );
 	runner.run();
