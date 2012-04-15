@@ -38,7 +38,9 @@ namespace Baukasten {
 			DRAW_VERSION      = 1 << 1,
 			DRAW_VERSION_NAME = 1 << 2,
 			DRAW_TIME         = 1 << 3,
+			DRAW_ENTITY_COUNT = 1 << 4,
 			DRAW_ALL          = DRAW_FPS + DRAW_VERSION + DRAW_VERSION_NAME + DRAW_TIME
+				+ DRAW_ENTITY_COUNT
 		};
 
 		/*!

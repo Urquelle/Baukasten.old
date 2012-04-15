@@ -5,6 +5,7 @@
 #include "graphics/Image"
 #include "input/IInput"
 #include "model/Form"
+#include "model/ModelInterface"
 #include "services/Services"
 
 #include "graphics/include/glfw/glfw_graphics_helper.h"
@@ -98,23 +99,20 @@ public:
 			IGraphics::InfoFlags flags = IGraphics::DRAW_ALL )
 	{
 		f32 x = pos[BK_X], y = pos[BK_Y];
-
-		Color white( { 255, 255, 255, 120 } );
-		Color black( { 0, 0, 0, 255 } );
 		vec2<f32> size({ 200, 150 });
 
 		if ( compact )
-			size = { 300, 20 };
+			size = { 600, 20 };
 
 		// draw semitransparent rect
-		drawRect( size, { x, y, 0.0 }, white );
+		drawRect( size, { x, y, 0.0 }, Color::BK_WHITE );
 		x += 10;
 
 		// draw fps
 		if ( flags & IGraphics::DRAW_FPS ) {
 			stringstream _fps;
 			_fps << "fps: " << fps();
-			drawText( font, _fps.str(), { x, y + 15, 0 }, black );
+			drawText( font, _fps.str(), { x, y + 15, 0 }, Color::BK_BLACK );
 		}
 
 		// draw version
@@ -127,7 +125,7 @@ public:
 				y += 20;
 			}
 
-			drawText( font, _version.str(), { x, y + 15, 0 }, black );
+			drawText( font, _version.str(), { x, y + 15, 0 }, Color::BK_BLACK );
 		}
 
 		// draw version name
@@ -137,7 +135,7 @@ public:
 			} else {
 				y += 20;
 			}
-			drawText( font, "version name: " + name(), { x, y + 15, 0 }, black );
+			drawText( font, "version name: " + name(), { x, y + 15, 0 }, Color::BK_BLACK );
 		}
 
 		// draw time
@@ -145,12 +143,25 @@ public:
 			stringstream _time;
 			_time << "time: " << time();
 			if ( compact ) {
+				x += 150;
+			} else {
+				y += 20;
+			}
+
+			drawText( font, _time.str(), { x, y + 15, 0 }, Color::BK_BLACK );
+		}
+
+		// draw model information
+		if ( flags & IGraphics::DRAW_ENTITY_COUNT ) {
+			if ( compact ) {
 				x += 100;
 			} else {
 				y += 20;
 			}
 
-			drawText( font, _time.str(), { x, y + 15, 0 }, black );
+			stringstream entityCount;
+			entityCount << "entity count: " << ModelInterface::instance().entityCount();
+			drawText( font, entityCount.str(), { x, y + 15, 0 }, Color::BK_BLACK );
 		}
 	}
 
