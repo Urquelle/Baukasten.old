@@ -33,7 +33,7 @@ namespace Baukasten {
 			return m_info->data;
 		}
 
-		vec2<u32>
+		Vector<u32, 2>
 		dim() const
 		{
 			return { m_info->width, m_info->height };
@@ -110,7 +110,7 @@ Image::data() const
 	return m_impl->data();
 }
 
-vec2<u32>
+Vector<u32, 2>
 Image::dim() const
 {
 	return m_impl->dim();

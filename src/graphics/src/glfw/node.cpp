@@ -404,7 +404,7 @@ PolyNode::outline() const
 // TextNodePrivate
 class Baukasten::TextNodePrivate {
 public:
-	TextNodePrivate( IFont *font, const string &text, const vec3<f32> &pos,
+	TextNodePrivate( IFont *font, const string &text, const Vector3 &pos,
 			const Color &c ) :
 		m_font( font ),
 		m_text( text ),
@@ -424,15 +424,15 @@ public:
 	}
 
 private:
-	IFont*       m_font;
-	string       m_text;
-	vec3<f32>  m_pos;
-	Color        m_color;
+	IFont*    m_font;
+	string    m_text;
+	Vector3   m_pos;
+	Color     m_color;
 };
 
 // TextNode
 TextNode::TextNode( IFont *font, const string &text,
-		const vec3<f32> &pos, const Color &c ) :
+		const Vector3 &pos, const Color &c ) :
 	Node( 0, 0, 0 ),
 	m_impl( new TextNodePrivate( font, text, pos, c ) )
 {

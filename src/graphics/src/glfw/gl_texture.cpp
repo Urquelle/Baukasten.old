@@ -11,7 +11,7 @@ namespace Baukasten {
 	class GlTexturePrivate {
 	public:
 		GlTexturePrivate( GlTexture *master, const string &path,
-				const vec2<f32> &size ) :
+				const Vector2 &size ) :
 			m_master( master ),
 			m_size( size ),
 			m_source( path )
@@ -54,15 +54,15 @@ namespace Baukasten {
 		}
 
 	private:
-		GLuint       m_cbo;
-		GlTexture*   m_master;
-		vec2<float>  m_size;
-		string       m_source;
-		GLuint       m_tbo;
+		GLuint      m_cbo;
+		GlTexture*  m_master;
+		Vector2     m_size;
+		string      m_source;
+		GLuint      m_tbo;
 	};
 } /* Baukasten */
 
-GlTexture::GlTexture( const string &filePath, const vec2<float> &size ) :
+GlTexture::GlTexture( const string &filePath, const Vector2 &size ) :
 	m_impl( new GlTexturePrivate( this, filePath, size ) )
 {
 }

@@ -2,9 +2,8 @@
 #define NODE_H_AROBCMPN
 
 #include "core/Color"
-#include "core/Math"
-#include "core/Color"
 #include "graphics/Global"
+#include "math/Vector3"
 
 #include <GL/glew.h>
 #include <GL/gl.h>
@@ -101,7 +100,7 @@ namespace Baukasten {
 	class TextNodePrivate;
 	class TextNode : public Node {
 	public:
-		TextNode( IFont*, const string&, const vec3<f32>&, const Color& );
+		TextNode( IFont*, const string&, const Vector3&, const Color& );
 		virtual ~TextNode();
 
 		void render();

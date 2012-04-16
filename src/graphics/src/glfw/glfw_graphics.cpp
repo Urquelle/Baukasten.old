@@ -39,7 +39,7 @@ public:
 		m_master->setIsReady( true );
 	}
 
-	void createWindow( const vec2<u32> &size, const string &title,
+	void createWindow( const Vector<u32, 2> &size, const string &title,
 			IGraphics::WindowFlags flags )
 	{
 		glfwInit();
@@ -95,11 +95,11 @@ public:
 	}
 
 	void
-	drawInfo( IFont *font, const vec3<f32> &pos, bool compact,
+	drawInfo( IFont *font, const Vector3 &pos, bool compact,
 			IGraphics::InfoFlags flags = IGraphics::DRAW_ALL )
 	{
 		f32 x = pos[BK_X], y = pos[BK_Y];
-		vec2<f32> size({ 200, 150 });
+		Vector2 size({ 200, 150 });
 
 		if ( compact )
 			size = { 600, 20 };
@@ -166,7 +166,7 @@ public:
 	}
 
 	void
-	drawCircle( const vec3<f32> &pos, const u32 radius, const Color &c )
+	drawCircle( const Vector3 &pos, const u32 radius, const Color &c )
 	{
 		glBegin( GL_TRIANGLE_FAN );
 			glVertex2f( pos[BK_X], pos[BK_Y] );
@@ -180,8 +180,8 @@ public:
 	}
 
 	void
-	drawImage( const string &path, const vec2<f32> &size,
-			const vec3<f32> &pos )
+	drawImage( const string &path, const Vector2 &size,
+			const Vector3 &pos )
 	{
 		Image image( path );
 		auto t = m_cache.find( path );
@@ -192,7 +192,7 @@ public:
 	}
 
 	void
-	drawImage( Image &image, const vec2<f32> &size, const vec3<f32> &pos )
+	drawImage( Image &image, const Vector2 &size, const Vector3 &pos )
 	{
 		// transform to normalised [-1.0, 1.0]
 		f32 xMin = _normalise( m_windowSize[BK_WIDTH], pos[BK_X] );
@@ -258,7 +258,7 @@ public:
 	}
 
 	void
-	drawLine( const vec3<f32> &from, const vec3<f32> &to,
+	drawLine( const Vector3 &from, const Vector3 &to,
 			const Color &c, const f32 width = 1.0f )
 	{
 		f32 r, g, b, a;
@@ -293,7 +293,7 @@ public:
 	}
 
 	void
-	drawPoint( const vec3<f32> &pos, const u32 size, const Color &c )
+	drawPoint( const Vector3 &pos, const u32 size, const Color &c )
 	{
 		f32 r, g, b, a;
 		c.rgbF( &r, &g, &b, &a );
@@ -322,7 +322,7 @@ public:
 	}
 
 	void
-	drawRect( const vec2<f32> &size, const vec3<f32> &pos,
+	drawRect( const Vector2 &size, const Vector3 &pos,
 			const Color &c, bool outline = false )
 	{
 		f32 r, g, b, a;
@@ -361,14 +361,14 @@ public:
 	}
 
 	void
-	drawText( IFont *font, const string &text, const vec3<f32> &pos, const Color &c )
+	drawText( IFont *font, const string &text, const Vector3 &pos, const Color &c )
 	{
 		TextNode *node = new TextNode( font, text, pos, c );
 		m_nodes.push_back( node );
 	}
 
 	void
-	drawPolygon( const vector<vec3<f32>> &vertices,
+	drawPolygon( const vector<Vector3> &vertices,
 			const Color &c, bool outline = true )
 	{
 		f32 r, g, b, a;
@@ -414,7 +414,7 @@ public:
 	}
 
 	void
-	setWindowSize( const vec2<u32> &size )
+	setWindowSize( const Vector<u32, 2> &size )
 	{
 		glfwSetWindowSize( (GLsizei) size[BK_X], (GLsizei) size[BK_Y] );
 		glViewport( 0, 0, size[BK_X], size[BK_Y] );
@@ -438,7 +438,7 @@ private:
 	f32            m_t1;
 	string         m_title;
 	GLuint         m_vao;
-	vec2<u32>      m_windowSize;
+	Vector<u32, 2> m_windowSize;
 };
 // }}}
 
@@ -460,7 +460,7 @@ GlfwGraphics::init( Services &services )
 }
 
 void
-GlfwGraphics::createWindow( const vec2<u32> &size,
+GlfwGraphics::createWindow( const Vector<u32, 2> &size,
 		const string &title, WindowFlags flags )
 {
 	m_impl->createWindow( size, title, flags );
@@ -479,63 +479,63 @@ GlfwGraphics::shutdown()
 }
 
 void
-GlfwGraphics::drawInfo( IFont *font, const vec3<f32> &pos,
+GlfwGraphics::drawInfo( IFont *font, const Vector3 &pos,
 		bool compact, InfoFlags flags )
 {
 	m_impl->drawInfo( font, pos, compact, flags );
 }
 
 void
-GlfwGraphics::drawCircle( const vec3<f32> &pos, const u32 radius,
+GlfwGraphics::drawCircle( const Vector3 &pos, const u32 radius,
 		const Color &c )
 {
 	m_impl->drawCircle( pos, radius, c );
 }
 
 void
-GlfwGraphics::drawImage( const string &path, const vec2<f32> &size,
-		const vec3<f32> &pos )
+GlfwGraphics::drawImage( const string &path, const Vector2 &size,
+		const Vector3 &pos )
 {
 	m_impl->drawImage( path, size, pos );
 }
 
 void
-GlfwGraphics::drawImage( Image &image, const vec2<f32> &size,
-		const vec3<f32> &pos )
+GlfwGraphics::drawImage( Image &image, const Vector2 &size,
+		const Vector3 &pos )
 {
 	m_impl->drawImage( image, size, pos );
 }
 
 void
-GlfwGraphics::drawLine( const vec3<f32> &from, const vec3<f32> &to,
+GlfwGraphics::drawLine( const Vector3 &from, const Vector3 &to,
 		const Color &color, const f32 width )
 {
 	m_impl->drawLine( from, to, color, width );
 }
 
 void
-GlfwGraphics::drawPoint( const vec3<f32> &pos,
+GlfwGraphics::drawPoint( const Vector3 &pos,
 		const u32 size, const Color &color )
 {
 	m_impl->drawPoint( pos, size, color );
 }
 
 void
-GlfwGraphics::drawPolygon( const vector<vec3<f32>> &vertices,
+GlfwGraphics::drawPolygon( const vector<Vector3> &vertices,
 		const Color &c, bool outline )
 {
 	m_impl->drawPolygon( vertices, c, outline );
 }
 
 void
-GlfwGraphics::drawRect( const vec2<f32> &size,
-		const vec3<f32> &pos, const Color &color, bool outline )
+GlfwGraphics::drawRect( const Vector2 &size,
+		const Vector3 &pos, const Color &color, bool outline )
 {
 	m_impl->drawRect( size, pos, color, outline );
 }
 
 void
-GlfwGraphics::drawText( IFont *font, const string &text, const vec3<f32> &pos,
+GlfwGraphics::drawText( IFont *font, const string &text, const Vector3 &pos,
 		const Color &color )
 {
 	m_impl->drawText( font, text, pos, color );

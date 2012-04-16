@@ -245,15 +245,6 @@ void wrapClasses()
 		.constructor()
 		.set("entity", &VirtualSpace::entity)
 			.param("Entity id");
-
-	// register vec3<float> struct
-	SLB::Class<vec3<float>>("vec3<float>")
-		.comment("vec3<float> struct")
-		.constructor()
-		.constructor<float, float, float>()
-		.set("x", &vec3<float>::first)
-		.set("y", &vec3<float>::second)
-		.set("z", &vec3<float>::third);
 }
 
 #endif /* end of include guard: GLOBAL_LUA_S7HRAEG3 */

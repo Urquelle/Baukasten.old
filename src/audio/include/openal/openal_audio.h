@@ -56,13 +56,13 @@ namespace Baukasten {
 		void setVolumeFactor( const float );
 
 		/*! \sa IAudio::setPosition() */
-		void setPosition( const string&, const vec3<float>& );
+		void setPosition( const string&, const Vector3& );
 
 		/*! \sa IAudio::setLoop() */
 		void setLoop( const string&, bool );
 
 		/*! \sa IAudio::setDirection() */
-		void setDirection( const string&, const vec3<float>& );
+		void setDirection( const string&, const Vector3& );
 
 		/*! \sa IAudio::play( const string& ) */
 		void play( const string& );

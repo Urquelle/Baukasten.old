@@ -3,6 +3,8 @@
 
 #include "math/Vector2"
 
+#include <cmath>
+
 using namespace Baukasten;
 using namespace CppUnit;
 

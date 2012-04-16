@@ -2,7 +2,6 @@
 #define GL_FONT_H_YX7ETJ8M
 
 #include "core/Color"
-#include "core/Math"
 #include "graphics/Global"
 #include "graphics/IFont"
 
@@ -17,7 +16,7 @@ namespace Baukasten {
 		virtual ~GlFont();
 
 		virtual void render( const string&,
-				const vec3<f32>&, const Color& );
+				const Vector3&, const Color& );
 
 		virtual void setSize( const u32 );
 		virtual u32 size() const;

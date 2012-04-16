@@ -78,7 +78,7 @@ public:
 		glUseProgram( 0 );
 	}
 
-	void display( const string &text, const vec3<f32> &pos, const Color &c )
+	void display( const string &text, const Vector3 &pos, const Color &c )
 	{
 		int width, height;
 		glfwGetWindowSize( &width, &height );
@@ -161,7 +161,7 @@ GlFont::~GlFont()
 }
 
 void
-GlFont::render( const string &text, const vec3<f32> &pos, const Color &c )
+GlFont::render( const string &text, const Vector3 &pos, const Color &c )
 {
 	m_impl->display( text, pos, c );
 }

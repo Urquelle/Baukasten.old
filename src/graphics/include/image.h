@@ -1,8 +1,8 @@
 #ifndef IMAGE_H_9GZDLWPR
 #define IMAGE_H_9GZDLWPR
 
-#include "core/Math"
 #include "graphics/Global"
+#include "math/Vector"
 
 namespace Baukasten {
 	class ImagePrivate;
@@ -40,7 +40,7 @@ namespace Baukasten {
 		u8*        data() const;
 
 		/*! returns the width/height of the image. */
-		vec2<u32>  dim() const;
+		Vector<u32, 2>  dim() const;
 
 		/*!
 		 * returns whether or not the image

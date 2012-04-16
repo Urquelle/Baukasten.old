@@ -30,7 +30,7 @@ void FieldForm::render()
 	int i = 0;
 	int j = 0;
 	auto pos = position();
-	vec2<float> size({ 40.0, 40.0 });
+	Vector2 size({ 40.0, 40.0 });
 
 	Color cSet( 255, 0, 0, 255 );
 	Color cInMotion( 255, 125, 125, 255 );

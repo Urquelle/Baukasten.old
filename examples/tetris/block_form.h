@@ -32,8 +32,8 @@ public:
         u32 x_offset = 0;
         u32 y = position()[BK_Y];
         u32 y_offset = 0;
-        vec3f pos;
-        vec2f size({ (float)(BLOCK_PX_WIDTH), (float)(BLOCK_PX_HEIGHT) });
+        Vector3 pos;
+        Vector2 size({ (f32)(BLOCK_PX_WIDTH), (f32)(BLOCK_PX_HEIGHT) });
 
         for ( int i = 0; i < BLOCK_SIZE; ++i ) {
             x_offset = ( i % BLOCK_WIDTH ) * BLOCK_PX_WIDTH;

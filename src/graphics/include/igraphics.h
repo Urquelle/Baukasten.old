@@ -2,9 +2,11 @@
 #define IGRAPHICS_HHQEW1LG
 
 #include "core/Color"
-#include "core/Math"
 #include "graphics/Global"
 #include "graphics/GraphicsInterface"
+#include "math/Vector"
+#include "math/Vector2"
+#include "math/Vector3"
 #include "services/IService"
 
 namespace Baukasten {
@@ -70,7 +72,7 @@ namespace Baukasten {
 		 * \param size size of the window.
 		 * \param title window title.
 		 */
-		virtual void createWindow( const vec2<u32> &size, const string &title,
+		virtual void createWindow( const Vector<u32, 2> &size, const string &title,
 				WindowFlags flags = FULLSCREEN ) = 0;
 
 		/*!
@@ -94,7 +96,7 @@ namespace Baukasten {
 		 * row, or compact on a single row.
 		 * \param flags which info to show.
 		 */
-		virtual void drawInfo( IFont *font, const vec3<f32> &position,
+		virtual void drawInfo( IFont *font, const Vector3 &position,
 				bool compact = false, InfoFlags flags = DRAW_ALL ) = 0;
 
 		/*!
@@ -107,7 +109,7 @@ namespace Baukasten {
 		 * \param radius u32 value of the radius.
 		 * \param color color the circle is filled with.
 		 */
-		virtual void drawCircle( const vec3<f32> &position,
+		virtual void drawCircle( const Vector3 &position,
 				const u32 radius, const Color &color ) = 0;
 
 		/*!
@@ -120,8 +122,8 @@ namespace Baukasten {
 		 * \param size size of the image.
 		 * \param position position where the image will be drawn.
 		 */
-		virtual void drawImage( const string &path, const vec2<f32> &size,
-				const vec3<f32> &position ) = 0;
+		virtual void drawImage( const string &path, const Vector2 &size,
+				const Vector3 &position ) = 0;
 
 		/*!
 		 * \brief draws an image.
@@ -133,8 +135,8 @@ namespace Baukasten {
 		 * \param size size of the image.
 		 * \param position position where the image will be drawn.
 		 */
-		virtual void drawImage( Image &image, const vec2<f32> &size,
-				const vec3<f32> &position ) = 0;
+		virtual void drawImage( Image &image, const Vector2 &size,
+				const Vector3 &position ) = 0;
 
 		/*!
 		 * \brief draws a line.
@@ -149,7 +151,7 @@ namespace Baukasten {
 		 * \param color the color of the line.
 		 * \param pattern the pattern of the line.
 		 */
-		virtual void drawLine( const vec3<f32> &from, const vec3<f32> &to,
+		virtual void drawLine( const Vector3 &from, const Vector3 &to,
 				const Color &color, const f32 pattern ) = 0;
 
 		/*!
@@ -161,7 +163,7 @@ namespace Baukasten {
 		 * \param size size of the point.
 		 * \param color color of the point.
 		 */
-		virtual void drawPoint( const vec3<f32> &position,
+		virtual void drawPoint( const Vector3 &position,
 				const u32 size, const Color &color ) = 0;
 
 		/*!
@@ -174,7 +176,7 @@ namespace Baukasten {
 		 * \param color color to draw the polygon in.
 		 * \param outline if true no filling of polygon takes place.
 		 */
-		virtual void drawPolygon( const vector<vec3<f32> > &vertices,
+		virtual void drawPolygon( const vector<Vector3> &vertices,
 				const Color &color, bool outline = false ) = 0;
 
 		/*!
@@ -187,7 +189,7 @@ namespace Baukasten {
 		 * \param color color to draw the rectangle in.
 		 * \param outline if true no filling of rectangle takes place.
 		 */
-		virtual void drawRect( const vec2<f32> &size, const vec3<f32> &position,
+		virtual void drawRect( const Vector2 &size, const Vector3 &position,
 				const Color &color, bool outline = false ) = 0;
 
 		/*!
@@ -201,7 +203,7 @@ namespace Baukasten {
 		 * \param color color of the drawn text.
 		 */
 		virtual void drawText( IFont *font, const string &text,
-				const vec3<f32> &position, const Color &color ) = 0;
+				const Vector3 &position, const Color &color ) = 0;
 
 		/*!
 		 * \brief current frame rate.

@@ -2,7 +2,7 @@
 
 #include "audio/AudioInterface"
 #include "audio/Global"
-#include "core/Math"
+#include "math/Vector3"
 #include "services/IService"
 
 namespace Baukasten {
@@ -99,7 +99,7 @@ namespace Baukasten {
 		 * \param id key under which the audio resource is stored in the collection.
 		 * \param position position of the audio source in the game space.
 		 */
-		virtual void setPosition( const string &id, const vec3<float> &position ) = 0;
+		virtual void setPosition( const string &id, const Vector3 &position ) = 0;
 
 		/*!
 		 * \brief set the direction of the audio source.
@@ -109,7 +109,7 @@ namespace Baukasten {
 		 * \param id key under which the audio resource is stored in the collection.
 		 * \param direction direction of the audio source in the game space.
 		 */
-		virtual void setDirection( const string &id, const vec3<float> &direction ) = 0;
+		virtual void setDirection( const string &id, const Vector3 &direction ) = 0;
 
 		/*!
 		 * \brief set whether the audio resource's playback should be looped.

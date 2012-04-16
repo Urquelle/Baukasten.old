@@ -2,8 +2,8 @@
 #define IFONT_H_1ZHU2XBV
 
 #include "core/Color"
-#include "core/Math"
 #include "graphics/Global"
+#include "math/Vector3"
 
 namespace Baukasten {
 
@@ -35,7 +35,7 @@ namespace Baukasten {
 		 * \param color color the text will be drawn in.
 		 */
 		virtual void render( const string &text,
-				const vec3<f32> &position, const Color &color ) = 0;
+				const Vector3 &position, const Color &color ) = 0;
 
 		/*!
 		 * \brief set font size.

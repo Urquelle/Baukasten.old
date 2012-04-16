@@ -3,7 +3,8 @@
 
 #include "model/Global"
 
-#include "core/Core"
+#include "math/Vector2"
+#include "math/Vector3"
 #include "model/Entity"
 
 namespace Baukasten {
@@ -49,16 +50,16 @@ namespace Baukasten {
 		 * \param position a three point vector which represents
 		 * the position of the object in a 3d space.
 		 */
-		void setPosition( const vec3f );
+		void setPosition( const Vector3 );
 
 		/*! \brief getter method for position. */
-		const vec3f position() const;
+		const Vector3 position() const;
 
 		/*! set the object's size. */
-		void setSize( const vec2f );
+		void setSize( const Vector2 );
 
 		/*! returns the object's size. */
-		const vec2f size() const;
+		const Vector2 size() const;
 
 		/*!
 		 * \brief set the rotation around the x-axis.
@@ -90,13 +91,13 @@ namespace Baukasten {
 
 	protected:
 		// position of the object
-		vec3f m_position;
+		Vector3 m_position;
 
 		// size of the object
-		vec2f m_size;
+		Vector2 m_size;
 
 		// orientation the object is looking at
-		vec3f m_orientation;
+		Vector3 m_orientation;
 
 		// rotation about the x-axis
 		f32 m_pitch;
