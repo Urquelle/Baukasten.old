@@ -176,15 +176,14 @@ DoActionFunction recalc([]( Action *action, GameEntity *field ) {
 	step->setValue( step->value() + 1 );
 
 	setBlockFields( field, CLEAN );
-	float row = step->value() / BLOCK_PX_HEIGHT;
+	f32 row = step->value() / BLOCK_PX_HEIGHT;
 	row += ( step->value() % BLOCK_PX_HEIGHT == 0 ) ? 0 : 1;
 	field->form()->state<StateInt*>( "block:row" )->setValue( row );
 	setBlockFields( field, IN_MOTION );
 
 	if ( block ) {
-
-		int currMatrix = block->form()->state<StateInt*>( "state:currentMatrix" )->value();
-		int rows = field->state<StateInt*>( "state:rows" )->value();
+		u32 currMatrix = block->form()->state<StateInt*>( "state:currentMatrix" )->value();
+		u32 rows = field->state<StateInt*>( "state:rows" )->value();
 
 		if ( collisionDetected( block, field ) ) {
 			field->invokeAction( "action:clearCompleteRows" );

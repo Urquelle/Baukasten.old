@@ -35,12 +35,12 @@ public:
         Vector3 pos;
         Vector2 size({ (f32)(BLOCK_PX_WIDTH), (f32)(BLOCK_PX_HEIGHT) });
 
-        for ( int i = 0; i < BLOCK_SIZE; ++i ) {
+        for ( u32 i = 0; i < BLOCK_SIZE; ++i ) {
             x_offset = ( i % BLOCK_WIDTH ) * BLOCK_PX_WIDTH;
-            y_offset = (int)( i / BLOCK_HEIGHT ) * BLOCK_PX_HEIGHT;
+            y_offset = (u32)( i / BLOCK_HEIGHT ) * BLOCK_PX_HEIGHT;
 
-            pos.set( BK_X, (float)(x + x_offset) );
-            pos.set( BK_Y, (float)(y + y_offset) );
+            pos.set( BK_X, (f32)(x + x_offset) );
+            pos.set( BK_Y, (f32)(y + y_offset) );
 
             if ( matrix[ i ] == SET ) {
                 graphics().drawRect( size, pos, cSet );
