@@ -25,6 +25,8 @@ namespace Baukasten {
 		Vector3  operator/( const f32 ) const;
 		f32      operator[]( const u32 ) const;
 
+		void     set( const u32, const f32 );
+
 		f32      mag() const;
 		f32      magSqr() const;
 		Vector3  normalised() const;

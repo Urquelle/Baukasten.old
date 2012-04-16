@@ -123,6 +123,13 @@ Vector2::operator[]( const u32 index ) const
 	return m_data[ index ];
 }
 
+void
+Vector2::set( const u32 index, const f32 value )
+{
+	BK_ASSERT( index >= 0 && index < 2, "index is out of bounds." );
+	m_data[ index ] = value;
+}
+
 f32
 Vector2::mag() const
 {

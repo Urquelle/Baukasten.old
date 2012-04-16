@@ -131,6 +131,13 @@ Vector3::operator[]( const u32 index ) const
 	return m_data[ index ];
 }
 
+void
+Vector3::set( const u32 index, const f32 value )
+{
+	BK_ASSERT( index >= 0 && index < 3, "index is out of bounds." );
+	m_data[ index ] = value;
+}
+
 f32
 Vector3::mag() const
 {
