@@ -2,7 +2,10 @@
 #define VECTOR_H_LYM4MXR7
 
 #include "core/Assert"
+#include "core/Debug"
 #include "math/Global"
+
+#include <cstdarg>
 
 namespace Baukasten {
 	/*!
@@ -35,6 +38,26 @@ namespace Baukasten {
 				return m_v->m_data[m_index];
 			}
 
+			T* operator&()
+			{
+				return &( m_v->m_data[ m_index ] );
+			}
+
+			const T* operator&() const
+			{
+				return &( m_v->m_data[ m_index ] );
+			}
+
+			bool operator==( const T value )
+			{
+				return ( value == m_v[ m_index ] );
+			}
+
+			bool operator!=( const T value )
+			{
+				return !operator==( value );
+			}
+
 		private:
 			Vector<T, size>* m_v;
 			u32              m_index;
@@ -44,10 +67,21 @@ namespace Baukasten {
 		{
 		}
 
+		Vector( const T first, ...)
+		{
+			va_list vl;
+			va_start( vl, first );
+			m_data[ 0 ] = first;
+			for ( u32 i = 1; i < size; ++i ) {
+				m_data[ i ] = va_arg( vl, T );
+			}
+			va_end( vl );
+		}
+
 		Vector( const Vector<T, size> &other )
 		{
 			if ( &other == this ) return;
-			for ( size_t i = 0; i < size; ++i ) {
+			for ( u32 i = 0; i < size; ++i ) {
 				m_data[ i ] = other[ i ];
 			}
 		}
