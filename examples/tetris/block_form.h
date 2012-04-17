@@ -39,8 +39,8 @@ public:
             x_offset = ( i % BLOCK_WIDTH ) * BLOCK_PX_WIDTH;
             y_offset = (u32)( i / BLOCK_HEIGHT ) * BLOCK_PX_HEIGHT;
 
-            pos.set( BK_X, (f32)(x + x_offset) );
-            pos.set( BK_Y, (f32)(y + y_offset) );
+            pos[BK_X] = (f32)(x + x_offset);
+            pos[BK_Y] = (f32)(y + y_offset);
 
             if ( matrix[ i ] == SET ) {
                 graphics().drawRect( size, pos, cSet );
