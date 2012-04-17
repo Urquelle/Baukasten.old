@@ -5,20 +5,20 @@
 #include "core/Debug"
 #include "math/Global"
 
-#include <cstdarg>
+#include <vector>
 
 namespace Baukasten {
 	/*!
 	 * \break Vector class declaration.
 	 */
-	template<class T, u32 size>
+	template<class T, u32 SIZE>
 	class BAUKASTEN_EXPORT Vector {
 	public:
 
 		friend class VectorProxy;
 		class VectorProxy {
 		public:
-			VectorProxy( Vector<T, size> &v, u32 index ) :
+			VectorProxy( Vector<T, SIZE> &v, u32 index ) :
 				m_v( &v ), m_index( index )
 			{
 			}
@@ -26,11 +26,13 @@ namespace Baukasten {
 			VectorProxy& operator=( const VectorProxy &other )
 			{
 				m_v->m_data[ m_index ] = other.m_v[ other.m_index ];
+				return *this;
 			}
 
 			VectorProxy& operator=( T value )
 			{
 				m_v->m_data[ m_index ] = value;
+				return *this;
 			}
 
 			operator T() const
@@ -59,29 +61,31 @@ namespace Baukasten {
 			}
 
 		private:
-			Vector<T, size>* m_v;
+			Vector<T, SIZE>* m_v;
 			u32              m_index;
 		};
 
-		Vector() : m_data{ 0 }
+		Vector()
 		{
+			m_data.reserve( SIZE );
+			m_data.assign( SIZE, 0 );
 		}
 
-		Vector( const T first, ...)
+		Vector( initializer_list<T> list )
 		{
-			va_list vl;
-			va_start( vl, first );
-			m_data[ 0 ] = first;
-			for ( u32 i = 1; i < size; ++i ) {
-				m_data[ i ] = va_arg( vl, T );
-			}
-			va_end( vl );
+			BK_ASSERT( list.size() == SIZE, "argument must contain " << SIZE <<
+					" arguments." );
+
+			m_data.reserve( SIZE );
+			m_data = list;
 		}
 
-		Vector( const Vector<T, size> &other )
+		Vector( const Vector<T, SIZE> &other )
 		{
 			if ( &other == this ) return;
-			for ( u32 i = 0; i < size; ++i ) {
+
+			m_data.reserve( SIZE );
+			for ( u32 i = 0; i < SIZE; ++i ) {
 				m_data[ i ] = other[ i ];
 			}
 		}
@@ -90,10 +94,15 @@ namespace Baukasten {
 		{
 		}
 
+		u32 size() const
+		{
+			return SIZE;
+		}
+
 		Vector& operator=( const Vector &other )
 		{
 			if ( &other == this ) return *this;
-			for ( size_t i = 0; i < size; ++i ) {
+			for ( u32 i = 0; i < SIZE; ++i ) {
 				m_data[ i ] = other[ i ];
 			}
 
@@ -102,47 +111,47 @@ namespace Baukasten {
 
 		Vector& operator=( const T &value )
 		{
-			for ( size_t i = 0; i < size; ++i ) {
+			for ( u32 i = 0; i < SIZE; ++i ) {
 				m_data[ i ] = value;
 			}
 
 			return *this;
 		}
 
-		Vector<T,size> operator+( const Vector &other )
+		Vector<T,SIZE> operator+( const Vector &other )
 		{
-			Vector<T, size> v;
-			for ( size_t i = 0; i < size; ++i ) {
+			Vector<T, SIZE> v;
+			for ( u32 i = 0; i < SIZE; ++i ) {
 				v[ i ] = m_data[ i ] + other[ i ];
 			}
 
 			return v;
 		}
 
-		Vector<T,size> operator+( const T &value )
+		Vector<T,SIZE> operator+( const T &value )
 		{
-			Vector<T, size> v;
-			for ( size_t i = 0; i < size; ++i ) {
+			Vector<T, SIZE> v;
+			for ( u32 i = 0; i < SIZE; ++i ) {
 				v[ i ] = m_data[ i ] + value;
 			}
 
 			return v;
 		}
 
-		Vector<T,size> operator*( const Vector &other )
+		Vector<T,SIZE> operator*( const Vector &other )
 		{
-			Vector<T, size> v;
-			for ( size_t i = 0; i < size; ++i ) {
+			Vector<T, SIZE> v;
+			for ( u32 i = 0; i < SIZE; ++i ) {
 				v[ i ] = m_data[ i ] * other[ i ];
 			}
 
 			return v;
 		}
 
-		Vector<T,size> operator*( const T &value )
+		Vector<T,SIZE> operator*( const T &value )
 		{
-			Vector<T, size> v;
-			for ( size_t i = 0; i < size; ++i ) {
+			Vector<T, SIZE> v;
+			for ( u32 i = 0; i < SIZE; ++i ) {
 				v[ i ] = m_data[ i ] * value;
 			}
 
@@ -151,18 +160,18 @@ namespace Baukasten {
 
 		const VectorProxy operator[]( const u32 index ) const
 		{
-			BK_ASSERT( index < size && index >= 0, "index out of bounds." );
-			return VectorProxy( const_cast<Vector<T,size>&>( *this ), index );
+			BK_ASSERT( index < SIZE && index >= 0, "index out of bounds." );
+			return VectorProxy( const_cast<Vector<T,SIZE>&>( *this ), index );
 		}
 
 		VectorProxy operator[]( const u32 index )
 		{
-			BK_ASSERT( index < size && index >= 0, "index out of bounds." );
+			BK_ASSERT( index < SIZE && index >= 0, "index out of bounds." );
 			return VectorProxy( *this, index );
 		}
 
 	private:
-		T m_data[size];
+		vector<T> m_data;
 	};
 } /* Baukasten */
 
