@@ -9,25 +9,25 @@ using namespace Baukasten;
 using namespace std;
 
 Vector2::Vector2() :
-	m_data{ 0.0, 0.0 },
+	Vector(),
 	m_mag( -1.0 )
 {
 }
 
 Vector2::Vector2( const Vector2 &other ) :
-	m_data{ other[0], other[1] },
+	Vector({ other[ 0 ], other[ 1 ] }),
 	m_mag( -1.0 )
 {
 }
 
 Vector2::Vector2( const f32 value ) :
-	m_data{ value, value },
+	Vector({ value, value }),
 	m_mag( -1.0 )
 {
 }
 
 Vector2::Vector2( const f32 _f, const f32 _s ) :
-	m_data{ _f, _s },
+	Vector({ _f, _s }),
 	m_mag( -1.0 )
 {
 }
@@ -42,7 +42,7 @@ Vector2::operator=( const Vector2 &other )
 	if ( this == &other )
 		return *this;
 
-	m_data = { other[0], other[1] };
+	Type::operator=( other );
 	m_dirty = true;
 	return *this;
 }
@@ -50,7 +50,7 @@ Vector2::operator=( const Vector2 &other )
 Vector2&
 Vector2::operator=( const f32 value )
 {
-	m_data = { value, value };
+	Type::operator=({ value, value });
 	m_dirty = true;
 	return *this;
 }
@@ -61,8 +61,8 @@ Vector2::operator==( const Vector2 &other ) const
 	f32 tolerance = 0.00000001;
 
 	if (
-		fabs( m_data[0] - other[0] ) < tolerance &&
-		fabs( m_data[1] - other[1] ) < tolerance
+		fabs( (*this)[0] - other[0] ) < tolerance &&
+		fabs( (*this)[1] - other[1] ) < tolerance
 	) return true;
 
 	return false;
@@ -77,33 +77,33 @@ Vector2::operator!=( const Vector2 &other ) const
 Vector2
 Vector2::operator+( const Vector2 &other ) const
 {
-	return Vector2( m_data[0] + other[0], m_data[1] + other[1] );
+	return Vector2( (*this)[0] + other[0], (*this)[1] + other[1] );
 }
 
 Vector2
 Vector2::operator+( const f32 value ) const
 {
-	return Vector2( m_data[0] + value, m_data[1] + value );
+	return Vector2( (*this)[0] + value, (*this)[1] + value );
 }
 
 Vector2
 Vector2::operator*( const Vector2 &other ) const
 {
-	return Vector2( m_data[0] * other[0], m_data[1] * other[1] );
+	return Vector2( (*this)[0] * other[0], (*this)[1] * other[1] );
 }
 
 Vector2
 Vector2::operator*( const f32 value ) const
 {
-	return Vector2( m_data[0] * value, m_data[1] * value );
+	return Vector2( (*this)[0] * value, (*this)[1] * value );
 }
 
 Vector2
 Vector2::operator/( const Vector2 &other ) const
 {
 	return Vector2(
-		( other[0] != 0 ) ? m_data[0] / other[0] : FLT_MAX,
-		( other[1] != 0 ) ? m_data[1] / other[1] : FLT_MAX
+		( other[0] != 0 ) ? (*this)[0] / other[0] : FLT_MAX,
+		( other[1] != 0 ) ? (*this)[1] / other[1] : FLT_MAX
 	);
 }
 
@@ -113,21 +113,21 @@ Vector2::operator/( const f32 value ) const
 	if ( value == 0 )
 		return Vector2( FLT_MAX, FLT_MAX );
 
-	return Vector2( m_data[0] / value, m_data[1] / value );
+	return Vector2( (*this)[0] / value, (*this)[1] / value );
 }
 
-f32
+const Vector2::VectorProxy
 Vector2::operator[]( const u32 index ) const
 {
 	BK_ASSERT( index < 2 && index >= 0, "index out of bounds." );
-	return m_data[ index ];
+	return VectorProxy( (Vector<f32, 2>&)*this, index );
 }
 
-void
-Vector2::set( const u32 index, const f32 value )
+Vector2::VectorProxy
+Vector2::operator[]( const u32 index )
 {
-	BK_ASSERT( index >= 0 && index < 2, "index is out of bounds." );
-	m_data[ index ] = value;
+	BK_ASSERT( index < 2 && index >= 0, "index out of bounds." );
+	return VectorProxy( *this, index );
 }
 
 f32
@@ -135,8 +135,8 @@ Vector2::mag() const
 {
 	if ( m_mag < 0 || m_dirty ) {
 		m_mag = sqrt(
-			m_data[0] * m_data[0] +
-			m_data[1] * m_data[1]
+			(*this)[0] * (*this)[0] +
+			(*this)[1] * (*this)[1]
 		);
 		m_dirty = false;
 	}
@@ -155,8 +155,8 @@ Vector2::normalised() const
 {
 	f32 rev = 1 / mag();
 	return Vector2(
-		m_data[0] * rev,
-		m_data[1] * rev
+		(*this)[0] * rev,
+		(*this)[1] * rev
 	);
 }
 
@@ -165,8 +165,8 @@ Vector2::normalise()
 {
 	f32 rev = 1 / mag();
 
-	m_data[0] *= rev;
-	m_data[1] *= rev;
+	(*this)[0] = (*this)[0] * rev;
+	(*this)[1] = (*this)[1] * rev;
 
 	m_dirty = true;
 
@@ -177,8 +177,8 @@ f32
 Vector2::dot( const Vector2 &other ) const
 {
 	return (
-		m_data[0] * other[0] +
-		m_data[1] * other[1]
+		(*this)[0] * other[0] +
+		(*this)[1] * other[1]
 	);
 }
 

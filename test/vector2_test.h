@@ -15,6 +15,7 @@ class Vector2Test : public TestFixture {
 	CPPUNIT_TEST_SUITE( Vector2Test );
 	CPPUNIT_TEST( testInit );
 	CPPUNIT_TEST( testCopyConstructor );
+	CPPUNIT_TEST( testAssign );
 	CPPUNIT_TEST( testAdditionVec2 );
 	CPPUNIT_TEST( testAdditionScalar );
 	CPPUNIT_TEST( testMultVec2 );
@@ -45,8 +46,8 @@ public:
 		f32 expectedX = 1.0;
 		f32 expectedY = 2.0;
 
-		CPPUNIT_ASSERT_EQUAL( expectedX, v[BK_X] );
-		CPPUNIT_ASSERT_EQUAL( expectedY, v[BK_Y] );
+		CPPUNIT_ASSERT_EQUAL( expectedX, static_cast<f32>( v[BK_X] ) );
+		CPPUNIT_ASSERT_EQUAL( expectedY, static_cast<f32>( v[BK_Y] ) );
 	}
 
 	void testCopyConstructor()
@@ -57,8 +58,22 @@ public:
 		f32 eX = 5;
 		f32 eY = 10;
 
-		CPPUNIT_ASSERT_EQUAL( eX, v2[BK_X] );
-		CPPUNIT_ASSERT_EQUAL( eY, v2[BK_Y] );
+		CPPUNIT_ASSERT_EQUAL( eX, static_cast<f32>( v2[BK_X] ) );
+		CPPUNIT_ASSERT_EQUAL( eY, static_cast<f32>( v2[BK_Y] ) );
+	}
+
+	void testAssign()
+	{
+		Vector2 v;
+
+		v[BK_X] = 5.0;
+		v[BK_Y] = 7.0;
+
+		f32 eX = 5.0;
+		f32 eY = 7.0;
+
+		CPPUNIT_ASSERT_EQUAL( eX, static_cast<f32>( v[BK_X] ) );
+		CPPUNIT_ASSERT_EQUAL( eY, static_cast<f32>( v[BK_Y] ) );
 	}
 
 	void testAdditionVec2()
@@ -70,8 +85,8 @@ public:
 		f32 eX = 5.0;
 		f32 eY = 10.0;
 
-		CPPUNIT_ASSERT_EQUAL( eX, v3[BK_X] );
-		CPPUNIT_ASSERT_EQUAL( eY, v3[BK_Y] );
+		CPPUNIT_ASSERT_EQUAL( eX, static_cast<f32>( v3[BK_X] ) );
+		CPPUNIT_ASSERT_EQUAL( eY, static_cast<f32>( v3[BK_Y] ) );
 	}
 
 	void testAdditionScalar()
@@ -84,8 +99,8 @@ public:
 		f32 eX = 3.5;
 		f32 eY = 5.5;
 
-		CPPUNIT_ASSERT_EQUAL( eX, v2[BK_X] );
-		CPPUNIT_ASSERT_EQUAL( eY, v2[BK_Y] );
+		CPPUNIT_ASSERT_EQUAL( eX, static_cast<f32>( v2[BK_X] ) );
+		CPPUNIT_ASSERT_EQUAL( eY, static_cast<f32>( v2[BK_Y] ) );
 	}
 
 	void testMultVec2()
@@ -97,8 +112,8 @@ public:
 		f32 eX = 100.0;
 		f32 eY = 151.0;
 
-		CPPUNIT_ASSERT_EQUAL( eX, v3[BK_X] );
-		CPPUNIT_ASSERT_EQUAL( eY, v3[BK_Y] );
+		CPPUNIT_ASSERT_EQUAL( eX, static_cast<f32>( v3[BK_X] ) );
+		CPPUNIT_ASSERT_EQUAL( eY, static_cast<f32>( v3[BK_Y] ) );
 	}
 
 	void testMultScalar()
@@ -110,8 +125,8 @@ public:
 		f32 eX = 40.0;
 		f32 eY = 151.0;
 
-		CPPUNIT_ASSERT_EQUAL( eX, v2[BK_X] );
-		CPPUNIT_ASSERT_EQUAL( eY, v2[BK_Y] );
+		CPPUNIT_ASSERT_EQUAL( eX, static_cast<f32>( v2[BK_X] ) );
+		CPPUNIT_ASSERT_EQUAL( eY, static_cast<f32>( v2[BK_Y] ) );
 	}
 
 	void testEqual()
@@ -139,8 +154,8 @@ public:
 		f32 eX = FLT_MAX;
 		f32 eY = 5.0;
 
-		CPPUNIT_ASSERT_EQUAL( eX, v3[BK_X] );
-		CPPUNIT_ASSERT_EQUAL( eY, v3[BK_Y] );
+		CPPUNIT_ASSERT_EQUAL( eX, static_cast<f32>( v3[BK_X] ) );
+		CPPUNIT_ASSERT_EQUAL( eY, static_cast<f32>( v3[BK_Y] ) );
 	}
 
 	void testDivScalar()
@@ -152,8 +167,8 @@ public:
 		f32 eX = 5.0;
 		f32 eY = 7.5;
 
-		CPPUNIT_ASSERT_EQUAL( eX, v3[BK_X] );
-		CPPUNIT_ASSERT_EQUAL( eY, v3[BK_Y] );
+		CPPUNIT_ASSERT_EQUAL( eX, static_cast<f32>( v3[BK_X] ) );
+		CPPUNIT_ASSERT_EQUAL( eY, static_cast<f32>( v3[BK_Y] ) );
 	}
 
 	void testMag()
