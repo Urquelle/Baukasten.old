@@ -71,6 +71,7 @@ namespace Baukasten {
 		 *
 		 * \param size size of the window.
 		 * \param title window title.
+		 * \param flags flags to control window parameters.
 		 */
 		virtual void createWindow( const Vector<u32, 2> &size, const string &title,
 				WindowFlags flags = FULLSCREEN ) = 0;
