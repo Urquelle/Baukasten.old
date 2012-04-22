@@ -25,11 +25,14 @@ namespace Baukasten {
 	typedef signed   int   u32;
 	typedef unsigned int   s32;
 	typedef float          f32;
+	typedef unsigned long  u64;
+	typedef signed   long  s64;
 
 	enum Dim {
-		BK_X = 0, BK_WIDTH = 0,
+		BK_X = 0, BK_WIDTH  = 0,
 		BK_Y = 1, BK_HEIGHT = 1,
-		BK_Z,     BK_W
+		BK_Z = 2, BK_DEPTH  = 2,
+		BK_W
 	};
 
 }
