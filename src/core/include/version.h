@@ -12,13 +12,13 @@ namespace Baukasten {
 	string version();
 
 	/*! lib's major version */
-	u32 major();
+	inline u32 major();
 
 	/*! lib's minor version */
-	u32 minor();
+	inline u32 minor();
 
 	/*! lib's patch version */
-	u32 patch();
+	inline u32 patch();
 
 	/*! lib's version name */
 	string name();
