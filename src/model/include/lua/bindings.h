@@ -5,6 +5,7 @@
 
 #include "graphics/IGraphics"
 #include "model/Model"
+#include "core/Core"
 
 #include "model/include/slb/SLB.hpp"
 
@@ -245,6 +246,27 @@ void wrapClasses()
 		.constructor()
 		.set("entity", &VirtualSpace::entity)
 			.param("Entity id");
+
+	SLB::Class<TimerInterface, SLB::Instance::NoCopyNoDestroy>( "TimerInterface" )
+		.comment("TimerInterface class")
+		.set("instance", &TimerInterface::instance)
+		.set("createTimer", &TimerInterface::createTimer)
+			.param("Timer id")
+		.set("timer", &TimerInterface::timer)
+			.param("Timer id")
+		.set("updateAll", &TimerInterface::updateAll);
+
+	SLB::Class<Timer, SLB::Instance::NoCopyNoDestroy>( "Timer" )
+		.comment( "Timer class" )
+		.set( "start", &Timer::start )
+		.set( "update", &Timer::update )
+		.set( "reset", &Timer::reset )
+		.set( "isPaused", &Timer::isPaused )
+		.set( "setPause", &Timer::setPause )
+			.param( "boolean pause" )
+		.set( "time", &Timer::time )
+		.set( "timeScale", &Timer::timeScale )
+		.set( "cycles", &Timer::cycles );
 }
 
 #endif /* end of include guard: GLOBAL_LUA_S7HRAEG3 */

@@ -1,6 +1,7 @@
 #include "model/ActionLua"
 
 #include "core/Debug"
+#include "core/TimerInterface"
 #include "model/GameEntity"
 #include "model/Bindings"
 
@@ -31,6 +32,7 @@ void ActionLua::doAction( GameEntity *entity )
 	s.set( "entity", entity );
 	s.set( "action", this );
 	s.set( "source", source() );
+	s.set( "timerInterface", TimerInterface::instance() );
 
 	try {
 		s.doFile( m_path );
