@@ -27,7 +27,7 @@ namespace Baukasten {
 	 * here's an example taken from examples/tetris game and its score
 	 * drawing routine.
 	 *
-	 * \include examples/tetris/score_form.cpp
+	 * \include examples/tetris/score_form.h
 	 */
 	class BAUKASTEN_EXPORT Form : public Drawable {
 	public:

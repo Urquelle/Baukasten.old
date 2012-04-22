@@ -9,7 +9,7 @@
 
 namespace Baukasten {
 	/*!
-	 * \break Vector class declaration.
+	 * \brief Vector class declaration.
 	 */
 	template<class T, u32 SIZE>
 	class BAUKASTEN_EXPORT Vector {
