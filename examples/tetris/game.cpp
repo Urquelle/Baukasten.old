@@ -8,6 +8,8 @@
 #include "score_form.h"
 
 #include "audio/IAudio"
+#include "core/TimerInterface"
+#include "core/Timer"
 #include "graphics/IGraphics"
 #include "input/IInput"
 #include "model/ActionLua"
@@ -32,9 +34,8 @@ Game::Game( const string &id, int argc, char **argv ) :
 
 	m_game->addAction( new ActionLambda( *m_game, "action:pause",
 		([]( Action *action, GameEntity *entity ) {
-			entity->state<StateBool*>( "state:pause" )->setValue(
-				!entity->state<StateBool*>( "state:pause" )->value()
-			);
+		 	Timer &t = TimerInterface::instance()->timer( "game:main" );
+			t.setPause( !t.isPaused() );
 		})
 	) );
 
@@ -45,7 +46,7 @@ Game::Game( const string &id, int argc, char **argv ) :
 	) );
 
 	m_game->addState( new StateBool( "state:keepRunning", true ) );
-	m_game->addState( new StateBool( "state:pause", false ) );
+	m_game->addState( new StateFloat( "state:speed", 1.0f ) );
 
 	m_game->setForm( new Form( "form:main" ) );
 }
@@ -105,6 +106,7 @@ void Game::init()
 	field->setForm( new FieldForm( "form:field" ) );
 	field->form()->addState( new StateIntVector( "block:current" ) );
 	field->form()->addState( new StateInt( "state:step", 0 ) );
+	field->form()->addState( new StateFloat( "state:time", 0 ) );
 	field->form()->addState( new StateInt( "block:column", 5 ) );
 	field->form()->addState( new StateInt( "block:row", 0 ) );
 	field->form()->setPosition( { 240, 20, 0 } );
@@ -400,11 +402,18 @@ void Game::init()
 
 	m_game->addChild( preview );
 	m_game->form()->addToVSpace( preview->form() );
+
+	TimerInterface::instance()->createTimer( "game:main" ).start();
+
+	field->form()->state<StateFloat*>( "state:time" )->setValue(
+		TimerInterface::instance()->timer( "game:main" ).time()
+	);
 }
 
 void Game::run()
 {
 	while ( m_game->state<StateBool*>( "state:keepRunning" )->value() ) {
+		TimerInterface::instance()->updateAll();
 		m_game->runActions();
 		Services::instance().inputService().process();
 		Services::instance().graphicsService().render( m_game->form() );

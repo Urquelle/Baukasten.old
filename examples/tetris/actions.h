@@ -3,6 +3,8 @@
 
 #include "constants.h"
 
+#include "core/TimerInterface"
+#include "core/Timer"
 #include "model/ActionLambda"
 #include "model/Form"
 #include "model/GenericState"
@@ -109,8 +111,8 @@ DoActionFunction nextBlock([]( Action *action, GameEntity *entity ) {
 
 DoActionFunction moveRight([]( Action *action, GameEntity *entity ) {
 
-	auto gamePaused = entity->state<StateBool*>( "state:pause" );
-	if ( gamePaused && gamePaused->value() ) return; // do nothing on pause
+	if ( TimerInterface::instance()->timer( "game:main" ).isPaused() )
+		return; // do nothing on pause
 
 	GameEntity *field = entity->child( "entity:field" );
 	auto fieldMatrix = field->form()->state<StateIntVector*>( "state:field" )->values();
@@ -138,8 +140,8 @@ DoActionFunction moveRight([]( Action *action, GameEntity *entity ) {
 
 DoActionFunction moveLeft([]( Action *action, GameEntity *entity ) {
 
-	auto gamePaused = entity->state<StateBool*>( "state:pause" );
-	if ( gamePaused && gamePaused->value() ) return; // do nothing on pause
+	if ( TimerInterface::instance()->timer( "game:main" ).isPaused() )
+		return; // do nothing on pause
 
 	GameEntity *field = entity->child( "entity:field" );
 	auto fieldMatrix = field->form()->state<StateIntVector*>( "state:field" )->values();
@@ -167,18 +169,22 @@ DoActionFunction moveLeft([]( Action *action, GameEntity *entity ) {
 
 DoActionFunction recalc([]( Action *action, GameEntity *field ) {
 
-	auto gamePaused = field->parent()->state<StateBool*>( "state:pause" );
-	if ( gamePaused && gamePaused->value() ) return; // do nothing on pause
+	Timer &t = TimerInterface::instance()->timer( "game:main" );
+
+	auto game = field->parent();
 
 	GameEntity *block = field->parent()->form()->lSpace()->entity( "block:current" );
 
-	StateInt *step = field->form()->state<StateInt*>( "state:step" );
-	step->setValue( step->value() + 1 );
-
+	StateFloat *speed = game->state<StateFloat*>( "state:speed" );
+	StateFloat *time = field->form()->state<StateFloat*>( "state:time" );
 	setBlockFields( field, CLEAN );
-	f32 row = step->value() / BLOCK_PX_HEIGHT;
-	row += ( step->value() % BLOCK_PX_HEIGHT == 0 ) ? 0 : 1;
-	field->form()->state<StateInt*>( "block:row" )->setValue( row );
+	if ( t.time() - time->value() >= speed->value() ) {
+		field->form()->state<StateInt*>( "block:row" )->setValue(
+			field->form()->state<StateInt*>( "block:row" )->value() + 1
+		);
+
+		time->setValue( t.time() );
+	}
 	setBlockFields( field, IN_MOTION );
 
 	if ( block ) {
@@ -189,7 +195,6 @@ DoActionFunction recalc([]( Action *action, GameEntity *field ) {
 			field->invokeAction( "action:clearCompleteRows" );
 
 			setBlockFields( field, SET );
-			step->setValue( 0 );
 
 			field->form()->state<StateInt*>( "block:row" )->setValue( 0 );
 			field->parent()->form()->removeFromLSpace( "block:current" );
@@ -250,10 +255,6 @@ DoActionFunction clearCompleteRows([]( Action *action, GameEntity *entity ) {
 		}
 		prevRow = currRow;
 	}
-});
-
-DoneFunction recalcDone([]( const Action *action ) {
-	return false;
 });
 
 DoActionFunction collectPoints([]( Action *action, GameEntity *entity ) {
