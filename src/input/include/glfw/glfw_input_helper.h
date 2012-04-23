@@ -86,24 +86,24 @@ _key( int key )
 	case GLFW_KEY_PAGEDOWN:
 	case GLFW_KEY_HOME:
 	case GLFW_KEY_END:
-	case GLFW_KEY_KP_0:
-	case GLFW_KEY_KP_1:
-	case GLFW_KEY_KP_2:
-	case GLFW_KEY_KP_3:
-	case GLFW_KEY_KP_4:
-	case GLFW_KEY_KP_5:
-	case GLFW_KEY_KP_6:
-	case GLFW_KEY_KP_7:
-	case GLFW_KEY_KP_8:
-	case GLFW_KEY_KP_9:
-	case GLFW_KEY_KP_DIVIDE:
-	case GLFW_KEY_KP_MULTIPLY:
-	case GLFW_KEY_KP_SUBTRACT:
-	case GLFW_KEY_KP_ADD:
-	case GLFW_KEY_KP_DECIMAL:
-	case GLFW_KEY_KP_EQUAL:
-	case GLFW_KEY_KP_ENTER:
 		t_key = Key::KEY_NONE; break;
+	case GLFW_KEY_KP_0:        t_key = Key::KEY_0; break;
+	case GLFW_KEY_KP_1:        t_key = Key::KEY_1; break;
+	case GLFW_KEY_KP_2:        t_key = Key::KEY_2; break;
+	case GLFW_KEY_KP_3:        t_key = Key::KEY_3; break;
+	case GLFW_KEY_KP_4:        t_key = Key::KEY_4; break;
+	case GLFW_KEY_KP_5:        t_key = Key::KEY_5; break;
+	case GLFW_KEY_KP_6:        t_key = Key::KEY_6; break;
+	case GLFW_KEY_KP_7:        t_key = Key::KEY_7; break;
+	case GLFW_KEY_KP_8:        t_key = Key::KEY_8; break;
+	case GLFW_KEY_KP_9:        t_key = Key::KEY_9; break;
+	case GLFW_KEY_KP_DIVIDE:   t_key = Key::KEY_DIVIDE; break;
+	case GLFW_KEY_KP_MULTIPLY: t_key = Key::KEY_MULTIPLY; break;
+	case GLFW_KEY_KP_SUBTRACT: t_key = Key::KEY_SUBTRACT; break;
+	case GLFW_KEY_KP_ADD:      t_key = Key::KEY_ADD; break;
+	case GLFW_KEY_KP_DECIMAL:  t_key = Key::KEY_DECIMAL; break;
+	case GLFW_KEY_KP_EQUAL:    t_key = Key::KEY_EQUAL; break;
+	case GLFW_KEY_KP_ENTER:    t_key = Key::KEY_ENTER; break;
 	default: t_key = Key::KEY_NONE; break;
 	}
 
