@@ -1,6 +1,8 @@
 #ifndef GLFW_GRAPHICS_FUNCTIONS_H_SRTQPXNJ
 #define GLFW_GRAPHICS_FUNCTIONS_H_SRTQPXNJ
 
+#include "core/TimerInterface"
+#include "core/Timer"
 #include "graphics/Font"
 #include "graphics/Global"
 
@@ -114,7 +116,7 @@ _initProgram( GLuint &program )
 static inline void
 _computeFps( f32 &t0, f32 &t1, u32 &frames, f32 &fps )
 {
-	t1 = glfwGetTime();
+	t1 = TimerInterface::instance()->timer( "system:main" ).time();
 
 	if ( ( t1 - t0 ) >= 1.0 || frames == 0 ) {
 		fps = frames / ( t1 - t0 );

@@ -21,8 +21,7 @@ namespace Baukasten {
 		virtual ~GlfwGraphics();
 
 		void createWindow( const Vector<u32, 2>&, const string&, WindowFlags );
-		void drawInfo( IFont*, const Vector3&,
-				bool compact, InfoFlags = DRAW_ALL );
+		void drawInfo( IFont*, const Vector3&, InfoFlags = DRAW_ALL );
 		void drawCircle( const Vector3&, const u32, const Color& );
 		void drawImage( const string&, const Vector2&, const Vector3& );
 		void drawImage( Image&, const Vector2&, const Vector3& );
@@ -40,7 +39,6 @@ namespace Baukasten {
 		void setWindowTitle( const string& );
 		void setWindowSize( const u32, const u32 );
 		void shutdown();
-		f32 time() const;
 
 	private:
 		BK_IMPL_PTR( GlfwGraphics );

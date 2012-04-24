@@ -71,8 +71,11 @@ TimerInterface* TimerInterface::m_instance = 0;
 TimerInterface*
 TimerInterface::instance()
 {
-	if ( !m_instance )
+	if ( !m_instance ) {
 		m_instance = new TimerInterface();
+		m_instance->createTimer( "system:main" ).start();
+	}
+
 	return m_instance;
 }
 

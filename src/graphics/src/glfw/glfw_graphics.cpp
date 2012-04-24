@@ -1,5 +1,8 @@
 #include "graphics/include/glfw/glfw_graphics.h"
 
+#include "audio/IAudio"
+#include "core/Timer"
+#include "core/TimerInterface"
 #include "core/Version"
 #include "graphics/Font"
 #include "graphics/Image"
@@ -35,7 +38,7 @@ public:
 	void
 	init( Services &services )
 	{
-		m_t0 = glfwGetTime();
+		m_t0 = TimerInterface::instance()->timer( "system:main" ).time();
 		m_master->setIsReady( true );
 	}
 
@@ -95,17 +98,14 @@ public:
 	}
 
 	void
-	drawInfo( IFont *font, const Vector3 &pos, bool compact,
+	drawInfo( IFont *font, const Vector3 &pos,
 			IGraphics::InfoFlags flags = IGraphics::DRAW_ALL )
 	{
 		f32 x = pos[BK_X], y = pos[BK_Y];
-		Vector2 size({ 200, 150 });
-
-		if ( compact )
-			size = { 600, 20 };
+		Vector2 size({ 200, 200 });
 
 		// draw semitransparent rect
-		drawRect( size, { x, y, 0.0 }, Color::BK_WHITE );
+		drawRect( size, { x, y, 0.0 }, { 255, 255, 255, 60 } );
 		x += 10;
 
 		// draw fps
@@ -117,51 +117,63 @@ public:
 
 		// draw version
 		if ( flags & IGraphics::DRAW_VERSION ) {
+			y += 20;
+
 			stringstream _version;
 			_version << "version: " << version();
-			if ( compact ) {
-				x += 100;
-			} else {
-				y += 20;
-			}
-
 			drawText( font, _version.str(), { x, y + 15, 0 }, Color::BK_BLACK );
 		}
 
 		// draw version name
 		if ( flags & IGraphics::DRAW_VERSION_NAME ) {
-			if ( compact ) {
-				x += 100;
-			} else {
-				y += 20;
-			}
+			y += 20;
 			drawText( font, "version name: " + name(), { x, y + 15, 0 }, Color::BK_BLACK );
 		}
 
 		// draw time
 		if ( flags & IGraphics::DRAW_TIME ) {
-			stringstream _time;
-			_time << "time: " << time();
-			if ( compact ) {
-				x += 150;
-			} else {
-				y += 20;
-			}
+			y += 20;
 
+			stringstream _time;
+			_time << "time: " <<
+				TimerInterface::instance()->timer( "system:main" ).time();
 			drawText( font, _time.str(), { x, y + 15, 0 }, Color::BK_BLACK );
 		}
 
 		// draw model information
 		if ( flags & IGraphics::DRAW_ENTITY_COUNT ) {
-			if ( compact ) {
-				x += 100;
-			} else {
-				y += 20;
-			}
+			y += 20;
 
 			stringstream entityCount;
 			entityCount << "entity count: " << ModelInterface::instance().entityCount();
 			drawText( font, entityCount.str(), { x, y + 15, 0 }, Color::BK_BLACK );
+		}
+
+		// draw graphics backend information
+		if ( flags & IGraphics::DRAW_GRAPHICS_BACKEND ) {
+			y += 20;
+
+			stringstream graphicsBackend;
+			graphicsBackend << "graphics backend: " << Services::instance().graphicsService().name();
+			drawText( font, graphicsBackend.str(), { x, y + 15, 0 }, Color::BK_BLACK );
+		}
+
+		// draw input backend information
+		if ( flags & IGraphics::DRAW_INPUT_BACKEND ) {
+			y += 20;
+
+			stringstream inputBackend;
+			inputBackend << "input backend: " << Services::instance().inputService().name();
+			drawText( font, inputBackend.str(), { x, y + 15, 0 }, Color::BK_BLACK );
+		}
+
+		// draw input backend information
+		if ( flags & IGraphics::DRAW_AUDIO_BACKEND ) {
+			y += 20;
+
+			stringstream audioBackend;
+			audioBackend << "audio backend: " << Services::instance().audioService().name();
+			drawText( font, audioBackend.str(), { x, y + 15, 0 }, Color::BK_BLACK );
 		}
 	}
 
@@ -421,12 +433,6 @@ public:
 		m_windowSize = size;
 	}
 
-	f32
-	time() const
-	{
-		return glfwGetTime();
-	}
-
 private:
 	GLCache        m_cache;
 	f32            m_fps;
@@ -479,10 +485,9 @@ GlfwGraphics::shutdown()
 }
 
 void
-GlfwGraphics::drawInfo( IFont *font, const Vector3 &pos,
-		bool compact, InfoFlags flags )
+GlfwGraphics::drawInfo( IFont *font, const Vector3 &pos, InfoFlags flags )
 {
-	m_impl->drawInfo( font, pos, compact, flags );
+	m_impl->drawInfo( font, pos, flags );
 }
 
 void
@@ -557,11 +562,5 @@ void
 GlfwGraphics::setWindowSize( const u32 width, const u32 height )
 {
 	m_impl->setWindowSize( { width, height } );
-}
-
-f32
-GlfwGraphics::time() const
-{
-	return m_impl->time();
 }
 

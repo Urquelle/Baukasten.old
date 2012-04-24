@@ -36,13 +36,23 @@ namespace Baukasten {
 		 * flags that are used with the drawInfo method.
 		 */
 		enum InfoFlags {
-			DRAW_FPS          = 1 << 0,
-			DRAW_VERSION      = 1 << 1,
-			DRAW_VERSION_NAME = 1 << 2,
-			DRAW_TIME         = 1 << 3,
-			DRAW_ENTITY_COUNT = 1 << 4,
-			DRAW_ALL          = DRAW_FPS + DRAW_VERSION + DRAW_VERSION_NAME + DRAW_TIME
-				+ DRAW_ENTITY_COUNT
+			DRAW_FPS              = 1 << 0,
+			DRAW_VERSION          = 1 << 1,
+			DRAW_VERSION_NAME     = 1 << 2,
+			DRAW_TIME             = 1 << 3,
+			DRAW_ENTITY_COUNT     = 1 << 4,
+			DRAW_GRAPHICS_BACKEND = 1 << 5,
+			DRAW_INPUT_BACKEND    = 1 << 6,
+			DRAW_AUDIO_BACKEND    = 1 << 7,
+
+			DRAW_ALL              = DRAW_FPS +
+			                        DRAW_VERSION +
+									DRAW_VERSION_NAME +
+									DRAW_TIME +
+									DRAW_ENTITY_COUNT +
+									DRAW_GRAPHICS_BACKEND +
+									DRAW_INPUT_BACKEND +
+									DRAW_AUDIO_BACKEND
 		};
 
 		/*!
@@ -91,14 +101,20 @@ namespace Baukasten {
 		 *
 		 * - Time
 		 *
+		 * - Current Amount of Model objects
+		 *
+		 * - Graphics backend in use
+		 *
+		 * - Input backend in use
+		 *
+		 * - Audio backend in use
+		 *
 		 * \param font font to be used to draw the text.
 		 * \param position where the box is drawn.
-		 * \param compact whether the box is shown with the every info on its own
-		 * row, or compact on a single row.
 		 * \param flags which info to show.
 		 */
 		virtual void drawInfo( IFont *font, const Vector3 &position,
-				bool compact = false, InfoFlags flags = DRAW_ALL ) = 0;
+				InfoFlags flags = DRAW_ALL ) = 0;
 
 		/*!
 		 * \brief draws a circle.
@@ -240,12 +256,6 @@ namespace Baukasten {
 		 * \param height height of the window.
 		 */
 		virtual void setWindowSize( const u32 width, const u32 height ) = 0;
-
-		/*!
-		 * \brief returns the time that passed after application started.
-		 * \return f32 value of the time passed after application started..
-		 */
-		virtual f32 time() const = 0;
 	};
 	/** @} */
 	/** @} */
