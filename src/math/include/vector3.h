@@ -36,9 +36,9 @@ namespace Baukasten {
 		f32      dot( const Vector3& ) const;
 		Vector3  cross( const Vector3& ) const;
 
-	private:
-		mutable bool m_dirty;
-		mutable f32  m_mag;
+		f32 &x;
+		f32 &y;
+		f32 &z;
 	};
 } /* Baukasten */
 

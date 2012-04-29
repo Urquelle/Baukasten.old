@@ -35,9 +35,8 @@ namespace Baukasten {
 		Vector2& normalise();
 		f32      dot( const Vector2& ) const;
 
-	private:
-		mutable bool m_dirty;
-		mutable f32  m_mag;
+		f32 &x;
+		f32 &y;
 	};
 } /* Baukasten */
 

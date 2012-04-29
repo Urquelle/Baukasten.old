@@ -10,25 +10,25 @@ using namespace std;
 
 Vector2::Vector2() :
 	Vector(),
-	m_mag( -1.0 )
+	x( m_data[0] ), y( m_data[1] )
 {
 }
 
 Vector2::Vector2( const Vector2 &other ) :
 	Vector({ other[ 0 ], other[ 1 ] }),
-	m_mag( -1.0 )
+	x( m_data[0] ), y( m_data[1] )
 {
 }
 
 Vector2::Vector2( const f32 value ) :
 	Vector({ value, value }),
-	m_mag( -1.0 )
+	x( m_data[0] ), y( m_data[1] )
 {
 }
 
 Vector2::Vector2( const f32 _f, const f32 _s ) :
 	Vector({ _f, _s }),
-	m_mag( -1.0 )
+	x( m_data[0] ), y( m_data[1] )
 {
 }
 
@@ -43,7 +43,6 @@ Vector2::operator=( const Vector2 &other )
 		return *this;
 
 	Type::operator=( other );
-	m_dirty = true;
 	return *this;
 }
 
@@ -51,18 +50,15 @@ Vector2&
 Vector2::operator=( const f32 value )
 {
 	Type::operator=({ value, value });
-	m_dirty = true;
 	return *this;
 }
 
 bool
 Vector2::operator==( const Vector2 &other ) const
 {
-	f32 tolerance = 0.00000001;
-
 	if (
-		fabs( (*this)[0] - other[0] ) < tolerance &&
-		fabs( (*this)[1] - other[1] ) < tolerance
+		fabs( x - other.x ) < BK_MATH_EPSILON &&
+		fabs( y - other.y ) < BK_MATH_EPSILON
 	) return true;
 
 	return false;
@@ -77,33 +73,33 @@ Vector2::operator!=( const Vector2 &other ) const
 Vector2
 Vector2::operator+( const Vector2 &other ) const
 {
-	return Vector2( (*this)[0] + other[0], (*this)[1] + other[1] );
+	return Vector2( x + other.x, y + other.y );
 }
 
 Vector2
 Vector2::operator+( const f32 value ) const
 {
-	return Vector2( (*this)[0] + value, (*this)[1] + value );
+	return Vector2( x + value, y + value );
 }
 
 Vector2
 Vector2::operator*( const Vector2 &other ) const
 {
-	return Vector2( (*this)[0] * other[0], (*this)[1] * other[1] );
+	return Vector2( x * other.x, y * other.y );
 }
 
 Vector2
 Vector2::operator*( const f32 value ) const
 {
-	return Vector2( (*this)[0] * value, (*this)[1] * value );
+	return Vector2( x * value, y * value );
 }
 
 Vector2
 Vector2::operator/( const Vector2 &other ) const
 {
 	return Vector2(
-		( other[0] != 0 ) ? (*this)[0] / other[0] : FLT_MAX,
-		( other[1] != 0 ) ? (*this)[1] / other[1] : FLT_MAX
+		( other.x != 0 ) ? x / other.x : FLT_MAX,
+		( other.y != 0 ) ? y / other.y : FLT_MAX
 	);
 }
 
@@ -113,7 +109,7 @@ Vector2::operator/( const f32 value ) const
 	if ( value == 0 )
 		return Vector2( FLT_MAX, FLT_MAX );
 
-	return Vector2( (*this)[0] / value, (*this)[1] / value );
+	return Vector2( x / value, y / value );
 }
 
 const Vector2::VectorProxy
@@ -133,15 +129,7 @@ Vector2::operator[]( const u32 index )
 f32
 Vector2::mag() const
 {
-	if ( m_mag < 0 || m_dirty ) {
-		m_mag = sqrt(
-			(*this)[0] * (*this)[0] +
-			(*this)[1] * (*this)[1]
-		);
-		m_dirty = false;
-	}
-
-	return m_mag;
+	return sqrt( x * x + y * y );
 }
 
 f32
@@ -154,10 +142,7 @@ Vector2
 Vector2::normalised() const
 {
 	f32 rev = 1 / mag();
-	return Vector2(
-		(*this)[0] * rev,
-		(*this)[1] * rev
-	);
+	return Vector2( x * rev, y * rev );
 }
 
 Vector2&
@@ -165,10 +150,8 @@ Vector2::normalise()
 {
 	f32 rev = 1 / mag();
 
-	(*this)[0] = (*this)[0] * rev;
-	(*this)[1] = (*this)[1] * rev;
-
-	m_dirty = true;
+	x *= rev;
+	y *= rev;
 
 	return *this;
 }
@@ -176,9 +159,6 @@ Vector2::normalise()
 f32
 Vector2::dot( const Vector2 &other ) const
 {
-	return (
-		(*this)[0] * other[0] +
-		(*this)[1] * other[1]
-	);
+	return ( x * other.x + y * other.y );
 }
 

@@ -11,25 +11,25 @@ using namespace std;
 Vector3::Vector3() :
 	//(*this){ 0.0, 0.0, 0.0 },
 	Vector(),
-	m_mag( -1.0 )
+	x( m_data[0] ), y( m_data[1] ), z( m_data[2] )
 {
 }
 
 Vector3::Vector3( const Vector3 &other ) :
-	Vector({ other[0], other[1], other[2] }),
-	m_mag( -1.0 )
+	Vector({ other.x, other.y, other.z }),
+	x( m_data[0] ), y( m_data[1] ), z( m_data[2] )
 {
 }
 
 Vector3::Vector3( const f32 value ) :
 	Vector({ value, value, value }),
-	m_mag( -1.0 )
+	x( m_data[0] ), y( m_data[1] ), z( m_data[2] )
 {
 }
 
 Vector3::Vector3( const f32 _f, const f32 _s, const f32 _t ) :
 	Vector({ _f, _s, _t }),
-	m_mag( -1.0 )
+	x( m_data[0] ), y( m_data[1] ), z( m_data[2] )
 {
 }
 
@@ -44,7 +44,6 @@ Vector3::operator=( const Vector3 &other )
 		return *this;
 
 	Type::operator=( other );
-	m_dirty = true;
 	return *this;
 }
 
@@ -52,19 +51,16 @@ Vector3&
 Vector3::operator=( const f32 value )
 {
 	Type::operator=({ value, value, value });
-	m_dirty = true;
 	return *this;
 }
 
 bool
 Vector3::operator==( const Vector3 &other ) const
 {
-	f32 tolerance = 0.00000001;
-
 	if (
-		fabs( (*this)[0] - other[0] ) < tolerance &&
-		fabs( (*this)[1] - other[1] ) < tolerance &&
-		fabs( (*this)[2] - other[2] ) < tolerance
+		fabs( x - other.x ) < BK_MATH_EPSILON &&
+		fabs( y - other.y ) < BK_MATH_EPSILON &&
+		fabs( z - other.z ) < BK_MATH_EPSILON
 	) return true;
 
 	return false;
@@ -79,38 +75,34 @@ Vector3::operator!=( const Vector3 &other ) const
 Vector3
 Vector3::operator+( const Vector3 &other ) const
 {
-	return Vector3( (*this)[0] + other[0], (*this)[1] + other[1],
-		(*this)[2] + other[2] );
+	return Vector3( x + other.x, y + other.y, z + other.z );
 }
 
 Vector3
 Vector3::operator+( const f32 value ) const
 {
-	return Vector3( (*this)[0] + value, (*this)[1] + value,
-		(*this)[2] + value );
+	return Vector3( x + value, y + value, z + value );
 }
 
 Vector3
 Vector3::operator*( const Vector3 &other ) const
 {
-	return Vector3( (*this)[0] * other[0], (*this)[1] * other[1],
-		(*this)[2] * other[2] );
+	return Vector3( x * other.x, y * other.y, z * other.z );
 }
 
 Vector3
 Vector3::operator*( const f32 value ) const
 {
-	return Vector3( (*this)[0] * value, (*this)[1] * value,
-		(*this)[2] * value );
+	return Vector3( x * value, y * value, z * value );
 }
 
 Vector3
 Vector3::operator/( const Vector3 &other ) const
 {
 	return Vector3(
-		( other[0] != 0 ) ? (*this)[0] / other[0] : FLT_MAX,
-		( other[1] != 0 ) ? (*this)[1] / other[1] : FLT_MAX,
-		( other[2] != 0 ) ? (*this)[2] / other[2] : FLT_MAX
+		( other.x != 0 ) ? x / other.x : FLT_MAX,
+		( other.y != 0 ) ? y / other.y : FLT_MAX,
+		( other.z != 0 ) ? z / other.z : FLT_MAX
 	);
 }
 
@@ -121,7 +113,7 @@ Vector3::operator/( const f32 value ) const
 		return Vector3( FLT_MAX, FLT_MAX, FLT_MAX );
 
 	return Vector3(
-		(*this)[0] / value, (*this)[1] / value, (*this)[2] / value
+		x / value, y / value, z / value
 	);
 }
 
@@ -142,16 +134,7 @@ Vector3::operator[]( const u32 index )
 f32
 Vector3::mag() const
 {
-	if ( m_mag < 0 || m_dirty ) {
-		m_mag = sqrt(
-			(*this)[0] * (*this)[0] +
-			(*this)[1] * (*this)[1] +
-			(*this)[2] * (*this)[2]
-		);
-		m_dirty = false;
-	}
-
-	return m_mag;
+	return sqrt( x * x + y * y + z * z );
 }
 
 f32
@@ -164,11 +147,7 @@ Vector3
 Vector3::normalised() const
 {
 	f32 rev = 1 / mag();
-	return Vector3(
-		(*this)[0] * rev,
-		(*this)[1] * rev,
-		(*this)[2] * rev
-	);
+	return Vector3( x * rev, y * rev, z * rev );
 }
 
 Vector3&
@@ -176,11 +155,9 @@ Vector3::normalise()
 {
 	f32 rev = 1 / mag();
 
-	(*this)[0] = (*this)[0] * rev;
-	(*this)[1] = (*this)[1] * rev;
-	(*this)[2] = (*this)[2] * rev;
-
-	m_dirty = true;
+	x = x * rev;
+	y = y * rev;
+	z = z * rev;
 
 	return *this;
 }
@@ -188,20 +165,16 @@ Vector3::normalise()
 f32
 Vector3::dot( const Vector3 &other ) const
 {
-	return (
-		(*this)[0] * other[0] +
-		(*this)[1] * other[1] +
-		(*this)[2] * other[2]
-	);
+	return ( x * other.x + y * other.y + z * other.z );
 }
 
 Vector3
 Vector3::cross( const Vector3 &other ) const
 {
 	return Vector3{
-		(*this)[1] * other[2] - (*this)[2] * other[1],
-		(*this)[2] * other[0] - (*this)[0] * other[2],
-		(*this)[0] * other[1] - (*this)[1] * other[0]
+		y * other.z - z * other.y,
+		z * other.x - x * other.z,
+		x * other.y - y * other.x
 	};
 }
 

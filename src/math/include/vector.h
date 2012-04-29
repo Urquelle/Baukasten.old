@@ -170,7 +170,7 @@ namespace Baukasten {
 			return VectorProxy( *this, index );
 		}
 
-	private:
+	protected:
 		vector<T> m_data;
 	};
 } /* Baukasten */
