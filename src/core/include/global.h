@@ -32,7 +32,7 @@ namespace Baukasten {
 		BK_X = 0, BK_WIDTH  = 0,
 		BK_Y = 1, BK_HEIGHT = 1,
 		BK_Z = 2, BK_DEPTH  = 2,
-		BK_W
+		BK_W = 3
 	};
 
 }
