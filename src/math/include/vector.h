@@ -99,6 +99,40 @@ namespace Baukasten {
 			return SIZE;
 		}
 
+		void add( const T scalar )
+		{
+			for ( u32 i = 0; i < SIZE; ++i ) {
+				m_data[ i ] += scalar;
+			}
+		}
+
+		void add( const Vector &other )
+		{
+			for ( u32 i = 0; i < SIZE; ++i ) {
+				m_data[ i ] += other[ i ];
+			}
+		}
+
+		void multiply( const T scalar )
+		{
+			for ( u32 i = 0; i < SIZE; ++i ) {
+				m_data[ i ] *= scalar;
+			}
+		}
+
+		void multiply( const Vector &other )
+		{
+			for ( u32 i = 0; i < SIZE; ++i ) {
+				m_data[ i ] *= other[ i ];
+			}
+		}
+
+		T get( const u32 index ) const
+		{
+			BK_ASSERT( index < SIZE, "index out of bounds." );
+			return m_data[ index ];
+		}
+
 		Vector& operator=( const Vector &other )
 		{
 			if ( &other == this ) return *this;
@@ -120,41 +154,29 @@ namespace Baukasten {
 
 		Vector<T,SIZE> operator+( const Vector &other )
 		{
-			Vector<T, SIZE> v;
-			for ( u32 i = 0; i < SIZE; ++i ) {
-				v[ i ] = m_data[ i ] + other[ i ];
-			}
-
+			Vector<T, SIZE> v( *this );
+			v.add( other );
 			return v;
 		}
 
 		Vector<T,SIZE> operator+( const T &value )
 		{
-			Vector<T, SIZE> v;
-			for ( u32 i = 0; i < SIZE; ++i ) {
-				v[ i ] = m_data[ i ] + value;
-			}
-
+			Vector<T, SIZE> v( *this );
+			v.add( value );
 			return v;
 		}
 
 		Vector<T,SIZE> operator*( const Vector &other )
 		{
-			Vector<T, SIZE> v;
-			for ( u32 i = 0; i < SIZE; ++i ) {
-				v[ i ] = m_data[ i ] * other[ i ];
-			}
-
+			Vector<T, SIZE> v( *this );
+			v.multiply( other );
 			return v;
 		}
 
 		Vector<T,SIZE> operator*( const T &value )
 		{
-			Vector<T, SIZE> v;
-			for ( u32 i = 0; i < SIZE; ++i ) {
-				v[ i ] = m_data[ i ] * value;
-			}
-
+			Vector<T, SIZE> v( *this );
+			v.multiply( value );
 			return v;
 		}
 
