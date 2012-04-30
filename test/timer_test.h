@@ -8,7 +8,7 @@ using namespace Baukasten;
 using namespace CppUnit;
 
 /*!
- * \break TimerTest class declaration.
+ * \brief TimerTest class declaration.
  */
 class TimerTest : public TestFixture {
 	CPPUNIT_TEST_SUITE( TimerTest );
