@@ -9,7 +9,6 @@ using namespace Baukasten;
 using namespace std;
 
 Vector3::Vector3() :
-	//(*this){ 0.0, 0.0, 0.0 },
 	Vector(),
 	x( m_data[0] ), y( m_data[1] ), z( m_data[2] )
 {
