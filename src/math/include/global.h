@@ -3,6 +3,8 @@
 
 #include "core/Global"
 
+#define BK_MATH_TOLERANCE 2e-37f
 #define BK_MATH_EPSILON   0.000001f
+
 #endif /* end of include guard: GLOBAL_H_7GY4XO6H */
 
