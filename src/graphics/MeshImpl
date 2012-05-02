@@ -1,0 +1,5 @@
+#include "graphics/include/glfw/gl_mesh.h"
+
+namespace Baukasten {
+typedef GlMesh Mesh;
+}
