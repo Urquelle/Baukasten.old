@@ -207,25 +207,25 @@ public:
 	drawImage( Image &image, const Vector2 &size, const Vector3 &pos )
 	{
 		// transform to normalised [-1.0, 1.0]
-		f32 xMin = _normalise( m_windowSize[BK_WIDTH], pos[BK_X] );
-		f32 xMax = _normalise( m_windowSize[BK_WIDTH], pos[BK_X] + size[BK_WIDTH] );
-		f32 yMin = _normalise( m_windowSize[BK_HEIGHT], pos[BK_Y] ) * -1;
-		f32 yMax = _normalise( m_windowSize[BK_HEIGHT], pos[BK_Y] + size[BK_HEIGHT] ) * -1;
+		f32 xMin = _normalise( m_windowSize[BK_WIDTH], pos.x );
+		f32 xMax = _normalise( m_windowSize[BK_WIDTH], pos.x + size[BK_WIDTH] );
+		f32 yMin = _normalise( m_windowSize[BK_HEIGHT], pos.y ) * -1;
+		f32 yMax = _normalise( m_windowSize[BK_HEIGHT], pos.y + size[BK_HEIGHT] ) * -1;
 
 		GLfloat vertices[] = {
 			// vertex coordinates
-			xMin, yMin, pos[BK_Z], 1.0f,
-			xMax, yMin, pos[BK_Z], 1.0f,
-			xMax, yMax, pos[BK_Z], 1.0f,
-			xMin, yMax, pos[BK_Z], 1.0f,
+			xMin, yMin, pos.z, 1.0f,
+			xMax, yMin, pos.z, 1.0f,
+			xMax, yMax, pos.z, 1.0f,
+			xMin, yMax, pos.z, 1.0f,
 
 			// texture coordinates
 			// ** we have to remap the coordinates here somewhat, as the
 			// ** y vertex coordinates are mirrored by the -1.0 multiplication
-			0.0f, 1.0f, 0.0f,      1.0f,
-			1.0f, 1.0f, 0.0f,      1.0f,
-			1.0f, 0.0f, 0.0f,      1.0f,
-			0.0f, 0.0f, 0.0f,      1.0f
+			0.0f, 1.0f, 0.0f, 1.0f,
+			1.0f, 1.0f, 0.0f, 1.0f,
+			1.0f, 0.0f, 0.0f, 1.0f,
+			0.0f, 0.0f, 0.0f, 1.0f
 		};
 
 		GLuint tbo;
