@@ -52,6 +52,23 @@ public:
 	void
 	prepare()
 	{
+		// PATTERN
+		auto it_p = m_attributes.find( IMesh::PATTERN );
+		if ( it_p != m_attributes.end() ) {
+			glLineStipple( 1, it_p->second.value_f32 );
+			glEnable( GL_LINE_STIPPLE );
+		}
+
+		// SIZE
+		auto it_s = m_attributes.find( IMesh::SIZE );
+		if ( it_s != m_attributes.end() )
+			glPointSize( it_s->second.value_u32 );
+
+		// WIDTH
+		auto it_w = m_attributes.find( IMesh::WIDTH );
+		if ( it_w != m_attributes.end() )
+			glLineWidth( it_w->second.value_f32 );
+
 		glBindBuffer( GL_ARRAY_BUFFER, m_vbo );
 	}
 
