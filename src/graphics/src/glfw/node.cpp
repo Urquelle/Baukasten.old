@@ -2,7 +2,6 @@
 
 #include "core/Debug"
 #include "graphics/Font"
-#include "graphics/include/glfw/gl_texture.h"
 
 #include <GL/glu.h>
 #include <GL/glext.h>
