@@ -41,19 +41,5 @@ Quaternion::operator=( const Quaternion &other )
 	return *this;
 }
 
-const Quaternion::VectorProxy
-Quaternion::operator[]( const u32 index ) const
-{
-	BK_ASSERT( index < 4 && index >= 0, "index out of bounds." );
-	return VectorProxy( (Vector<f32, 4>&)*this, index );
-}
-
-Quaternion::VectorProxy
-Quaternion::operator[]( const u32 index )
-{
-	BK_ASSERT( index < 4 && index >= 0, "index out of bounds." );
-	return VectorProxy( *this, index );
-}
-
 }
 

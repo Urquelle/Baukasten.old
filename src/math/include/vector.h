@@ -15,56 +15,6 @@ namespace Baukasten {
 	class BAUKASTEN_EXPORT Vector {
 	public:
 
-		friend class VectorProxy;
-		class VectorProxy {
-		public:
-			VectorProxy( Vector<T, SIZE> &v, u32 index ) :
-				m_v( &v ), m_index( index )
-			{
-			}
-
-			VectorProxy& operator=( const VectorProxy &other )
-			{
-				m_v->m_data[ m_index ] = other.m_v[ other.m_index ];
-				return *this;
-			}
-
-			VectorProxy& operator=( T value )
-			{
-				m_v->m_data[ m_index ] = value;
-				return *this;
-			}
-
-			operator T() const
-			{
-				return m_v->m_data[m_index];
-			}
-
-			T* operator&()
-			{
-				return &( m_v->m_data[ m_index ] );
-			}
-
-			const T* operator&() const
-			{
-				return &( m_v->m_data[ m_index ] );
-			}
-
-			bool operator==( const T value )
-			{
-				return ( value == m_v[ m_index ] );
-			}
-
-			bool operator!=( const T value )
-			{
-				return !operator==( value );
-			}
-
-		private:
-			Vector<T, SIZE>* m_v;
-			u32              m_index;
-		};
-
 		Vector()
 		{
 			m_data.reserve( SIZE );
@@ -180,16 +130,16 @@ namespace Baukasten {
 			return v;
 		}
 
-		const VectorProxy operator[]( const u32 index ) const
+		const T operator[]( const u32 index ) const
 		{
 			BK_ASSERT( index < SIZE && index >= 0, "index out of bounds." );
-			return VectorProxy( const_cast<Vector<T,SIZE>&>( *this ), index );
+			return m_data[ index ];
 		}
 
-		VectorProxy operator[]( const u32 index )
+		T& operator[]( const u32 index )
 		{
 			BK_ASSERT( index < SIZE && index >= 0, "index out of bounds." );
-			return VectorProxy( *this, index );
+			return m_data[ index ];
 		}
 
 	protected:

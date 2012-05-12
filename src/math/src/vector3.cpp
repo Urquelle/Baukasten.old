@@ -116,20 +116,6 @@ Vector3::operator/( const f32 value ) const
 	);
 }
 
-const Vector3::VectorProxy
-Vector3::operator[]( const u32 index ) const
-{
-	BK_ASSERT( index < 3 && index >= 0, "index out of bounds." );
-	return VectorProxy( (Vector<f32, 3>&)*this, index );
-}
-
-Vector3::VectorProxy
-Vector3::operator[]( const u32 index )
-{
-	BK_ASSERT( index < 3 && index >= 0, "index out of bounds." );
-	return VectorProxy( *this, index );
-}
-
 f32
 Vector3::mag() const
 {

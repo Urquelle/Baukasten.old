@@ -112,20 +112,6 @@ Vector2::operator/( const f32 value ) const
 	return Vector2( x / value, y / value );
 }
 
-const Vector2::VectorProxy
-Vector2::operator[]( const u32 index ) const
-{
-	BK_ASSERT( index < 2 && index >= 0, "index out of bounds." );
-	return VectorProxy( (Vector<f32, 2>&)*this, index );
-}
-
-Vector2::VectorProxy
-Vector2::operator[]( const u32 index )
-{
-	BK_ASSERT( index < 2 && index >= 0, "index out of bounds." );
-	return VectorProxy( *this, index );
-}
-
 f32
 Vector2::mag() const
 {

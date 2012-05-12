@@ -65,9 +65,6 @@ namespace Baukasten {
 		Matrix&            operator*=( const f32 );
 		bool               operator==( const Matrix& );
 		bool               operator!=( const Matrix& );
-
-		const VectorProxy  operator[]( const u32 ) const;
-		VectorProxy        operator[]( const u32 );
 	};
 } /* Baukasten */
 

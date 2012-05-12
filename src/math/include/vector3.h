@@ -8,7 +8,6 @@ namespace Baukasten {
 
 	class BAUKASTEN_EXPORT Vector3 : public Vector<f32, 3> {
 		typedef Vector<f32, 3> Type;
-		typedef Type::VectorProxy VectorProxy;
 	public:
 		Vector3();
 		Vector3( const Vector3& );
@@ -26,8 +25,6 @@ namespace Baukasten {
 		Vector3            operator*( const f32 ) const;
 		Vector3            operator/( const Vector3& ) const;
 		Vector3            operator/( const f32 ) const;
-		const VectorProxy  operator[]( const u32 ) const;
-		VectorProxy        operator[]( const u32 );
 
 		f32      mag() const;
 		f32      magSqr() const;

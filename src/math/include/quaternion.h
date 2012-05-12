@@ -13,7 +13,6 @@ namespace Baukasten {
 	 */
 	class BAUKASTEN_EXPORT Quaternion : public Vector<f32, 4> {
 		typedef Vector<f32, 4> Type;
-		typedef Type::VectorProxy VectorProxy;
 	public:
 		Quaternion();
 		Quaternion( const f32, const f32, const f32, const f32 );
@@ -24,8 +23,6 @@ namespace Baukasten {
 		virtual ~Quaternion();
 
 		Quaternion&        operator=( const Quaternion& );
-		const VectorProxy  operator[]( const u32 ) const;
-		VectorProxy        operator[]( const u32 );
 
 		f32 &x;
 		f32 &y;

@@ -485,20 +485,6 @@ Matrix::operator*=( const f32 scalar )
 	return *this;
 }
 
-const Matrix::VectorProxy
-Matrix::operator[]( const u32 index ) const
-{
-	BK_ASSERT( index < MATRIX_SIZE && index >= 0, "index out of bounds." );
-	return VectorProxy( (Vector<f32, 16>&)*this, index );
-}
-
-Matrix::VectorProxy
-Matrix::operator[]( const u32 index )
-{
-	BK_ASSERT( index < MATRIX_SIZE && index >= 0, "index out of bounds." );
-	return VectorProxy( *this, index );
-}
-
 bool
 Matrix::operator==( const Matrix &other )
 {
