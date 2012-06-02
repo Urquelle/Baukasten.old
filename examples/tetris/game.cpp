@@ -12,12 +12,15 @@
 #include "core/Timer"
 #include "graphics/IGraphics"
 #include "input/IInput"
+#include "math/Random"
 #include "model/ActionLua"
 #include "model/GenericState"
 #include "model/LogicalSpace"
 #include "model/ModelInterface"
 #include "model/VirtualSpace"
 #include "services/Services"
+
+#include <ctime>
 
 using namespace Baukasten;
 
@@ -73,6 +76,8 @@ void Game::init()
 	IInput &m_input = service.inputService();
 	IGraphics &m_graphics = service.graphicsService();
 	IAudio &m_audio = service.audioService();
+
+	Random::init( time( 0 ) );
 
 	m_graphics.createWindow( { 1024, 768 }, "Tetris", IGraphics::WINDOW );
 

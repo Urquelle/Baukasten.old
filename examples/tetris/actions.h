@@ -5,14 +5,12 @@
 
 #include "core/TimerInterface"
 #include "core/Timer"
+#include "math/Random"
 #include "model/ActionLambda"
 #include "model/Form"
 #include "model/GenericState"
 #include "model/LogicalSpace"
 #include "model/VirtualSpace"
-
-#include <cstdlib>
-#include <ctime>
 
 using namespace Baukasten;
 
@@ -74,17 +72,18 @@ void setBlockFields( GameEntity *field, int value = SET )
 DoActionFunction nextBlock([]( Action *action, GameEntity *entity ) {
 	string blocks[] = { "block:i", "block:j", "block:z", "block:s", "block:l", "block:t", "block:o" };
 
-	srand( time( 0 ) );
+	u32 iNext = (int)( Random::random() * 10 );
+	u32 iANext = (int)( Random::random() * 10 );
 
 	GameEntity *block = 0;
 	GameEntity *field = entity->parent()->child( "entity:field" );
-	GameEntity *nextBlock = entity->child( blocks[ rand() % 7 ] );
+	GameEntity *nextBlock = entity->child( blocks[ iNext % 7 ] );
 	GameEntity *preview = field->parent()->child( "entity:preview" );
 
 	if ( field->form()->lSpace()->hasEntity( "block:next" ) ) {
 		block = field->form()->lSpace()->entity( "block:next" );
 	} else {
-		block = entity->child( blocks[ rand() % 7 ] );
+		block = entity->child( blocks[ iANext % 7 ] );
 	}
 
 	field->form()->state<StateIntVector*>( "block:current" )->setValues(
