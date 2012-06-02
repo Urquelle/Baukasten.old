@@ -5,6 +5,7 @@
 #include "game_entity_test.h"
 #include "image_test.h"
 #include "matrix_test.h"
+#include "random_test.h"
 #include "timer_test.h"
 #include "vector_test.h"
 #include "vector2_test.h"
@@ -23,6 +24,7 @@ int main(int argc, const char *argv[])
 	runner.addTest( GameEntityTest::suite() );
 	runner.addTest( ImageTest::suite() );
 	runner.addTest( MatrixTest::suite() );
+	runner.addTest( RandomTest::suite() );
 	runner.addTest( TimerTest::suite() );
 	runner.addTest( VectorTest::suite() );
 	runner.addTest( Vector2Test::suite() );
