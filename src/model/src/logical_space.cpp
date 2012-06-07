@@ -27,9 +27,9 @@ LogicalSpace::entity( const string &id ) const
 void
 LogicalSpace::runActions()
 {
-	for_each( m_list.begin(), m_list.end(), []( GameEntity *entity ) {
+	for( GameEntity *entity : m_list ) {
 		entity->runActions();
-	});
+	}
 }
 
 void

@@ -81,10 +81,10 @@ void
 Form::constructScene()
 {
 	auto entities = m_vSpace->entities();
-	for_each( entities.begin(), entities.end(), []( Form* f ) {
+	for( Form *f : entities ) {
 		f->constructScene();
 		f->render();
-	});
+	}
 }
 
 void

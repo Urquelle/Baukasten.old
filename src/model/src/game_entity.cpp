@@ -238,9 +238,9 @@ GameEntity::runActions()
 {
 	// run own actions first
 	auto al = m_actions->invokedActions();
-	for_each( al.begin(), al.end(), []( Action *a ) {
+	for( Action *a : al ) {
 		a->run();
-	});
+	}
 
 	// run children's actions
 	Form *_form = form();

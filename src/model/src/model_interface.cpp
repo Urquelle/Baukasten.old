@@ -47,9 +47,7 @@ struct ElementNode {
 			entity = 0;
 		}
 
-		ElementNode *element = 0;
-		for ( auto i = children.begin(); i != children.end(); ++i) {
-			element = *i;
+		for( ElementNode *element : children ) {
 			if ( element )
 				delete element;
 		}

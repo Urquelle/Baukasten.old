@@ -93,10 +93,11 @@ Action::run()
 
 	auto _targets = targets();
 	if ( !_targets.empty() ) {
-		for_each( _targets.begin(), _targets.end(), [_source, this]( GameEntity* entity ) {
+		for( GameEntity *entity : _targets ) {
 			_source->onActionRun().emit( _source, this );
 			doAction( entity );
-		});
+		}
+
 		return;
 	}
 
